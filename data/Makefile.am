@@ -35,13 +35,13 @@ install-data-hook:
               phDic=`cat $(DESTDIR)/$(pkgdatadir)/$$lg/alternatives-phon.dat | grep PhoneticDictionary | cut -d' ' -f2`; \
 	      cat $(DESTDIR)/$(pkgdatadir)/$$lg/dicc.src | LD_LIBRARY_PATH=$(LD_LIBRARY_PATH):$(DESTDIR)/$(libdir) $(DESTDIR)/$(bindir)/dicc2phon $(DESTDIR)/$(pkgdatadir)/$$lg/$$phRul > $(DESTDIR)/$(pkgdatadir)/$$lg/$$phDic; \
            fi; \
-	   nfil=`ls -1 $(DESTDIR)/$(pkgdatadir)/$$lg/dep_treeler/srl/parameters.*.gz.aa | wc -l`; \
+	   nfil=`ls -1 $(DESTDIR)/$(pkgdatadir)/$$lg/dep_treeler/srl/parameters.*.gz.aa 2>/dev/null | wc -l`; \
 	   if (test $$nfil -gt 0 ); then \
 	     pfname=`basename $(DESTDIR)/$(pkgdatadir)/$$lg/dep_treeler/srl/parameters.*.gz.aa .aa`; \
 	     cat $(DESTDIR)/$(pkgdatadir)/$$lg/dep_treeler/srl/parameters.*.gz.* > $(DESTDIR)/$(pkgdatadir)/$$lg/dep_treeler/srl/$$pfname; \
 	     rm -f $(DESTDIR)/$(pkgdatadir)/$$lg/dep_treeler/srl/parameters.*.gz.*; \
 	   fi; \
-	   nfil=`ls -1 $(DESTDIR)/$(pkgdatadir)/$$lg/dep_treeler/dep/parameters.*.gz.aa | wc -l`; \
+	   nfil=`ls -1 $(DESTDIR)/$(pkgdatadir)/$$lg/dep_treeler/dep/parameters.*.gz.aa 2>/dev/null | wc -l`; \
 	   if (test $$nfil -gt 0 ); then \
 	     pfname=`basename $(DESTDIR)/$(pkgdatadir)/$$lg/dep_treeler/dep/parameters.*.gz.aa .aa`; \
 	     cat $(DESTDIR)/$(pkgdatadir)/$$lg/dep_treeler/dep/parameters.*.gz.* > $(DESTDIR)/$(pkgdatadir)/$$lg/dep_treeler/dep/$$pfname; \
