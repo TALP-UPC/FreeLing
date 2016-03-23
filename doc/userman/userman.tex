@@ -403,10 +403,10 @@ webpage download section, and then execute:
 \end{enumerate}
 
 
-\subsection{Install from \texttt{SVN} repositories}
+\subsection{Install from \texttt{GitHub} repositories}
 \label{sec-install-svn}
 
-  Installing from the SVN is very similar to installing from source,
+  Installing from GitHub is very similar to installing from source,
   but you'll have the chance to easily update your FreeLing to the
   latest development version.
 
@@ -414,9 +414,9 @@ webpage download section, and then execute:
 
 \item \textbf{Install development tools}
 
- You'll need to install the C++ compiler, the GNU autotools, \textbf{plus} a SVN client.
+ You'll need to install the C++ compiler, the GNU autotools, \textbf{plus} a \texttt{git} client.
 \begin{verbatim}
- sudo apt-get install build-essential automake autoconf libtool subversion
+ sudo apt-get install build-essential automake autoconf libtool git 
 \end{verbatim}
 
    If you use a distribution different than Debian or Ubuntu, these packages
@@ -432,22 +432,28 @@ webpage download section, and then execute:
 
   If you want the latest development version, do:
 \begin{verbatim}
- svn checkout http://devel.cpl.upc.edu/freeling/svn/trunk mysrc
+  git clone https://github.com/TALP-UPC/FreeLing.git mysrc
 \end{verbatim}
 \noindent (you can replace \verb#mysrc# with the directory name of your choice).
 
-  Alternatively, you can get any previous release with a command like:
+  If you want a previous release, after cloning the repository with the above
+ command, you can checkout any previous tagged version with
+ something like:
 \begin{verbatim}
- svn checkout http://devel.cpl.upc.edu/freeling/svn/versions/freeling-3.0 mysrc
+ git checkout -b mybranch-v4 4.0-beta1
 \end{verbatim}
-\noindent (just replace \verb#freeling-3.0# with the desired version
-number). You can see which versions are available by pointing your web
-browser to \surl{http://devel.cpl.upc.edu/freeling/svn/versions}\footnote{Note
-  that FreeLing-2.x versions require the appropiate \texttt{libomlet} and
-  \texttt{libfries} versions (which you can checkout from the SVN in the
-  same way).  Check the \emph{Download} section in FreeLing webpage to
-  find out which \emph{Omlet\&Fries} version is suitable for each 2.x
-  FreeLing version.}.
+\noindent (that will create a new branch \verb#mybranch-v4# in your local 
+repository that will contain the version tagged as \verb#4.0-beta1# in GitHub).
+
+ You can find out the available tags at \url{https://github.com/TALP-UPC/freeling}.
+
+ Versions older than 4.0 are available at the SVN repository
+ \surl{http://devel.cpl.upc.edu/freeling/svn/versions}\footnote{Note
+   that FreeLing-2.x versions require the appropiate \texttt{libomlet}
+   and \texttt{libfries} versions (which you can checkout from the SVN
+   in the same way).  Check the \emph{Download} section in FreeLing
+   webpage to find out which \emph{Omlet\&Fries} version is suitable
+   for each 2.x FreeLing version.}.
 
 \item \textbf{Prepare local repositories for compilation}
 \begin{verbatim}
@@ -468,13 +474,13 @@ browser to \surl{http://devel.cpl.upc.edu/freeling/svn/versions}\footnote{Note
 to newer versions at any moment:
 \begin{verbatim}
  cd mysrc
- svn update
+ git pull
  ./configure
  make
  sudo make install
 \end{verbatim}
  Depending on what changed in the repository, you may need to issue
- \verb#autoreconf --install# after \verb#svn update#.  You
+ \verb#autoreconf --install# after \verb#git pull#.  You
  may also need to issue \verb#make distclean# and repeat the process
  from \verb#./configure# onwards.
 
