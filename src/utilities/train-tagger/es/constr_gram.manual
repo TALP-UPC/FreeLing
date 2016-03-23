@@ -1,0 +1,314 @@
+
+SETS
+
+DetMasc = DA0MS0 DA0MP0 DD0MS0 DD0MP0 DI0MS0 DI0MP0 DP1MSP DP1MPP 
+          DP2MSP DP2MPP DT0MS0 DT0MP0 DE0MS0 DE0MP0 AQ0MS0 AQ0MP0 ; 
+
+DetFem  = DA0FS0 DA0FP0 DD0FS0 DD0FP0 DI0FS0 DI0FP0 DP1FSP DP1FPP 
+          DP2FSP DP2FPP DT0FS0 DT0FP0 DE0FS0 DE0FP0 AQ0FS0 AQ0FP0 ; 
+
+VerbPron = <dar_cuenta> <dar_a_conocer> <acabar> <acentuar> <acoplar> 
+           <acordar> <acostar> <acostumbrar> <adentrar> <alimentar>
+           <arrepentir> <asentar> <asomar> <atrever> <basar>
+           <colar> <componer> <comportar> <convertir> <decidir>
+           <dejar> <derramar> <derretir> <derrumbar> <deshacer>
+           <deslizar> <detener> <disparar> <disponer> <dormir>
+           <encender> <encontrar> <entretener> <equivocar> <formar>
+           <ganar> <helar> <inmutar> <interesar> <ir> <largar>
+           <llamar> <manifestar> <mezclar> <molestar> <morir>
+           <mudar> <ocurrir> <ofrecer> <parecer> <pegar> <perder>
+           <permitir> <polarizar> <precipitar> <preocupar>
+           <quedar> <quemar> <referir> <reír> <reproducir>
+           <romper> <sentar> <transformar> <unir> <venir> <volver>;
+
+VerbNoPron = <acumular> <admitir> <alcanzar> <aplicar> <apuntar>
+             <aspirar> <cambiar> <castigar> <celebrar>  <cerrar> 
+             <comentar> <comprender> <comprobar> <conseguir> <considerar> 
+             <contar> <crear> <deber> <decir> <desencadenar> <detectar> 
+             <deteriorar> <escribir> <especular> <evidenciar> 
+             <hablar> <incluir> <intentar> <leer> <llegar> 
+             <necesitar> <obtener> <oír> <olvidar> <pensar> 
+             <poder> <prender> <preparar> <prohibir> <realizar> 
+             <rebajar> <refugiar> <representar> <separar> <ser>
+             <sintetizar> <sospechar> <suceder> <sumar> <suponer> 
+             <tener> <usar> <utilizar> <vaciar> <vender> <vivir>;
+
+VerbCompl = <acentuar> <aceptar> <aconsejar> <acordar> <admitir> <advertir>
+	    <afirmar> <alegar> <alertar> <anticipar> <anunciar> <añadir> 
+	    <apostar> <apoyar> <apreciar> <aprender> <apuntar> <asegurar>
+	    <asumir> <avalar> <calcular> <comentar> <comunicar> <concluir>
+	    <confesar> <confirmar> <considerar> <contar> <contestar>
+	    <controlar> <convencer> <creer> <decidir> <decir> <declarar> 
+	    <defender> 
+	    <demostrar> <denunciar> <descartar> <desconfiar> <descubrir>
+	    <desestimar> <desmentir> <detectar> <determinar> <discrepar> 
+ 	    <discutir> <disponer> <divulgar> <documentar> <dudar> <encontrar>
+	    <enfatizar> <enseñar> <entender> <escribir> <especificar> 
+	    <especular> <esperar> <establecer> <estimar> <estipular>
+	    <evaluar> <evitar> <excluir> <exigir> <explicar> <exponer> 
+	    <expresar> <favorecer> <figurar> <fomentar> <garantizar> <ignorar>
+	    <ilustrar> <imaginar> <impedir> <implicar> <implorar> <importar>
+	    <indicar> <informar> <insinuar> <insistir> <jurar> <justificar>
+	    <lamentar> <leer> <mandar> <mantener> <mencionar> <molestar> 
+	    <mostrar> <necesitar> <negar> <notar> <observar> <ofrecer>
+	    <olvidar> <omitir> <opinar> <ordenar> <pedir> <pensar> <percibir> 
+	    <permitir> <pedir> <planear> <plantear> <precisar> <predecir>
+	    <preferir> <preguntar> <preocupar> <presumir> <prevenir> <prever>
+	    <probar> <proclamar> <prometer> <pronosticar> <proponer> <publicar>
+	    <querer> <rebatir> <rechazar> <reclamar> <recomendar> <reconocer>
+	    <recordar> <refutar> <reiterar> <reivindicar> <remarcar> <repetir>
+	    <requerir> <responder> <resultar> <revelar> <saber> <sentir>
+	    <señalar> <significar> <solicitar> <sospechar> <sostener> <subrayar>
+	    <sugerir> <suponer> <temer> <teorizar> <transmitir> <valorar> <ver>
+            <tener>;
+
+
+
+CONSTRAINTS
+
+%% prefer indicative to imperative
+0.7 VMI*
+    (0 VMM*);
+
+%% after a preposision, better noun than verb
+4.0 NC*
+    (0 VMS* or VMI* or VMM* or VMG* or VMP*)
+    (-1 SP*);
+
+%% better tag "que" as a PR0CN000 after a noun without no verb before it
+15.0 PR*<que>
+    (-1 NC*)
+    (-1* OUT_OF_BOUNDS barrier V*);
+
+%% "que" without a completive verb to the left is tagged as PR0CN000
+8.0 PR*<que>
+    (-1* OUT_OF_BOUNDS barrier {VerbCompl});
+
+%% better tag "que" as CS after completive verb
+7.0 CS<que>
+    (-1 {VerbCompl});
+
+%% better tag "que" as a CS after a verb, punctuation, adverb or prepossition 
+1.5 CS<que>
+    (-1 VMI* or VMS* or VAI* or VAS* or VSI* or VSS* or Fp or RG or SPS00);
+
+%%% haga lo que haga 
+5.0 VMS*
+    (-1 OUT_OF_BOUNDS)
+    (0 VMM*)
+    (1 DA*)
+    (2 <que>)
+    (3 VMS*);
+
+2.0 VMS*
+    (0 VMM*)
+    (1 DA*)
+    (2 <que>)
+    (3 VMS*);
+
+2.0 VMS*
+    (0 VMM*)
+    (-1 <que>)
+    (-2 DA*)
+    (-3 VMS*);
+
+%% preferred lemma selection
+5.0 <vivir>    (0 <vivar>);
+5.0 <tejer>    (0 <tejar>);
+5.0 <salir>    (0 <salgar>);
+5.0 <rugir>    (0 <rujar>);
+5.0 <morir>    (0 <murar>);
+5.0 <tañer>    (0 <tañar>);
+5.0 <ser>      (0 <erar>);
+5.0 <doler>    (0 <dolar>);
+5.0 <creer>    (0 <crear>);
+5.0 <asentir>  (0 <asentar>);
+
+%% DT+NC number-gender concordance
+1.1 NCM*
+	(0 NCF*)
+	(-1 {DetMasc});
+
+1.1 NCF*
+	(0 NCM*)
+	(-1 {DetFem});
+
+%% Pre-verbal pronoun "le dijo", "todo era bonito""
+30.0 P*
+	(0 D*)
+	(1 VMI* or VMS* or VAI* or VAS* or VSI* or VSS*);
+
+%% neutral pronoun "lo eran/parecian/estaban" (habian sido/parcido/estado)" 
+%% vs masc-sing "lo cogía"
+1.5 PP3CNA0
+	(0 PP3MSA0)
+	(1 <ser> or <parecer>);
+
+0.5 PP3CNA0
+	(0 PP3MSA0)
+	(1 VA*)
+	(2 <ser> or <parecer>);
+
+1.0 PP3MSA0
+	(0 PP3CNA0)
+	(not 1 VA* or <ser> or <parecer>);
+
+0.5 PP3MSA0
+	(0 PP3CNA0)
+	(1 VA*)
+	(not 2 <ser> or <parecer>);
+
+0.5 PP3MSA0
+	(0 PP3CNA0)
+	(1 <estar>)
+	(2 VMG*);
+
+0.5 PP3MSA0
+	(0 PP3CNA0)
+	(1 VA*)
+	(2 <estar>)
+	(3 VMG*);
+
+0.5 PP3MSA0
+	(0 PP3CNA0)
+	(1 <estar>)
+	(2 VSG*)
+	(3 VM*);
+
+0.5 PP3CNA0
+	(0 PP3MSA0)
+	(1 <estar>)
+	(not 2 VMG*);
+
+0.5 PP3CNA0
+	(0 PP3MSA0)
+	(1 VA*)
+	(2 <estar>)
+	(not 3 VMG*);
+
+0.5 PP3CNA0
+	(0 PP3MSA0)
+	(1 <estar>)
+	(2 VSG*)
+	(not 3 VM*);
+
+%%  "mucho" before a noun is determiner 
+60.0 DI*
+	(0 (mucho))
+	(1 NC*);
+
+%% before a noun, prefer a determiner to a pronoun
+0.1 DT*
+	(0 PT*)
+	(1 NC*);
+
+%% reflexive pronouns "te dabas cuenta", "me doy cuenta", "nos atrevimos"
+
+5.0 P01*
+     (1 {VerbPron});
+
+5.0 P01*
+     (1 VA*)
+     (2 {VerbPron});
+
+5.0 P02*
+     (1 {VerbPron});
+
+5.0 P02*
+     (1 VA*)
+     (2 {VerbPron});
+
+%%% "se" needs more strength on that to avoid selecting P000000
+10.0 P03*
+     (1 {VerbPron});
+
+10.0 P03*
+     (1 VA*)
+     (2 {VerbPron});
+
+%% certain verbs prefer impersonal "se" (se dice, se rumorea, se comenta)
+5.0 P00*
+     (1 {VerbNoPron});
+
+5.0 P00*
+     (1 VA*)
+     (2 {VerbNoPron});
+
+% after a derminer, better noun than adverb
+5.0 NC*
+    (0 RG)
+    (-1 D*);
+
+% after "se", better verb than noun
+12.0 VMI*
+    (0 NC*)
+    (-1 P*(se));
+
+% "sí" after preposition is pronoun (por sí, para sí), but otherwise, is adverb
+10.1 RG
+    (0 PP3*)
+    (not -1 SPS00);
+
+10.1 PP3*
+    (0 RG)
+    (-1 SPS00);
+
+%% lemma selection for "fue", "fui": before gerund, prefer "ir" (fui andando, fui sobreviviendo)
+12.0 <ir>
+	(0 <ser>)
+	(1 VMG*);
+
+%% lemma selection for "fue", "fui": before "a", prefer "ir" (fui a casa)
+3.0 <ir>
+	(0 <ser>)
+	(1 SPS00(a));
+
+% prefer 3rd person to 1st
+0.5 VMSP3S0     (0 VMSP1S0);
+0.1 VMII3S0     (0 VMII1S0);
+0.1 VMSI3S0     (0 VMSI1S0); 
+0.1 VMIC3S0     (0 VMIC1S0); 
+0.1 VAII3S0     (0 VAII1S0);
+0.1 VSII3S0     (0 VSII1S0);
+0.1 VASI3S0     (0 VASI1S0);
+0.1 VSSI3S0     (0 VSSI1S0);
+0.1 VSSP3S0     (0 VSSP1S0);
+0.1 VASP3S0     (0 VASP1S0);
+0.1 VAIC3S0     (0 VAIC1S0);
+0.1 VSIC3S0     (0 VSIC1S0);
+
+% prefer 1st person if precedeed by 1st person pronoun
+
+5.0 VMIP1*     (-1* <yo> or <nosotros> barrier N* or PP* );
+5.0 VMIP1*     (-1* <yo> or <nosotros> barrier N* or PP* );
+5.0 VMII1*     (-1* <yo> or <nosotros> barrier N* or PP* );
+5.0 VMSI1*     (-1* <yo> or <nosotros> barrier N* or PP* );
+5.0 VMIC1*     (-1* <yo> or <nosotros> barrier N* or PP* );
+5.0 VAII1*     (-1* <yo> or <nosotros> barrier N* or PP* );
+5.0 VSII1*     (-1* <yo> or <nosotros> barrier N* or PP* );
+5.0 VASI1*     (-1* <yo> or <nosotros> barrier N* or PP* );
+5.0 VSSI1*     (-1* <yo> or <nosotros> barrier N* or PP* );
+5.0 VSSP1*     (-1* <yo> or <nosotros> barrier N* or PP* );
+5.0 VASP1*     (-1* <yo> or <nosotros> barrier N* or PP* );
+5.0 VAIC1*     (-1* <yo> or <nosotros> barrier N* or PP* );
+5.0 VSIC1*     (-1* <yo> or <nosotros> barrier N* or PP* );
+
+%% select CS for "que" after NC+de "en vista de que", "a causa de que"
+5.0 CS
+    (0 PR*(que))
+    (-1 <de>)
+    (-2 NC*);
+
+%% "fuera" is an adverb (not a verbal form ir/ser) if after a verb (salimos fuera, viven fuera)
+10.1 RG
+	(0 (fuera))
+	(-1 V*);
+
+%% Mark "las nuestras" as AP (possessive adjective) 
+%% vs. "nuestras cosas" (DP,possesive determiner)
+5.0 AP*
+     (-1 DA*)
+     (0 DP*)
+     (not 1 NC*);
+
+%%%%%%%%% Begin of statistically-acquired constraint %%%%%%%%%

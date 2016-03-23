@@ -1,0 +1,21 @@
+
+<UnknownWordsOnly>
+yes
+</UnknownWordsOnly>
+
+<JoinChars>
+## list of chars that may join compound elements (one char per line)
+-
+</JoinChars>
+
+<CompoundPatterns>
+## cazafantasmas, cuentatrolas, comemierda
+VMIP3S0_NC NCCN000
+
+## hombre-lobo, hombre-rana, cliente-servidor, podadora-segadora
++NC_NC
+
+## politicosocial, económico-jurídico, árabe-israelí
+AQ_+AQ
+
+</CompoundPatterns>

@@ -1,0 +1,45 @@
+
+<UnknownWordsOnly>
+yes
+</UnknownWordsOnly>
+
+<JoinChars>
+## list of chars that may join compound elements (one char per line)
+-
+s
+e
+</JoinChars>
+
+<CompoundPatterns>
+# Adjective+noun
+# søtsaker - sweet things i.e. sweets, storby - a large city, hurtigtog - fast train 
+
+AQ_+NC
+
+# Verb + noun
+# skrivebok / skrivepaper - excercise book / writing papaper, spisestue - dining room, hoppetau - skipping rope
+
+VM_+NC
+
+# Preposition+noun
+# overtro - superstition, baksete - back seat, underverden - under world
+
+SP_+NC
+
+# Noun+participle
+# krigsskadet - hurt in the war, trafikkskadet - hurt in the traffic, jordsjelvrammet - hit by earth quake, knivstukket / knivdrept - hurt / killed by knife 
+
+NC_+VMP
+
+# Adverb+noun
+# nærmiljø - local community, nærbutikk - local shop, uteligger - homeless (sleeps outside), innemenneske / utemenneske - person who prefers to be inside / outside  
+
+RG_+NC
+
+# Long words 
+# Some compound words can be extremely long, composed of three or more words
+# sykehuspolitikk (syke/hus/politikk) - hospital policy, menneskerettighetserklæring (menneske/rettighets/erklæring)  -declaration of human rights, hovedstadspostkontorer (hoved/stads/post/kontorer) - post offices in the capital, arbeidsgiveransvaret (arbeids/giver/ansvaret) - the work giver's [employer's] responsibility
+NC_NC_+NC
+
+
+</CompoundPatterns>

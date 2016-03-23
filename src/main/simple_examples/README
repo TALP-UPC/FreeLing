@@ -1,0 +1,179 @@
+
+
+  This directory contains several simple sample programs that demonstrate 
+ to call FreeLing analyzers.
+
+  You can build them all with the command "make", provided you make sure 
+  that FREELINGDIR in "Makefile" is pointing to your actual FreeLing 
+  installation directory.
+
+  See comments in "Makefile" for details.
+
+
+ === BASIC MODULES ===
+
+ Each of the following programs illustrates the use of a few FreeLing modules.
+
+ ** FL1_MORPH.CC ****
+
+   Illustrates how to tokenize and split a plain text, look up each
+   word in the morphological dictionary, and assign a probability to
+   each word.
+
+   Usage:
+   ./fl1_morph tokenizerFile splitterFile dictionaryFile probabilitiesFile <input.txt
+
+   This program produces the same output than the command:
+   analyze -f xx.cfg -ftok TokenizerFile -fsplit splitterFile -fdict dictionaryFile -fprob probabilitiesFile --nopunct --noquant --nonumb --noloc --noner --outlv morfo 
+
+
+ ** FL2_TAGGER.CC ****
+
+   Illustrates how to call the PoS tagger. Assumes that the input carries the
+   necessary morphological information, as produced by the example fl1_morhp
+   (or by FreeLing "analyze" program with option "--outf morfo").
+
+   Usage:
+   ./fl2_tagger relaxtaggerFile <input.morph
+
+   This program produces the same output than the command:
+   analyze -f xx.cfg --inplv morfo --outlv tagged --tagger relax -R relaxtaggerFile
+
+ ** FL3_CHUNKER.CC ****
+
+   Illustrates how to call the chart_parser. Assumes that the input
+   carries the necessary disambiguated morphological information, as
+   produced by the example fl1_tagger (or by FreeLing "analyze" program
+   with option "--outf tagged").
+
+   Usage:
+   ./fl3_chunker grammarFile <input.tagger
+
+   This program produces the same output than the command:
+   analyze -f xx.cfg --inplv tagged --outlv shallow -G grammarFile
+
+
+ ** FL4_DEPENDENCES.CC ****
+
+   Illustrates how to call the chart_parser and dependency
+   parser. Assumes that the input carries the necessary disambiguated
+   morphological information, as produced by the example fl1_tagger
+   (or by FreeLing "analyze" program with option "--outf tagged").
+
+   Usage:
+   ./fl4_dependences deprulesFile <input.tagger
+
+   This program produces the same output than the command:
+   analyze -f xx.cfg --inplv tagged --outlv dep -G grammarFile -T deprulesFile
+
+
+ Since each of the above examples outputs what the next one expects, they can be pipelined:
+ E.g.:
+ cat input.txt | ./fl1_morph tokenizerFile splitterFile dictionaryFile probabilitiesFile 
+               | ./fl2_tagger relaxtaggerFile
+               | ./fl3_chunker grammarFile 
+  
+ Or either:
+ cat input.txt | ./fl1_morph tokenizerFile splitterFile dictionaryFile probabilitiesFile 
+               | ./fl2_tagger relaxtaggerFile
+               | ./fl4_dependences deprulesFile
+
+
+ === ADVANCED EXAMPLES
+
+ ** ANALYZER.cc ****
+
+   This program illustrates the use of analyzer.cc class that allows to 
+  create all needed modules from a set of configuration options.
+   This is much more easier to use than creating and calling every module,
+  but enables less control of how data is pipelined through the chain of
+  modules.
+   
+     ./analyzer FL-install-path
+
+  If FL-install-path is ommited, the program will looks for data 
+  files under default installation directory /usr/local
+
+
+
+  ** IDENT.CC ****
+
+   ident.cc provides a simple example of how to use the language
+  identifier class. To use it, do:
+
+   ./ident ident.dat < input.txt
+
+   (Sample configuration files "ident.dat" and "ident-few.dat" can 
+    be found in $FLDIR/share/FreeLing/common/lang_ident, where $FLDIR
+    stands for your freeling installation directory, /usr/local
+    by default)
+
+   The program will read each line from stdin, try to identify its
+   language, and print the result for each line.
+
+
+ ** COREFERENCES.CC ****
+
+   Illustrates how to call the coreference resolution module. Takes
+   plain text as input and calls all required modules.
+   
+   Usage: 
+      ./coreferences  FL-install-path <input.txt
+
+   If FL-install-path is ommited, the program will looks for data 
+   files under default installation directory /usr/local
+
+   This program produces the same output than the command:
+   analyze -f xx.cfg --outlv coref --nec --sense ukb
+
+
+ ** SAMPLE.CC ****
+
+  The program "sample.cc", is provided as an example of how
+  application could use the services in FreeLing library.  In this
+  case, the application would read a sentence, call FreeLing to get
+  morphological analysis, PoS tagging, chunking, and dependency
+  parsing.  Then, it processes the results at will (the sample just
+  prints them in a different formats, but a real application could do
+  any other thing)
+
+  You can use sample.cc as a starting point to build your application,
+  using customized calls to the library, with no need of annoying 
+  option management.
+
+  To execute the sample program, just run the program and write some
+  simple sentences in the terminal.  End the input with ctl-D.
+
+  By default, the program assumes FreeLing was installed in the default
+  location /usr/local. 
+  If you installed FreeLing somewhere else, you'll need to provide the
+  actual path as a parameter to the program:
+
+      ./sample  FL-install-path
+
+
+ ** KBEST_TAGGER.CC ****
+
+  This program analyzes input sentences (tokenizer, splitter, morfo, tagger).
+  The tagger is set to compute the 3 best tag sequences instead of only one
+  (default behaviour).
+  The program outputs the 3 best PoS sequences for each sentece (if there 
+  are less than three possible sequences, it will output all possible sequences)
+
+      ./kbest_tagger  FL-install-path
+
+  If FL-install-path is ommited, the program will looks for data 
+  files under default installation directory /usr/local
+
+
+ ** ALTS.cc ****
+
+  This program illustrates the use of alternatives.cc class to obtain words
+  orthographically or phonetically similar to the given word.
+ 
+     ./alts FL-install-path
+
+  If FL-install-path is ommited, the program will looks for data 
+  files under default installation directory /usr/local
+
+

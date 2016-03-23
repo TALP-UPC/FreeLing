@@ -1,0 +1,16 @@
+<ExtractorType>
+Entities
+</ExtractorType>
+
+<NE_Tag>
+NP
+</NE_Tag>
+
+<NE_Classes>
+NP00SP0 person
+NP00G00 location
+NP00O00 organization
+NP00V00 other
+NP00000 unknown
+</NE_Classes>
+

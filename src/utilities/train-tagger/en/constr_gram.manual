@@ -1,0 +1,65 @@
+
+SETS
+  %% insert here set definitions for your manual constraints, if any.
+
+  VerbCompl = <accept> <acknowledge> <add> <admit> <advise> <advocate>
+              <affirm> <agree> <allege> <allow> <announce> <anticipate> <appear>
+              <argue> <arise> <ask> <assert> <assume> <assure> <attest>
+              <believe> <bet> <boast> <brag> <calculate> <caution> <charge> <claim>
+              <comment> <complain> <concede> <concern> <conclude> <confess>
+              <confide> <confirm> <consider> <contend> <continue> <counter> <decide>
+              <declare> <deem> <demand> <demonstrate> <deny> <determine> <dictate>
+              <disagree> <disappoint> <disclose> <discover> <disprove> <doubt>
+              <emerge> <emphasize> <ensure> <establish> <estimate> <evaporate>
+              <exist> <expect> <explain> <expound> <fear> <feel> <figure> <find>
+              <follow> <forecast> <forget> <forgot> <found> <fret> <gloat>
+              <grumble> <guarantee> <guess> <hear>
+              <hint> <hold> <hope> <hurt> <ignore> <illustrate> <imagine> <implore>
+              <imply> <indicate> <insist> <insure> <judge> <know> <lament> <laugh>
+              <learn> <maintain> <mandate> <mean> <mention> <mind> <mount> <muse>
+              <note> <notice> <observe> <opine> <ordain> <order> <perceive> <pledge>
+              <predict> <prefer> <pretend> <proclaim> <project> <promise> <propose>
+              <protest> <prove> <provide> <read> <realize> <reason> <reassure>
+              <recall> <reckon> <recognize> <recommend> <regret> <reiterate>
+              <remain> <remark> <remember> <repeat> <reply> <report> <request>
+              <require> <resent> <respond> <reveal> <rule> <say> <scream> <see>
+              <seem> <sense> <show> <sigh> <signal> <signify> <sniff> <specify>
+              <speculate> <spread> <state> <stipulate> <stress> <suggest> <suppose>
+              <surface> <suspect> <tell> <testify> <think> <trust> <understand>
+              <urge> <venture> <volunteer> <vow> <wad> <warn> <warrant> <wend>
+              <wish> <worry> <write>;
+
+CONSTRAINTS
+  %% insert here your manual constraints
+
+%%% "much/many of" is a pronoun
+5.0 PRP
+    (0 <much> or <many>)
+    (1 <of>);
+
+%%% "that" after a noun with no verb before it, is a relative: "the boy that..."
+15.0 WDT
+    (-1 NN*)
+    (-1* OUT_OF_BOUNDS barrier VB*);
+
+%%% "that" without a completive verb to the left, is probably a relative
+%%% e.g  "I saw the boy that...", but not "I told the boy that..."
+5.0 WDT
+    (-1* OUT_OF_BOUNDS barrier {VerbCompl} );
+
+%%%  "that" before a verb tends to be preposition  (??? )
+%5.0 IN
+%    (0 <that>)
+%    (1 VB*);
+
+%% Help predeterminers  "all three men", "half the crew", ...
+8.0 PDT
+    (1 Z*)
+    (2 NN*);
+
+%% "This is", "that sucks"
+40.0 PRP
+    (0 DT*)
+    (1* VB* barrier NN*);
+
+%%%%%%%%% Begin of statistically-acquired constraint %%%%%%%%%

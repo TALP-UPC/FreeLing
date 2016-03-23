@@ -1,0 +1,84 @@
+# Constant values
+CONSTANT: Cskip  -2
+CONSTANT: Cspace -2
+CONSTANT: Csub   0
+CONSTANT: Cvowel 0
+CONSTANT: Cexp   -10000
+
+# List of phonemes
+VOWELS:     a e i o u 
+CONSONANTS: b c d f g h j k l m n p q r s t v w x y z 
+
+# List of features and comparisonal groups
+FEATURES: a b c d e f g h i j k l m n o p q r s t u v w x y z 
+FVOWELS:  a b c d e f g h i j k l m n o p q r s t u v w x y z 
+FOTHER:   a b c d e f g h i j k l m n o p q r s t u v w x y z 
+
+
+# Numerical values of the categorical features
+VALUE: Y 1
+VALUE: N 0
+
+
+
+# Matric of attribute values for phonemes
+#    F	a b c d e f g h i j k l m n o p q r s t u v w x y z
+#============================================================================================================
+
+FON: a  Y N N N N N N N N N N N N N N N N N N N N N N N N N 
+FON: b  N Y N N N N N N N N N N N N N N N N N N N N N N N N 
+FON: c  N N Y N N N N N N N N N N N N N N N N N N N N N N N 
+FON: d  N N N Y N N N N N N N N N N N N N N N N N N N N N N 
+FON: e  N N N N Y N N N N N N N N N N N N N N N N N N N N N 
+FON: f  N N N N N Y N N N N N N N N N N N N N N N N N N N N 
+FON: g  N N N N N N Y N N N N N N N N N N N N N N N N N N N 
+FON: h  N N N N N N N Y N N N N N N N N N N N N N N N N N N 
+FON: i  N N N N N N N N Y N N N N N N N N N N N N N N N N N 
+FON: j  N N N N N N N N N Y N N N N N N N N N N N N N N N N 
+FON: k  N N N N N N N N N N Y N N N N N N N N N N N N N N N 
+FON: l  N N N N N N N N N N N Y N N N N N N N N N N N N N N 
+FON: m  N N N N N N N N N N N N Y N N N N N N N N N N N N N 
+FON: n  N N N N N N N N N N N N N Y N N N N N N N N N N N N 
+FON: o  N N N N N N N N N N N N N N Y N N N N N N N N N N N 
+FON: p  N N N N N N N N N N N N N N N Y N N N N N N N N N N 
+FON: q  N N N N N N N N N N N N N N N N Y N N N N N N N N N 
+FON: r  N N N N N N N N N N N N N N N N N Y N N N N N N N N 
+FON: s  N N N N N N N N N N N N N N N N N N Y N N N N N N N 
+FON: t  N N N N N N N N N N N N N N N N N N N Y N N N N N N 
+FON: u  N N N N N N N N N N N N N N N N N N N N Y N N N N N 
+FON: v  N N N N N N N N N N N N N N N N N N N N N Y N N N N 
+FON: w  N N N N N N N N N N N N N N N N N N N N N N Y N N N 
+FON: x  N N N N N N N N N N N N N N N N N N N N N N N Y N N 
+FON: y  N N N N N N N N N N N N N N N N N N N N N N N N Y N 
+FON: z  N N N N N N N N N N N N N N N N N N N N N N N N N Y 
+
+
+
+# Weight(salience) of the features
+WEIGHT: a       1
+WEIGHT: b       1
+WEIGHT: c       1
+WEIGHT: d       1
+WEIGHT: e       1
+WEIGHT: f       1
+WEIGHT: g       1
+WEIGHT: h       1
+WEIGHT: i       1
+WEIGHT: j       1
+WEIGHT: k       1
+WEIGHT: l       1
+WEIGHT: m       1
+WEIGHT: n       1
+WEIGHT: ñ       1
+WEIGHT: o       1
+WEIGHT: p       1
+WEIGHT: q       1
+WEIGHT: r       1
+WEIGHT: s       1
+WEIGHT: t       1
+WEIGHT: u       1
+WEIGHT: v       1
+WEIGHT: w       1
+WEIGHT: x       1
+WEIGHT: y       1
+WEIGHT: z       1

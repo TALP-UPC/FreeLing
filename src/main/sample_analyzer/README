@@ -1,0 +1,68 @@
+ --------
+ PROGRAMS
+ --------
+
+ **** ANALYZER.CC ****
+
+    "analyzer.cc" is an exhaustive main program that allows the 
+ user to control all parameters and configuration files provided to the 
+ library, and to choose different kinds of I/O formats.
+   This program is provided as a sample, as well as a main program to 
+ access the analisys library for those who just want a ready-to-use analyzer.
+   The used options are controlled via configuration file, or via
+ command-line options.
+
+   The "--server" option can be used to launch the analyzer in server mode,
+ which will wait in a socket for client requests.
+
+  See user manual for details on the available options. 
+
+  Running "analyzer --help" also provides a summary of available options.
+
+ **** ANALYZER.CC server mode and ANALYZER_CLIENT.CC ****
+
+   "analyzer_client.cc" reads from stdin, sends the data to a running
+ analyzer in server mode, gets the results, and prints them to stdout.
+
+    This means that the analyzer doesn't need to be loaded and initialized 
+ for each file to be processsed. It may be permanently loaded, and 
+ clients just have to send text to analyze.
+
+   To launch "analyzer" in server mode, just add options "--server" and 
+ "--port portnum" as described in the user manual.
+ E.g.:  "analyzer -f configfile.cfg --server --port 12345"
+
+    To call "analyzer_client", give one parameters: the hostname/IP and 
+ the port where the server is running separated by a colon. 
+ E.g. "analyzer_client my.host.com:12345"
+
+
+ **** THREADED_ANALYZER.CC ****
+
+    This program behaves similarly to "analyzer", has the same options, 
+ and illustrates how to embed FreeLing modules into threads for 
+ pipelined processing.
+
+    This program requires libboost_thread (headers and binaries), and 
+ 'make' will not build it if this library is not installed.
+
+    To run it, use the same command line options than with "analyzer".
+
+ -------
+ SCRIPTS
+ -------
+
+ **** ANALYZE ****
+
+    This script just calls "analyzer" and so, it accepts
+ the same command line options.
+ 
+ Advantatges of this script over directly running the binaries are:
+
+ 1.- The -f option (configuration file) does not need to be the full path 
+    of an existing file. If the file is not found, it is searched in 
+    share/FreeLing/config under FreeLing installation directory.
+
+ 2.- You don't need to properly set LD_LIBRARY_PATH or FREELINGSHARE, 
+   since the script will try to locate FreeLing libraries and data 
+   files using the script location as a hint.

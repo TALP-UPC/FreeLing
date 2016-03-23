@@ -1,0 +1,3661 @@
+00001740-v A0:Agent A1:Theme A2:Destination
+00002724-v A0:Agent A1:Theme A2:Result
+00002942-v A0:Location A1:Theme
+00003133-v A0:Location A1:Theme
+00003431-v A0:Agent
+00003826-v A0:Agent
+00004032-v A0:Agent A1:Recipient A2:Theme
+00004227-v A0:Pivot A1:Theme
+00004605-v A1:Theme A2:Source A3:Location
+00004819-v A0:Agent A1:Recipient A2:Theme
+00006238-v A0:Agent A1:Theme A2:Destination
+00007328-v A0:Agent A1:Recipient A2:Theme
+00007549-v A0:Agent A1:Theme A2:Recipient
+00007739-v A0:Agent A1:Patient A2:Recipient A3:Theme
+00008195-v A0:Agent A1:Patient A2:Recipient A3:Theme
+00008299-v A0:Agent A1:Patient A2:Recipient A3:Theme
+00008435-v A0:Agent A1:Patient A2:Recipient A3:Theme
+00008977-v A0:Experiencer A1:Stimulus
+00009631-v A0:Agent A1:Patient
+00010435-v A0:Agent A1:Attribute
+00014201-v A1:Experiencer A2:Stimulus
+00014549-v A0:Agent A1:Theme A2:Destination A3:Initial_Location A4:Trajectory
+00014742-v A0:Agent A1:Theme
+00015303-v A0:Agent A1:Theme
+00015498-v A0:Agent A1:Theme
+00016702-v A0:Agent A1:Theme A2:Patient A3:Recipient
+00017031-v A0:Agent A1:Recipient A2:Theme
+00018526-v A1:Theme A2:Location
+00018813-v A0:Agent A1:Patient A2:Instrument A3:Result
+00019982-v A0:Agent A1:Patient A2:Instrument A3:Result
+00020671-v A0:Stimulus A1:Experiencer A2:Result
+00022686-v A0:Stimulus A1:Experiencer A2:Result
+00023646-v A0:Stimulus A1:Experiencer
+00024279-v A1:Patient A2:Agent A3:Instrument A4:Result
+00024649-v A0:Agent A1:Patient A2:Instrument A3:Result
+00024814-v A0:Agent A1:Patient A2:Instrument A3:Result
+00025034-v A0:Agent A1:Patient
+00025203-v A0:Agent A1:Patient A2:Instrument A3:Result
+00025654-v A0:Stimulus A1:Experiencer A2:Result
+00026153-v A0:Agent A1:Patient A2:Instrument A3:Result
+00027268-v A0:Agent A1:Patient A2:Recipient A3:Theme
+00028010-v A0:Agent A1:Patient A2:Instrument A3:Result
+00028167-v A0:Agent A1:Patient A2:Recipient A3:Theme
+00028362-v A0:Stimulus A1:Experiencer A2:Result
+00028565-v A0:Agent A1:Theme A2:Recipient
+00029025-v A0:Agent A1:Theme A2:Recipient
+00029214-v A0:Agent A1:Theme A2:Recipient
+00029336-v A0:Agent A2:Theme A3:Recipient
+00029836-v A0:Agent A1:Theme A2:Recipient
+00030010-v A0:Agent A2:Theme A3:Recipient
+00030142-v A0:Agent A1:Recipient A2:Theme
+00031418-v A0:Agent A1:Theme A2:Recipient
+00031540-v A0:Agent A1:Recipient A2:Theme
+00031663-v A0:Agent A1:Topic A2:Recipient
+00031820-v A0:Agent A1:Theme A2:Recipient
+00032981-v A0:Agent A1:Recipient A2:Theme
+00033203-v A0:Agent A1:Theme A2:Recipient
+00033599-v A0:Stimulus A2:Experiencer
+00033852-v A0:Agent A1:Theme A2:Recipient
+00033955-v A0:Agent A1:Theme A2:Recipient A3:Patient
+00034115-v A0:Agent A1:Patient A2:Recipient A3:Theme
+00034288-v A0:Agent A1:Theme A2:Recipient
+00034758-v A0:Agent A1:Recipient A2:Theme
+00035089-v A0:Agent A1:Theme A2:Destination
+00035259-v A0:Agent A1:Patient
+00035603-v A0:Agent A1:Patient
+00035758-v A0:Agent A1:Patient A2:Instrument A3:Result
+00036362-v A0:Agent A1:Patient A2:Instrument
+00036932-v A0:Agent A1:Patient
+00037138-v A0:Agent A2:Patient
+00037919-v A0:Agent A1:Patient
+00038365-v A0:Agent A1:Patient
+00039824-v A0:Agent A1:Patient
+00040084-v A0:Agent A1:Destination A2:Theme
+00040188-v A0:Agent A1:Patient
+00040353-v A0:Agent A1:Patient
+00041417-v A0:Agent A1:Destination A2:Theme
+00041687-v A0:Agent A1:Patient
+00041866-v A0:Agent A1:Patient A2:Instrument
+00042017-v A0:Agent A1:Patient
+00042173-v A0:Agent A1:Theme A2:Destination
+00042364-v A0:Agent A1:Patient
+00042479-v A0:Agent A1:Patient
+00042641-v A0:Agent A1:Patient
+00043278-v A0:Agent A1:Patient
+00043480-v A0:Agent A1:Destination A2:Theme
+00043683-v A0:Agent A1:Patient
+00044149-v A0:Agent A1:Theme
+00044797-v A0:Agent A1:Patient
+00045639-v A0:Agent A1:Patient
+00045817-v A0:Agent A1:Patient A2:Instrument A3:Result
+00046534-v A0:Agent A1:Patient
+00047172-v A0:Agent A1:Destination A2:Theme
+00047745-v A0:Agent A1:Theme
+00047945-v A0:Agent A1:Patient
+00048633-v A0:Agent A1:Theme A2:Theme A3:Destination
+00048912-v A0:Agent A1:Patient
+00049770-v A0:Agent A1:Destination A2:Theme
+00049900-v A0:Agent A1:Patient
+00050652-v A0:Agent A1:Theme
+00051511-v A0:Agent A1:Destination A2:Theme
+00052043-v A0:Agent A1:Theme
+00052374-v A0:Agent A1:Theme
+00053159-v A0:Agent A1:Destination A2:Theme
+00054628-v A0:Cause A1:Theme A2:Predicate
+00055142-v A0:Agent A1:Patient A2:Instrument A3:Result
+00056188-v A1:Instrument A2:Patient A3:Agent A4:Result
+00056334-v A0:Agent A1:Patient A2:Instrument A3:Result
+00057895-v A0:Agent A1:Patient
+00058014-v A0:Agent A1:Patient
+00058135-v A0:Agent A1:Patient
+00058265-v A0:Agent A1:Patient
+00058516-v A0:Agent A1:Patient
+00058794-v A0:Agent A1:Patient
+00058897-v A0:Agent A1:Patient
+00061595-v A0:Agent A1:Source A2:Theme
+00063095-v A0:Agent A1:Product A2:Material
+00064487-v A0:Agent A1:Experiencer A2:Instrument
+00066191-v A0:Agent A1:Theme A2:Recipient
+00067129-v A0:Agent A1:Recipient A2:Theme
+00067274-v A0:Agent A1:Theme A2:Recipient
+00067999-v A0:Source A1:Theme A2:Location
+00069012-v A0:Source A1:Theme A2:Location
+00069570-v A0:Agent A1:Destination A2:Theme
+00070816-v A0:Experiencer A1:Patient A2:Stimulus
+00071646-v A0:Agent A1:Theme
+00072012-v A0:Agent A1:Theme A2:Destination
+00072989-v A0:Agent A1:Theme A2:Source
+00073584-v A0:Agent A1:Theme A2:Source
+00073813-v A0:Agent A1:Source A2:Theme
+00074038-v A0:Agent A1:Destination A2:Theme
+00075421-v A0:Stimulus A1:Experiencer A2:Result
+00076400-v A0:Agent A1:Destination A2:Theme
+00077606-v A0:Agent A1:Theme A2:Result
+00077698-v A0:Agent A1:Theme A2:Result
+00078316-v A1:Theme
+00078578-v A0:Agent A1:Patient A2:Recipient A3:Theme
+00080304-v A0:Agent A1:Beneficiary
+00082929-v A0:Agent A1:Theme A2:Destination
+00083124-v A0:Agent A1:Destination A2:Theme
+00084738-v A0:Agent A1:Destination A2:Theme
+00085626-v A0:Agent A1:Destination A2:Theme
+00085907-v A0:Agent A1:Destination A2:Theme
+00086077-v A0:Agent A1:Agent A2:Location A3:Source A4:Theme
+00086320-v A0:Agent A1:Theme A2:Destination
+00088209-v A0:Agent A1:Patient A2:Instrument A3:Result
+00088713-v A0:Agent A1:Destination A2:Theme
+00090708-v A0:Agent A1:Patient A2:Instrument
+00090888-v A0:Agent A1:Patient A2:Instrument
+00091647-v A0:Agent A1:Theme
+00092293-v A0:Agent A1:Patient A2:Instrument A3:Result
+00093593-v A1:Theme A2:Location A3:Pivot
+00093979-v A1:Patient
+00095990-v A0:Agent A1:Patient
+00096766-v A1:Patient
+00097179-v A1:Patient
+00097621-v A0:Stimulus A1:Experiencer A2:Result
+00099184-v A0:Agent A1:Patient A2:Instrument A3:Result
+00099721-v A0:Agent A1:Patient
+00100410-v A0:Agent A1:Theme A2:Location A3:Result
+00100551-v A0:Agent A1:Patient
+00101629-v A0:Agent
+00101779-v A0:Agent
+00102420-v A0:Experiencer A1:Patient
+00102586-v A0:Stimulus A1:Experiencer A2:Result
+00102974-v A0:Agent A1:Theme A2:Destination
+00103317-v A0:Agent A1:Patient A2:Instrument A3:Result
+00103875-v A0:Agent A1:Patient A2:Instrument A3:Result
+00104147-v A0:Agent A1:Patient
+00104299-v A0:Agent A1:Patient A2:Instrument A3:Result
+00104868-v A0:Agent A1:Theme A2:Source
+00105958-v A0:Experiencer A1:Stimulus
+00107739-v A0:Agent A1:Patient A2:Instrument A3:Result
+00107943-v A0:Agent A1:Patient A2:Instrument A3:Result
+00108303-v A0:Agent A1:Patient A2:Instrument A3:Result
+00109263-v A0:Agent
+00114291-v A0:Agent A1:Patient A2:Instrument A3:Result
+00114615-v A0:Agent A1:Patient A2:Instrument A3:Result
+00114837-v A0:Agent A1:Patient A2:Result A3:Material
+00115157-v A0:Agent A1:Patient A2:Result A3:Material
+00117985-v A1:Theme A2:Location A3:Pivot
+00118523-v A0:Agent A1:Theme A2:Time
+00119074-v A0:Agent A1:Patient A2:Co-Patient
+00119873-v A0:Agent A1:Patient A2:Result A3:Material
+00120316-v A0:Agent A1:Result A2:Theme
+00123170-v A0:Agent A1:Patient A2:Instrument A3:Result
+00125841-v A0:Agent A1:Patient A2:Result A3:Material
+00140751-v A0:Agent A1:Theme A2:Co-Theme A3:Theme A4:Co-Agent A5:Location
+00141524-v A0:Agent A1:Patient A2:Instrument A3:Result
+00142055-v A0:Agent A1:Theme A2:Goal A3:Goal
+00143914-v A0:Agent A1:Theme A2:Location
+00144169-v A0:Agent A1:Patient A2:Instrument A3:Result
+00145299-v A0:Agent A1:Patient A2:Instrument
+00145902-v A0:Agent A1:Patient A2:Recipient A3:Theme
+00149296-v A0:Agent A1:Patient A2:Instrument A3:Result
+00149583-v A0:Agent A1:Patient A2:Goal A3:Source
+00150287-v A0:Agent A1:Patient A2:Goal
+00151114-v A0:Agent A1:Patient A2:Goal
+00152558-v A0:Agent A1:Patient A2:Instrument A3:Result
+00152762-v A0:Agent A1:Patient A2:Instrument A3:Result
+00153061-v A1:Patient A2:Initial_Location
+00153263-v A0:Agent A1:Patient A2:Instrument A3:Result
+00154778-v A0:Agent A1:Patient A2:Instrument A3:Result
+00155143-v A1:Patient A2:Extent A3:Attribute
+00155406-v A1:Patient A2:Extent A3:Attribute
+00155547-v A1:Patient A2:Extent A3:Attribute
+00155727-v A1:Patient A2:Extent A3:Attribute
+00155869-v A0:Agent A1:Theme A2:Source
+00157623-v A1:Patient A2:Extent A3:Attribute
+00157844-v A0:Agent A1:Patient A2:Instrument A3:Result
+00158804-v A0:Agent A1:Theme
+00159642-v A0:Agent A1:Patient A2:Goal
+00160653-v A0:Agent A1:Patient A2:Co-Patient
+00160880-v A0:Agent A1:Patient A2:Co-Patient
+00161012-v A0:Agent A1:Patient A2:Co-Patient
+00161225-v A1:Theme A2:Co-Theme A3:Agent A4:Co-Agent A5:Location
+00162688-v A0:Agent A1:Theme A2:Co-Theme A3:Co-Agent
+00165618-v A0:Agent A1:Patient A2:Co-Patient
+00165789-v A0:Agent A1:Patient A2:Co-Patient
+00171586-v A0:Agent A1:Destination A2:Theme
+00172258-v A0:Agent A1:Product A2:Material
+00172732-v A0:Agent A1:Theme A2:Source
+00173338-v A0:Agent A1:Theme A2:Source A3:Destination
+00177011-v A0:Agent A1:Theme A2:Source
+00177136-v A0:Agent A1:Theme A2:Source
+00177243-v A0:Agent A2:Patient
+00177861-v A0:Agent A1:Patient A2:Instrument A3:Result
+00177984-v A0:Agent A1:Theme A2:Source
+00178235-v A0:Agent A1:Location A2:Theme
+00179567-v A0:Agent A1:Source A2:Theme
+00179718-v A0:Agent A1:Source A2:Theme
+00179852-v A0:Agent A1:Patient A2:Co-Patient
+00179959-v A0:Agent A1:Source A2:Theme
+00180076-v A0:Agent A1:Source A2:Theme
+00180495-v A0:Agent A1:Theme A2:Source
+00181180-v A0:Agent A1:Source A2:Theme
+00181258-v A0:Agent A1:Source A2:Theme
+00181434-v A0:Theme A1:Agent A2:Location A3:Time
+00181664-v A0:Agent A1:Location A2:Theme
+00181875-v A0:Agent A1:Destination A2:Theme
+00183879-v A0:Agent A1:Theme A2:Goal
+00188375-v A0:Agent A1:Destination A2:Theme
+00189189-v A0:Agent A1:Destination A2:Theme
+00189364-v A0:Agent A1:Destination A2:Theme
+00194170-v A0:Agent A1:Theme A2:Source
+00194534-v A0:Agent A1:Theme A2:Source
+00194912-v A0:Agent A1:Theme A2:Source
+00195342-v A0:Agent A1:Location A2:Theme
+00195617-v A0:Agent A1:Beneficiary A2:Patient A3:Product
+00196024-v A0:Agent A1:Source A2:Theme
+00196364-v A0:Agent A1:Patient A2:Instrument A3:Result
+00196758-v A0:Agent A1:Patient A2:Instrument A3:Result
+00196990-v A0:Agent A1:Source A2:Theme
+00197091-v A0:Agent A1:Source A2:Theme
+00197206-v A0:Agent A1:Source A2:Theme
+00197423-v A0:Agent A1:Source A2:Theme
+00197590-v A0:Agent A1:Source A2:Theme
+00197744-v A0:Agent A1:Source A2:Theme
+00198057-v A0:Agent A1:Source A2:Theme
+00198213-v A0:Agent A1:Source A2:Theme
+00198477-v A0:Agent A1:Source A2:Theme
+00200242-v A0:Agent A1:Source A2:Theme
+00201034-v A0:Agent A1:Theme A2:Source
+00203081-v A1:Patient
+00203213-v A0:Agent A1:Theme A2:Attribute
+00205046-v A0:Agent A1:Patient A2:Instrument A3:Result
+00205885-v A0:Agent A1:Patient A2:Instrument A3:Result
+00207728-v A0:Agent A1:Patient A2:Instrument A3:Result
+00208210-v A0:Agent A1:Patient A2:Instrument A3:Result
+00208497-v A1:Patient
+00208836-v A0:Patient
+00209837-v A1:Patient
+00211108-v A0:Agent A1:Patient A2:Instrument A3:Result
+00212049-v A0:Agent A1:Theme A2:Asset A3:Beneficiary A4:Source
+00213223-v A0:Agent A1:Patient A2:Instrument A3:Result
+00213544-v A0:Agent A1:Theme A2:Destination
+00213794-v A0:Agent A1:Theme A2:Destination
+00214020-v A0:Agent A1:Patient A2:Instrument A3:Result
+00214268-v A0:Agent A1:Patient A2:Instrument A3:Result
+00214407-v A0:Agent A1:Patient A2:Instrument A3:Result
+00215800-v A0:Agent A1:Patient
+00216216-v A0:Theme A1:Destination A2:Agent
+00217700-v A0:Agent A1:Destination A2:Theme
+00217956-v A0:Agent A1:Patient A2:Instrument A3:Result
+00218330-v A0:Agent A1:Patient A2:Instrument A3:Result
+00219012-v A0:Agent A1:Destination A2:Theme
+00219963-v A0:Agent A1:Patient A2:Co-Patient
+00220461-v A0:Agent A1:Patient A2:Instrument A3:Result
+00220701-v A0:Agent A1:Patient A2:Instrument A3:Result
+00220869-v A0:Agent A1:Patient A2:Instrument A3:Result
+00222993-v A0:Agent A1:Destination A2:Theme
+00223500-v A0:Agent A1:Patient A2:Instrument A3:Result
+00224651-v A0:Agent A1:Patient A2:Instrument A3:Result
+00224901-v A0:Agent A1:Patient A2:Instrument A3:Result
+00226071-v A0:Agent A1:Patient A2:Instrument A3:Result
+00226379-v A0:Agent A1:Patient A2:Instrument A3:Result
+00226566-v A0:Agent A1:Patient A2:Instrument A3:Result
+00227042-v A0:Agent A1:Patient A2:Instrument A3:Result
+00227165-v A0:Agent A1:Patient A2:Instrument A3:Result
+00227913-v A0:Agent A1:Patient A2:Instrument A3:Result
+00228521-v A0:Agent A1:Theme A2:Initial_Location A3:Instrument A4:Destination A5:Result
+00228655-v A0:Agent A1:Theme A2:Destination
+00229280-v A0:Agent A1:Theme A2:Source
+00229605-v A0:Agent A1:Patient A2:Instrument A3:Result
+00231445-v A1:Patient A2:Extent A3:Attribute
+00232956-v A0:Agent A1:Patient A2:Instrument A3:Result
+00233335-v A0:Cause A1:Patient A2:Goal
+00235110-v A1:Theme A2:Location A3:Pivot
+00238867-v A0:Agent A1:Patient A2:Instrument A3:Result
+00240293-v A0:Agent A1:Patient A2:Instrument A3:Result
+00240571-v A1:Patient A2:Agent A3:Instrument A4:Result
+00241038-v A0:Agent A1:Patient A2:Instrument A3:Result
+00241689-v A0:Agent A1:Patient A2:Instrument A3:Result
+00242580-v A0:Agent A1:Patient A2:Co-Patient
+00242747-v A0:Agent A1:Patient A2:Co-Patient
+00245059-v A0:Agent A1:Patient A2:Instrument A3:Result
+00245289-v A0:Agent A1:Patient A2:Instrument A3:Result
+00246217-v A0:Agent A1:Patient A2:Instrument A3:Result
+00246475-v A0:Agent A1:Patient A2:Instrument A3:Result
+00246746-v A0:Agent A1:Patient A2:Instrument A3:Result
+00247048-v A0:Agent A1:Patient A2:Instrument A3:Result
+00247390-v A0:Agent A1:Patient A2:Instrument A3:Result
+00247830-v A0:Patient A1:Agent A2:Instrument A3:Result
+00248026-v A1:Patient A2:Agent A3:Instrument A4:Result
+00248512-v A0:Agent A1:Patient A2:Instrument A3:Result
+00248659-v A0:Agent A1:Patient A2:Instrument A3:Result
+00249679-v A0:Agent A1:Patient A2:Instrument A3:Result
+00249852-v A0:Agent A1:Patient A2:Instrument A3:Result
+00249969-v A0:Agent A1:Patient A2:Instrument A3:Result
+00250181-v A1:Material A2:Agent A3:Product
+00252019-v A0:Agent A1:Product A2:Material
+00253761-v A0:Agent A1:Product A2:Material A3:Beneficiary A4:Asset
+00254150-v A0:Agent A1:Patient A2:Instrument A3:Result
+00254298-v A1:Patient A2:Instrument A3:Agent A4:Result
+00254486-v A1:Patient A2:Instrument A3:Agent A4:Result
+00254672-v A1:Patient A2:Instrument A3:Agent A4:Result
+00254867-v A0:Agent A1:Patient A2:Instrument A3:Result
+00255079-v A0:Agent A1:Destination A2:Theme
+00255389-v A0:Agent A1:Patient A2:Instrument A3:Result
+00256117-v A0:Agent A1:Patient A2:Instrument A3:Result
+00256507-v A1:Patient
+00257269-v A0:Agent A1:Patient A2:Instrument A3:Result
+00258857-v A0:Agent A1:Patient A2:Instrument
+00259560-v A0:Agent A1:Patient A2:Instrument
+00259927-v A0:Agent A2:Patient A3:Instrument A4:Result
+00260311-v A0:Stimulus A1:Experiencer A2:Result
+00260470-v A0:Stimulus A1:Experiencer A2:Result
+00261533-v A0:Agent A1:Destination A2:Theme
+00262703-v A0:Agent A1:Destination A2:Theme
+00263231-v A1:Location A2:Theme
+00264034-v A0:Agent A1:Patient A2:Instrument A3:Result
+00264705-v A0:Agent A1:Patient A2:Instrument A3:Result
+00264875-v A0:Agent A1:Patient A2:Instrument A3:Result
+00265094-v A0:Agent A1:Patient A2:Instrument A3:Result
+00266798-v A0:Agent A1:Patient A2:Instrument A3:Result
+00267249-v A0:Agent A1:Patient A2:Instrument A3:Result
+00270561-v A0:Agent A1:Patient A2:Instrument A3:Result
+00270699-v A1:Patient A2:Extent A3:Attribute
+00270826-v A0:Agent A1:Patient A2:Instrument A3:Result
+00271201-v A0:Agent A1:Theme A2:Value
+00271711-v A0:Agent A1:Patient A2:Instrument A3:Result
+00271946-v A0:Agent A1:Patient A2:Instrument A3:Result
+00272177-v A0:Agent A1:Patient A2:Instrument A3:Result
+00273963-v A0:Agent A1:Patient A2:Instrument A3:Result
+00274283-v A0:Agent A1:Patient A2:Instrument A3:Result
+00275253-v A1:Patient
+00278280-v A0:Agent A1:Material A2:Attribute A3:Beneficiary A4:Result
+00278514-v A0:Agent A1:Theme A2:Goal A3:Goal
+00280301-v A0:Agent A1:Patient A2:Instrument A3:Result
+00280532-v A0:Agent A1:Patient A2:Instrument A3:Result
+00281913-v A0:Agent A1:Destination A2:Theme
+00282523-v A0:Agent A1:Patient A2:Result A3:Material
+00282652-v A0:Agent A1:Patient A2:Instrument A3:Result
+00282790-v A1:Patient
+00283090-v A0:Agent A1:Patient A2:Result
+00283664-v A0:Agent A1:Patient
+00283911-v A0:Agent A1:Patient A2:Result
+00285088-v A0:Agent A1:Patient A2:Instrument A3:Result
+00286798-v A0:Agent A1:Theme A2:Destination
+00289031-v A0:Agent A1:Patient A2:Instrument A3:Result
+00289297-v A0:Agent A1:Patient A2:Instrument A3:Result
+00289392-v A0:Agent A1:Patient A2:Instrument A3:Result
+00289532-v A0:Agent A1:Patient A2:Instrument A3:Result
+00289679-v A0:Agent A1:Patient A2:Instrument A3:Result
+00289840-v A0:Agent A1:Patient A2:Instrument A3:Result
+00290302-v A0:Agent A1:Patient A2:Instrument A3:Result
+00290581-v A0:Agent A1:Patient A2:Instrument A3:Result
+00291163-v A0:Source A1:Theme A2:Location
+00292672-v A0:Agent A1:Patient A2:Instrument
+00293141-v A0:Agent A1:Destination A2:Theme
+00294245-v A1:Theme A2:Location
+00298244-v A0:Agent A1:Patient A2:Goal
+00299580-v A0:Agent A1:Patient A2:Goal
+00300113-v A0:Agent A1:Patient A2:Goal
+00300317-v A0:Agent A1:Patient A2:Instrument A3:Result
+00301662-v A0:Agent A1:Beneficiary
+00301856-v A0:Agent A1:Patient A2:Instrument A3:Result
+00302130-v A0:Agent A1:Patient A2:Instrument A3:Result
+00302464-v A0:Agent A1:Patient A2:Instrument A3:Result
+00302875-v A0:Agent A1:Patient A2:Instrument A3:Result
+00303309-v A0:Agent A1:Patient A2:Instrument A3:Result
+00303465-v A0:Agent A1:Patient A2:Instrument A3:Result
+00303661-v A0:Agent A1:Patient A2:Instrument A3:Result
+00303940-v A0:Agent A1:Patient A2:Instrument A3:Result
+00304828-v A0:Agent A1:Patient A2:Instrument A3:Result
+00305109-v A0:Agent A1:Patient A2:Instrument A3:Result
+00306017-v A0:Agent A1:Patient A2:Instrument A3:Result
+00306723-v A0:Agent A1:Patient A2:Instrument A3:Result
+00307568-v A0:Source A1:Theme A2:Location
+00307785-v A1:Theme A2:Location
+00309310-v A0:Agent A1:Patient A2:Instrument A3:Result
+00310635-v A0:Patient A1:Agent A2:Instrument A3:Result
+00311113-v A0:Agent A1:Patient A2:Instrument A3:Result
+00311559-v A0:Agent A1:Patient A2:Instrument A3:Result
+00312380-v A0:Agent A1:Patient A2:Instrument A3:Result
+00312815-v A0:Agent A1:Patient A2:Instrument A3:Result
+00312990-v A0:Agent A1:Patient A2:Instrument A3:Result
+00313171-v A0:Agent A1:Source A2:Theme
+00313585-v A0:Agent A1:Patient A2:Instrument A3:Result
+00314782-v A1:Experiencer A2:Theme
+00315020-v A1:Patient A2:Attribute A3:Extent
+00316195-v A1:Patient A2:Extent A3:Attribute
+00316494-v A0:Agent A1:Patient A2:Instrument A3:Result
+00316631-v A0:Agent A1:Patient A2:Instrument A3:Result
+00317468-v A0:Agent A1:Patient A2:Instrument A3:Result
+00317569-v A0:Agent A1:Patient A2:Instrument A3:Result
+00317700-v A0:Agent A1:Patient A2:Instrument A3:Result
+00320246-v A0:Agent A1:Patient A2:Result A3:Instrument
+00320410-v A0:Agent A1:Patient A2:Instrument A3:Result
+00321486-v A0:Agent A1:Destination A2:Theme
+00321652-v A0:Agent A1:Destination A2:Theme
+00321936-v A0:Agent A1:Patient A2:Instrument A3:Result
+00322151-v A0:Agent A1:Patient A2:Instrument A3:Result
+00322395-v A0:Agent A1:Patient A2:Instrument A3:Result
+00322559-v A0:Agent A1:Patient A2:Instrument A3:Result
+00323377-v A0:Agent A1:Asset A2:Beneficiary A3:Material A4:Product
+00323571-v A0:Agent A1:Patient A2:Instrument A3:Result
+00323856-v A0:Agent A1:Patient A2:Instrument A3:Result
+00324071-v A0:Agent A1:Theme A2:Destination
+00324231-v A0:Agent A1:Patient A2:Instrument A3:Result
+00324427-v A0:Location A1:Theme
+00324806-v A0:Agent A1:Patient A2:Instrument A3:Result
+00325208-v A0:Agent A1:Patient A2:Instrument A3:Result
+00325328-v A0:Agent A1:Patient A2:Instrument A3:Result
+00326619-v A0:Agent A1:Patient A2:Instrument A3:Result
+00326773-v A0:Agent A1:Patient A2:Instrument A3:Result
+00327145-v A0:Agent A1:Patient A2:Instrument A3:Result
+00328128-v A0:Agent A1:Patient A2:Instrument A3:Result
+00328370-v A0:Agent A1:Patient A2:Instrument A3:Result
+00331082-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+00331514-v A0:Agent A1:Patient A2:Instrument A3:Result
+00332154-v A0:Agent A1:Patient A2:Instrument A3:Result
+00332835-v A0:Agent A1:Patient A2:Co-Patient
+00333594-v A0:Agent A1:Patient A2:Instrument A3:Result
+00333758-v A0:Agent A1:Patient A2:Instrument A3:Result
+00333907-v A0:Agent A1:Patient A2:Instrument A3:Result
+00334186-v A0:Agent A1:Patient A2:Instrument A3:Result
+00334649-v A0:Agent A1:Patient A2:Instrument A3:Result
+00334996-v A0:Agent A1:Patient A2:Instrument A3:Result
+00335366-v A0:Agent A1:Patient A2:Instrument A3:Result
+00335814-v A0:Agent A1:Patient A2:Co-Patient
+00335923-v A0:Agent A1:Patient A2:Instrument A3:Result
+00336260-v A0:Agent A1:Patient A2:Instrument A3:Result
+00336718-v A0:Agent A1:Patient A2:Instrument A3:Result
+00336922-v A0:Agent A1:Patient A2:Instrument A3:Result
+00337065-v A0:Agent A1:Patient A2:Instrument A3:Result
+00337234-v A0:Agent A1:Patient A2:Instrument A3:Result
+00337903-v A0:Agent A1:Patient A2:Instrument A3:Result
+00339085-v A0:Agent A1:Patient A2:Instrument A3:Result
+00339934-v A1:Theme A2:Location
+00341040-v A1:Theme A2:Location
+00341422-v A0:Theme A1:Location
+00341917-v A1:Theme A2:Location
+00344174-v A1:Theme A2:Location
+00345508-v A1:Theme A2:Location
+00345652-v A1:Patient
+00345761-v A0:Agent A1:Theme A2:Instrument
+00346537-v A0:Agent A1:Theme A2:Instrument
+00348746-v A0:Agent A1:Theme A2:Instrument
+00349416-v A0:Agent A1:Theme A2:Instrument
+00350104-v A0:Agent A1:Theme A2:Instrument
+00350283-v A0:Agent A1:Theme A2:Instrument
+00351824-v A1:Patient A2:Initial_Location
+00351963-v A0:Agent A1:Theme A2:Instrument
+00352826-v A0:Agent A1:Theme A2:Instrument
+00354845-v A1:Patient A2:Initial_Location
+00355670-v A0:Theme A1:Agent A2:Location A3:Time
+00356649-v A0:Agent A1:Patient A2:Instrument A3:Result
+00356789-v A1:Patient
+00357332-v A1:Patient
+00357854-v A1:Patient
+00357998-v A1:Patient
+00358431-v A0:Patient A1:Initial_Location
+00360337-v A0:Agent A1:Theme
+00360501-v A0:Agent A1:Theme A2:Result
+00361495-v A1:Theme
+00361641-v A0:Agent A1:Source A2:Theme
+00362348-v A0:Agent A1:Theme A2:Instrument
+00364868-v A0:Agent A1:Patient A2:Instrument A3:Result
+00365446-v A0:Agent A1:Patient A2:Instrument A3:Result
+00366275-v A0:Agent A1:Patient A2:Instrument A3:Result
+00366547-v A0:Agent A1:Patient A2:Instrument A3:Result
+00366858-v A0:Agent A1:Patient A2:Instrument A3:Result
+00369194-v A0:Agent A1:Patient A2:Instrument A3:Result
+00369628-v A0:Agent A1:Patient A2:Instrument A3:Result
+00369864-v A0:Agent A1:Patient A2:Instrument A3:Result
+00370412-v A0:Agent A1:Patient A2:Instrument A3:Result
+00371264-v A0:Agent A1:Patient A2:Instrument A3:Result
+00372665-v A0:Agent A1:Patient A2:Instrument A3:Result
+00372958-v A0:Agent A1:Patient A2:Instrument A3:Result
+00373250-v A0:Agent A1:Patient A2:Instrument A3:Result
+00375021-v A0:Agent A1:Patient A2:Instrument A3:Result
+00376106-v A0:Agent A1:Material A2:Product
+00376807-v A0:Agent A1:Source A2:Theme
+00377002-v A0:Agent A1:Patient A2:Instrument A3:Result
+00377569-v A0:Theme A1:Location
+00377715-v A0:Agent A1:Patient A2:Instrument A3:Result
+00377906-v A0:Theme A1:Agent A2:Location A3:Time
+00378042-v A0:Agent A1:Patient A2:Instrument A3:Result
+00378664-v A0:Agent A1:Patient A2:Instrument A3:Result
+00379440-v A0:Agent A1:Patient A2:Instrument A3:Result
+00379774-v A1:Patient
+00380159-v A0:Agent A1:Theme A2:Co-Theme A3:Theme A4:Co-Agent A5:Location
+00381013-v A0:Agent A1:Patient A2:Result A3:Material
+00381601-v A0:Agent A1:Patient A2:Result A3:Material
+00382493-v A0:Agent A1:Patient A2:Result A3:Material
+00382635-v A0:Agent A1:Patient A2:Result A3:Material
+00384055-v A0:Agent A1:Patient A2:Result A3:Material
+00384411-v A0:Agent A1:Patient A2:Result A3:Material
+00387310-v A1:Patient A2:Goal A3:Agent A4:Source
+00388635-v A0:Agent A1:Patient A2:Instrument
+00389992-v A1:Theme A2:Location A3:Pivot
+00391971-v A0:Agent A1:Patient A2:Instrument A3:Result
+00392314-v A0:Agent A1:Patient A2:Instrument A3:Result
+00392588-v A0:Agent A1:Patient A2:Instrument A3:Result
+00392960-v A0:Agent A1:Patient A2:Instrument A3:Result
+00394813-v A0:Agent A1:Beneficiary A2:Patient A3:Product
+00396703-v A0:Agent A1:Patient A2:Co-Patient
+00397405-v A0:Agent A1:Patient A2:Instrument A3:Result
+00397576-v A0:Agent A1:Patient A2:Instrument A3:Result
+00398484-v A0:Agent A1:Patient A2:Instrument A3:Result
+00398741-v A0:Agent A1:Patient A2:Instrument A3:Result
+00399553-v A0:Agent A1:Patient A2:Instrument A3:Result
+00400101-v A0:Agent A1:Patient A2:Instrument A3:Result
+00403967-v A0:Agent A1:Patient A2:Instrument A3:Result
+00404401-v A0:Agent A1:Result A2:Material A3:Beneficiary A4:Attribute
+00405236-v A0:Agent A1:Patient A2:Instrument A3:Result
+00405540-v A0:Agent A1:Patient A2:Instrument A3:Result
+00406243-v A0:Agent A1:Patient A2:Result
+00407146-v A0:Agent A1:Topic A2:Source
+00407633-v A0:Agent A1:Theme A2:Destination
+00407848-v A0:Agent A1:Patient A2:Result
+00409281-v A0:Agent A1:Patient A2:Instrument A3:Result
+00409643-v A0:Agent A1:Patient A2:Instrument A3:Result
+00410406-v A0:Agent A1:Patient A2:Instrument A3:Result
+00413876-v A0:Theme A1:Theme A4:Location
+00415044-v A0:Theme A1:Theme A4:Location
+00416571-v A0:Agent A1:Patient A2:Instrument A3:Result
+00416705-v A0:Agent A1:Patient A2:Instrument A3:Result
+00416880-v A0:Agent A1:Patient A2:Instrument A3:Result
+00417001-v A0:Agent A1:Patient A2:Instrument A3:Result
+00417596-v A0:Agent A1:Patient A2:Instrument A3:Result
+00418563-v A0:Agent A1:Patient A2:Instrument A3:Result
+00419137-v A0:Agent A1:Patient A2:Instrument A3:Result
+00419375-v A0:Agent A1:Patient A2:Instrument A3:Result
+00419950-v A0:Agent A1:Patient A2:Instrument A3:Result
+00420132-v A0:Agent A1:Patient A2:Instrument A3:Result
+00420434-v A0:Agent A1:Patient A2:Instrument A3:Result
+00420549-v A0:Agent A1:Patient A2:Instrument A3:Result
+00421125-v A0:Agent A1:Patient A2:Instrument A3:Result
+00421408-v A0:Agent A1:Patient A2:Instrument A3:Result
+00421917-v A0:Agent A1:Patient A2:Instrument A3:Result
+00422090-v A1:Theme A2:Location
+00424224-v A1:Theme A2:Location
+00424869-v A0:Agent A1:Theme A2:Location
+00425967-v A1:Theme A2:Location
+00426581-v A0:Theme A1:Location
+00426958-v A1:Patient A2:Initial_Location
+00427397-v A1:Patient A2:Initial_Location
+00430625-v A0:Agent A1:Patient A2:Instrument A3:Result
+00430999-v A0:Agent A1:Patient A2:Instrument A3:Result
+00431117-v A0:Agent A1:Patient A2:Instrument A3:Result
+00431327-v A0:Agent A1:Patient A2:Instrument A3:Result
+00431610-v A0:Agent A1:Patient A2:Instrument A3:Result
+00431826-v A1:Patient
+00432061-v A1:Patient A2:Extent A3:Attribute
+00432281-v A0:Agent A1:Patient A2:Instrument A3:Result
+00432436-v A0:Agent A1:Patient A2:Instrument A3:Result
+00432683-v A1:Patient A2:Extent A3:Attribute
+00433069-v A1:Attribute A2:Extent A3:Patient
+00433232-v A1:Patient A2:Extent A3:Attribute
+00433778-v A1:Patient
+00434374-v A0:Agent A1:Patient A2:Instrument A3:Result
+00435103-v A0:Agent A2:Co-Agent A3:Theme
+00435481-v A0:Agent A1:Patient A2:Instrument A3:Result
+00438178-v A0:Agent A1:Patient A2:Instrument A3:Result
+00438495-v A0:Agent A1:Patient A2:Instrument A3:Result
+00439343-v A0:Agent A1:Patient A2:Instrument A3:Result
+00439958-v A0:Agent A1:Patient A2:Instrument A3:Result
+00440580-v A0:Agent A1:Patient A2:Instrument A3:Result
+00440786-v A0:Agent A1:Patient A2:Instrument A3:Result
+00441007-v A0:Agent A1:Destination A2:Theme
+00441212-v A0:Agent A1:Patient A2:Instrument A3:Result
+00441445-v A0:Agent A1:Patient A2:Instrument A3:Result
+00442267-v A0:Agent A1:Patient A2:Instrument A3:Result
+00443116-v A0:Agent A1:Patient A2:Instrument A3:Result
+00443384-v A0:Agent A1:Patient A2:Instrument A3:Result
+00443670-v A0:Agent A1:Patient A2:Instrument A3:Result
+00443984-v A0:Agent A1:Patient A2:Instrument A3:Result
+00444309-v A0:Agent A1:Patient A2:Instrument A3:Result
+00444629-v A0:Agent A1:Material A2:Product
+00445169-v A0:Agent A1:Patient A2:Instrument A3:Result
+00445467-v A0:Agent A1:Patient A2:Instrument A3:Result
+00445940-v A0:Agent A1:Patient A2:Instrument A3:Result
+00446329-v A0:Agent A1:Patient A2:Instrument A3:Result
+00447309-v A0:Agent A1:Patient A2:Instrument A3:Result
+00448440-v A0:Agent A1:Patient
+00449153-v A0:Agent A1:Agent A2:Location A3:Source A4:Theme
+00450168-v A0:Agent A1:Source A2:Theme
+00450565-v A0:Agent A1:Location A2:Theme
+00450691-v A0:Agent A1:Location A2:Theme
+00452220-v A0:Agent A1:Patient A2:Instrument A3:Result
+00453680-v A0:Agent A1:Theme A2:Destination
+00453803-v A0:Agent A1:Destination A2:Theme
+00454135-v A0:Agent A1:Destination A2:Theme
+00455529-v A0:Agent A1:Theme A2:Source
+00455750-v A0:Agent A1:Theme
+00456151-v A0:Theme A1:Destination A2:Agent
+00457998-v A0:Agent A1:Patient A2:Instrument A3:Result
+00458471-v A0:Agent A1:Patient A2:Instrument A3:Result
+00459296-v A0:Agent A1:Theme
+00459498-v A0:Agent A1:Theme
+00460555-v A0:Agent A1:Theme A2:Location
+00461354-v A0:Agent A1:Patient A2:Instrument A3:Result
+00461493-v A0:Agent A1:Patient A2:Instrument A3:Result
+00462092-v A0:Agent A1:Theme
+00463469-v A0:Agent A1:Patient A2:Instrument A3:Result
+00463778-v A0:Agent A1:Patient A2:Instrument A3:Result
+00466651-v A0:Agent A1:Patient A2:Co-Patient
+00467451-v A0:Agent A1:Patient A2:Co-Patient
+00469030-v A0:Agent A1:Patient A2:Result A3:Material
+00469187-v A0:Agent A1:Patient A2:Result A3:Material
+00469382-v A0:Agent A1:Theme A2:Source
+00469637-v A1:Patient
+00470084-v A0:Agent A1:Patient A2:Instrument A3:Result
+00470701-v A0:Agent A1:Patient A2:Instrument
+00471711-v A0:Agent A1:Theme A3:Source
+00472230-v A0:Agent A1:Patient A2:Instrument
+00472871-v A0:Agent A1:Theme A2:Source
+00475183-v A0:Agent A1:Theme A2:Source
+00475647-v A0:Agent A1:Source A2:Theme
+00477247-v A0:Agent A1:Material A2:Product A3:Asset A4:Beneficiary
+00478217-v A0:Agent A1:Theme A3:Source
+00478682-v A0:Agent A1:Theme A3:Source
+00479176-v A0:Agent A1:Patient A2:Instrument
+00482893-v A0:Agent A1:Patient A2:Goal
+00484166-v A0:Agent A1:Theme A2:Instrument
+00485891-v A0:Agent A1:Destination A2:Theme
+00487182-v A0:Agent A1:Patient A2:Instrument A3:Result
+00487350-v A0:Agent A1:Patient A2:Instrument A3:Result
+00487554-v A0:Agent A1:Patient A2:Instrument A3:Result
+00488617-v A0:Agent A1:Theme A2:Source
+00488770-v A0:Agent A1:Patient A2:Instrument A3:Result
+00489029-v A0:Agent A1:Patient A2:Instrument A3:Result
+00490968-v A0:Agent A1:Theme A3:Value
+00491313-v A0:Agent A1:Theme A3:Value
+00492706-v A0:Agent A1:Destination A2:Theme
+00493052-v A0:Agent A1:Source A2:Theme
+00494269-v A0:Agent A1:Patient A2:Beneficiary A3:Location
+00494613-v A0:Agent A1:Patient A2:Co-Patient
+00495636-v A0:Agent A1:Theme A2:Destination
+00495808-v A0:Agent A1:Theme A2:Goal
+00495998-v A0:Agent A1:Patient A2:Beneficiary A3:Location
+00496266-v A0:Agent A1:Patient A2:Beneficiary A3:Location
+00497061-v A0:Agent A1:Patient A2:Instrument A3:Result
+00497705-v A0:Agent A1:Destination A2:Theme
+00498530-v A0:Agent A1:Patient A2:Instrument A3:Result
+00498662-v A0:Agent A1:Patient A2:Instrument A3:Result
+00498988-v A0:Agent A1:Patient A2:Instrument A3:Result
+00500638-v A0:Agent A1:Patient A2:Instrument A3:Result
+00500834-v A0:Agent A1:Patient A2:Instrument A3:Result
+00501896-v A0:Agent A1:Theme A2:Source
+00505151-v A0:Agent A1:Patient A2:Instrument A3:Result
+00506539-v A1:Instrument A2:Patient A3:Agent A4:Result
+00506672-v A1:Instrument A2:Patient A3:Agent A4:Result
+00506952-v A0:Agent A1:Patient A2:Instrument A3:Result
+00507664-v A0:Agent A1:Patient A2:Instrument A3:Result
+00509607-v A0:Experiencer A1:Stimulus
+00510364-v A0:Agent A1:Destination A2:Theme
+00511430-v A0:Agent A1:Patient A2:Instrument A3:Result
+00511855-v A1:Theme A2:Location
+00512043-v A0:Agent A1:Patient
+00512749-v A0:Agent A1:Source A2:Theme
+00514730-v A0:Agent A1:Source A2:Theme
+00516747-v A0:Agent A1:Theme A2:Destination
+00518395-v A0:Agent A1:Patient A2:Instrument A3:Result
+00519056-v A0:Source A1:Theme A2:Location
+00519363-v A1:Theme A2:Location
+00519751-v A0:Location A1:Theme
+00523645-v A0:Agent A1:Patient A2:Instrument A3:Result
+00524682-v A0:Agent A1:Theme
+00528836-v A1:Theme A2:Location
+00528990-v A1:Theme A3:Location
+00529582-v A0:Source A1:Theme A2:Location
+00529759-v A0:Source A1:Theme A2:Location
+00531163-v A0:Agent A1:Source A2:Theme
+00531302-v A0:Agent A1:Source A2:Theme
+00531904-v A0:Agent A1:Source A2:Theme
+00532429-v A0:Agent A1:Destination A2:Theme
+00533403-v A0:Agent A1:Destination A2:Theme
+00533671-v A0:Agent A1:Destination A2:Theme
+00534837-v A0:Agent A1:Patient A2:Instrument A3:Result
+00535844-v A0:Agent A1:Destination A2:Theme
+00536304-v A0:Agent A1:Patient A2:Instrument A3:Result
+00536678-v A0:Agent A1:Patient A2:Instrument A3:Result
+00536807-v A0:Agent A1:Patient A2:Instrument A3:Result
+00537153-v A0:Agent A1:Patient A2:Instrument A3:Result
+00537759-v A0:Agent A1:Patient A2:Instrument A3:Result
+00537892-v A0:Agent A1:Patient A2:Instrument A3:Result
+00539338-v A0:Theme A1:Theme A4:Location
+00539546-v A0:Agent A1:Theme A2:Instrument
+00540101-v A1:Theme A2:Location
+00541163-v A0:Agent A1:Patient A2:Instrument A3:Result
+00541551-v A0:Agent A1:Source A2:Theme
+00543410-v A0:Agent A1:Product A2:Material
+00544280-v A0:Agent A1:Patient A2:Instrument A3:Result
+00544404-v A0:Agent A2:Instrument A3:Patient A4:Result
+00545557-v A0:Agent A1:Product A2:Product A3:Material
+00546192-v A1:Theme A2:Source A3:Location
+00546609-v A0:Agent A1:Patient A2:Instrument A3:Result
+00548750-v A0:Agent A1:Patient A2:Instrument
+00549217-v A0:Agent A1:Patient A2:Instrument A3:Result
+00550117-v A0:Agent A1:Patient A2:Goal A3:Source
+00551210-v A0:Agent A1:Patient A2:Instrument A3:Result
+00552253-v A0:Agent A1:Patient A2:Instrument A3:Result
+00552815-v A0:Patient
+00555084-v A1:Attribute A2:Extent A3:Patient
+00555654-v A0:Agent A1:Patient A2:Goal A3:Source
+00555780-v A0:Agent A1:Initial_Location A2:Destination A3:Instrument A4:Result A5:Theme
+00557022-v A0:Agent A1:Destination A2:Theme
+00557686-v A0:Agent A1:Theme A2:Source
+00558371-v A0:Agent A1:Patient A2:Instrument A3:Result
+00558536-v A1:Theme A2:Location
+00559390-v A0:Agent A1:Patient A2:Instrument A3:Result
+00559556-v A0:Agent A1:Patient A2:Recipient A3:Theme
+00560893-v A0:Agent A1:Patient A2:Instrument A3:Result
+00561090-v A0:Agent A1:Patient A2:Source A3:Instrument A4:Result
+00564695-v A0:Agent A1:Material A2:Product
+00564857-v A0:Agent A1:Patient A2:Instrument A3:Result
+00565081-v A0:Agent A1:Patient A2:Instrument A3:Result
+00565279-v A0:Agent A1:Patient A2:Instrument A3:Result
+00570524-v A0:Agent A1:Patient A2:Instrument A3:Result
+00570694-v A0:Theme A1:Destination A2:Initial_Location A3:Trajectory
+00571390-v A1:Theme A2:Agent A3:Location
+00571596-v A0:Agent A1:Theme A2:Asset A3:Beneficiary A4:Source
+00572021-v A1:Theme A2:Agent A3:Location
+00572186-v A1:Theme A2:Agent A3:Location
+00585405-v A0:Agent
+00585499-v A0:Agent A1:Patient A2:Instrument A3:Result
+00587962-v A0:Agent A1:Patient A2:Instrument A3:Result
+00588221-v A0:Experiencer A1:Stimulus A2:Attribute
+00588888-v A0:Experiencer A1:Attribute A2:Stimulus
+00589738-v A0:Experiencer A1:Stimulus A2:Attribute
+00591115-v A0:Experiencer A1:Attribute A2:Stimulus
+00593522-v A0:Experiencer A1:Attribute A2:Stimulus
+00594058-v A0:Experiencer A1:Stimulus
+00594621-v A0:Agent A1:Theme A2:Attribute
+00595935-v A0:Agent A1:Theme A2:Attribute
+00596644-v A0:Experiencer A1:Stimulus
+00597915-v A0:Agent A1:Topic A2:Source
+00599992-v A0:Agent A1:Topic A2:Source
+00600370-v A0:Stimulus A1:Experiencer A2:Result
+00601043-v A0:Stimulus A1:Experiencer A2:Result
+00602635-v A0:Theme A2:Agent
+00604576-v A0:Agent A1:Topic A2:Source
+00604930-v A0:Agent A1:Beneficiary
+00605783-v A0:Agent A1:Topic A2:Source
+00606093-v A0:Agent A1:Theme
+00607114-v A0:Agent A1:Topic A2:Source
+00608670-v A0:Agent A1:Theme A2:Predicate
+00610374-v A0:Agent A1:Theme A2:Predicate
+00612841-v A0:Agent A1:Patient A2:Beneficiary A3:Location
+00613018-v A0:Agent A1:Theme A2:Location
+00613248-v A0:Agent A1:Theme A3:Co-Theme A4:Co-Agent
+00613683-v A0:Agent A1:Theme A2:Goal
+00614057-v A0:Theme A1:Initial_Location
+00614999-v A0:Agent A1:Theme
+00615774-v A0:Agent A1:Theme A2:Source
+00619869-v A0:Experiencer A1:Stimulus A2:Attribute
+00620379-v A0:Stimulus A1:Experiencer A2:Result
+00620532-v A0:Stimulus A1:Experiencer A2:Result
+00621058-v A0:Agent A1:Topic A2:Recipient A3:Source
+00621734-v A0:Stimulus A1:Experiencer A2:Result
+00622384-v A0:Stimulus A1:Experiencer A2:Result
+00623151-v A0:Agent A1:Theme A2:Attribute
+00624476-v A0:Agent A1:Theme A2:Attribute
+00625119-v A0:Agent A1:Source A3:Topic
+00626428-v A0:Agent A1:Topic A2:Recipient A3:Source
+00626890-v A0:Agent A1:Topic A2:Recipient A3:Source
+00631737-v A0:Experiencer A1:Theme
+00632236-v A0:Agent A1:Theme A2:Predicate
+00632931-v A0:Agent A1:Topic A2:Recipient
+00633094-v A0:Agent A1:Topic A2:Recipient
+00633443-v A0:Agent A1:Theme A2:Predicate
+00634472-v A0:Agent A1:Theme A2:Source
+00634906-v A0:Agent A1:Theme A2:Source
+00636574-v A0:Agent A1:Theme A2:Source
+00636888-v A0:Agent A1:Theme A2:Source
+00637259-v A0:Agent A1:Result A2:Material A3:Attribute A4:Beneficiary
+00640828-v A0:Agent A1:Theme A2:Co-Theme
+00641252-v A0:Agent A1:Theme A2:Source
+00644066-v A0:Agent A1:Result A2:Material A3:Beneficiary A4:Attribute
+00645771-v A0:Agent A1:Theme A2:Attribute
+00646271-v A0:Agent A1:Theme A2:Location
+00646442-v A0:Agent A1:Location A2:Theme
+00646542-v A0:Agent A1:Location A2:Theme
+00647094-v A0:Agent A1:Theme A3:Value
+00648071-v A0:Agent A1:Theme A2:Location
+00650353-v A0:Agent A1:Patient A2:Co-Patient
+00651145-v A0:Agent A1:Theme A2:Attribute
+00651991-v A0:Agent A1:Theme A2:Result
+00652346-v A0:Agent A1:Theme A2:Source
+00652622-v A0:Agent A1:Theme A2:Goal
+00654625-v A0:Agent A1:Theme A2:Goal
+00656292-v A0:Agent A1:Theme A2:Attribute
+00656576-v A0:Agent A1:Theme A2:Goal
+00656916-v A0:Agent A1:Theme A2:Goal
+00657016-v A0:Agent A1:Theme A2:Goal
+00657260-v A0:Agent A1:Theme A2:Goal
+00658913-v A0:Agent A1:Theme A2:Goal A3:Goal
+00660102-v A0:Agent A1:Theme A2:Attribute
+00660971-v A0:Agent A1:Theme A2:Value
+00664483-v A0:Agent A1:Topic A2:Recipient A3:Source
+00668099-v A0:Experiencer A1:Stimulus A2:Attribute
+00668805-v A0:Agent A1:Theme
+00671335-v A0:Agent A1:Theme A2:Attribute
+00672017-v A0:Agent A1:Theme
+00672433-v A0:Agent A1:Theme A2:Value
+00673766-v A0:Agent A1:Theme A2:Attribute
+00673983-v A0:Agent A1:Theme A2:Attribute
+00674607-v A0:Agent A1:Theme A3:Attribute
+00675901-v A0:Agent A1:Theme A2:Source
+00676450-v A0:Experiencer A1:Stimulus
+00677021-v A0:Agent A1:Theme A2:Source
+00678282-v A0:Agent A1:Result A2:Attribute A3:Beneficiary A4:Material
+00679389-v A0:Agent A1:Theme A2:Source A3:Beneficiary A4:Asset
+00680841-v A0:Patient A1:Stimulus A2:Agent
+00684645-v A0:Experiencer A1:Stimulus A2:Attribute
+00685419-v A0:Agent A1:Theme A2:Source
+00687926-v A0:Experiencer A1:Stimulus A2:Attribute
+00688377-v A0:Agent A1:Theme
+00689950-v A0:Agent A1:Theme A2:Predicate
+00690614-v A0:Agent A1:Theme A2:Attribute
+00691944-v A0:Experiencer A1:Stimulus
+00694068-v A0:Experiencer A1:Stimulus A2:Attribute
+00695226-v A0:Agent A1:Theme A2:Value
+00695761-v A0:Agent A1:Theme A2:Attribute
+00697589-v A0:Agent A1:Theme A2:Co-Agent
+00698855-v A0:Agent A1:Theme A2:Co-Agent
+00700517-v A0:Agent A1:Asset A2:Recipient A3:Asset
+00701040-v A0:Cause A1:Theme A2:Predicate
+00705227-v A0:Experiencer A1:Theme
+00706047-v A0:Experiencer A1:Theme
+00706804-v A0:Agent A1:Result A2:Beneficiary A3:Attribute A4:Material
+00706975-v A0:Agent A1:Theme A2:Co-Agent A3:Beneficiary
+00707624-v A0:Agent A1:Co-Agent A2:Theme A3:Beneficiary
+00707956-v A0:Agent A1:Theme A2:Co-Agent A3:Beneficiary
+00708128-v A0:Agent A1:Theme A2:Co-Agent
+00708980-v A0:Experiencer A1:Theme
+00709205-v A0:Agent A1:Result A2:Theme
+00709625-v A0:Agent A1:Result A2:Beneficiary A3:Attribute A4:Material
+00710005-v A0:Agent A1:Result A2:Material A3:Beneficiary A4:Attribute
+00710803-v A0:Agent A1:Theme A2:Destination
+00712135-v A0:Agent A1:Theme
+00712708-v A0:Agent A1:Theme
+00714273-v A0:Agent A1:Patient A2:Co-Patient
+00715074-v A0:Agent A1:Theme A2:Instrument
+00715868-v A0:Agent A1:Result A2:Theme
+00719231-v A0:Agent A1:Theme
+00719734-v A0:Agent A1:Theme A2:Predicate
+00720808-v A0:Agent A1:Theme A2:Predicate
+00721098-v A0:Agent A1:Theme A2:Predicate
+00721302-v A0:Agent A1:Theme A2:Source
+00721437-v A0:Agent A1:Theme A2:Source
+00721889-v A0:Agent A1:Theme A2:Value
+00722065-v A0:Agent A1:Theme A2:Source
+00722232-v A0:Experiencer A2:Theme
+00724492-v A0:Experiencer A1:Stimulus
+00724832-v A0:Stimulus A1:Experiencer A2:Result
+00725046-v A0:Stimulus A1:Experiencer A2:Result
+00725274-v A0:Stimulus A1:Experiencer A2:Result
+00726153-v A0:Stimulus A1:Experiencer A2:Result
+00727143-v A0:Agent A1:Recipient A2:Theme
+00727791-v A0:Agent A1:Recipient A2:Theme
+00728393-v A0:Stimulus A1:Experiencer A2:Result
+00728954-v A0:Experiencer A1:Stimulus A2:Attribute
+00729378-v A0:Agent A1:Topic A2:Recipient
+00730758-v A0:Agent A1:Theme A2:Destination
+00731789-v A1:Experiencer A2:Theme
+00732552-v A0:Experiencer A1:Stimulus
+00733044-v A0:Agent A1:Theme A2:Source
+00734790-v A0:Agent A1:Theme A2:Destination
+00734927-v A0:Agent A1:Destination A2:Theme
+00735389-v A0:Agent A1:Destination A2:Theme
+00738747-v A0:Agent A1:Topic A2:Recipient
+00738951-v A0:Location A1:Value A2:Agent
+00739662-v A0:Agent A1:Theme A2:Attribute
+00740577-v A0:Agent A1:Topic A2:Recipient A3:Source
+00741573-v A0:Agent A1:Topic A2:Co-Agent
+00743082-v A0:Agent A1:Topic A2:Recipient A3:Source
+00745078-v A0:Agent A1:Topic A2:Recipient
+00745187-v A0:Agent A1:Topic A2:Recipient
+00745499-v A0:Agent A1:Theme A2:Beneficiary A3:Source A4:Asset
+00746718-v A0:Agent A1:Topic A2:Recipient
+00747757-v A0:Agent A1:Theme A2:Recipient A3:Reflexive
+00749963-v A0:Agent A1:Recipient A2:Topic
+00750532-v A0:Agent A1:Recipient A2:Theme
+00751567-v A0:Agent A1:Recipient A2:Topic
+00752493-v A0:Agent A1:Topic A2:Recipient
+00752764-v A0:Agent A1:Topic A2:Recipient
+00753428-v A0:Agent A1:Topic A2:Recipient
+00754942-v A0:Agent A1:Topic A2:Recipient
+00755745-v A0:Agent A1:Topic A2:Recipient
+00756338-v A0:Agent A1:Topic A2:Recipient
+00757544-v A0:Agent A1:Theme A2:Attribute
+00758627-v A0:Agent A1:Recipient A2:Topic
+00758887-v A0:Agent A1:Recipient A2:Topic
+00759087-v A0:Agent A1:Recipient A2:Topic
+00759269-v A0:Agent A1:Topic A2:Recipient
+00759657-v A0:Agent A1:Recipient A2:Topic
+00759944-v A0:Pivot A1:Theme
+00761713-v A0:Agent A1:Co-Agent A2:Theme
+00762329-v A0:Agent A1:Theme A2:Co-Agent
+00763260-v A0:Agent A1:Co-Agent A2:Topic
+00763399-v A0:Agent A1:Goal A2:Co-Agent
+00764222-v A0:Agent A1:Theme A2:Co-Agent
+00765977-v A0:Agent A1:Patient A2:Result
+00766418-v A0:Agent A1:Patient A2:Result
+00767530-v A0:Agent A1:Recipient A2:Topic
+00768778-v A0:Agent A1:Patient A2:Result
+00770141-v A0:Agent A1:Agent A2:Theme
+00770437-v A0:Agent A1:Patient A3:Result
+00771341-v A0:Agent A1:Patient A2:Result
+00771632-v A0:Agent A1:Patient A2:Result
+00772967-v A0:Agent A1:Theme A2:Recipient A3:Reflexive
+00773432-v A0:Agent A1:Co-Agent A2:Topic
+00773922-v A0:Agent A1:Co-Agent A2:Topic
+00774056-v A0:Co-Agent A1:Topic A2:Agent
+00774344-v A0:Agent A1:Co-Agent A2:Topic
+00774817-v A0:Agent A1:Co-Agent A2:Topic
+00775156-v A0:Agent A1:Agent A2:Topic A3:Co-Agent
+00777522-v A0:Stimulus A1:Experiencer A2:Result
+00777931-v A0:Agent A1:Recipient A2:Topic
+00779061-v A0:Agent A1:Location A2:Theme
+00779360-v A0:Agent A1:Theme A2:Destination
+00782057-v A0:Agent A1:Recipient A2:Topic
+00782527-v A0:Agent A1:Patient A2:Result
+00783246-v A0:Agent A1:Patient A2:Result
+00784342-v A0:Agent A1:Topic A2:Recipient
+00784727-v A0:Agent A1:Topic A2:Recipient
+00785008-v A0:Agent A1:Topic A2:Recipient A3:Attribute
+00785690-v A0:Experiencer A1:Stimulus
+00786458-v A0:Agent A1:Location A2:Theme
+00788184-v A0:Agent A1:Topic A2:Recipient A3:Attribute
+00788564-v A0:Agent A1:Location A2:Theme
+00789448-v A0:Agent A1:Recipient A2:Topic
+00790965-v A0:Agent A1:Topic A2:Recipient
+00791506-v A0:Agent A1:Theme A2:Source A3:Destination
+00793037-v A0:Agent A1:Theme
+00793785-v A0:Agent A1:Patient A2:Result
+00794079-v A0:Agent A1:Patient A3:Result
+00794981-v A0:Agent A1:Result A2:Attribute A3:Beneficiary A4:Material
+00795632-v A0:Agent A1:Theme A2:Beneficiary A3:Asset A4:Source
+00795863-v A0:Agent A1:Theme
+00796392-v A0:Agent A1:Theme
+00796588-v A0:Agent A1:Theme
+00797697-v A0:Agent A1:Goal A2:Co-Agent
+00798539-v A0:Agent A1:Theme A2:Attribute
+00798717-v A0:Agent A1:Theme A2:Source
+00802318-v A0:Agent A1:Topic A2:Recipient
+00802946-v A0:Agent A1:Theme
+00804139-v A0:Agent A1:Co-Agent A2:Theme
+00804476-v A0:Agent A2:Co-Agent A3:Theme
+00804802-v A0:Agent A1:Co-Agent A2:Topic
+00805228-v A0:Agent A1:Co-Agent A2:Topic
+00805376-v A0:Co-Agent A1:Theme A2:Agent
+00806502-v A0:Agent A1:Theme
+00807461-v A0:Agent A1:Topic A2:Recipient
+00808855-v A0:Agent A1:Recipient A2:Topic A3:Attribute
+00809654-v A0:Agent A1:Theme A2:Location
+00811375-v A0:Agent A1:Theme A2:Location
+00812149-v A0:Agent A1:Theme A2:Location
+00812298-v A0:Agent A1:Theme A2:Instrument
+00813044-v A0:Agent A1:Theme A2:Attribute
+00815686-v A0:Agent A1:Recipient A2:Topic
+00816353-v A0:Agent A1:Recipient A2:Topic
+00817311-v A0:Agent A1:Topic A2:Recipient
+00818553-v A0:Agent A1:Topic A2:Recipient
+00819508-v A0:Agent A1:Topic A2:Recipient
+00820976-v A1:Theme A2:Recipient A3:Agent A4:Reflexive
+00822262-v A0:Agent A1:Theme A2:Attribute
+00822367-v A0:Agent A1:Predicate A2:Theme
+00823669-v A0:Agent A1:Theme A2:Attribute
+00824292-v A0:Agent A1:Theme A2:Attribute
+00824767-v A0:Agent A1:Theme A2:Attribute
+00825975-v A0:Agent A1:Theme A2:Attribute
+00826333-v A0:Experiencer A1:Stimulus A2:Attribute
+00826509-v A0:Agent A1:Theme A2:Attribute
+00827730-v A0:Agent A1:Topic A2:Recipient
+00828003-v A0:Agent A1:Topic A2:Recipient A3:Source
+00828374-v A0:Agent A1:Recipient A2:Topic
+00830188-v A0:Agent A1:Beneficiary
+00830761-v A0:Agent A1:Recipient A2:Topic
+00831273-v A0:Agent A1:Recipient A2:Topic
+00832907-v A0:Agent A1:Topic A2:Recipient
+00833071-v A0:Agent A1:Topic A2:Recipient
+00833702-v A0:Agent A1:Beneficiary
+00834009-v A0:Agent A1:Patient A2:Result
+00834943-v A0:Agent A1:Result A2:Patient
+00835506-v A0:Agent A1:Theme A2:Location
+00836926-v A0:Agent A1:Destination A2:Theme
+00837288-v A0:Agent A1:Theme
+00837617-v A0:Agent A1:Attribute
+00837872-v A0:Agent A1:Patient A2:Result
+00839194-v A0:Agent A1:Patient A2:Result
+00839834-v A0:Agent A1:Theme
+00840609-v A0:Agent A1:Theme
+00841580-v A0:Agent A1:Theme A2:Attribute
+00841986-v A0:Agent A2:Topic A3:Recipient A4:Source
+00842538-v A0:Agent A1:Theme A2:Attribute
+00842989-v A0:Agent A1:Theme A2:Attribute
+00845299-v A0:Agent A1:Theme A2:Attribute
+00845909-v A0:Agent A1:Theme A2:Attribute
+00846509-v A0:Agent A1:Theme A2:Attribute
+00847870-v A0:Agent A1:Theme A2:Attribute
+00848169-v A0:Agent A1:Theme A2:Attribute
+00848420-v A0:Stimulus A1:Experiencer A2:Result
+00848707-v A0:Experiencer A1:Stimulus
+00849080-v A0:Agent A1:Theme A2:Attribute
+00849788-v A0:Agent A1:Theme
+00850192-v A0:Agent A1:Recipient A2:Theme
+00850501-v A0:Stimulus A1:Experiencer A2:Result
+00851733-v A0:Agent A1:Patient A2:Result
+00851933-v A0:Agent A1:Theme A2:Attribute
+00852685-v A0:Agent A1:Theme A2:Attribute
+00852922-v A0:Agent A1:Theme A2:Attribute
+00853633-v A0:Agent A1:Co-Agent A2:Topic
+00854420-v A0:Agent A1:Patient A2:Result
+00854904-v A0:Agent A1:Patient A2:Result
+00855295-v A0:Agent A1:Co-Agent A2:Theme
+00855512-v A0:Agent A1:Theme A2:Attribute
+00855933-v A0:Agent A1:Theme A2:Attribute
+00856429-v A0:Agent A1:Theme A2:Attribute
+00856824-v A0:Agent A1:Theme A2:Attribute
+00857270-v A0:Agent A1:Theme A2:Attribute
+00857517-v A0:Agent A1:Topic A2:Recipient
+00857784-v A0:Agent A1:Theme A2:Location A3:Time
+00857923-v A0:Experiencer A1:Stimulus
+00859153-v A0:Stimulus A1:Experiencer A2:Result
+00859325-v A0:Stimulus A1:Experiencer A2:Result
+00859758-v A0:Stimulus A1:Experiencer A2:Result
+00860292-v A0:Agent A1:Theme A2:Attribute
+00860620-v A0:Agent A1:Theme A2:Attribute
+00861725-v A0:Agent A1:Theme A2:Attribute
+00862591-v A0:Theme A1:Agent A2:Location A3:Time
+00864159-v A0:Agent A1:Theme A2:Attribute
+00864475-v A0:Agent A1:Theme A2:Attribute
+00864910-v A0:Agent A2:Theme A3:Attribute
+00865958-v A0:Agent A1:Theme A2:Attribute
+00866505-v A0:Agent A1:Theme A2:Attribute
+00867062-v A0:Agent A1:Patient A2:Instrument
+00867843-v A0:Agent A1:Theme A2:Attribute
+00868097-v A0:Agent A1:Patient A2:Result
+00870213-v A0:Agent A1:Topic A2:Recipient
+00870577-v A0:Agent A1:Recipient A2:Topic
+00871195-v A0:Agent A1:Topic A2:Recipient
+00871942-v A0:Cause A1:Topic A2:Recipient
+00872414-v A0:Agent A1:Recipient A2:Topic
+00872886-v A0:Agent A1:Recipient A2:Topic
+00873682-v A0:Agent A1:Recipient A2:Topic
+00875141-v A0:Agent A1:Recipient A2:Topic
+00875394-v A0:Agent A1:Recipient A2:Topic
+00876104-v A0:Experiencer A1:Stimulus A2:Result
+00876665-v A0:Agent A1:Co-Agent A2:Topic
+00878348-v A0:Agent A1:Co-Agent A2:Theme
+00879540-v A0:Agent A1:Theme A2:Result
+00880102-v A0:Agent A1:Topic A2:Recipient
+00880227-v A0:Stimulus A1:Experiencer A2:Result
+00880780-v A0:Agent A1:Theme A2:Attribute
+00881661-v A0:Agent A1:Theme A2:Attribute
+00881901-v A0:Agent A1:Theme A2:Attribute
+00881998-v A0:Agent A1:Theme A2:Attribute
+00882395-v A0:Agent A1:Theme A2:Attribute
+00882948-v A0:Agent A1:Theme A2:Attribute
+00883226-v A0:Agent A1:Topic A2:Recipient
+00883847-v A0:Agent A1:Theme A2:Attribute
+00884011-v A0:Agent A1:Recipient A2:Topic
+00884317-v A0:Agent A1:Goal A2:Theme
+00886602-v A0:Agent A1:Theme A2:Recipient
+00887463-v A0:Agent A1:Theme A2:Goal
+00890590-v A0:Cause A1:Theme A2:Beneficiary
+00891216-v A0:Agent A1:Theme A4:Co-Theme
+00892315-v A0:Agent A1:Theme A2:Attribute
+00893167-v A0:Agent A1:Theme A2:Attribute
+00895304-v A0:Agent A1:Theme A2:Co-Theme
+00897746-v A0:Agent A1:Topic A2:Recipient
+00898210-v A0:Agent A1:Theme A2:Patient A3:Recipient
+00899847-v A0:Agent A1:Recipient A2:Topic
+00899956-v A0:Agent A1:Recipient A2:Topic
+00900376-v A0:Agent A1:Theme A2:Attribute
+00900499-v A0:Agent A1:Topic A2:Recipient
+00902424-v A0:Cause A1:Source A2:Theme
+00903385-v A0:Agent A1:Theme A2:Attribute
+00904046-v A0:Cause A1:Source A2:Theme
+00904878-v A0:Agent A1:Source A2:Theme
+00905399-v A0:Agent A1:Theme A2:Attribute
+00905852-v A0:Agent A1:Theme A2:Attribute
+00906735-v A0:Agent A1:Theme A2:Attribute
+00907147-v A0:Agent A1:Topic A2:Recipient
+00907657-v A0:Agent A1:Theme A2:Attribute
+00907930-v A0:Agent A1:Topic A2:Recipient
+00908099-v A0:Agent A1:Agent A2:Theme
+00909219-v A0:Agent A1:Topic A2:Recipient
+00909573-v A0:Agent A1:Topic A2:Recipient
+00909896-v A0:Agent A1:Theme A2:Recipient A3:Location
+00910000-v A0:Agent A1:Topic A2:Recipient
+00910135-v A0:Agent A1:Theme A2:Beneficiary A3:Co-Agent
+00910973-v A0:Agent A1:Topic A2:Recipient
+00911350-v A0:Experiencer A1:Stimulus A2:Attribute
+00911562-v A0:Experiencer A1:Stimulus A2:Attribute
+00911761-v A0:Experiencer A1:Stimulus A2:Attribute
+00912048-v A0:Agent A1:Topic A2:Recipient
+00912833-v A0:Agent A1:Topic A2:Recipient
+00913065-v A0:Theme A1:Agent A2:Location A3:Time
+00914215-v A0:Agent A1:Topic A2:Recipient
+00914420-v A0:Theme A1:Agent A2:Location A3:Time
+00914634-v A0:Agent A1:Theme A2:Recipient A3:Location
+00914769-v A0:Agent A1:Topic A2:Recipient
+00915265-v A0:Agent A1:Topic A2:Recipient
+00915423-v A0:Agent A1:Topic A2:Recipient
+00915605-v A0:Agent A1:Topic A2:Recipient
+00916274-v A0:Agent A1:Topic A2:Recipient
+00916679-v A0:Stimulus A1:Experiencer
+00917772-v A0:Agent A1:Theme A2:Predicate
+00918580-v A0:Agent A1:Theme
+00918746-v A0:Agent A1:Theme A2:Value
+00918872-v A0:Agent A1:Theme A2:Source
+00921072-v A0:Agent A1:Theme A2:Predicate
+00922867-v A0:Agent A1:Theme A3:Value
+00923197-v A0:Cause A1:Topic A2:Recipient
+00923793-v A0:Cause A1:Topic A2:Recipient
+00925110-v A0:Experiencer A1:Stimulus
+00925490-v A0:Experiencer A1:Stimulus
+00925735-v A0:Experiencer A1:Stimulus
+00925873-v A0:Agent A1:Result A2:Material A3:Beneficiary A4:Attribute
+00926932-v A0:Stimulus A1:Experiencer A2:Result
+00927049-v A0:Agent A1:Predicate A2:Theme
+00928630-v A0:Agent A1:Topic A2:Recipient
+00929839-v A0:Cause A1:Topic A2:Recipient
+00930599-v A0:Cause A1:Topic A2:Recipient
+00933821-v A0:Agent A1:Topic A2:Recipient
+00935987-v A1:Theme A2:Location
+00936465-v A0:Agent A1:Topic A2:Recipient
+00936648-v A0:Agent A1:Source A2:Theme
+00937208-v A0:Agent A1:Topic A2:Recipient
+00938146-v A0:Agent A1:Theme A2:Destination
+00939277-v A0:Agent A1:Topic A2:Recipient A3:Source
+00941990-v A0:Agent A1:Topic A2:Co-Agent
+00943837-v A0:Agent A1:Theme A2:Recipient A3:Reflexive
+00944788-v A0:Agent A1:Recipient A2:Topic
+00945255-v A0:Agent A1:Topic A2:Recipient A3:Source
+00949288-v A0:Agent A1:Theme A2:Co-Theme
+00952182-v A0:Agent A1:Topic A2:Recipient
+00952524-v A0:Agent A1:Topic A2:Recipient
+00953058-v A0:Agent A1:Topic A2:Recipient
+00953216-v A0:Agent A1:Topic A2:Recipient A3:Source
+00955601-v A0:Agent A1:Topic A2:Recipient A3:Source
+00956405-v A0:Agent A1:Destination A2:Theme
+00957679-v A0:Agent A1:Topic A2:Recipient
+00957945-v A0:Agent A1:Location A2:Recipient A3:Theme
+00958334-v A0:Agent A1:Topic A2:Recipient
+00962447-v A0:Agent A1:Topic A2:Co-Agent
+00964694-v A0:Agent A1:Topic A2:Co-Agent
+00965035-v A0:Agent A1:Topic A2:Recipient
+00965390-v A0:Agent A1:Attribute A2:Theme
+00966809-v A0:Agent A1:Topic A2:Recipient
+00967625-v A0:Agent A1:Result A2:Attribute A3:Beneficiary A4:Material
+00969137-v A0:Agent A1:Topic A2:Recipient
+00971015-v A0:Agent A1:Theme A2:Result
+00971650-v A0:Agent A1:Theme A2:Result
+00972867-v A0:Agent A1:Theme A2:Source A3:Destination
+00974367-v A0:Agent A1:Topic A2:Recipient
+00975427-v A0:Agent A1:Topic A2:Recipient
+00976653-v A0:Agent A1:Theme A2:Location
+00977153-v A0:Agent A1:Theme A2:Attribute
+00977336-v A0:Agent A1:Topic A2:Recipient
+00977871-v A0:Agent A1:Topic A2:Recipient
+00978369-v A0:Agent A1:Topic A2:Recipient
+00978549-v A0:Agent A1:Theme A2:Result
+00979870-v A0:Agent A1:Topic A2:Recipient
+00980176-v A0:Agent A1:Topic A2:Recipient
+00980453-v A0:Agent A1:Topic A2:Recipient
+00981276-v A0:Agent A1:Theme A2:Attribute
+00981544-v A0:Agent A1:Topic A2:Recipient
+00981814-v A0:Agent A1:Topic A2:Recipient
+00981944-v A0:Agent A1:Topic A2:Recipient
+00982178-v A0:Agent A1:Topic A2:Recipient
+00983333-v A0:Agent A1:Destination A2:Theme
+00985464-v A0:Theme A1:Agent A2:Location A3:Time
+00985800-v A0:Agent A1:Topic A2:Recipient
+00986173-v A0:Agent A1:Topic A2:Recipient
+00986897-v A0:Agent A1:Location A2:Theme A3:Time
+00990812-v A0:Agent A1:Destination A2:Theme
+00991025-v A0:Agent A1:Theme A2:Destination
+00991577-v A0:Agent A1:Theme A2:Source
+00991900-v A0:Agent A1:Theme A2:Attribute
+00992041-v A0:Agent A1:Recipient A2:Patient A3:Theme
+00993014-v A0:Agent A1:Topic A2:Recipient
+00994682-v A0:Agent A1:Theme A2:Destination
+00994895-v A0:Agent A1:Theme A2:Destination
+00995103-v A0:Agent A1:Theme A2:Destination
+00996485-v A0:Agent A1:Destination A2:Theme
+00997020-v A0:Agent A1:Theme A2:Destination
+00997133-v A0:Agent A1:Theme A2:Destination
+00997307-v A0:Agent A1:Theme A2:Destination
+00997794-v A0:Agent A1:Theme A2:Destination
+00998399-v A0:Agent A1:Theme A2:Destination
+00999815-v A0:Agent A1:Theme A2:Source
+01001008-v A0:Agent A1:Destination A2:Theme
+01001136-v A0:Agent A1:Theme A2:Destination
+01001643-v A0:Agent A1:Theme A2:Destination
+01001857-v A0:Agent A1:Theme
+01002161-v A0:Agent A1:Theme
+01002297-v A0:Agent A1:Theme A2:Destination
+01002740-v A0:Agent A1:Theme A2:Destination
+01003049-v A0:Agent A1:Theme A2:Destination
+01003249-v A0:Agent A1:Theme A2:Destination
+01004692-v A0:Agent A1:Theme A2:Destination
+01006239-v A0:Agent A1:Theme A2:Destination
+01007222-v A0:Agent A1:Topic A2:Recipient
+01007495-v A0:Agent A1:Topic A2:Recipient
+01007676-v A0:Agent A1:Topic A2:Recipient
+01008903-v A0:Agent A1:Topic A2:Recipient A3:Source
+01009240-v A0:Agent A1:Topic A2:Recipient
+01010118-v A0:Agent A1:Topic A2:Recipient
+01011031-v A0:Agent A1:Topic A2:Recipient A3:Source
+01011923-v A0:Experiencer A1:Stimulus A2:Attribute
+01012073-v A0:Agent A1:Theme A2:Recipient A3:Reflexive
+01012395-v A0:Agent A1:Theme
+01012561-v A0:Agent A1:Topic A2:Recipient A3:Source
+01014821-v A0:Agent A1:Topic A2:Recipient
+01016002-v A0:Agent A1:Topic A2:Recipient
+01016778-v A0:Agent A1:Theme A2:Recipient A3:Reflexive
+01017643-v A0:Agent A1:Theme A2:Co-Theme
+01017826-v A0:Agent A1:Theme A2:Source
+01019643-v A0:Agent A1:Topic A2:Recipient
+01019808-v A0:Stimulus A1:Experiencer A2:Result
+01020005-v A0:Agent A1:Topic A2:Recipient
+01020934-v A0:Experiencer A1:Stimulus
+01021420-v A0:Agent A1:Theme A2:Instrument
+01023259-v A0:Agent A1:Source A2:Topic A3:Recipient
+01024190-v A0:Agent A1:Topic A2:Recipient
+01026728-v A0:Agent A1:Patient A2:Goal A3:Source
+01028079-v A0:Agent A1:Theme A2:Result
+01028640-v A0:Agent A1:Theme A2:Result
+01028748-v A0:Agent A1:Theme A2:Result
+01029212-v A0:Agent A1:Theme A2:Result
+01029642-v A0:Agent A1:Theme A3:Result
+01030132-v A0:Agent A1:Theme A2:Result
+01030397-v A0:Agent A1:Theme A2:Source
+01031109-v A0:Agent A1:Theme A2:Result
+01031256-v A0:Agent A1:Theme A2:Destination A3:Initial_Location
+01031756-v A0:Agent A1:Theme A2:Destination A3:Initial_Location
+01032127-v A0:Agent A1:Theme A2:Destination A3:Initial_Location
+01032451-v A0:Agent A1:Topic A2:Recipient
+01036047-v A0:Agent A1:Theme
+01036804-v A0:Agent A1:Topic A2:Recipient
+01037650-v A0:Agent A1:Topic A2:Recipient
+01037910-v A0:Agent A1:Co-Agent A2:Theme
+01038666-v A0:Agent A1:Topic A2:Co-Agent
+01039162-v A0:Agent A1:Co-Agent A2:Topic
+01039330-v A0:Agent A1:Topic A2:Recipient
+01040158-v A0:Agent A1:Topic A2:Recipient
+01040278-v A0:Agent A1:Topic A2:Recipient
+01041415-v A0:Agent A1:Patient A2:Recipient A3:Theme
+01041954-v A0:Agent A1:Topic A2:Co-Agent
+01042531-v A0:Agent A1:Topic A2:Recipient
+01043887-v A0:Agent A1:Theme A2:Location A3:Time
+01044114-v A0:Agent A1:Topic A2:Recipient
+01044533-v A0:Agent A1:Topic A2:Recipient
+01045073-v A0:Agent A1:Theme A2:Recipient
+01045719-v A0:Agent A1:Topic A2:Recipient
+01046059-v A0:Agent A1:Theme A2:Location A3:Time
+01046357-v A0:Theme A1:Agent A2:Location A3:Time
+01046932-v A0:Theme A1:Agent A2:Location A3:Time
+01047263-v A0:Agent A1:Recipient A2:Topic
+01047381-v A0:Agent A1:Theme A2:Recipient A3:Location
+01047596-v A0:Agent A1:Topic A2:Recipient
+01048073-v A0:Agent A1:Location A2:Recipient A3:Theme
+01048171-v A0:Agent A1:Location A2:Recipient A3:Theme
+01048330-v A0:Agent A1:Location A2:Recipient A3:Theme
+01048492-v A0:Agent A1:Recipient A2:Topic
+01048569-v A0:Agent A1:Topic A2:Recipient
+01048718-v A0:Theme A1:Agent A2:Location A3:Time
+01049470-v A0:Agent A1:Topic A2:Recipient
+01049737-v A0:Agent A1:Theme A2:Beneficiary
+01050651-v A0:Agent A1:Recipient A2:Topic
+01051956-v A0:Agent A1:Topic A2:Recipient
+01052301-v A0:Agent A1:Location A2:Recipient A3:Theme
+01052782-v A0:Agent A1:Location A2:Recipient A3:Theme
+01052936-v A0:Agent A1:Topic A2:Recipient
+01053098-v A0:Agent A1:Location A2:Recipient A3:Theme
+01053495-v A0:Agent A1:Theme A2:Location A3:Time
+01053623-v A0:Agent A1:Location A2:Recipient A3:Theme
+01053771-v A0:Agent A1:Topic A2:Recipient
+01054186-v A0:Agent A1:Topic A2:Recipient
+01054399-v A0:Agent A1:Topic A2:Recipient
+01054553-v A0:Agent A1:Location A2:Recipient A3:Theme
+01054694-v A0:Agent A1:Location A2:Recipient A3:Theme
+01054849-v A0:Agent A1:Theme A2:Location A3:Time
+01055018-v A0:Agent A1:Location A2:Recipient A3:Theme
+01055146-v A0:Agent A1:Theme A2:Location A3:Time
+01055404-v A0:Agent A1:Topic A2:Recipient
+01056214-v A0:Theme A1:Agent A2:Location A3:Time
+01056369-v A0:Agent A1:Theme A2:Recipient A3:Location
+01056554-v A0:Agent A1:Topic A2:Recipient
+01058224-v A0:Theme A1:Agent A2:Location A3:Time
+01058426-v A0:Agent A1:Location A2:Recipient A3:Theme
+01058574-v A0:Agent A1:Topic A2:Recipient
+01059564-v A0:Agent A1:Theme A2:Attribute
+01059743-v A0:Agent A1:Location A2:Recipient A3:Theme
+01060065-v A0:Agent A1:Location A2:Recipient A3:Theme
+01062555-v A0:Agent A1:Theme A2:Destination A3:Initial_Location A4:Destination
+01063695-v A0:Agent A1:Theme
+01065630-v A0:Agent A1:Topic A2:Recipient
+01066433-v A0:Agent A1:Theme A2:Instrument
+01066775-v A0:Agent A1:Topic A2:Recipient
+01067380-v A0:Agent A1:Theme A2:Recipient
+01067512-v A0:Agent A1:Topic A2:Recipient
+01067816-v A0:Agent A1:Theme A2:Location A3:Time
+01069809-v A0:Agent A1:Topic A2:Recipient
+01069989-v A0:Agent A1:Theme A2:Location
+01070102-v A0:Agent A1:Theme A2:Co-Agent
+01071155-v A0:Agent A1:Theme A2:Attribute
+01072262-v A0:Agent A1:Co-Agent A2:Topic
+01076953-v A0:Agent A1:Patient A2:Result
+01078050-v A0:Agent A1:Theme A2:Source
+01078783-v A0:Agent A1:Theme A2:Instrument
+01085237-v A0:Agent A1:Beneficiary
+01085677-v A0:Agent A1:Patient A2:Stimulus
+01087197-v A0:Agent A1:Recipient A2:Theme
+01087559-v A0:Agent A1:Recipient A2:Theme
+01088005-v A0:Agent A1:Source A2:Theme
+01088749-v A0:Agent A1:Destination A2:Theme
+01089614-v A0:Agent A1:Beneficiary
+01089878-v A0:Agent A1:Theme
+01092366-v A0:Agent A1:Co-Agent A2:Topic
+01093172-v A0:Agent A1:Co-Agent A2:Topic
+01095899-v A0:Agent A1:Attribute
+01096097-v A0:Agent A1:Theme A2:Attribute
+01096497-v A0:Agent A2:Attribute
+01096860-v A0:Agent A1:Beneficiary
+01097500-v A0:Agent A1:Theme A2:Attribute
+01098452-v A0:Agent A1:Theme
+01104852-v A0:Theme A1:Co-Theme A2:Attribute A3:Extent
+01105639-v A0:Theme A1:Co-Theme A2:Attribute A3:Extent
+01107544-v A0:Theme A1:Co-Theme A2:Attribute A3:Extent
+01108627-v A0:Theme A1:Co-Theme A2:Attribute
+01110247-v A0:Theme A1:Co-Theme A2:Attribute A3:Extent
+01110661-v A0:Agent A1:Patient A2:Result
+01113806-v A0:Theme A1:Destination A2:Initial_Location A3:Trajectory
+01116447-v A0:Agent A2:Co-Agent A3:Theme
+01120759-v A0:Agent A1:Patient A2:Result
+01121719-v A0:Theme A1:Theme A2:Agent A3:Location
+01121948-v A0:Agent A1:Co-Agent A2:Topic
+01122736-v A0:Agent A1:Topic A2:Co-Agent
+01123261-v A0:Agent A1:Co-Agent A2:Topic
+01123765-v A0:Agent A1:Co-Agent A2:Topic
+01125373-v A0:Agent A1:Theme A2:Destination
+01126219-v A0:Agent A1:Patient A2:Instrument
+01127411-v A0:Agent A1:Theme A2:Destination
+01128193-v A0:Agent A1:Theme A2:Co-Theme
+01129337-v A0:Agent A1:Beneficiary
+01129876-v A0:Agent A1:Beneficiary
+01130607-v A0:Agent A1:Theme A2:Destination
+01131473-v A0:Agent A1:Theme A2:Instrument
+01131902-v A0:Agent A1:Destination A2:Theme
+01133825-v A0:Agent A1:Theme A2:Destination A3:Initial_Location A4:Result
+01135783-v A0:Agent A1:Theme A2:Destination A3:Initial_Location A4:Result
+01135922-v A0:Agent A1:Destination A2:Theme
+01137138-v A0:Agent A1:Patient A2:Instrument A3:Result
+01139104-v A0:Agent A1:Theme A2:Theme
+01140065-v A0:Agent
+01140315-v A0:Agent
+01140794-v A0:Agent A1:Theme A2:Location
+01141763-v A0:Agent A1:Location A2:Theme
+01141938-v A0:Agent
+01142070-v A0:Agent
+01142761-v A0:Agent
+01142899-v A0:Agent
+01143028-v A0:Agent A1:Topic A2:Recipient
+01143147-v A0:Agent
+01143266-v A0:Agent A1:Theme A2:Location
+01143614-v A0:Agent
+01143713-v A0:Agent A1:Location A2:Theme
+01143838-v A0:Agent A1:Theme A2:Location
+01144657-v A0:Agent A1:Theme A2:Location
+01145944-v A0:Agent
+01147060-v A0:Agent A1:Theme A3:Theme A4:Destination
+01148961-v A0:Agent A1:Destination A2:Theme
+01149138-v A0:Agent A1:Beneficiary
+01150559-v A0:Agent A1:Theme A2:Instrument
+01152396-v A0:Agent A1:Patient A2:Instrument A3:Result
+01153165-v A0:Agent A1:Theme A2:Beneficiary A3:Co-Agent
+01155307-v A0:Agent A1:Destination A2:Theme
+01155687-v A0:Agent A1:Asset A3:Recipient
+01156834-v A0:Agent A1:Patient
+01158022-v A0:Agent A1:Source A2:Theme
+01158572-v A0:Agent A1:Asset A2:Goal
+01158872-v A0:Agent A1:Theme A2:Predicate
+01161087-v A0:Agent A1:Asset A2:Goal
+01162754-v A0:Agent A1:Theme A2:Predicate
+01164273-v A0:Agent A1:Theme A2:Predicate
+01164906-v A0:Agent A1:Source A2:Theme
+01165290-v A0:Agent A1:Patient A2:Stimulus
+01166093-v A0:Agent A1:Theme A2:Predicate
+01166351-v A0:Agent A1:Patient A2:Source
+01167981-v A0:Agent A1:Patient
+01168259-v A0:Agent A1:Patient
+01168468-v A0:Agent A1:Patient A2:Source
+01169205-v A0:Agent A1:Patient
+01169704-v A0:Agent A1:Theme A2:Source
+01170566-v A0:Agent A1:Theme A2:Location A3:Time
+01173405-v A0:Agent A1:Patient
+01173656-v A0:Agent A1:Patient
+01173933-v A0:Agent A1:Patient
+01174294-v A0:Agent A1:Patient
+01174742-v A0:Agent A1:Patient
+01174973-v A0:Agent A1:Patient
+01175224-v A0:Agent A1:Patient
+01175467-v A0:Agent A1:Theme A2:Attribute
+01176232-v A0:Agent A1:Theme A2:Recipient
+01177118-v A0:Theme A1:Location
+01178565-v A0:Agent A1:Theme A2:Recipient A3:Asset
+01179638-v A0:Agent A1:Theme A2:Recipient
+01179865-v A0:Agent A1:Patient A2:Source
+01180351-v A0:Agent A1:Theme A2:Recipient
+01180701-v A0:Agent A1:Patient A2:Instrument A3:Result
+01180975-v A0:Agent A1:Theme A2:Source A3:Asset A4:Beneficiary
+01181295-v A0:Agent A1:Theme A2:Recipient
+01182021-v A0:Agent A1:Theme A2:Recipient
+01182293-v A0:Stimulus A1:Experiencer A2:Result
+01182709-v A0:Agent A1:Recipient A2:Theme
+01184333-v A0:Agent A1:Theme A2:Destination
+01184625-v A0:Agent A1:Theme A2:Instrument
+01185304-v A0:Agent A1:Patient
+01185604-v A0:Agent A1:Patient
+01185740-v A0:Agent A1:Patient
+01185981-v A0:Agent A1:Patient
+01187271-v A0:Agent A1:Theme A2:Recipient
+01188485-v A0:Pivot A1:Theme
+01189823-v A0:Agent A1:Theme A2:Location
+01190948-v A0:Experiencer A1:Stimulus A2:Attribute
+01192312-v A0:Agent A1:Theme A2:Destination
+01193099-v A1:Agent A2:Patient
+01194418-v A0:Agent A1:Beneficiary
+01194938-v A0:Agent A1:Patient A2:Instrument A3:Result
+01195201-v A0:Agent A1:Theme A2:Destination
+01196037-v A0:Agent A1:Theme
+01196653-v A0:Agent A1:Patient
+01196802-v A0:Agent A1:Theme A2:Instrument
+01197014-v A0:Agent A1:Patient
+01198616-v A0:Pivot A1:Theme
+01199213-v A0:Agent A1:Theme A2:Destination
+01200806-v A0:Agent A1:Destination A2:Theme
+01201089-v A0:Agent A1:Patient
+01201693-v A0:Agent A1:Patient A2:Instrument
+01201856-v A0:Agent
+01202728-v A0:Agent A1:Patient A2:Instrument
+01203074-v A0:Location A1:Value A2:Agent
+01204021-v A0:Agent A1:Patient A2:Instrument
+01205459-v A0:Agent A1:Patient
+01205696-v A1:Theme A2:Co-Theme
+01206218-v A0:Agent A1:Experiencer A2:Instrument
+01208896-v A0:Agent A1:Theme A2:Destination
+01209025-v A0:Agent A1:Destination A2:Theme
+01209135-v A1:Location A2:Theme
+01209678-v A0:Experiencer A1:Stimulus
+01210737-v A0:Agent A1:Theme
+01211263-v A0:Agent A1:Experiencer A2:Instrument
+01211455-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+01212230-v A0:Agent A1:Theme A2:Destination
+01212572-v A0:Agent A1:Theme A2:Source
+01213504-v A0:Agent A1:Patient A3:Instrument A4:Location A5:Result
+01213614-v A0:Agent A1:Theme A2:Source A3:Beneficiary
+01213998-v A0:Agent A1:Theme A2:Source A3:Beneficiary
+01215421-v A0:Agent A1:Theme A2:Source A3:Asset A4:Beneficiary
+01216331-v A0:Theme A1:Co-Theme
+01216522-v A0:Agent A1:Theme
+01216670-v A0:Agent A1:Theme
+01217043-v A0:Theme A1:Co-Theme
+01219993-v A0:Agent A1:Patient A2:Instrument A3:Result
+01220303-v A0:Agent A1:Theme
+01220636-v A0:Agent A1:Destination A2:Theme
+01220885-v A1:Theme A2:Co-Theme
+01222485-v A0:Agent A1:Patient A2:Co-Patient
+01222958-v A0:Agent A1:Theme A2:Destination A3:Initial_Location A4:Result
+01223182-v A0:Agent A1:Material A2:Product
+01223833-v A0:Agent A1:Patient
+01224001-v A0:Agent A1:Theme
+01224211-v A0:Agent A1:Patient A2:Recipient A3:Theme
+01224415-v A0:Agent A1:Theme
+01224744-v A0:Agent A1:Patient A2:Instrument A3:Result
+01225970-v A0:Agent A1:Experiencer A2:Instrument
+01226215-v A0:Agent A1:Experiencer A2:Instrument
+01226875-v A0:Agent A1:Location A2:Theme
+01227088-v A0:Agent A1:Patient A2:Source A3:Instrument A4:Result
+01228235-v A0:Agent A1:Patient A2:Instrument A3:Result
+01229809-v A0:Agent A1:Destination A2:Theme
+01229976-v A0:Agent A1:Patient A2:Instrument
+01230241-v A0:Agent A1:Patient A2:Instrument
+01230350-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+01230555-v A0:Agent A1:Patient A2:Instrument A3:Result
+01230710-v A0:Agent A1:Patient A2:Result
+01231252-v A0:Agent A1:Experiencer A2:Instrument
+01231652-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+01231980-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+01232738-v A0:Agent A1:Experiencer A2:Instrument
+01233027-v A0:Agent A1:Theme A2:Source
+01233194-v A0:Agent A1:Theme A2:Source
+01233387-v A0:Agent A1:Theme A2:Destination
+01233838-v A0:Agent A1:Destination A2:Theme
+01233993-v A0:Agent A1:Destination A2:Theme
+01234223-v A0:Agent A1:Destination A2:Theme
+01234379-v A0:Agent A1:Theme A2:Destination
+01234500-v A0:Agent A1:Theme A2:Destination
+01234625-v A0:Agent A1:Theme A2:Destination
+01234920-v A0:Agent A1:Destination A2:Theme
+01235073-v A0:Agent A1:Destination A2:Theme
+01235355-v A0:Agent A1:Material A2:Product
+01236795-v A0:Theme A1:Agent A2:Location A3:Time
+01238204-v A0:Theme A1:Location A2:Agent A3:Time
+01239359-v A0:Agent A1:Theme A2:Destination
+01239494-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+01239619-v A0:Agent A1:Patient A2:Instrument A3:Result
+01240514-v A0:Experiencer A1:Instrument A2:Agent
+01241073-v A0:Agent A1:Patient A2:Result
+01241614-v A0:Agent A1:Theme A2:Destination A3:Initial_Location A4:Result
+01241753-v A1:Theme A2:Agent A3:Location A4:Result
+01242208-v A0:Agent A1:Patient A2:Recipient A3:Theme
+01242391-v A1:Theme A2:Location
+01242832-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+01242996-v A0:Agent A1:Destination A2:Theme
+01243474-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+01243809-v A0:Agent A1:Initial_Location A2:Destination A3:Instrument A4:Result A5:Theme
+01244178-v A0:Agent A1:Theme A2:Source
+01244351-v A0:Agent A1:Theme A2:Source
+01244692-v A0:Agent A1:Location A2:Theme
+01244853-v A0:Agent A1:Theme A2:Initial_Location A3:Destination A4:Instrument A5:Result
+01246321-v A0:Agent A1:Patient A2:Instrument A3:Result
+01246444-v A0:Agent A1:Patient A2:Instrument A3:Result
+01246601-v A0:Agent A1:Patient A2:Instrument A3:Result
+01247804-v A0:Agent A1:Patient A2:Instrument A3:Result
+01248782-v A0:Agent A1:Theme A2:Source
+01249147-v A0:Agent A1:Theme A2:Source
+01249294-v A0:Agent A1:Patient A2:Instrument
+01249490-v A0:Agent A1:Theme A2:Source
+01250474-v A0:Agent A1:Theme A2:Source
+01250676-v A0:Agent A1:Destination A2:Theme
+01250908-v A0:Agent A1:Experiencer A3:Instrument
+01251228-v A0:Agent A1:Theme A2:Source
+01251651-v A0:Agent A1:Theme A2:Source
+01251928-v A0:Agent A1:Theme A2:Destination
+01252971-v A0:Agent A1:Patient A2:Instrument A3:Result
+01253468-v A0:Agent A1:Patient A2:Instrument A3:Result
+01253621-v A0:Agent A1:Patient A2:Instrument A3:Result
+01255057-v A0:Agent A1:Source A2:Theme
+01256157-v A0:Agent A1:Product A2:Material A3:Asset A4:Beneficiary
+01256867-v A0:Agent A1:Patient A2:Instrument
+01257173-v A0:Agent A1:Patient A2:Instrument A3:Result A4:Source
+01258828-v A0:Agent
+01259005-v A0:Agent A1:Patient A2:Instrument A3:Result A4:Source
+01259141-v A0:Agent A1:Patient A3:Instrument
+01259328-v A0:Agent A1:Product A2:Material A4:Product A5:Asset A6:Beneficiary
+01259458-v A0:Agent A1:Patient A2:Instrument A3:Result A4:Source
+01259691-v A0:Agent A1:Patient A2:Instrument A3:Result A4:Source
+01261018-v A0:Agent A1:Theme A2:Source
+01261371-v A0:Agent A1:Destination A2:Theme
+01261628-v A0:Agent A1:Destination A2:Theme
+01261950-v A0:Agent A1:Destination A2:Theme
+01262321-v A0:Agent A1:Destination A2:Theme
+01262936-v A0:Agent A1:Source A2:Theme
+01263479-v A0:Agent A1:Theme A2:Source
+01263659-v A0:Agent A1:Theme A2:Source
+01263784-v A0:Agent A1:Source A2:Theme
+01264148-v A0:Agent A1:Source A2:Theme
+01264283-v A0:Agent A1:Destination A2:Theme
+01265740-v A0:Agent A1:Destination A2:Theme
+01266604-v A0:Agent A1:Destination A2:Theme
+01267098-v A0:Agent A1:Destination A2:Theme
+01267866-v A0:Agent A1:Destination A2:Theme
+01267998-v A0:Agent A1:Destination A2:Theme
+01268112-v A0:Agent A1:Theme A2:Destination
+01268457-v A0:Agent A1:Destination A2:Theme
+01268571-v A0:Agent A1:Destination A2:Theme
+01268726-v A0:Agent A1:Destination A2:Theme
+01269224-v A0:Agent A1:Theme A2:Destination
+01269379-v A0:Agent A1:Destination A2:Theme
+01269521-v A0:Agent A1:Patient A2:Result
+01269702-v A0:Agent A1:Destination A2:Theme
+01270199-v A0:Agent A2:Patient
+01270589-v A0:Agent A1:Patient A2:Result
+01270784-v A0:Agent A1:Destination A2:Theme
+01271189-v A0:Agent A1:Destination A2:Theme
+01271936-v A0:Agent A1:Destination A2:Theme
+01272457-v A0:Agent A1:Destination A2:Theme
+01272798-v A0:Agent A1:Theme A2:Destination
+01273814-v A0:Agent A1:Destination A2:Theme
+01274104-v A0:Agent A1:Theme A2:Destination
+01274745-v A0:Agent A1:Patient A2:Instrument A3:Result A4:Source
+01275301-v A0:Agent A1:Destination A2:Theme
+01275427-v A0:Agent A1:Patient A2:Instrument A3:Result A4:Source
+01275658-v A0:Agent A1:Patient A2:Instrument A3:Result A4:Source
+01275762-v A0:Agent A1:Theme A2:Destination
+01276970-v A0:Agent A2:Patient A3:Instrument
+01277784-v A0:Agent A1:Patient A2:Instrument A3:Result
+01278427-v A0:Agent A1:Patient A2:Instrument A3:Result
+01278817-v A0:Agent A1:Patient A2:Instrument A3:Result
+01279305-v A0:Agent A1:Patient A2:Recipient A3:Theme
+01279474-v A1:Patient A2:Agent A3:Instrument A4:Result
+01279631-v A0:Agent A1:Patient A2:Instrument
+01280014-v A0:Agent A1:Material A2:Product
+01281611-v A0:Agent A1:Patient A2:Instrument
+01281782-v A0:Agent A1:Patient A2:Instrument
+01281912-v A0:Agent A1:Patient A2:Instrument
+01283208-v A0:Agent A1:Destination A2:Theme
+01284461-v A0:Agent A1:Patient A2:Co-Patient
+01284683-v A0:Agent A1:Destination A2:Theme
+01284908-v A0:Agent A1:Patient A2:Instrument A3:Result
+01286777-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01288052-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01288201-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01288636-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01288808-v A0:Agent A1:Patient A2:Co-Patient
+01288921-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01289155-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01289492-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01290009-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01290730-v A0:Agent A1:Theme A2:Destination
+01292885-v A0:Agent A1:Patient A2:Patient A3:Co-Patient
+01296154-v A0:Agent A1:Patient A2:Instrument A3:Co-Patient A4:Result
+01297174-v A1:Patient A2:Co-Patient A3:Agent A4:Instrument A5:Result
+01297624-v A0:Agent A1:Patient A2:Patient A3:Co-Patient
+01298668-v A0:Agent A1:Patient A2:Co-Patient
+01298931-v A0:Result
+01300144-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01300271-v A0:Agent A1:Destination A2:Theme
+01300437-v A0:Agent A1:Destination A2:Theme
+01300565-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01300655-v A0:Agent A1:Destination A2:Theme
+01302183-v A0:Agent A1:Patient A2:Beneficiary A3:Location
+01302854-v A0:Agent A1:Theme A2:Destination
+01302982-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01303242-v A0:Agent A1:Destination A2:Destination A3:Theme
+01303547-v A0:Agent A1:Destination A2:Theme
+01303707-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01304342-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01305241-v A0:Agent A1:Theme A2:Destination
+01305361-v A0:Agent A1:Theme A2:Destination
+01305542-v A0:Agent A1:Theme A2:Destination
+01305731-v A0:Agent A1:Theme A2:Destination
+01305939-v A0:Agent A1:Theme A2:Destination
+01306654-v A0:Agent A1:Patient A3:Instrument A4:Location A5:Result
+01306853-v A0:Agent A1:Theme A2:Initial_Location A3:Instrument A4:Destination A5:Result
+01307020-v A0:Agent A1:Theme A2:Initial_Location A3:Instrument A4:Destination A5:Result
+01307142-v A0:Agent A1:Patient A2:Instrument A3:Result
+01308160-v A0:Agent A1:Patient A3:Instrument A4:Result A5:Source
+01309478-v A0:Agent A1:Patient A3:Instrument A4:Result A5:Source
+01309701-v A0:Agent A1:Theme A2:Location
+01310660-v A0:Agent A1:Theme A2:Location
+01311103-v A0:Agent A1:Result A2:Attribute A3:Beneficiary A4:Material
+01312371-v A0:Agent A1:Theme A2:Destination
+01312810-v A0:Agent A1:Theme A2:Destination A3:Initial_Location A4:Instrument A5:Result
+01313411-v A0:Agent A1:Theme A2:Destination
+01313592-v A0:Agent A1:Theme A2:Destination
+01313780-v A0:Agent A1:Theme A2:Destination
+01314440-v A0:Agent A1:Location A2:Theme
+01314738-v A0:Agent A1:Location A2:Theme
+01315613-v A0:Agent A1:Location A2:Theme
+01316401-v A0:Agent A1:Theme A2:Location
+01317276-v A0:Agent A1:Location A2:Theme
+01317723-v A0:Agent A1:Location A2:Theme
+01318223-v A0:Agent A1:Location A2:Theme
+01318659-v A0:Agent A1:Location A2:Theme
+01318849-v A0:Agent A1:Location A2:Theme
+01319049-v A0:Agent A1:Location A2:Theme
+01319193-v A0:Agent A1:Theme A2:Location
+01320009-v A0:Agent A1:Theme A2:Source
+01320513-v A0:Agent A1:Theme A2:Initial_Location A3:Instrument A4:Destination A5:Result
+01320816-v A0:Agent A1:Theme A2:Initial_Location A3:Instrument A4:Destination A5:Result
+01321002-v A0:Agent A1:Theme A2:Source
+01321509-v A0:Agent A1:Destination A2:Theme
+01321895-v A0:Agent A1:Destination A2:Theme
+01322675-v A0:Agent A1:Patient A2:Source A3:Instrument A4:Result
+01322854-v A0:Agent A1:Patient A2:Instrument
+01323338-v A0:Agent A1:Patient A2:Instrument A3:Result
+01323518-v A0:Agent A1:Destination A2:Theme
+01323958-v A0:Agent A1:Patient A2:Instrument
+01325536-v A0:Agent A1:Patient A2:Instrument
+01325774-v A0:Agent A1:Patient A2:Instrument
+01327020-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+01327301-v A0:Agent A1:Patient A2:Instrument
+01327582-v A0:Agent A1:Patient A2:Instrument
+01328340-v A0:Agent A1:Patient A2:Co-Patient
+01331818-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01332205-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01332483-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01332730-v A0:Agent A1:Theme A2:Theme A3:Destination
+01335711-v A0:Agent A1:Destination A2:Theme
+01336159-v A0:Agent A1:Destination A2:Theme
+01336635-v A0:Agent A1:Theme A2:Theme A3:Destination
+01337653-v A0:Agent A1:Destination A2:Theme
+01337927-v A0:Agent A1:Destination A2:Theme
+01338247-v A0:Agent A1:Destination A2:Theme
+01338663-v A0:Agent A1:Destination A2:Theme
+01340028-v A0:Agent A1:Patient A2:Recipient A3:Theme
+01340283-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01341897-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01342012-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01342224-v A0:Agent A1:Patient A2:Co-Patient
+01343204-v A0:Agent A1:Theme A2:Destination
+01343610-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01344140-v A0:Agent A1:Patient A2:Co-Patient
+01344293-v A0:Agent A1:Patient A2:Co-Patient
+01345109-v A0:Agent A1:Patient A2:Instrument A3:Result
+01346693-v A0:Agent A1:Patient A2:Instrument A3:Result
+01346804-v A0:Agent A1:Patient A2:Instrument A3:Result
+01346978-v A0:Agent A1:Patient A2:Instrument A3:Result
+01348174-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01348705-v A0:Agent A1:Patient A2:Co-Patient
+01348838-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01348987-v A0:Agent A1:Patient A2:Co-Patient
+01349493-v A0:Agent A1:Theme A2:Source
+01350283-v A0:Agent A1:Theme
+01350699-v A0:Agent A1:Material A2:Product
+01351754-v A0:Agent A1:Theme A2:Source
+01352154-v A0:Agent A1:Theme A2:Source
+01352273-v A0:Agent A1:Source A2:Theme
+01352528-v A0:Agent A1:Patient A2:Co-Patient
+01352680-v A0:Agent A1:Patient A2:Co-Patient
+01352806-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01353405-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01353873-v A0:Agent A1:Patient A2:Co-Patient
+01354565-v A0:Agent A1:Destination A2:Theme
+01354673-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01357429-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01357656-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01357831-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01358023-v A0:Agent A1:Destination A2:Theme
+01358191-v A0:Agent A1:Destination A2:Theme
+01358328-v A0:Agent A1:Destination A2:Theme
+01358855-v A0:Agent A1:Destination A2:Theme
+01359007-v A0:Agent A1:Destination A2:Theme
+01359432-v A0:Agent A1:Theme A2:Destination
+01360899-v A0:Agent A1:Theme A2:Destination
+01362430-v A0:Agent A1:Theme A2:Destination
+01362568-v A0:Agent A1:Theme A2:Destination
+01362736-v A0:Agent A1:Patient A2:Result
+01363482-v A0:Agent A1:Destination A2:Theme
+01364357-v A0:Agent A1:Destination A2:Theme
+01364733-v A0:Agent A1:Destination A2:Theme
+01365549-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01366061-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01366321-v A0:Agent A1:Patient A2:Co-Patient
+01366653-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01367069-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01367456-v A0:Agent A1:Patient A2:Co-Patient
+01367760-v A0:Agent A1:Patient A2:Co-Patient
+01367862-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01368001-v A0:Agent A1:Patient A2:Co-Patient
+01368264-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01368474-v A0:Agent A1:Patient A2:Co-Patient
+01369204-v A0:Agent A1:Patient A2:Instrument A3:Result
+01370561-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+01371201-v A0:Agent A1:Theme A2:Destination
+01371454-v A0:Agent A1:Patient
+01372189-v A0:Agent A1:Theme A2:Location A3:Result
+01372408-v A0:Agent A1:Theme A2:Initial_Location A3:Destination A4:Result
+01372682-v A0:Agent A1:Theme A2:Destination
+01372994-v A0:Agent A1:Theme A2:Destination
+01373551-v A0:Agent A1:Theme A2:Destination
+01373844-v A0:Agent A1:Theme A2:Destination
+01374020-v A0:Agent A1:Theme A2:Destination
+01374587-v A0:Agent A1:Theme A2:Destination A3:Initial_Location
+01375637-v A0:Agent A1:Theme A2:Destination
+01376082-v A0:Agent A1:Destination A2:Theme
+01376245-v A0:Agent A1:Theme A2:Destination
+01376620-v A0:Agent A1:Destination A2:Theme
+01377032-v A0:Agent A1:Theme A2:Source
+01378123-v A0:Agent A1:Theme A2:Destination
+01378331-v A0:Agent A1:Destination A2:Theme
+01378421-v A0:Agent A1:Destination A2:Theme
+01378556-v A0:Agent A1:Theme A2:Recipient
+01380122-v A1:Theme A2:Location
+01380638-v A0:Agent A1:Theme
+01381357-v A0:Agent A1:Location A2:Theme
+01382083-v A0:Agent A1:Theme A2:Source A3:Beneficiary A4:Asset
+01382606-v A0:Agent
+01382720-v A0:Agent
+01382917-v A0:Agent A1:Theme A2:Source
+01383089-v A0:Agent
+01383245-v A0:Agent
+01383393-v A0:Agent
+01383511-v A0:Agent
+01383646-v A0:Agent
+01383800-v A0:Agent
+01383947-v A0:Agent
+01384102-v A0:Agent
+01384275-v A0:Agent A1:Theme A2:Source
+01384638-v A0:Agent A1:Theme A2:Destination
+01385170-v A0:Agent A1:Theme
+01385920-v A0:Agent A1:Patient A2:Co-Patient
+01387164-v A0:Agent A1:Patient A2:Instrument A3:Result
+01387656-v A0:Agent A1:Patient
+01388653-v A0:Agent A1:Patient A2:Instrument A3:Result
+01388813-v A0:Stimulus A1:Experiencer
+01389329-v A0:Agent A1:Material A2:Product
+01389607-v A0:Agent A1:Patient A2:Instrument A3:Result
+01389776-v A0:Agent A1:Theme A2:Destination
+01390486-v A0:Agent A1:Patient A2:Instrument
+01390833-v A0:Agent A1:Theme A2:Initial_Location A3:Instrument A4:Result
+01392237-v A0:Agent A1:Theme A2:Source
+01393339-v A0:Agent A1:Theme A2:Instrument A3:Destination A4:Initial_Location A5:Result
+01393714-v A0:Agent A1:Theme A2:Source
+01393996-v A0:Agent A1:Theme A2:Source
+01394464-v A0:Agent A1:Patient A2:Recipient A3:Theme
+01394812-v A0:Agent A1:Patient A2:Recipient A3:Theme
+01395049-v A0:Agent A1:Destination A2:Theme
+01395493-v A0:Agent A1:Destination A2:Theme
+01395663-v A0:Agent A1:Theme A2:Destination
+01395945-v A0:Agent A1:Destination A2:Theme
+01396524-v A0:Theme A1:Co-Theme
+01396644-v A0:Agent A2:Patient A3:Instrument A4:Result
+01396937-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+01397088-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+01397210-v A0:Agent A1:Patient A2:Instrument A3:Result
+01398032-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+01398443-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+01399450-v A0:Agent A1:Patient A2:Instrument A3:Result
+01399576-v A0:Agent A1:Patient A2:Instrument A3:Result
+01400044-v A0:Agent A1:Patient A2:Instrument A3:Result
+01401371-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+01401552-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+01405044-v A0:Agent A1:Theme A2:Destination A3:Initial_Location A4:Result
+01408297-v A0:Agent A1:Theme A2:Initial_Location A3:Destination A4:Result
+01408760-v A0:Agent A1:Theme A2:Destination A3:Initial_Location
+01411085-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+01411978-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+01412204-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+01412548-v A0:Agent A1:Patient A2:Instrument A3:Result
+01412759-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+01413173-v A0:Agent A1:Destination A2:Initial_Location A3:Result A4:Theme
+01414467-v A0:Agent A1:Patient A2:Instrument A3:Result
+01414626-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+01414916-v A0:Agent A1:Patient A2:Instrument A3:Result
+01415162-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+01415285-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+01415585-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+01415807-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+01416020-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+01416193-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+01416364-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+01417162-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+01417416-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+01417578-v A0:Agent A1:Destination A2:Theme
+01418037-v A0:Agent A1:Patient A2:Co-Patient
+01418389-v A0:Agent A1:Material A2:Product A3:Asset A4:Beneficiary
+01418536-v A0:Agent A1:Beneficiary A2:Patient A3:Product
+01420194-v A0:Agent A1:Co-Agent A2:Topic
+01420304-v A0:Agent A1:Co-Agent A2:Topic
+01420928-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+01421417-v A0:Agent A1:Patient A2:Co-Patient
+01421622-v A0:Agent A1:Theme A2:Destination
+01422886-v A0:Agent A1:Destination A2:Theme
+01423623-v A0:Agent A1:Destination A2:Theme
+01423929-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+01424106-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+01424350-v A0:Agent A1:Co-Agent
+01424456-v A0:Agent A1:Co-Agent
+01424948-v A1:Agent A2:Co-Agent
+01425511-v A1:Agent A2:Co-Agent
+01426153-v A0:Agent A1:Co-Agent A2:Theme
+01428853-v A0:Agent A1:Co-Agent A2:Agent A3:Theme
+01429953-v A0:Agent A1:Patient A2:Instrument A3:Result
+01431230-v A0:Agent A1:Experiencer A2:Instrument
+01431723-v A0:Agent A1:Experiencer A2:Instrument
+01431987-v A0:Agent A1:Experiencer A2:Instrument
+01433159-v A0:Agent A1:Theme A2:Destination A3:Initial_Location
+01433294-v A0:Agent A1:Theme A2:Beneficiary A3:Asset A4:Source
+01433809-v A0:Agent A1:Theme A2:Source
+01434140-v A0:Agent A1:Theme A2:Destination A3:Initial_Location A4:Instrument
+01435254-v A0:Agent A1:Theme A2:Source
+01435380-v A0:Agent A1:Theme A2:Destination A3:Initial_Location
+01436721-v A0:Agent A1:Patient A2:Instrument A3:Result
+01436865-v A0:Agent A1:Patient A2:Instrument A3:Result
+01437254-v A0:Agent A1:Theme A2:Destination A3:Initial_Location A4:Destination
+01437888-v A0:Agent A1:Theme A2:Destination A3:Initial_Location
+01438304-v A0:Agent A1:Theme A2:Destination A3:Initial_Location
+01438681-v A0:Agent A1:Theme A2:Recipient
+01439190-v A0:Agent A1:Theme A2:Source A3:Asset A4:Beneficiary
+01439604-v A0:Agent A1:Theme A2:Beneficiary A3:Source
+01439745-v A0:Agent A1:Theme A2:Source
+01440801-v A0:Agent A1:Patient A2:Instrument
+01441100-v A0:Agent A1:Patient A2:Instrument
+01441510-v A0:Agent A1:Patient A2:Instrument
+01441993-v A0:Agent A1:Theme A2:Destination
+01442361-v A0:Agent A1:Patient A2:Instrument
+01442779-v A0:Agent A1:Patient A2:Instrument
+01445407-v A0:Agent A1:Patient A2:Instrument
+01445597-v A0:Agent A1:Patient
+01445932-v A0:Agent A1:Patient A2:Instrument A3:Location A4:Result
+01446420-v A0:Agent A1:Patient
+01446729-v A0:Agent A1:Patient
+01446901-v A0:Agent A1:Theme A2:Location
+01447868-v A0:Agent A1:Experiencer A2:Instrument
+01448100-v A0:Agent A1:Theme A2:Initial_Location A3:Destination
+01448778-v A0:Agent A1:Patient
+01449974-v A0:Agent A1:Theme A2:Destination A3:Initial_Location
+01450792-v A0:Agent A1:Theme A2:Destination A3:Initial_Location
+01451502-v A0:Agent A1:Theme A2:Initial_Location A3:Destination
+01452255-v A0:Agent A1:Theme A4:Destination A5:Initial_Location
+01453433-v A0:Agent A1:Theme A2:Destination A3:Initial_Location
+01453718-v A0:Agent A1:Theme A2:Initial_Location A3:Destination
+01454246-v A0:Agent A1:Theme A2:Destination A3:Initial_Location
+01454431-v A0:Agent A1:Theme A2:Destination A3:Initial_Location
+01454810-v A0:Agent A1:Theme A2:Destination A3:Initial_Location
+01455184-v A0:Agent A1:Theme A2:Destination
+01455754-v A0:Agent A1:Theme A2:Destination
+01455866-v A0:Agent A1:Theme A2:Destination A3:Initial_Location
+01456463-v A0:Agent A1:Patient A2:Instrument A3:Source A4:Result
+01456771-v A0:Agent A1:Experiencer A2:Instrument
+01457489-v A0:Agent A1:Destination A2:Theme
+01458464-v A0:Patient A1:Agent A2:Instrument A3:Result
+01458973-v A0:Agent A1:Theme A2:Source
+01459392-v A0:Agent A1:Theme A2:Source
+01459896-v A0:Agent A1:Result A2:Material A3:Beneficiary A4:Attribute
+01460594-v A0:Agent A1:Theme A2:Location
+01460937-v A0:Agent A1:Theme A2:Source
+01466543-v A0:Agent A1:Destination A2:Theme
+01466978-v A1:Theme A2:Co-Theme
+01467370-v A1:Theme A2:Co-Theme
+01468058-v A0:Agent A1:Theme A2:Source
+01468576-v A0:Agent A2:Source A3:Theme
+01469263-v A0:Agent A1:Theme A2:Destination
+01470098-v A0:Agent A1:Theme A2:Location
+01471043-v A0:Agent A1:Theme A2:Source A3:Beneficiary
+01471547-v A0:Agent A1:Theme A2:Source A3:Destination
+01471825-v A0:Agent A1:Theme A2:Source A3:Beneficiary
+01472417-v A0:Agent A1:Theme A2:Source A3:Beneficiary
+01472807-v A0:Agent A1:Patient A2:Co-Patient
+01473020-v A0:Agent A1:Patient A2:Co-Patient
+01473176-v A0:Agent A1:Location A2:Theme
+01473346-v A0:Agent A1:Theme A2:Location
+01475828-v A0:Agent A1:Patient A2:Co-Patient
+01476180-v A0:Agent A1:Result A2:Theme
+01476483-v A0:Agent A1:Patient A3:Instrument A4:Result
+01477224-v A0:Agent A1:Destination A2:Theme
+01477704-v A0:Agent A1:Theme A2:Co-Theme
+01478002-v A0:Agent A1:Theme A3:Theme A4:Destination
+01478603-v A0:Agent A1:Destination A2:Theme
+01480149-v A0:Agent A1:Theme A2:Source A3:Asset A4:Beneficiary
+01480770-v A0:Agent A1:Theme A2:Destination
+01481154-v A0:Agent A1:Theme A2:Destination
+01481819-v A1:Theme A2:Location A3:Agent
+01483247-v A0:Agent A1:Destination A2:Theme
+01483779-v A0:Agent A1:Product A2:Material
+01484392-v A0:Agent A1:Theme
+01484714-v A0:Agent A1:Patient A2:Instrument A3:Result
+01485158-v A0:Agent A1:Theme A2:Destination
+01485839-v A0:Agent A1:Theme A2:Destination
+01486312-v A0:Agent A1:Theme A2:Destination
+01486678-v A0:Agent A1:Theme A2:Destination
+01487927-v A0:Agent A1:Source A2:Theme
+01488123-v A0:Agent A1:Source A2:Theme
+01488313-v A0:Agent A1:Location A2:Theme
+01488555-v A0:Agent A1:Destination A2:Theme
+01488847-v A0:Agent A1:Destination A2:Theme
+01489465-v A0:Agent A1:Theme A2:Source
+01490814-v A0:Agent A1:Recipient A2:Theme
+01492052-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01492422-v A0:Agent A1:Destination A2:Theme
+01492725-v A0:Agent A1:Patient A2:Instrument
+01492944-v A0:Agent A1:Patient A2:Instrument A3:Result
+01493142-v A0:Agent A1:Theme A2:Destination
+01493234-v A0:Agent A1:Theme A2:Destination
+01494310-v A0:Agent A1:Theme A2:Destination
+01496630-v A0:Agent A1:Theme A2:Destination
+01497750-v A0:Agent A1:Theme A2:Destination
+01500082-v A0:Agent A1:Theme A2:Destination
+01500572-v A0:Agent A1:Theme A2:Location A3:Time
+01500873-v A0:Agent A1:Destination A2:Theme
+01501347-v A0:Agent A1:Theme A2:Destination
+01501676-v A0:Agent A1:Theme A2:Destination
+01502279-v A0:Agent A1:Theme A2:Destination
+01502654-v A0:Agent A1:Theme A2:Destination
+01502946-v A0:Agent A1:Theme A2:Destination
+01504480-v A0:Agent A1:Co-Agent A2:Topic
+01504699-v A0:Agent A1:Co-Agent A2:Topic
+01505254-v A0:Agent A1:Theme A2:Asset A3:Beneficiary A4:Source
+01507143-v A0:Agent A1:Theme A2:Destination A3:Initial_Location A4:Result
+01507407-v A0:Agent A1:Patient A2:Instrument A3:Result
+01507792-v A0:Agent A1:Theme A2:Result A3:Trajectory
+01507914-v A0:Agent A1:Destination A2:Theme
+01509079-v A0:Agent A1:Theme A2:Destination A3:Initial_Location A4:Result
+01511380-v A0:Agent A1:Theme A2:Source
+01512465-v A0:Agent A1:Theme A2:Destination A3:Initial_Location A4:Result
+01512625-v A0:Agent A1:Theme A2:Destination A3:Initial_Location A4:Result
+01513290-v A0:Agent A1:Destination A2:Initial_Location A3:Result A4:Theme
+01514348-v A0:Agent A1:Theme A2:Destination A3:Initial_Location A4:Result
+01514525-v A0:Agent A1:Theme A2:Destination A3:Initial_Location A4:Result
+01514887-v A0:Agent A1:Theme A2:Destination A3:Initial_Location A4:Trajectory
+01516290-v A0:Source A1:Theme A2:Location
+01517055-v A0:Agent A1:Destination A2:Theme
+01517175-v A0:Agent A1:Destination A2:Theme
+01517355-v A0:Agent A1:Destination A2:Theme
+01518772-v A0:Agent A1:Product A2:Material A3:Asset A4:Beneficiary
+01518924-v A0:Agent A1:Destination A2:Theme
+01519569-v A0:Agent A1:Patient
+01522276-v A0:Agent A1:Theme A2:Location
+01522878-v A0:Agent A1:Theme A2:Destination
+01523270-v A0:Agent A1:Material A2:Product
+01523986-v A0:Agent A1:Theme A2:Location
+01524199-v A0:Agent A1:Patient A2:Co-Patient
+01524523-v A0:Agent A1:Destination A2:Theme
+01525666-v A0:Agent A1:Patient A2:Instrument A3:Result
+01526956-v A0:Agent A1:Destination A2:Theme
+01527508-v A0:Agent A1:Theme A2:Source
+01527877-v A0:Agent A1:Theme A2:Source
+01528069-v A0:Agent A1:Theme A2:Destination
+01528339-v A0:Agent A1:Location A2:Theme
+01528522-v A0:Agent A1:Theme A2:Source
+01528821-v A0:Agent A1:Theme A2:Destination
+01529491-v A0:Agent A1:Theme A2:Destination
+01530098-v A0:Agent A1:Theme A2:Destination
+01530898-v A0:Agent A1:Destination A2:Theme
+01531742-v A0:Agent A1:Destination A2:Theme
+01531998-v A0:Agent A1:Destination A2:Theme
+01532329-v A0:Agent A1:Destination A2:Theme
+01532589-v A0:Agent A1:Patient A2:Instrument A3:Result
+01534147-v A0:Agent A1:Destination A2:Theme
+01534609-v A0:Agent A1:Theme A2:Destination
+01536344-v A0:Agent A1:Theme A2:Source
+01537409-v A1:Patient
+01538161-v A0:Agent A1:Destination A2:Theme
+01538310-v A0:Agent A1:Destination A2:Theme
+01538469-v A0:Agent A1:Destination A2:Theme
+01538629-v A0:Agent A1:Theme A2:Destination
+01538928-v A0:Agent A1:Theme A2:Destination
+01541000-v A0:Agent A1:Patient A2:Co-Patient
+01541579-v A0:Source A1:Theme A2:Location
+01541803-v A0:Source A1:Theme A2:Location
+01542668-v A1:Theme A2:Location A3:Agent
+01543426-v A0:Agent A1:Theme A2:Location
+01543731-v A0:Theme A1:Agent A2:Location
+01543998-v A1:Theme A2:Destination A3:Agent
+01544558-v A0:Agent A1:Value A2:Location
+01544692-v A0:Agent A1:Theme A2:Destination
+01545314-v A1:Theme A2:Location A3:Agent
+01545883-v A0:Agent A1:Theme A2:Location
+01546111-v A0:Agent A1:Theme A2:Location
+01547001-v A1:Theme A2:Location A3:Agent
+01547390-v A0:Agent A1:Theme A2:Location
+01548290-v A0:Agent A1:Co-Patient A2:Instrument A3:Patient A4:Result
+01548447-v A0:Agent A1:Patient A2:Co-Patient
+01548718-v A0:Agent A1:Theme A2:Source
+01549187-v A0:Agent A1:Theme A2:Source
+01549420-v A0:Agent A1:Theme A2:Source
+01549905-v A0:Agent A1:Patient A2:Instrument
+01550817-v A0:Agent A1:Patient A2:Instrument A3:Result
+01551195-v A0:Agent A1:Theme A2:Destination
+01551871-v A0:Agent A1:Product A2:Material A4:Product A5:Asset A6:Beneficiary
+01552219-v A0:Agent A1:Product A2:Material A4:Product A5:Asset A6:Beneficiary
+01553761-v A0:Agent A1:Patient
+01555742-v A0:Agent A1:Destination A2:Theme
+01558218-v A0:Agent A1:Patient A2:Co-Patient
+01558681-v A0:Agent A1:Patient A2:Instrument
+01558883-v A0:Agent A1:Patient A3:Instrument
+01559055-v A0:Agent A1:Patient A2:Instrument
+01560369-v A0:Agent A1:Theme A2:Initial_Location A3:Instrument A4:Destination A5:Result
+01560731-v A0:Agent A1:Theme A2:Source
+01560984-v A0:Agent A1:Patient A2:Co-Patient
+01561143-v A0:Theme A1:Location
+01561408-v A0:Agent A1:Patient A2:Instrument A3:Result
+01561819-v A1:Theme A2:Location
+01562061-v A0:Agent A1:Patient A2:Instrument A3:Result
+01562209-v A0:Agent A1:Patient A2:Instrument A3:Result
+01562733-v A0:Theme A1:Location
+01563575-v A0:Agent A1:Patient A2:Instrument
+01564144-v A0:Agent A1:Patient A2:Instrument
+01565472-v A0:Agent A1:Theme A2:Source
+01565795-v A0:Agent A1:Patient A2:Instrument A3:Result
+01566185-v A0:Agent A1:Patient A2:Instrument
+01566705-v A0:Agent A1:Patient A2:Instrument A3:Result
+01566916-v A0:Agent A1:Theme A2:Source
+01567275-v A0:Agent A1:Theme A2:Destination
+01567888-v A0:Agent A1:Destination A2:Theme
+01568630-v A0:Agent A1:Theme A2:Result
+01568886-v A0:Agent A1:Theme A2:Destination
+01569181-v A0:Agent A1:Patient A2:Instrument A3:Result
+01569566-v A0:Agent A1:Theme A2:Destination
+01570258-v A0:Agent A1:Theme A2:Destination
+01570935-v A0:Agent A1:Patient A2:Instrument A3:Result
+01571354-v A0:Agent A1:Patient A2:Instrument A3:Result
+01571744-v A0:Agent A1:Patient A2:Instrument A3:Result
+01572728-v A0:Agent A1:Patient A2:Instrument A3:Result
+01573515-v A0:Agent A1:Patient A2:Instrument A3:Result
+01573891-v A0:Agent A1:Patient A2:Instrument A3:Result
+01574077-v A0:Agent A1:Patient A2:Instrument
+01575146-v A0:Agent A1:Patient A2:Instrument A3:Result
+01575675-v A0:Agent A1:Theme A2:Destination
+01576165-v A0:Agent A1:Patient
+01576478-v A0:Agent A1:Theme A2:Destination
+01577093-v A0:Agent A1:Theme A2:Destination
+01577513-v A0:Agent A1:Destination A2:Theme
+01577635-v A0:Agent A1:Theme A2:Destination
+01578513-v A0:Agent A1:Patient A2:Instrument A3:Result
+01578993-v A0:Agent A1:Theme A2:Destination
+01579153-v A0:Agent A1:Theme A2:Destination
+01579340-v A0:Agent A1:Theme A2:Destination
+01579488-v A0:Source A1:Theme A2:Source A3:Location
+01579813-v A0:Agent A1:Patient A2:Instrument A3:Result
+01581362-v A0:Agent A1:Theme A2:Destination
+01582070-v A0:Agent A1:Theme A2:Destination
+01582409-v A0:Agent A1:Theme A2:Destination
+01582645-v A0:Agent A1:Theme A2:Destination
+01583142-v A0:Agent A1:Result A2:Material A4:Result A5:Attribute A6:Beneficiary
+01585276-v A0:Agent A1:Patient A2:Instrument
+01585523-v A0:Agent A1:Theme A2:Destination
+01587062-v A1:Theme A2:Co-Theme
+01588134-v A0:Agent A1:Theme A2:Destination
+01588493-v A0:Agent A1:Destination A2:Theme
+01590523-v A0:Agent A1:Source A2:Theme
+01590658-v A0:Agent A1:Theme
+01590747-v A0:Agent A1:Source A2:Theme
+01592072-v A0:Agent A1:Theme A2:Result A3:Trajectory
+01592669-v A0:Agent A1:Experiencer A2:Instrument
+01593011-v A0:Agent A1:Patient
+01593763-v A0:Agent A1:Theme A2:Location A3:Result
+01593937-v A0:Agent A1:Patient A2:Instrument
+01594978-v A0:Agent A1:Patient A2:Instrument
+01595260-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01596645-v A0:Agent A1:Patient
+01597286-v A0:Agent A1:Theme A2:Destination A3:Initial_Location A4:Result
+01598395-v A1:Theme A3:Location A4:Agent
+01599052-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+01600478-v A0:Agent A1:Theme A2:Destination
+01603032-v A0:Agent A1:Destination A2:Theme
+01603175-v A0:Agent A1:Destination A2:Theme
+01603418-v A0:Agent A1:Destination A2:Theme
+01604012-v A0:Agent A1:Destination A2:Initial_Location A3:Result A4:Theme
+01605021-v A0:Agent A1:Theme
+01607445-v A0:Agent A1:Theme A2:Destination
+01608706-v A0:Theme
+01611123-v A0:Agent A1:Patient A2:Source A3:Instrument A4:Result
+01611359-v A0:Agent A1:Theme A2:Destination
+01611746-v A0:Agent A1:Theme A2:Destination
+01611901-v A0:Agent A1:Theme A2:Destination
+01612964-v A0:Agent A1:Theme A2:Destination
+01613391-v A0:Agent A1:Theme A2:Destination
+01617192-v A0:Cause A1:Theme A2:Predicate
+01618547-v A0:Agent A1:Theme A2:Instrument
+01618884-v A0:Agent A1:Patient A2:Instrument A3:Result
+01619014-v A0:Agent A1:Product A2:Material A3:Beneficiary A4:Asset
+01619725-v A0:Agent A1:Product A2:Material A3:Beneficiary A4:Asset
+01619929-v A0:Agent A1:Patient A2:Instrument
+01620854-v A0:Agent A1:Theme A2:Instrument
+01621555-v A0:Asset
+01624897-v A0:Agent A1:Patient A2:Instrument A3:Result
+01627355-v A1:Theme A2:Cause A3:Predicate
+01627947-v A0:Agent A1:Product A2:Material
+01628197-v A0:Agent A1:Product A2:Material
+01628449-v A0:Agent A1:Theme A2:Instrument
+01629000-v A0:Agent A1:Product A2:Material
+01629958-v A0:Stimulus A1:Experiencer A2:Result
+01632411-v A0:Agent A1:Result A2:Attribute A3:Beneficiary A4:Material
+01634142-v A0:Agent A1:Result A2:Material A3:Beneficiary A4:Attribute
+01634424-v A0:Agent A1:Beneficiary A2:Patient A3:Product
+01635432-v A0:Agent A1:Theme A2:Attribute
+01636221-v A0:Agent A1:Theme A2:Attribute
+01637633-v A0:Experiencer A1:Theme
+01637982-v A0:Agent A1:Theme A2:Source
+01639105-v A0:Agent A1:Result A2:Attribute A3:Beneficiary A4:Material
+01639364-v A0:Agent A1:Product A2:Material A3:Asset A4:Beneficiary
+01639714-v A0:Agent A1:Result A2:Beneficiary A3:Attribute A4:Material
+01640207-v A0:Agent A1:Result A2:Material A3:Beneficiary A4:Attribute
+01640550-v A0:Agent A1:Result A2:Beneficiary A3:Attribute A4:Material
+01640855-v A0:Agent A1:Theme
+01641914-v A0:Agent A1:Beneficiary
+01642437-v A0:Agent A1:Theme
+01643464-v A0:Agent A1:Theme A2:Destination
+01643657-v A0:Cause A1:Theme A2:Predicate
+01644522-v A0:Agent A1:Patient A2:Instrument A3:Result
+01645421-v A0:Agent A1:Beneficiary
+01645601-v A0:Cause A1:Theme A2:Predicate
+01646682-v A0:Cause A1:Theme A2:Predicate
+01646866-v A0:Cause A1:Predicate A2:Theme
+01647229-v A0:Agent A1:Theme A2:Instrument
+01647543-v A0:Agent A1:Theme A2:Value
+01648126-v A0:Agent A1:Theme A2:Instrument
+01649024-v A0:Cause A1:Theme A2:Predicate
+01649124-v A0:Agent A1:Theme A2:Instrument
+01649251-v A0:Agent A1:Theme A2:Instrument
+01649999-v A0:Agent A1:Patient A2:Result
+01650425-v A0:Agent A1:Patient A2:Result
+01651293-v A0:Agent A1:Theme A2:Instrument
+01651444-v A0:Agent A1:Theme A2:Instrument
+01653442-v A0:Agent A1:Result A2:Material A3:Beneficiary A4:Attribute
+01654271-v A0:Agent A1:Theme A2:Destination
+01654628-v A0:Asset
+01655902-v A0:Agent A1:Result A2:Attribute A3:Beneficiary A4:Material
+01656458-v A0:Agent A1:Patient A2:Instrument
+01656788-v A0:Agent A1:Product A2:Material A4:Product A5:Asset A6:Beneficiary
+01657524-v A0:Agent A1:Product A2:Material A4:Product A5:Asset A6:Beneficiary
+01657977-v A0:Agent A1:Patient A2:Co-Patient
+01658188-v A0:Agent A1:Product A2:Asset A3:Beneficiary A4:Material
+01658762-v A0:Agent A1:Result A2:Attribute A3:Beneficiary A4:Material
+01659248-v A0:Agent A1:Material A2:Product A3:Asset A4:Beneficiary
+01661804-v A0:Agent A1:Patient A2:Instrument
+01662771-v A0:Agent A1:Product A2:Material A3:Asset A4:Beneficiary
+01663920-v A0:Agent A3:Beneficiary A4:Patient A5:Product
+01664172-v A0:Asset
+01664704-v A0:Agent A1:Source A2:Theme
+01665638-v A0:Agent A1:Asset A2:Beneficiary A3:Material A4:Product
+01666131-v A0:Agent A1:Result A2:Material A3:Beneficiary A4:Attribute
+01666327-v A0:Agent A1:Product A2:Material A4:Product A5:Asset A6:Beneficiary
+01666717-v A0:Agent A1:Agent A2:Beneficiary A4:Beneficiary A5:Asset A6:Material A7:Product
+01666894-v A0:Agent A1:Material A2:Result A3:Attribute A4:Beneficiary
+01667132-v A0:Agent A1:Patient A2:Instrument A3:Result
+01668421-v A0:Agent A1:Theme A2:Destination
+01669547-v A0:Agent A1:Destination A2:Theme
+01669643-v A0:Agent A1:Destination A2:Theme
+01670777-v A0:Agent A1:Destination A2:Theme
+01671039-v A0:Agent A1:Product A2:Material A4:Product A5:Asset A6:Beneficiary
+01672753-v A0:Agent A1:Product A2:Material A3:Asset A4:Beneficiary
+01673472-v A0:Agent A1:Theme A2:Location
+01673891-v A0:Agent A1:Material A2:Product A3:Asset A4:Beneficiary
+01675245-v A0:Agent A1:Product A2:Material A3:Beneficiary A4:Product A5:Asset
+01675780-v A0:Agent A1:Theme A2:Source
+01675963-v A0:Agent A1:Destination A2:Theme
+01677989-v A0:Agent A1:Destination A2:Theme
+01678279-v A0:Agent A1:Destination A2:Theme
+01678407-v A0:Agent A1:Destination A2:Theme
+01678519-v A0:Agent A1:Destination A2:Theme
+01679433-v A0:Agent A1:Destination A2:Theme
+01679669-v A0:Agent A1:Destination A2:Theme
+01679980-v A0:Agent A1:Destination A2:Theme
+01680267-v A0:Agent A1:Destination A2:Theme
+01681212-v A0:Agent A1:Destination A2:Theme
+01681333-v A0:Agent A1:Destination A2:Theme
+01681723-v A0:Agent A1:Patient A2:Result
+01682039-v A0:Agent A1:Destination A2:Theme
+01682761-v A0:Agent A1:Patient A2:Result
+01682946-v A0:Agent A1:Patient A2:Result
+01683101-v A0:Agent A1:Destination A2:Theme
+01683422-v A0:Agent A1:Patient A2:Result
+01683758-v A0:Agent A1:Destination A2:Theme
+01684180-v A0:Agent A1:Theme A2:Destination
+01684337-v A0:Agent A1:Product A2:Material A4:Product A5:Asset A6:Beneficiary
+01684899-v A0:Agent A1:Destination A2:Theme
+01686626-v A0:Agent A1:Theme A2:Beneficiary A3:Source
+01686827-v A0:Agent A1:Theme A2:Beneficiary A3:Source
+01686956-v A0:Agent A1:Theme A2:Attribute
+01688604-v A0:Agent A1:Theme A2:Destination
+01690294-v A0:Agent A1:Theme A2:Destination
+01691057-v A0:Agent A1:Theme A2:Destination
+01692443-v A0:Agent A1:Theme A2:Destination
+01692709-v A0:Agent A1:Theme A2:Destination
+01693138-v A0:Agent A1:Theme A2:Destination
+01693324-v A0:Agent A1:Theme A2:Destination
+01693453-v A0:Agent A1:Theme A2:Destination
+01693881-v A0:Agent A1:Theme A2:Destination
+01694263-v A0:Agent A1:Theme
+01694376-v A0:Agent A1:Theme A2:Destination
+01695773-v A0:Agent A1:Destination A2:Theme
+01696135-v A0:Agent A1:Destination A2:Theme
+01696350-v A0:Agent A1:Destination A2:Theme
+01697628-v A0:Agent A1:Theme A2:Destination
+01697986-v A0:Agent A1:Result A2:Attribute A3:Beneficiary A4:Material
+01703454-v A0:Agent A1:Topic A2:Recipient A3:Source
+01704030-v A0:Agent A1:Theme A2:Beneficiary
+01705494-v A0:Agent A1:Result A2:Beneficiary A3:Attribute A4:Material
+01706129-v A0:Agent A1:Product A2:Material A3:Beneficiary A4:Product A5:Asset
+01708113-v A0:Agent A1:Theme A2:Destination
+01708542-v A0:Agent A1:Location A2:Result A3:Theme
+01708676-v A0:Agent A2:Theme A3:Location A4:Result
+01709931-v A0:Theme A1:Agent A2:Location A3:Result
+01710317-v A0:Agent A1:Theme A2:Beneficiary
+01710481-v A0:Agent A1:Theme A2:Attribute
+01711445-v A0:Agent A1:Result A2:Attribute A3:Beneficiary A4:Material
+01711965-v A0:Agent A1:Theme A2:Destination
+01712450-v A0:Agent A1:Theme A2:Destination
+01714208-v A0:Agent A1:Theme A2:Beneficiary
+01722980-v A0:Agent A1:Beneficiary
+01723690-v A0:Agent A1:Theme
+01728840-v A0:Agent A1:Result A2:Attribute A3:Beneficiary A4:Material
+01731031-v A0:Agent A1:Topic A2:Recipient
+01731828-v A0:Agent A1:Topic A2:Recipient
+01732921-v A0:Agent A1:Theme A2:Beneficiary
+01734502-v A0:Agent A1:Theme
+01735308-v A0:Agent A1:Theme A2:Destination
+01736299-v A0:Agent A1:Theme A2:Destination
+01738774-v A0:Agent A1:Product A2:Material A3:Beneficiary A4:Asset
+01740320-v A0:Location A1:Value A2:Agent
+01741446-v A0:Agent A1:Beneficiary A2:Patient A3:Product
+01741864-v A0:Agent A1:Theme A2:Destination A3:Initial_Location A4:Instrument A5:Result
+01742556-v A0:Agent A1:Theme A2:Destination
+01743784-v A0:Agent A1:Result A2:Material A3:Attribute A4:Beneficiary
+01744611-v A0:Agent A1:Result A2:Attribute A3:Beneficiary A4:Material
+01745722-v A0:Agent A1:Result A2:Attribute A3:Beneficiary A4:Material
+01746715-v A0:Agent A1:Theme A2:Destination
+01747203-v A0:Agent A1:Theme A2:Destination
+01747374-v A0:Agent A1:Theme A2:Destination
+01747945-v A0:Agent A1:Theme A2:Destination
+01749660-v A0:Agent A1:Theme A2:Destination
+01749790-v A0:Agent A1:Destination A2:Theme
+01750302-v A0:Agent A1:Theme A2:Destination
+01750421-v A0:Agent A1:Destination A2:Theme
+01753788-v A0:Cause A1:Theme A2:Predicate
+01754737-v A0:Agent A1:Agent A2:Beneficiary A4:Beneficiary A5:Asset A6:Material A7:Product
+01755137-v A0:Agent A1:Theme A2:Destination
+01755504-v A0:Agent A1:Product A2:Material A3:Beneficiary A4:Asset
+01761706-v A0:Stimulus A1:Experiencer A2:Result
+01762283-v A0:Stimulus A1:Experiencer A2:Result
+01762528-v A0:Stimulus A1:Experiencer A2:Result
+01762963-v A0:Stimulus A1:Experiencer A2:Result
+01763643-v A0:Stimulus A1:Experiencer A2:Result
+01764171-v A0:Stimulus A1:Experiencer A2:Result
+01764800-v A0:Agent A1:Patient A2:Instrument A3:Result
+01765392-v A0:Stimulus A1:Experiencer A2:Result
+01765908-v A0:Stimulus A1:Experiencer A2:Result
+01766407-v A0:Stimulus A1:Experiencer A2:Result
+01767949-v A0:Stimulus A1:Experiencer A2:Result
+01769090-v A0:Stimulus A1:Experiencer A2:Result
+01769413-v A0:Stimulus A2:Experiencer A3:Result
+01769902-v A0:Stimulus A1:Experiencer A2:Result
+01770252-v A0:Stimulus A1:Experiencer A2:Result
+01770501-v A0:Stimulus A1:Experiencer A2:Result
+01770802-v A0:Stimulus A1:Experiencer A2:Result
+01771390-v A0:Stimulus A1:Experiencer A2:Result
+01772172-v A0:Patient A1:Stimulus A2:Agent
+01772363-v A0:Agent A1:Theme A2:Beneficiary A3:Source
+01772498-v A0:Agent A1:Theme A2:Attribute
+01772960-v A0:Stimulus A1:Experiencer A2:Result
+01773825-v A0:Stimulus A1:Experiencer A2:Result
+01774136-v A0:Experiencer A1:Stimulus A2:Attribute
+01774426-v A0:Experiencer A1:Stimulus A2:Attribute
+01774799-v A0:Experiencer A1:Stimulus A2:Attribute
+01775164-v A0:Experiencer A1:Stimulus A2:Attribute
+01775535-v A0:Experiencer A1:Stimulus A2:Attribute
+01776214-v A0:Experiencer A1:Stimulus A2:Attribute
+01776727-v A0:Experiencer A1:Stimulus A2:Attribute
+01776952-v A0:Experiencer A1:Stimulus A2:Attribute
+01777210-v A0:Experiencer A1:Stimulus A2:Attribute
+01777817-v A0:Experiencer A1:Stimulus A2:Attribute
+01778017-v A0:Experiencer A1:Stimulus A2:Attribute
+01778568-v A0:Experiencer A1:Stimulus A2:Attribute
+01778990-v A0:Experiencer A1:Stimulus A2:Attribute
+01779165-v A0:Stimulus A1:Experiencer A2:Result
+01779644-v A0:Stimulus A1:Experiencer A2:Result
+01779803-v A0:Stimulus A1:Experiencer A2:Result
+01780202-v A0:Experiencer A1:Stimulus A2:Attribute
+01780434-v A0:Experiencer A1:Stimulus A2:Attribute
+01780941-v A0:Stimulus A1:Experiencer A2:Stimulus A3:Result
+01781180-v A0:Stimulus A1:Experiencer A2:Result
+01782650-v A0:Stimulus A1:Experiencer A2:Result
+01783022-v A0:Stimulus A1:Experiencer A2:Result
+01783214-v A0:Stimulus A1:Experiencer A2:Result
+01783394-v A0:Stimulus A1:Experiencer A2:Result
+01783881-v A0:Stimulus A1:Experiencer A2:Result
+01785748-v A0:Stimulus A1:Experiencer A2:Result
+01785971-v A0:Stimulus A1:Experiencer A2:Result
+01786620-v A0:Stimulus A1:Experiencer A2:Result
+01786760-v A0:Stimulus A1:Experiencer A2:Result
+01786906-v A0:Stimulus A1:Experiencer A2:Result
+01787106-v A0:Stimulus A1:Experiencer A2:Result
+01787600-v A0:Stimulus A1:Experiencer A2:Result
+01787709-v A0:Stimulus A1:Experiencer A2:Result
+01787955-v A0:Stimulus A1:Experiencer A2:Result
+01788932-v A0:Stimulus A1:Experiencer A2:Result
+01789047-v A0:Stimulus A1:Experiencer A2:Result
+01789270-v A0:Stimulus A1:Experiencer A2:Result
+01789514-v A0:Stimulus A1:Experiencer A2:Result
+01790020-v A0:Stimulus A1:Experiencer A2:Result
+01790383-v A0:Stimulus A1:Experiencer A2:Result
+01790538-v A0:Stimulus A1:Experiencer A2:Result
+01790739-v A0:Stimulus A1:Experiencer A2:Result
+01791232-v A0:Stimulus A1:Experiencer A2:Result
+01791408-v A0:Stimulus A1:Experiencer A2:Result
+01791535-v A0:Stimulus A1:Experiencer A2:Result
+01791973-v A0:Stimulus A1:Experiencer A2:Result
+01792097-v A0:Stimulus A1:Experiencer A2:Result
+01792567-v A0:Stimulus A1:Experiencer A2:Result
+01793177-v A0:Stimulus A1:Experiencer A2:Result
+01793742-v A0:Stimulus A1:Experiencer A2:Result
+01793933-v A1:Stimulus A2:Experiencer
+01794195-v A0:Agent A1:Theme A2:Location
+01794363-v A1:Experiencer A2:Stimulus A3:Result
+01794523-v A1:Experiencer A2:Stimulus A3:Result
+01795333-v A0:Experiencer A1:Stimulus
+01795428-v A0:Agent A1:Patient A2:Instrument A3:Result
+01795888-v A0:Stimulus A1:Experiencer A2:Result
+01796346-v A0:Stimulus A1:Experiencer A2:Result
+01796582-v A0:Experiencer A1:Stimulus A2:Attribute
+01796924-v A0:Experiencer A1:Stimulus A2:Attribute
+01797051-v A0:Experiencer A1:Stimulus A2:Attribute
+01797582-v A0:Stimulus A1:Experiencer A2:Result
+01797730-v A0:Stimulus A1:Experiencer A2:Result
+01798100-v A0:Stimulus A1:Experiencer A2:Result
+01798936-v A0:Stimulus A1:Experiencer A2:Result
+01799794-v A0:Stimulus A1:Experiencer A2:Result
+01800195-v A0:Stimulus A1:Experiencer A2:Result
+01800422-v A0:Stimulus A1:Experiencer A2:Result
+01801697-v A0:Stimulus A1:Experiencer A2:Result
+01801847-v A0:Stimulus A1:Experiencer A2:Result
+01802689-v A0:Stimulus A1:Experiencer A2:Result
+01803003-v A0:Stimulus A1:Experiencer A2:Result
+01803380-v A0:Stimulus A1:Experiencer A2:Result
+01803936-v A0:Agent A1:Patient A2:Result
+01805523-v A0:Experiencer A1:Stimulus A2:Attribute
+01805684-v A0:Pivot A1:Theme
+01805982-v A0:Experiencer A1:Stimulus A2:Attribute
+01806505-v A0:Stimulus A1:Experiencer A2:Result
+01807770-v A0:Stimulus A1:Experiencer A2:Stimulus A3:Result
+01808374-v A0:Stimulus A1:Experiencer A2:Result
+01808769-v A0:Stimulus A1:Experiencer A2:Result
+01809064-v A0:Stimulus A1:Experiencer A2:Result
+01809321-v A0:Stimulus A1:Experiencer A2:Result
+01810447-v A0:Stimulus A1:Experiencer A2:Result
+01811736-v A0:Stimulus A1:Experiencer A2:Result
+01812324-v A0:Stimulus A1:Experiencer A2:Result
+01812720-v A0:Cause A1:Theme A2:Predicate
+01813053-v A0:Stimulus A1:Experiencer A2:Result
+01813393-v A0:Stimulus A1:Experiencer
+01813668-v A0:Experiencer A1:Stimulus
+01813884-v A0:Stimulus A1:Experiencer
+01814396-v A0:Stimulus A1:Experiencer A2:Result
+01814815-v A0:Stimulus A1:Experiencer A2:Result
+01815628-v A0:Stimulus A1:Experiencer A2:Result
+01816219-v A0:Stimulus A1:Experiencer A2:Result
+01816431-v A0:Stimulus A1:Experiencer A2:Result
+01816645-v A0:Stimulus A1:Experiencer A2:Result
+01816844-v A0:Stimulus A1:Experiencer A2:Result
+01817130-v A0:Stimulus A1:Experiencer A2:Result
+01817314-v A0:Stimulus A1:Experiencer A2:Result
+01817755-v A0:Stimulus A1:Experiencer A2:Result
+01817938-v A0:Stimulus A1:Experiencer A2:Result
+01818835-v A0:Agent A1:Patient A2:Result
+01819387-v A0:Stimulus A1:Experiencer A2:Result
+01819554-v A0:Agent A1:Theme
+01820189-v A0:Agent A1:Location A2:Theme
+01820302-v A0:Experiencer A1:Stimulus A2:Attribute
+01820901-v A0:Stimulus A1:Experiencer A2:Result
+01821423-v A0:Stimulus A1:Experiencer A2:Result
+01821634-v A0:Stimulus A1:Experiencer A2:Result
+01821884-v A0:Stimulus A1:Experiencer A2:Result
+01821996-v A0:Experiencer A1:Stimulus A2:Attribute
+01822248-v A0:Experiencer A2:Stimulus
+01823370-v A0:Stimulus A1:Experiencer
+01823528-v A0:Stimulus A1:Experiencer A2:Result
+01824253-v A0:Agent A1:Theme A2:Source
+01824736-v A0:Experiencer A1:Theme
+01825125-v A0:Experiencer A1:Stimulus A2:Attribute
+01825761-v A0:Pivot A1:Theme
+01827064-v A0:Experiencer A1:Stimulus A2:Attribute
+01827232-v A1:Theme A2:Pivot
+01827619-v A0:Experiencer A1:Stimulus A2:Attribute
+01827858-v A0:Experiencer A1:Stimulus A2:Attribute
+01828405-v A0:Pivot A1:Theme
+01828736-v A0:Experiencer A1:Stimulus A2:Attribute
+01830192-v A0:Stimulus A1:Experiencer A2:Result
+01830445-v A0:Stimulus A1:Experiencer A2:Result
+01830600-v A0:Stimulus A1:Experiencer A2:Result
+01830798-v A0:Stimulus A1:Experiencer A2:Result
+01830965-v A0:Stimulus A1:Experiencer A2:Result
+01834053-v A1:Theme A2:Destination A3:Initial_Location A4:Trajectory
+01834360-v A0:Theme A1:Agent A2:Location A3:Time
+01835496-v A0:Theme A1:Location A2:Agent A3:Result
+01838651-v A0:Agent A1:Theme A2:Location A3:Result
+01840238-v A0:Agent A1:Theme A2:Location
+01842508-v A0:Agent A1:Theme A2:Location A3:Location A4:Result
+01843364-v A0:Theme A1:Location
+01844653-v A0:Agent A1:Location A2:Theme
+01845229-v A0:Theme A1:Location A2:Agent
+01845720-v A0:Agent A1:Location A2:Result A3:Theme
+01846099-v A0:Agent A1:Theme A2:Location A3:Result
+01846320-v A0:Agent A1:Theme A2:Location
+01846658-v A0:Agent A1:Theme A2:Location
+01846916-v A0:Theme A1:Location A2:Agent A3:Result
+01847392-v A0:Theme A1:Location A2:Agent A3:Result
+01847676-v A0:Agent A1:Theme A2:Location
+01847845-v A0:Agent A1:Theme A2:Location
+01848718-v A0:Theme A1:Initial_Location A2:Destination A3:Trajectory
+01849221-v A1:Theme A2:Destination A3:Initial_Location A4:Trajectory
+01853542-v A0:Agent A1:Theme A2:Initial_Location A3:Destination A4:Instrument A5:Result
+01854132-v A0:Agent A1:Theme A2:Source
+01854679-v A0:Agent A1:Theme A2:Source
+01856450-v A0:Agent A1:Source A2:Theme A3:Destination
+01857392-v A1:Theme A2:Location A3:Pivot
+01857717-v A0:Agent A1:Theme A2:Instrument
+01858910-v A1:Theme A2:Location
+01860795-v A0:Agent A1:Theme A2:Instrument
+01864230-v A0:Agent A1:Theme A2:Instrument
+01864634-v A0:Agent A1:Location A2:Theme
+01864865-v A0:Agent A1:Patient A2:Result
+01865383-v A0:Agent A1:Theme A2:Location
+01866610-v A1:Theme A2:Location A3:Agent
+01867697-v A0:Agent A1:Theme A2:Location
+01867997-v A1:Theme A2:Destination A3:Initial_Location A4:Trajectory
+01868139-v A0:Theme A1:Location A2:Agent
+01868258-v A0:Agent A1:Theme A2:Location
+01869196-v A1:Theme A4:Location A5:Agent
+01869299-v A0:Agent A1:Location A2:Theme
+01869563-v A0:Agent A1:Theme A2:Location A3:Result
+01871321-v A0:Agent A1:Patient
+01871546-v A0:Theme A1:Agent A2:Location
+01872645-v A0:Agent A1:Theme
+01872877-v A0:Agent A1:Theme
+01874875-v A1:Theme A2:Agent A3:Location A4:Result
+01875295-v A0:Agent A1:Theme A2:Location
+01876434-v A0:Agent A1:Theme A2:Location
+01876907-v A0:Agent A1:Theme A2:Location
+01877355-v A0:Agent A1:Patient
+01877620-v A0:Agent A1:Theme A2:Location A3:Result
+01878063-v A1:Theme A2:Agent A3:Location
+01878719-v A1:Theme A2:Agent A3:Location
+01879251-v A1:Theme A2:Agent A3:Location
+01880888-v A0:Agent A1:Theme A2:Location
+01881180-v A0:Theme A1:Location A2:Agent A3:Result
+01881957-v A0:Theme A1:Location A2:Agent A3:Result
+01882814-v A0:Agent A1:Theme A2:Location A3:Result
+01883716-v A1:Theme A4:Location A5:Agent
+01884383-v A0:Agent A1:Patient
+01884577-v A0:Agent A1:Patient A2:Instrument A3:Result
+01884868-v A0:Agent A1:Theme A2:Patient A3:Recipient
+01884974-v A0:Agent A1:Patient A2:Instrument A3:Result
+01885430-v A1:Theme A2:Location
+01885845-v A0:Theme A1:Location A2:Agent
+01886334-v A0:Theme A1:Agent A2:Location
+01888784-v A0:Agent A1:Location A2:Theme
+01888946-v A1:Experiencer A2:Stimulus
+01889392-v A0:Patient A1:Experiencer A2:Stimulus
+01890792-v A0:Stimulus A1:Experiencer
+01891817-v A0:Agent A1:Patient
+01892608-v A1:Theme A4:Location A5:Agent A6:Result
+01892849-v A1:Theme A3:Location A4:Agent
+01893079-v A0:Agent A1:Theme A2:Destination A3:Initial_Location A4:Result
+01893313-v A0:Agent A1:Patient A2:Instrument A3:Result
+01893601-v A0:Agent A1:Theme A2:Destination A3:Initial_Location A4:Result
+01893771-v A0:Agent A1:Theme A2:Location A3:Time
+01893988-v A0:Agent A1:Theme A2:Location
+01894164-v A0:Agent A1:Theme A2:Location
+01894320-v A0:Agent A1:Theme A2:Location
+01895263-v A0:Agent A1:Theme A2:Location A3:Result
+01895612-v A0:Theme A1:Location A2:Agent A3:Result
+01895757-v A0:Agent A1:Theme A2:Location A3:Result
+01896007-v A0:Theme A1:Location A2:Agent A3:Result
+01896213-v A0:Theme A1:Location A2:Agent A3:Result
+01896767-v A0:Agent A1:Location A2:Result A3:Theme
+01896881-v A0:Agent A1:Theme A2:Location A3:Result
+01897203-v A0:Agent A1:Theme A2:Location A3:Result
+01897583-v A0:Agent A1:Theme A2:Location A3:Result
+01897779-v A0:Agent A1:Theme A2:Location A3:Result
+01898032-v A0:Theme A1:Location A2:Agent A3:Result
+01898181-v A0:Theme A1:Location A2:Agent A3:Result
+01898282-v A0:Agent A1:Theme A2:Location
+01898592-v A0:Agent A1:Patient A2:Recipient A3:Theme
+01899158-v A0:Agent A1:Theme A2:Location A3:Result
+01899891-v A1:Theme A3:Location A4:Agent
+01900408-v A0:Theme A1:Location A2:Agent
+01900918-v A1:Theme A4:Location A5:Agent
+01901133-v A0:Theme A1:Location A2:Agent
+01901783-v A0:Agent A1:Theme A2:Location
+01902405-v A0:Theme A1:Agent A2:Location
+01904293-v A0:Agent A1:Theme A2:Destination A3:Initial_Location A4:Trajectory
+01906687-v A0:Agent A1:Theme A2:Location A3:Location A4:Result
+01909397-v A0:Agent A1:Patient A2:Instrument A3:Result
+01909978-v A0:Agent A1:Patient A2:Instrument A3:Result
+01910779-v A0:Experiencer A1:Stimulus A2:Result
+01910873-v A0:Theme A1:Location A2:Agent A3:Result
+01910965-v A1:Theme A3:Location A4:Agent A5:Result
+01911698-v A0:Agent A1:Location A2:Theme
+01911888-v A0:Theme A1:Location A2:Agent
+01912709-v A0:Theme A1:Agent A2:Location A3:Result
+01914657-v A0:Agent A1:Patient A2:Recipient A3:Theme
+01916214-v A0:Theme A1:Location A2:Agent A3:Result
+01916634-v A1:Theme A4:Location A5:Agent
+01916960-v A1:Theme A2:Location A3:Location A4:Agent
+01917123-v A0:Agent A1:Theme A2:Location A3:Location
+01917244-v A0:Agent A1:Location A2:Theme
+01917549-v A0:Theme A1:Location A2:Agent
+01917980-v A0:Theme A1:Location A2:Agent A3:Result
+01918183-v A0:Theme A1:Agent A2:Location
+01918304-v A0:Agent A1:Location A2:Result A3:Theme
+01918521-v A0:Agent A1:Location A2:Theme
+01918803-v A1:Theme A2:Agent A3:Location
+01919711-v A0:Theme A1:Agent A2:Location A3:Result
+01919898-v A0:Agent A1:Theme A2:Location A3:Location
+01920048-v A0:Theme A1:Destination A2:Initial_Location A3:Trajectory
+01920698-v A0:Theme A1:Location A2:Agent A3:Result
+01920932-v A0:Agent A1:Theme A2:Location
+01921204-v A0:Theme A1:Location A2:Agent A3:Result
+01921772-v A0:Theme A1:Agent A2:Location
+01923414-v A0:Theme A1:Co-Theme
+01924023-v A0:Theme A1:Agent A2:Location
+01924882-v A1:Theme A2:Agent A3:Location
+01925170-v A1:Theme A2:Agent A3:Location
+01925338-v A0:Theme A1:Agent A2:Location
+01925548-v A0:Theme A1:Location A2:Agent
+01925694-v A1:Theme A2:Agent A3:Location A4:Result
+01926031-v A1:Theme A3:Location A4:Agent
+01926311-v A0:Agent A1:Theme A2:Destination A3:Initial_Location
+01926878-v A0:Theme A1:Location A2:Agent
+01926984-v A0:Theme A1:Location
+01927330-v A0:Theme A1:Agent A2:Location
+01929254-v A0:Agent A1:Theme A2:Location
+01929824-v A0:Theme A1:Agent A2:Location
+01929927-v A0:Theme A1:Location A2:Agent
+01930033-v A1:Theme A2:Location A3:Agent A4:Time
+01930482-v A0:Agent A1:Theme A2:Location
+01931566-v A0:Agent A1:Location A2:Theme
+01932704-v A0:Agent A1:Theme A2:Location
+01933900-v A0:Agent A1:Theme A2:Destination
+01934205-v A0:Agent A1:Theme A2:Destination
+01935476-v A0:Theme A1:Location A2:Agent A3:Result
+01936048-v A0:Agent A1:Theme A2:Location A3:Location A4:Result
+01936753-v A0:Agent A1:Location A2:Result A3:Theme
+01937795-v A0:Agent A1:Theme A2:Location A3:Result
+01938426-v A0:Agent A1:Location A2:Result A3:Theme
+01939174-v A0:Agent A1:Theme A2:Location A3:Location A4:Result
+01939406-v A0:Agent A1:Theme A2:Location A3:Location A4:Result
+01939811-v A0:Agent A1:Theme A2:Location A3:Location A4:Result
+01940034-v A0:Agent A1:Theme A2:Location A3:Location A4:Result
+01940403-v A0:Agent A1:Theme A2:Location A3:Result
+01941093-v A0:Agent A1:Beneficiary
+01942234-v A1:Agent A2:Location A3:Result A4:Theme
+01943448-v A1:Theme A2:Location A3:Agent
+01943718-v A1:Patient A2:Extent A3:Attribute
+01944086-v A1:Patient A2:Extent A5:Attribute
+01944692-v A0:Agent A1:Location A2:Result A3:Theme
+01945183-v A0:Agent A1:Theme A2:Location A3:Location A4:Result
+01945381-v A0:Agent A1:Theme A2:Location A3:Location A4:Result
+01945516-v A0:Agent A1:Theme A2:Location
+01946408-v A0:Agent A1:Theme A2:Location
+01947543-v A0:Agent A1:Theme A2:Location A3:Location A4:Result
+01947735-v A0:Agent A1:Theme A2:Location A3:Location A4:Result
+01948659-v A0:Agent A1:Location A2:Result A3:Theme
+01949007-v A0:Agent A1:Theme A2:Location A3:Location A4:Result
+01949110-v A0:Agent A1:Theme A2:Location A3:Location A4:Result
+01949218-v A0:Agent A1:Theme A2:Location A3:Location A4:Result
+01949333-v A0:Agent A1:Theme A2:Location A3:Location A4:Result
+01949674-v A0:Agent A1:Theme A2:Initial_Location A3:Destination
+01949817-v A0:Agent A1:Theme A2:Location A3:Location A4:Result
+01949966-v A0:Agent A1:Theme A2:Location A3:Location A4:Result
+01950502-v A0:Agent A1:Destination A2:Initial_Location A3:Theme
+01950798-v A0:Agent A1:Theme A2:Destination A3:Initial_Location
+01951480-v A0:Agent A1:Theme A2:Destination A3:Initial_Location A4:Destination
+01951937-v A0:Agent A1:Patient A2:Goal A3:Source
+01952898-v A0:Agent A1:Theme A2:Recipient
+01953810-v A0:Agent A1:Theme A2:Destination A3:Initial_Location
+01954341-v A0:Agent A1:Theme A2:Destination A3:Initial_Location
+01954741-v A0:Agent A1:Theme A2:Location A3:Result
+01955127-v A0:Agent A1:Theme A2:Destination A3:Initial_Location
+01955508-v A0:Agent A1:Theme A2:Destination A3:Initial_Location
+01955984-v A0:Agent A1:Theme A2:Location
+01956708-v A0:Agent A1:Theme A2:Destination A3:Initial_Location
+01957529-v A0:Agent A1:Theme A2:Location
+01958452-v A0:Agent A1:Patient A2:Co-Patient
+01960911-v A0:Theme A1:Location A2:Agent A3:Result
+01963942-v A0:Theme A1:Location A2:Agent A3:Result
+01964788-v A1:Theme A3:Initial_Location A4:Destination A5:Agent A6:Trajectory
+01965156-v A0:Theme A1:Location A2:Agent A3:Result
+01965806-v A0:Agent A1:Theme A4:Location A5:Result
+01966861-v A0:Theme A1:Agent A2:Location A3:Result
+01967373-v A1:Patient A2:Extent A3:Attribute
+01968275-v A0:Theme A1:Location A2:Agent A3:Result
+01970348-v A1:Theme A3:Initial_Location A4:Destination A5:Trajectory
+01972298-v A1:Theme A2:Destination A3:Initial_Location A4:Trajectory
+01972753-v A0:Agent A1:Location
+01972849-v A0:Agent A1:Location
+01973125-v A0:Agent A1:Theme A2:Destination
+01973759-v A0:Agent A1:Patient A2:Recipient A3:Theme
+01974062-v A0:Agent A1:Theme A2:Destination
+01974916-v A0:Agent A1:Destination A2:Theme
+01975587-v A0:Agent A1:Destination A2:Theme
+01976220-v A0:Agent A1:Destination A2:Theme
+01976841-v A0:Agent A1:Theme A4:Result A5:Location
+01977080-v A1:Theme A2:Destination A3:Initial_Location A4:Trajectory
+01977266-v A0:Agent A1:Theme A2:Location A3:Time
+01977421-v A0:Agent A1:Theme A2:Location A3:Time
+01977962-v A0:Agent A1:Patient A2:Recipient A3:Theme
+01978199-v A1:Patient A2:Extent A3:Attribute
+01978947-v A0:Agent A1:Theme A2:Destination
+01981036-v A0:Agent A1:Theme A2:Destination
+01982395-v A0:Agent A1:Theme
+01983134-v A1:Patient A2:Extent A3:Attribute
+01983597-v A0:Theme A1:Location
+01984119-v A1:Theme A2:Destination A3:Initial_Location A4:Trajectory
+01984317-v A1:Theme A2:Destination A3:Initial_Location A4:Trajectory
+01985029-v A1:Agent A2:Location
+01985524-v A1:Theme A4:Location A5:Agent
+01985757-v A1:Theme A4:Location A5:Agent
+01986869-v A0:Agent A1:Patient A5:Instrument A6:Result
+01988886-v A1:Agent A2:Location
+01989053-v A0:Agent A1:Patient A2:Instrument A3:Result
+01989562-v A0:Agent A1:Patient A2:Instrument A3:Result
+01989720-v A1:Agent A2:Location
+01989873-v A0:Agent A1:Patient A5:Instrument A6:Result
+01990694-v A0:Theme A1:Location
+01991347-v A1:Theme A2:Location
+01991744-v A0:Agent A1:Theme A2:Location
+01992251-v A1:Patient A2:Extent A3:Attribute
+01992503-v A1:Theme A3:Initial_Location A4:Destination A5:Trajectory
+01994442-v A0:Theme A1:Destination A2:Initial_Location A3:Trajectory
+01995211-v A0:Agent A1:Patient A2:Co-Patient
+01995549-v A0:Agent A1:Theme A2:Instrument
+01996402-v A0:Agent A1:Location A2:Theme
+01998432-v A0:Agent A1:Theme A2:Location
+01999218-v A0:Theme A1:Co-Theme
+01999798-v A0:Instrument A1:Theme A2:Agent A3:Destination A4:Initial_Location
+02000547-v A0:Agent A1:Beneficiary
+02000868-v A0:Agent A1:Theme A2:Location
+02001252-v A0:Agent A1:Theme A2:Location
+02001461-v A0:Agent A1:Theme A2:Location
+02001858-v A0:Agent A1:Theme A2:Location
+02003359-v A0:Agent A1:Theme A2:Source A3:Destination
+02003480-v A0:Agent A1:Theme A2:Source
+02003601-v A0:Agent A1:Theme A2:Location
+02005948-v A1:Theme A4:Destination A5:Initial_Location A6:Trajectory
+02006834-v A0:Agent A1:Destination
+02009200-v A1:Theme A2:Location A3:Pivot
+02009433-v A0:Theme A1:Initial_Location A2:Destination A3:Trajectory
+02010698-v A0:Theme A1:Initial_Location A2:Destination A3:Trajectory
+02010864-v A1:Theme A3:Location A4:Agent
+02011040-v A0:Theme A1:Destination A2:Initial_Location A3:Trajectory
+02011560-v A0:Agent A1:Theme A2:Location
+02011685-v A0:Agent A1:Location A2:Theme
+02012227-v A0:Agent A1:Theme A2:Destination A3:Initial_Location
+02012344-v A0:Agent A1:Theme A2:Destination A3:Initial_Location
+02014024-v A0:Agent A1:Source A2:Theme A3:Destination
+02015598-v A0:Theme A1:Initial_Location A2:Destination A3:Trajectory
+02018049-v A0:Agent A1:Theme A2:Destination
+02018524-v A1:Theme A2:Location
+02020413-v A0:Agent A1:Destination A2:Theme
+02020590-v A0:Agent A1:Destination
+02023107-v A0:Agent A1:Co-Agent
+02023396-v A1:Co-Theme A2:Theme
+02023600-v A0:Agent A1:Theme
+02024168-v A0:Theme A1:Agent
+02024508-v A0:Agent A1:Theme
+02024716-v A0:Agent A1:Theme
+02025009-v A0:Agent A1:Theme A2:Goal A3:Goal
+02025353-v A0:Agent A1:Theme
+02025550-v A0:Agent A1:Theme A4:Destination
+02026086-v A0:Agent A1:Theme A2:Destination
+02026712-v A0:Agent A1:Beneficiary
+02027226-v A0:Agent A1:Theme
+02028366-v A1:Theme A2:Location
+02028616-v A0:Agent A1:Theme
+02028722-v A0:Agent A1:Theme
+02028994-v A0:Agent A1:Patient A2:Instrument A3:Result
+02030424-v A0:Agent A1:Patient A2:Instrument A3:Result
+02032227-v A0:Theme A1:Location
+02032415-v A0:Theme A1:Co-Theme
+02033295-v A0:Theme A1:Location A2:Agent
+02034004-v A0:Agent A1:Theme A2:Location
+02034671-v A0:Agent A1:Patient A2:Recipient A3:Theme
+02034986-v A0:Agent A1:Patient A2:Recipient A3:Theme
+02035559-v A0:Agent A1:Patient A2:Recipient A3:Theme
+02036977-v A0:Agent A1:Patient A2:Recipient A3:Theme
+02037090-v A0:Theme A1:Agent A2:Location
+02037683-v A0:Agent A1:Theme A2:Location
+02037989-v A1:Theme A2:Location
+02038357-v A0:Agent A1:Theme A2:Location
+02038791-v A0:Agent A1:Theme A2:Destination
+02039156-v A0:Agent A1:Theme A2:Location
+02040054-v A0:Agent A1:Theme A2:Location
+02040549-v A0:Agent A1:Recipient A2:Topic
+02040709-v A0:Agent A1:Recipient A2:Topic
+02040934-v A0:Agent A1:Recipient A2:Topic
+02041206-v A1:Theme A2:Location
+02041422-v A1:Theme A2:Location
+02041877-v A0:Agent A1:Patient A2:Instrument A3:Result
+02042067-v A0:Agent A1:Location A2:Theme
+02043982-v A1:Theme A2:Location A3:Agent
+02045043-v A0:Agent A1:Theme A2:Location A3:Result
+02045790-v A0:Agent A1:Theme A2:Location A3:Result
+02046441-v A0:Agent A1:Theme A2:Destination A3:Initial_Location
+02047650-v A1:Theme A2:Agent A3:Location A4:Result
+02047857-v A1:Theme A2:Agent A3:Location A4:Result
+02048384-v A0:Agent A1:Theme A2:Location A3:Result
+02048511-v A0:Agent A1:Patient A2:Recipient A3:Theme
+02048891-v A0:Agent A1:Theme A2:Location A3:Result
+02049190-v A0:Agent A1:Patient
+02052476-v A0:Agent A1:Theme A2:Recipient
+02053381-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+02053621-v A0:Agent A1:Patient A2:Co-Patient A3:Instrument A4:Result
+02055267-v A0:Theme A1:Theme A2:Agent A3:Location
+02055521-v A1:Theme A4:Location A5:Agent
+02058049-v A0:Agent A1:Beneficiary
+02058191-v A0:Theme A1:Location
+02058448-v A0:Agent A1:Patient
+02058590-v A0:Agent A1:Location A2:Theme
+02058994-v A0:Agent A1:Patient A2:Instrument A3:Result
+02060588-v A0:Theme A1:Location A2:Agent
+02060792-v A0:Agent A1:Agent A2:Location A3:Source A4:Theme
+02061069-v A0:Experiencer A1:Stimulus
+02062081-v A0:Agent A1:Theme A2:Initial_Location A3:Destination
+02062632-v A0:Agent A1:Location
+02063771-v A0:Experiencer A1:Stimulus
+02063988-v A0:Experiencer A1:Stimulus
+02064131-v A0:Agent A1:Patient A2:Instrument
+02064612-v A0:Agent A1:Location
+02064887-v A0:Theme A1:Theme A2:Co-Theme
+02065085-v A0:Theme A1:Theme A2:Co-Theme
+02066028-v A0:Agent A1:Theme A2:Location
+02066510-v A1:Theme A2:Location
+02066939-v A1:Theme A2:Location
+02068324-v A0:Agent A1:Destination A2:Theme
+02068413-v A0:Source A1:Theme A2:Location
+02069014-v A0:Theme A1:Agent A2:Location A3:Time
+02069120-v A0:Theme A1:Agent A2:Location A3:Time
+02071316-v A1:Theme A2:Location
+02071974-v A1:Theme A2:Location A3:Source
+02072849-v A1:Patient A2:Initial_Location
+02073065-v A1:Patient A2:Initial_Location
+02073714-v A0:Theme A1:Destination A2:Initial_Location A3:Trajectory
+02074377-v A0:Agent A1:Theme A2:Location
+02074677-v A0:Theme A1:Destination A2:Initial_Location A3:Trajectory
+02075462-v A0:Theme A1:Initial_Location A2:Destination A3:Trajectory
+02076280-v A0:Agent A1:Patient A2:Co-Patient
+02076676-v A0:Theme A1:Initial_Location A2:Destination A3:Trajectory
+02076857-v A0:Theme A1:Initial_Location A2:Destination A3:Trajectory
+02077148-v A0:Agent A1:Patient A2:Instrument A3:Result
+02077656-v A0:Instrument A1:Theme A2:Agent A3:Destination A4:Initial_Location
+02079933-v A0:Agent A1:Theme A2:Destination
+02081795-v A0:Theme A1:Co-Theme A2:Attribute A3:Extent
+02081946-v A1:Location A2:Theme
+02082690-v A0:Agent A1:Theme A2:Destination
+02085158-v A0:Theme A1:Location
+02085320-v A0:Agent A1:Destination A2:Theme
+02086458-v A0:Agent A1:Theme A2:Source A3:Destination
+02087156-v A0:Agent A1:Theme A2:Destination
+02087605-v A0:Theme A1:Agent A2:Location
+02087745-v A0:Agent A1:Theme A2:Location A3:Result
+02088627-v A0:Agent A1:Theme A2:Location A3:Time
+02088792-v A0:Theme A1:Agent A2:Location A3:Time
+02088949-v A0:Theme A1:Agent A2:Location A3:Time
+02089420-v A0:Agent A1:Theme A2:Location A3:Result
+02089984-v A0:Agent A1:Theme A2:Location A3:Result
+02091165-v A0:Agent A1:Theme A2:Location
+02092309-v A0:Agent A1:Theme A2:Destination A3:Initial_Location
+02092476-v A0:Theme A1:Initial_Location A2:Destination A3:Trajectory
+02093088-v A0:Theme A1:Agent A2:Location A3:Time
+02093610-v A0:Agent A1:Patient A2:Recipient A3:Theme
+02094788-v A0:Theme A1:Agent A2:Location A3:Result
+02094922-v A0:Theme A1:Agent A2:Location A3:Result
+02095211-v A0:Theme A1:Agent A2:Location A3:Result
+02096167-v A0:Agent A1:Theme A2:Location A3:Result
+02096494-v A0:Agent A1:Theme A2:Location
+02097047-v A0:Agent A1:Patient A2:Instrument A3:Result
+02097544-v A0:Agent A1:Location A2:Theme
+02097800-v A0:Agent A1:Theme A2:Source
+02098458-v A0:Agent A1:Theme A2:Location
+02098827-v A0:Agent A1:Theme A2:Location
+02099075-v A0:Theme A1:Location A2:Agent
+02099239-v A0:Agent A1:Theme
+02099829-v A0:Theme A1:Location
+02100176-v A0:Theme A1:Agent A2:Location A3:Time
+02100341-v A0:Agent A1:Theme A2:Destination A3:Initial_Location
+02100632-v A0:Agent A1:Patient A2:Patient A3:Co-Patient
+02102398-v A0:Agent A1:Theme A2:Location
+02102840-v A0:Theme A1:Location A2:Agent A3:Result
+02104373-v A0:Agent A1:Patient A2:Instrument A3:Result
+02106006-v A0:Experiencer A1:Stimulus
+02106506-v A0:Experiencer A1:Stimulus
+02112891-v A0:Agent A1:Patient A2:Instrument A3:Result
+02115273-v A0:Stimulus A1:Experiencer A2:Result
+02115430-v A0:Stimulus A1:Experiencer A2:Result
+02115618-v A0:Stimulus A1:Experiencer A2:Result
+02116118-v A0:Stimulus A1:Experiencer A2:Result
+02117333-v A0:Stimulus A1:Experiencer A2:Result
+02117534-v A1:Patient A2:Agent A3:Instrument A4:Result
+02118476-v A0:Experiencer A1:Stimulus
+02118933-v A0:Experiencer A1:Stimulus
+02119470-v A0:Experiencer A1:Stimulus
+02120140-v A0:Agent A1:Experiencer A2:Instrument
+02121188-v A1:Patient A2:Experiencer A3:Stimulus
+02121845-v A0:Stimulus A1:Patient A2:Experiencer
+02122164-v A0:Patient A1:Experiencer A2:Stimulus
+02122983-v A0:Stimulus A1:Patient A2:Experiencer
+02123298-v A0:Stimulus A1:Patient A2:Experiencer
+02123424-v A0:Stimulus A1:Patient A2:Experiencer
+02124106-v A1:Theme A2:Location
+02125641-v A0:Agent A1:Destination A2:Theme
+02126382-v A0:Agent A1:Destination A2:Theme
+02127613-v A0:Agent A1:Location A2:Theme
+02128653-v A0:Experiencer A1:Stimulus
+02128873-v A0:Experiencer A1:Stimulus
+02129289-v A0:Experiencer A1:Stimulus
+02130160-v A0:Experiencer A1:Stimulus
+02130524-v A0:Experiencer A1:Stimulus
+02131279-v A0:Experiencer A1:Stimulus
+02131963-v A0:Experiencer A1:Stimulus
+02132745-v A0:Experiencer A1:Stimulus
+02133185-v A0:Experiencer A1:Stimulus
+02133435-v A0:Stimulus A2:Experiencer
+02134350-v A1:Stimulus A2:Experiencer
+02135048-v A1:Stimulus A3:Experiencer
+02136019-v A0:Agent A1:Theme A2:Location A3:Time
+02137132-v A0:Agent A1:Theme A2:Recipient A3:Reflexive
+02138611-v A0:Agent A1:Patient A2:Recipient A3:Theme
+02138766-v A0:Agent A1:Product A2:Material A3:Beneficiary A4:Asset
+02139361-v A0:Agent A1:Product A2:Material
+02139544-v A0:Agent A1:Theme A2:Recipient A3:Reflexive
+02140033-v A0:Theme A1:Theme A3:Recipient A4:Agent A5:Reflexive
+02140781-v A0:Agent A1:Patient A2:Instrument A3:Result
+02140965-v A0:Agent A1:Theme A2:Location
+02141973-v A0:Agent A1:Theme A2:Recipient A3:Reflexive
+02142626-v A0:Agent A1:Beneficiary
+02142775-v A0:Agent A1:Beneficiary
+02143539-v A0:Agent A1:Location A2:Theme
+02144644-v A0:Agent A1:Theme A2:Result
+02144835-v A0:Agent A1:Patient A2:Beneficiary A3:Location
+02146790-v A0:Agent A1:Patient A2:Beneficiary A3:Location
+02147466-v A0:Agent A1:Theme A2:Destination
+02150510-v A0:Experiencer A1:Stimulus
+02150948-v A0:Experiencer A1:Stimulus
+02152278-v A0:Agent A1:Theme A2:Location
+02152812-v A0:Experiencer A1:Stimulus
+02153023-v A0:Agent A1:Location A2:Theme
+02153709-v A0:Agent A1:Location A2:Theme
+02154312-v A0:Experiencer A1:Stimulus
+02154508-v A0:Experiencer A1:Stimulus
+02156225-v A0:Experiencer A1:Stimulus
+02156546-v A1:Patient A2:Initial_Location
+02158034-v A0:Agent A1:Patient A2:Instrument A3:Result
+02158587-v A0:Agent A1:Destination A2:Theme
+02158896-v A0:Agent A1:Destination A2:Theme
+02159890-v A1:Theme A2:Agent A3:Location
+02160177-v A1:Theme A2:Agent A3:Location
+02160552-v A0:Source A1:Theme A2:Location
+02160779-v A0:Theme A1:Agent A2:Location
+02160944-v A0:Theme A1:Agent A2:Location
+02161160-v A1:Theme A2:Agent A3:Location
+02161758-v A0:Agent A1:Patient A2:Instrument A3:Result
+02162310-v A0:Agent A1:Patient A2:Instrument A3:Result
+02162947-v A0:Agent A1:Theme A2:Location
+02163301-v A0:Agent A1:Location A2:Theme
+02163746-v A0:Experiencer A1:Stimulus
+02164067-v A0:Experiencer A1:Stimulus
+02164288-v A0:Experiencer A1:Stimulus
+02165146-v A0:Experiencer A1:Stimulus
+02165304-v A0:Experiencer A1:Stimulus
+02167052-v A0:Experiencer A1:Stimulus
+02167571-v A0:Agent A1:Location A2:Theme
+02168965-v A0:Experiencer A1:Stimulus
+02169119-v A0:Agent A1:Location A2:Theme
+02169891-v A0:Experiencer A1:Stimulus
+02170861-v A0:Experiencer A2:Theme
+02171664-v A0:Agent A1:Location A2:Theme A3:Time
+02172127-v A0:Theme A1:Agent A2:Location A3:Time
+02172296-v A0:Agent A1:Location A2:Recipient A3:Theme
+02172683-v A0:Agent A1:Theme A2:Location A3:Time
+02173336-v A0:Theme A1:Agent A2:Location A3:Time
+02173838-v A0:Agent A1:Theme A2:Location A3:Time
+02173967-v A0:Agent A1:Theme A2:Location A3:Time
+02174115-v A0:Agent A1:Theme A2:Location A3:Time
+02174311-v A1:Theme A2:Agent A3:Location A4:Time
+02175057-v A0:Theme A1:Agent A2:Location A3:Time
+02175384-v A0:Theme A1:Agent A2:Location A3:Time
+02175578-v A0:Agent A1:Location A2:Theme A3:Time
+02175958-v A1:Theme A2:Location
+02177661-v A0:Agent A1:Location A2:Recipient A3:Theme
+02177976-v A0:Agent A1:Theme A2:Location A3:Time
+02178484-v A0:Theme A1:Agent A2:Location A3:Time
+02178709-v A0:Theme A1:Agent A2:Location A3:Time
+02179372-v A0:Agent A1:Location A2:Theme A3:Time
+02179518-v A1:Theme A2:Location
+02180262-v A0:Agent A1:Theme A2:Location A3:Time
+02180898-v A0:Agent A1:Theme A2:Location A3:Time
+02181174-v A0:Theme A1:Agent A2:Location A3:Time
+02181538-v A0:Agent A1:Theme A2:Location A3:Time
+02181865-v A1:Theme A2:Agent A3:Location A4:Time
+02181973-v A0:Agent A1:Theme A2:Location A3:Time
+02182342-v A0:Agent A1:Location A2:Theme A3:Time
+02182479-v A0:Agent A1:Theme A2:Location A3:Time
+02183024-v A0:Agent A1:Theme A2:Location A3:Time
+02183175-v A0:Agent A1:Theme A2:Location A3:Time
+02183442-v A0:Agent A1:Theme A2:Location A3:Time
+02183787-v A1:Theme A2:Location
+02184610-v A1:Theme A2:Agent A3:Location A4:Time
+02184797-v A0:Theme A1:Location A2:Agent A3:Time
+02184965-v A0:Agent A1:Theme A2:Location A3:Time
+02185187-v A0:Agent A1:Theme A2:Location A3:Time
+02185373-v A0:Agent A1:Patient A2:Instrument A3:Result
+02185664-v A0:Agent A1:Location A2:Theme A3:Time
+02185988-v A0:Agent A1:Location A2:Theme A3:Time
+02186360-v A0:Agent A1:Location A2:Theme A3:Time
+02186506-v A1:Theme A2:Agent A3:Location A4:Time
+02186690-v A0:Agent A1:Theme A2:Location A3:Time
+02187041-v A0:Theme A1:Agent A2:Location A3:Time
+02187693-v A0:Theme A1:Agent A2:Location A3:Time
+02187922-v A0:Theme A1:Agent A2:Location A3:Time
+02188442-v A0:Agent A1:Location A2:Recipient A3:Theme
+02188587-v A1:Theme A2:Agent A3:Location A4:Time
+02190188-v A0:Agent A1:Patient A2:Instrument A3:Result
+02191546-v A0:Experiencer A1:Stimulus
+02191766-v A0:Agent A1:Destination A2:Theme
+02192992-v A0:Experiencer A1:Stimulus
+02193194-v A0:Experiencer A1:Stimulus
+02193974-v A0:Experiencer A1:Stimulus
+02194286-v A1:Stimulus A2:Experiencer
+02194495-v A1:Stimulus A2:Experiencer
+02194913-v A0:Stimulus A1:Experiencer A2:Result
+02195191-v A0:Agent A1:Patient A2:Instrument A3:Result
+02195470-v A0:Agent A1:Patient A2:Instrument A3:Result
+02196081-v A0:Agent A1:Destination A2:Theme
+02196214-v A0:Agent A1:Destination A2:Theme
+02196690-v A0:Agent A1:Patient A2:Instrument A3:Result
+02198014-v A0:Agent A1:Theme A2:Location A3:Time
+02199590-v A0:Agent A1:Theme A2:Recipient A3:Asset
+02200498-v A0:Agent A1:Theme A2:Recipient A3:Asset
+02200686-v A0:Agent A1:Theme A2:Recipient A3:Asset
+02201644-v A0:Agent A1:Theme A2:Recipient
+02202133-v A0:Agent A1:Asset A2:Recipient
+02203168-v A0:Agent A1:Theme A2:Location
+02203844-v A0:Agent A1:Theme A2:Location
+02204094-v A0:Agent A1:Theme A2:Location
+02204564-v A0:Agent A1:Theme A2:Predicate
+02204692-v A0:Pivot A1:Theme
+02205887-v A0:Agent A1:Theme A2:Beneficiary A3:Source
+02206619-v A0:Agent A1:Theme A2:Source A3:Beneficiary
+02206920-v A0:Agent A1:Theme A2:Source A3:Beneficiary
+02207206-v A0:Agent A1:Theme A2:Source A3:Asset A4:Beneficiary
+02208265-v A0:Agent A1:Theme A2:Source A3:Asset A4:Beneficiary
+02208537-v A0:Agent A1:Theme A2:Beneficiary A3:Asset A4:Source
+02208903-v A0:Agent A1:Theme A2:Recipient A3:Asset
+02210119-v A0:Agent A1:Theme A2:Source
+02210855-v A0:Agent A1:Theme A2:Source A3:Asset A4:Beneficiary
+02213336-v A0:Agent A1:Theme A2:Beneficiary A3:Asset A4:Source
+02215001-v A0:Agent A1:Theme A2:Source
+02215355-v A0:Agent A1:Theme A2:Source A3:Beneficiary
+02218173-v A0:Agent A1:Theme A2:Source
+02219940-v A0:Agent A1:Beneficiary
+02220148-v A0:Agent A1:Beneficiary
+02222318-v A0:Agent A1:Theme A2:Destination A3:Initial_Location A4:Result
+02224055-v A0:Agent A1:Theme A2:Source A3:Destination
+02224781-v A0:Agent A1:Theme A2:Source
+02228031-v A0:Theme A1:Initial_Location
+02228698-v A0:Agent A1:Theme A2:Goal
+02229055-v A0:Agent A1:Theme A2:Goal
+02229550-v A0:Agent A1:Theme A2:Recipient
+02230056-v A0:Agent A1:Theme A2:Source
+02230772-v A0:Asset
+02231328-v A0:Agent A1:Theme A2:Destination A3:Initial_Location
+02231661-v A0:Agent A1:Theme A2:Destination A3:Initial_Location
+02232190-v A0:Agent A1:Theme A2:Destination A3:Initial_Location
+02234087-v A0:Agent A1:Theme A2:Goal
+02234551-v A0:Agent A1:Theme A2:Goal
+02234803-v A0:Agent A1:Theme A2:Goal
+02235229-v A0:Agent A1:Theme A2:Goal
+02237206-v A0:Agent A1:Theme A2:Attribute
+02238085-v A0:Agent A1:Theme A2:Source A3:Asset
+02238536-v A0:Agent A1:Theme A2:Source
+02238770-v A0:Agent A1:Theme A2:Source A3:Asset A4:Beneficiary
+02239098-v A0:Agent A1:Theme A2:Source
+02239533-v A0:Agent A1:Theme
+02239692-v A0:Agent A1:Theme
+02240319-v A0:Agent A1:Theme
+02240481-v A0:Agent A1:Theme A2:Location
+02241107-v A0:Agent A1:Theme A2:Source A3:Beneficiary
+02241621-v A0:Agent A1:Theme A2:Source A3:Beneficiary
+02241767-v A0:Agent A1:Patient A2:Result
+02242464-v A0:Agent A1:Theme A2:Recipient A3:Asset
+02244773-v A0:Agent A1:Theme A3:Value
+02244956-v A0:Agent A1:Theme A2:Recipient A3:Asset
+02246456-v A0:Agent A1:Theme A2:Recipient
+02246686-v A0:Agent A1:Theme A2:Recipient
+02247390-v A0:Agent A1:Theme A2:Beneficiary A3:Asset A4:Source
+02247977-v A0:Agent A1:Theme A2:Source
+02249438-v A0:Agent A1:Theme A2:Source A3:Beneficiary
+02249591-v A0:Agent A1:Theme A2:Source
+02249741-v A0:Agent A2:Theme A3:Attribute
+02250625-v A0:Agent A1:Theme A2:Attribute
+02251743-v A0:Agent A1:Asset A3:Theme A4:Recipient
+02253956-v A0:Agent A2:Goal A3:Theme
+02254155-v A0:Agent A2:Goal A3:Theme
+02255081-v A0:Agent A1:Theme A2:Recipient
+02255268-v A0:Agent A1:Theme A2:Goal
+02255462-v A0:Agent A1:Theme A2:Goal
+02255942-v A0:Agent A1:Theme A2:Goal
+02256109-v A0:Experiencer A1:Stimulus A2:Attribute
+02256354-v A0:Agent A1:Theme A2:Asset A3:Beneficiary A4:Source
+02257767-v A0:Agent A1:Theme A2:Co-Theme A3:Co-Agent
+02259005-v A0:Agent A1:Theme A2:Co-Agent A3:Co-Theme A4:Location
+02259241-v A0:Agent A1:Theme A3:Co-Theme A4:Co-Agent
+02259547-v A0:Agent A1:Co-Agent A2:Theme
+02259829-v A0:Agent A1:Agent A2:Topic A3:Co-Agent
+02260085-v A0:Agent A1:Theme A2:Co-Agent A3:Co-Theme A4:Location
+02261642-v A0:Agent A1:Theme A2:Recipient
+02261888-v A0:Agent A1:Theme A2:Goal
+02262278-v A0:Agent A1:Theme A2:Goal
+02264075-v A0:Agent A1:Theme A2:Attribute
+02264601-v A0:Agent A1:Theme A2:Destination
+02267060-v A0:Agent A1:Theme A3:Asset
+02267529-v A0:Agent A1:Theme A3:Asset
+02267989-v A0:Theme A1:Value A2:Beneficiary
+02269894-v A0:Agent A1:Location A2:Theme
+02270165-v A0:Agent A1:Theme A2:Beneficiary A3:Source
+02270404-v A0:Agent A1:Theme A2:Beneficiary A3:Source
+02272549-v A0:Agent A1:Theme A2:Source A3:Beneficiary
+02273293-v A0:Agent A1:Theme A2:Source A3:Beneficiary
+02274482-v A0:Agent A1:Theme A2:Source A3:Beneficiary
+02275034-v A0:Agent A1:Patient A2:Result
+02276322-v A0:Agent A1:Theme A2:Source A3:Beneficiary
+02276866-v A0:Agent A1:Theme A2:Source A3:Beneficiary
+02277138-v A0:Agent A1:Theme A2:Source A3:Beneficiary
+02277303-v A0:Agent A1:Theme A2:Source A3:Beneficiary
+02278061-v A0:Agent A1:Theme A2:Source A3:Beneficiary
+02278592-v A0:Agent A1:Theme A2:Destination
+02280132-v A0:Agent A1:Theme A2:Co-Theme
+02281093-v A0:Agent A1:Theme A2:Location
+02281960-v A0:Agent A1:Theme A2:Destination
+02282365-v A0:Agent A1:Theme A2:Destination
+02282506-v A0:Agent A1:Theme A2:Location
+02282946-v A0:Agent A1:Theme A2:Destination
+02283080-v A0:Agent A1:Theme A2:Destination
+02283716-v A0:Agent A1:Theme A2:Beneficiary A3:Asset A4:Source
+02283949-v A0:Agent A1:Theme A4:Goal
+02284096-v A0:Agent A1:Patient A2:Result
+02284951-v A0:Agent A1:Theme A2:Recipient
+02285392-v A0:Agent A1:Theme A2:Location
+02285629-v A0:Agent A1:Theme A2:Beneficiary A3:Asset A4:Source
+02286027-v A0:Agent A1:Location A2:Theme
+02288295-v A0:Agent A1:Theme A2:Beneficiary A3:Source A4:Asset
+02288656-v A0:Agent A1:Theme A2:Source
+02289295-v A0:Agent A1:Theme A2:Beneficiary A3:Source A4:Asset
+02290196-v A0:Agent A1:Theme A2:Beneficiary A3:Source A4:Asset
+02292125-v A0:Agent A1:Theme A2:Source A3:Beneficiary A4:Asset
+02292535-v A0:Agent A1:Theme A2:Source A3:Beneficiary
+02293148-v A0:Agent A1:Theme A2:Source
+02293321-v A0:Agent A1:Theme A2:Recipient
+02294436-v A0:Agent A1:Theme A2:Recipient
+02297142-v A0:Agent A1:Theme A3:Goal
+02297948-v A0:Agent A1:Theme A2:Goal
+02299801-v A0:Theme A1:Co-Theme A2:Attribute A3:Extent
+02301000-v A0:Theme A1:Co-Theme A2:Attribute A3:Extent
+02302817-v A0:Agent A1:Theme A2:Recipient A3:Asset
+02304013-v A0:Agent A1:Theme A2:Beneficiary A3:Source
+02304648-v A0:Agent A1:Theme A2:Source
+02304982-v A0:Agent A1:Theme
+02305586-v A0:Agent A1:Theme A2:Source
+02307412-v A0:Agent A1:Asset A2:Recipient
+02307547-v A0:Agent A1:Asset A2:Recipient
+02308389-v A0:Agent A1:Theme A2:Value
+02309374-v A0:Agent A1:Theme A2:Recipient A3:Asset
+02310328-v A0:Agent A1:Theme A2:Recipient
+02310482-v A0:Agent A1:Theme A2:Recipient
+02310855-v A0:Agent A1:Theme A2:Destination
+02311387-v A0:Agent A1:Theme A2:Source
+02312478-v A0:Agent A1:Theme A2:Source A3:Destination
+02312882-v A0:Agent A1:Source A2:Theme
+02313250-v A0:Agent A1:Theme A2:Source
+02313906-v A0:Agent A1:Theme A2:Source
+02314275-v A0:Agent A1:Theme A2:Source
+02314658-v A0:Agent A1:Theme A2:Source
+02315277-v A0:Agent A1:Theme
+02315421-v A0:Agent A1:Theme A2:Source
+02315525-v A0:Agent A1:Theme A2:Source
+02316304-v A0:Agent A1:Theme A2:Recipient
+02316649-v A0:Agent A1:Theme A2:Goal
+02316868-v A0:Agent A1:Theme A2:Recipient A3:Asset
+02317094-v A0:Agent A1:Theme A2:Goal
+02318648-v A0:Agent A1:Destination A2:Theme
+02319290-v A0:Agent A1:Asset A2:Recipient
+02320374-v A0:Agent A1:Asset A2:Recipient
+02320903-v A0:Agent A1:Asset A2:Recipient
+02321046-v A0:Agent A1:Asset A2:Recipient A3:Asset
+02321391-v A0:Agent A1:Source A2:Theme
+02321757-v A0:Agent A1:Theme A2:Source A3:Asset A4:Beneficiary
+02322230-v A0:Agent A1:Theme A2:Source A3:Beneficiary
+02322810-v A0:Agent A1:Theme A2:Destination
+02324026-v A0:Agent A1:Theme A2:Source
+02324182-v A0:Agent A1:Theme A2:Recipient
+02325736-v A0:Agent A1:Patient A2:Instrument
+02326795-v A0:Agent
+02327200-v A0:Agent A1:Theme A2:Recipient
+02331175-v A0:Agent A1:Destination A2:Theme
+02333225-v A0:Stimulus A1:Experiencer A2:Result
+02333358-v A0:Agent A1:Patient A2:Instrument A3:Result
+02334173-v A0:Agent A1:Value A2:Location
+02334458-v A0:Agent A1:Value A2:Location
+02334867-v A0:Agent A1:Recipient A2:Theme
+02335078-v A0:Agent A1:Recipient A2:Theme
+02335363-v A0:Agent A1:Destination A2:Theme
+02337230-v A1:Theme A2:Location
+02338003-v A0:Agent A1:Theme A2:Destination
+02338386-v A0:Agent A1:Destination A2:Theme
+02339413-v A0:Agent A1:Recipient A2:Theme
+02342800-v A0:Theme A1:Location A2:Pivot
+02344060-v A0:Agent A1:Theme A3:Asset A4:Recipient
+02344381-v A0:Agent A2:Theme A3:Attribute
+02344568-v A0:Agent A1:Theme A2:Source
+02345498-v A0:Agent A1:Asset A2:Recipient
+02347220-v A0:Agent A1:Theme A2:Asset A3:Recipient
+02348057-v A0:Agent A1:Theme A2:Destination
+02348568-v A0:Agent A1:Theme A2:Destination A4:Destination
+02349212-v A0:Agent A1:Theme A2:Recipient
+02349706-v A0:Agent A1:Theme A2:Source A3:Beneficiary A4:Asset
+02350175-v A0:Agent A1:Theme A2:Source
+02350440-v A0:Agent A1:Patient A2:Instrument A3:Result
+02351010-v A0:Agent A1:Theme A2:Value
+02352704-v A0:Agent A1:Destination A2:Theme
+02353201-v A0:Agent A1:Theme
+02353537-v A0:Agent A1:Patient A2:Beneficiary A3:Location
+02355596-v A0:Agent A1:Destination
+02356113-v A0:Agent A1:Destination A2:Theme
+02356704-v A0:Agent A1:Theme A2:Destination
+02358217-v A0:Agent A1:Theme A2:Beneficiary A3:Source
+02359340-v A0:Agent A1:Theme A2:Source A3:Asset A4:Beneficiary
+02359553-v A0:Agent A1:Theme A2:Recipient A3:Asset
+02360003-v A0:Agent A1:Source A2:Theme
+02360171-v A0:Agent A1:Source A2:Theme
+02360497-v A1:Co-Theme A2:Theme
+02361600-v A0:Agent A1:Destination A2:Theme
+02363128-v A0:Agent A1:Destination A2:Theme
+02364491-v A0:Agent A1:Source A2:Theme
+02364668-v A0:Agent A1:Source A2:Theme
+02365481-v A0:Agent A1:Source A2:Theme
+02366241-v A0:Agent A1:Source A2:Theme
+02367032-v A0:Agent A1:Source
+02370987-v A0:Agent A1:Theme
+02371684-v A0:Agent A1:Co-Agent A2:Beneficiary A3:Theme
+02376958-v A0:Agent A1:Co-Agent A2:Theme
+02379198-v A0:Agent A1:Source
+02379528-v A0:Agent A1:Theme A2:Instrument
+02380009-v A0:Agent A1:Source
+02382367-v A0:Agent A1:Source
+02383440-v A0:Agent A1:Source
+02384041-v A0:Agent A1:Theme A2:Result
+02385372-v A0:Agent A1:Theme A2:Source
+02386012-v A0:Agent A1:Theme A2:Result
+02386388-v A0:Agent A1:Theme A2:Recipient
+02386675-v A0:Agent A1:Theme A2:Recipient
+02387034-v A0:Agent A1:Attribute A2:Theme
+02390169-v A0:Agent A1:Co-Agent A2:Theme
+02391650-v A0:Agent A1:Theme A2:Source A3:Attribute
+02392385-v A0:Agent A1:Theme A2:Goal
+02393086-v A0:Agent A1:Theme A2:Goal
+02393489-v A0:Agent A1:Theme A2:Co-Agent A3:Co-Theme A4:Location
+02396205-v A0:Agent A1:Theme A2:Result
+02396716-v A0:Agent A1:Result A2:Theme
+02397637-v A0:Agent A1:Theme
+02398956-v A0:Agent A1:Theme A2:Attribute
+02399185-v A0:Agent A1:Theme
+02400037-v A0:Experiencer A1:Stimulus A2:Attribute
+02400760-v A0:Agent A1:Theme A2:Result
+02401296-v A0:Agent A1:Theme A2:Result
+02401523-v A0:Agent A1:Theme A2:Result
+02401809-v A0:Agent A1:Theme A2:Source A3:Destination
+02402825-v A0:Agent A1:Theme A2:Source A3:Attribute
+02403920-v A0:Agent A1:Theme A2:Source A3:Attribute
+02404904-v A0:Agent A1:Theme A2:Source A3:Destination
+02405252-v A0:Agent A1:Theme A2:Source
+02407338-v A0:Agent A1:Co-Agent A2:Topic
+02409412-v A0:Agent A1:Theme A2:Attribute
+02409941-v A0:Agent A1:Attribute A2:Theme
+02411802-v A0:Agent A1:Beneficiary
+02412175-v A0:Agent A1:Source A2:Theme
+02416278-v A0:Agent A1:Co-Agent A2:Theme A3:Beneficiary
+02416751-v A0:Agent A1:Co-Agent A2:Theme A3:Beneficiary
+02421374-v A0:Agent A1:Theme A2:Source A3:Beneficiary
+02422026-v A0:Cause A1:Source A2:Theme
+02423183-v A0:Agent A1:Predicate A2:Theme
+02424984-v A0:Agent A1:Beneficiary
+02425112-v A0:Agent A1:Beneficiary
+02426395-v A0:Agent A1:Patient A2:Instrument A3:Result
+02427103-v A0:Agent A1:Theme A2:Instrument
+02427334-v A0:Agent A1:Theme A2:Source
+02427726-v A0:Agent A1:Theme A2:Result
+02428924-v A0:Agent A1:Theme
+02430191-v A0:Agent A2:Co-Agent A3:Beneficiary A4:Theme
+02430580-v A0:Agent A1:Patient A2:Co-Patient
+02432530-v A0:Agent A1:Patient A4:Result
+02433123-v A0:Agent A1:Material A2:Material A3:Beneficiary A4:Result A5:Attribute
+02433381-v A0:Agent A1:Material A2:Material A3:Beneficiary A4:Result A5:Attribute
+02434238-v A0:Agent A1:Patient A2:Instrument A3:Result
+02439281-v A0:Agent A1:Theme A2:Instrument
+02440486-v A0:Agent A1:Beneficiary
+02444662-v A0:Agent A1:Theme A2:Attribute
+02447001-v A0:Agent A1:Beneficiary
+02447133-v A0:Agent A1:Beneficiary
+02447793-v A0:Agent A1:Theme A2:Attribute
+02449847-v A0:Agent A1:Theme A2:Location
+02450505-v A0:Agent A1:Theme A2:Theme
+02451370-v A0:Agent A1:Theme
+02452885-v A0:Agent A1:Theme A2:Theme
+02453321-v A0:Agent A1:Theme A2:Location
+02453692-v A0:Experiencer A1:Stimulus A2:Attribute
+02453889-v A0:Experiencer A1:Stimulus A2:Attribute
+02454312-v A0:Agent A1:Location A2:Theme
+02455407-v A0:Experiencer A1:Stimulus
+02456031-v A0:Agent A1:Beneficiary
+02456493-v A0:Agent A1:Theme A2:Destination
+02457233-v A0:Agent A1:Theme A2:Attribute
+02458747-v A0:Agent A1:Location A2:Theme
+02459799-v A0:Agent A1:Theme A2:Destination
+02459915-v A0:Agent A1:Theme A2:Destination
+02460199-v A0:Agent A1:Theme A2:Recipient A3:Asset
+02460619-v A0:Agent A1:Theme A2:Source A3:Asset A4:Beneficiary
+02463426-v A0:Agent A1:Theme
+02463510-v A0:Agent A1:Theme A2:Location
+02464725-v A0:Experiencer A1:Stimulus A2:Attribute
+02464866-v A0:Agent A1:Destination A2:Theme
+02465494-v A0:Agent A1:Theme A2:Location
+02465939-v A0:Agent A1:Theme A2:Source A3:Attribute
+02466134-v A0:Agent A1:Beneficiary
+02467662-v A0:Agent A1:Patient A2:Instrument A3:Result
+02469274-v A0:Agent A1:Patient A2:Instrument A3:Result
+02471327-v A0:Agent A1:Theme A2:Goal
+02475261-v A0:Agent A1:Result A2:Patient
+02476846-v A0:Agent A1:Patient A2:Instrument
+02478059-v A0:Agent A1:Patient
+02479154-v A0:Agent A1:Theme
+02479323-v A0:Agent A1:Theme A2:Recipient
+02479990-v A0:Agent A1:Theme A2:Recipient
+02480216-v A0:Agent A1:Theme A2:Source A3:Destination
+02480923-v A0:Agent A1:Theme
+02482139-v A0:Agent A1:Patient A2:Co-Patient
+02482425-v A0:Agent A1:Patient A2:Instrument
+02482889-v A0:Agent A1:Theme A2:Destination
+02483000-v A0:Agent A1:Patient A2:Instrument
+02483267-v A0:Agent A1:Patient A2:Instrument
+02483828-v A0:Agent A1:Theme A2:Destination
+02484049-v A0:Agent A1:Patient A2:Instrument A3:Result
+02484208-v A0:Agent A1:Patient A2:Instrument
+02484570-v A0:Agent A1:Patient A2:Instrument A3:Result
+02484957-v A0:Agent A1:Patient A2:Instrument A3:Result
+02485322-v A0:Agent A1:Patient A2:Instrument A3:Result
+02485451-v A0:Agent A1:Patient A2:Instrument A3:Result
+02485631-v A0:Agent A1:Theme A2:Destination
+02485844-v A0:Agent A1:Co-Agent
+02486232-v A0:Agent A1:Co-Agent
+02486932-v A0:Agent A1:Co-Agent
+02487226-v A0:Agent A1:Co-Agent A2:Theme
+02487573-v A0:Agent A1:Co-Agent
+02488304-v A0:Experiencer A1:Stimulus
+02488488-v A0:Experiencer A1:Stimulus
+02488834-v A1:Agent A2:Co-Agent
+02490090-v A0:Agent A1:Patient A2:Co-Patient
+02491383-v A0:Stimulus A1:Experiencer A2:Result
+02492198-v A0:Stimulus A1:Experiencer A2:Result
+02492362-v A0:Stimulus A1:Experiencer A2:Result
+02493030-v A0:Experiencer A1:Stimulus
+02494356-v A0:Agent A1:Theme A2:Destination
+02494850-v A0:Agent A1:Location A2:Theme
+02495038-v A0:Agent A1:Theme A2:Destination
+02496036-v A0:Agent A1:Theme A2:Destination
+02496696-v A0:Agent A1:Patient A2:Instrument
+02497062-v A0:Agent A1:Theme A2:Source A3:Beneficiary
+02497400-v A0:Cause A1:Theme A2:Source
+02498320-v A0:Agent A1:Theme A2:Source A3:Asset A4:Beneficiary
+02498716-v A0:Agent A1:Asset A2:Recipient
+02499629-v A0:Agent A1:Theme A2:Attribute
+02500619-v A0:Agent A1:Theme A2:Attribute
+02501738-v A0:Agent A1:Theme A2:Source A3:Destination
+02502536-v A0:Agent A1:Theme A2:Location
+02503365-v A0:Agent A1:Theme A2:Source A3:Destination
+02503803-v A0:Agent A1:Theme A2:Source A3:Destination
+02504017-v A0:Agent A1:Theme A2:Source A3:Destination
+02504280-v A0:Agent A1:Theme A2:Source A3:Destination
+02504562-v A0:Agent A1:Patient A2:Result
+02505807-v A0:Agent A1:Patient A2:Result
+02506546-v A0:Agent A1:Patient A2:Result
+02507093-v A0:Agent A1:Theme A2:Attribute
+02508078-v A0:Agent A1:Patient A2:Result
+02508245-v A0:Agent A1:Theme A2:Attribute
+02508663-v A0:Agent A1:Destination A2:Theme
+02516594-v A0:Agent A1:Theme A2:Attribute
+02519991-v A0:Agent A1:Recipient A2:Theme
+02521284-v A0:Agent A1:Theme A2:Attribute
+02521410-v A0:Agent A1:Theme A2:Beneficiary A3:Co-Agent
+02522153-v A0:Agent A1:Theme A2:Location
+02524171-v A0:Agent A1:Theme
+02526085-v A0:Agent A1:Theme
+02526509-v A0:Agent A1:Theme A2:Instrument
+02527431-v A0:Agent A1:Theme A2:Source A3:Beneficiary
+02530167-v A0:Agent A1:Theme
+02533109-v A0:Agent A1:Location A2:Theme
+02533748-v A0:Agent A1:Patient A2:Instrument A3:Result
+02533907-v A0:Agent A1:Patient A2:Instrument A3:Result
+02534492-v A0:Agent A1:Co-Agent
+02534761-v A0:Agent A1:Co-Agent
+02535093-v A0:Agent A1:Theme A2:Location
+02536329-v A0:Agent A1:Patient A2:Result
+02538365-v A0:Experiencer A2:Theme
+02541138-v A0:Agent A1:Beneficiary
+02543874-v A0:Agent A1:Patient A2:Instrument A3:Result
+02544348-v A0:Agent A1:Theme
+02545272-v A0:Agent A1:Theme
+02545578-v A0:Agent A1:Theme
+02546075-v A0:Agent A1:Theme A2:Attribute
+02547225-v A0:Stimulus A1:Experiencer A2:Result
+02547586-v A0:Agent A1:Theme A2:Beneficiary
+02548710-v A0:Agent A1:Beneficiary A2:Theme
+02549211-v A0:Agent A1:Beneficiary A2:Theme
+02550044-v A0:Agent A1:Beneficiary
+02550516-v A0:Agent A1:Beneficiary
+02550698-v A0:Agent A1:Beneficiary
+02550868-v A0:Agent A1:Theme A2:Source A3:Beneficiary
+02553262-v A0:Agent A1:Theme A2:Attribute
+02554066-v A0:Agent A1:Beneficiary
+02554422-v A0:Agent A1:Theme
+02554922-v A0:Agent A1:Theme
+02557199-v A0:Agent A1:Theme
+02559613-v A0:Agent A1:Patient A2:Instrument
+02559752-v A0:Agent A1:Theme A2:Instrument
+02560424-v A0:Agent A1:Theme
+02563724-v A0:Agent A1:Theme
+02564146-v A0:Cause A1:Source A2:Theme
+02564674-v A0:Agent A1:Asset A2:Recipient
+02564841-v A0:Stimulus A1:Experiencer A2:Result
+02568065-v A0:Agent A1:Patient A2:Instrument
+02569630-v A0:Agent A1:Theme A2:Instrument
+02571901-v A0:Agent A1:Theme A2:Location
+02572119-v A0:Agent A1:Theme A2:Source
+02572792-v A0:Agent A1:Theme A2:Source
+02573275-v A0:Agent A1:Theme A2:Source
+02574205-v A0:Agent A1:Theme A2:Attribute
+02574874-v A0:Agent A1:Patient A2:Result
+02575082-v A0:Agent A1:Patient A2:Result
+02575723-v A0:Agent A1:Patient A2:Result
+02576503-v A0:Agent A1:Theme
+02578008-v A0:Agent A1:Patient A2:Result
+02580577-v A0:Agent A2:Beneficiary
+02581073-v A0:Agent A1:Patient A2:Result
+02581276-v A0:Agent A1:Result A2:Patient
+02581675-v A0:Agent A1:Theme A2:Co-Theme
+02583041-v A0:Agent A1:Theme A2:Destination
+02583139-v A0:Agent A1:Theme A2:Beneficiary A3:Co-Agent
+02585489-v A0:Agent A1:Theme A2:Attribute
+02587532-v A0:Agent A1:Theme
+02589245-v A0:Agent A1:Co-Agent A2:Theme
+02590072-v A0:Patient A1:Goal A2:Agent A3:Source
+02590253-v A0:Agent A1:Patient A2:Goal A3:Source
+02592397-v A0:Agent A1:Beneficiary
+02592667-v A0:Agent A1:Beneficiary
+02595662-v A0:Agent A1:Theme A2:Instrument
+02596113-v A0:Agent A1:Co-Agent
+02597095-v A0:Agent A1:Co-Agent A2:Theme
+02598143-v A0:Agent A1:Theme A3:Beneficiary A4:Asset A5:Source
+02600948-v A0:Agent A1:Theme A2:Instrument
+02601456-v A0:Agent A1:Theme A2:Result
+02603699-v A1:Theme A2:Location A3:Pivot
+02604477-v A1:Theme A2:Location A3:Pivot
+02607830-v A1:Theme A2:Location
+02608347-v A0:Agent A1:Theme A2:Instrument
+02609203-v A0:Agent A1:Theme A2:Instrument
+02609614-v A1:Theme A2:Location
+02609764-v A0:Agent A1:Theme A2:Instrument
+02610628-v A0:Agent A1:Theme A2:Instrument
+02611002-v A1:Theme A2:Location
+02611630-v A0:Agent A1:Theme A2:Recipient A3:Reflexive
+02611976-v A0:Agent A1:Theme A2:Location
+02613487-v A0:Agent A1:Theme A3:Goal
+02615580-v A1:Theme A2:Location A3:Pivot
+02618149-v A0:Agent A1:Patient
+02621395-v A0:Agent A1:Product A2:Material A3:Beneficiary A4:Asset
+02623194-v A1:Theme A2:Co-Theme
+02624263-v A1:Theme A2:Location
+02625187-v A1:Theme A2:Location
+02625521-v A0:Source A1:Theme A2:Source A3:Location
+02625786-v A1:Theme A2:Location
+02626604-v A0:Agent A1:Patient A2:Result A3:Material
+02626934-v A0:Agent A1:Patient A2:Result A3:Material
+02627753-v A1:Theme A2:Location
+02627934-v A0:Pivot A1:Theme A2:Source
+02629256-v A0:Agent A1:Theme A2:Source
+02629793-v A0:Theme A1:Co-Theme
+02632035-v A1:Patient
+02634265-v A1:Theme A2:Location
+02636132-v A1:Co-Theme A2:Theme
+02636921-v A0:Cause A1:Topic A2:Recipient
+02637202-v A1:Theme A2:Location
+02637592-v A1:Theme A2:Location A3:Pivot
+02637938-v A1:Theme A2:Location A3:Pivot
+02639075-v A0:Agent A1:Location A2:Theme
+02639606-v A0:Agent A1:Location A2:Theme
+02640053-v A0:Theme A1:Location A2:Pivot
+02640440-v A0:Agent A1:Theme A2:Location
+02641035-v A0:Agent A1:Location A2:Theme
+02641298-v A0:Agent A1:Theme A2:Location
+02641957-v A0:Agent A1:Theme A2:Location
+02642238-v A0:Agent A1:Theme A2:Location
+02642610-v A0:Agent A1:Theme A2:Location
+02644234-v A1:Location A2:Pivot A3:Theme
+02644905-v A1:Theme A2:Co-Theme A3:Attribute A4:Extent
+02645007-v A0:Agent A1:Theme A2:Value
+02645597-v A0:Theme A1:Co-Theme A2:Attribute A3:Extent
+02645839-v A1:Stimulus A2:Experiencer
+02646757-v A0:Agent A1:Theme A2:Source A3:Asset A4:Beneficiary
+02647497-v A1:Theme A2:Location A3:Pivot
+02648502-v A1:Theme A2:Location A3:Pivot
+02648639-v A0:Theme A1:Location A2:Pivot
+02649220-v A0:Agent A1:Destination A2:Theme
+02649830-v A0:Theme A1:Location A2:Pivot
+02650552-v A0:Theme A1:Location A2:Pivot
+02651193-v A0:Agent A1:Theme A2:Co-Agent
+02651424-v A0:Agent A1:Theme A2:Destination
+02652158-v A0:Agent A1:Theme
+02652494-v A0:Theme A1:Location
+02653159-v A0:Agent A1:Theme A2:Destination
+02653381-v A0:Theme A1:Location A2:Pivot
+02653996-v A0:Theme A1:Location
+02654585-v A0:Agent A1:Destination A2:Theme
+02654686-v A0:Agent A1:Destination A2:Theme
+02656763-v A0:Theme A1:Location
+02658447-v A0:Stimulus A2:Experiencer
+02659656-v A0:Agent A1:Goal A2:Co-Agent
+02661252-v A1:Theme A2:Co-Theme
+02664575-v A0:Theme A1:Co-Theme
+02666239-v A1:Theme A2:Co-Theme
+02667228-v A0:Agent A1:Co-Agent A2:Topic
+02669081-v A0:Theme A1:Co-Theme A2:Attribute A3:Extent
+02669477-v A0:Theme A1:Co-Theme A2:Attribute A3:Extent
+02670890-v A0:Agent A1:Attribute
+02673965-v A0:Agent A1:Theme
+02676054-v A0:Theme A1:Co-Theme
+02676496-v A0:Experiencer A2:Theme
+02677567-v A0:Agent A1:Theme A2:Goal
+02678070-v A0:Agent A1:Patient A2:Co-Patient
+02678438-v A0:Stimulus A1:Experiencer A2:Result
+02678839-v A0:Stimulus A1:Experiencer A2:Result
+02679012-v A0:Agent A1:Agent A2:Attribute
+02680814-v A0:Agent A1:Theme A2:Instrument
+02683671-v A1:Theme A2:Agent A3:Location A4:Time
+02684784-v A1:Patient A2:Initial_Location
+02684924-v A0:Agent A1:Theme A2:Time
+02685951-v A1:Theme A2:Location A3:Pivot
+02686625-v A0:Agent A1:Theme A2:Destination A3:Initial_Location
+02687385-v A0:Theme A1:Co-Theme A2:Attribute A3:Extent
+02687596-v A1:Theme A2:Co-Theme
+02687730-v A0:Agent A1:Theme A2:Source
+02687916-v A1:Theme A2:Location A3:Pivot
+02689882-v A0:Agent A1:Destination A2:Theme
+02690384-v A0:Theme A1:Co-Theme
+02690708-v A1:Theme A2:Location A3:Agent
+02692335-v A1:Experiencer A2:Theme
+02692686-v A1:Theme A2:Co-Theme
+02693088-v A0:Theme A1:Co-Theme
+02694106-v A0:Theme A1:Co-Theme
+02694287-v A0:Theme A1:Co-Theme
+02694548-v A1:Theme A2:Co-Theme
+02694677-v A0:Agent A1:Destination A2:Theme
+02696801-v A1:Theme A2:Agent A3:Location
+02696961-v A1:Theme A2:Location A3:Pivot
+02697120-v A0:Stimulus A1:Experiencer A2:Result
+02697435-v A0:Theme A1:Co-Theme
+02697950-v A0:Agent A1:Theme A2:Attribute
+02701210-v A0:Location A1:Value A2:Agent
+02701962-v A0:Agent A1:Value A2:Location
+02702508-v A1:Theme A2:Value A3:Beneficiary
+02703539-v A1:Theme A2:Co-Theme
+02704349-v A0:Agent A1:Theme A3:Value
+02704617-v A0:Agent A1:Theme A3:Value
+02704818-v A0:Agent A1:Theme A3:Value
+02704928-v A1:Theme A2:Value A3:Beneficiary
+02706605-v A0:Location A1:Theme
+02707251-v A0:Agent A1:Theme A2:Instrument
+02707987-v A0:Theme A1:Location
+02708301-v A0:Agent A1:Theme
+02708420-v A0:Agent A1:Asset A2:Goal
+02708707-v A0:Theme A1:Location
+02709107-v A0:Agent A1:Theme
+02709422-v A0:Theme A1:Location
+02709573-v A0:Theme A1:Location
+02709774-v A0:Theme A1:Location
+02710673-v A0:Theme A1:Co-Theme
+02712443-v A1:Theme A2:Co-Theme
+02713372-v A0:Agent A1:Theme A2:Location
+02713748-v A0:Theme A1:Co-Theme
+02714360-v A1:Location A2:Theme
+02714974-v A0:Location A1:Theme
+02717102-v A0:Instrument A1:Theme A2:Agent A3:Destination A4:Initial_Location
+02717472-v A0:Agent A1:Theme A2:Location
+02717701-v A0:Agent A1:Theme A2:Location
+02718750-v A0:Agent A1:Theme A2:Location
+02719016-v A0:Agent A1:Recipient A2:Theme
+02721438-v A0:Agent A1:Predicate A2:Theme
+02722663-v A0:Agent A1:Theme A2:Recipient A3:Reflexive
+02722902-v A0:Theme A1:Location
+02724126-v A0:Agent A1:Theme A2:Destination
+02724835-v A1:Patient
+02725562-v A1:Theme A2:Location A3:Agent
+02725714-v A0:Agent A1:Theme
+02727462-v A1:Theme A2:Location A3:Pivot
+02730471-v A1:Stimulus A2:Experiencer
+02731242-v A1:Theme A2:Location A3:Pivot
+02732603-v A0:Theme A1:Co-Theme
+02732798-v A0:Location A1:Value A2:Agent
+02735142-v A0:Agent A1:Destination A2:Theme
+02735418-v A0:Agent A1:Theme A2:Instrument
+02738701-v A1:Theme A2:Location
+02743921-v A1:Theme A2:Location
+02747709-v A0:Agent A1:Theme A2:Time
+02747922-v A0:Agent A1:Theme A2:Time
+02748495-v A0:Agent A1:Patient A2:Instrument
+02748627-v A0:Agent A1:Product A2:Material A3:Beneficiary A4:Asset
+02748759-v A0:Agent A1:Product A2:Material A3:Beneficiary A4:Asset
+02748927-v A0:Agent A1:Destination A2:Theme
+02749405-v A0:Agent A1:Destination A2:Theme
+02749520-v A0:Agent A1:Destination A2:Theme
+02749633-v A0:Agent A1:Destination A2:Theme
+02749768-v A0:Agent A1:Destination A2:Theme
+02753642-v A0:Agent A1:Goal A2:Co-Agent
+02756063-v A1:Patient A2:Stimulus A3:Experiencer
+02756558-v A1:Theme
+02757304-v A0:Agent A1:Patient A2:Instrument A3:Result
+02757475-v A1:Theme
+02757651-v A1:Theme
+02757828-v A1:Theme
+02758033-v A1:Theme
+02758826-v A1:Theme
+02758977-v A1:Theme
+02759115-v A1:Theme
+02759254-v A1:Theme
+02759443-v A1:Theme A2:Agent A3:Location
+02760495-v A0:Agent A1:Destination A2:Theme
+02760622-v A0:Agent A1:Patient A2:Instrument A3:Result
+02761594-v A0:Agent A1:Patient A2:Instrument A3:Result
+02761685-v A0:Agent A1:Patient A2:Instrument A3:Result
+02761897-v A0:Agent A1:Theme A3:Source
+02762468-v A0:Agent A1:Patient A2:Instrument A3:Result
+02762806-v A0:Agent A1:Theme A2:Location
+02762981-v A0:Agent A1:Theme A2:Location
+02763450-v A1:Theme A2:Agent A3:Location
+02763609-v A1:Theme A2:Agent A3:Location
+02763740-v A0:Agent A1:Theme A2:Location
+02764765-v A0:Agent A1:Theme A2:Location
+02765924-v A0:Agent A1:Theme A2:Location
+02766390-v A1:Location A2:Agent A3:Theme
+02767116-v A0:Source A1:Theme A2:Location
+02768579-v A1:Source A2:Location A3:Theme
+02769241-v A1:Theme
+02769783-v A0:Agent A1:Theme A2:Location
+02769900-v A1:Theme
+02770170-v A1:Theme
+02770535-v A1:Theme
+02770717-v A0:Agent A1:Patient A2:Instrument A3:Result
+02771320-v A0:Agent A1:Patient A2:Instrument
+02771997-v A0:Agent A1:Patient A2:Instrument A3:Result

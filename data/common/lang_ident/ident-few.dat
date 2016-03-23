@@ -1,0 +1,16 @@
+## configuration file for a language identifier
+## aware of a few European languages.
+<Languages>
+./de.dat
+./en.dat
+./es.dat
+./fr.dat
+./pt.dat
+</Languages>
+<Threshold>
+0.4
+</Threshold>
+<ScaleFactor>
+5.0
+</ScaleFactor>
+

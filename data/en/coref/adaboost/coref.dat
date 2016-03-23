@@ -1,0 +1,15 @@
+<Model>
+coref.abm
+</Model>
+<Classes>
+0 NO 1 YES
+</Classes>
+<SEMDB>
+../../semdb.dat
+</SEMDB>
+<MaxDistance>
+20
+</MaxDistance>
+<Features>
+0xFFFFFFFF
+<Features>

@@ -1,0 +1,48 @@
+#
+# FreeLing: Português Europeu
+#
+# Pablo Gamallo Otero <pablo.gamallo@usc.es>
+# Marcos Garcia González <marcos.garcia.gonzalez@usc.es>
+# Grupo ProLNat
+# Departamento de Língua Espanhola
+# Universidade de Santiago de Compostela
+# http://gramatica.usc.es/pln
+#
+# Isaac González López <isaacjgonzalez@cilenis.com>
+# Iria Gayo <iriagayo@cilenis.com>
+# Cilenis Language Technology
+# http://www.cilenis.com
+#
+
+Adaptação e avaliação:
+Garcia, Marcos and Pablo Gamallo, 2010. Análise Morfossintáctica para Português
+Europeu e Galego: Problemas, Soluções e Avaliação. Linguamática, 2(2), p. 59-67.
+
+http://linguamatica.com/index.php/linguamatica/article/download/56/87
+
+
+Corpus de treino utilizado (PoS-tagger e NER bio):
+-Bosque 8.0 da Linguateca (http://www.linguateca.pt/Floresta/corpus.html#bosque):
+ parte da Floresta Sintá(c)tica etiquetada manualmente.
+-Aprox. 9.300 frases e 138.000 tokens.
+-Adaptado para o formato requerido pelo Freeling.
+-Mudanças para adaptá-lo ao dicionário (lemas e categorias) e correcções.
+
+Corpus de treino utilizado (NEC):
+-Bosque 8.0 da Linguateca.
+-Dois corpora (Wikipedia e Europarl) de 30.000 tokens cada um.
+
+
+Dicionário utilizado:
+-Label-Lex (SW) do Label (http://label.ist.utl.pt/pt/downloads_pt.php): léxico de palavras simples.
+-Aprox. 900.000 tokens gerados a partir de 120000 lemas.
+-Adaptado para o formato requerido pelo Freeling.
+-Mudanças para adaptá-lo ao corpus e modificações de alguns lemas e/ou categorias.
+
+
+Propriedades:
+-Tagset: adaptação do Parole.
+-Enquanto os verbos com pronomes mesoclíticos são lematizados com a forma normal do verbo:
+ comê-lo-ão > comerão + o, com pronome clítico são lematizados pelo alomorfe: fazê-lo > fazê (VMN) + o.
+-Locuções extraídas automaticamente do corpus.
+-O dicionário não contém palavras compostas (com traço), nem expressões multipalavra (só as extraídas automaticamente em locucions.dat).

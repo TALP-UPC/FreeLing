@@ -1,0 +1,84 @@
+## tagset description used to compute short tag versions
+TAGSET ../../tagset.dat
+
+
+## features extracted only for words tagged as NP
+RULES t matches ^NP
+  is_num@     [0,0]  W matches ^([0-9](\.\,)?)+$
+  has_num@    [0,0]  W matches [0-9]
+  is_acr@     [-2,2]  W matches ^[[:upper:]][[:upper:]]+$
+  has_acr@    [-2,2]  W matches (([[:upper:]][[:upper:]]+_)|(_[[:upper:]][[:upper:]]+))
+  all_caps@   [-2,2]  W matches ^[[:upper:]]([[:upper:]_])+$
+  has_caps@   [-2,2]  W matches [[:upper:]]
+
+  suf@:{$0}   [0,0]  w matches ...$
+  pre@:{$0}   [0,0]  w matches ^...
+
+  gazPER@     [0,0]  l in_set ../data/gazPER-c.dat
+  gazLOC@     [0,0]  l in_set ../data/gazLOC-c.dat
+  gazORG@     [0,0]  l in_set ../data/gazORG-c.dat
+  igazPER@    [0,0]  l.split("_") in_set ../data/gazPER-c.dat
+  igazLOC@    [0,0]  l.split("_") in_set ../data/gazLOC-c.dat
+  igazORG@    [0,0]  l.split("_") in_set ../data/gazORG-c.dat
+
+  gazPER     [-3,-1]  l in_set ../data/gazPER-c.dat
+  gazPER     [1,3]    l in_set ../data/gazPER-c.dat
+  gazLOC     [-3,-1]  l in_set ../data/gazLOC-c.dat
+  gazLOC     [1,3]    l in_set ../data/gazLOC-c.dat
+  gazORG     [-3,-1]  l in_set ../data/gazORG-c.dat
+  gazORG     [1,3]    l in_set ../data/gazORG-c.dat
+  igazPER    [-3,-1]  l.split("_") in_set ../data/gazPER-c.dat
+  igazPER    [1,3]    l.split("_") in_set ../data/gazPER-c.dat
+  igazLOC    [-3,-1]  l.split("_") in_set ../data/gazLOC-c.dat
+  igazLOC    [1,3]    l.split("_") in_set ../data/gazLOC-c.dat
+  igazORG    [-3,-1]  l.split("_") in_set ../data/gazORG-c.dat
+  igazORG    [1,3]    l.split("_") in_set ../data/gazORG-c.dat
+
+  itwPER@     [0,0]  l.split("_") in_set ../data/twPER.dat
+  itwLOC@     [0,0]  l.split("_") in_set ../data/twLOC.dat
+  itwORG@     [0,0]  l.split("_") in_set ../data/twORG.dat
+  itwGENT@    [0,0]  l.split("_") in_set ../data/twGENT.dat
+
+  itwPER     [-3,-1]  l.split("_") in_set ../data/twPER.dat
+  itwPER     [1,3]    l.split("_") in_set ../data/twPER.dat
+  itwLOC     [-3,-1]  l.split("_") in_set ../data/twLOC.dat
+  itwLOC     [1,3]    l.split("_") in_set ../data/twLOC.dat
+  itwORG     [-3,-1]  l.split("_") in_set ../data/twORG.dat
+  itwORG     [1,3]    l.split("_") in_set ../data/twORG.dat
+  itwGENT    [-3,-1]  l.split("_") in_set ../data/twGENT.dat
+  itwGENT    [1,3]    l.split("_") in_set ../data/twGENT.dat
+
+  twPER@      [-3,-1]  l in_set ../data/twPER.dat
+  twPER@      [1,3]    l in_set ../data/twPER.dat
+  twLOC@      [-3,-1]  l in_set ../data/twLOC.dat
+  twLOC@      [1,3]    l in_set ../data/twLOC.dat
+  twORG@      [-3,-1]  l in_set ../data/twORG.dat
+  twORG@      [1,3]    l in_set ../data/twORG.dat
+  twGENT@     [-3,-1]  l in_set ../data/twGENT.dat
+  twGENT@     [1,3]    l in_set ../data/twGENT.dat
+
+  city@       [-2,2]   l in_set ../../../common/nec/cities.dat
+  icity@      [-2,2]   l.split("_") in_set ../../../common/nec/cities.dat
+
+  W@:$W(0)    [-3,3]  ALL
+  l@:$l(0)    [-3,3]  t !matches ^[ZWF]
+  t@:$t(0)    [-3,3]  ALL
+  T@:$T(0)    [-3,3]  t !matches ^[ZWF]
+
+  bow:$w(0)   [-6,-1]  t matches ^[ANV] 
+  bow:$w(0)   [1,6]    t matches ^[ANV]
+  bol:$l(0)   [-6,-1]  t matches ^[ANV]
+  bol:$l(0)   [1,6]    t matches ^[ANV]
+
+  pbig@:$w(0)_$pt(1)   [-3,3]    ALL
+  lt@:$l(0)_$t(0)      [-3,3]    ALL
+
+  pat:d      [0,0]    w.split("_") matches ^del?$
+  pat:e      [0,0]    w.split("_") matches ^(el|los?|las?)$
+  pat:S      [0,0]    W.split("_") matches ^[[:upper:]]\.?$
+  pat:A      [0,0]    W.split("_") matches ^[[:upper:]]+\.?$
+  pat:M      [0,0]    W.split("_") matches ^[[:upper:]][[:lower:]]+\.?$
+  pat:9      [0,0]    W.split("_") matches [0-9]+
+  pat:w      [0,0]    W.split("_") matches ^[[:lower:]]+\.?$
+
+ENDRULES

@@ -1,0 +1,17 @@
+<General>
+AllowBetweenMarkers 0
+MaxWords 250
+</General>
+<Markers>
+" "
+( )
+{ }
+/* */
+</Markers>
+<SentenceEnd>
+. 0
+? 0
+! 0
+</SentenceEnd>
+<SentenceStart>
+</SentenceStart>

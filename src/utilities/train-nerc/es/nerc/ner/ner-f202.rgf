@@ -1,0 +1,88 @@
+## tagset description used to compute short tag versions
+TAGSET ../../tagset.dat
+
+
+## features extracted for all words
+RULES ALL
+
+  unk@       [0,0]   na is 0
+  possib_NA@ [0,0]   pt matches ^[NA]
+
+  punct@     [-3,1]  pt matches ^F
+  is_dot@    [-3,1]  W matches ^[\.\?\!]$
+  has_dot@   [-2,2]  W matches \.
+  no_analysis@    [-3,3]    na is 0     
+  all_caps@       [-2,2]    W matches ^[[:upper:]][[:upper:]]+$
+
+  ini@            [-2,2]    W matches ^[[:upper:]]\.?$
+  acr@            [-2,2]    W matches ^[[:upper:]][\.[:upper:]]+$
+
+  rom@            [-2,2]    W matches ^[VIX]+$
+  has_num@        [-2,2]    W matches [[:digit:]]
+  is_num@         [-2,2]    W matches ^[[:digit:]][[:digit:]\.\,]+$
+  guio@           [-2,2]    W matches ^[[:alpha:]]+\-
+  subgio@         [-2,2]    W matches ^[[:alpha:]]+\_
+  web@            [-2,2]    W matches ^www\.*\.[[:alpha:]]+$
+
+  functw@         [-4,4]    w in_set ../data/function.dat
+  
+  gaz@            [-3,3]     pl in_set ../data/gazPER-c.dat
+  gaz@            [-3,3]     pl in_set ../data/gazLOC-c.dat
+  gaz@            [-3,3]     pl in_set ../data/gazORG-c.dat
+
+  f@:$w(0)             [-4,4]    ALL
+  pl@:$pl(0)           [-4,4]    ALL
+  pt@:$pt(0)           [-3,3]    ALL
+  bw@:$w(0)_$w(1)      [-3,3]    ALL
+  pbt@:$pt(0)_$pt(1)   [-3,3]    ALL
+
+  bow:$w(0)            [-6,-1]   ALL
+  bow:$w(0)            [1,6]     ALL
+  bol:$pl(0)           [-6,-1]   ALL
+  bol:$pl(0)           [1,6]     ALL
+  pa@:$pa(0)           [-3,3]    ALL
+
+  wpt@:$w(0)_$pt(0)    [-3,3]    ALL
+  plpt@:$pl(0)_$pt(0)  [-3,3]    ALL
+
+  quot@          [-5,-1]    w is "
+  quot@          [1,5]      w is "
+  
+  suf3@:{$0}     [-3,3]  w matches ...$
+  pre3@:{$0}     [-3,3]  w matches ^...
+  suf4@:{$0}     [-3,3]  w matches ....$
+  pre4@:{$0}     [-3,3]  w matches ^....
+
+  nw@:{nwords(0)}     [-3,3]  ALL
+  {quoted(0)}@        [-2,2]  ALL
+  {parenthesis(0)}@   [-2,2]  ALL  
+
+  p0@:{pattern(0)}  [0,0]  ALL
+
+  ip1L:{pattern(-1)}_{pattern(0)}                             [0,0] ALL
+  ip2L:{pattern(-2)}_{pattern(-1)}_{pattern(0)}               [0,0] ALL
+  ip3L:{pattern(-3)}_{pattern(-2)}_{pattern(-1)}_{pattern(0)} [0,0] ALL
+  ip1R:{pattern(0)}_{pattern(1)}                              [0,0] ALL
+  ip2R:{pattern(0)}_{pattern(1)}_{pattern(2)}                 [0,0] ALL
+  ip3R:{pattern(0)}_{pattern(1)}_{pattern(2)}_{pattern(3)}    [0,0] ALL
+
+  p1L:{pattern(-1)}                             [0,0] ALL
+  p2L:{pattern(-2)}_{pattern(-1)}               [0,0] ALL
+  p3L:{pattern(-3)}_{pattern(-2)}_{pattern(-1)} [0,0] ALL
+  p1R:{pattern(1)}                              [0,0] ALL
+  p2R:{pattern(1)}_{pattern(2)}                 [0,0] ALL
+  p3R:{pattern(1)}_{pattern(2)}_{pattern(3)}    [0,0] ALL
+
+ENDRULES
+
+
+RULES W matches ^[[:upper:]][[:lower:]]
+
+  cap@                  [-4,4]  ALL
+  cap&pnoun@            [-3,3]  pt matches ^[NA]
+  cap&na=0@             [-3,3]  na is 0
+
+  cap&pat@:{pattern(0}} [-3,3]  ALL
+  cap&functw@           [-1,-1] w in_set ../data/function.dat   
+
+ENDRULES

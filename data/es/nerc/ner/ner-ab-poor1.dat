@@ -1,0 +1,40 @@
+<Type>
+bio
+</Type>
+<Lexicon>
+ner-f201-poor1-3abs.lex
+</Lexicon>
+<ModelFile>
+ner-f201-poor1-3abs.abm
+</ModelFile>
+<RGF>
+ner-f201.rgf
+</RGF>
+<NE_Tag>
+NP00000
+</NE_Tag>
+<Classifier>
+AdaBoost
+</Classifier>
+<Classes>
+0 B 1 I 2 O
+</Classes>
+<UseSoftMax>
+yes
+</UseSoftMax>
+<InitialProb>
+B 0.138468
+I 0
+O 0.861472
+</InitialProb>
+<TransitionProb>
+B B 0.000596115
+B I 0.385897
+B O 0.613507
+I B 0.00060009
+I I 0.449917
+I O 0.549482
+O B 0.059839
+O I 0
+O O 0.940161
+</TransitionProb>

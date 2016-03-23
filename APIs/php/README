@@ -1,0 +1,9 @@
+
+
+  ##### PHP API for FreeLing    ######
+
+    SWIG supports PHP only partially with regard to STL classes used in FreeLing
+    So, a real API can not be generated currently.
+
+    This directory contains a PHP class 'analyzer.php' that launches a FreeLing server and then uses it to analyze text. 
+    

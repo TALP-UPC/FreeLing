@@ -1,0 +1,140 @@
+# ===============================================
+#            Affixation rules file
+# ===============================================
+
+# === Each line is a affixation rule, with the following fields:
+# 1 Affix to erase form word form (e.g: gatito - ito = gat)
+# 2 Affix (* for emtpy string) to add to the resulting root
+#   to rebuild the lemma that must be searched in dictionary 
+#   (e.g:  gat+o = gato)
+# 3 Regexp condition on the parole tag of found dictionary entry
+# 4 Parole tag for suffixed word (* = keep tag in dictionary entry)
+# 5 Check lemma adding accents
+# 6 Enclitic suffix (special accent behaviour in Spanish)
+# 7 Prevent later modules from assigning more tags to the word
+# 8 Lemma to assign: F=original form, R=root found in dict, L=lemma in matching dict entry, 
+#                    AF/AR/AL=affix followed by F/R/L, FA/RA/LA=F/R/L followed by affix
+# 9 Consider the suffix always, not only for unknown words.
+# 10 How to retokenize the word if necessary (see uer manual).
+#==============================================================
+
+
+<Prefixes>
+</Prefixes>
+
+<Suffixes>
+################ ENCLITICS ###################
+
+cela	re|*	^V	*	0	0	0	L	1	$$+ce+la:$$+PP+PP
+cele	re|*	^V	*	0	0	0	L	1	$$+ce+le:$$+PP+PP
+celi	re|*	^V	*	0	0	0	L	1	$$+ce+li:$$+PP+PP
+celo	re|*	^V	*	0	0	0	L	1	$$+ce+lo:$$+PP+PP
+cene	re|*	^V	*	0	0	0	L	1	$$+ce+ne:$$+PP+PP
+ci	re|*	^V	*	0	0	0	L	1	$$+ci:$$+PP
+gli	re|*	^V	*	0	0	0	L	1	$$+gli:$$+PP
+gliela	re|*	^V	*	0	0	0	L	1	$$+gli+la:$$+PP+PP
+gliele	re|*	^V	*	0	0	0	L	1	$$+gli+le:$$+PP+PP
+glieli	re|*	^V	*	0	0	0	L	1	$$+gli+li:$$+PP+PP
+glielo	re|*	^V	*	0	0	0	L	1	$$+gli+lo:$$+PP+PP
+gliene	re|*	^V	*	0	0	0	L	1	$$+gli+ne:$$+PP+PP
+la	re|*	^V	*	0	0	0	L	1	$$+la:$$+PP
+le	re|*	^V	*	0	0	0	L	1	$$+le:$$+PP
+li	re|*	^V	*	0	0	0	L	1	$$+li:$$+PP
+lo	re|*	^V	*	0	0	0	L	1	$$+lo:$$+PP
+mela	re|*	^V	*	0	0	0	L	1	$$+me+la:$$+PP+PP
+mele	re|*	^V	*	0	0	0	L	1	$$+me+le:$$+PP+PP
+meli	re|*	^V	*	0	0	0	L	1	$$+me+li:$$+PP+PP
+melo	re|*	^V	*	0	0	0	L	1	$$+me+lo:$$+PP+PP
+mene	re|*	^V	*	0	0	0	L	1	$$+me+ne:$$+PP+PP
+mi	re|*	^V	*	0	0	0	L	1	$$+mi:$$+PP
+ne	re|*	^V	*	0	0	0	L	1	$$+ne:$$+PP
+sela	re|*	^V	*	0	0	0	L	1	$$+se+la:$$+PP+PP
+sele	re|*	^V	*	0	0	0	L	1	$$+se+le:$$+PP+PP
+seli	re|*	^V	*	0	0	0	L	1	$$+se+li:$$+PP+PP
+selo	re|*	^V	*	0	0	0	L	1	$$+se+lo:$$+PP+PP
+sene	re|*	^V	*	0	0	0	L	1	$$+se+ne:$$+PP+PP
+si	re|*	^V	*	0	0	0	L	1	$$+si:$$+PP
+tela	re|*	^V	*	0	0	0	L	1	$$+te+la:$$+PP+PP
+tele	re|*	^V	*	0	0	0	L	1	$$+te+le:$$+PP+PP
+teli	re|*	^V	*	0	0	0	L	1	$$+te+li:$$+PP+PP
+telo	re|*	^V	*	0	0	0	L	1	$$+te+lo:$$+PP+PP
+tene	re|*	^V	*	0	0	0	L	1	$$+te+ne:$$+PP+PP
+ti	re|*	^V	*	0	0	0	L	1	$$+ti:$$+PP
+# ve:PP is not in dict. Uncomment this when included 
+#vela	re|*	^V	*	0	0	0	L	1	$$+ve+la:$$+PP+PP
+#vele	re|*	^V	*	0	0	0	L	1	$$+ve+le:$$+PP+PP
+#veli	re|*	^V	*	0	0	0	L	1	$$+ve+li:$$+PP+PP
+#velo	re|*	^V	*	0	0	0	L	1	$$+ve+lo:$$+PP+PP
+#vene	re|*	^V	*	0	0	0	L	1	$$+ve+ne:$$+PP+PP
+vi	re|*	^V	*	0	0	0	L	1	$$+vi:$$+PP
+
+
+
+################ ADVERBIS -mente ##############
+
+mente	*	^AQ0CS	RG	0	0	0	F	1	-
+mente	*	^AQ0FS	RG	0	0	0	F	1	-
+
+
+######## SUFIXOS DIMINUTIUS, DESPECTIUS I AUGMENTATIUS #######
+
+rrimo	re|ro	^AQ0	AQSMS0	0	0	0	L	0	-
+rrima	re|ro	^AQ0	AQSFS0	0	0	0	L	0	-
+rrimi	re|ro	^AQ0	AQSMP0	0	0	0	L	0	-
+rrime	re|ro	^AQ0	AQSFP0	0	0	0	L	0	-
+
+etto	o|e|a|io	^AQ0	AQDMS0	0	0	0	L	0	-
+etti	o|e|a|io	^AQ0	AQDMP0	0	0	0	L	0	-
+etta	o|e|a|io	^AQ0	AQDFS0	0	0	0	L	0	-
+ette	o|e|a|io	^AQ0	AQDFP0	0	0	0	L	0	-
+ino	o|e|a|io	^AQ0	AQDMS0	0	0	0	L	0	-
+ini	o|e|a|io	^AQ0	AQDMP0	0	0	0	L	0	-
+ina	o|e|a|io	^AQ0	AQDFS0	0	0	0	L	0	-
+ine	o|e|a|io	^AQ0	AQDFP0	0	0	0	L	0	-
+issimo	o|e|io|ie	^AQ0	AQSMS0	0	0	0	L	0	-
+issimi	o|e|io|ie	^AQ0	AQSMP0	0	0	0	L	0	-
+issima	o|e|io|ie	^AQ0	AQSFS0	0	0	0	L	0	-
+issime	o|e|io|ie	^AQ0	AQSFP0	0	0	0	L	0	-
+
+entissimo	o	^AQ0	AQSMS0	0	0	0	L	0	-
+entissimi	o	^AQ0	AQSMP0	0	0	0	L	0	-
+entissima	o	^AQ0	AQSFS0	0	0	0	L	0	-
+entissime	o	^AQ0	AQSFP0	0	0	0	L	0	-
+
+uissimo	u	^AQ0	AQSMS0	0	0	0	L	0	-
+uissimi	u	^AQ0	AQSMP0	0	0	0	L	0	-
+uissima	u	^AQ0	AQSFS0	0	0	0	L	0	-
+uissime	u	^AQ0	AQSFP0	0	0	0	L	0	-
+
+chetto	ce|co|cio	^AQ0	AQDMS0	0	0	0	L	0	-
+chetti	ce|co|cio	^AQ0	AQDMP0	0	0	0	L	0	-
+chetta	ce|co|cio	^AQ0	AQDFS0	0	0	0	L	0	-
+chette	ce|co|cio	^AQ0	AQDFP0	0	0	0	L	0	-
+chino	ce|co|cio	^AQ0	AQDMS0	0	0	0	L	0	-
+chini	ce|co|cio	^AQ0	AQDMP0	0	0	0	L	0	-
+china	ce|co|cio	^AQ0	AQDFS0	0	0	0	L	0	-
+chine	ce|co|cio	^AQ0	AQDFP0	0	0	0	L	0	-
+chissimo	ce|co|cio	^AQ0	AQDMS0	0	0	0	L	0	-
+chissimi	ce|co|cio	^AQ0	AQDMP0	0	0	0	L	0	-
+chissima	ce|co|cio	^AQ0	AQDFS0	0	0	0	L	0	-
+chissime	ce|co|cio	^AQ0	AQDFP0	0	0	0	L	0	-
+
+ghissimo	ge	^AQ0	AQDMS0	0	0	0	L	0	-
+ghissimi	ge	^AQ0	AQDMP0	0	0	0	L	0	-
+ghissima	ge	^AQ0	AQDFS0	0	0	0	L	0	-
+ghissime	ge	^AQ0	AQDFP0	0	0	0	L	0	-
+
+
+uetto	ù	^AQ0	AQDMS0	0	0	0	L	0	-
+uetti	ù	^AQ0	AQDMP0	0	0	0	L	0	-
+uetta	ù	^AQ0	AQDFS0	0	0	0	L	0	-
+uette	ù	^AQ0	AQDFP0	0	0	0	L	0	-
+uino	ù	^AQ0	AQDMS0	0	0	0	L	0	-
+uini	ù	^AQ0	AQDMP0	0	0	0	L	0	-
+uina	ù	^AQ0	AQDFS0	0	0	0	L	0	-
+uine	ù	^AQ0	AQDFP0	0	0	0	L	0	-
+uissimo	ù	^AQ0	AQDMS0	0	0	0	L	0	-
+uissimi	ù	^AQ0	AQDMP0	0	0	0	L	0	-
+uissima	ù	^AQ0	AQDFS0	0	0	0	L	0	-
+uissime	ù	^AQ0	AQDFP0	0	0	0	L	0	-
+</Suffixes>

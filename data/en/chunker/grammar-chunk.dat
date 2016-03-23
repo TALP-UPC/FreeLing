@@ -1,0 +1,417 @@
+%%%%%%%%%%%%%%%%%%%% FREELING ENGLISH CHUNKING GRAMMAR %%%%%%%%%%%%%%%%%%%
+%                                                                        %
+%       JORDI CARRERA          MARINA LLOBERES          LLUIS PADRO      %
+%   jcarrera@lsi.upc.edu    mlloberes@lsi.upc.edu    padro@lsi.upc.edu   %
+%                                                                        %
+%     Centre de Tecnologies i Aplicacions del Llenguatge i la Parla      %
+%                 (Universitat Politecnica de Catalunya)                 %
+%                         Jordi Girona 1-3                               %
+%                          08034 Barcelona                               %
+%                                                                        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% NEW (March 2009) %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%									%
+% Secuencias sn,+adv(before, etc.) --> NN*,+adv				%
+% sn-chunk com mas de un especificador					%
+% sn-chunk con pronombre posesivo					%
+% 'be going to' como verbo modal					%
+%									%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%                            %%%%%%%
+%%%%%%%     SINTAGMES NOMINALS     %%%%%%%
+%%%%%%%                            %%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% QA MORFOLOGIA
+quant ==>   WRB(how), +JJ | WRB(how), +RB
+	  | PR*<how_much> | PR*<how_many>.
+quant ==> +quant, NN | +quant, NNS | +quant, OF-chunk.
+
+%%% NOMS NO DETERMINATS (bare NP)
+proper-noun ==> NP* | NNP*.
+n-chunk ==>   NN | NNS | proper-noun.
+n-chunk ==>   NN, +n-chunk | NNS, +n-chunk | proper-noun, +n-chunk 
+	    | NN, +n-ngen | NNS, +n-ngen | proper-noun, +n-ngen.
+
+% nom + modificador adjectival
+n-chunk ==>   attrib, +n-chunk | attrib, +ngen
+	    | JJS, +ngen | JJR, +ngen
+	    | att-coor, +n-chunk.
+
+%%% NOMS DETERMINATS
+sn-chunk ==> P*<"sn-chunkPRP.data">, +n-chunk | P*("sn-chunkPRP.data"), +sn-chunk.
+sn-chunk ==> DT, +n-chunk | Z, +n-chunk | DT, +sn-chunk | Z, +sn-chunk.
+
+sn-chunk ==>   DT, VBN, +n-chunk | Z, VBN, +n-chunk
+	     | DT, VBG, +n-chunk | Z, VBG, +n-chunk
+	     | DT, part, +n-chunk.
+
+sn-indef ==> Z(a), +n-chunk | DT(an), +n-chunk | sn-chunk(a), +n-chunk | sn-chunk(a), +sn-chunk.
+
+% Sintagmes nominals predeterminats (both, all, quite, such, half, nary)
+sn-chunk ==> PD*<"list.PDTssg">, +sn-indef.		 % Nary, such, quite
+sn-chunk ==> PDT(all), +sn-chunk | PDT(half), +sn-chunk. % all the book, all the rice...
+sn-chunk ==> RB(not), +sn-indef. 			 % Not a book
+
+%%% PRONOMS
+sn-chunk ==> PRP*<"appendix.PRP">.
+sn-chunk ==> PRP.
+
+%%% XIFRES
+sn-chunk ==> Z.
+
+%%% COORDINACIO DE SN
+% Actualment, la coordinacio entre sintagmes nominals es tracta a les dependencies
+%sn-coor ==> sn-chunk, +CC, NN. % V. dependencies
+%sn-coor ==> sn-chunk, +CC, NNS. % V. dependencies
+%sn-coor ==> sn-chunk, +CC, proper-noun. % V. dependencies
+%sn-coor ==> NN, +CC, NN. % V. dependencies
+%sn-coor ==> NNS, +CC, NN. % V. dependencies
+%sn-coor ==> NNS, +CC, NNS. % V. dependencies
+%sn-coor ==> NN, +CC, NNS. % V. dependencies
+%sn-coor ==> proper-noun, +CC, proper-noun. % V. dependencies
+
+%%% SERIES
+% regles anul.lades
+%sn-chunk ==> sn-chunk, +series. % analisis erronies
+%sn-chunk ==> n-chunk, +series. % analisis erronies
+%series ==> coma, sn-chunk, +series. % analisis erronies
+%series ==> coma, n-chunk, +series. % analisis erronies
+%series ==> coma, sn-chunk, +nex-coord, sn-chunk. % analisis erronies
+%series ==> coma, sn-chunk, +nex-coord, n-chunk. % analisis erronies
+%series ==> coma, n-chunk, +nex-coord, sn-chunk. % analisis erronies
+%series ==> coma, n-chunk, +nex-coord, n-chunk. % analisis erronies
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%			       %%%%
+%%%%          ADJECTIUS        %%%%
+%%%%			       %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% ADJECTIUS ATRIBUTIUS
+attrib ==> JJ | JJR | JJS.
+attrib ==>   +JJ, RB(enough) | JJR, +JJ
+	   | +VBG, att-coor | +VBN, att-coor.
+att-coor ==> attrib, +CC, attrib.
+
+%%% ADJECTIUS PREDICATIUS
+pred ==> VBN.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%		      %%%%
+%%%%   GENITIU SAXO   %%%%
+%%%%		      %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+n-ngen ==> POS, +sn-chunk. 
+n-ngen ==> POS, +n-chunk. 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%						 	     %%%%
+%%%%     PREPOSICIONS, ADVERBIS, CONJUNCIONS, PARTICULES     %%%%
+%%%%						 	     %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Nexe 'of'
+OF-chunk ==> IN(of).
+
+% Nexe 'to'
+TO-chunk ==> TO | CC(in_order_to).
+
+% Nexes preposicionals, adverbials y conjuncions (ambigus)
+prt-mix ==> IN*("nexes.mixtos").
+prt-sub ==> IN*("nexes.subordinants") | CC*("nexes.subordinants").
+
+% Nexes inherentment preposicionals
+prt-sp ==> IN*("nexes.preposicionals").
+%prt-sp ==> IN*.
+
+%%% SINTAGMES PREPOSICIONALS
+% Three of the/all/some books, three of us, three of all of your books
+%OF-chunk ==> +IN(of), sn-chunk | +IN(of), n-chunk. % V. dependencies
+
+% Aquests inclouen totes les preposicions menys 'of'
+%sp-chunk ==> +prt-sp, sn-chunk | +prt-sp, n-chunk. % V. dependencies
+%sp-chunk ==> +prt-sp, sp-chunk | +RB, sp-chunk | +RP, sp-chunk. % V. dependencies
+%sp-chunk ==> +prt-sp, OF-chunk | +RB, OF-chunk | +RP, OF-chunk. % V. dependencies
+
+%sp-chunk ==> +IN, sn-chunk, pred | +IN, n-chunk, pred | +TO, sn-chunk, pred | +TO, n-chunk, pred. % V. dependencies
+sp-chunk ==> +prt-sp, quant | +prt-mix, quant | +IN(of), quant.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%		    			    %%%%%%%%%%
+%%%%%%%%%%	    SUBORDINADES ADVERBIALS	    %%%%%%%%%%
+%%%%%%%%%%		   	    		    %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+prt-sp ==> +NNS(thanks), TO-chunk.
+prt-sp ==> IN(apart_from).
+nex-vppt ==> VBN*(provided) | VBN*(given).
+conj ==> IN*(that) | IN*(whether).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%					%%%%%%%%%%
+%%%%%%%%%%		COORDINADES		%%%%%%%%%%
+%%%%%%%%%%					%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% AQUI: Incloses "but", "and" i "or"
+nex-coord ==> CC*("conjuncions.dat"). 
+
+
+% either
+% neither
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%		    				   %%%%%%%%%%
+%%%%%%%%%%	    SUBORDINADES INTERROGATIVES	 	   %%%%%%%%%%
+%%%%%%%%%%		   	    			   %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+wh-adv ==> WRB*<"WH-words.dat">.
+
+%wh-adv ==> +WRB*(how),RB*(much) | +WRB*(how),RB*(many).
+%wh-adv ==> +WRB*(how),JJ*(much) | +WRB*(how),JJ*(many).
+%wh-pro ==> +WRB*(how),PRP.
+%wh-quant ==> wh-adj, +n-chunk | wh-adj, +sn-chunk.
+
+wh-pro ==> WP*<"WH-words.dat"> | WDT(that) | WD*(which).
+% wh-pro ==> +WDT(what), sn-chunk | +WDT(which), sn-chunk. % no funciona --> analisis erronies
+wh-pro ==> IN, +wh-pro.
+wh-pro ==> IN, +wh-adv.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%	   	  %%%%%%%%%%
+%%%%%%%%%%     VERBS      %%%%%%%%%%
+%%%%%%%%%%		  %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%% EXISTENCIALS
+exs ==> EX, +vb-be.
+exs ==> EX, vb-have, +vb-be.
+
+%%% Apendix: l'adverbi distal
+adv ==> EX.
+
+
+%%%%%%
+%%%%%%	VERBS PRINCIPALS
+%%%%%%
+
+%%% Tercera persona del singular dels verbs amb contingut lexic
+vb-chunk ==> VBZ | VBP | VBD | VBN.
+
+%%% Forma base
+vb-chunk ==> VB.
+
+%%% Gerundi
+vb-chunk ==> VBG.
+
+%%% PHRASAL VERBS
+
+% Intransitius (V. dependencies per a phrasal verbs transitius)
+vb-chunk ==> +VB*<"ph-about.dat">, IN*<about> | +VB*<"ph-about.dat">, RB*<about>.
+vb-chunk ==> +VB*<"ph-across.dat">, IN*<across> | +VB*<"ph-across.dat">, RB*<across>.
+vb-chunk ==> +VB*<"ph-after.dat">, IN*<after> | +VB*<"ph-after.dat">, RB*<after>.
+vb-chunk ==> +VB*<"ph-ahead.dat">, IN*<ahead> | +VB*<"ph-ahead.dat">, RB*<ahead>.
+vb-chunk ==> +VB*<"ph-along.dat">, IN*<along> | +VB*<"ph-along.dat">, RB*<along>.
+vb-chunk ==> +VB*<"ph-around.dat">, IN*<around> | +VB*<"ph-around.dat">, RB*<around>.
+vb-chunk ==> +VB*<"ph-as.dat">, IN*<as> | +VB*<"ph-as.dat">, RB*<as>.
+vb-chunk ==> +VB*<"ph-at.dat">, IN*<at> | +VB*<"ph-at.dat">, RB*<at>.
+vb-chunk ==> +VB*<"ph-away.dat">, IN*<away> | +VB*<"ph-away.dat">, RB*<away>.
+vb-chunk ==> +VB*<"ph-back.dat">, IN*<back> | +VB*<"ph-back.dat">, RB*<back>.
+vb-chunk ==> +VB*<"ph-by.dat">, IN*<by> | +VB*<"ph-by.dat">, RB*<by>.
+vb-chunk ==> +VB*<"ph-down.dat">, IN*<down> | +VB*<"ph-down.dat">, RB*<down>.
+vb-chunk ==> +VB*<"ph-for.dat">, IN*<for> | +VB*<"ph-for.dat">, RB*<for>.
+vb-chunk ==> +VB*<"ph-forward.dat">, IN*<forward> | +VB*<"ph-forward.dat">, RB*<forward>.
+vb-chunk ==> +VB*<"ph-in.dat">, IN*<in> | +VB*<"ph-in.dat">, RB*<in>.
+vb-chunk ==> +VB*<"ph-into.dat">, IN*<into> | +VB*<"ph-into.dat">, RB*<into>.
+vb-chunk ==> +VB*<"ph-of.dat">, IN*<of> | +VB*<"ph-of.dat">, RB*<of>.
+vb-chunk ==> +VB*<"ph-off.dat">, IN*<off> | +VB*<"ph-off.dat">, RB*<off>.
+vb-chunk ==> +VB*<"ph-on.dat">, IN*<on> | +VB*<"ph-on.dat">, RB*<on>.
+vb-chunk ==> +VB*<"ph-onto.dat">, IN*<onto> | +VB*<"ph-onto.dat">, RB*<onto>.
+vb-chunk ==> +VB*<"ph-out.dat">, IN*<out> | +VB*<"ph-out.dat">, RB*<out>.
+vb-chunk ==> +VB*<"ph-over.dat">, IN*<over> | +VB*<"ph-over.dat">, RB*<over>.
+vb-chunk ==> +VB*<"ph-still.dat">, IN*<still> | +VB*<"ph-still.dat">, RB*<still>.
+vb-chunk ==> +VB*<"ph-through.dat">, IN*<through> | +VB*<"ph-through.dat">, RB*<through>.
+vb-chunk ==> +VB*<"ph-to.dat">, TO*<to> | +VB*<"ph-to.dat">, RB*<to>.
+vb-chunk ==> +VB*<"ph-together.dat">, IN*<together> | +VB*<"ph-together.dat">, RB*<together>.
+vb-chunk ==> +VB*<"ph-under.dat">, IN*<under> | +VB*<"ph-under.dat">, RB*<under>.
+vb-chunk ==> +VB*<"ph-up.dat">, IN*<up> | +VB*<"ph-up.dat">, RB*<up>.
+vb-chunk ==> +VB*<"ph-upon.dat">, IN*<upon> | +VB*<"ph-upon.dat">, RB*<upon>.
+vb-chunk ==> +VB*<"ph-with.dat">, IN*<with> | +VB*<"ph-with.dat">, RB*<with>.
+vb-chunk ==> +VB*<"ph-without.dat">, IN*<without> | +VB*<"ph-without.dat">, RB*<without>.
+
+% Phrasal verbs transitius i intransitius
+vb-chunk ==> +VB*, RP.
+
+%%%%%
+%%%%% GRUPS VERBALS
+%%%%%
+
+vb-chunk ==> mod-chunk,+vb-chunk.
+vb-chunk ==> vb-be,+vb-chunk.
+vb-chunk ==> vb-have,+vb-chunk.
+vb-chunk ==> vb-do,+vb-chunk.
+
+%%% ADVERBIS
+%%%
+%%% MODIFICADOR DELS VERBS
+%%% 
+adv ==> NN*, +RB(ago) | NN*, +RB(later) | NN*, +RB(before) | NN*, +RB(sooner).
+%adv ==> sn-chunk, +RB(ago) | sn-chunk, +RB(later) | sn-chunk, +RB(before) | sn-chunk, +RB(sooner). % errores pr+adv
+%adv ==> n-chunk, +RB(ago) | n-chunk, +RB(later) | n-chunk, +RB(before) | n-chunk, +RB(sooner). % errores pr+adv
+adv ==> RB.
+adv ==> RBR.
+adv ==> RBR.
+adv ==> RBS.
+%adv ==> adv, +CC, adv. % V. dependencies
+%vb-be ==> +vb-be, adv. % V. dependencies - adv es modificador del verb principal
+%vb-do ==> +vb-do, adv. % V. dependencies - adv es modificador del verb principal
+%vb-have ==> +vb-have, adv. % V. dependencies - adv es modificador del verb principal
+%vb-chunk ==> RB, +vb-chunk. % V. dependencies
+%vb-chunk ==> +vb-chunk, adv. % V. dependencies + V. chunks (regles phrasal verbs)
+attrib ==> +attrib, adv.
+attrib ==> adv, +attrib.
+%part ==> adv, +VBN. % V. dependencies
+%part ==> adv, +VBG. % V. dependencies
+
+%%%%%
+%%%%%	ADVERBIS
+%%%%%
+attrib ==> +adv(as), attrib.
+
+
+%%%%%
+%%%%%	ADVERBIS DISLOCATS
+%%%%%
+adv ==> RB*("nexes.parentetics").
+
+
+%%%%%
+%%%%%   NEGACIO DE VERBS PERSONALS
+%%%%%
+
+vb-chunk ==> +VB*<do>, verbLex.
+
+
+%%%%%
+%%%%%	VERBS MODALS
+%%%%%
+
+mod-chunk ==> MD*<"dicc.vbmodals">.
+mod-chunk ==> +mod-chunk, adv.
+mod-chunk ==> VB*<be>, +VBG<go>, TO<to>.
+mod-chunk ==> VB*<'re>, +VBG<go>, TO<to>.
+mod-chunk ==> VB*<'re>, +VBG<go>, IN<to>.
+vb-chunk ==> VB*<help>, +vb-chunk.
+
+%%%%%
+%%%%%	LEXEMES VERBALS	
+%%%%%
+
+vb-be ==> VBZ<be> | VBP<be> | VBD<be> | VBN<be> | VBG <be> | VB<be>.
+vb-have ==> VBZ<have> | VBP<have> | VBD<have> | VBN<have> | VBG<have> | VB<have>.
+vb-do ==> VBZ<do> | VBP<do> | VBD<do> | VBN<do> | VBG<do> | VB<do>.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%                 %%%%%%
+%%%%%%    LOCUCIONS    %%%%%%
+%%%%%%		       %%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% AQUI: the former / the latter (en sg)
+sn-chunk ==> DT(the), +PRP(former) | DT(the), +JJ(former) | DT(the), +NN(former) | DT(the), +PRP(latter) | DT(the), +JJ(latter) | DT(the), +NN(former).
+
+sp-chunk ==> +prep1, TO-chunk, sn-chunk.
+
+% AQUI: next to, due to
+prep1 ==> JJ(due).
+prep1 ==> JJ(next).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%		      %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%   A P E N D I X   %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%		      %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+st-brk ==> Fp | Fs. % strong sentence breaks (full stop, dot)
+sf-brk ==> Fc | Fx | Fd. % soft sentence breaks (coma, semi-colon, colon)
+in-brk ==> Fia | Fit. % interrogation sentence breaks
+ex-brk ==> Faa | Fat. % exclamation sentence breaks
+quot-mk ==> Fe | Fra | Frc. % quotation marks
+inc-mk ==> Fca | Fct | Fla | Flt | Fg | Fpa | Fpt. % digressions marks
+oth-mk ==> Fh | Ft | Fz. % other marks
+
+adv ==> W.
+sp-chunk ==> +prt-sp, adv.
+
+
+% SOFTWARE % SOFTWARE % SOFTWARE % SOFTWARE % SOFTWARE % SOFTWARE % SOFTWARE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Control directives
+
+%% -------------------------
+%% NOTOP: Categories not considered as valid tree roots.  
+%% -------------------------
+% @NOTOP xyz.
+
+%% -------------------------
+%% START: Specify which is the start symbol of the grammar. If the result of the parsing 
+%% is not a complete tree, or no valid root nodes are found, a fictitious root node is
+%%  created  with this label.
+%% -------------------------
+@START S.
+
+%% -------------------------
+%% FLAT: Trees for "flat" categories are flattened when the category is recursive. 
+%% Only the highest occurrence appears in the final tree.
+%% -------------------------
+%@FLAT main-verb.
+
+
+%% -------------------------
+%% Priority definitions: decreasing priority downwards and rightwards in
+%% the following list.  When two chart edges cover the same subsentence,
+%% the edge with highest prioriy will be included the final parse tree.
+%% -------------------------
+@PRIOR exs adv.
+@PRIOR quant sn-chunk n-chunk.
+@PRIOR wh-adv attrib vb-be vb-do vb-have vb-chunk.
+@PRIOR wh-adv vb-be vb-have vb-do mod-chunk vb-chunk.
+@PRIOR adv prt-sp sn-chunk n-chunk.
+
+@HIDDEN proper-noun.

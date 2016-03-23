@@ -1,0 +1,22 @@
+<Currency>
+$
+</Currency>
+<Measure>
+WG kg
+WG g
+WG ton
+WG pood
+
+AR sotka
+PER perc
+</Measure>
+<MeasureNames>
+проц perc N
+% perc N
+<процент> perc $1:N
+<килограмм> kg $1:N
+<тонна> ton $1:N
+<грамм> g $1:N
+<пуд> pood $1:N
+<сотка> sotka $1:N
+</MeasureNames>

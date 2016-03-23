@@ -1,0 +1,12 @@
+<General>
+RemoveUsedChains false
+OnlyStrong false
+SemDBPath ./semdb.dat
+Heuristic FirstWord
+MaxDistanceBetweenWords 6
+</General>
+
+<Relations>
+SameWord ^(NP|V|NC)
+Hypernymy ^(NP|V|NC) 2 0.6
+</Relations>

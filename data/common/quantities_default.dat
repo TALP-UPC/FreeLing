@@ -1,0 +1,536 @@
+<Currency>
+$
+</Currency>
+<Measure>
+$ ADP
+$ AED
+$ AFA
+$ ALL
+$ AMD
+$ ARA
+$ ARS
+$ ATS
+$ AUD
+$ AWK
+$ AZM
+$ BAD
+$ BBD
+$ BDT
+$ BEF
+$ BGL
+$ BHD
+$ BIF
+$ BMD
+$ BND
+$ BOB
+$ BRL
+$ BSD
+$ BTN
+$ BWP
+$ BYR
+$ BZD
+$ CAD
+$ CHF
+$ CLP
+$ COP
+$ CRC
+$ CUP
+$ CYP
+$ CZK
+$ DEM
+$ DKK
+$ DOP
+$ DZD
+$ ECS
+$ ECU
+$ EEK
+$ EGP
+$ ESP
+$ ETB
+$ FIM
+$ FJD
+$ FRF
+$ GBP
+$ GEK
+$ GHC
+$ GMD
+$ GNF
+$ GRD
+$ GTQ
+$ GWP
+$ GYD
+$ HNL
+$ HRD
+$ HRK
+$ HTG
+$ HUF
+$ IDR
+$ IEP
+$ ILS
+$ INR
+$ IQD
+$ IRR
+$ ISK
+$ ITL
+$ JMD
+$ JOD
+$ JPY
+$ KES
+$ KHR
+$ KPW
+$ KRW
+$ KWD
+$ KZT
+$ LAK
+$ LBP
+$ LKR
+$ LRD
+$ LSL
+$ LTL
+$ LUF
+$ LVL
+$ LYD
+$ MAD
+$ MDL
+$ MGF
+$ MMK
+$ MNT
+$ MOP
+$ MRO
+$ MTL
+$ MWK
+$ MXN
+$ MYR
+$ MZM
+$ NGN
+$ NIO
+$ NLG
+$ NOK
+$ NPR
+$ NZD
+$ OMR
+$ PAB
+$ PEI
+$ PEN
+$ PGK
+$ PHP
+$ PKR
+$ PLN
+$ PTE
+$ PYG
+$ QAR
+$ RMB
+$ ROL
+$ RUR
+$ RWF
+$ SAR
+$ SCR
+$ SDP
+$ SEK
+$ SGD
+$ SIT
+$ SKK
+$ SLL
+$ SOS
+$ SRG
+$ SVC
+$ SYP
+$ SZL
+$ THB
+$ TJR
+$ TMM
+$ TND
+$ TPE
+$ TRL
+$ TZS
+$ UAH
+$ UAK
+$ UDS
+$ UGS
+$ USD
+$ UYP
+$ UYU
+$ VEB
+$ VND
+$ VUV
+$ WST
+$ XAF
+$ XCD
+$ XOF
+$ ZAR
+$ ZMK
+$ ZWD
+AR ac
+AR cm2
+AR hA
+AR km2
+AR mi2
+AR mm2
+AR m2
+AR ft2
+AR in2
+AR yd2
+CB cm3/s
+CB gal/ac/d
+CB gal/ft2/d
+CB gal/ft2
+CB gal/ft2/min
+CB gal/cap/d
+CB gal/d
+CB gal/h
+CB gal/min
+CB gal/s
+CB l/s
+CB l/d
+CB ml/d
+CB l/d/cap
+CB l/m2/d
+CB l/m2
+CB l/m2/min
+CB l/m2/s
+CB l/min
+CB m3/d
+CB m3/ha/d
+CB m3/h
+CB m3/m2/d
+CB m3/m2/h
+CB m3/s
+CB ft3/min
+CB ft3/s
+IF bit
+IF byte
+IF eB
+IF gb
+IF gB
+IF kb
+IF kB
+IF mb
+IF mB
+IF nibble
+IF pB
+IF tB
+IF yB
+IF zB
+IF mbps
+EN Wb
+EN cal
+EN Kcal
+EN Kwh
+EN Bq
+EN cd
+EN Gy
+EN ohm
+EN V
+EN Cb
+DN hab/km2
+FQ Hz
+FQ lm
+FQ lx
+LN rad
+LN srad
+FQ sv
+LN Å
+LN cm
+SP m/s
+SP cm/s
+EN J/K
+EN J
+EN w
+EN T
+EN J/kg·K
+FR kg/s
+SP km/h
+AC km/h/s
+LN km
+SP km/s
+FR lbF
+LN mi
+LN m
+LN mm
+SP mi/h
+FR N
+FR Pa·s
+SP ft/h
+SP ft/min
+LN ft
+AC ft/s2
+SP ft/s
+LN in
+AC in/s2
+AC rad/s2
+SP rad/s
+FR V/m
+FR w/m/K
+FR w/srad
+LN yd
+PR Bar
+PR cmHg
+PR kg/cm2
+PR kg/m2
+PR lb/ft2
+PR mmHg
+PR MPa
+PR HPa
+PR N/m2
+PR Pa
+PR ftH2O
+PR lb/in2
+PR inH2O
+PR inHg
+TM d
+TM h
+TM min
+TM ms
+TM s
+TP K
+TP C
+TP F
+VL ac·ft
+VL bu
+VL cl
+VL cm3
+VL Dl
+VL gal
+VL Hl
+VL l
+VL ml
+VL mm3
+VL floz
+VL ft3
+VL pk
+VL pt
+VL in3
+VL qt
+VL yd3
+WG g
+WG kg
+DN kg/m3
+WG lb
+DN lb/milgal
+DN lb/ft3
+WG mg
+WG Mg
+WG oz
+WG mol
+WG tm
+WG tr
+WG uma
+DN g/l
+DN g/m3
+</Measure>
+<MeasureNames>
+$ USD NCMN000 I
+€ ECU NCMN000 I
+£ GBP NCFN000 I
+¥ JPY NCMN000 I
+Å Å NCMP000 I
+ac ac NCMP000 I
+ac-ft ac·ft NCMP000 I
+ac·ft ac·ft NCMP000 I
+<amstrong> Å $1:NC I
+Bar Bar NCMP000 I
+bit bit NCMP000 I
+Bq Bq NCMP000 I
+bu bu NCMP000 I
+<bushel> bu $1:NC I
+<byte> byte $1:NC I
+byte byte NCMP000 I
+cal cal NCFP000 I
+Cb Cb NCMP000 I
+C C NCMP000 I
+cd cd NCMP000 I
+cl cl NCMP000 I
+cm2 cm2 NCMP000 I
+cm3 cm3 NCMP000 I
+cm3_Fh_s cm3/s NCFS000 I
+cm3_Fh_seg cm3/s NCFS000 I
+cm cm NCMP000 I
+cm_Fh_s cm/s NCFS000 I
+cmhg cmHg NCMP000 I
+cmHg cmHg NCMP000 I
+<coulomb> Cb $1:NC I
+d d NCMP000 I
+Dl Dl NCMP000 I
+eB eB NCMP000 I
+<euro> ECU $1:NC I
+<exabyte> eB $1:NC I
+F F NCMP000 I
+floz floz NCFP000 I
+ft2 ft2 NCMP000 I
+ft3_Fh_min ft3/min NCMS000 I
+ft3_Fh_s ft3/s NCMS000 I
+ft3 ft3 NCMP000 I
+ft_Fh_h ft/h NCMS000 I
+ft_Fh_min ft/min NCMS000 I
+ft_Fh_s2 ft/s2 NCMS000 I
+ft_Fh_s ft/s NCMS000 I
+ft ft NCMP000 I
+fth2o ftH2O NCMP000 I
+ftH2O ftH2O NCMP000 I
+gal_Fh_ac_Fh_d gal/ac/d NCMS000 I
+gal_Fh_cap_Fh_d gal/cap/d NCMS000 I
+gal_Fh_d gal/d NCMS000 I
+gal_Fh_ft2_d gal/ft2/d NCMS000 I
+gal_Fh_ft2_Fh_min gal/ft2/min NCMS000 I
+gal_Fh_ft2 gal/ft2 NCMS000 I
+gal_Fh_h gal/h NCMS000 I
+gal_Fh_min gal/min NCMS000 I
+gal_Fh_s gal/s $1:NC I
+gal gal NCMP000 I
+gb gb NCMP000 I
+gB gB NCMP000 I
+g_Fh_l g/l NCMP000 I
+g_Fh_m3 g/m3 NCMP000 I
+g g NCMP000 I
+<gigabit> gb $1:NC I
+<gigabyte> gB $1:NC I
+<gray> Gy $1:NC I
+Gy Gy NCMP000 I
+hab_Fh_km2 hab/km2 NCFS000 I
+hA hA NCFP000 I
+h h NCFP000 I
+hl Hl NCMP000 I
+Hl Hl NCMP000 I
+HPa HPa NCMP000 I
+hz Hz NCMP000 I
+Hz Hz NCMP000 I
+in2 in2 NCFP000 I
+in3 in3 NCFP000 I
+in_Fh_s2 in/s2 NCFS000 I
+inh20 inH2O NCFP000 I
+inH2O inH2O NCFP000 I
+inhg inHg NCFP000 I
+inHg inHg NCFP000 I
+in in NCFP000 I
+j_Fh_kg·k J/kg·K NCMP000 I
+j_Fh_k J/K NCFS000 I
+J J NCMP000 I
+<joule>_Fh_kelvin J/K $1:NC I
+<joule>_Fh_k J/K $1:NC I
+<joule> J $1:NC I
+kb kb NCMP000 I
+kB kB NCMP000 I
+Kcal Kcal NCFP000 I
+kg_Fh_cm2 kg/cm2 NCMP000 I
+kg_Fh_m2 kg/m2 NCMP000 I
+kg_Fh_m3 kg/m3 NCMP000 I
+kg_Fh_s kg/s NCFS000 I
+kg kg NCMP000 I
+<kilobit> kb $1:NC I
+<kilobyte> kB $1:NC I
+K K NCMP000 I
+km2 km2 NCMP000 I
+km_Fh_h_Fh_s km/h/s NCFS000 I
+km_Fh_h km/h NCFS000 I
+km_Fh_s km/s NCFS000 I
+km km NCMP000 I
+Kwh Kwh NCMP000 I
+lb_Fh_ft2 lb/ft2 NCFP000 I
+lb_Fh_ft3 lb/ft3 NCFP000 I
+lb_Fh_in2 lb/in2 NCFP000 I
+lb_Fh_milgal lb/milgal NCFP000 I
+lbf lbF NCMP000 I
+lbF lbF NCMP000 I
+lb lb NCFP000 I
+l_Fh_día l/d NCFS000 I
+l_Fh_d l/d NCFS000 I
+l_Fh_m2_Fh_d l/m2/d NCFS000 I
+l_Fh_m2_Fh_min l/m2/min NCFS000 I
+l_Fh_m2_Fh_s l/m2/s NCFS000 I
+l_Fh_m2 l/m2 NCFS000 I
+l_Fh_min l/min NCFS000 I
+l_Fh_s l/s NCFS000 I
+l l NCMP000 I
+lm lm NCMP000 I
+lt_Fh_m2_Fh_d l/m2/d NCFS000 I
+lt_Fh_m2_Fh_min l/m2/min NCFS000 I
+lt_Fh_m2_Fh_s l/m2/s NCFS000 I
+lt_Fh_m2 l/m2 NCFS000 I
+lt l NCMP000 I
+<lumen> lm $1:NC I
+<lux> lx $1:NC I
+lx lx NCMP000 I
+m2 m2 NCMP000 I
+m3_Fh_ha_Fh_d m3/ha/d NCFS000 I
+m3_Fh_h m3/h NCFS000 I
+m3_Fh_hora m3/h NCFS000 I
+m3_Fh_m2_Fh_d m3/m2/d NCFS000 I
+m3_Fh_m2_Fh_h m3/m2/h NCFS000 I
+m3_Fh_seg m3/s NCFS000 I
+m3_Fh_s m3/s NCFS000 I
+mb mb NCMP000 I
+mB mB NCMP000 I
+mbps mbps NCMP000 I
+<megabit>_Fh_s mbps $1:NC I
+<megabit> mb $1:NC I
+<megabyte> mB $1:NC I
+<megapascal> MPa $1:NC I
+m_Fh_s m/s NCFS000 I
+mg mg NCMP000 I
+Mg Mg NCMP000 I
+mi2 mi2 NCFP000 I
+mi_Fh_h mi/h NCFS000 I
+mi mi NCFP000 I
+min min NCMP000 I
+ml_Fh_d ml/d NCFS000 I
+ml ml NCMP000 I
+mlt_Fh_d ml/d NCFS000 I
+mm2 mm2 NCMP000 I
+mm3 mm3 NCMP000 I
+mmhg mmHg NCMP000 I
+mmHg mmHg NCMP000 I
+mm mm NCMP000 I
+m m NCMP000 I
+<mol> mol $1:NC I
+mol mol NCMP000 I
+MPa MPa NCMP000 I
+ms ms NCMP000 I
+n_Fh_m2 N/m2 NCMP000 I
+<nibble> nibble $1:NC I
+nibble nibble NCMP000 I
+N N NCMP000 I
+ºc C NCMP000 I
+ºf F NCMP000 I
+<ohm> ohm $1:NCMP000 I
+ohm ohm NCMP000 I
+ºk K NCMP000 I
+oz oz NCFP000 I
+Pa Pa NCMP000 I
+<pascal> Pa $1:NC I
+Pa·s Pa·s NCMP000 I
+pB pB NCMP000 I
+<peck> pk $1:NC I
+<petabyte> pB $1:NC I
+pk pk NCMP000 I
+pt pt NCMP000 I
+qt qt NCMP000 I
+rad_Fh_s rad/s NCFS000 I
+rad rad NCMP000 I
+srad srad NCMP000 I
+s s NCMP000 I
+sv sv NCMP000 I
+tB tB NCMP000 I
+<terabyte> tB $1:NC I
+<tesla> T $1:NC I
+tm tm NCFP000 I
+tr tr NCMP000 I
+T T NCFP000 I
+uma uma NCFP000 I
+u.m.a. uma NCFP000 I
+v_Fh_m V/m NCMP000 I
+<volt> V $1:NC I
+V V NCMP000 I
+<watt> w $1:NC I
+Wb Wb NCMP000 I
+<weber> Wb NCMP000 I
+w_Fh_m_K w/m/K NCFS000 I
+w_Fh_srad w/srad NCFS000 I
+w w NCMP000 I
+yB yB NCMP000 I
+yd2 yd2 NCFP000 I
+yd3 yd3 NCFP000 I
+yd yd NCFP000 I
+<yottabyte> yB NCMP000 I
+zB zB NCMP000 I
+<zettabyte> zB NCMP000 I
+</MeasureNames>

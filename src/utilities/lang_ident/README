@@ -1,0 +1,53 @@
+
+ This directory provides a train.cc program that can be used to learn 
+ models for new languages in the language identifier.
+
+ An example of how to use a trained model to identify language of a 
+ text can be found in src/main/simple_examples/ident.cc
+
+
+ COMPILING
+ ---------
+ To compile the program, issue:
+
+   g++ -o train train.cc -lfreeling
+
+   (You may need to add -I or -L options if your FreeLing includes
+    and lib directories are not in a standard path.)
+
+
+ TRAINING NEW MODELS
+ -------------------
+ To execute it to train a new language, do:
+
+  ./train lang_code model_file < training_text
+
+    (You may need to set LD_LIBRARY_PATH  if your FreeLing 
+     lib directories are not in a standard path)
+
+ E.g.  
+  ./train es  es.dat  < es_text.txt
+  ./train it  it.dat  < it_text.txt
+  ./train jp  jp.dat  < jp_text.txt
+
+  The training text should be any text in the target language.
+  A text of some 50,000 words or more will produce good models.
+
+  Make sure the text utf8 encoded. 
+
+  If you use clean texts for training, results will be better.
+  By "clean text" we understand text that are formatted as you would in 
+  a text processor: untokenized text, with "return" used to separate 
+  paragraphs.
+
+  E.g.  
+   This is a text, which we consider "properly formatted".
+
+  versus:
+   This is a text , 
+   which 
+   we do NOT
+   consider " properly
+   formatted " .
+
+

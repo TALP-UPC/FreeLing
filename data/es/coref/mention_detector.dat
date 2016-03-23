@@ -1,0 +1,68 @@
+%%%%%%%%%%%%%%%%%%%%%
+%%% GENERAL
+%%%%%%%%%%%%%%%%%%%%%
+
+<Language>
+SPANISH
+</Language>
+
+%%%%%%%%%%%%%%%%%%%%%
+%%% MENTION DETECTION
+%%%%%%%%%%%%%%%%%%%%%
+
+%%% Useful syntactic labels 
+<Labels>
+COOR_NP ^coor-n$
+NP ^sn|grup-nom
+NP_PARENTH ^sn-parenth$
+% propouns: personal=PP, demonstrative=PD, relative=PR, indefinite=PI, interrogative=PT, possesive=PX
+% possessive determiners: DP
+PRON ^P[PDRTX]|DP
+% Warning: filter out PT at the beginning of the interrogative sentences
+XPRON ^PT
+% possessive particles
+POSS ^PX|DP 
+
+% Proper names and Named Entities
+PN ^(NP.*|Z.?|W)$
+% Subordinate clauses
+SUB ^relativa$
+% Colon: to detect explanatory subordinate clauses
+PC ^Fc$
+% Common names
+NC ^NC
+% Adjectives
+ADJ ^AQ
+% Dets
+DET ^D
+% Verbs
+VERB ^V
+NUM ^Z
+</Labels>
+
+%%% List of prohibited nouns to be head of mention
+<ProhibitedHeads>
+%% temporal nouns
+mes
+día
+año
+rato
+siglo
+lustro
+minuto
+segundo
+tiempo
+temporada
+década
+semana
+hora
+mañana
+tarde
+noche
+</ProhibitedHeads>
+
+%%% Limit mentions to NE, pronouns and NPs that either are alias of a NE 
+%%% or the head is repeated at least once
+<ReduceMentions>
+no
+</ReduceMentions>

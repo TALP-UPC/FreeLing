@@ -1,0 +1,18 @@
+<Lexicon>
+nec.lex
+</Lexicon>
+<Classifier>
+SVM
+</Classifier>
+<RGF>
+nec.rgf
+<RGF>
+<ModelFile>
+nec.svm
+</ModelFile>
+<Classes>
+0 NP00SP0 1 NP00G00 2 NP00O00 3 NP00V00
+</Classes>
+<NE_Tag>
+NP00000
+</NE_Tag>

@@ -1,0 +1,2574 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="LibreOffice 3.5  (Linux)">
+	<META NAME="CREATED" CONTENT="0;0">
+	<META NAME="CHANGED" CONTENT="20121214;11261100">
+	<META NAME="CHANGEDBY" CONTENT="Lluís Padró">
+	<STYLE TYPE="text/css">
+	<!--
+		@page { margin-left: 3cm; margin-right: 1.5cm; margin-top: 2cm; margin-bottom: 2cm }
+		TD P { widows: 2; orphans: 2 }
+		TD P.western { font-size: 12pt }
+		P { widows: 2; orphans: 2 }
+		P.western { font-size: 12pt }
+		H3.cjk { font-family: "WenQuanYi Micro Hei" }
+		H3.ctl { font-family: "Lohit Hindi" }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<P CLASS="western"><B>INTRODUCTION TO EAGLES TAGS FOR RUSSIAN</B></P>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western">The morphological analyzer for Russian uses a set
+of tags to represent morphological information of words. This set is
+based on a set of tags proposed by the group EAGLES
+(http://www.ilc.cnr.it/EAGLES96/annotate/node9.html) for all European
+languages.</P>
+<P CLASS="western">Since it is planned to collect existing grammar
+constructions in European languages, depending on the language some
+attributes are not relevant or used. If an attribute is not
+specified, it means that it either encodes some information not
+present or not relevant in that language. Underspecified attributes
+get 0 (zero) as value.</P>
+<P CLASS="western">Below the tagset for Russian is presented. 
+</P>
+<P CLASS="western">For each Part-of-Speech category, a table encoding
+attributes, their vaules, and how they are encoded is presented:</P>
+<P CLASS="western"><BR><BR>
+</P>
+<DL>
+	<DL>
+		<DD>
+		<TABLE WIDTH=376 CELLPADDING=2 CELLSPACING=0>
+			<COL WIDTH=43>
+			<COL WIDTH=95>
+			<COL WIDTH=172>
+			<COL WIDTH=48>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Pos</B></P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Attribute</B></P>
+				</TD>
+				<TD WIDTH=172 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Value</B></P>
+				</TD>
+				<TD WIDTH=48 STYLE="border: 1px solid #000000; padding: 0.05cm">
+					<P CLASS="western"><B>Code</B></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western" ALIGN=CENTER>...</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western" ALIGN=CENTER>...</P>
+				</TD>
+				<TD WIDTH=172 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western" ALIGN=CENTER>...</P>
+				</TD>
+				<TD WIDTH=48 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western" ALIGN=CENTER>...</P>
+				</TD>
+			</TR>
+		</TABLE>
+	</DL>
+</DL>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western"><I>Column 1 (PoS)</I> contains the position in the
+tag. C<I>olumn 2 (Attribute)</I> describes the meaning of the
+attribute in that position. C<I>olumn 3 (Value)</I> lists the
+possible values for that attribute, and <I>Column 4 (Code)</I>
+contains the digit that encodes each of these values. 
+</P>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western"><B>Parts of speech:</B></P>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western"><B>A</B>: <A HREF="#adjective">Adjective</A></P>
+<P CLASS="western"><B>D</B>: <A HREF="#adverb">Adverb</A></P>
+<P CLASS="western"><B>P</B>: <A HREF="#pron-adv">Pronominal adverb</A></P>
+<P CLASS="western"><B>Y</B>: <A HREF="#ordinal">Ordinal numeral</A></P>
+<P CLASS="western"><B>R</B>: <A HREF="#pron-adj">Pronominal adjective</A></P>
+<P CLASS="western"><B>M</B>: <A HREF="#part">Part of a compound</A></P>
+<P CLASS="western"><B>C</B>: <A HREF="#conjunction">Conjunction</A></P>
+<P CLASS="western"><B>J</B>: <A HREF="#interjection">Interjection</A></P>
+<P CLASS="western"><B>Z</B>: <A HREF="#numeral">Numeral</A></P>
+<P CLASS="western"><B>T</B>: <A HREF="#particle">Particle</A></P>
+<P CLASS="western"><B>B</B>: <A HREF="#preposition">Preposition</A></P>
+<P CLASS="western"><B>N</B>: <A HREF="#noun">Noun</A></P>
+<P CLASS="western"><B>E</B>: <A HREF="#pronoun">Pronoun</A></P>
+<P CLASS="western"><B>V</B>: <A HREF="#verb">Verb</A></P>
+<P CLASS="western"><B>Q</B>: <A HREF="#participle">Participle</A></P>
+<P CLASS="western"><BR><BR>
+</P>
+<H3 CLASS="western"><A NAME="adjective"></A>Adjective</H3>
+<DL>
+	<DL>
+		<DD>
+		<TABLE WIDTH=441 CELLPADDING=2 CELLSPACING=0>
+			<COL WIDTH=43>
+			<COL WIDTH=95>
+			<COL WIDTH=225>
+			<COL WIDTH=60>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Pos</B></P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Attribute</B></P>
+				</TD>
+				<TD WIDTH=225 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Value</B></P>
+				</TD>
+				<TD WIDTH=60 STYLE="border: 1px solid #000000; padding: 0.05cm">
+					<P CLASS="western"><B>Code</B></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">1</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Category</P>
+				</TD>
+				<TD WIDTH=225 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Adjective</P>
+				</TD>
+				<TD WIDTH=60 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">A</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">2</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Case</P>
+				</TD>
+				<TD WIDTH=225 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Nominative</P>
+					<P CLASS="western">Genitive</P>
+					<P CLASS="western">Dative</P>
+					<P CLASS="western">Accusative</P>
+					<P CLASS="western">Instrumental</P>
+					<P CLASS="western">Prepositional</P>
+					<P CLASS="western">Partitive (2nd genitive)</P>
+					<P CLASS="western">Locative (2nd prepositional)</P>
+					<P CLASS="western">Vocative</P>
+				</TD>
+				<TD WIDTH=60 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">N</P>
+					<P CLASS="western">G</P>
+					<P CLASS="western">D</P>
+					<P CLASS="western">F</P>
+					<P CLASS="western">C</P>
+					<P CLASS="western">O</P>
+					<P CLASS="western">P</P>
+					<P CLASS="western">L</P>
+					<P CLASS="western">V</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">3</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Number</P>
+				</TD>
+				<TD WIDTH=225 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Singular</P>
+					<P CLASS="western">Plural</P>
+				</TD>
+				<TD WIDTH=60 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">S</P>
+					<P CLASS="western">P</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">4</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Gender</P>
+				</TD>
+				<TD WIDTH=225 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Masculine</P>
+					<P CLASS="western">Feminine</P>
+					<P CLASS="western">Neuter</P>
+					<P CLASS="western">Common</P>
+				</TD>
+				<TD WIDTH=60 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">M</P>
+					<P CLASS="western">F</P>
+					<P CLASS="western">N</P>
+					<P CLASS="western">C</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">5</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Animacy</P>
+				</TD>
+				<TD WIDTH=225 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Animate</P>
+					<P CLASS="western">Inanimate</P>
+				</TD>
+				<TD WIDTH=60 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">A</P>
+					<P CLASS="western">I</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">6</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Form of the adjective</P>
+				</TD>
+				<TD WIDTH=225 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Short</P>
+					<P CLASS="western">Full</P>
+				</TD>
+				<TD WIDTH=60 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">S</P>
+					<P CLASS="western">F</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">7</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Degree of comparison</P>
+				</TD>
+				<TD WIDTH=225 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Superlative</P>
+					<P CLASS="western">Comparative</P>
+					<P CLASS="western">Positive</P>
+				</TD>
+				<TD WIDTH=60 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">E</P>
+					<P CLASS="western">C</P>
+					<P CLASS="western">P</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">8</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Additional Information 
+					</P>
+				</TD>
+				<TD WIDTH=225 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Transitions</P>
+					<P CLASS="western">Difficult formation of form</P>
+					<P CLASS="western">Corrupted form</P>
+					<P CLASS="western">Predicative</P>
+					<P CLASS="western">Spoken form 
+					</P>
+					<P CLASS="western">Uncommon word</P>
+					<P CLASS="western">Abbreviation</P>
+					<P CLASS="western">Outdated form</P>
+				</TD>
+				<TD WIDTH=60 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">P</P>
+					<P CLASS="western">D</P>
+					<P CLASS="western">V</P>
+					<P CLASS="western">R</P>
+					<P CLASS="western">I</P>
+					<P CLASS="western">A</P>
+					<P CLASS="western">B</P>
+					<P CLASS="western">E</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">9</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Sign of obscene language</P>
+				</TD>
+				<TD WIDTH=225 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Obscene</P>
+					<P CLASS="western">Non-obscene</P>
+				</TD>
+				<TD WIDTH=60 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">H</P>
+					<P CLASS="western">0</P>
+				</TD>
+			</TR>
+		</TABLE>
+	</DL>
+</DL>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western"><B>Examples:</B></P>
+<P CLASS="western"><BR><BR>
+</P>
+<DL>
+	<DL>
+		<DD>
+		<TABLE WIDTH=404 CELLPADDING=2 CELLSPACING=0 STYLE="page-break-before: auto; page-break-after: auto; page-break-inside: auto">
+			<COL WIDTH=128>
+			<COL WIDTH=142>
+			<COL WIDTH=121>
+			<TR VALIGN=TOP>
+				<TD WIDTH=128 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Word</B></P>
+				</TD>
+				<TD WIDTH=142 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Lemma</B></P>
+				</TD>
+				<TD WIDTH=121 STYLE="border: 1px solid #000000; padding: 0.05cm">
+					<P CLASS="western"><B>Tag</B></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=128 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">звонких</P>
+				</TD>
+				<TD WIDTH=142 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">звонкий</P>
+				</TD>
+				<TD WIDTH=121 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">AGP00F000</P>
+				</TD>
+			</TR>
+		</TABLE>
+	</DL>
+</DL>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western">звонких звонкий AGP00F000:: A -
+adjective, G - genitive, P - plural, F - full form of the adjective.</P>
+<P CLASS="western"><BR><BR>
+</P>
+<H3 CLASS="western"><A NAME="adverb"></A>Adverb</H3>
+<DL>
+	<DL>
+		<DD>
+		<TABLE WIDTH=417 CELLPADDING=2 CELLSPACING=0>
+			<COL WIDTH=43>
+			<COL WIDTH=95>
+			<COL WIDTH=207>
+			<COL WIDTH=54>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Pos</B></P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Attribute</B></P>
+				</TD>
+				<TD WIDTH=207 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Value</B></P>
+				</TD>
+				<TD WIDTH=54 STYLE="border: 1px solid #000000; padding: 0.05cm">
+					<P CLASS="western"><B>Code</B></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">1</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Category</P>
+				</TD>
+				<TD WIDTH=207 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Adverb</P>
+				</TD>
+				<TD WIDTH=54 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">D</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">2</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Degree of comparison</P>
+				</TD>
+				<TD WIDTH=207 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Superlative</P>
+					<P CLASS="western">Comparative</P>
+					<P CLASS="western">Positive</P>
+				</TD>
+				<TD WIDTH=54 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">E</P>
+					<P CLASS="western">C</P>
+					<P CLASS="western">P</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">3</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Additional Information 
+					</P>
+				</TD>
+				<TD WIDTH=207 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Transitions</P>
+					<P CLASS="western">Difficult formation of form</P>
+					<P CLASS="western">Corrupted form</P>
+					<P CLASS="western">Predicative</P>
+					<P CLASS="western">Spoken form 
+					</P>
+					<P CLASS="western">Uncommon word</P>
+					<P CLASS="western">Abbreviation</P>
+					<P CLASS="western">Outdated form</P>
+				</TD>
+				<TD WIDTH=54 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">P</P>
+					<P CLASS="western">D</P>
+					<P CLASS="western">V</P>
+					<P CLASS="western">R</P>
+					<P CLASS="western">I</P>
+					<P CLASS="western">A</P>
+					<P CLASS="western">B</P>
+					<P CLASS="western">E</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">4</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Sign of obscene language</P>
+				</TD>
+				<TD WIDTH=207 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Obscene</P>
+					<P CLASS="western">Non-obscene</P>
+				</TD>
+				<TD WIDTH=54 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">H</P>
+					<P CLASS="western">0</P>
+				</TD>
+			</TR>
+		</TABLE>
+	</DL>
+</DL>
+<P CLASS="western"><BR><BR>
+</P>
+<H3 CLASS="western"><A NAME="pron-adv"></A>Pronominal Adverb</H3>
+<DL>
+	<DL>
+		<DD>
+		<TABLE WIDTH=417 CELLPADDING=2 CELLSPACING=0>
+			<COL WIDTH=43>
+			<COL WIDTH=95>
+			<COL WIDTH=207>
+			<COL WIDTH=54>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Pos</B></P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Attribute</B></P>
+				</TD>
+				<TD WIDTH=207 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Value</B></P>
+				</TD>
+				<TD WIDTH=54 STYLE="border: 1px solid #000000; padding: 0.05cm">
+					<P CLASS="western"><B>Code</B></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">1</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Category</P>
+				</TD>
+				<TD WIDTH=207 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Pronominal adverb</P>
+				</TD>
+				<TD WIDTH=54 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">P</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">2</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Additional Information 
+					</P>
+				</TD>
+				<TD WIDTH=207 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Transitions</P>
+					<P CLASS="western">Difficult formation of form</P>
+					<P CLASS="western">Corrupted form</P>
+					<P CLASS="western">Predicative</P>
+					<P CLASS="western">Spoken form 
+					</P>
+					<P CLASS="western">Uncommon word</P>
+					<P CLASS="western">Abbreviation</P>
+					<P CLASS="western">Outdated form</P>
+				</TD>
+				<TD WIDTH=54 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">P</P>
+					<P CLASS="western">D</P>
+					<P CLASS="western">V</P>
+					<P CLASS="western">R</P>
+					<P CLASS="western">I</P>
+					<P CLASS="western">A</P>
+					<P CLASS="western">B</P>
+					<P CLASS="western">E</P>
+				</TD>
+			</TR>
+		</TABLE>
+	</DL>
+</DL>
+<P CLASS="western"><BR><BR>
+</P>
+<H3 CLASS="western"><A NAME="ordinal"></A>Ordinal</H3>
+<P CLASS="western" STYLE="margin-bottom: 0cm; font-weight: normal">In
+Russian, the ordinal numerals have all the grammatical features of
+relative adjectives. Parts of complex ordinal numbers (from 21 th)
+are written separately: the двадцать первый.
+(Wikipedia)</P>
+<DL>
+	<DL>
+		<DD>
+		<TABLE WIDTH=426 CELLPADDING=2 CELLSPACING=0>
+			<COL WIDTH=43>
+			<COL WIDTH=95>
+			<COL WIDTH=223>
+			<COL WIDTH=47>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Pos</B></P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Attribute</B></P>
+				</TD>
+				<TD WIDTH=223 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Value</B></P>
+				</TD>
+				<TD WIDTH=47 STYLE="border: 1px solid #000000; padding: 0.05cm">
+					<P CLASS="western"><B>Code</B></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">1</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Category</P>
+				</TD>
+				<TD WIDTH=223 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Ordinal</P>
+				</TD>
+				<TD WIDTH=47 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">Y</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">2</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Case</P>
+				</TD>
+				<TD WIDTH=223 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Nominative</P>
+					<P CLASS="western">Genitive</P>
+					<P CLASS="western">Dative</P>
+					<P CLASS="western">Accusative</P>
+					<P CLASS="western">Instrumental</P>
+					<P CLASS="western">Prepositional</P>
+					<P CLASS="western">Partitive (2nd genitive)</P>
+					<P CLASS="western">Locative (2nd prepositional)</P>
+					<P CLASS="western">Vocative</P>
+				</TD>
+				<TD WIDTH=47 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">N</P>
+					<P CLASS="western">G</P>
+					<P CLASS="western">D</P>
+					<P CLASS="western">F</P>
+					<P CLASS="western">C</P>
+					<P CLASS="western">O</P>
+					<P CLASS="western">P</P>
+					<P CLASS="western">L</P>
+					<P CLASS="western">V</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">3</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Number</P>
+				</TD>
+				<TD WIDTH=223 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Singular</P>
+					<P CLASS="western">Plural</P>
+				</TD>
+				<TD WIDTH=47 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">S</P>
+					<P CLASS="western">P</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">4</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Gender</P>
+				</TD>
+				<TD WIDTH=223 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Masculine</P>
+					<P CLASS="western">Feminine</P>
+					<P CLASS="western">Neuter</P>
+					<P CLASS="western">Common</P>
+				</TD>
+				<TD WIDTH=47 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">M</P>
+					<P CLASS="western">F</P>
+					<P CLASS="western">N</P>
+					<P CLASS="western">C</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">5</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Animacy</P>
+				</TD>
+				<TD WIDTH=223 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Animate</P>
+					<P CLASS="western">Inanimate</P>
+				</TD>
+				<TD WIDTH=47 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">A</P>
+					<P CLASS="western">I</P>
+				</TD>
+			</TR>
+		</TABLE>
+	</DL>
+</DL>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western"><B>Examples:</B></P>
+<P CLASS="western"><BR><BR>
+</P>
+<DL>
+	<DL>
+		<DD>
+		<TABLE WIDTH=323 CELLPADDING=2 CELLSPACING=0 STYLE="page-break-before: auto; page-break-after: auto; page-break-inside: auto">
+			<COL WIDTH=110>
+			<COL WIDTH=104>
+			<COL WIDTH=96>
+			<TR VALIGN=TOP>
+				<TD WIDTH=110 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Form</B></P>
+				</TD>
+				<TD WIDTH=104 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Lemma</B></P>
+				</TD>
+				<TD WIDTH=96 STYLE="border: 1px solid #000000; padding: 0.05cm">
+					<P CLASS="western"><B>Tag</B></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=110 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">сотый</P>
+				</TD>
+				<TD WIDTH=104 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">сотый</P>
+				</TD>
+				<TD WIDTH=96 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">YNSM0</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=110 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">сотый</P>
+				</TD>
+				<TD WIDTH=104 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">сотый</P>
+				</TD>
+				<TD WIDTH=96 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">YFSMI</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=110 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">сотою</P>
+				</TD>
+				<TD WIDTH=104 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">сотый</P>
+				</TD>
+				<TD WIDTH=96 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">YCSF0</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=110 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">один</P>
+				</TD>
+				<TD WIDTH=104 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">один</P>
+				</TD>
+				<TD WIDTH=96 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">YNSM0</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=110 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">один</P>
+				</TD>
+				<TD WIDTH=104 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">один</P>
+				</TD>
+				<TD WIDTH=96 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">YFSMI</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=110 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">одну</P>
+				</TD>
+				<TD WIDTH=104 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">один</P>
+				</TD>
+				<TD WIDTH=96 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">YFSF0</P>
+				</TD>
+			</TR>
+		</TABLE>
+	</DL>
+</DL>
+<P CLASS="western"><I>сотый </I>YNSM0: Y-ordinal, N-nominative
+case, S-singular, M-masculine</P>
+<P CLASS="western"><I>сотый </I>YFSMI: Y-ordinal, N-nominative
+case, S-singular, M-masculine I-inanimate</P>
+<P CLASS="western"><I>сотою </I>YCSF0: Y-ordinal,
+C-instrumental, S-singular, F-feminine 
+</P>
+<P CLASS="western"><BR><BR>
+</P>
+<H3 CLASS="western"><A NAME="pron-adj"></A>Pronominal Adjective</H3>
+<DL>
+	<DL>
+		<DD>
+		<TABLE WIDTH=424 CELLPADDING=2 CELLSPACING=0>
+			<COL WIDTH=43>
+			<COL WIDTH=95>
+			<COL WIDTH=223>
+			<COL WIDTH=45>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Pos</B></P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Attribute</B></P>
+				</TD>
+				<TD WIDTH=223 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Value</B></P>
+				</TD>
+				<TD WIDTH=45 STYLE="border: 1px solid #000000; padding: 0.05cm">
+					<P CLASS="western"><B>Code</B></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">1</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Category</P>
+				</TD>
+				<TD WIDTH=223 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Pronominal adjective</P>
+				</TD>
+				<TD WIDTH=45 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">R</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">2</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Case</P>
+				</TD>
+				<TD WIDTH=223 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Nominative</P>
+					<P CLASS="western">Genitive</P>
+					<P CLASS="western">Dative</P>
+					<P CLASS="western">Accusative</P>
+					<P CLASS="western">Instrumental</P>
+					<P CLASS="western">Prepositional</P>
+					<P CLASS="western">Partitive (2nd genitive)</P>
+					<P CLASS="western">Locative (2nd prepositional)</P>
+					<P CLASS="western">Vocative</P>
+				</TD>
+				<TD WIDTH=45 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">N</P>
+					<P CLASS="western">G</P>
+					<P CLASS="western">D</P>
+					<P CLASS="western">F</P>
+					<P CLASS="western">C</P>
+					<P CLASS="western">O</P>
+					<P CLASS="western">P</P>
+					<P CLASS="western">L</P>
+					<P CLASS="western">V</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">3</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Number</P>
+				</TD>
+				<TD WIDTH=223 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Singular</P>
+					<P CLASS="western">Plural</P>
+				</TD>
+				<TD WIDTH=45 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">S</P>
+					<P CLASS="western">P</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">4</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Gender</P>
+				</TD>
+				<TD WIDTH=223 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Masculine</P>
+					<P CLASS="western">Feminine</P>
+					<P CLASS="western">Neuter</P>
+					<P CLASS="western">Common</P>
+				</TD>
+				<TD WIDTH=45 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">M</P>
+					<P CLASS="western">F</P>
+					<P CLASS="western">N</P>
+					<P CLASS="western">C</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">5</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Animacy</P>
+				</TD>
+				<TD WIDTH=223 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Animate</P>
+					<P CLASS="western">Inanimate</P>
+				</TD>
+				<TD WIDTH=45 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">A</P>
+					<P CLASS="western">I</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">6</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Additional Information 
+					</P>
+				</TD>
+				<TD WIDTH=223 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Transitions</P>
+					<P CLASS="western">Difficult formation of form</P>
+					<P CLASS="western">Corrupted form</P>
+					<P CLASS="western">Predicative</P>
+					<P CLASS="western">Spoken form 
+					</P>
+					<P CLASS="western">Uncommon word</P>
+					<P CLASS="western">Abbreviation</P>
+					<P CLASS="western">Outdated form</P>
+				</TD>
+				<TD WIDTH=45 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">P</P>
+					<P CLASS="western">D</P>
+					<P CLASS="western">V</P>
+					<P CLASS="western">R</P>
+					<P CLASS="western">I</P>
+					<P CLASS="western">A</P>
+					<P CLASS="western">B</P>
+					<P CLASS="western">E</P>
+				</TD>
+			</TR>
+		</TABLE>
+	</DL>
+</DL>
+<P CLASS="western"><BR><BR>
+</P>
+<H3 CLASS="western"><A NAME="part"></A>Part of a compound</H3>
+<DL>
+	<DL>
+		<DD>
+		<TABLE WIDTH=423 CELLPADDING=2 CELLSPACING=0>
+			<COL WIDTH=43>
+			<COL WIDTH=95>
+			<COL WIDTH=223>
+			<COL WIDTH=44>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Pos</B></P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Attribute</B></P>
+				</TD>
+				<TD WIDTH=223 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Value</B></P>
+				</TD>
+				<TD WIDTH=44 STYLE="border: 1px solid #000000; padding: 0.05cm">
+					<P CLASS="western"><B>Code</B></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">1</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Category</P>
+				</TD>
+				<TD WIDTH=223 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Compound part</P>
+				</TD>
+				<TD WIDTH=44 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">M</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">2</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Additional Information 
+					</P>
+				</TD>
+				<TD WIDTH=223 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Transitions</P>
+					<P CLASS="western">Difficult formation of form</P>
+					<P CLASS="western">Corrupted form</P>
+					<P CLASS="western">Predicative</P>
+					<P CLASS="western">Spoken form 
+					</P>
+					<P CLASS="western">Uncommon word</P>
+					<P CLASS="western">Abbreviation</P>
+					<P CLASS="western">Outdated form</P>
+				</TD>
+				<TD WIDTH=44 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">P</P>
+					<P CLASS="western">D</P>
+					<P CLASS="western">V</P>
+					<P CLASS="western">R</P>
+					<P CLASS="western">I</P>
+					<P CLASS="western">A</P>
+					<P CLASS="western">B</P>
+					<P CLASS="western">E</P>
+				</TD>
+			</TR>
+		</TABLE>
+	</DL>
+</DL>
+<P CLASS="western"><BR><BR>
+</P>
+<H3 CLASS="western"><A NAME="conjunction"></A>Conjunction</H3>
+<DL>
+	<DL>
+		<DD>
+		<TABLE WIDTH=440 CELLPADDING=2 CELLSPACING=0>
+			<COL WIDTH=43>
+			<COL WIDTH=95>
+			<COL WIDTH=240>
+			<COL WIDTH=44>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Pos</B></P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Attribute</B></P>
+				</TD>
+				<TD WIDTH=240 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Value</B></P>
+				</TD>
+				<TD WIDTH=44 STYLE="border: 1px solid #000000; padding: 0.05cm">
+					<P CLASS="western"><B>Code</B></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">1</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Category</P>
+				</TD>
+				<TD WIDTH=240 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Conjunction</P>
+				</TD>
+				<TD WIDTH=44 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">C</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">2</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Additional Information 
+					</P>
+				</TD>
+				<TD WIDTH=240 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Transitions</P>
+					<P CLASS="western">Difficult formation of form</P>
+					<P CLASS="western">Corrupted form</P>
+					<P CLASS="western">Predicative</P>
+					<P CLASS="western">Spoken form 
+					</P>
+					<P CLASS="western">Uncommon word</P>
+					<P CLASS="western">Abbreviation</P>
+					<P CLASS="western">Outdated form</P>
+				</TD>
+				<TD WIDTH=44 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">P</P>
+					<P CLASS="western">D</P>
+					<P CLASS="western">V</P>
+					<P CLASS="western">R</P>
+					<P CLASS="western">I</P>
+					<P CLASS="western">A</P>
+					<P CLASS="western">B</P>
+					<P CLASS="western">E</P>
+				</TD>
+			</TR>
+		</TABLE>
+	</DL>
+</DL>
+<P CLASS="western"><BR><BR>
+</P>
+<H3 CLASS="western"><A NAME="interjection"></A>Interjection</H3>
+<DL>
+	<DL>
+		<DD>
+		<TABLE WIDTH=427 CELLPADDING=2 CELLSPACING=0>
+			<COL WIDTH=43>
+			<COL WIDTH=95>
+			<COL WIDTH=224>
+			<COL WIDTH=47>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Pos</B></P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Attribute</B></P>
+				</TD>
+				<TD WIDTH=224 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Value</B></P>
+				</TD>
+				<TD WIDTH=47 STYLE="border: 1px solid #000000; padding: 0.05cm">
+					<P CLASS="western"><B>Code</B></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">1</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Category</P>
+				</TD>
+				<TD WIDTH=224 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Interjection</P>
+				</TD>
+				<TD WIDTH=47 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">J</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">2</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Additional Information 
+					</P>
+				</TD>
+				<TD WIDTH=224 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Transitions</P>
+					<P CLASS="western">Difficult formation of form</P>
+					<P CLASS="western">Corrupted form</P>
+					<P CLASS="western">Predicative</P>
+					<P CLASS="western">Spoken form 
+					</P>
+					<P CLASS="western">Uncommon word</P>
+					<P CLASS="western">Abbreviation</P>
+					<P CLASS="western">Outdated form</P>
+				</TD>
+				<TD WIDTH=47 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">P</P>
+					<P CLASS="western">D</P>
+					<P CLASS="western">V</P>
+					<P CLASS="western">R</P>
+					<P CLASS="western">I</P>
+					<P CLASS="western">A</P>
+					<P CLASS="western">B</P>
+					<P CLASS="western">E</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">3</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Sign of obscene language</P>
+				</TD>
+				<TD WIDTH=224 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Obscene</P>
+					<P CLASS="western">Non-obscene</P>
+				</TD>
+				<TD WIDTH=47 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">H</P>
+					<P CLASS="western">0</P>
+				</TD>
+			</TR>
+		</TABLE>
+	</DL>
+</DL>
+<P CLASS="western"><BR><BR>
+</P>
+<H3 CLASS="western"><A NAME="numeral"></A>Numeral</H3>
+<DL>
+	<DL>
+		<DD>
+		<TABLE WIDTH=427 CELLPADDING=2 CELLSPACING=0>
+			<COL WIDTH=43>
+			<COL WIDTH=95>
+			<COL WIDTH=224>
+			<COL WIDTH=47>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Pos</B></P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Attribute</B></P>
+				</TD>
+				<TD WIDTH=224 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Value</B></P>
+				</TD>
+				<TD WIDTH=47 STYLE="border: 1px solid #000000; padding: 0.05cm">
+					<P CLASS="western"><B>Code</B></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">1</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Category</P>
+				</TD>
+				<TD WIDTH=224 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Numeral</P>
+				</TD>
+				<TD WIDTH=47 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">Z</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">2</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Case</P>
+				</TD>
+				<TD WIDTH=224 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Nominative</P>
+					<P CLASS="western">Genitive</P>
+					<P CLASS="western">Dative</P>
+					<P CLASS="western">Accusative</P>
+					<P CLASS="western">Instrumental</P>
+					<P CLASS="western">Prepositional</P>
+					<P CLASS="western">Partitive (2nd genitive)</P>
+					<P CLASS="western">Locative (2nd prepositional)</P>
+					<P CLASS="western">Vocative</P>
+				</TD>
+				<TD WIDTH=47 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">N</P>
+					<P CLASS="western">G</P>
+					<P CLASS="western">D</P>
+					<P CLASS="western">F</P>
+					<P CLASS="western">C</P>
+					<P CLASS="western">O</P>
+					<P CLASS="western">P</P>
+					<P CLASS="western">L</P>
+					<P CLASS="western">V</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">3</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Number</P>
+				</TD>
+				<TD WIDTH=224 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Singular</P>
+					<P CLASS="western">Plural</P>
+				</TD>
+				<TD WIDTH=47 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">S</P>
+					<P CLASS="western">P</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">4</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Gender</P>
+				</TD>
+				<TD WIDTH=224 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Masculine</P>
+					<P CLASS="western">Feminine</P>
+					<P CLASS="western">Neuter</P>
+					<P CLASS="western">Common</P>
+				</TD>
+				<TD WIDTH=47 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">M</P>
+					<P CLASS="western">F</P>
+					<P CLASS="western">N</P>
+					<P CLASS="western">C</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">5</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Animacy</P>
+				</TD>
+				<TD WIDTH=224 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Animate</P>
+					<P CLASS="western">Inanimate</P>
+				</TD>
+				<TD WIDTH=47 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">A</P>
+					<P CLASS="western">I</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">6</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Additional Information 
+					</P>
+				</TD>
+				<TD WIDTH=224 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Transitions</P>
+					<P CLASS="western">Difficult formation of form</P>
+					<P CLASS="western">Corrupted form</P>
+					<P CLASS="western">Predicative</P>
+					<P CLASS="western">Spoken form 
+					</P>
+					<P CLASS="western">Uncommon word</P>
+					<P CLASS="western">Abbreviation</P>
+					<P CLASS="western">Outdated form</P>
+				</TD>
+				<TD WIDTH=47 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">P</P>
+					<P CLASS="western">D</P>
+					<P CLASS="western">V</P>
+					<P CLASS="western">R</P>
+					<P CLASS="western">I</P>
+					<P CLASS="western">A</P>
+					<P CLASS="western">B</P>
+					<P CLASS="western">E</P>
+				</TD>
+			</TR>
+		</TABLE>
+	</DL>
+</DL>
+<P CLASS="western"><BR><BR>
+</P>
+<H3 CLASS="western"><A NAME="particle"></A>Particle</H3>
+<DL>
+	<DL>
+		<DD>
+		<TABLE WIDTH=417 CELLPADDING=2 CELLSPACING=0>
+			<COL WIDTH=43>
+			<COL WIDTH=95>
+			<COL WIDTH=224>
+			<COL WIDTH=37>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Pos</B></P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Attribute</B></P>
+				</TD>
+				<TD WIDTH=224 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Value</B></P>
+				</TD>
+				<TD WIDTH=37 STYLE="border: 1px solid #000000; padding: 0.05cm">
+					<P CLASS="western"><B>Code</B></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">1</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Category</P>
+				</TD>
+				<TD WIDTH=224 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Particle</P>
+				</TD>
+				<TD WIDTH=37 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">T</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">2</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Additional Information 
+					</P>
+				</TD>
+				<TD WIDTH=224 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Transitions</P>
+					<P CLASS="western">Difficult formation of form</P>
+					<P CLASS="western">Corrupted form</P>
+					<P CLASS="western">Predicative</P>
+					<P CLASS="western">Spoken form 
+					</P>
+					<P CLASS="western">Uncommon word</P>
+					<P CLASS="western">Abbreviation</P>
+					<P CLASS="western">Outdated form</P>
+				</TD>
+				<TD WIDTH=37 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">P</P>
+					<P CLASS="western">D</P>
+					<P CLASS="western">V</P>
+					<P CLASS="western">R</P>
+					<P CLASS="western">I</P>
+					<P CLASS="western">A</P>
+					<P CLASS="western">B</P>
+					<P CLASS="western">E</P>
+				</TD>
+			</TR>
+		</TABLE>
+	</DL>
+</DL>
+<P CLASS="western"><BR><BR>
+</P>
+<H3 CLASS="western"><A NAME="preposition"></A>Preposition</H3>
+<DL>
+	<DL>
+		<DD>
+		<TABLE WIDTH=417 CELLPADDING=2 CELLSPACING=0>
+			<COL WIDTH=43>
+			<COL WIDTH=95>
+			<COL WIDTH=223>
+			<COL WIDTH=38>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Pos</B></P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Attribute</B></P>
+				</TD>
+				<TD WIDTH=223 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Value</B></P>
+				</TD>
+				<TD WIDTH=38 STYLE="border: 1px solid #000000; padding: 0.05cm">
+					<P CLASS="western"><B>Code</B></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">1</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Category</P>
+				</TD>
+				<TD WIDTH=223 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Preposition</P>
+				</TD>
+				<TD WIDTH=38 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">B</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">2</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Additional Information 
+					</P>
+				</TD>
+				<TD WIDTH=223 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Transitions</P>
+					<P CLASS="western">Difficult formation of form</P>
+					<P CLASS="western">Corrupted form</P>
+					<P CLASS="western">Predicative</P>
+					<P CLASS="western">Spoken form 
+					</P>
+					<P CLASS="western">Uncommon word</P>
+					<P CLASS="western">Abbreviation</P>
+					<P CLASS="western">Outdated form</P>
+				</TD>
+				<TD WIDTH=38 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">P</P>
+					<P CLASS="western">D</P>
+					<P CLASS="western">V</P>
+					<P CLASS="western">R</P>
+					<P CLASS="western">I</P>
+					<P CLASS="western">A</P>
+					<P CLASS="western">B</P>
+					<P CLASS="western">E</P>
+				</TD>
+			</TR>
+		</TABLE>
+	</DL>
+</DL>
+<P CLASS="western"><BR><BR>
+</P>
+<H3 CLASS="western"><A NAME="noun"></A>Noun</H3>
+<DL>
+	<DL>
+		<DD>
+		<TABLE WIDTH=430 CELLPADDING=2 CELLSPACING=0>
+			<COL WIDTH=43>
+			<COL WIDTH=95>
+			<COL WIDTH=234>
+			<COL WIDTH=40>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Pos</B></P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Attribute</B></P>
+				</TD>
+				<TD WIDTH=234 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Value</B></P>
+				</TD>
+				<TD WIDTH=40 STYLE="border: 1px solid #000000; padding: 0.05cm">
+					<P CLASS="western"><B>Code</B></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">1</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Category</P>
+				</TD>
+				<TD WIDTH=234 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Noun</P>
+				</TD>
+				<TD WIDTH=40 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">N</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">2</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Subcategory</P>
+				</TD>
+				<TD WIDTH=234 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Proper</P>
+					<P CLASS="western">Common</P>
+				</TD>
+				<TD WIDTH=40 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">P</P>
+					<P CLASS="western">C</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">3</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Case</P>
+				</TD>
+				<TD WIDTH=234 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Nominative</P>
+					<P CLASS="western">Genitive</P>
+					<P CLASS="western">Dative</P>
+					<P CLASS="western">Accusative</P>
+					<P CLASS="western">Instrumental</P>
+					<P CLASS="western">Prepositional</P>
+					<P CLASS="western">Partitive (2nd genitive)</P>
+					<P CLASS="western">Locative (2nd prepositional)</P>
+					<P CLASS="western">Vocative</P>
+				</TD>
+				<TD WIDTH=40 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">N</P>
+					<P CLASS="western">G</P>
+					<P CLASS="western">D</P>
+					<P CLASS="western">F</P>
+					<P CLASS="western">C</P>
+					<P CLASS="western">O</P>
+					<P CLASS="western">P</P>
+					<P CLASS="western">L</P>
+					<P CLASS="western">V</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">4</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Number</P>
+				</TD>
+				<TD WIDTH=234 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Singular</P>
+					<P CLASS="western">Plural</P>
+				</TD>
+				<TD WIDTH=40 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">S</P>
+					<P CLASS="western">P</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">5</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Gender</P>
+				</TD>
+				<TD WIDTH=234 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Masculine</P>
+					<P CLASS="western">Feminine</P>
+					<P CLASS="western">Neuter</P>
+					<P CLASS="western">Common</P>
+				</TD>
+				<TD WIDTH=40 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">M</P>
+					<P CLASS="western">F</P>
+					<P CLASS="western">N</P>
+					<P CLASS="western">C</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">6</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Animacy</P>
+				</TD>
+				<TD WIDTH=234 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Animate</P>
+					<P CLASS="western">Inanimate</P>
+				</TD>
+				<TD WIDTH=40 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">A</P>
+					<P CLASS="western">I</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">7</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Additional noun information</P>
+				</TD>
+				<TD WIDTH=234 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Geographical</P>
+					<P CLASS="western">Proper name</P>
+					<P CLASS="western">Patronymic</P>
+					<P CLASS="western">Surname</P>
+				</TD>
+				<TD WIDTH=40 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">G</P>
+					<P CLASS="western">N</P>
+					<P CLASS="western">S</P>
+					<P CLASS="western">F</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">8</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Additional Information 
+					</P>
+				</TD>
+				<TD WIDTH=234 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Transitions</P>
+					<P CLASS="western">Difficult formation of form</P>
+					<P CLASS="western">Corrupted form</P>
+					<P CLASS="western">Predicative</P>
+					<P CLASS="western">Spoken form 
+					</P>
+					<P CLASS="western">Uncommon word</P>
+					<P CLASS="western">Abbreviation</P>
+					<P CLASS="western">Outdated form</P>
+				</TD>
+				<TD WIDTH=40 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">P</P>
+					<P CLASS="western">D</P>
+					<P CLASS="western">V</P>
+					<P CLASS="western">R</P>
+					<P CLASS="western">I</P>
+					<P CLASS="western">A</P>
+					<P CLASS="western">B</P>
+					<P CLASS="western">E</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">9</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Sign of obscene language</P>
+				</TD>
+				<TD WIDTH=234 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Obscene</P>
+					<P CLASS="western">Non-obscene</P>
+				</TD>
+				<TD WIDTH=40 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">H</P>
+					<P CLASS="western">0</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">10</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Named entity class</P>
+				</TD>
+				<TD WIDTH=234 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Person</P>
+					<P CLASS="western">Place</P>
+					<P CLASS="western">Organization</P>
+					<P CLASS="western">Others</P>
+				</TD>
+				<TD WIDTH=40 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">P</P>
+					<P CLASS="western">G</P>
+					<P CLASS="western">O</P>
+					<P CLASS="western">V</P>
+				</TD>
+			</TR>
+		</TABLE>
+	</DL>
+</DL>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western"><B>Examples:</B></P>
+<P CLASS="western"><BR><BR>
+</P>
+<DL>
+	<DL>
+		<DD>
+		<TABLE WIDTH=400 CELLPADDING=2 CELLSPACING=0 STYLE="page-break-before: auto; page-break-after: auto; page-break-inside: auto">
+			<COL WIDTH=109>
+			<COL WIDTH=150>
+			<COL WIDTH=127>
+			<TR VALIGN=TOP>
+				<TD WIDTH=109 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Word</B></P>
+				</TD>
+				<TD WIDTH=150 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Lemma</B></P>
+				</TD>
+				<TD WIDTH=127 STYLE="border: 1px solid #000000; padding: 0.05cm">
+					<P CLASS="western"><B>Code</B></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=109 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">скалолазанье</P>
+				</TD>
+				<TD WIDTH=150 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">скалолазание</P>
+				</TD>
+				<TD WIDTH=127 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">NCNSAI0000</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=109 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">скалолазании</P>
+				</TD>
+				<TD WIDTH=150 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">скалолазание</P>
+				</TD>
+				<TD WIDTH=127 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">NCOSAI0000</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=109 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">растении</P>
+				</TD>
+				<TD WIDTH=150 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">растение</P>
+				</TD>
+				<TD WIDTH=127 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">NCOSAI0000</P>
+				</TD>
+			</TR>
+		</TABLE>
+	</DL>
+</DL>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0cm; font-weight: normal">скалолазание
+скалолазание NCNSAI0000 скалолазание
+NCFSAI0000</P>
+<P CLASS="western" STYLE="margin-bottom: 0cm; font-weight: normal">NCNSAI0000:
+N - noun, C- common, N - nominative, S - singular, A - neuter, I -
+inanimate;</P>
+<P CLASS="western" STYLE="margin-bottom: 0cm; font-weight: normal">NCFSAI0000:
+N - noun, C- common, F - accusative, S - singular, A - neuter, I -
+inanimate;</P>
+<P CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0cm; font-weight: normal">ретроградстве
+ретроградство NCOSAI0000</P>
+<P CLASS="western" STYLE="margin-bottom: 0cm; font-weight: normal">NCOSAI0000:
+N - noun, C- Common, O - prepositional, S - singular, A - neuter, I -
+inanimate;</P>
+<P CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0cm; font-weight: normal">Иванову
+Иванов NP0000000P</P>
+<P CLASS="western" STYLE="margin-bottom: 0cm; font-weight: normal">NP0000000P:
+N - noun, P – proper, P - person</P>
+<P CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P CLASS="western"><BR><BR>
+</P>
+<H3 CLASS="western"><A NAME="pronoun"></A>Pronoun</H3>
+<DL>
+	<DL>
+		<DD>
+		<TABLE WIDTH=431 CELLPADDING=2 CELLSPACING=0>
+			<COL WIDTH=43>
+			<COL WIDTH=95>
+			<COL WIDTH=228>
+			<COL WIDTH=47>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Pos</B></P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Attribute</B></P>
+				</TD>
+				<TD WIDTH=228 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Value</B></P>
+				</TD>
+				<TD WIDTH=47 STYLE="border: 1px solid #000000; padding: 0.05cm">
+					<P CLASS="western"><B>Code</B></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">1</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Category</P>
+				</TD>
+				<TD WIDTH=228 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Pronoun</P>
+				</TD>
+				<TD WIDTH=47 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">E</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">2</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Case</P>
+				</TD>
+				<TD WIDTH=228 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Nominative</P>
+					<P CLASS="western">Genitive</P>
+					<P CLASS="western">Dative</P>
+					<P CLASS="western">Accusative</P>
+					<P CLASS="western">Instrumental</P>
+					<P CLASS="western">Prepositional</P>
+					<P CLASS="western">Partitive (2nd genitive)</P>
+					<P CLASS="western">Locative (2nd prepositional)</P>
+					<P CLASS="western">Vocative</P>
+				</TD>
+				<TD WIDTH=47 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">N</P>
+					<P CLASS="western">G</P>
+					<P CLASS="western">D</P>
+					<P CLASS="western">F</P>
+					<P CLASS="western">C</P>
+					<P CLASS="western">O</P>
+					<P CLASS="western">P</P>
+					<P CLASS="western">L</P>
+					<P CLASS="western">V</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">3</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Number</P>
+				</TD>
+				<TD WIDTH=228 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Singular</P>
+					<P CLASS="western">Plural</P>
+				</TD>
+				<TD WIDTH=47 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">S</P>
+					<P CLASS="western">P</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">4</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Gender</P>
+				</TD>
+				<TD WIDTH=228 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Masculine</P>
+					<P CLASS="western">Feminine</P>
+					<P CLASS="western">Neuter</P>
+					<P CLASS="western">Common</P>
+				</TD>
+				<TD WIDTH=47 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">M</P>
+					<P CLASS="western">F</P>
+					<P CLASS="western">N</P>
+					<P CLASS="western">C</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">5</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Animacy</P>
+				</TD>
+				<TD WIDTH=228 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Animate</P>
+					<P CLASS="western">Inanimate</P>
+				</TD>
+				<TD WIDTH=47 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">A</P>
+					<P CLASS="western">I</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">6</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Person</P>
+				</TD>
+				<TD WIDTH=228 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">First</P>
+					<P CLASS="western">Second</P>
+					<P CLASS="western">Third</P>
+				</TD>
+				<TD WIDTH=47 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">1</P>
+					<P CLASS="western">2</P>
+					<P CLASS="western">3</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">7</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Additional Information 
+					</P>
+				</TD>
+				<TD WIDTH=228 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Transitions</P>
+					<P CLASS="western">Difficult formation of form</P>
+					<P CLASS="western">Corrupted form</P>
+					<P CLASS="western">Predicative</P>
+					<P CLASS="western">Spoken form 
+					</P>
+					<P CLASS="western">Uncommon word</P>
+					<P CLASS="western">Abbreviation</P>
+					<P CLASS="western">Outdated form</P>
+				</TD>
+				<TD WIDTH=47 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">P</P>
+					<P CLASS="western">D</P>
+					<P CLASS="western">V</P>
+					<P CLASS="western">R</P>
+					<P CLASS="western">I</P>
+					<P CLASS="western">A</P>
+					<P CLASS="western">B</P>
+					<P CLASS="western">E</P>
+				</TD>
+			</TR>
+		</TABLE>
+	</DL>
+</DL>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western">Examples:</P>
+<DL>
+	<DL>
+		<DD>
+		<TABLE WIDTH=344 CELLPADDING=2 CELLSPACING=0 STYLE="page-break-before: auto; page-break-after: auto; page-break-inside: auto">
+			<COL WIDTH=131>
+			<COL WIDTH=82>
+			<COL WIDTH=117>
+			<TR VALIGN=TOP>
+				<TD WIDTH=131 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Form</B></P>
+				</TD>
+				<TD WIDTH=82 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Lemma</B></P>
+				</TD>
+				<TD WIDTH=117 STYLE="border: 1px solid #000000; padding: 0.05cm">
+					<P CLASS="western"><B>Tag</B></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=131 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">они</P>
+				</TD>
+				<TD WIDTH=82 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">они</P>
+				</TD>
+				<TD WIDTH=117 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">ENP0000</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=131 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">ними</P>
+				</TD>
+				<TD WIDTH=82 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">они</P>
+				</TD>
+				<TD WIDTH=117 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">ECP0000</P>
+				</TD>
+			</TR>
+		</TABLE>
+	</DL>
+</DL>
+<P CLASS="western"><BR><BR>
+</P>
+<H3 CLASS="western"><A NAME="verb"></A>Verb</H3>
+<DL>
+	<DL>
+		<DD>
+		<TABLE WIDTH=410 CELLPADDING=2 CELLSPACING=0>
+			<COL WIDTH=43>
+			<COL WIDTH=95>
+			<COL WIDTH=213>
+			<COL WIDTH=41>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Pos</B></P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Attribute</B></P>
+				</TD>
+				<TD WIDTH=213 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Value</B></P>
+				</TD>
+				<TD WIDTH=41 STYLE="border: 1px solid #000000; padding: 0.05cm">
+					<P CLASS="western"><B>Code</B></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">1</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Category</P>
+				</TD>
+				<TD WIDTH=213 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Verb</P>
+				</TD>
+				<TD WIDTH=41 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">V</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">2</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Mood</P>
+				</TD>
+				<TD WIDTH=213 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Gerund</P>
+					<P CLASS="western">Infinitive</P>
+					<P CLASS="western">Indicative</P>
+					<P CLASS="western">Imperative</P>
+				</TD>
+				<TD WIDTH=41 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">G</P>
+					<P CLASS="western">I</P>
+					<P CLASS="western">D</P>
+					<P CLASS="western">M</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">3</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Number</P>
+				</TD>
+				<TD WIDTH=213 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Singular</P>
+					<P CLASS="western">Plural</P>
+				</TD>
+				<TD WIDTH=41 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">S</P>
+					<P CLASS="western">P</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">4</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Gender</P>
+				</TD>
+				<TD WIDTH=213 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Masculine</P>
+					<P CLASS="western">Feminine</P>
+					<P CLASS="western">Neuter</P>
+					<P CLASS="western">Common</P>
+				</TD>
+				<TD WIDTH=41 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">M</P>
+					<P CLASS="western">F</P>
+					<P CLASS="western">N</P>
+					<P CLASS="western">C</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">5</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Tense</P>
+				</TD>
+				<TD WIDTH=213 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Present</P>
+					<P CLASS="western">Future</P>
+					<P CLASS="western">Past</P>
+				</TD>
+				<TD WIDTH=41 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">P</P>
+					<P CLASS="western">F</P>
+					<P CLASS="western">S</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">6</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Person</P>
+				</TD>
+				<TD WIDTH=213 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">First</P>
+					<P CLASS="western">Second</P>
+					<P CLASS="western">Third</P>
+				</TD>
+				<TD WIDTH=41 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">1</P>
+					<P CLASS="western">2</P>
+					<P CLASS="western">3</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">7</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Aspect</P>
+				</TD>
+				<TD WIDTH=213 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Perfective</P>
+					<P CLASS="western">Imperfective</P>
+				</TD>
+				<TD WIDTH=41 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">F</P>
+					<P CLASS="western">N</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">8</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Voice</P>
+				</TD>
+				<TD WIDTH=213 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Active</P>
+					<P CLASS="western">Passive</P>
+				</TD>
+				<TD WIDTH=41 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">A</P>
+					<P CLASS="western">S</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">9</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Transitivity</P>
+				</TD>
+				<TD WIDTH=213 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Transitive verb</P>
+					<P CLASS="western">Intransitive verb</P>
+				</TD>
+				<TD WIDTH=41 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">M</P>
+					<P CLASS="western">A</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">10</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Additional Information 
+					</P>
+				</TD>
+				<TD WIDTH=213 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Transitions</P>
+					<P CLASS="western">Difficult formation of form</P>
+					<P CLASS="western">Corrupted form</P>
+					<P CLASS="western">Predicative</P>
+					<P CLASS="western">Spoken form 
+					</P>
+					<P CLASS="western">Uncommon word</P>
+					<P CLASS="western">Abbreviation</P>
+					<P CLASS="western">Outdated form</P>
+				</TD>
+				<TD WIDTH=41 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">P</P>
+					<P CLASS="western">D</P>
+					<P CLASS="western">V</P>
+					<P CLASS="western">R</P>
+					<P CLASS="western">I</P>
+					<P CLASS="western">A</P>
+					<P CLASS="western">B</P>
+					<P CLASS="western">E</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">11</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Sign of obscene language</P>
+				</TD>
+				<TD WIDTH=213 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Obscene</P>
+					<P CLASS="western">Non-obscene</P>
+				</TD>
+				<TD WIDTH=41 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">H</P>
+					<P CLASS="western">0</P>
+				</TD>
+			</TR>
+		</TABLE>
+	</DL>
+</DL>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western"><B>Examples:</B></P>
+<DL>
+	<DL>
+		<DD>
+		<TABLE WIDTH=366 CELLPADDING=2 CELLSPACING=0 STYLE="page-break-before: auto; page-break-after: auto; page-break-inside: auto">
+			<COL WIDTH=110>
+			<COL WIDTH=119>
+			<COL WIDTH=123>
+			<TR VALIGN=TOP>
+				<TD WIDTH=110 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Word</B></P>
+				</TD>
+				<TD WIDTH=119 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Lemma</B></P>
+				</TD>
+				<TD WIDTH=123 STYLE="border: 1px solid #000000; padding: 0.05cm">
+					<P CLASS="western"><B>Code</B></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=110 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">сей</P>
+				</TD>
+				<TD WIDTH=119 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">скалолазание</P>
+				</TD>
+				<TD WIDTH=123 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">VMS000N0000</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=110 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">сею</P>
+				</TD>
+				<TD WIDTH=119 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">скалолазание</P>
+				</TD>
+				<TD WIDTH=123 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">VDS0F0N0000</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=110 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">нашей</P>
+				</TD>
+				<TD WIDTH=119 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">нашивать</P>
+				</TD>
+				<TD WIDTH=123 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">VMS00000000</P>
+				</TD>
+			</TR>
+		</TABLE>
+	</DL>
+</DL>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0cm; font-weight: normal">сей
+сеять VMS000N0000: V - verb, M - imperative, S -singular, N -
+imperfective</P>
+<P CLASS="western" STYLE="margin-bottom: 0cm; font-weight: normal">сею
+сеять VDS0F0N0000: V - verb, D - indicative, S - singular, F -
+Future, N - imperfective</P>
+<P CLASS="western" STYLE="margin-bottom: 0cm; font-weight: normal">нашей
+нашивать VMS00000000: V - verb, M - imperative, S - singular</P>
+<P CLASS="western"><BR><BR>
+</P>
+<H3 CLASS="western"><A NAME="participle"></A>Participle</H3>
+<DL>
+	<DL>
+		<DD>
+		<TABLE WIDTH=413 CELLPADDING=2 CELLSPACING=0>
+			<COL WIDTH=43>
+			<COL WIDTH=95>
+			<COL WIDTH=212>
+			<COL WIDTH=45>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Pos</B></P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Attribute</B></P>
+				</TD>
+				<TD WIDTH=212 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><B>Value</B></P>
+				</TD>
+				<TD WIDTH=45 STYLE="border: 1px solid #000000; padding: 0.05cm">
+					<P CLASS="western"><B>Code</B></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">1</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Category</P>
+				</TD>
+				<TD WIDTH=212 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Participle</P>
+				</TD>
+				<TD WIDTH=45 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">Q</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">2</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Mood</P>
+				</TD>
+				<TD WIDTH=212 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Gerund</P>
+					<P CLASS="western">Infinitive</P>
+					<P CLASS="western">Indicative</P>
+					<P CLASS="western">Imperative</P>
+				</TD>
+				<TD WIDTH=45 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">G</P>
+					<P CLASS="western">I</P>
+					<P CLASS="western">D</P>
+					<P CLASS="western">M</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">3</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Number</P>
+				</TD>
+				<TD WIDTH=212 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Singular</P>
+					<P CLASS="western">Plural</P>
+				</TD>
+				<TD WIDTH=45 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">S</P>
+					<P CLASS="western">P</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">4</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Gender</P>
+				</TD>
+				<TD WIDTH=212 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Masculine</P>
+					<P CLASS="western">Feminine</P>
+					<P CLASS="western">Neuter</P>
+					<P CLASS="western">Common</P>
+				</TD>
+				<TD WIDTH=45 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">M</P>
+					<P CLASS="western">F</P>
+					<P CLASS="western">N</P>
+					<P CLASS="western">C</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">5</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Tense</P>
+				</TD>
+				<TD WIDTH=212 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Present</P>
+					<P CLASS="western">Future</P>
+					<P CLASS="western">Past</P>
+				</TD>
+				<TD WIDTH=45 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">P</P>
+					<P CLASS="western">F</P>
+					<P CLASS="western">S</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">6</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Person</P>
+				</TD>
+				<TD WIDTH=212 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">First</P>
+					<P CLASS="western">Second</P>
+					<P CLASS="western">Third</P>
+				</TD>
+				<TD WIDTH=45 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">1</P>
+					<P CLASS="western">2</P>
+					<P CLASS="western">3</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">7</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Aspect</P>
+				</TD>
+				<TD WIDTH=212 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Perfective</P>
+					<P CLASS="western">Imperfective</P>
+				</TD>
+				<TD WIDTH=45 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">F</P>
+					<P CLASS="western">N</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">8</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Voice</P>
+				</TD>
+				<TD WIDTH=212 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Active</P>
+					<P CLASS="western">Passive</P>
+				</TD>
+				<TD WIDTH=45 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">A</P>
+					<P CLASS="western">S</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">9</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Transitivity</P>
+				</TD>
+				<TD WIDTH=212 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Transitive verb</P>
+					<P CLASS="western">Intransitive verb</P>
+				</TD>
+				<TD WIDTH=45 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">M</P>
+					<P CLASS="western">A</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">10</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Additional Information 
+					</P>
+				</TD>
+				<TD WIDTH=212 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Transitions</P>
+					<P CLASS="western">Difficult formation of form</P>
+					<P CLASS="western">Corrupted form</P>
+					<P CLASS="western">Predicative</P>
+					<P CLASS="western">Spoken form 
+					</P>
+					<P CLASS="western">Uncommon word</P>
+					<P CLASS="western">Abbreviation</P>
+					<P CLASS="western">Outdated form</P>
+				</TD>
+				<TD WIDTH=45 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">P</P>
+					<P CLASS="western">D</P>
+					<P CLASS="western">V</P>
+					<P CLASS="western">R</P>
+					<P CLASS="western">I</P>
+					<P CLASS="western">A</P>
+					<P CLASS="western">B</P>
+					<P CLASS="western">E</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=43 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">11</P>
+				</TD>
+				<TD WIDTH=95 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Sign of obscene language</P>
+				</TD>
+				<TD WIDTH=212 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">Obscene</P>
+					<P CLASS="western">Non-obscene</P>
+				</TD>
+				<TD WIDTH=45 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">H</P>
+					<P CLASS="western">0</P>
+				</TD>
+			</TR>
+		</TABLE>
+	</DL>
+</DL>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western"><B>Examples:</B></P>
+<P CLASS="western"><BR><BR>
+</P>
+<DL>
+	<DL>
+		<DD>
+		<TABLE WIDTH=385 CELLPADDING=2 CELLSPACING=0>
+			<COL WIDTH=126>
+			<COL WIDTH=127>
+			<COL WIDTH=119>
+			<TR VALIGN=TOP>
+				<TD WIDTH=126 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><FONT COLOR="#000000"><B>Word</B></FONT></P>
+				</TD>
+				<TD WIDTH=127 STYLE="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.05cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western"><FONT COLOR="#000000"><B>Lemma</B></FONT></P>
+				</TD>
+				<TD WIDTH=119 STYLE="border: 1px solid #000000; padding: 0.05cm">
+					<P CLASS="western"><FONT COLOR="#000000"><B>Code</B></FONT></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=126 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">мобилизованному</P>
+				</TD>
+				<TD WIDTH=127 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">мобилизовать</P>
+				</TD>
+				<TD WIDTH=119 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">QDSMSF00000</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=126 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">мобилизованных</P>
+				</TD>
+				<TD WIDTH=127 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">мобилизовать</P>
+				</TD>
+				<TD WIDTH=119 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">QGP0SFF0000</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=126 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">мобилизованный</P>
+				</TD>
+				<TD WIDTH=127 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
+					<P CLASS="western">мобилизовать</P>
+				</TD>
+				<TD WIDTH=119 STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm">
+					<P CLASS="western">QMSMSF00000</P>
+				</TD>
+			</TR>
+		</TABLE>
+	</DL>
+</DL>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0cm; font-weight: normal">мобилизованному
+мобилизовать QDSMS0F0000: Q - participle, D - indicative,
+S - singular, M - masculine, S - past, F - perfective</P>
+<P CLASS="western" STYLE="margin-bottom: 0cm; font-weight: normal">мобилизованных
+мобилизовать: QGP0S0F0000: Q - participle, G - gerund, P
+– plural, S - past, F - perfective</P>
+<P CLASS="western" STYLE="margin-bottom: 0cm; font-weight: normal">мобилизованный
+мобилизовать: QMSMS0F0000: Q - participle, M -
+imperative, S- singular, M- Masculine, S - past, F - perfective</P>
+<P CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+</P>
+</BODY>
+</HTML>

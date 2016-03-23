@@ -1,0 +1,44 @@
+#!/bin/bash
+
+#  usage:
+#
+#  - analyze stdin in interactive mode:
+#     analyze [options]    
+#
+#  - start an analyzer server
+#     analyze [options] --server --port <portnum>
+#
+#  - stop an analyzer server
+#     analyze stop PORT
+#
+#  Executes freeling analyzer with given options, taking care of
+#  paths and default locations
+# 
+#  This script also checks whether the config file given with option -f
+#  is found in the current directory. If not, it is searched in
+#  share/FreeLing/config under FreeLing installation directory.
+
+
+# enable extended regexps for bash
+shopt -s extglob
+
+## Execute FreeLing environment initialization
+. $(cd $(dirname $0) && echo $PWD)/fl_initialize $@
+
+if [[ "$1" == "stop" ]]; then
+  # If the first argument is the word "stop", signal the server to stop
+  if [[ "x$2" == "x" ]]; then
+    echo "Missing pid for server to stop."
+    exit
+  fi
+  # Signal the server to stop
+  kill -15 $2
+else
+  ## otherwise call the actual executable with given arguments 
+  $FREELING/bin/analyzer $param
+fi
+
+
+
+
+

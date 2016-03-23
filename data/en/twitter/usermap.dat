@@ -1,0 +1,94 @@
+#[^\s]+ .hashtag. NP00000
+RT .response-to. NN
+@[^\s]+ .response-to. NP00000
+http://.+ .url. Fz
+
+%%% horizontal smiles like 
+%%% :) :)) :))) :-) O:-) :') =) ;) :D :( B-) :(( :((( :'( ;P :|
+[>Oo]?[:;B8=]['_]*\-?[\)\|\(DPp]+ .smiley. Fz
+[xX][D\)] .smiley. Fz
+[lL][Oo][lL] .smiley. Fz
+
+%%% "left hand" smiles
+%%% D:<
+[(D)\|]-?:[<Oo]? .smiley. Fz
+
+%%% Vertical faces like v__v *_O -.- -_-u %%% O_o vv' *__*
+[\-*vVOo][_\.]+[\-*vVOo][uU']? $$ Fz
+
+%%% other complex objects and strange faces
+\([oOY\s]+\) $$ Fz
+<3 .icon. Fz
+</3 .icon. Fz
+\(+:+ .icon. Fz
+:'?3 .smiley. Fz
+
+
+%%% Joooooo
+[jJ][oO]+ .jo. I
+
+%%% (laughs)
+%%% jujuuuuu    HAHAHAHAHAHA   wuajajajjaa 
+%%% mauhaajjaaj mmmwuahahahaha jajajaja...
+%%% aJajjjajajaaj juasjuasjuas
+
+([mw]+a*)?[aA]*([jJ]+[aA]*)([jJ]+[aA]*)+ .laugh. I
+([mw]+a*)?[aA]*([hH]+[aA]*)([hH]+[aA]*)+ .laugh. I
+%([Jj][uU][aA][sS])+ .laugh. I
+
+([mw]+a*)?[eE]*([jJ]+[eE]*)([jJ]+[eE]*)+ .laugh. I
+([mw]+a*)?[eE]*([hH]+[eE]*)([hH]+[eE]*)+ .laugh. I
+
+([mw]+a*)?[iI]*([jJ]+[iI]*)([jJ]+[iI]*)+ .laugh. I
+([mw]+a*)?[iI]*([hH]+[iI]*)([hH]+[iI]*)+ .laugh. I
+
+([mw]+a*)?[oO]*([jJ]+[oO]*)([jJ]+[oO]*)+ .laugh. I
+([mw]+a*)?[oO]*([hH]+[oO]*)([hH]+[oO]*)+ .laugh. I
+
+([mw]+a*)?[uU]*([jJ]+[uU]*)([jJ]+[uU]*)+ .laugh. I
+([mw]+a*)?[uU]*([hH]+[uU]*)([hH]+[uU]*)+ .laugh. I
+
+([mw]+a*)?[aAeEiIoOuU]*([jJ]+[aAeEiIoOuU]*)([jJ]+[aAeEiIoOuU]*)+ .laugh. I
+([mw]+a*)?[aAeEiIoOuU]*([hH]+[aAeEiIoOuU]*)([hH]+[aAeEiIoOuU]*)+ .laugh. I
+
+%%% puf, pffff
+[pP]+[Uu]*[Ff]+ .puff. I
+
+%%% ufff
+[pPUu]+[Ff]+ .puff. I
+
+%%% kiss muaxh muacks mcuack
+[mM][uU][aA][cC][kKsS]* .kiss. I
+
+%%% ay, ai, ayayaya
+([aA]+[iIyY]+)+ .ay. I
+
+%%% agggg aaaah
+([aA]+[hHgG]+) .agh. I
+[Aa]+[Rr]+[gGhH]([Gg]*[Hh]*)* .agh. I
+
+%%% bah bueh
+[bB][aA][hH] .bah. I
+[bB][uU][eE][hH] .bah. I
+
+%%% Huuuyyy ui uiiii (no cobreix "huí" del verb "huir")
+[hH]?[uU]+[iIyY]+ .ay. I
+
+%%% Yum-yum! Hauria de ser ñam-ñam
+[Yy]+[uU]+[mM]+[yY]* .yum. I
+[Ññ]+[aA]+[mM]+[ñÑ]* .yum. I
+
+% exclamations
+[oO]+[hH]+ .oh. I
+[aA]+[hH]+ .ah. I
+[eE]+[hH]+ .eh. I
+[uU]+[hH]+ .uh. I
+
+% hum, jum, hm
+[jJhH][uU]?[mM] .hum. I
+
+%%% other
+[aA][iI][nN][sS]+ $$ I
+[mM]{2,} $$ I
+[yY]+[eE]+[aA]+[hH]* $$ I
+[bcçdfghjklmnñpqrstvwxyz]{4,} $$ I

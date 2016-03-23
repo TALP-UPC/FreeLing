@@ -1,0 +1,306 @@
+
+##########################################################
+#
+#  This file contains rules for phonetic encoding of
+#  Czech words in SAMPA standard
+#
+##########################################################
+
+
+# Rules change from a sound (one or more letters) or a category
+# to another sound or category, in a certain context.
+#
+# Category names can have only one letter are usually uppercase.
+#
+# Contexts must contain a "_" symbol indicating where the replacement
+# takes place; they may also contain letters, categories, and the special
+# symbols ( ) (to enclose optional parts), ^ (word beginning), or $ (word end)
+#
+# Rules can only change letters/sounds to sounds, and categories to categories.
+# If a category is to be changed to another category, they should contain the 
+# same number of characteers. Otherwise the second category will have its last
+# letter repeated until it has the same length as the first (if it is
+# shorter), or characters in the second category that don't match
+# characters in the first will be ignored.
+#
+# Don't use regex metacharacters (except for the parentheses, ^, and $) in
+# context specifications, category names, or sound codes.
+
+############################################
+<Rules>
+#############
+# Categories
+#############
+
+# vowels, long, short
+U=áéíóú
+V=aeiou
+X=aeiouáéíóú
+# c/dz, č/dž, neznelé ř/znelé ř riešené inak
+A=ptťkfsšx
+B=bdďgvzžh
+
+
+# ako prvé
+x/ks/_
+q/kv/_
+ch/x/_
+
+## PRAVIDLÁ MODIFIKUJÚCE TEXT NORMÁLNYMI PÍSMENAMI (nie veľkými)
+
+jsem/sem/^_$
+jsi/si/^_$
+jsme/sme/^_$
+jste/ste/^_$
+jsou/sou/^_$
+
+# koupit [koʊ̯pɪt] – dvojhláska /oʊ̯/
+ou/o_u/_
+au/a_u/_
+eu/e_u/_
+
+# kvazidvojhlasky
+# neplati v cudzich slovach, na to asi treba lexikon
+ia/ija/_
+ie/ije/_
+ii/iji/_
+io/ijo/_
+iu/iju/_
+
+# použít [poʔʊʒiːt] – setkání /o/ + /ʊ/ na hranici předpony a kořene slova
+# pokud dojde setkání samohlásky a /ʊ/
+
+# au
+a_u/au/^n_
+a_u/au/^z_
+a_u/au/^led_
+a_u/au/^p_
+# radšej nie, napr. auto
+# slovo na a-u ma žiadne nenapadá
+#a_u/au/^_
+a_u/au/^di_
+a_u/au/^extr_
+a_u/au/^hept_
+a_u/au/^hex_
+a_u/au/^infr_
+a_u/au/^intr_
+a_u/au/^kontr_
+a_u/au/^met_
+a_u/au/^par_
+a_u/au/^supr_
+a_u/au/^tetr_
+a_u/au/^ultr_
+a_u/au/^yott_
+a_u/au/^zett_
+a_u/au/^ex_
+a_u/au/^pet_
+a_u/au/^ter_
+a_u/au/^gig_
+a_u/au/^meg_
+a_u/au/^dek_
+
+# ou
+
+o_u/ou/^d_
+o_u/ou/^p_
+o_u/ou/^mim_
+o_u/ou/^míst_
+o_u/ou/^okol_
+o_u/ou/^pol_
+o_u/ou/^skor_
+o_u/ou/^hyp_
+o_u/ou/^kvadr_
+o_u/ou/^makr_
+o_u/ou/^mezz_
+o_u/ou/^mikr_
+o_u/ou/^pent_
+o_u/ou/^pr_
+o_u/ou/^prot_
+o_u/ou/^pseud_
+o_u/ou/^kil_
+o_u/ou/^hekt_
+o_u/ou/^mikr_
+o_u/ou/^nan_
+o_u/ou/^pik_
+o_u/ou/^femt_
+o_u/ou/^att_
+o_u/ou/^zept_
+o_u/ou/^yokt_
+
+e_u/eu/^př_
+e_u/eu/^n_
+e_u/eu/^vel_
+e_u/eu/^ant_
+e_u/eu/^r_
+e_u/eu/^pr_
+e_u/eu/^vic_
+
+ě_u/ěu/^vn_
+ě_u/ěu/^n_
+
+####################
+#
+di/ďi/_
+dí/ďí/_
+ti/ťi/_
+tí/ťí/_
+ni/ňi/_
+ní/ňí/_
+
+# až po di/ti/ni/.. inak šaty -> šaťi
+y/i/_
+ý/í/_
+
+# ě
+dě/ďe/_
+tě/ťe/_
+ně/ňe/_
+
+# {b,p,v,f}ě
+bě/bje/_
+pě/pje/_
+vě/vje/_
+fě/fje/_
+mě/mJe/_
+
+
+# SPODOBOVANIE / ASIMILÁCIA 
+
+# znělé souhlásky se na konci slov vyslovují nezněle
+# např. led [lɛt] - ledu [lɛdu]
+B/A/_$
+dz/c/_$
+dž/č/_$
+
+
+# ba_n_ka
+n/N/_k
+n/N/_g
+n/N/_x
+
+# tra_m_vaj
+m/F/_v
+m/F/_f
+
+# v - fčela
+v/f/_A
+v/f/_c
+v/f/_č
+
+# srdce -> srce
+d//_c
+d//_č
+d//_dz
+d//_dž
+t//_c
+t//_č
+t//_dz
+t//_dž
+
+# detský -> decký
+# najčastejšie
+ds/c/_
+dš/č/_
+ts/c/_
+tš/č/_
+
+
+
+# regresívna asimilácia
+A/B/_B
+A/B/_dz
+A/B/_dž
+c/B/_B
+c/B/_dz
+c/B/_dž
+č/B/_B
+č/B/_dz
+č/B/_dž
+
+B/A/_A
+B/A/_c
+B/A/_č
+dz/A/_A
+dz/A/_c
+dz/A/_č
+dž/A/_A
+dž/A/_c
+dž/A/_č
+
+## max. 2x, viacnásobná asimilácia nepodporovaná
+A/B/_B
+A/B/_dz
+A/B/_dž
+c/dz/_B
+c/dz/_dz
+c/dz/_dž
+č/dž/_B
+č/dž/_dz
+č/dž/_dž
+
+B/A/_A
+B/A/_c
+B/A/_č
+dz/c/_A
+dz/c/_c
+dz/c/_č
+dž/č/_A
+dž/č/_c
+dž/č/_č
+
+# fix v in zvětlo -> světlo
+B/A/_v
+dz/A/_v
+dž/A/_v
+
+
+# ř je znelé pri přetvá_ř_ka a na začiatku slov (zrejme)
+# neznelé pri 'při' a na konci slov 'keř', 'pepř'
+## neznelé ř
+### progresívna asimilácia
+ř/Q\/A_X
+ř/Q\/c_X
+ř/Q\/č_X
+### regresívna asimilácia
+ř/Q\/X_A
+ř/Q\/X_c
+ř/Q\/X_č
+### koniec slova
+ř/Q\/_$
+
+### zvyšok bude znelé
+ř/P\/_
+
+</Rules>
+
+<Rules>
+í/i:/_
+é/e:/_
+á/a:/_
+ó/o:/_
+ú/u:/_
+ů/u:/_
+ě/e/_
+</Rules>
+
+
+<Rules>
+dz/d_z/_
+dž/d_Z/_
+c/t_s/_
+č/t_S/_
+h/h\/_
+š/S/_
+ž/Z/_
+ď/J\/_
+ň/J/_
+
+# ako posledné a v druhom rulesete, lebo robia inak bordel
+ť/c/_
+</Rules>
+
+### Exceptions: words in this list are not applied the rulesets.
+<Exceptions>
+
+</Exceptions>
+

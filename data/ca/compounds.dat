@@ -1,0 +1,21 @@
+
+<UnknownWordsOnly>
+yes
+</UnknownWordsOnly>
+
+<JoinChars>
+## list of chars that may join compound elements (one char per line)
+-
+</JoinChars>
+
+<CompoundPatterns>
+## trencaclosques, lligacames
+VMIP3S0_NC NCCN000
+
+## aiguaneu, terra-aire
++NC_NC
+
+## agredolç, nord-est
+AQ_+AQ
+
+</CompoundPatterns>

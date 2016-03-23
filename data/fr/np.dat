@@ -1,0 +1,56 @@
+## Type of NE recognizer (basic/BIO). Changing this value will require
+## changing some sections in the rest of the file
+<Type>
+basic
+</Type>
+
+## list of words that may be included in a Named Entity
+## e.g.  "Banco de España"  "Pedro Villacasas de la Morena"
+<FunctionWords>
+le
+la
+les
+l'
+un
+une
+unes
+de
+d'
+&
+pour
+</FunctionWords>
+## Punctuation mark tags after which a capitalized word
+## may be indicating just a sentence (or clause) beginning
+<SpecialPunct>
+Fpa
+Fca
+Fla
+Fp
+Fs
+Fd
+Fg
+Fe
+Fia
+Fit
+Faa
+Fat
+Fra
+Frc
+</SpecialPunct>
+## Tag to be assigned to detected NEs
+<NE_Tag>
+NP00000
+</NE_Tag>
+<TitleLimit>
+0
+</TitleLimit>
+<Affixes>
+mr.  PRE
+md. PRE
+mme. PRE
+ms.  PRE
+jr. SUF
+</Affixes>
+<SplitMultiwords>
+no
+</SplitMultiwords>

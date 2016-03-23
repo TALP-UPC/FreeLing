@@ -1,0 +1,284 @@
+# ===============================================
+#            Affixation rules file
+# ===============================================
+
+# === Each line is a affixation rule, with the following fields:
+# 1 Affix to erase form word form (e.g: gatito - ito = gat)
+# 2 Affix (* for empty string) to add to the resulting root
+#   to rebuild the lemma that must be searched in dictionary 
+#   (e.g:  gat+o = gato)
+# 3 Regexp condition on the parole tag of found dictionary entry
+# 4 Parole tag for suffixed word (* = keep tag in dictionary entry)
+# 5 Check lemma adding accents
+# 6 Enclitic suffix (special accent behaviour in Spanish)
+# 7 Prevent later modules from assigning more tags to the word
+# 8 Lemma to assign: F=original form, R=root found in dict, L=lemma in matching dict entry, 
+#                    AF/AR/AL=affix followed by F/R/L, FA/RA/LA=F/R/L followed by affix
+# 9 Consider the suffix always, not only for unknown words.
+# 10 How to retokenize the word if necessary (see user manual).
+#==============================================================
+#--------------------------------------
+# Regras de sufixación para o galego
+#--------------------------------------
+#	Xavier Gómez Guinovart
+#	Seminario de Lingüística Informática
+#	Universidade de Vigo
+#	http://sli.uvigo.es
+#--------------------------------------
+
+################ ENCLITICOS ###################
+
+<Prefixes>
+</Prefixes>
+
+<Suffixes>
+
+lle	*	^V	*	0	1	0	L	1	$$+lle:$$+PP
+lles	*	^V	*	0	1	0	L	1	$$+lles:$$+PP
+me	*	^V	*	0	1	0	L	1	$$+me:$$+PP
+te	*	^V	*	0	1	0	L	1	$$+te:$$+PP
+che	*	^V	*	0	1	0	L	1	$$+che:$$+PP
+nos	*	^V	*	0	1	0	L	1	$$+nos:$$+PP
+monos	mos	^V	*	0	1	0	L	1	$$+nos:$$+PP
+vos	*	^V	*	0	1	0	L	1	$$+vos:$$+PP
+se	*	^V	*	0	1	0	L	1	$$+se:$$+PP
+
+## mirareino mireinas
+eino	ei	^V	*	0	1	0	L	1	$$+o:$$+PP
+einos	ei	^V	*	0	1	0	L	1	$$+os:$$+PP
+eina	ei	^V	*	0	1	0	L	1	$$+a:$$+PP
+einas	ei	^V	*	0	1	0	L	1	$$+as:$$+PP
+
+## comeuno
+euno	eu	^V	*	0	1	0	L	1	$$+o:$$+PP
+eunos	eu	^V	*	0	1	0	L	1	$$+os:$$+PP
+euna	eu	^V	*	0	1	0	L	1	$$+a:$$+PP
+eunas	eu	^V	*	0	1	0	L	1	$$+as:$$+PP
+
+## amouno
+ouno	ou	^V	*	0	1	0	L	1	$$+o:$$+PP
+ounos	ou	^V	*	0	1	0	L	1	$$+os:$$+PP
+ouna	ou	^V	*	0	1	0	L	1	$$+a:$$+PP
+ounas	ou	^V	*	0	1	0	L	1	$$+as:$$+PP
+
+## partiuno
+iuno	iu	^V	*	0	1	0	L	1	$$+o:$$+PP
+iunos	iu	^V	*	0	1	0	L	1	$$+os:$$+PP
+iuna	iu	^V	*	0	1	0	L	1	$$+a:$$+PP
+iunas	iu	^V	*	0	1	0	L	1	$$+as:$$+PP
+
+## distribuíuno argüíunas
+íuno	íu	^V	*	0	1	0	L	1	$$+o:$$+PP
+íunos	íu	^V	*	0	1	0	L	1	$$+os:$$+PP
+íuna	íu	^V	*	0	1	0	L	1	$$+a:$$+PP
+íunas	íu	^V	*	0	1	0	L	1	$$+as:$$+PP
+
+## faino
+aino	ai	^V	*	0	1	0	L	1	$$+o:$$+PP
+ainos	ai	^V	*	0	1	0	L	1	$$+os:$$+PP
+aina	ai	^V	*	0	1	0	L	1	$$+a:$$+PP
+ainas	ai	^V	*	0	1	0	L	1	$$+as:$$+PP
+
+## comelo cómelo
+lo	r|s	^V	*	0	1	0	L	0	$$+o:$$+PP
+los	r|s	^V	*	0	1	0	L	0	$$+os:$$+PP
+la	r|s	^V	*	0	1	0	L	0	$$+a:$$+PP
+las	r|s	^V	*	0	1	0	L	0	$$+as:$$+PP
+
+## acusativo
+o	*	^V.[^(N((1|3)S|0000))|(SF(1|3)S)]	*	0	1	0	L	0	$$+o:$$+PP
+os	*	^V.[^(N((1|3)S|0000))|(SF(1|3)S)]	*	0	1	0	L	0	$$+os:$$+PP
+a	*	^V.[^(N((1|3)S|0000))|(SF(1|3)S)]	*	0	1	0	L	0	$$+a:$$+PP
+as	*	^V.[^(N((1|3)S|0000))|(SF(1|3)S)]	*	0	1	0	L	0	$$+as:$$+PP
+
+## Segunda forma do artigo
+-lo	r	^V	*	0	1	0	L	1	$$+o:$$+DA
+-la	r	^V	*	0	1	0	L	1	$$+a:$$+DA
+-los	r	^V	*	0	1	0	L	1	$$+os:$$+DA
+-las	r	^V	*	0	1	0	L	1	$$+as:$$+DA
+
+## combinacións de dous enclíticos
+
+ma	*	^V	*	0	1	0	L	1	$$+me+a:$$+PP+PP
+mas	*	^V	*	0	1	0	L	1	$$+me+as:$$+PP+PP
+mo	*	^V	*	0	1	0	L	1	$$+me+o:$$+PP+PP
+mos	*	^V	*	0	1	0	L	1	$$+me+os:$$+PP+PP
+cheme	*	^V	*	0	1	0	L	1	$$+che+me:$$+PP+PP
+chelle	*	^V	*	0	1	0	L	1	$$+che+lle:$$+PP+PP
+chenos	*	^V	*	0	1	0	L	1	$$+che+nos:$$+PP+PP
+chevos	*	^V	*	0	1	0	L	1	$$+che+vos:$$+PP+PP
+chelles	*	^V	*	0	1	0	L	1	$$+che+lles:$$+PP+PP
+cha	*	^V	*	0	1	0	L	1	$$+che+a:$$+PP+PP
+chas	*	^V	*	0	1	0	L	1	$$+che+as:$$+PP+PP
+cho	*	^V	*	0	1	0	L	1	$$+che+o:$$+PP+PP
+chos	*	^V	*	0	1	0	L	1	$$+che+os:$$+PP+PP
+lla	*	^V	*	0	1	0	L	1	$$+lle+a:$$+PP+PP
+llas	*	^V	*	0	1	0	L	1	$$+lle+as:$$+PP+PP
+llo	*	^V	*	0	1	0	L	1	$$+lle+o:$$+PP+PP
+llos	*	^V	*	0	1	0	L	1	$$+lle+os:$$+PP+PP
+nola	*	^V	*	0	1	0	L	1	$$+nos+a:$$+PP+PP
+monola	mos	^V	*	0	1	0	L	1	$$+nos+a:$$+PP+PP
+nolas	*	^V	*	0	1	0	L	1	$$+nos+as:$$+PP+PP
+monolas	mos	^V	*	0	1	0	L	1	$$+nos+as:$$+PP+PP
+nolo	*	^V	*	0	1	0	L	1	$$+nos+o:$$+PP+PP
+monolo	mos	^V	*	0	1	0	L	1	$$+nos+o:$$+PP+PP
+nolos	*	^V	*	0	1	0	L	1	$$+nos+os:$$+PP+PP
+monolos	mos	^V	*	0	1	0	L	1	$$+nos+os:$$+PP+PP
+vola	*	^V	*	0	1	0	L	1	$$+vos+a:$$+PP+PP
+volas	*	^V	*	0	1	0	L	1	$$+vos+as:$$+PP+PP
+volo	*	^V	*	0	1	0	L	1	$$+vos+o:$$+PP+PP
+volos	*	^V	*	0	1	0	L	1	$$+vos+os:$$+PP+PP
+llela	*	^V	*	0	1	0	L	1	$$+lles+a:$$+PP+PP
+llelas	*	^V	*	0	1	0	L	1	$$+lles+as:$$+PP+PP
+llelo	*	^V	*	0	1	0	L	1	$$+lles+o:$$+PP+PP
+llelos	*	^V	*	0	1	0	L	1	$$+lles+os:$$+PP+PP
+seme	*	^V	*	0	1	0	L	1	$$+se+me:$$+PP+PP
+selle	*	^V	*	0	1	0	L	1	$$+se+lle:$$+PP+PP
+senos	*	^V	*	0	1	0	L	1	$$+se+nos:$$+PP+PP
+sevos	*	^V	*	0	1	0	L	1	$$+se+vos:$$+PP+PP
+selles	*	^V	*	0	1	0	L	1	$$+se+lles:$$+PP+PP
+
+## combinacións de tres enclíticos
+
+chema	*	^V	*	0	1	0	L	1	$$+che+me+a:$$+PP+PP+PP
+chemas	*	^V	*	0	1	0	L	1	$$+che+me+as:$$+PP+PP+PP
+chemo	*	^V	*	0	1	0	L	1	$$+che+me+o:$$+PP+PP+PP
+chemos	*	^V	*	0	1	0	L	1	$$+che+me+os:$$+PP+PP+PP
+chella	*	^V	*	0	1	0	L	1	$$+che+lle+a:$$+PP+PP+PP
+chellas	*	^V	*	0	1	0	L	1	$$+che+lle+as:$$+PP+PP+PP
+chello	*	^V	*	0	1	0	L	1	$$+che+lle+o:$$+PP+PP+PP
+chellos	*	^V	*	0	1	0	L	1	$$+che+lle+os:$$+PP+PP+PP
+chenola	*	^V	*	0	1	0	L	1	$$+che+nos+a:$$+PP+PP+PP
+chenolas	*	^V	*	0	1	0	L	1	$$+che+nos+as:$$+PP+PP+PP
+chenolo	*	^V	*	0	1	0	L	1	$$+che+nos+o:$$+PP+PP+PP
+chenolos	*	^V	*	0	1	0	L	1	$$+che+nos+os:$$+PP+PP+PP
+chevola	*	^V	*	0	1	0	L	1	$$+che+vos+a:$$+PP+PP+PP
+chevolas	*	^V	*	0	1	0	L	1	$$+che+vos+as:$$+PP+PP+PP
+chevolo	*	^V	*	0	1	0	L	1	$$+che+vos+o:$$+PP+PP+PP
+chevolos	*	^V	*	0	1	0	L	1	$$+che+vos+os:$$+PP+PP+PP
+chellela	*	^V	*	0	1	0	L	1	$$+che+lles+a:$$+PP+PP+PP
+chellelas	*	^V	*	0	1	0	L	1	$$+che+lles+as:$$+PP+PP+PP
+chellelo	*	^V	*	0	1	0	L	1	$$+che+lles+o:$$+PP+PP+PP
+chellelos	*	^V	*	0	1	0	L	1	$$+che+lles+os:$$+PP+PP+PP
+
+
+################ ADVERBIOS -mente ##############
+
+mente	*	^AQ0CS	RG	1	0	0	L	1	-
+mente	*	^AQ0FS	RG	1	0	0	L	1	-
+
+################ DIMINUTIVOS ##############
+
+# irmanciño
+
+nciñas	n	^NCMS	NCFP00D	1	0	0	L	0	-
+nciña	n	^NCMS	NCFS00D	1	0	0	L	0	-
+nciños	n	^NCMS	NCMP00D	1	0	0	L	0	-
+nciño	n	^NCMS	NCMS00D	1	0	0	L	0	-
+
+# leccionciña
+
+nciñas	n	^NCFS	NCFP00D	1	0	0	L	0	-
+nciña	n	^NCFS	NCFS00D	1	0	0	L	0	-
+
+# rapaciño
+
+ciñas	z	^NCMS	NCFP00D	1	0	0	L	0	-
+ciña	z	^NCMS	NCFS00D	1	0	0	L	0	-
+ciños	z	^NCMS	NCMP00D	1	0	0	L	0	-
+ciño	z	^NCMS	NCMS00D	1	0	0	L	0	-
+
+# luciña
+
+ciñas	z	^NCFS	NCFP00D	1	0	0	L	0	-
+ciña	z	^NCFS	NCFS00D	1	0	0	L	0	-
+
+# francesiño
+
+siñas	s	^NCMS	NCFP00D	1	0	0	L	0	-
+siña	s	^NCMS	NCFS00D	1	0	0	L	0	-
+siños	s	^NCMS	NCMP00D	1	0	0	L	0	-
+siño	s	^NCMS	NCMS00D	1	0	0	L	0	-
+
+# directoriño
+
+riñas	L	^NCMS	NCFP00D	1	0	0	L	0	-
+riña	L	^NCMS	NCFS00D	1	0	0	L	0	-
+riños	L	^NCMS	NCMP00D	1	0	0	L	0	-
+riño	L	^NCMS	NCMS00D	1	0	0	L	0	-
+
+# directorciño
+
+rciñas	L	^NCMS	NCFP00D	1	0	0	L	0	-
+rciña	L	^NCMS	NCFS00D	1	0	0	L	0	-
+rciños	L	^NCMS	NCMP00D	1	0	0	L	0	-
+rciño	L	^NCMS	NCMS00D	1	0	0	L	0	-
+
+# españoliño
+
+liñas	l	^NCMS	NCFP00D	1	0	0	L	0	-
+liña	l	^NCMS	NCFS00D	1	0	0	L	0	-
+liños	l	^NCMS	NCMP00D	1	0	0	L	0	-
+liño	l	^NCMS	NCMS00D	1	0	0	L	0	-
+
+# avociño
+
+ciñas	*	^NCMS	NCFP00D	1	0	0	L	0	-
+ciña	*	^NCMS	NCFS00D	1	0	0	L	0	-
+ciños	*	^NCMS	NCMP00D	1	0	0	L	0	-
+ciño	*	^NCMS	NCMS00D	1	0	0	L	0	-
+
+# naiciña
+
+ciñas	*	^NCFS	NCFP00D	1	0	0	L	0	-
+ciña	*	^NCFS	NCFS00D	1	0	0	L	0	-
+
+# avoíño
+
+íñas	*	^NCMS	NCFP00D	1	0	0	L	0	-
+íña	*	^NCMS	NCFS00D	1	0	0	L	0	-
+íños	*	^NCMS	NCMP00D	1	0	0	L	0	-
+íño	*	^NCMS	NCMS00D	1	0	0	L	0	-
+
+# neniño
+
+iñas	a|e|i|o|u	^NCMS	NCFP00D	1	0	0	L	0	-
+iña	a|e|i|o|u	^NCMS	NCFS00D	1	0	0	L	0	-
+iños	a|e|i|o|u	^NCMS	NCMP00D	1	0	0	L	0	-
+iño	a|e|i|o|u	^NCMS	NCMS00D	1	0	0	L	0	-
+
+# mesiña
+
+iñas	a|e|i|o|u	^NCFS	NCFP00D	1	0	0	L	0	-
+iña	a|e|i|o|u	^NCFS	NCFS00D	1	0	0	L	0	-
+
+# brutanciño
+
+nciñas	n	^AQ0MS	AQDFP0	1	0	0	L	0	-
+nciña	n	^AQ0MS	AQDFS0	1	0	0	L	0	-
+nciños	n	^AQ0MS	AQDMP0	1	0	0	L	0	-
+nciño	n	^AQ0MS	AQDMS0	1	0	0	L	0	-
+
+# bonitiño
+
+iñas	a|e|i|o|u	^AQ0MS	AQDFP0	1	0	0	L	0	-
+iña	a|e|i|o|u	^AQ0MS	AQDFS0	1	0	0	L	0	-
+iños	a|e|i|o|u	^AQ0MS	AQDMP0	1	0	0	L	0	-
+iño	a|e|i|o|u	^AQ0MS	AQDMS0	1	0	0	L	0	-
+
+################ SUPERLATIVOS ##############
+
+# altísimo
+
+ísimo	a|e|o|*	^AQ0MS	AQDFP0	1	0	0	L	0	-
+ísimos	a|e|o|*	^AQ0MS	AQDFP0	1	0	0	L	0	-
+ísima	a|e|o|*	^AQ0MS	AQDFP0	1	0	0	L	0	-
+ísimas	a|e|o|*	^AQ0MS	AQDFP0	1	0	0	L	0	-
+
+# amabilísimo
+bilísimo	bel	^AQ0CS	AQSMS0	1	0	0	L	0	-
+bilísimos	beis	^AQ0CP	AQSMP0	1	0	0	L	0	-
+bilísima	bel	^AQ0CS	AQSFS0	1	0	0	L	0	-
+bilísimas	beis	^AQ0CP	AQSFP0	1	0	0	L	0	-
+
+</Suffixes>

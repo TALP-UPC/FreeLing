@@ -1,0 +1,69 @@
+## Type of NE recognizer (basic/BIO). Changing this value will require
+## changing some sections in the rest of the file
+<Type>
+basic
+</Type>
+
+## list of words that may be included in a Named Entity
+## e.g.  "Bank of England"  "Foundation for the Research of Important Things"
+<FunctionWords>
+</FunctionWords>
+
+## Punctuation mark tags after which a capitalized word
+## may be indicating just a sentence (or clause) beginning
+<SpecialPunct>
+</SpecialPunct>
+
+## Tag to be assigned to detected NEs
+<NE_Tag>
+NP
+</NE_Tag>
+
+<TitleLimit>
+0
+</TitleLimit>
+
+<RE_DateNumPunct>
+(^[FZ]|^W$)
+</RE_DateNumPunct>
+
+<Affixes>
+mr.  PRE
+mrs. PRE
+jr. SUF
+sr. SUF
+</Affixes>
+
+<Ignore>
+i 0
+english 0
+spanish 0
+dutch 0
+german 0
+french 0
+basque 0
+catalan 0
+январь 1
+февраль 1
+март 1
+апрель 1
+may 1
+june 1
+july 1
+august 1
+september 1
+october 1
+november 1
+december 1
+monday 1
+tuesday 1
+wednesday 1
+thursday 1
+friday 1
+saturday 1
+sunday 1
+</Ignore>
+
+<SplitMultiwords>
+no
+</SplitMultiwords>

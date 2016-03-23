@@ -1,0 +1,225 @@
+
+    =========================================================
+    COPYING FreeLing: Open-Source Suite of Language Analyzers
+    =========================================================
+
+ -----------
+ 1.- LICENSE
+ -----------
+
+   All data and code modules included in this package 
+ (except those listed below, under "2.-EXCEPTIONS") are
+ distributed under GNU Affero General Public License
+ and copyrighted by Universitat Politècnica de Catalunya.
+
+   You can find a copy of Affero GPL license in the file
+ LICENSES/AGPL.license included in this package, or at
+ http://www.gnu.org/licenses/agpl
+
+ --------------
+ 2.- EXCEPTIONS
+ --------------
+
+   Some contents of this package are copyrighted by a third party and 
+ distributed under different open licenses.
+   If you want to redistribute FreeLing, part of it, or use it or part of it
+ in derived works, make sure you are doing so under the terms stated in the 
+ license applying to each of the involved modules.
+
+
+ 2a.- CODE COMPONENTS
+ -------------------- 
+
+ Code components copyrigthed by a third party with licenses other 
+ than AGPL are:
+
+ 1.- FOMA code under src/libfoma is copyrighted by Mans Hulden,
+     and distributed under its original Apache 2.0 license.
+     See http://code.google.com/p/foma/ for details.
+     You'll find the license in the file LICENSES/Apache.license included 
+     in this package or at http://www.apache.org/licenses/LICENSE-2.0
+
+ 2.- libSVM code in src/libfreeling/omlet/libsvm.cc and
+     src/include/freeling/omlet/libsvm.h is copyrighted by Chih-Chung Chang 
+     and Chih-Jen Lin and is distributed under its original BSD
+     license, which can be found in file LICENSES/BSD.license
+
+
+ 2b.- DATA COMPONENTS
+ -------------------- 
+
+ Data components copyrigthed by a third party with licenses other 
+ than AGPL are:
+
+ 1.- English WordNet synset and relation data, contained in files
+     data/en/senses30.src and data/common/wn30.src in this package are
+     distributed under the original WordNet license. You can find a
+     copy in the file LICENSES/WN.license included in this package or
+     at http://wordnet.princeton.edu
+
+ 2.- Data for Catalan, Galician, and Spanish WordNets in files
+     data/(ca|gl|es)/senses30.src are extracted from the MCR3.0
+     project (http://adimen.si.ehu.es/web/MCR). They are distributed
+     under their original "Attribution Unported" Creative Commons
+     license. You'll find the license in the file
+     LICENSES/CC-BY.license included in this package or at
+     http://creativecommons.org/licenses/by/3.0
+
+ 3.- Data for Italian WordNet in file data/it/senses30.src are
+     extracted from OpenWN project MultiWordnet project developed by
+     Fondazione Bruno Kessler (http://multiwordnet.fbk.eu). It is
+     distributed under its original Creative Commons Attribution 3.0
+     Unported License.  You'll find the license in the file
+     LICENSES/CC-BY.license included in this package or at
+     http://creativecommons.org/licenses/by/3.0
+
+ 4.- Data for Portuguese WordNet in file data/pt/senses30.src are
+     extracted from brazilian-wn project
+     (https://github.com/arademaker/wordnet-br).  It is distributed
+     under its original Creative Commons Attribution 3.0
+     License.  You'll find the license in the file
+     LICENSES/CC-BY.license included in this package or at
+     http://creativecommons.org/licenses/by/3.0
+
+ 5.- Data for Slovenian WordNet in file data/sl/senses30.src is 
+     extracted from sloWNet project (http://lojze.lugos.si/darja/slownet.html)
+     by Darja Fišer (see Fišer 2012 for details).
+     It is distributed under its original Creative Commons 
+     Attribution-ShareAlike 4.0 License.  
+     You'll find the license in the file
+     LICENSES/CC-BY-SA.license included in this package or at
+     http://creativecommons.org/licenses/by-sa/4.0
+
+ 5.- Data for Croatian WordNet in file data/hr/senses30.src is 
+     extracted from croWN, developed by University of Zagreb,
+     available at Meta-Share (http://meta-share.ffzg.hr/).
+     It is distributed under its original Creative Commons 
+     Attribution-Noncommercial-ShareAlike 3.0 License.  
+     You'll find the license in the file
+     LICENSES/CC-BY-NC-SA.license included in this package or at
+     http://creativecommons.org/licenses/by-nc-sa/3.0
+
+ 6.- Data for French WordNet in file data/fr/senses30.src is 
+     extracted from WOLF (WordNet Libre du Français)
+     developed by Benoît Sagot at INRIA / Université de Paris 7 
+     See http://alpage.inria.fr/~sagot/wolf-en.html for details.
+     These data are distributed under their original CeCILL-C
+     license.  You'll find the license in the file
+     LICENSES/CECILC.license included in this package or at
+     http://www.cecill.info/licences/Licence_CeCILL-C_V1-en.html
+
+ 7.- Links from WordNet synsets to Cyc concepts (http://www.cyc.com)
+     have been obtained from OpenCyc OWL files, and are distributed
+     under their original "Attribution Unported" Creative Commons
+     license. You'll find the license in the file
+     LICENSES/CC-BY.license included in this package or at
+     http://creativecommons.org/licenses/by/3.0
+ 
+ 8.- Italian dictionary contained in the files in data/it/dictionary
+     (this package) and share/it/dicc.src (after installation) is
+     straightforwardly extracted from Morph-it! lexicon developed at
+     the University of bologna (see
+     http://sslmitdev-online.sslmit.unibo.it/linguistics/morph-it.php),
+     and is distributed under an "Attribution-ShareAlike" Creative
+     Commons license.  You'll find the license in the file
+     LICENSES/CC-BY-SA.license included in this package or at
+     http://creativecommons.org/licenses/by-sa/3.0/
+
+ 8.- Galician dictionary contained in the files in data/gl/dictionary
+     (this package) and share/gl/dicc.src (after installation) is
+     straightforwardly extracted from the OpenTrad project
+     (http://www.opentrad.org) and has been developed by the Seminario
+     de Lingüística Informática (http://sli.uvigo.es) at Universidade
+     de Vigo, and extended by Pablo Gamallo and Marcos Garcia, from
+     Universidade de Santiago de Compostela.  It is distributed under
+     an "Attribution-ShareAlike" Creative Commons license. You'll find
+     the license in the file LICENSES/CC-BY-SA.license included in
+     this package or at http://creativecommons.org/licenses/by-sa/3.0/
+
+10.- Spanish dictionary contained in the files in data/es/dictionary
+     (this package) and share/es/dicc.src (after installation) is
+     extracted from the Spanish Resource Grammar projects
+     (http://www.upf.edu/pdi/iula/montserrat.marimon/srg.html) and was
+     developed at the Institut Universitari de Linguistica Aplicada
+     (http://www.iula.upf.edu) of the Universitat Pompeu Fabra. It is
+     distributed under a "Lesser General Public License For Linguistic
+     Resources" license. You'll find the license in the file
+     LICENSES/LGPLLR.license included in this package or at
+     http://sanskrit.inria.fr/DATA/LGPLLR.html
+
+11.- Ancient Spanish dictionary was developed at the Universitat
+     Pompeu Fabra in Barcelona by Cristina Sánchez Marco. This
+     dictionary is a largely adapted and extended version of the
+     Spanish Resource Grammar dictionary described above. The ancient
+     Spanish dictionary is distributed under Lesser General Public
+     License For Linguistic Resources. You'll find the license in the
+     file LICENSES/LGPLLR.license included in this package or at
+     http://sanskrit.inria.fr/DATA/LGPLLR.html
+
+12.- Argentine Spanish dictionary was developed by Agustin Gravano at
+     Universidad de Buenos Aires. Ddetails can be found in 
+     http://habla.dc.uba.ar/gravano/freeling-ar-es.php
+     It is distributed under Apache License 2.0.
+     You'll find the license in the file LICENSES/Apache.license included 
+     in this package or at http://www.apache.org/licenses/LICENSE-2.0
+
+12.- Dictionaries for Valencian and Balearic variants of Catalan
+     contained in the files under data/ca/dictionary/balear
+     and data/ca/dictionary/valencia (in the tarball package)
+     or in share/ca/balear/dicc.src and share/ca/valencia/dicc.src 
+     (after installation) were obtained from "El Corrector", a Catalan 
+     spellchecker project (http://projectes.lafarga.cat/projects/corrector), 
+     which was funded by the Catalan Government, developed by 
+     Fundacio Barcelona Media (http://www.barcelonamedia.org/), 
+     and released under GPL.
+
+13.- Portuguese dictionary contained in the files in
+     data/pt/dictionary (this package) and share/pt/dicc.src (after
+     installation) was extracted from the LABEL-LEX project
+     (http://label.ist.utl.pt/pt/labellex_pt.php) developed by
+     Laboratório de Engenharia da Linguagem (http://label.ist.utl.pt)
+     at Universidade Técnica de Lisboa (http://www.utl.pt), and
+     adapted to FreeLing by Pablo Gamallo and Marcos Garcia, from
+     Universidade de Santiago de Compostela.  It is distributed under
+     its original GPLv3 license.
+
+14.- Welsh dictionary contained in the files in data/cy/dictionary
+     (this package) and share/cy/dicc.src (after installation) was
+     extracted from Eurfa project (http://kevindonnelly.org.uk/eurfa/)
+     developed by Kevin Donelly. It is distributed under its original
+     GPL license.
+
+15.- Asturian dictionary contained in the files in data/as/dictionary
+     (this package) and share/as/dicc.src (after installation) was
+     developed at the Universidad the Oviedo in the framework of the
+     Eslema project (http://www.uniovi.es/eslema/). It is distributed
+     under its original GPL license.
+
+16.- French dictionary is extracted from LEFFF (Lexique des Formes
+     Fléchies du Français), developed by Benoît Sagot at INRIA /
+     Université de Paris 7 See
+     http://alpage.inria.fr/~sagot/lefff.html for details.  
+     These data are distributed under their original LGPL-LR license
+
+17.- Slovenian dictionary is extracted from Sloleks 
+     (http://eng.slovenscina.eu/sloleks/prenos), copyrighted by
+     the Slovenian Government, and distributed under its original
+     Creative Commons Attribution-Noncommercial-ShareAlike 3.0 License.  
+     You'll find the license in the file
+     LICENSES/CC-BY-NC-SA.license included in this package or at
+     http://creativecommons.org/licenses/by-nc-sa/3.0
+
+18.- Norwegian dictionary is extracted from Norsk Ordbank,
+     developed at University of Oslo.
+     See http://www.edd.uio.no/prosjekt/ordbanken for details.
+     It is distributed under its original GPL license.
+
+19.- German dictionary is extracted from Morphy 
+     (http://www.wolfganglezius.de/doku.php?id=cl:morphy) by 
+     Daniel Naber (http://www.danielnaber.de/morphologie). 
+     It is distributed under its original
+     Creative Commons Attribution-ShareAlike 3.0 License.  
+     You'll find the license in the file
+     LICENSES/CC-BY-SA.license included in this package or at
+     http://creativecommons.org/licenses/by-sa/3.0
+

@@ -1,0 +1,11 @@
+<ABModel>
+coref.abm
+</ABModel>
+
+<SEMDB>
+../semdb.dat
+</SEMDB>
+
+<MaxDistance>
+20
+</MaxDistance>

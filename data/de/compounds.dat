@@ -1,0 +1,65 @@
+
+<UnknownWordsOnly>
+yes
+</UnknownWordsOnly>
+
+<JoinChars>
+## list of chars that may join compound elements (one char per line)
+-
+e
+e-
+n
+n-
+en
+en-
+ens
+ens-
+ns
+ns-
+er
+er-
+s
+s-
+es
+es-
+</JoinChars>
+
+
+<CompoundPatterns>
+
+## There is no rule limiting the length of a compound
+## While the final element of a compound noun must be a noun, the first
+## element an be an adjective, an adverb, a verb or verb stem, or a
+## preposition.
+
+## Arbeitgeber (employer)
+NC_+NC
+
+## Glasflächenreinigung (glass surface cleaning); Feuerwehrzufahrt (fire department access)
+NC_NC_+NC
+
+##
+NC_NC_NC_+NC
+
+## Fernfahrer (long-distance trucker)
+A_+NC
+
+##
+RG_+NC
+
+##  Vorort (suburb)
+SP_+NC
+
+## The first word can also be a verb, which is represented by the stem
+## Esszimmer (dining room)
+
+## The final word can also be an adjective or adverb, so that the compound
+## itself becomes that part of speech
+
+## hellblau (light blue)
+A_+A
+
+## vollautomatisch" (fully automatic)
+RG_+A
+
+</CompoundPatterns>

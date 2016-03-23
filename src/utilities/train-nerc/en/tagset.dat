@@ -1,0 +1,53 @@
+<DecompositionRules>
+Z 2 postype/d:partitive;m:currency;p:percentage;u:unit
+F 0 punct/c:comma;s:etc;d:colon;x:semicolon;g:hyphen;e:quotation;h:slash;p:period;i:questionmark;a:exclamationmark;t:percent;l:curlybracket;q:squarebracket;r:roundbracket;z:other punctenclose/a:open;t:close
+</DecompositionRules>
+<DirectTranslations>
+Fpa Fpa punct=bracket|punctenclose=open
+Fpt Fpt punct=bracket|punctenclose=close
+Fca Fca punct=squarebracket|punctenclose=open
+Fct Fct punct=squarebracket|punctenclose=close
+Fra Fra punct=quotation|punctenclose=open
+Frc Frc punct=quotation|punctenclose=close
+NNP NP
+NP00SP0 NP
+NP00G00 NP
+NP00O00 NP
+NP00V00 NP
+NP00000 NP
+CC CC
+DT DT
+EX EX
+IN IN
+JJ JJ
+JJR JJR
+JJS JJS
+MD MD
+NN NN
+NNP NP
+NP NP
+NNPS NP
+NNS NNS
+PDT PDT
+POS POS
+PRP PRP
+PRP$ PRP$
+RB RB
+RBR RBR
+RBS RBS
+RP RP
+TO TO
+UH UH
+VB VB
+VBD VBD
+VBG VBG
+VBN VBN
+VBP VBP
+VBZ VBZ
+W NNP
+WDT WDT
+WP WP
+WP$ WP$
+WRB WRB
+I I
+</DirectTranslations>

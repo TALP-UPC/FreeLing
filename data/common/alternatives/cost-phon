@@ -1,0 +1,171 @@
+Insert 1000
+Substitute 1500
+Delete 1000
+Cost 0
+ E:e a:{ e:E {:a
+Cost 100
+ I:i O:o U:u i:I o:O u:U
+Cost 200
+ T:f f:T
+Cost 250
+ @:E @:V @:e E:@ E:I E:a E:{ I:E I:e O:u Q:o U:o V:@ a:E a:e e:@ e:I e:a e:{ o:Q o:U u:O {:E {:e
+Cost 350
+ A:V E:i O:Q O:U Q:O U:O V:A e:i i:E i:e o:u u:o
+Cost 400
+ B:D D:B D:z G:R J:N J:n N:J R:G T:s c:k c:t k:c n:J s:T t:c z:D
+Cost 500
+ @:I @:a @:{ E:V I:@ I:a I:j I:y I:{ Q:U U:Q U:w U:y V:E V:e V:o a:@ a:I e:V j:I o:V w:U y:I y:U {:@ {:I 4:r B:b G:g S:s Z:z b:B d:z g:G k:x r:4 s:S s:t t:s x:k z:Z z:d
+Cost 600
+ @:A @:i A:@ A:Q A:a A:{ O:V Q:A Q:u V:O a:A a:i i:@ i:a i:j i:y i:{ j:i u:Q u:w u:y w:u y:i y:u {:A {:i f:s s:f
+Cost 700
+ f:p p:f
+Cost 750
+ @:o A:O E:j E:y I:V O:A Q:V U:V V:I V:Q V:U V:a V:{ a:V e:j e:y j:E j:e o:@ o:w o:y w:o y:E y:e y:o {:V
+Cost 800
+ B:z G:z N:n b:d d:b d:g g:d k:t m:n n:N n:m p:t s:x t:k t:p x:s z:B z:G
+Cost 850
+ @:O A:E A:e A:o E:A O:@ O:w O:y V:i V:u e:A i:V o:A u:V w:O y:O
+Cost 900
+ j:L w:L D:Z D:b D:d L:j L:w R:g S:T T:S T:p T:t Z:D b:D c:s c:x d:D g:R p:T s:c t:T x:c
+Cost 1000
+ @:Q @:U @:j @:y A:i A:u E:o I:U I:L Q:@ Q:a Q:w Q:y Q:{ U:@ U:I a:Q a:j a:y e:o i:A i:u i:L j:@ j:a j:w j:y j:{ o:E o:e u:A u:i w:Q w:j w:y y:@ y:Q y:a y:j y:w y:{ {:Q {:j {:y D:T G:x L:I L:i N:g S:Z S:t T:D Z:S Z:d b:m b:p d:Z d:n d:t g:N g:k k:g m:b n:d p:b s:z t:S t:d x:G z:s
+Cost 1100
+ @:u A:I A:U E:O I:A I:u O:E O:e U:A U:i e:O i:U u:@ u:I S:f f:S f:t t:f
+Cost 1200
+ B:f D:G D:f G:D J:m L:r R:z T:x c:p f:B f:D m:J p:c r:L x:T z:R
+Cost 1250
+ E:Q E:U I:o O:i Q:E Q:e U:E U:e V:j V:w V:y a:o e:Q e:U i:O j:V o:I o:a o:{ w:V y:V {:o
+Cost 1300
+ B:Z B:d G:Z G:d S:x T:c Z:B Z:G b:z c:T d:B d:G g:z k:s p:s s:k s:p t:x x:S x:t z:b z:g
+Cost 1350
+ E:u I:O O:I O:a O:{ a:O e:u i:o o:i u:E u:e {:O
+Cost 1400
+ U:L u:L y:L B:T D:s J:d J:g L:U L:u L:y L:l R:x S:c T:B T:z c:S c:d c:g d:J d:c f:x g:J g:c l:L s:D x:R x:f z:T
+Cost 1500
+ @:w I:Q I:w Q:I U:a U:j U:{ a:U j:U w:@ w:I {:U B:m B:p G:N G:k N:G S:z Z:s c:f d:s f:c g:x k:G m:B n:z p:B s:Z s:d t:z x:g z:S z:n z:t
+Cost 1600
+ A:j A:w A:y Q:i a:u i:Q i:w j:A j:u u:a u:j u:{ w:A w:i y:A {:u B:G D:R G:B N:m R:D b:g f:z g:b k:p m:N p:k z:f
+Cost 1700
+ 4:L D:g L:4 R:Z R:d T:k Z:R b:f d:R f:b g:D k:T
+Cost 1750
+ E:w e:w j:o o:j w:E w:e
+Cost 1800
+ B:s G:s N:d S:k S:p Z:b Z:g b:Z b:n b:t d:N d:k d:m d:p g:Z g:n g:t k:S k:d m:d n:b n:g p:S p:d s:B s:G t:b t:g x:z z:x
+Cost 1850
+ O:j j:O
+Cost 1900
+ D:S D:m D:n D:p D:t G:J G:c J:G J:z L:Z N:R R:N R:k S:D T:Z T:b T:d Z:L Z:T b:T c:G c:z d:T f:k k:R k:f m:D n:D p:D t:D z:J z:c
+Cost 2000
+ E:L Q:j a:w e:L j:Q w:a w:{ {:w B:R J:c L:E L:e N:k R:B S:d Z:n Z:t c:J d:S h:x k:N m:p n:Z n:t p:m t:Z t:n x:h
+Cost 2100
+ j:r w:r B:g G:b Z:f b:G d:f f:Z f:d g:B p:x r:j r:w x:p
+Cost 2200
+ I:r i:r 4:Z D:x G:T J:b R:s T:G Z:4 b:J b:c c:b l:r r:I r:i r:l s:R x:D
+Cost 2300
+ j:l w:l B:S B:n B:t D:J D:c G:S G:n G:t J:D J:R N:z R:J R:c S:B S:G Z:x b:s c:D c:R d:x g:s k:z l:j l:w m:z n:B n:G p:z s:b s:g t:B t:G x:Z x:d z:N z:k z:m z:p
+Cost 2400
+ @:L I:l O:L V:L i:l o:L G:L G:f J:Z J:k J:t L:@ L:O L:V L:o L:G L:z N:c Z:J Z:c c:N c:Z c:n f:G k:J l:I l:i n:c t:J z:L
+Cost 2500
+ j:G w:G G:j G:w N:x R:b Z:l b:R h:k k:h l:Z n:s s:n x:N
+Cost 2600
+ U:r j:4 u:r w:4 y:r 4:j 4:w B:x N:b R:T R:h T:R b:N b:k g:m g:p h:R k:b m:g p:g r:U r:u r:y x:B
+Cost 2700
+ I:4 i:4 4:I 4:i 4:l 4:z B:J B:c D:N D:k J:B N:D R:S R:n R:t S:R T:g Z:r c:B f:m g:T k:D l:4 m:f n:R r:Z t:R z:4
+Cost 2800
+ U:l j:Z u:l w:Z y:l D:L L:D L:R N:Z N:t R:L R:f S:b S:g Z:j Z:w Z:N Z:k Z:m Z:p b:S f:R g:S h:s k:Z k:n l:U l:u l:y m:Z m:t n:k n:p p:Z p:n s:h t:N t:m
+Cost 2900
+ I:Z i:Z j:R w:R J:s J:x L:S L:d L:g R:j R:w S:L T:m T:n Z:I Z:i c:h d:L f:g g:L g:f h:c m:T n:T s:J x:J
+Cost 3000
+ U:G j:g u:G w:g y:G G:U G:u G:y G:h S:n g:j g:w h:G l:z n:S z:l
+Cost 3100
+ U:4 u:4 y:4 4:U 4:u 4:y 4:D 4:G B:N B:k D:4 G:4 G:m G:p N:B b:x f:n k:B m:G n:f p:G x:b
+Cost 3200
+ E:r e:r 4:S 4:d B:L J:p L:B S:4 T:h c:m d:4 h:T m:c p:J r:E r:e r:z z:r
+Cost 3300
+ U:Z j:z u:Z w:z y:Z J:T N:s S:h T:J Z:U Z:u Z:y h:S h:t m:s n:x s:N s:m t:h x:n z:j z:w
+Cost 3400
+ A:L E:l I:G I:z Q:L U:R a:L e:l i:G i:z u:R y:R {:L D:l G:I G:i J:S L:A L:Q L:a L:{ L:s L:x R:U R:u R:y S:J f:h h:f l:E l:e l:D s:L x:L z:I z:i
+Cost 3500
+ U:g j:x u:g w:x y:g 4:B 4:R B:4 J:L J:f L:J L:c R:4 R:m R:p S:l c:L d:l f:J g:U g:u g:y g:h h:g l:S l:d m:R p:R x:j x:w
+Cost 3600
+ @:r O:r V:r o:r 4:g D:r G:r N:p g:4 k:m m:k p:N r:@ r:O r:V r:o r:D r:G
+Cost 3700
+ E:4 e:4 j:D w:D 4:E 4:e 4:s D:j D:w L:b N:T S:r T:N b:L d:r r:S r:d s:4
+Cost 3800
+ @:l I:D I:R O:l U:z V:l i:D i:R j:S j:d o:l u:z w:S w:d y:z B:l D:I D:i G:l L:T N:S R:I R:i S:j S:w S:N S:m T:L d:j d:w h:z l:@ l:O l:V l:o l:B l:G m:S z:U z:u z:y z:h
+Cost 3900
+ E:Z I:S I:d I:g e:Z i:S i:d i:g L:N L:k L:n L:t N:L N:f S:I S:i Z:E Z:e d:I d:i f:N g:I g:i k:L n:L t:L
+Cost 4000
+ @:G O:G U:x V:G j:N j:k o:G u:x w:N w:k y:x 4:b B:r G:@ G:O G:V G:o L:f N:j N:w R:r b:4 f:L k:j k:w l:s r:B r:R s:l x:U x:u x:y
+Cost 4100
+ @:4 O:4 V:4 j:B o:4 w:B 4:@ 4:O 4:V 4:o 4:T 4:x B:j B:w T:4 g:r h:p m:x p:h r:g x:4 x:m
+Cost 4200
+ I:B U:D i:B u:D y:D 4:J 4:c 4:n 4:t B:I B:i D:U D:u D:y D:h J:4 R:l c:4 h:D l:R n:4 r:s s:r t:4
+Cost 4300
+ @:Z O:Z U:S U:d V:Z j:s o:Z u:S u:d w:s y:S y:d 4:f S:U S:u S:y Z:@ Z:O Z:V Z:o Z:h b:l d:U d:u d:y d:h f:4 g:l h:Z h:d l:b l:g s:j s:w
+Cost 4400
+ @:R E:G E:z I:s I:x O:R V:R e:G e:z i:s i:x j:J j:c o:R w:J w:c G:E G:e J:j J:w R:@ R:O R:V R:o T:l c:j c:w l:T s:I s:i x:I x:i z:E z:e
+Cost 4500
+ @:g I:J I:c O:g U:N U:k V:g i:J i:c o:g u:N u:k y:N y:k J:I J:i N:U N:u N:y N:h b:r c:I c:i g:@ g:O g:V g:o h:N k:U k:u k:y l:n l:t n:l r:b t:l
+Cost 4600
+ A:r Q:r U:B a:r j:b u:B w:b y:B {:r 4:N 4:k B:U B:u B:y B:h N:4 T:r b:j b:w f:l h:B k:4 l:f r:A r:Q r:a r:{ r:T r:x x:r
+Cost 4700
+ I:b i:b j:T w:T J:r L:m L:p T:j T:w b:I b:i c:r m:L n:r p:L r:J r:c r:n r:t t:r
+Cost 4800
+ @:z A:l E:D E:R I:T O:z Q:l U:s V:z a:l e:D e:R i:T j:n j:t o:z u:s w:n w:t y:s {:l D:E D:e R:E R:e T:I T:i f:r l:A l:Q l:a l:{ l:x n:j n:w r:f s:U s:u s:y t:j t:w x:l z:@ z:O z:V z:o
+Cost 4900
+ E:S E:d E:g I:N I:k I:n I:t U:J U:c e:S e:d e:g i:N i:k i:n i:t j:f u:J u:c w:f y:J y:c J:U J:u J:y J:h J:l N:I N:i S:E S:e c:U c:u c:y c:l d:E d:e f:j f:w g:E g:e h:J k:I k:i l:J l:c n:I n:i t:I t:i
+Cost 5000
+ @:x A:G I:f O:x Q:G V:x a:G i:f o:x {:G 4:m 4:p G:A G:Q G:a G:{ f:I f:i m:4 p:4 x:@ x:O x:V x:o
+Cost 5100
+ A:4 Q:4 U:b a:4 u:b y:b {:4 4:A 4:Q 4:a 4:{ N:r b:U b:u b:y b:h h:b k:r r:N r:k
+Cost 5200
+ @:D E:B O:D U:T V:D e:B o:D u:T y:T B:E B:e D:@ D:O D:V D:o T:U T:u T:y
+Cost 5300
+ @:S @:d A:Z O:S O:d Q:Z U:n U:t V:S V:d a:Z o:S o:d u:n u:t y:n y:t {:Z N:l S:@ S:O S:V S:o Z:A Z:Q Z:a Z:{ d:@ d:O d:V d:o h:n k:l l:N l:k l:m l:p m:l n:U n:u n:y n:h p:l t:U t:u t:y
+Cost 5400
+ A:R E:s E:x Q:R U:f a:R e:s e:x u:f y:f {:R L:h R:A R:Q R:a R:{ f:U f:u f:y h:L s:E s:e x:E x:e
+Cost 5500
+ @:N @:k A:g E:J E:c O:N O:k Q:g V:N V:k a:g e:J e:c j:h o:N o:k w:h {:g J:E J:e N:@ N:O N:V N:o c:E c:e g:A g:Q g:a g:{ h:j h:w k:@ k:O k:V k:o m:r p:r r:m r:p
+Cost 5600
+ @:B O:B V:B j:m j:p o:B w:m w:p B:@ B:O B:V B:o m:j m:w p:j p:w
+Cost 5700
+ E:b I:m I:p e:b i:m i:p b:E b:e m:I m:i p:I p:i
+Cost 5800
+ @:s A:z E:T O:s Q:z V:s a:z e:T o:s {:z T:E T:e s:@ s:O s:V s:o z:A z:Q z:a z:{
+Cost 5900
+ @:J @:c E:N E:k E:n E:t O:J O:c V:J V:c e:N e:k e:n e:t o:J o:c J:@ J:O J:V J:o N:E N:e c:@ c:O c:V c:o k:E k:e n:E n:e t:E t:e
+Cost 6000
+ A:x E:f Q:x U:h a:x e:f u:h y:h {:x f:E f:e h:U h:u h:y x:A x:Q x:a x:{
+Cost 6100
+ @:b O:b U:m U:p V:b o:b u:m u:p y:m y:p 4:h b:@ b:O b:V b:o h:4 h:m m:U m:u m:y m:h p:U p:u p:y
+Cost 6200
+ @:T A:D O:T Q:D V:T a:D o:T {:D D:A D:Q D:a D:{ T:@ T:O T:V T:o
+Cost 6300
+ @:n @:t A:S A:d O:n O:t Q:S Q:d V:n V:t a:S a:d o:n o:t {:S {:d S:A S:Q S:a S:{ d:A d:Q d:a d:{ n:@ n:O n:V n:o t:@ t:O t:V t:o
+Cost 6400
+ @:f I:h O:f V:f i:h o:f f:@ f:O f:V f:o h:I h:i
+Cost 6500
+ A:N A:k Q:N Q:k a:N a:k {:N {:k N:A N:Q N:a N:{ k:A k:Q k:a k:{
+Cost 6600
+ A:B Q:B a:B {:B B:A B:Q B:a B:{ h:r r:h
+Cost 6700
+ E:m E:p e:m e:p m:E m:e p:E p:e
+Cost 6800
+ A:s Q:s a:s {:s h:l l:h s:A s:Q s:a s:{
+Cost 6900
+ A:J A:c Q:J Q:c a:J a:c {:J {:c J:A J:Q J:a J:{ c:A c:Q c:a c:{
+Cost 7000
+ @:h O:h V:h o:h h:@ h:O h:V h:o
+Cost 7100
+ @:m @:p A:b O:m O:p Q:b V:m V:p a:b o:m o:p {:b b:A b:Q b:a b:{ m:@ m:O m:V m:o p:@ p:O p:V p:o
+Cost 7200
+ A:T Q:T a:T {:T T:A T:Q T:a T:{
+Cost 7300
+ A:n A:t Q:n Q:t a:n a:t {:n {:t n:A n:Q n:a n:{ t:A t:Q t:a t:{
+Cost 7400
+ A:f E:h Q:f a:f e:h {:f f:A f:Q f:a f:{ h:E h:e
+Cost 8000
+ A:h Q:h a:h {:h h:A h:Q h:a h:{
+Cost 8100
+ A:m A:p Q:m Q:p a:m a:p {:m {:p m:A m:Q m:a m:{ p:A p:Q p:a p:{

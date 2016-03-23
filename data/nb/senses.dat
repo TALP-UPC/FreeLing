@@ -1,0 +1,16 @@
+<WNposMap>
+N n L
+J a L
+R r L
+V v L
+VBG a F
+</WNposMap>
+
+<DataFiles>
+senseDictFile  ./senses30.src
+formDictFile  ./dicc.src
+</DataFiles>
+
+<DuplicateAnalysis>
+no
+</DuplicateAnalysis>

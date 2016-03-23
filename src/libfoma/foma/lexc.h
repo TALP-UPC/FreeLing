@@ -1,0 +1,11 @@
+void lexc_init();
+void lexc_add_mc(char *symbol);
+int lexc_find_mc(char *symbol);
+struct states *lexc_find_lex_state(char *name);
+void lexc_add_word();
+struct fsm *lexc_to_fsm(void);
+void lexc_set_current_lexicon(char *name, int which);
+void lexc_set_current_word(char *name);
+void lexc_clear_current_word();
+void lexc_set_network(struct fsm *net);
+void lexc_trim(char *s);
