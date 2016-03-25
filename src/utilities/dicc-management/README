@@ -1,0 +1,75 @@
+ ======================
+ FOLDER dict-management
+ ======================
+
+    This folder contains the source files and scripts needed to 
+    generate FreeLing dictionary.
+
+    If you want to add forms to the lexicon, or modify existing ones, 
+    modify the source files and rebuild the dictionary.
+
+    This folder contains two folders:
+
+     bin: scripts to build the dictionary
+     sources: source data files
+
+   Source data files:
+   -----------------
+
+    You can keep any number of source data files. They may be
+   organized by PoS, but you can also have different files for
+   terminological entries, or for any other selection criteria you may
+   be interested in.
+
+    A word form can appear in different source files (e.g. with
+    different PoS or lemma).
+
+   Build the dictionary
+   --------------------
+
+    To build a dictionary, just run the script bin/build-dict, with 
+    the files you want to include in the dictionary as arguments.
+
+    Examples:
+
+     - Build a dictionary with all source files:
+         bin/build-dict sources/*  >dicc.src
+ 
+     - Build a dictionary with only nouns and verbs source files:
+         bin/build-dict sources/nouns.dat sources/verbs.dat  >dicc.src
+
+     - Build a general dictionary enlarged with medical terminological nouns:
+         bin/build-dict sources/nouns.dat sources/verbs.dat sources/medical/noun.dat  >dicc.src
+
+    Default dictionary data for each language can be found at data/XX/dictionary (where XX 
+    is the language code).
+
+   Example
+   ---------
+
+    For instance, if we had the following files:
+
+     nouns.dat         verbs.dat         adj.dat
+     ----------------------------------------------------
+     runs run NNS      run run VBP       tall tall JJ
+     cat cat NN        runs run VBZ      better good JJR
+     birds bird NN     eat eat VBP       tired tired JJ
+                       tired tire VBD
+                       tired tire VBN
+
+  
+    And we build the dictionary:
+
+      bin/build-dict nouns.dat verbs.dat adj.dat
+
+    We obtain:
+
+       better good JJR
+       birds bird NN
+       cat cat NN
+       eat eat VBP
+       runs run NNS run VBZ
+       run run VBP
+       tall tall JJ
+       tired tired JJ tire VBD tire VBN
+

@@ -1,0 +1,127 @@
+
+  This folder contains corpus and scripts to train the HMM and relax
+  taggers, and evaluate the performance of the learned models.
+
+  == CORPUS ==============================
+
+  There is data folders for each language (en,es,ca,pt,etc.)
+  To train and test a tagger, its data folder must contain:
+
+     - A file 'hmm-forbidden.manual' with the forbidden trigram
+       combinations.  This file may be empty, and the information may
+       be added at any later time if necessary.
+ 
+     - A file 'constr_gram.manual' with the headers (and maybe some
+       manual constraints) for the relax tagger. This file must
+       contain a minimal header with a line "SETS" and a line
+       "CONSTRAINTS". You can use a copy of the basic file for 
+       English (or any other language with no manual constraints).
+         
+     - A file 'unk-tags.XX' with the list of tags of open classes 
+       to be considered as possible tags for unknown words.
+       (XX stands for the right language code: en,es,ru,etc.)
+
+     - A file 'train' with the train corpus.
+
+     - A file 'test' with the test corpus (only needed to evaluate
+       the performance of your learned models)
+
+   Both 'train' and 'test' files have the same format:
+
+    word lemmaOK tagOK # lemma1 tag1 prob1 lemma2 tag2 prob2 ... 
+
+  * The first three fields are the word form with its right lemma and
+    tag in the sentence context.
+  * The fourth field is a separator '#' 
+  * The fields fifth and following are triples of all possible lemma-tags
+    for that form, obtained from the dictionary.
+  * Probability fields (prob1, prob2, ...) may be set to -1 if not available,
+    the script will use the training corpus to compute them.
+
+   The train and/or test corpus may be changed to evaluate the performance 
+  of the model on other data, or to build a model using different 
+  training data. The only requisite is that they have the right format and 
+  that the used tagset is consistent with that of FreeLing dictionaries.
+
+  * MAKING THE CORPUS CONSISTENT WITH THE DICTIONARY  
+ 
+   If the possible tags and lemmas for each word are not consistent
+  with your dictionary, you can use the program change-corpus-dict to
+  adapt it.
+
+   1) Compile the program (just run 'make' in 'bin' directory. You may 
+     need to adjust FreeLing installation path in the Makefile).
+
+   2) Run the program:
+         cat corpus.txt | ./change-corpus-dict lang path
+      ("lang" is the language of the corpus --es, en, ru, etc.-- and
+       "path" is the absolute path to freeling data directory where
+       the new dictionary is located --e.g. /usr/local/share/freeling)
+ 
+   This program will change the possible lemma-tag pairs for each word
+   to those found in the dictionary for that word. 
+
+   The correct lemma-tag will be left unchanged. If the correct
+   lemma-tag does not match the list of candidate pairs, this will be
+   reported by the TRAIN.sh script (see below).
+
+
+  == TRAIN / TEST SCRIPTS ===================================
+
+   The directory 'bin' contains two scripts: TRAIN.sh and TEST.sh
+   to train and test the tagger. Its usage is described below.
+ 
+   You may need to edit them and adjust the FLDIR variable to your
+   local FreeLing installation path. 
+ 
+   The TEST.sh script calls the program "update-probs" in the same 
+   'bin' directory. Before calling TEST.sh, make sure the program 
+   "update-probs" in the same directory is compiled. 
+   Just issuing "make" from 'bin' should compile it. You may need 
+   to adjust your local FreeLing installation path in the 'Makefile'.
+
+
+  == EXECUTING TRAIN.sh ===================================
+
+   The script bin/TRAIN.sh is called as follows from the
+   "train-taggers" directory:
+
+    bin/TRAIN.sh <language>
+
+   E.g.:  bin/TRAIN.sh es
+
+    The TRAIN.sh script will use the "train" corpus to build new 
+  tagger models for the given language.
+    You can use the TEST.sh script (see below) to evaluate their 
+  performance.
+
+   Once you are satisfied with the learned models, you can move them
+  to production stage, moving the following files to FreeLing
+  data directories.
+
+    probabilities.dat  --> required for the probabilities module
+    tagger.dat --> model for the HMM tagger
+    constr_gram-*.dat --> models for the relax tagger
+
+   As a side effect, the script will produce a file 'report.txt' with 
+  a list of inconsistencies found in the corpus (e.g. words with a 
+  right tag not in the list of possible tags, or words that do not
+  have the same list of possible tags in all their occurrences).
+
+   Fixing those inconsistencies is not mandatory, but doing so you'll get 
+  a cleaner corpus and the learned models will be better.
+
+
+  == EXECUTING TEST.sh =====================================
+
+   The script bin/TEST.sh is called as follows from the
+   "train-taggers" directory:
+
+    bin/TEST.sh <language>
+
+   E.g.:  bin/TEST.sh ru
+
+    It will annotate the test corpus with the last acquired models, 
+   and report on the accuracy of each one.
+
+

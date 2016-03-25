@@ -1,0 +1,41 @@
+<DecompositionRules>
+N 0,1,4 noun type/C:common;P:proper gen/M:m;F:f;N:n num/S:s;P:p case/N:nominative;G:genitive;D:dative;A:accusative;V:vocative;L:locative;I:instrumental animate/N:no;Y:yes
+V 3 verb type/M:main;A:auxiliary;O:modal;C:copula vform/I:indicative;M:imperative;C:conditional;N:infinitive;P:participle tense/P:present;I:imperfect;F:future;S:past;L:pluperfect;A:aorist person/1:1;2:2;3:3 num/S:s;P:p gen/M:m;F:f;N:n voice/A:active;P:passive negative/N:no;Y:yes
+A 0,1,5 adjective type/F:qualificative;S:possessive;O:ordinal degree/P:positive;C:comparative;S:superlative gen/M:m;F:f;N:n num/S:s;P:p case/N:nominative;G:genitive;D:dative;A:accusative;V:vocative;L:locative;I:instrumental definite/N:no;Y:yes animate/N:no;Y:yes
+P 0,1,5 pronoun type/P:personal;D:demonstrative;I:indefinite;S:possessive;R:relative;X:reflexive person/1:1;2:2;3:3 gen/M:m;F:f;N:n num/S:s;P:p case/N:nominative;G:genitive;D:dative;A:accusative;V:vocative;L:locative;I:instrumental definite/N:no;Y:yes possessornum/S:s;P:p possessorgen/M:m;F:f;N:n clitic/Y:yes;N:no referent/P:personal;S:possessive syntactic/N:nominal;A:adjectival animate/N:no;Y:yes
+R 2 adverb type/G:general degree/P:positive;C:comparative;S:superlative
+S 0,1,3 adposition type/P:preposition formation/S:simple;C:compound case/G:genitive;D:dative;A:accusative;L:locative;I:instrumental
+C 2 conjunction type/C:coordinating;S:subordinating formation/S:simple;C:compound
+M 0,1,4 numeral type/C:cardinal;O:ordinal;M:multiple;S:special gen/M:m;F:f;N:n num/S:s;P:p case/N:nominative;G:genitive;D:dative;A:accusative;V:vocative;L:locative;I:instrumental form/D:digit;R:roman;L:letter animate/N:no;Y:yes
+Q 0 particle type/Z:negative;Q:interrogative;O:modal;R:affirmative
+I 1 interjection formation/S:simple;C:compound
+Y 1 abbreviation syntactic/N:nominal;A:adjectival gen/M:m;F:f;N:n num/S:s;D:d;P:p case/N:nominative;G:genitive;D:dative;A:accusative;L:locative;I:instrumental 
+X 0 residual
+Z 0 number type/d:partitive;m:currency;p:percentage;u:unit
+W 0 date
+</DecompositionRules>
+<DirectTranslations>
+Fc Fc pos=punctuation|type=comma
+Fs Fs pos=punctuation|type=etc
+Fd Fd pos=punctuation|type=colon
+Fx Fx pos=punctuation|type=semicolon
+Fg Fg pos=punctuation|type=hyphen
+Fe Fe pos=punctuation|type=quotation
+Fh Fh pos=punctuation|type=slash
+Fp Fp pos=punctuation|type=period
+Fia Fia pos=punctuation|type=questionmark|punctenclose=open
+Fit Fit pos=punctuation|type=questionmark|punctenclose=close
+Faa Faa pos=punctuation|type=exclamationmark|punctenclose=open
+Fat Fat pos=punctuation|type=exclamationmark|punctenclose=close
+Ft Ft pos=punctuation|type=percentage
+Fla Fla pos=punctuation|type=curlybracket|punctenclose=open
+Flt Flt pos=punctuation|type=curlybracket|punctenclose=close
+Fca Fca pos=punctuation|type=squarebracket|punctenclose=open
+Fct Fct pos=punctuation|type=squarebracket|punctenclose=close
+Fpa Fpa pos=punctuation|type=parenthesis|punctenclose=open
+Fpt Fpt pos=punctuation|type=parenthesis|punctenclose=close
+Fra Fra pos=punctuation|type=quotation|punctenclose=open
+Frc Frc pos=punctuation|type=quotation|punctenclose=close
+Fz Fz pos=punctuation|type=other
+</DirectTranslations>
+

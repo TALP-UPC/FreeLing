@@ -1,0 +1,814 @@
+<Currency>
+$
+</Currency>
+<Measure>
+$ AED
+$ ANG
+$ ARS
+$ ATS
+$ AUD
+$ BDT
+$ BEF
+$ BGN
+$ BHD
+$ BND
+$ BRL
+$ BSD
+$ BWP
+$ CAD
+$ CHF
+$ CLP
+$ CNY
+$ COP
+$ CYP
+$ CZK
+$ DEM
+$ DKK
+$ ECU
+$ EEK
+$ EGP
+$ ESP
+$ EUR
+$ FIM
+$ FJD
+$ FRF
+$ GBP
+$ GHC
+$ GRD
+$ HKD
+$ HNL
+$ HRK
+$ HUF
+$ IDR
+$ IEP
+$ ILS
+$ INR
+$ IQD
+$ IRR
+$ ISK
+$ ITL
+$ JMD
+$ JPY
+$ KRW
+$ KWD
+$ LKR
+$ LTL
+$ LUF
+$ LVL
+$ LYD
+$ MAD
+$ MMK
+$ MTL
+$ MUR
+$ MXN
+$ MXP
+$ MYR
+$ NLG
+$ NOK
+$ NPR
+$ NZD
+$ OMR
+$ PAB
+$ PEN
+$ PHP
+$ PKR
+$ PLN
+$ PTE
+$ QAR
+$ ROL
+$ RON
+$ RUB
+$ SAR
+$ SEK
+$ SGD
+$ SIT
+$ SKK
+$ THB
+$ TND
+$ TRL
+$ TRY
+$ TTD
+$ TWD
+$ USD
+$ VEB
+$ ZAL
+$ ZAR
+AR ac
+AR cm2
+AR hA
+AR km2
+AR mi2
+AR mm2
+AR m2
+AR ft2
+AR in2
+AR yd2
+CB cm3/s
+CB gal/ac/d
+CB gal/ft2/d
+CB gal/ft2
+CB gal/ft2/min
+CB gal/cap/d
+CB gal/d
+CB gal/h
+CB gal/min
+CB gal/s
+CB l/s
+CB l/d
+CB ml/d
+CB l/d/cap
+CB l/m2/d
+CB l/m2
+CB l/m2/min
+CB l/m2/s
+CB l/min
+CB m3/d
+CB m3/ha/d
+CB m3/h
+CB m3/m2/d
+CB m3/m2/h
+CB m3/s
+CB ft3/min
+CB ft3/s
+IF bit
+IF byte
+IF eB
+IF gb
+IF gB
+IF kb
+IF kB
+IF mb
+IF mB
+IF nibble
+IF pB
+IF tB
+IF yB
+IF zB
+IF mbps
+EN Wb
+EN cal
+EN Kcal
+EN Kwh
+EN Bq
+EN cd
+EN Gy
+EN ohm
+EN V
+EN Cb
+DN hab/km2
+FQ Hz
+FQ lm
+FQ lx
+LN rad
+LN srad
+FQ sv
+LN Å
+LN cm
+SP m/s
+SP cm/s
+EN J/K
+EN J
+EN w
+EN T
+EN J/kg·K
+FR kg/s
+SP km/h
+AC km/h/s
+LN km
+SP km/s
+FR lbF
+LN mi
+LN m
+LN mm
+SP mi/h
+FR N
+FR Pa·s
+SP ft/h
+SP ft/min
+LN ft
+AC ft/s2
+SP ft/s
+LN in
+AC in/s2
+AC rad/s2
+SP rad/s
+FR V/m
+FR w/m/K
+FR w/srad
+LN yd
+PR Bar
+PR cmHg
+PR kg/cm2
+PR kg/m2
+PR lb/ft2
+PR mmHg
+PR MPa
+PR HPa
+PR N/m2
+PR Pa
+PR ftH2O
+PR lb/in2
+PR inH2O
+PR inHg
+TM d
+TM h
+TM min
+TM ms
+TM s
+TP K
+TP C
+TP F
+VL ac·ft
+VL bu
+VL cl
+VL cm3
+VL Dl
+VL gal
+VL Hl
+VL l
+VL ml
+VL mm3
+VL floz
+VL ft3
+VL pk
+VL pt
+VL in3
+VL qt
+VL yd3
+WG g
+WG kg
+DN kg/m3
+WG lb
+DN lb/milgal
+DN lb/ft3
+WG mg
+WG Mg
+WG oz
+WG mol
+WG tm
+WG tr
+WG uma
+DN g/l
+DN g/m3
+</Measure>
+<MeasureNames>
+$ USD NNS I
+€ ECU NNS I
+£ GBP NNS I
+¥ JPY NNS I
+algerian_<dinar> DZD $2:NN I
+argentine_<peso> ARS $2:NN I
+australian_<dollar> AUD $2:NN I
+austrian_<schilling> ATS $2:NN I
+bahamian_<dollar> BSD $2:NN I
+barbadian_<dollar> BBD $2:NN I
+bermudian_<dollar> BMD $2:NN I
+bahraini_<dinar> BHD $2:NN I
+<baht> THB $1:NN I
+<balboa> PAB $1:NN I
+bangladesh_<taka> BDT $2:NN I
+belarusian_<ruble> BYR $2:NN I
+belgian_<franc> BEF $2:NN I
+<bolivar> VEB $1:NN I
+botswanan_<pula> BWP $2:NN I
+brazilian_<real> BRL $2:NN I
+british_<pound> GBP $2:NN I
+brunei_<dollar> BND $2:NN I
+bulgarian_<lev> BGN $2:NN I
+canadian_<dollar> CAD $2:NN I
+<cedi> GHC $1:NN I
+chilean_<peso> CLP $2:NN I
+chinese_<yuan> CNY $2:NN I
+colombian_<peso> COP $2:NN I
+croatian_<kuna> HRK $2:NN I
+cyprus_<pound> CYP $2:NN I
+czech_<koruna> CZK $2:NN I
+danish_<krone> DKK $2:NN I
+deutsche_<mark> DEM $2:NN I
+<dinar> KWD $1:NN I
+<dirham> AED $1:NN I
+<dollar> USD $1:NN I
+<drachma> GRD $1:NN I
+egyptian_<pound> EGP $2:NN I
+<escudo> PTE $1:NN I
+estonian_<kroon> EEK $2:NN I
+<euro> EUR $1:NN I
+fiji_<dollar> FJD $2:NN I
+finnish_<markka> FIM $2:NN I
+<forint> HUF $1:NN I
+<franc> FRF $1:NN I
+french_<franc> FRF $2:NN I
+ghana_<cedi> GHC $2:NN I
+greek_<drachma> GRD $2:NN I
+<guilder> NLG $1:NN I
+honduras_<lempira> HNL $2:NN I
+hong_kong_<dollar> HKD $3:NN I
+hungarian_<forint> HUF $2:NN I
+iceland_<krona> ISK $2:NN I
+indian_<rupee> INR $2:NN I
+indonesian_<rupiah> IDR $2:NN I
+iranian_<rial> IRR $2:NN I
+iraqi_<dinar> IQD $2:NN I
+irish_<pound> IEP $2:NN I
+israeli_<shekel> ILS $2:NN I
+italian_<lira> ITL $2:NN I
+jamaican_<dollar> JMD $2:NN I
+japanese_<yen> JPY $2:NN I
+<koruna> CZK $1:NN I
+<krona> SEK $1:NN I
+<krone> DKK $1:NN I
+<kroon> EEK $1:NN I
+<kuna> HRK $1:NN I
+kuwaiti_<dinar> KWD $2:NN I
+<kyat> MMK $1:NN I
+<lat> LVL $1:NN I
+latvian_<lat> LVL $2:NN I
+<lempira> HNL $1:NN I
+<leu> RON $1:NN I
+<lev> BGN $1:NN I
+libyan_<dinar> LYD $2:NN I
+<lira> ITL $1:NN I
+<lita> LTL $1:NN I
+lithuanian_<lita> LTL $2:NN I
+luxembourg_<franc> LUF $2:NN I
+malaysian_<ringgit> MYR $2:NN I
+maltese_<lira> MTL $2:NN I
+<mark> DEM $1:NN I
+<markka> FIM $1:NN I
+mauritius_<rupee> MUR $2:NN I
+mexican_<peso> MXP $2:NN I
+moroccan_<dirham> MAD $2:NN I
+myanmar_<kyat> MMK $2:NN I
+nepalese_<rupee> NPR $2:NN I
+netherlands_antillian_<guilder> ANG $3:NN I
+netherlands_<guilder> NLG $2:NN I
+new_zealand_<dollar> NZD $3:NN I
+norwegian_<krone> NOK $2:NN I
+omani_<rial> OMR $2:NN I
+pakistan_<rupee> PKR $2:NN I
+panamanian_<balboa> PAB $2:NN I
+peruvian_<sol> PEN $2:NN I
+<peseta> ESP $1:NN I
+<peso> MXP $1:NN I
+philippine_<peso> PHP $2:NN I
+polish_<zloty> PLN $2:NN I
+portuguese_<escudo> PTE $2:NN I
+<pound> GBP $1:NN I
+<pula> BWP $1:NN I
+qatari_<riyal> QAR $2:NN I
+<rand> ZAR $1:NN I
+<real> BRL $1:NN I
+<rial> IRR $1:NN I
+<ringgit> MYR $1:NN I
+<riyal> SAR $1:NN I
+romanian_<leu> ROL $2:NN I
+romanian_new_<leu> RON $3:NN I
+<ruble> RUB $1:NN I
+<rupee> INR $1:NN I
+<rupiah> IDR $1:NN I
+russian_<ruble> RUB $2:NN I
+saudi_<riyal> SAR $2:NN I
+<schilling> ATS $1:NN I
+<shekel> ILS $1:NN I
+singapore_<dollar> SGD $2:NN I
+slovak_<koruna> SKK $2:NN I
+slovenia_<tolar> SIT $2:NN I
+south_african_financial_<rand> ZAL $4:NN I
+south_african_<rand> ZAR $3:NN I
+south_korean_<won> KRW $3:NN I
+spanish_<peseta> ESP $2:NN I
+sri_lankan_<rupee> LKR $3:NN I
+swedish_<krona> SEK $2:NN I
+swiss_<franc> CHF $2:NN I
+taiwan_new_<dollar> TWD $3:NN I
+<taka> BDT $1:NN I
+thai_<baht> THB $2:NN I
+<tolar> SIT $1:NN I
+trinidad_and_tobago_<dollar> TTD $4:NN I
+tunisian_<dinar> TND $2:NN I
+turkish_<lira> TRL $2:NN I
+turkish_new_<lira> TRY $3:NN I
+u.a.e._<dirham> AED $2:NN I
+us_<dollar> USD $2:NN I
+american_<dollar> USD $2:NN I
+venezuelan_<bolivar> VEB $2:NN I
+<yuan> CNY $1:NN I
+<won> KRW $1:NN I
+<yen> JPY $1:NN I
+<zloty> PLN $1:NN I
+Å Å NNS I
+<armstrong> Å $1:NN I
+ac-ft ac·ft NNS I
+ac·ft ac·ft NNS I
+<acre-foot> acre-foot $1:NN
+<acre>_foot ac·ft $1:NN I
+<acre> ac $1:NN I
+<bit> bit $1:NN I
+<bushel> bu $1:NN I
+<byte> byte $1:NN I
+<centiliter> cl $1:NN I
+cl cl NNS I
+<centimeter> cm $1:NN I
+cm_Fh_s cm/s NN I
+<centimeter>_Fh_s cm/s $1:NN I
+<centimeter>_Fh_second cm/s $1:NN I
+<centimeter>_per_second cm/s $1:NN I
+<centimeter>_second cm/s $1:NN I
+square_<centimeter> cm2 $2:NN I
+cm cm NNS I
+cm2 cm2 NNS I
+cubic_<centimeter> cm3 $2:NN I
+cm3 cm3 NNS I
+cubic_<centimeter>_Fh_second cm3/s $2:NN I
+cm3_Fh_s cm3/s NN I
+cm3_Fh_sec cm3/s NN I
+hg_<centimeter> cmHg $2:NN I
+mercury_<centimeter> cmHg $2:NN I
+cmhg cmHg NNS I
+<coulomb> Cb $1:NN I
+<decaliter> Dl $1:NN I
+<stereoradian> srad $1:NN I
+<exabyte> eB $1:NN I
+ft2 ft2 NNS I
+ft3_Fh_min ft3/min NN I
+ft3_Fh_s ft3/s NN I
+ft3 ft3 NNS I
+ft_Fh_h ft/h NN I
+ft_Fh_min ft/min NN I
+ft_Fh_s2 ft/s2 NN I
+ft_Fh_s ft/s NN I
+fth2o ftH2O NNS I
+gal_Fh_ac_Fh_d gal/ac/d NN I
+gal_Fh_cap_Fh_d gal/cap/d NN I
+gal_Fh_d gal/d NN I
+gal_Fh_ft2_d gal/ft2/d NN I
+gal_Fh_ft2_Fh_min gal/ft2/min NN I
+gal_Fh_ft2 gal/ft2 NN I
+gal_Fh_h gal/h NN I
+gal_Fh_min gal/min NN I
+gal_Fh_s gal/s $1:NN I
+<gallon>_acre_Fh_day gal/ac/d $1:NN I
+<gallon>_acre_per_day gal/ac/d $1:NN I
+<gallon>_capita_Fh_day gal/cap/d $1:NN I
+<gallon>_capita_per_day gal/cap/d $1:NN I
+<gallon>_day gal/d $1:NN I
+<gallon> gal $1:NN I
+<gallon>_Fh_acre_day gal/ac/d $1:NN I
+<gallon>_Fh_acre_Fh_day gal/ac/d $1:NN I
+<gallon>_Fh_acre_per_day gal/ac/d $1:NN I
+<gallon>_Fh_capita_day gal/cap/d $1:NN I
+<gallon>_Fh_capita_Fh_day gal/cap/d $1:NN I
+<gallon>_Fh_capita_per_day gal/cap/d $1:NN I
+<gallon>_Fh_day gal/d $1:NN I
+<gallon>_Fh_hour gal/h $1:NN I
+<gallon>_Fh_minute gal/min $1:NN I
+<gallon>_Fh_square_foot_day gal/ft2/d $1:NN I
+<gallon>_Fh_square_foot_Fh_day gal/ft2/d $1:NN I
+<gallon>_Fh_square_foot_Fh_minute gal/ft2/min $1:NN I
+<gallon>_Fh_square_foot gal/ft2 $1:NN I
+<gallon>_Fh_square_foot_minute gal/ft2/min $1:NN I
+<gallon>_Fh_square_foot_per_day gal/ft2/d $1:NN I
+<gallon>_Fh_square_foot_per_minute gal/ft2/min $1:NN I
+<gallon>_Fh_second gal/s $1:NN I
+<gallon>_hour gal/h $1:NN I
+<gallon>_minute gal/min $1:NN I
+<gallon>_per_capita_day gal/cap/d $1:NN I
+<gallon>_per_capita_Fh_day gal/cap/d $1:NN I
+<gallon>_per_capita_per_day gal/cap/d $1:NN I
+<gallon>_square_foot_Fh_day gal/ft2/d $1:NN I
+<gallon>_square_foot_Fh_minute gal/ft2/min $1:NN I
+<gallon>_square_foot_per_day gal/ft2/d $1:NN I
+<gallon>_square_foot_per_minute gal/ft2/min $1:NN I
+<gallon>_per_acre_day gal/ac/d $1:NN I
+<gallon>_per_acre_Fh_day gal/ac/d $1:NN I
+<gallon>_per_acre_per_day gal/ac/d $1:NN I
+<gallon>_per_acre_and_day gal/ac/d $1:NN I
+<gallon>_per_capita_day gal/cap/d $1:NN I
+<gallon>_per_capita_Fh_day gal/cap/d $1:NN I
+<gallon>_per_capita_per_day gal/cap/d $1:NN I
+<gallon>_per_day gal/d $1:NN I
+<gallon>_per_hour gal/h $1:NN I
+<gallon>_per_minute gal/min $1:NN I
+<gallon>_per_square_foot_day gal/ft2/d $1:NN I
+<gallon>_per_square_foot_Fh_day gal/ft2/d $1:NN I
+<gallon>_per_square_foot_Fh_minute gal/ft2/min $1:NN I
+<gallon>_per_square_foot gal/ft2 $1:NN I
+<gallon>_per_square_foot_minute gal/ft2/min $1:NN I
+<gallon>_per_square_foot_per_day gal/ft2/d $1:NN I
+<gallon>_per_square_foot_per_minute gal/ft2/min $1:NN I
+<gallon>_per_square_foot_and_day gal/ft2/d $1:NN I
+<gallon>_per_square_foot_and_minute gal/ft2/min $1:NN I
+<gallon>_per_second gal/s $1:NN I
+<gallon>_second gal/s $1:NN I
+<gray> Gy $1:NN I
+<degree>_celsius C $1:NN I
+celsius_<degree> C $2:NN I
+ºc C NNS I
+ºf F NNS I
+ºk K NNS I
+<degree>_farenheit F $1:NN I
+<degree>_kelvin K $1:NN I
+farenheit_<degree> F $2:NN I
+kelvin_<degree> K $2:NN I
+<gram>_Fh_liter g/l $1:NN I
+<gram>_Fh_meter_cubic g/m3 $1:NN I
+<gram> g $1:NN I
+<gram>_per_liter g/l $1:NN I
+g_Fh_l g/l NNS I
+g_Fh_m3 g/m3 NNS I
+<gram>_per_meter_cubic g/m3 $1:NN I
+<gigabit> gb $1:NN I
+<gigabyte> gB $1:NN I
+hab_Fh_km2 hab/km2 NN I
+<people>_Fh_km2 hab/km2 $1:NN I
+<people>_Fh_kms2 hab/km2 $1:NN I
+<people>_per_square_kilometer hab/km2 $1:NN I
+<people>_per_km2 hab/km2 $1:NN I
+<hectare> hA $1:NN I
+<hectoliter> Hl $1:NN I
+hl Hl NNS I
+<hectopascal> HPa $1:NN I
+<hertz> Hz $1:NN I
+hz Hz NNS I
+in2 in2 NNS I
+in3 in3 NNS I
+in_Fh_s2 in/s2 NN I
+inh20 inH2O NNS I
+inhg inHg NNS I
+j_Fh_k J/K NN I
+<joule>_Fh_degree_kelvin J/K $1:NN I
+<joule>_Fh_kelvin_degree J/K $1:NN I
+<joule>_Fh_kelvin J/K $1:NN I
+<joule>_Fh_k J/K $1:NN I
+<joule> J $1:NN I
+<joule>_per_degree_kelvin J/K $1:NN I
+joule>_per_kelvin_degree J/K $1:NN I
+<joule>_per_kelvin J/K $1:NN I
+j_Fh_kg·k J/kg·K NNS I
+kg_Fh_cm2 kg/cm2 NNS I
+kg_Fh_m2 kg/m2 NNS I
+kg_Fh_m3 kg/m3 NNS I
+kg_Fh_s kg/s NN I
+kg kg NNS I
+<kilobit> kb $1:NN I
+<kilobyte> kB $1:NN I
+<kilogram>_Fh_square_<centimeter> kg/cm2 $1:NN I
+<kilogram>_Fh_square_<meter> kg/m2 $1:NN I
+<kilogram>_Fh_cubicmeter kg/m3 $1:NN I
+<kilogram>_Fh_second kg/s $1:NN I
+<kilogram> kg $1:NN I
+<kilogram>_per_square_<centimeter> kg/cm2 $1:NN I
+<kilogram>_per_square_<meter> kg/m2 $1:NN I
+<kilogram>_per_cubic_<meter> kg/m3 $1:NN I
+<kilogram>_per_second kg/s $1:NN I
+square_<kilometer> km2 $2:NN I
+<kilometer>_Fh_h_Fh_s km/h/s $1:NN I
+<kilometer>_Fh_h km/h $1:NN I
+<kilometer>_Fh_hour_Fh_second km/h/s $1:NN I
+<kilometer>_Fh_hour km/h $1:NN I
+<kilometer>_Fh_hour_per_second km/h/s $1:NN I
+<kilometer>_Fh_hour_second km/h/s $1:NN I
+<kilometer>_Fh_second km/s $1:NN I
+<kilometer>_Fh_s km/s $1:NN I
+<kilometer>_hour_Fh_second km/h/s $1:NN I
+<kilometer>_hour_per_second km/h/s $1:NN I
+<kilometer>_hour_second km/h/s $1:NN I
+<kilometer> km $1:NN I
+<kilometer>_per_hour_Fh_second km/h/s $1:NN I
+<kilometer>_per_hour km/h $1:NN I
+<kilometer>_per_hour_per_second km/h/s $1:NN I
+<kilometer>_per_second km/s $1:NN I
+<kilometer>_second km/s $1:NN I
+km2 km2 NNS I
+km_Fh_h_Fh_s km/h/s NN I
+km_Fh_h km/h NN I
+km_Fh_s km/s NN I
+lb_Fh_ft2 lb/ft2 NNS I
+lb_Fh_ft3 lb/ft3 NNS I
+lb_Fh_in2 lb/in2 NNS I
+lb_Fh_milgal lb/milgal NNS I
+lbf lbF NNS I
+l_Fh_day l/d NN I
+l_Fh_d l/d NN I
+l_Fh_m2_Fh_d l/m2/d NN I
+l_Fh_m2_Fh_min l/m2/min NN I
+l_Fh_m2_Fh_s l/m2/s NN I
+l_Fh_m2 l/m2 NN I
+l_Fh_min l/min NN I
+l_Fh_s l/s NN I
+<pound>_Fh_milgallon lb/milgal $1:NN I
+<pound>_Fh_square_foot lb/ft2 $1:NN I
+<pound>_Fh_cubic_foot lb/ft3 $1:NN I
+<pound>_Fh_square_inch lb/in2 $1:NN I
+<pound> lb $1:NN I
+<pound>_milgallon lb/milgal $1:NN I
+<pound>_per_milgallon lb/milgal $1:NN I
+<pound>_per_square_foot lb/ft2 $1:NN I
+<pound>_per_cubic_foot lb/ft3 $1:NN I
+<pound>_per_square_inch lb/in2 $1:NN I
+<liter>_day_capita l/d/cap $1:NN I
+<liter>_day_per_capita l/d/cap $1:NN I
+<liter>_day_per_capita l/d/cap $1:NN I
+<liter>_Fh_day_Fh_capita l/d/cap $1:NN I
+<liter>_Fh_day_per_capita l/d/cap $1:NN I
+<liter>_Fh_square_<meter>_Fh_dia l/m2/d $1:NN I
+<liter>_Fh_square_<meter>_Fh_minute l/m2/min $1:NN I
+<liter>_Fh_square_<meter>_Fh_second l/m2/s $1:NN I
+<liter>_Fh_square_<meter> l/m2 $1:NN I
+<liter>_Fh_square_<meter>_per_dia l/m2/d $1:NN I
+<liter>_Fh_square_<meter>_per_minute l/m2/min $1:NN I
+<liter>_Fh_square_<meter>_per_second l/m2/s $1:NN I
+<liter>_Fh_minute l/min $1:NN I
+<liter>_Fh_second l/s $1:NN I
+<liter> l $1:NN I
+<liter>_square_<meter>_per_day l/m2/d $1:NN I
+<liter>_square_<meter>_per_minute l/m2/min $1:NN I
+<liter>_square_<meter>_per_second l/m2/s $1:NN I
+<liter>_per_day_capita l/d/cap $1:NN I
+<liter>_per_day_Fh_capita l/d/cap $1:NN I
+<liter>_per_day l/d $1:NN I
+<liter>_per_day_per_capita l/d/cap $1:NN I
+<liter>_per_day_per_capita l/d/cap $1:NN I
+<liter>_per_square_<meter>_day l/m2/d $1:NN I
+<liter>_per_square_<meter>_Fh_dia l/m2/d $1:NN I
+<liter>_per_square_<meter>_Fh_minute l/m2/min $1:NN I
+<liter>_per_square_<meter>_Fh_second l/m2/s $1:NN I
+<liter>_per_square_<meter> l/m2 $1:NN Il
+<liter>_per_square_<meter>_minute l/m2/min $1:NN I
+<liter>_per_square_<meter>_per_dia l/m2/d $1:NN I
+<liter>_per_square_<meter>_per_minute l/m2/min $1:NN I
+<liter>_per_square_<meter>_per_second l/m2/s $1:NN I
+<liter>_per_square_<meter>_second l/m2/s $1:NN I
+<liter>_per_square_<meter>_and_day l/m2/d $1:NN I
+<liter>_per_square_<meter>_and_minute l/m2/min $1:NN I
+<liter>_per_square_<meter>_and_second l/m2/s $1:NN I
+<liter>_per_minute l/min $1:NN I
+<liter>_per_second l/s $1:NN I
+lt_Fh_d_per_capita l/d/cap NN I
+lt_Fh_d_per_capita l/d/cap NN I
+lt_Fh_m2_Fh_d l/m2/d NN I
+lt_Fh_m2_Fh_min l/m2/min NN I
+lt_Fh_m2_Fh_s l/m2/s NN I
+lt_Fh_m2 l/m2 NN I
+lt l NNS I
+<lumen> lm $1:NN I
+<lux> lx $1:NN I
+m2 m2 NNS I
+m3_Fh_ha_Fh_d m3/ha/d NN I
+m3_Fh_h m3/h NN I
+m3_Fh_hour m3/h NN I
+m3_Fh_m2_Fh_d m3/m2/d NN I
+m3_Fh_m2_Fh_h m3/m2/h NN I
+m3_Fh_sec m3/s NN I
+m3_Fh_s m3/s NN I
+<square>_<meter> m2 $2:NN I
+<cubic>_<meter>_Fh_hour m3/h $1:NN I
+<cubic>_<meter>_Fh_second m3/s $1:NN I
+<cubic>_<meter>_per_hour m3/h $1:NN I
+<cubic>_<meter>_per_second m3/s $1:NN I
+<meter>_Fh_second m/s $1:NN I
+<meter>_Fh_s m/s $1:NN I
+<meter> m $1:NN I
+m m NNS I
+<meter>_per_second m/s $1:NN I
+<meter>_second m/s $1:NN I
+m_Fh_s m/s NN I
+mg mg NNS I
+mi2 mi2 NNS I
+<megabit> mb $1:NN I
+<megabyte> mB $1:NN I
+<megagram> tm $1:NN I
+<megapascal> MPa $1:NN I
+mbps mbps NNS I
+<megabit>_per_second mbps $1:NN I
+<megabit>_Fh_second mbps $1:NN I
+<megabit>_Fh_s mbps $1:NN I
+mi_Fh_h mi/h NN I
+<milligram> mg $1:NN I
+<milliliter> ml $1:NN I
+<millimeter>_<square> mm2 $1:NN I
+<millimeter>_<cubic> mm3 $1:NN I
+hg_<millimeter> mmHg $2:NN I
+<millimeter>_hg mmHg $1:NN I
+mercury_<millimeter> mmHg $2:NN I
+<millimeter> mm $1:NN I
+<millisecond> ms $1:NN I
+<second> s $1:NN I
+square_<mile> mi2 $1:NN I
+<mile>_Fh_hour mi/h $1:NN I
+<mile> mi $1:NN I
+<mile>_per_hour mi/h $1:NN I
+ml_Fh_d ml/d NN I
+ml ml NNS I
+mlt_Fh_d ml/d NN I
+mm2 mm2 NNS I
+mm3 mm3 NNS I
+mmhg mmHg NNS I
+<mol> mol $1:NN I
+ms ms NNS I
+<newton>_Fh_square_meter N/m2 $1:NN I
+<newton> N $1:NN I
+<newton>_per_square_meter N/m2 $1:NN I
+n_Fh_m2 N/m2 NNS I
+<nibble> nibble $1:NN I
+<ohm> ohm $1:NNS I
+fluid_<ounce> floz $2:NN I
+<ounce> oz $1:NN I
+<pascal> Pa $1:NN I
+<peck> pk $1:NN I
+<petabyte> pB $1:NN I
+<foot> ft $1:NN I
+square_<foot> ft2 $2:NN I
+cubic_<foot>_Fh_minute ft3/min $2:NN I
+cubic_<foot>_Fh_second ft3/s $2:NN I
+cubic_<foot> ft3 $2:NN I
+cubic_<foot>_per_minute ft3/min $2:NN I
+cubic_<foot>_per_second ft3/s $2:NN I
+water_<foot> ftH2O $2:NN I
+<foot>_Fh_hour ft/h $1:NN I
+<foot>_Fh_minute ft/min $1:NN I
+<foot>_Fh_second_Fh_second ft/s2 $1:NN I
+<foot>_Fh_second ft/s $1:NN I
+<foot>_Fh_second_per_second ft/s2 $1:NN I
+<foot>_Fh_second_second ft/s2 $1:NN I
+<foot>_hour ft/h $1:NN I
+<foot>_minute ft/min $1:NN I
+<foot>_per_hour ft/h $1:NN I
+<foot>_per_minute ft/min $1:NN I
+<foot>_per_second_al_square ft/s2 $1:NN I
+<foot>_per_second_square ft/s2 $1:NN I
+<foot>_per_second_Fh_second ft/s2 $1:NN I
+<foot>_per_second ft/s $1:NN I
+<foot>_per_second_per_second ft/s2 $1:NN I
+<foot>_per_second_second ft/s2 $1:NN I
+<foot>_second_Fh_second ft/s2 $1:NN I
+<foot>_second ft/s $1:NN I
+<foot>_second_per_second ft/s2 $1:NN I
+<foot>_second_second ft/s2 $1:NN 
+water_<inch> inH2O $2:NN I
+square_<inch> in2 $2:NN I
+cubic_<inch> in3 $2:NN I
+water_<inch> inH2O $2:NN I
+hg_<inch> inHg $2:NN I
+mercury_<inch> inHg $2:NN I
+<inch>_hg inHg $1:NN I
+inhg inHg NNS I
+<inch>_Fh_second_Fh_second in/s2 $1:NN I
+<inch>_Fh_second_per_second in/s2 $1:NN I
+<inch>_Fh_second_second in/s2 $1:NN I
+<inch> in $1:NN I
+<inch>_per_square_second in/s2 $1:NN I
+<inch>_per_second_Fh_second in/s2 $1:NN I
+<inch>_per_second_per_second in/s2 $1:NN I
+<inch>_per_second_second in/s2 $1:NN I
+<inch>_second_Fh_second in/s2 $1:NN I
+<inch>_second_per_second in/s2 $1:NN I
+<inch>_second_second in/s2 $1:NN I
+rad_Fh_s rad/s NN I
+<radian>_Fh_second rad/s $1:NN I
+<radian>_per_second rad/s $1:NN I
+<radian> rad $1:NN I
+tm tm NNS I
+metric_<ton> tm $1:NN I
+<ton> tm $1:NN I
+<terabyte> tB $1:NN I
+<tesla> T $1:NN I
+atomic_mass_<unit> uma $3:NN I
+a.m.u uma NNS I
+amu uma NNS I
+<volt> V $1:NN I
+<volt>_Fh_<meter> V/m $1:NN I
+<volt>_per_<meter> V/m $1:NN I
+v_Fh_m V/m NNS I
+<watt>_Fh_stereoradian w/srad $1:NN I
+<watt>_Fh_meter_Fh_degree_kelvin w/m/K $1:NN I
+<watt>_Fh_meter_Fh_kelvin_degree w/m/K $1:NN I
+<watt>_Fh_meter_Fh_kelvin w/m/K $1:NN I
+<watt>_Fh_meter_per_degree_kelvin w/m/K $1:NN I
+<watt>_Fh_meter_per_kelvin_degree w/m/K $1:NN I
+<watt>_Fh_meter_per_kelvin w/m/K $1:NN I
+<watt>_per_stereoradian w/srad $1:NN I
+<watt>_per_meter_Fh_degree_kelvin w/m/K $1:NN I
+<watt>_per_meter_Fh_kelvin_degree w/m/K $1:NN I
+<watt>_per_meter_Fh_kelvin w/m/K $1:NN I
+<watt>_per_meter_per_degree_kelvin w/m/K $1:NN I
+<watt>_per_meter_per_kelvin_degree w/m/K $1:NN I
+<watt>_per_meter_per_kelvin w/m/K $1:NN I
+<watt>_per_meter_Fh_degree_kelvin w/m/K $1:NN I
+<watt>_per_meter_Fh_kelvin_degree w/m/K $1:NN I
+<watt>_per_meter_Fh_kelvin w/m/K $1:NN I
+<watt>_per_meter_per_degree_kelvin w/m/K $1:NN I
+<watt>_per_meter_per_kelvin_degree w/m/K $1:NN I
+<watt>_per_meter_per_kelvin w/m/K $1:NN I
+<watt> w $1:NN I
+<weber> Wb NNS I
+w_Fh_m_K w/m/K NN I
+w_Fh_srad w/srad NN I
+square_<yard> yd2 $2:NN I
+cubic_<yard> yd3 $2:NN I
+<yard> yd $1:NN I
+yd2 yd2 NNS I
+yd3 yd3 NNS I
+<yottabyte> yB NNS I
+<zettabyte> zB NNS I
+</MeasureNames>

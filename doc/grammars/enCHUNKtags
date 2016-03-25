@@ -1,0 +1,51 @@
+%%% FREELING SHALLOW PARSER: CHUNKING TAGS FOR ENGLISH %%%%%%%%%%%%%%%%%%%
+%                                                                        %
+%   		   MARINA LLOBERES          LLUIS PADRO			 %
+%  	        mlloberes@lsi.upc.edu    padro@lsi.upc.edu		 %
+%                                                                        %
+%                                                                        %
+%     	    Departament de Llenguatges i Sistemes Informàtics      	 %
+%                 (Universitat Politecnica de Catalunya)                 %
+%                         Jordi Girona 1-3                               %
+%                          08034 Barcelona                               %
+%                                                                        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+(document in progress)
+
+
+att-coor	adjective, adjective coordination
+attrib		adjective, attributive adjective
+pred		adjective, predicative adjective
+adv		adverb
+part		adverb, verb modifier
+conj		conjunction
+prep1		conjunction, preposition or adverb 'due to' and 'next to'
+quant		determiner, quantifier
+n-ngen		genitive case
+n-chunk		noun
+sn-chunk	noun, noun with definite article
+sn-indef	noun, noun with indefinite article
+prt-sub		particle, conjunction
+nex-coord	particle, coordinating conjunction
+exs		particle, existential
+OF-chunk	particle, 'of' particle
+prt-mix		particle, preposition, adverb or conjunction
+prt-sp		particle, preposition
+TO-chunk	particle, 'to' particle
+sp-chunk	prepostion
+sf-brk		punctuation, coma, colon or semi-colon
+inc-mk		punctuation, digression
+ex-brk		punctuation, exclamation
+st-brk		punctuation, full stop or dot
+in-brk		punctuation, interrogation
+oth-mk		punctuation, other punctuation marks
+quot-mk		punctuation, quotation
+nex-vppt	subordinating participles 'provided' and 'given'
+mod-chunk	verb, modal verb
+vb-be		verb, to 'be'
+vb-do		verb, to 'do'
+vb-have		verb, to 'have'
+vb-chunk	verb
+wh-adv		wh- pro-form, adverb or interrogative mark
+wh-pro		wh- pro-form, pronoun or interrogative mark

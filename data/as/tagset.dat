@@ -1,0 +1,38 @@
+<DecompositionRules>
+A 2 adjective type/O:ordinal;Q:qualificative degree/S:superlative gen/F:f;M:m;C:c num/S:s;P:p;N:c
+C 2 conjunction type/C:coordinating;S:subordinating
+D 2 determiner type/A:article;D:demonstrative;E:exclamative;I:indefinite;T:interrogative;N:numeral;P:possessive person/1:1;2:2;3:3 gen/F:f;M:m;C:c num/S:s;P:p;N:c possessornum/S:s;P:p
+N 2 noun type/C:common;P:proper gen/F:f;M:m;C:c num/S:s;P:p;N:c neclass/S:person;G:location;O:organization;V:other degree/A:augmentative;D:diminutive
+P 2 pronoun type/D:demonstrative;E:exclamative;I:indefinite;T:interrogative;N:numeral;P:personal;X:possessive;R:relative person/1:1;2:2;3:3 gen/F:f;M:m;C:c num/S:s;P:p;N:c case/N:nominative;A:accusative;D:dative;O:oblique possessornum/S:s;P:p polite/P:yes
+R 2 adverb type/N:negative
+S 2 adposition type/P:preposition contracted/S:0;C:yes gen/M:m num/S:s
+V 3 verb type/M:main;A:auxiliary;S:semiauxiliary mood/I:indicative;S:subjunctive;M:imperative;P:pastparticiple;G:gerund;N:infinitive tense/P:present;I:imperfect;F:future;S:past;C:conditional person/1:1;2:2;3:3 num/S:s;P:p gen/F:f;M:m
+Z 2 number type/d:partitive;m:currency;p:ratio;u:unit
+W 0 date
+I 0 interjection
+</DecompositionRules>
+<DirectTranslations>
+Fc Fc pos=punctuation|type=comma
+Fs Fs pos=punctuation|type=etc
+Fd Fd pos=punctuation|type=colon
+Fx Fx pos=punctuation|type=semicolon
+Fg Fg pos=punctuation|type=hyphen
+Fe Fe pos=punctuation|type=quotation
+Fh Fh pos=punctuation|type=slash
+Fp Fp pos=punctuation|type=period
+Fia Fia pos=punctuation|type=questionmark|punctenclose=open
+Fit Fit pos=punctuation|type=questionmark|punctenclose=close
+Faa Faa pos=punctuation|type=exclamationmark|punctenclose=open
+Fat Fat pos=punctuation|type=exclamationmark|punctenclose=close
+Ft Ft pos=punctuation|type=percentage
+Fla Fla pos=punctuation|type=curlybracket|punctenclose=open
+Flt Flt pos=punctuation|type=curlybracket|punctenclose=close
+Fca Fca pos=punctuation|type=squarebracket|punctenclose=open
+Fct Fct pos=punctuation|type=squarebracket|punctenclose=close
+Fpa Fpa pos=punctuation|type=parenthesis|punctenclose=open
+Fpt Fpt pos=punctuation|type=parenthesis|punctenclose=close
+Fra Fra pos=punctuation|type=quotation|punctenclose=open
+Frc Frc pos=punctuation|type=quotation|punctenclose=close
+Fz Fz pos=punctuation|type=other
+</DirectTranslations>
+

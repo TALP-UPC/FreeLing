@@ -1,0 +1,361 @@
+<!--                                                          -->
+<!--  FreeLing 4.0                                            -->
+<!--  TALP Research Center                                    -->
+<!--  Universitat Politecnica de Catalunya                    -->
+<!--                                                          -->
+<!--  This file contains the XML Schema for the output        -->
+<!--  produced by FreeLing module 'output_xml'                -->
+<!--                                                          -->
+
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+
+  <!-- ************************************ -->
+  <!-- Type definition for parse tree nodes -->
+  <!-- ************************************ -->
+  <xs:complexType name="nodeType">
+    <!-- Each node can have list of child nodes -->
+    <xs:sequence>
+      <xs:element name="node" type="nodeType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <!-- Content of the tree nodes -->
+    <xs:attribute type="xs:boolean" name="leaf" use="optional"/>
+    <xs:attribute type="xs:boolean" name="head" use="optional"/>
+    <xs:attribute type="xs:string" name="label" use="optional"/>
+    <xs:attribute type="xs:string" name="token" use="optional"/>
+    <xs:attribute type="xs:string" name="word" use="optional"/>
+  </xs:complexType>
+
+  <!-- ***************************************** -->
+  <!-- Type definition for dependency tree nodes -->
+  <!-- ***************************************** -->
+  <xs:complexType name="depnodeType">
+    <!-- Each node can have list of child nodes -->
+    <xs:sequence>
+      <xs:element name="depnode" type="depnodeType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <!-- Content of the dep tree nodes -->
+    <xs:attribute type="xs:string" name="token" use="optional"/>
+    <xs:attribute type="xs:string" name="function" use="optional"/>
+    <xs:attribute type="xs:string" name="word" use="optional"/>
+  </xs:complexType> 
+
+
+  <!-- ************************************* -->
+  <!-- **         MAIN DOCUMENT           ** -->
+  <!-- ************************************* -->
+  <xs:element name="document">
+    <xs:complexType>
+ 
+      <!-- A document contains paragraphs, coreferences, and semantic_graph -->
+      <xs:sequence>
+
+      <!-- paragraphs -->
+      <xs:sequence>
+        <xs:element name="paragraph" maxOccurs="unbounded" minOccurs="1">
+          <xs:complexType>
+
+            <!-- A paragraph contains a list of sentences -->
+            <xs:sequence>
+              <xs:element name="sentence" maxOccurs="unbounded" minOccurs="1">
+                <xs:complexType>
+
+	          <!-- a sentence contains tokens, parse_tree, dep_tree, and predicates -->
+                  <xs:sequence>
+
+                  <!-- A sentence contains a list of tokens -->
+                  <xs:sequence>
+                    <xs:element name="token" maxOccurs="unbounded" minOccurs="1">
+                      <xs:complexType>
+	                <xs:sequence>
+                           <xs:element name="analysis" maxOccurs="unbounded" minOccurs="0"> 
+                           <xs:complexType>
+                             <xs:attribute type="xs:string" name="lemma" use="optional"/>
+                             <xs:attribute type="xs:string" name="tag" use="optional"/>
+                             <xs:attribute type="xs:string" name="ctag" use="optional"/>
+                             <xs:attribute type="xs:string" name="pos" use="optional"/>
+                             <xs:attribute type="xs:string" name="vform" use="optional"/>
+                             <xs:attribute type="xs:string" name="wn" use="optional"/>
+                             <xs:attribute type="xs:string" name="type" use="optional"/>
+                             <xs:attribute type="xs:string" name="punctenclose" use="optional"/>
+                             <xs:attribute type="xs:string" name="num" use="optional"/>
+                             <xs:attribute type="xs:string" name="person" use="optional"/>
+                             <xs:attribute type="xs:string" name="neclass" use="optional"/>
+                             <xs:attribute type="xs:string" name="nec" use="optional"/>
+                             <xs:attribute type="xs:double" name="prob" use="optional"/>
+                           </xs:complexType>
+                           </xs:element> 
+ 	                </xs:sequence>
+                        <xs:attribute type="xs:string" name="id" use="required"/>
+                        <xs:attribute type="xs:string" name="form" use="required"/>
+                        <xs:attribute type="xs:string" name="phon" use="optional"/>
+                        <xs:attribute type="xs:string" name="lemma" use="optional"/>
+                        <xs:attribute type="xs:string" name="tag" use="optional"/>
+                        <xs:attribute type="xs:string" name="ctag" use="optional"/>
+                        <xs:attribute type="xs:string" name="pos" use="optional"/>
+                        <xs:attribute type="xs:string" name="vform" use="optional"/>
+                        <xs:attribute type="xs:string" name="wn" use="optional"/>
+                        <xs:attribute type="xs:string" name="type" use="optional"/>
+                        <xs:attribute type="xs:string" name="punctenclose" use="optional"/>
+                        <xs:attribute type="xs:string" name="num" use="optional"/>
+                        <xs:attribute type="xs:string" name="person" use="optional"/>
+                        <xs:attribute type="xs:string" name="neclass" use="optional"/>
+                        <xs:attribute type="xs:string" name="nec" use="optional"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+
+                  <!-- A sentence may contain a parse_tree -->
+                  <xs:sequence>
+                    <xs:element name="constituents" minOccurs="0" maxOccurs="1">
+                      <xs:complexType>
+                        <!-- The tree contains just a root node -->
+                        <xs:all>
+                          <xs:element name="node" type="nodeType" />
+                        </xs:all>
+                      </xs:complexType>
+	            </xs:element>
+                  </xs:sequence>
+
+                  <!-- A sentence may contain a dependency tree -->
+                  <xs:sequence>
+                    <xs:element name="dependencies" minOccurs="0" maxOccurs="1">
+                      <xs:complexType>
+                        <!-- The tree contains just a root node -->
+                        <xs:all>
+                          <xs:element name="depnode" type="depnodeType" />
+                        </xs:all>
+                      </xs:complexType>
+	            </xs:element>
+                  </xs:sequence>
+                    
+                  <!-- A sentence may contain a list of predicates -->
+                  <xs:sequence>
+                    <xs:element name="predicates" maxOccurs="1" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="predicate" maxOccurs="unbounded" minOccurs="1">
+                            <xs:complexType mixed="true">
+
+                              <!-- A predicate may contain a list of arguments -->
+                              <xs:sequence>
+                                <xs:element name="argument" maxOccurs="unbounded" minOccurs="0">
+                                  <xs:complexType>
+                                    <!-- Argument information -->
+                                    <xs:simpleContent>
+                                      <xs:extension base="xs:string">
+                                        <xs:attribute type="xs:string" name="role" use="optional"/>
+                                        <xs:attribute type="xs:string" name="words" use="optional"/>
+                                        <xs:attribute type="xs:string" name="head_token" use="optional"/>
+                                        <xs:attribute type="xs:string" name="from" use="optional"/>
+                                        <xs:attribute type="xs:string" name="to" use="optional"/>
+                                      </xs:extension>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+
+                              <!-- Predicate information -->
+                              <xs:attribute type="xs:string" name="id" use="optional"/>
+                              <xs:attribute type="xs:string" name="head_token" use="optional"/>
+                              <xs:attribute type="xs:string" name="sense" use="optional"/>
+                              <xs:attribute type="xs:string" name="words" use="optional"/>
+  
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <!-- End of 'predicates' element -->
+
+                  </xs:sequence>
+                  <!-- End of 'predicates' list -->
+
+                  </xs:sequence>
+                  <!-- End of sentence subelements --> 
+
+		  <!-- 'sentence' element attributes -->
+                  <xs:attribute type="xs:string" name="id" use="required"/>
+
+                </xs:complexType>
+              </xs:element>
+              <!-- End of 'sentence' element -->
+
+            </xs:sequence>
+            <!-- End of list of sentences in paragraph -->
+
+          </xs:complexType>
+        </xs:element>
+        <!-- End of 'paragraph' element -->
+
+      </xs:sequence>
+      <!-- End of list of paragraphs in document -->
+
+      <!-- A document may contain a list of coreference sets -->
+      <xs:sequence>
+        <xs:element name="coreferences" maxOccurs="1" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="coref" maxOccurs="unbounded" minOccurs="1">
+                <xs:complexType>	
+   	          <!-- A coreference group contains a list of mentions -->
+                  <xs:sequence>
+                    <xs:element name="mention" maxOccurs="unbounded" minOccurs="1">
+                      <xs:complexType>
+                            <xs:attribute type="xs:string" name="id" use="required"/>
+                            <xs:attribute type="xs:string" name="from" use="required"/>
+                            <xs:attribute type="xs:string" name="to" use="required"/>
+                            <xs:attribute type="xs:string" name="words" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <!-- Coreference group information -->
+                  <xs:attribute type="xs:string" name="id" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <!-- End of 'coreferece' element in document -->
+
+
+      <!-- A document may contain a semantic graph -->
+      <xs:sequence>
+        <xs:element name="semantic_graph" maxOccurs="1" minOccurs="0">
+          <xs:complexType>
+
+            <!-- A semantic graph contains a list of 'entities' and 'frames' -->
+            <xs:sequence>
+
+              <!-- 'entity' elements in the graph -->
+              <xs:element name="entity" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+
+                  <xs:sequence>       
+                  <!-- Entity contains a list of mentions -->
+                  <xs:sequence>
+                    <xs:element name="mention" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <!-- Basic mention information -->
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:string" name="id" use="optional"/>
+                            <xs:attribute type="xs:string" name="words" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+
+                  <!-- Entity may contains a list of synonyms -->
+                  <xs:sequence>
+                    <xs:element name="synonym" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:string" name="lemma" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+
+                  <!-- Entity may contains a list of URI -->
+                  <xs:sequence>
+                    <xs:element name="URI" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:string" name="knowledgeBase" use="optional"/>
+                            <xs:attribute type="xs:anyURI" name="URI" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  </xs:sequence>       
+
+                  <!-- Basic entity information -->
+                  <xs:attribute type="xs:string" name="id" use="required"/>
+                  <xs:attribute type="xs:string" name="lemma" use="required"/>
+                  <xs:attribute type="xs:string" name="class" use="optional"/>
+                  <xs:attribute type="xs:string" name="sense" use="optional"/>
+
+                </xs:complexType>
+              </xs:element>
+              <!-- End of 'entity' element -->
+
+
+              <!-- 'frame' elements in the graph -->
+              <xs:element name="frame" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+
+                  <xs:sequence>
+                  <!-- Frame may contain a list of arguments -->
+                  <xs:sequence>
+                    <xs:element name="argument" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:string" name="role" use="optional"/>
+                            <xs:attribute type="xs:string" name="entity" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+
+                  <!-- Frame may contains a list of synonyms -->
+                  <xs:sequence>
+                    <xs:element name="synonym" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:string" name="lemma" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+
+                  <!-- Frame may contains a list of URI -->
+                  <xs:sequence>
+                    <xs:element name="URI" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:string" name="knowledgeBase" use="optional"/>
+                            <xs:attribute type="xs:anyURI" name="URI" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  </xs:sequence>
+
+                  <!-- Basic frame information -->
+                  <xs:attribute type="xs:string" name="id" use="required"/>
+                  <xs:attribute type="xs:string" name="token" use="required"/>
+                  <xs:attribute type="xs:string" name="lemma" use="required"/>
+                  <xs:attribute type="xs:string" name="sense" use="optional"/>
+
+                </xs:complexType>
+              </xs:element>
+  	      <!-- End of 'Frame' element in semantic graph -->
+
+            </xs:sequence>
+            <!-- End of list of frames and entities in semantic graph -->
+
+        </xs:complexType>
+      </xs:element>
+      </xs:sequence>
+      <!-- End of semantic graph element -->
+
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <!-- End of 'document' element -->
+
+</xs:schema>
+

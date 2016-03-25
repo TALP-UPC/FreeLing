@@ -1,0 +1,67 @@
+<DecompositionRules>
+Z 2 number type/d:partitive;m:currency;p:percentage;u:unit
+W 0 date
+I 0 interjection
+</DecompositionRules>
+<DirectTranslations>
+Fc Fc pos=punctuation|type=comma
+Fs Fs pos=punctuation|type=etc
+Fd Fd pos=punctuation|type=colon
+Fx Fx pos=punctuation|type=semicolon
+Fg Fg pos=punctuation|type=hyphen
+Fe Fe pos=punctuation|type=quotation
+Fh Fh pos=punctuation|type=slash
+Fp Fp pos=punctuation|type=period
+Fia Fia pos=punctuation|type=questionmark|punctenclose=open
+Fit Fit pos=punctuation|type=questionmark|punctenclose=close
+Faa Faa pos=punctuation|type=exclamationmark|punctenclose=open
+Fat Fat pos=punctuation|type=exclamationmark|punctenclose=close
+Ft Ft pos=punctuation|type=percentage
+Fla Fla pos=punctuation|type=curlybracket|punctenclose=open
+Flt Flt pos=punctuation|type=curlybracket|punctenclose=close
+Fca Fca pos=punctuation|type=squarebracket|punctenclose=open
+Fct Fct pos=punctuation|type=squarebracket|punctenclose=close
+Fpa Fpa pos=punctuation|type=parenthesis|punctenclose=open
+Fpt Fpt pos=punctuation|type=parenthesis|punctenclose=close
+Fra Fra pos=punctuation|type=quotation|punctenclose=open
+Frc Frc pos=punctuation|type=quotation|punctenclose=close
+Fz Fz pos=punctuation|type=other
+NNP NP pos=noun|type=proper
+NNPS NP pos=noun|type=proper|num=p
+NP NP pos=noun|type=proper
+NP00SP0 NP pos=noun|type=proper|neclass=person
+NP00G00 NP pos=noun|type=proper|neclass=location
+NP00O00 NP pos=noun|type=proper|neclass=organization
+NP00V00 NP pos=noun|type=proper|neclass=other
+NP00000 NP pos=noun|type=proper
+CC CC pos=conjunction|type=coordinating
+DT DT pos=determiner
+EX EX pos=pronoun
+IN IN pos=preposition
+JJ JJ pos=adjective
+JJR JJR pos=adjective|degree=comparative
+JJS JJS pos=adjective|degree=superlative
+MD MD pos=verb|type=modal
+NN NN pos=noun|type=common|num=s
+NNS NNS pos=noun|type=common|num=p
+PDT PDT pos=determiner|type=predeterminer
+POS POS pos=adposition|type=possessive
+PRP PRP pos=pronoun|type=personal
+PRP$ PRP$ pos=pronoun|type=possessive
+RB RB pos=adverb|type=general
+RBR RBR pos=adverb|type=general|degree=comparative
+RBS RBS pos=adverb|type=general|degree=superlative
+RP RP pos=particle
+TO TO pos=particle|type=to
+UH UH pos=interjection
+VB VB pos=verb|vform=infinitive
+VBD VBD pos=verb|vform=past
+VBG VBG pos=verb|vform=gerund
+VBN VBN pos=verb|vform=participle
+VBP VBP pos=verb|vform=personal
+VBZ VBZ pos=verb|vform=personal|person=3
+WDT WDT pos=determiner|type=interrogative
+WP WP pos=pronoun|type=interrogative
+WP$ WP$ pos=pronoun|type=possessive
+WRB WRB pos=adverb|type=interrogative
+</DirectTranslations>

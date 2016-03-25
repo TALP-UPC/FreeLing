@@ -1,0 +1,328 @@
+## macros to be used in RegExps rules below
+<Macros>
+ALPHA	   [[:alpha:]]
+ALPHANUM   [[:alnum:]º°]
+NOALPHANUM [^[:alnum:]º°]
+SYMNUM     [\.:,_/\\=\*\+\-º°&$€£¢¥#%]
+OTHERS     .
+</Macros>
+
+## Tokenization rules. They are applied in the order of definition.
+## The first matching the *beginning* of the line is applied
+## and a token built. The process is repeated until the line 
+## has been completely processed.
+##    -The first field in the rule is the rule name. If it starts
+##     with a "*", the RegExp will only produce a token if the 
+##     match is found in abbreviation list <Abbreviations> below.
+##    -The second field in the rule is the substring to form the token/s with
+##     It may be 0 (the match of the whole expression) or any number
+##     from 1 to the number of substrings (up to 9). A token will be
+##     created for each substring from 1 to the specified value.
+##    -The third field is the regexp to match against the line
+## 
+<RegExps>
+INDEX_SEQUENCE   0  (\.{4,}|-{2,}|\*{2,}|_{2,}|/{2,})
+INITIALS1 	 1  ([А-Я](\.[А-Я])+)(\.\.\.)
+INITIALS2 	 0  ([А-Я]\.)+
+TIMES            0  (([01]?[0-9]|2[0-4]):[0-5][0-9])
+NAMES_CODES	0  ({ALPHA}|{SYMNUM})*[0-9]({ALPHA}|[0-9]|{SYMNUM}+{ALPHANUM})*
+THREE_DOTS 	 0  (\.\.\.)
+QUOTES	         0  (``|<<|>>|'')
+MAILS 	         0  {ALPHANUM}+([\._]{ALPHANUM}+)*@{ALPHANUM}+([\._]{ALPHANUM}+)*
+URLS1 	         0  ((mailto:|(news|http|https|ftp|ftps)://)[\w\.\-/]+|^(www(\.[\w\-/]+)+))
+URLS2            1  ([\w\.\-/]+\.(com|org|net))[\s]
+CONTRACT1        1  ({ALPHA}+)('([sdm]|ll|ve|re)({NOALPHANUM}|$))
+CONTRACT2        1  ('([sdm]|ll|ve|re))({NOALPHANUM}|$)
+KEEP_COMPOUNDS   0  {ALPHA}+(['_\-\+]{ALPHA}+)+
+*ABREVIATIONS1   0  (({ALPHA}+\.)+)(?!\.\.)
+WORD             0  {ALPHANUM}+[\+]*
+OTHERS_C         0  {OTHERS}
+</RegExps>
+
+## Abbreviations.  The dot is not tokenized separately
+## in the cases listed below.
+<Abbreviations>
+акад.
+б.
+вл.
+абл.
+абс.
+абх.
+авар.
+авг.
+австр.
+австрал.
+авт.
+агр.
+адж.
+адм.
+адыг.
+азерб.
+акад.
+акк.
+акц.
+алб.
+алг.
+алж.
+алт.
+алф.
+альм.
+альп.
+амер.
+анат.
+англ.
+ангол.
+аннот.
+антич.
+ап.
+апр.
+арам.
+аргент.
+арифм.
+арт.
+архип.
+архим.
+асср
+асс.
+ассир.
+астр.
+ат.
+атм.
+афг.
+афр.
+балк.
+балт.
+башк.
+безв.
+безл.
+бельг.
+библ.
+биогр.
+биол.
+бирм.
+бол.
+болг.
+буд.
+бюдж.
+бюлл.
+вал.
+вв.
+вдхр.
+вед.
+вел.
+венг.
+вкл.
+внеш.
+внутр.
+вод. ст.
+воен.
+возв.
+возд.
+воскр.
+вост.
+вт.
+вьетн.
+г.
+гг.
+га.
+гав.
+газ.
+гвин.
+гВт.
+ГГц.
+ген.
+ген. л.
+ген. м.
+ген. п.
+геогр.
+геод.
+геол.
+геом.
+герм.
+г­жа.
+гл.
+гор.
+гос.
+госп.
+град.
+греч.
+гр.
+гражд.
+греч.
+груз.
+губ.
+Гц.
+ГэВ.
+дптр.
+д. б. н.
+Д. В.
+д. г. н.
+д. г.­м. н.
+дер.
+д. и. н.
+д. иск.
+д. м. н.
+д. н.
+д. о.
+д. п.
+д. т. н.
+д. ф. н.
+д. ф.­м. н.
+д. х. н.
+д. ч.
+дБ.
+деепр.
+действ.
+дек.
+дер.
+Дж.
+диак.
+диал.
+диал.
+диам.
+див.
+диз.
+дир.
+дисс.
+дист.
+дифф.
+дкг.
+дкл.
+дкм.
+дм.
+доб.
+док.
+докт.
+долл.
+доп.
+доц.
+драм.
+дубл.
+евр.
+европ.
+егип.
+ед.
+ед. ч.
+ежедн.
+ежемес.
+еженед.
+ефр.
+ж.
+ж. д.
+жен.
+жит.
+женск.
+журн.
+засл. арт.
+з. д.
+зав.
+зав. хоз.
+загл.
+зал.
+зам.
+заруб.
+зем.
+зол.
+др.
+пр.
+и. о.
+и.о.
+игум.
+иером.
+им.
+иностр.
+инд.
+индонез.
+итал.
+канд.
+коп.
+корп.
+кв.
+ква.
+квт.
+кг.
+кгс.
+кгц.
+кд.
+кдж.
+кирг.
+ккал.
+кл.
+км.
+кмоль.
+книжн.
+кэв.
+л.с.
+лаб.
+лат.
+латв.
+лейт.
+лит.
+м.
+мин.
+м­р.
+муж.
+м.н.с.
+макс.
+матем.
+мат.
+маш.
+м­во.
+мгц.
+мдж.
+мед.
+мес.
+мин­во.
+митр.
+мка.
+мкал.
+мкв.
+мквт.
+мкм.
+мкмк.
+мком.
+мкпа.
+мкр.
+мкф.
+мкюри.
+мл.
+млк.
+млн.
+млрд.
+мн.ч.
+моск.
+мпа.
+мс.
+мужск.
+мэв.
+н.э.
+нем.
+обл.
+пос.
+пер.
+пр.
+пл.
+р.
+рис.
+стр.
+сокр.
+ст.н.с.
+ст.
+т.
+т.д.
+т.е.
+т.к.
+т.н.
+т.о.
+т.п.
+т.с.
+тыс.
+тел.
+тов.
+трлн.
+ул.
+франц.
+ч.
+чел.
+
+</Abbreviations>

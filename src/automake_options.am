@@ -1,0 +1,37 @@
+
+if BOOST_MT
+  MT="-mt"
+endif
+
+if BOOST_GCC
+ MT="-gcc-mt"
+endif
+
+if DEBUG
+  MY_CPPFLAGS=-g -O0
+  MY_CXXFLAGS=-g -O0
+else
+  MY_CPPFLAGS=-O3
+  MY_CXXFLAGS=-O3
+endif
+
+if USE_XPRESSIVE_REGEX
+  BOOST_REGEX_LIB=
+else
+  BOOST_REGEX_LIB=-lboost_regex$(MT) 
+endif
+
+if USE_BOOST_LOCALE
+  BOOST_LOCALE_LIB=-lboost_locale$(MT) -lboost_thread$(MT)
+else
+  BOOST_LOCALE_LIB=
+endif
+
+if BOOST_OLD
+  ADD_FL_DEPS=-lboost_thread$(MT)
+else
+  ADD_FL_DEPS=
+endif
+
+FREELING_DEPS=$(BOOST_REGEX_LIB) $(BOOST_LOCALE_LIB) $(ADD_FL_DEPS) -lboost_system$(MT) -lz
+

@@ -1,0 +1,55 @@
+# ===============================================
+#            Affixation rules file
+# ===============================================
+
+# === Each line is a affixation rule, with the following fields:
+# 1 Affix to erase form word form (e.g: gatito - ito = gat)
+# 2 Affix (* for emtpy string) to add to the resulting root
+#   to rebuild the lemma that must be searched in dictionary 
+#   (e.g:  gat+o = gato)
+# 3 Regexp condition on the parole tag of found dictionary entry
+# 4 Parole tag for suffixed word (* = keep tag in dictionary entry)
+# 5 Check lemma adding accents
+# 6 Enclitic suffix (special accent behaviour in Spanish)
+# 7 Prevent later modules from assigning more tags to the word
+# 8 Lemma to assign: any combination of: F,R,L,A,<literal> separated with '+'
+#                    where: F=original form, R=root found in dict, 
+# 		            L=lemma in matching dict entry, A=affix
+#                    examples:  A+L=affix+lemma,  R=root,  R+mente= root+"mente"
+# 9 Consider the suffix always, not only for unknown words.
+# 10 How to retokenize the word if necessary (see uer manual).
+#==============================================================
+
+
+
+<Prefixes>
+
+## augmentative prefixes
+aber	*	^(A|N|V)	*	0	0	1	A+L	0	-
+affen	*	^(A|N)		*	0	0	1	A+L	0	-
+bären	*	^(A|N)		*	0	0	1	A+L	0	-
+bomben	*	^(A|N)		*	0	0	1	bombe+L	0	-
+# dreck
+erz	*	^(A|N|V)	*	0	0	1	A+L	0	-
+extra	*	^(A|N)		*	0	0	1	A+L	0	-
+extra-	*	^(A|N)		*	0	0	1	A+L	0	-
+# grotten
+# hölle
+# hund
+hyper	*	^(A|N)		*	0	0	1	A+L	0	-
+# knall
+# mega
+# mord
+# mutterseelen
+# ober
+# piek
+# quietsch
+# sau
+# sheiße
+# schwein
+stink	*	^(A|N)		*	0	0	1	A+L	0	-
+stock	*	^A		*	0	0	1	A+L	0	-
+tot	*	^(A|N|V)	*	0	0	1	A+L	0	-
+ur	*	^(A|N)		*	0	0	1	A+L	0	-
+
+</Prefixes>

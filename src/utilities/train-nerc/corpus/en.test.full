@@ -1,0 +1,140 @@
+Their O their PRP # their PRP -1 their PRP$ -1
+stay O stay VBP # stay NN -1 stay VB -1 stay VBP -1
+on O on IN # on IN -1 on RB -1 on RP -1
+top O top JJ # top JJ -1 top NN -1 top VB -1 top VBP -1
+, O , Fc # , Fc -1
+though O though RB # though IN -1 though RB -1
+, O , Fc # , Fc -1
+may O may MD # may MD -1 may NN -1
+be O be VB # be VB -1
+short-lived O short-lived JJ # 
+as O as IN # as IN -1 as RB -1
+title O title NN # title NN -1 title VB -1 title VBP -1
+rivals O rival NNS # rival NNS -1 rival VBZ -1
+Essex B-ORG essex NP00O00 # 
+, O , Fc # , Fc -1
+Derbyshire B-ORG derbyshire NP00O00 # 
+and O and CC # and CC -1
+Surrey B-ORG surrey NP00O00 # surrey NN -1
+all O all DT # all DT -1 all PDT -1 all PRP -1 all RB -1
+closed O close VBD # close VBD -1 close VBN -1
+in O in IN # in IN -1 in RB -1 in RP -1
+on O on IN # on IN -1 on RB -1 on RP -1
+victory O victory NN # victory NN -1
+while O while IN # while IN -1 while NN -1 while VB -1 while VBP -1
+Kent B-ORG kent NP00O00 # kent VBD -1 kent VBN -1 kent VBP -1
+made O make VBN # make VBD -1 make VBN -1
+up O up RP # up IN -1 up NN -1 up RB -1 up RP -1 up VB -1 up VBP -1
+for O for IN # for IN -1 for RP -1
+lost O lose VBN # lose VBD -1 lose VBN -1
+time O time NN # time NN -1 time VB -1 time VBP -1
+in O in IN # in IN -1 in RB -1 in RP -1
+their O their PRP$ # their PRP -1 their PRP$ -1
+rain-affected O rain-affected JJ # 
+match O match NN # match NN -1 match VB -1 match VBP -1
+against O against IN # against IN -1
+Nottinghamshire B-ORG nottinghamshire NP00O00 # 
+. O . Fp # . Fp -1
+
+Trailing O trail VBG # trail VBG -1
+by O by IN # by IN -1 by RB -1 by RP -1
+213 O 213 Z # 213 Z -1
+, O , Fc # , Fc -1
+Somerset B-ORG somerset NP00O00 # 
+got O get VBD # get VB -1 get VBD -1 get VBN -1 get VBP -1
+a O 1 Z # 1 Z -1 a DT -1 a NN -1
+solid O solid JJ # solid JJ -1 solid NN -1
+start O start NN # start NN -1 start VB -1 start VBP -1
+to O to TO # to IN -1 to TO -1
+their O their PRP$ # their PRP -1 their PRP$ -1
+second O 2 JJ # 2 JJ -1 second NN -1 second VB -1 second VBP -1
+innings O inning NN # inning NNS -1
+before O before IN # before IN -1 before RB -1
+Simmons B-PER simmons NP00SP0 # 
+stepped O step VBD # step VBD -1 step VBN -1
+in O in IN # in IN -1 in RB -1 in RP -1
+to O to TO # to IN -1 to TO -1
+bundle O bundle VB # bundle NN -1 bundle VB -1 bundle VBP -1
+them O them PRP # them PRP -1
+out O out RP # out IN -1 out NN -1 out RB -1 out RP -1
+for O for IN # for IN -1 for RP -1
+174 O 174 Z # 174 Z -1
+. O . Fp # . Fp -1
+
+Hussain B-PER hussain NP00SP0 # 
+, O , Fc # , Fc -1
+considered O consider VBN # consider VBD -1 consider VBN -1
+surplus O surplus NN # surplus JJ -1 surplus NN -1
+to O to TO # to IN -1 to TO -1
+England B-LOC england NP00G00 # 
+'s O 's POS # 's POS -1 be VBZ -1 have VBZ -1
+one-day O one-day JJ # 
+requirements O requirement NNS # requirement NNS -1
+, O , Fc # , Fc -1
+struck O strike VBD # strike VBD -1 strike VBN -1
+158 O 158 Z # 158 Z -1
+, O , Fc # , Fc -1
+his O his PRP$ # his PRP -1 his PRP$ -1
+first O 1 JJ # 1 JJ -1 first NN -1 first RB -1
+championship O championship NN # championship NN -1
+century O century NN # century NN -1
+of O of IN # of IN -1 of RP -1
+the O the DT # the DT -1
+season O season NN # season NN -1 season VB -1 season VBP -1
+, O , Fc # , Fc -1
+as O as IN # as IN -1 as RB -1
+Essex B-ORG essex NP00O00 # 
+reached O reach VBN # reach VBD -1 reach VBN -1
+372 O 372 Z # 372 Z -1
+and O and CC # and CC -1
+took O take VBD # take VBD -1
+a O 1 Z # 1 Z -1 a DT -1 a NN -1
+first O 1 JJ # 1 JJ -1 first NN -1 first RB -1
+innings O inning NN # inning NNS -1
+lead O lead NN # lead NN -1 lead VB -1 lead VBN -1 lead VBP -1
+of O of IN # of IN -1 of RP -1
+82 O 82 Z # 82 Z -1
+. O . Fp # . Fp -1
+
+At O at IN # at IN -1 at RP -1
+the O the DT # the DT -1
+Oval B-LOC oval NP00G00 # oval JJ -1 oval NN -1
+, O , Fc # , Fc -1
+Surrey B-ORG surrey NP00O00 # surrey NN -1
+captain O captain NN # captain NN -1 captain VB -1 captain VBP -1
+Chris B-PER chris_lewis NP00SP0 # 
+Lewis I-PER chris_lewis NP00SP0 # 
+, O , Fc # , Fc -1
+another O another DT # another DT -1 another PRP -1
+man O man NN # man NN -1 man VB -1 man VBP -1
+dumped O dump VBD # dump VBD -1 dump VBN -1
+by O by IN # by IN -1 by RB -1 by RP -1
+England B-LOC england NP00G00 # 
+, O , Fc # , Fc -1
+continued O continue VBD # continue VBD -1 continue VBN -1
+to O to TO # to IN -1 to TO -1
+silence O silence VB # silence NN -1 silence VB -1 silence VBP -1
+his O his PRP$ # his PRP -1 his PRP$ -1
+critics O critic NNS # critic NNS -1
+as O as IN # as IN -1 as RB -1
+he O he PRP # he PRP -1
+followed O follow VBD # follow VBD -1 follow VBN -1
+his O his PRP$ # his PRP -1 his PRP$ -1
+four O 4 Z # 4 Z -1 four DT -1
+for O for IN # for IN -1 for RP -1
+45 O 45 Z # 45 Z -1
+on O on IN # on IN -1 on RB -1 on RP -1
+Thursday O [J:??/??/??:??.??:??] W # [J:??/??/??:??.??:??] W -1
+with O with IN # with IN -1 with RP -1
+80 O 80 Z # 80 Z -1
+not O not RB # not RB -1
+out O out RP # out IN -1 out NN -1 out RB -1 out RP -1
+on O on IN # on IN -1 on RB -1 on RP -1
+Friday O [V:??/??/??:??.??:??] W # [V:??/??/??:??.??:??] W -1
+in O in IN # in IN -1 in RB -1 in RP -1
+the O the DT # the DT -1
+match O match NN # match NN -1 match VB -1 match VBP -1
+against O against IN # against IN -1
+Warwickshire B-ORG warwickshire NP00O00 # 
+. O . Fp # . Fp -1
+

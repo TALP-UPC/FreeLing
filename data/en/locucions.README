@@ -1,0 +1,36 @@
+
+ There are several avalable multiword definition files for English:
+
+  locucions.dat:  Basic set of multiwords, mainly adverbial (e.g. by_chance,
+                  further_back, sooner_or_later, etc) and prepositional
+                  (e.g. according_to, regardless_of, etc)
+
+  locucions-extended.dat:  The Basic set above, plus all nominal and
+                  verbal multiwords from Princeton WordNet.
+                  Note that this includes many compounds that are 
+                  either terminological (e.g. amsinckia_grandiflora) or
+                  simply a compound and not a multiword in a linguistic 
+                  sense (e.g. antitrust_case, bio_lab, web_servers...).
+                  But since those compounds have a synset in WordNet,  
+                  you may want to detect them as a single unit to be
+                  able to retrieve their semantic information from WN.
+		  If that is the case, use this file.
+
+  locucions-nps-wn.dat:  Multiwords from Princeton WN that are proper names.
+                  You can *add* (e.g. with "cat" linux command) this file 
+                  to any of the previous if you need to. 
+                   Note that the proper nouns in this file will be ignored by
+                  FreeLing named entity recognizer.
+         
+  locucions-nums-wn.dat:  Multiwords from Princeton WN that include numbers
+                  or dates (e.g. area_17_of_brodmann, atomic_number_15, 
+                  february_12, etc.).
+                    You can *add* (e.g. with "cat" linux command) this file 
+                  to any of the previous if you need to. 
+                    You might be interested on detecting these multiwords
+                  for some specific applications, but note that they will 
+                  replace (and may even interefere with) regular numbers, 
+                  dates, and quantities detection modules.
+
+  Domain-FOOD-locucions.dat 
+  Domain-FOOD-usermap.dat:    Multiwords and patterns related to food and recipes.

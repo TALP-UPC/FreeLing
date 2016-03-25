@@ -1,0 +1,116 @@
+
+SETS
+
+DetMasc = DA0MS0 DA0MP0 DD0MS0 DD0MP0 DI0MS0 DI0MP0 DP1MSP DP1MPP 
+          DP2MSP DP2MPP DT0MS0 DT0MP0 DE0MS0 DE0MP0 AQ0MS0 AQ0MP0 ; 
+
+DetFem  = DA0FS0 DA0FP0 DD0FS0 DD0FP0 DI0FS0 DI0FP0 DP1FSP DP1FPP 
+          DP2FSP DP2FPP DT0FS0 DT0FP0 DE0FS0 DE0FP0 AQ0FS0 AQ0FP0 ; 
+
+VerbCompl = <accentuar> <acceptar> <aconsellar> <acordar> <admetre>
+	    <advertir> <afavorir> <afegir> <afirmar> <alertar> <al·legar>
+	    <anticipar> <anunciar> <apostar> <apreciar> <aprendre>
+	    <apuntar> <assegurar> <assenyalar> <assumir> <avalar>
+	    <avaluar> <calcular> <comentar> <comunicar> <concloure>
+	    <confessar> <confirmar> <considerar> <contar> <contestar>
+	    <controlar> <convèncer> <creure> <decidir> <declarar>
+	    <demanar> <demanar> <demostrar> <denunciar> <descartar>
+	    <descobrir> <desconfiar> <desestimar> <desmentir> <detectar>
+	    <determinar> <dir> <discrepar> <discutir> <disposar> <divulgar>
+	    <documentar> <donar> <dubtar> <emfatitzar> <ensenyar> <entendre>
+	    <escriure> <esmentar> <especificar> <especular> <esperar>
+	    <establir> <estimar> <estipular> <evitar> <excloure> <exigir>
+	    <explicar> <exposar> <expressar> <figurar> <fomentar> <garantir>
+	    <ignorar> <il·lustrar> <imaginar> <impedir> <implicar> <implorar>
+	    <importar> <indicar> <informar> <insinuar> <insistir> <jurar>
+	    <justificar> <lamentar> <llegir> <manar> <mantenir> <molestar>
+	    <mostrar> <necessitar> <negar> <notar> <oblidar> <observar>
+	    <oferir> <ometre> <opinar> <ordenar> <pensar> <percebre>
+	    <permetre> <planejar> <plantejar> <precisar> <predir> <preferir>
+	    <preguntar> <preocupar> <presumir> <prevenir> <preveure>
+	    <proclamar> <prometre> <pronosticar> <proposar> <provar>
+	    <publicar> <rebatre> <rebutjar> <reclamar> <recomanar>
+	    <reconèixer> <recordar> <refutar> <reiterar> <reivindicar>
+	    <remarcar> <repetir> <requerir> <respondre> <resultar>
+	    <revelar> <saber> <sentir> <significar> <sol·licitar> <sospitar> 
+	    <sostenir> <subratllar> <suggerir> <suposar> <témer> <teoritzar>
+	    <transmetre> <trobar> <valorar> <veure> <voler>;
+
+
+CONSTRAINTS
+
+%% better tag "que" as a PR0CN000 after a noun without no verb before it
+15.0 PR*<que>
+    (-1 NC*)
+    (-1* OUT_OF_BOUNDS barrier V*);
+
+%% "que" without a completive verb to the left is tagged as PR0CN000
+5.0 PR*<que>
+    (-1* OUT_OF_BOUNDS barrier {VerbCompl});
+
+%% better tag "que" as CS when two preceding rules are not satisfied and
+%% there is a completive verb to the left
+4.0 CS<que>
+    (0 PR*);
+
+4.0 CS<que>
+    (-1 {VerbCompl});
+
+%% better tag "que" as a CS after a verb, punctuation, adverb or prepossition 
+1.5 CS<que>
+    (-1 VMI* or VMS* or VAI* or VAS* or VSI* or VSS* or Fp or RG or SPS00);
+
+%%% haga lo que haga 
+5.0 VMS*
+    (-1 OUT_OF_BOUNDS)
+    (0 VMM*)
+    (1 DA*)
+    (2 <que>)
+    (3 VMS*);
+
+2.0 VMS*
+    (0 VMM*)
+    (1 DA*)
+    (2 <que>)
+    (3 VMS*);
+
+2.0 VMS*
+    (0 VMM*)
+    (-1 <que>)
+    (-2 DA*)
+    (-3 VMS*);
+
+%% DT+NC number-gender concordance
+1.1 NCM*
+	(0 NCF*)
+	(-1 {DetMasc});
+
+1.1 NCF*
+	(0 NCM*)
+	(-1 {DetFem});
+
+%% Pre-verbal pronoun "la mirava"
+15.1 PP*
+	(0 D*)
+	(1 VMI* or VMS* or VAI* or VAS* or VSI* or VSS*);
+
+%% before a noun, prefer a determiner to a pronoun
+0.1 DT*
+	(0 PT*)
+	(1 NC*);
+
+% prefer 3rd person to 1st
+0.5 VMSP3S0     (0 VMSP1S0);
+0.1 VMII3S0     (0 VMII1S0);
+0.1 VMSI3S0     (0 VMSI1S0); 
+0.1 VMIC3S0     (0 VMIC1S0); 
+0.1 VAII3S0     (0 VAII1S0);
+0.1 VSII3S0     (0 VSII1S0);
+0.1 VASI3S0     (0 VASI1S0);
+0.1 VSSI3S0     (0 VSSI1S0);
+0.1 VSSP3S0     (0 VSSP1S0);
+0.1 VASP3S0     (0 VASP1S0);
+0.1 VAIC3S0     (0 VAIC1S0);
+0.1 VSIC3S0     (0 VSIC1S0);
+
+%%%%%%%%% Begin of statistically-acquired constraint %%%%%%%%%

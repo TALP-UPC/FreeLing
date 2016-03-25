@@ -1,0 +1,26 @@
+## tagset description used to compute short tag versions
+TAGSET ../../tagset.dat
+
+
+## features extracted for all words
+RULES ALL
+
+  funct@     [0,0]   w in_set ../data/function.dat
+  unk@       [0,0]   na is 0
+  pb_noun@   [0,0]   pt matches ^[NA]
+  cap@       [0,0]   W matches ^[[:upper:]]
+  
+  p0:{pattern(0)}  [0,0] ALL
+
+  p1L:{pattern(-1)}                             [0,0] ALL
+  p2L:{pattern(-2)}_{pattern(-1)}               [0,0] ALL
+  p3L:{pattern(-3)}_{pattern(-2)}_{pattern(-1)} [0,0] ALL
+
+  p1R:{pattern(1)}                              [0,0] ALL
+  p2R:{pattern(1)}_{pattern(2)}                 [0,0] ALL
+  p3R:{pattern(1)}_{pattern(2)}_{pattern(3)}    [0,0] ALL
+
+
+ENDRULES
+
+

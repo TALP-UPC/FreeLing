@@ -1,0 +1,12 @@
+
+<Dependencies>
+## treeler config file for dep parser
+DependencyTreeler ./dep/config.dat
+
+## Tagset description file
+Tagset ../tagset.dat
+</Dependencies>
+
+## No SRL for Croatian available
+## <SRL>
+## </SRL>

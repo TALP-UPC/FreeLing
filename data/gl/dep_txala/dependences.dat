@@ -1,0 +1,895 @@
+
+%%% nueva versión marzo  2008 %%%%%%%%%%%
+
+<GRPAR>
+
+%% ----------- FORMAT of GRPAR rules ---------- %%
+%
+%
+%  prio enabling_flags context (leftChk,rightChk) operation RELABEL|MATCHING label ((+|-)flag)*
+%
+%  (see user manual at /usr/local/share/FreeLing/doc/userman/html/userman.html )
+%
+% e.g.
+%
+% 20  INIT|PHASE1  $$_~sverb  (sn-chunk,sppart)  top_left  RELABEL  noun-ph   -PHASE1 +PHASE2
+% 10  -            $$_~sverb  (sn-chunk,sppart)  last_left MATCHING sn{^NC.M}
+% 20  -            -          (sn-chunk,sppart)  top_right RELABEL  -         +HAVE_SUB
+%
+%% -------------------------------------------- %%
+
+
+%%% !!!! COPIA DEL ESPAÑOL.  FALTA ADAPTAR AL GALLEGO !!!!
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%Sintagma nominal%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+100 - - (sn,s-adj) - top_left RELABEL -
+20 - - (sn,sp-de) - top_left RELABEL - % la casa de María
+200 - - (sn,grup-sp) - last_left MATCHING sn % la creencia en
+200 - - (sn,conj-sp) - last_left MATCHING sn
+130 - - (sn,Fc) - top_left RELABEL - % El actor, Brad Pitt,
+230 - - (sn,F-no-c) - top_left RELABEL - % signos que no acaban frase
+130 - - (coor-n,Fc) - top_left RELABEL - % Los actores, Brad Pitt y Nicole Kidman,
+230 - - (coor-n,F-no-c) - top_left RELABEL - % signos que no acaban frase
+130 - - (sn,ncmod) - top_left RELABEL - % mis objetos / una cuarta parte de la población
+18 - - (sn,sn) - top_left RELABEL - % el presidente Nicolas Sarkozy
+% sn              coor-n          -               top_left        -               25   % los actores Pitt y Kidman
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%Sintagma verbal%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+200 - - (data,grup-verb) - top_right RELABEL -
+200 - - (sn,grup-verb) - top_right RELABEL -
+200 - - (sn,coor-vb) - top_right RELABEL -
+200 - - (coor-n,grup-verb) - top_right RELABEL -
+200 - - (coor-n,coor-vb) - top_right RELABEL -
+120 - - (grup-sp,grup-verb) - top_right RELABEL -
+200 - - (sadv,grup-verb) - top_right RELABEL -
+50 - - (grup-verb(trans),sp-de) - last_left MATCHING sn % compra cosas (de cristal)
+200 - - (grup-verb(prep1),sp-de) - top_left RELABEL - % trabaja (de cocinera)
+45 - - (grup-verb(trans),sn) - top_left RELABEL - % lee (una revista)
+45 - - (grup-verb(trans),coor-n) - top_left RELABEL - % lee (una revista y un periódico)
+
+50 - - (grup-verb,sn) - top_left RELABEL - % compra (revistas)
+50 - - (grup-verb,coor-n) - top_left RELABEL - % compra (revistas y periódicos)
+
+70 - - (grup-verb,grup-sp) - top_left RELABEL -
+120 - - (grup-verb,sadv) - top_left RELABEL -
+300 - - (grup-verb,grup-verb) - last_left MATCHING sn
+
+100 - - (grup-verb,numero) - top_left RELABEL -
+100 - - (grup-verb,Fc) - top_left RELABEL - % comer,
+520 - - (grup-verb,F-no-c<.>) - top_left RELABEL - % comer.
+100 - - (grup-verb,F-no-c) - top_left RELABEL -
+
+200 - - (grup-verb,grup-sp-inf) - top_left RELABEL -
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Negación%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+10 - - (neg,grup-verb) - top_right RELABEL -
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Pronombres átonos delante del verbo%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+20 - - (patons,grup-verb) - top_right RELABEL -
+
+
+80 - - (morf-pron,grup-verb) - top_right RELABEL -
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Oraciones subordinadas de infinitivo%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+120 - - (inf,grup-verb) - top_right RELABEL -
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Oraciones subordinadas de gerundio%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+120 - - (ger,grup-verb) - top_right RELABEL -
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%Sintagma Preposicional%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+60 - - (grup-sp,sp-de) - last_left MATCHING sn
+20 - - (grup-sp,sp-de) - last_left MATCHING inf
+20 - - (grup-sp,sp-de) - last_left MATCHING infinitivo
+110 - - (grup-sp,grup-sp) - last_left MATCHING sn
+20 - - (grup-sp,grup-sp) - last_left MATCHING inf
+20 - - (grup-sp,grup-sp) - last_left MATCHING infinitivo
+50 - - (grup-sp,sn) - last_left MATCHING sn
+100 - - (grup-sp,sn) - last_left MATCHING inf
+100 - - (grup-sp,sn) - last_left MATCHING infinitivo
+550 - - (grup-sp,Fc) - last_left MATCHING sn
+590 - - (grup-sp,F-no-c) - top_left RELABEL -
+100 - - (grup-sp,numero) - top_left RELABEL -
+
+50 - - (sp-de,sp-de) - last_left MATCHING sn
+20 - - (sp-de,sp-de) - last_left MATCHING inf
+20 - - (sp-de,sp-de) - last_left MATCHING infinitivo
+60 - - (sp-de,grup-sp) - last_left MATCHING sn
+20 - - (sp-de,grup-sp) - last_left MATCHING inf
+20 - - (sp-de,grup-sp) - last_left MATCHING infinitivo
+50 - - (sp-de,sn) - last_left MATCHING sn
+100 - - (sp-de,sn) - last_left MATCHING inf
+100 - - (sp-de,sn) - last_left MATCHING infinitivo
+100 - - (sp-de,numero) - top_left RELABEL -
+550 - - (sp-de,Fc) - last_left MATCHING sn
+590 - - (sp-de,F-no-c) - top_left RELABEL -
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Coordinacio%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+40 - - (coord,grup-sp) - top_left RELABEL coor-sp:- %(y)<-(en la montaña)
+60 - - (grup-sp,coor-sp) - top_right RELABEL - %(en el mar)->(y en la montaña)
+30 - - (coord,sn) - top_left RELABEL coor-n:- %(y) (agua)
+40 - - (sn,coor-n) - top_right RELABEL - %(pan) (y agua)
+80 - - (coord,grup-verb) - top_left RELABEL coor-vb:- %(y) (beber)
+90 - - (grup-verb,coor-vb) - top_right RELABEL - %(comer) (y beber)
+40 - - (coord,sadj) - top_left RELABEL coor-s-a:- %(y) (frías)
+40 - - (Fc,sadj) - top_left RELABEL coor-s-a:- % , frías
+%%% sadj	coor-s-a	-		top_right	-	      70  %(crueles) (y frías)
+40 - - (coord,sadv) - top_left RELABEL coor-sadv:- %(y) alegremente
+70 - - (sadv,coor-sadv) - top_right RELABEL - %(abiertamente) (y alegremente)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Passiva%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+50 - - (sn,verb-pass) - top_right RELABEL - %per fer la passiva
+50 - - (verb-pass,grup-sp) - top_left RELABEL - %per fer la passiva
+500 - - (verb-pass,F-no-c<.>) - top_left RELABEL -
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%Subordinada%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+50 - - (grup-verb,subord) - top_left RELABEL -
+100 - - (subord,Fc) - top_left RELABEL -
+100 - - (subord,F-no-c) - top_left RELABEL -
+100 - - (subord,numero) - top_left RELABEL -
+40 - - (sn,subord) - top_left RELABEL - %sn+que -> sn-que
+40 - - (sn,subord) - top_left RELABEL -
+250 - - (psubj,prel) - top_right RELABEL - %p*+que -> sn-que
+210 - - (prel,grup-verb) - top_right RELABEL -:subord %que vino
+40 - - (prel-adv,grup-verb) - top_left RELABEL subord:- %%que vino
+200 - - (sn-que,grup-verb) - top_right RELABEL -
+40 - - (ger,sn) - top_left RELABEL subord-ger:-
+40 - - (grup-verb,subord-ger) - top_left RELABEL -
+100 - - (coord-subord,grup-verb) - top_left RELABEL subord:-
+60 - - (grup-sp-inf,sn) - top_left RELABEL -
+</GRPAR>
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%% FUNCIONES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+<GRLAB>
+coor-vb		ncsubj-sujeto 		d.label=sn*   		d.side=left
+coor-vb	 	ncsubj-sujeto 		d.label=coor-n  	d.side=left
+coor-vb         csubj-sujeto            d.label=subord          d.side=left     d.lemma=que|quien
+coor-vb         xsubj-sujeto            d.label=inf             d.side=left
+
+coor-vb		co-v 			d.label=grup-verb
+coor-n		co-n			d.label=sn*
+coor-sadj       co-adj  		d.label=s-a*
+
+grup-verb	ncsubj-sujeto 		d.label=sn*   		d.side=left
+grup-verb	ncsubj-sujeto 		d.label=coor-n 		d.side=left
+grup-verb	xsubj-sujeto 		d.label=inf   		d.side=left
+grup-verb       csubj-sujeto            d.label=subord          d.side=left     d.lemma=que|quien
+
+grup-verb	iobj-prep		d.label=grup-sp		d.side=right	d.lemma=a|al|para   p.class=mov
+grup-verb       iobj-ind         	d.label=grup-sp 	d.side=right    d.lemma=a|al|para   p.class!=mov   
+grup-verb	dobj-objeto_directo	d.label=sn*		d.side=right  			    p.class!=intr
+grup-verb	dobj-objeto_directo	d.label=coor-n		d.side=right    		    p.class!=intr
+grup-verb       dobj-prep   		d.label=sp*  		d.side=right    		    p.class!=mov
+% grup-verb	cc			d.label=sn*		d.side=right    		    p.class=intr
+% grup-verb	cc			d.label=coor-n		d.side=right    		    p.class=intr
+grup-verb       att                     d.label=s-adj   	d.side=right    		    p.lemma=ser
+% grup-verb     cc                      d.label=grup-sp        		        		    p.class=mov
+% grup-verb     cc                      d.label=grup-sp 	d.lemma=en		            p.class!=mov
+% grup-verb     cc                      d.label=sadv
+grup-verb       iobj-prep               d.label=grup-sp-inf     d.lemma=a|al|para
+grup-verb-inf   dobj-objeto_directo     d.label=sn*     	d.side=right
+grup-verb-inf   dobj-objeto_directo     d.label=coor-n  	d.side=right
+
+verb-pass	aux			d.label=VS*
+verb-pass	obj-agen 		d.label=grup-sp		d.lemma=por
+verb-pass	subj-pac 		d.label=sn*   		d.side=left
+verb-pass	subj-pac 		d.label=coor-n 		d.side=left
+
+grup-sp-inf	head			d.label=grup-verb-inf	
+grup-sp	        head   			d.label=sn*
+grup-sp	        head    		d.label=coor-n
+grup-sp         dobj-prep               d.label=sn*
+grup-sp         dobj-prep               d.label=coor-n
+grup-sp         dobj-prep               d.label=infinitivo
+grup-sp         dobj-prep               d.label=data
+
+sp-de           dobj-prep               d.label=sn*
+sp-de           dobj-prep               d.label=coor-n
+sp-de           dobj-prep               d.label=infinitivo
+sp-de           dobj-prep               d.label=data
+inf             dobj-objeto_directo     d.label=sn*             d.side=right
+inf             dobj-objeto_directo     d.label=coor-n          d.side=right
+
+grup-verb       term                    d.label=F-term
+verb-pass       term                    d.label=F-term
+sn              term                    d.label=F-term
+coord           term                    d.label=F-term
+s-adj           term                    d.label=F-term
+grup-sp         term                    d.label=F-term
+sp-de           term                    d.label=F-term
+sadv            term                    d.label=F-term
+subord          term                    d.label=F-term
+
+grup-verb       ta                      d.label=Fc
+verb-pass       ta                      d.label=Fc
+sn              ta                      d.label=Fc
+coord           ta                      d.label=Fc
+s-adj           ta                      d.label=Fc
+grup-sp         ta                      d.label=Fc
+sp-de           ta                      d.label=Fc
+sadv            ta                      d.label=Fc
+subord          ta                      d.label=Fc
+
+s-a-ms          conj    		d.label=s-a*    
+s-a-fs          conj    		d.label=s-a*   
+s-a-fp          conj    		d.label=s-a*   
+s-a-mp          conj    		d.label=s-a*   
+
+espec-fp        det     		d.label=j*
+espec-fp        det     		d.label=dem*
+espec-fp        det    		        d.label=indef*
+espec-fp        det                     d.label=num*
+espec-fs        det     		d.label=j*
+espec-fs        det     		d.label=dem*
+espec-fs        det     		d.label=indef*
+espec-fs        det                     d.label=num*
+
+espec-mp        det     		d.label=j*
+espec-mp        det     		d.label=dem*
+espec-mp        det     		d.label=indef*
+espec-mp        det                     d.label=num*
+espec-ms        det     		d.label=j*
+espec-ms        det     		d.label=dem*
+espec-ms        det     		d.label=indef*
+espec-ms        det                     d.label=num*  
+
+sn              ncmod-name       	d.label=w*         
+sn              ncmod		       	d.label=n*     
+% sn            ncmod-noun       	d.label=w*     
+sn              det     		d.label=j*     
+sn              det                     d.label=dem*
+sn              det                     d.label=indef*
+sn              det                     d.label=num*
+sn              det                     d.label=espec*
+sn              ncmod                   d.label=ncmod*
+sn              ncmod                   d.label=s-a*
+sn              ncmod                   d.label=sp-de
+sn              ncmod                   d.label=coor-s-a*
+sn              head                    d.label=sn*
+
+coor-n          ncmod                   d.label=sn*
+coor-n          ncmod                   d.label=coor-n
+coor-n          ncmod                   d.label=grup-sp
+coor-n          ncmod                   d.label=s-a*
+
+</GRLAB>
+<CLASS>
+
+% verbos impersonales
+
+imper   llover
+imper   nevar
+imper   granizar
+imper   haber
+imper   tronar
+
+% verbos intransitivos
+
+intr    actuar
+intr    acercarse
+intr    adelgazar
+intr    ahondar
+intr    andar
+intr    aparecer
+intr    aproximarse
+intr    arruinar
+intr    ascender
+intr    asfixiarse
+intr    avanzar
+intr    aburrirse
+intr    llegar
+intr	ir
+intr	caminar
+intr    caer
+intr    descender
+intr    escaparse
+intr	esquiar
+intr	pedalear
+intr	gatear
+intr	navegar
+intr	nadar
+intr	marchar
+intr    quedar
+intr    quejarse
+intr    partir
+intr    proceder
+intr    rendir
+intr    residir
+intr    suceder
+intr	trepar
+intr	embarcar
+intr	salir
+intr    sufrir
+intr	entrar
+intr	regresar
+intr	partir
+intr	huir
+intr	volar
+intr	viajar
+intr    vivir
+intr    venir
+intr    volver
+
+% verbos transitivos
+
+trans  abrir
+trans  alcanzar
+trans  analizar
+trans  anunciar
+trans  añadir
+trans  adquirir
+trans  buscar
+trans  calificar
+trans  cambiar
+trans  celebrar
+trans  convocar
+trans  costar
+trans  comprar
+trans  comer
+trans  crear
+trans  cumplir
+trans  escribir
+trans  estudiar
+trans  examinar
+trans  decir
+trans  dedicar
+trans  defender
+trans  descubrir
+trans  detectar
+trans  durar
+trans  empezar
+trans  entender
+trans  evitar
+trans  financiar
+trans  leer
+trans  renovar
+trans  recibir
+trans  reconocer
+trans  resolver
+trans  saber
+trans  vender
+
+% verbos ditransitivos
+
+ditr   calificar
+ditr   colgar
+ditr   comenzar
+ditr   comer
+ditr   comprar
+ditr   compartir
+ditr   completar
+ditr   comprobar
+ditr   comprometer
+ditr   constituir
+ditr   construir
+ditr   contener
+ditr   continuar
+ditr   contratar 
+ditr   contribuir
+ditr   costar
+ditr   cumplir
+ditr   dar
+ditr   deber
+ditr   decidir
+ditr   decir
+ditr   dedicar
+ditr   devolver
+ditr   encontrar
+ditr   magnetizar
+ditr   manifestar
+ditr   mantener
+ditr   marcar
+ditr   marear
+ditr   merecer
+ditr   molestar
+ditr   morir
+ditr   mostrar %%% le muestra cariño
+ditr   mover
+ditr   murmurar
+ditr   narrar
+ditr   necesitar
+ditr   negociar
+ditr   nacer
+ditr   notificar
+ditr   obligar
+ditr   obsequiar
+ditr   observar
+ditr   obtener
+ditr   ocurrir
+ditr   ofender
+ditr   ordenar
+ditr   pacificar
+ditr   pagar
+ditr   participar
+ditr   pasar
+ditr   perder
+ditr   permitir
+ditr   perseguir
+ditr   pertenecer
+ditr   picar
+ditr   plantear
+ditr   poner
+ditr   posibilitar
+ditr   practicar
+ditr   precisar
+ditr   preferir
+ditr   preocupar
+ditr   presentar
+ditr   pretender
+ditr   prever
+ditr   proclamar
+ditr   producir
+ditr   prometer
+ditr   proporcionar
+ditr   proyectar
+ditr   proponer
+ditr   proveer
+ditr   provocar
+ditr   quedar
+ditr   quejar
+ditr   raptar
+ditr   realizar
+ditr   reanimar
+ditr   rebajar
+ditr   recibir
+ditr   reclamar
+ditr   recoger
+ditr   recompensar
+ditr   reconocer
+ditr   recordar
+ditr   recuperar
+ditr   refrescar
+ditr   regalar
+ditr   reivindicar
+ditr   relajar
+ditr   remover
+ditr   rendir
+ditr   renovar
+ditr   repartir
+ditr   repetir
+ditr   repugnar
+ditr   residir
+ditr   resolver
+ditr   responder
+ditr   resultar
+ditr   retirar
+ditr   retransmitir
+ditr   reunir
+ditr   robar
+ditr   ruborizarr
+ditr   sacar
+ditr   saber
+ditr   saltar
+ditr   salvar
+ditr   satisfacer
+ditr   sentir
+ditr   señalar
+ditr   separar
+ditr   servir
+ditr   significar
+ditr   situar
+ditr   sobreponer
+ditr   sobresaltar
+ditr   solicitar
+ditr   solucionar
+ditr   sorprender
+ditr   sostener
+ditr   suavizar
+ditr   subir
+ditr   sumergir
+ditr   suministrar
+ditr   subrayar
+ditr   suceder
+ditr   sufrir
+ditr   sofocar
+ditr   superar
+ditr   suspender
+ditr   tener
+ditr   tirar
+ditr   tocar
+ditr   tratar
+ditr   tranquilizar
+ditr   transferir
+ditr   transformar
+ditr   transmitir
+ditr   transportar
+ditr   trasladar
+ditr   traspasar
+ditr   trastornar
+ditr   ubicar
+ditr   usar
+ditr   usurpar
+ditr   utilizar
+ditr   valer
+ditr   valorar
+ditr   vender
+ditr   vincular
+ditr   vivir
+ditr   votar
+
+
+% verbos de regimen prep
+
+prep1  viajar     prep= de-a
+prep1  creer      prep= en
+prep1  cumplir    prep= con
+prep1  depender   prep= de
+prep1  disponer   prep= de
+prep1  pertenecer prep= a
+prep1  saber      prep= a
+
+% verbos de regimen (vp sp sp)
+
+prep2    acabar
+prep2    acceder
+prep2    aprovechar
+prep2    apuntar
+prep2    arreglar
+prep2    coincidir
+prep2    comenzar
+prep2    compartir
+prep2    
+prep2
+prep2
+prep2
+prep2
+prep2    
+prep2    empezar
+prep2    poner        prep= en-sobre
+prep2    incorporar   prep= a-en
+
+% verbos con predicativos
+
+pred     actuar
+pred     acabar
+pred     aparecer
+pred     constituir
+pred     incorporar
+pred     interpretar
+pred     juzgar
+pred     mantener
+pred     permanecer
+pred     resultar
+pred     sentirse
+
+
+% verbos con atributos
+
+atr      estar
+atr      parecer
+atr      ser
+
+
+% verbos de movimiento
+mov	ir	prep= a|hacia
+mov	venir	prep= de|a
+mov	andar	prep= por
+mov	alzar	prep= a|hacia	OD
+mov	desplazar     prep= a|hacia	(OD)
+mov	elevar	      prep= a|hacia	(OD)
+mov	izar	      prep= a|hacia	(OD)
+mov	levantar	prep= a|hacia	(OD)
+mov	mover		prep= a|hacia	(OD)
+mov	bajar		prep= a|hacia	(OD)
+mov	descender	prep= a|hacia
+mov	carretar	prep= a|hacia	(OD)
+mov	arrastar	prep= a|hacia	(OD)
+mov	remolcar	prep= a|hacia	(OD)
+mov	subir		prep= a|hacia	(OD)
+mov	conducir	prep= a|hacia	(OD)
+mov	empujar		prep= a|hacia	(OD)
+mov	transportar	prep= a		(OD)
+mov	trasladar	prep= a		(OD)
+mov	aproximar	prep= a		(OD+OI)
+mov	arrimar		prep= a		(OD+OI)
+mov	sumergir	prep= en	(OD)
+mov	acercar		prep= a		(OD+OI)
+mov	apartar		prep= de|a	(OD)
+mov	retirar		prep= de	(OD)
+mov	separar		prep= de	(OD)
+mov	transferir	prep= a		(OD)
+mov	lanzar		prep= a		(OD+OI)
+mov	portear		prep= a|hacia	(OD)
+mov	caminar		prep= a|hacia|por
+mov	esquiar		prep= por|a|hacia
+mov	pedalear	prep= por|a|hacia
+mov	gatear		prep= por|hacia
+mov	navegar		prep= por|a|hacia
+mov	arrastrarse	prep= por|hacia
+mov	nadar		prep= en|por|a|hacia
+mov	correr		prep= por|a|hacia
+mov	marchar		prep= a|hacia
+mov	recorrer	
+mov	cabalgar	prep= por|hacia|a
+mov	desplazarse	prep= por|a|hacia
+mov	traspasar	      (OD+OI)
+mov	atravesar	      
+mov	bordear		      
+mov	costear	
+mov	cruzar	
+mov	vadear	
+mov	escalar	prep= hacia
+mov	trepar	prep= a|hacia|por
+mov	tirar	prep= a	(OD+OI)
+mov	enviar	prep= a	(OD+OI)
+mov	montar	
+mov	devolver	prep= a	(OD+OI)
+mov	embarcar	prep= hacia
+mov	envainar	prep= en	(OD)
+mov	meter		prep= en	(OD)
+mov	descargar	prep= en	(OD)
+mov	echar		prep= a		(OD+OI)
+mov	deportar	prep= a		(OD)
+mov	importar	prep= de	(OD)
+mov	extraditar	prep= a		(OD)
+mov	sacar		prep= de	(OD)
+mov	evacuar		prep= de	(OD)
+mov	desalojar	prep= de	(OD)
+mov	acercarse	prep= a|hacia	(OI)
+mov	introducirse	prep= en
+mov	alejarse	prep= de
+mov	catapultar	prep= a|hacia
+mov	avanzar		prep= a|hacia
+mov	posicionar	prep= en	(OD)
+mov	volcar		prep= en
+mov	ahondar		prep= en
+mov	derramar	prep= en
+mov	propulsar	prep= hacia
+mov	proyectar	prep= a|hacia
+mov	situar		prep= en	(OD)
+mov	ubicar		prep= en	(OD)
+mov	citar		prep= en	(OD)
+mov	depositar	prep= en	(OD)
+mov	emperchar	prep= en	(OD)
+mov	poner		prep= en	(OD)
+mov	hundir		prep= en	(OD)
+mov	introducir	prep= en	(OD)
+mov	pasar		prep= por|a	(OD)
+mov	archivar	prep= en	(OD)
+mov	acompañar	prep= a| hacia	(OD)
+mov	almacenar	prep= en (OD)
+mov	encarcelar	prep= en (OD)
+mov	enjaular	prep= en (OD)
+mov	detener		prep= en (OD)
+mov	enterrar	prep= en (OD)
+mov	colocar		prep= en (OD)
+mov	despedir	      (OI)
+mov	robar		      (OD+OI)
+mov	desterrar	      prep= de|a	(OD)
+mov	derramar	      prep= en|encima de	(OD)
+mov	esparcir	      prep= por	      (OD)
+mov	alcanzar		    (OD)
+mov	internarse		    prep= en
+mov	penetrar		    prep= en
+mov	adentrarse		    prep= en
+mov	sumergirse		    prep= en
+mov	aproximarse		    prep= a	(OI)
+mov	hundirse		    prep= en
+mov	arrimarse		    prep= a	(OI)
+mov	apartarse		    prep= de
+mov	abandonar			  (OD)
+mov	dejar				  (OD)
+mov	detenerse			  prep= en
+mov	acudir				  prep= a
+mov	mudarse				  prep= a|de
+mov	desertar			  prep= de
+mov	vagar				  prep= por
+mov	vagabundear			  prep= por
+mov	rondar				  prep= por
+mov	merodear			  prep= por
+mov	callejear			  prep= por
+mov	desfilar			  prep= por
+mov	deambular			  prep= por
+mov	errar				  prep= por
+mov	pasarse				  prep= por
+mov	brincar				  prep= por|en
+mov	botar				  prep= en|encima
+mov	planear				  prep= por encima de
+mov	lanzarse			  prep= a
+mov	tirarse				  prep= a
+mov	venir				  prep= de|a
+mov	caer				  prep= de|en
+mov	viajar				  prep= a|hacia|por
+mov	volar				  prep= a|hacia
+mov	dirigirse			  prep= a|hacia
+mov	irse				  prep= a
+mov	largarse			  prep= a
+mov	pirarse				  prep= a
+mov	retirarse			  prep= a
+mov	salir				  prep= a|hacia|de
+mov	escaparse			  prep= de|a
+mov	marcharse			  prep= de|a
+mov	fugarse				  prep= de|a
+mov	huir				  prep= de|a
+mov	guillarse			  prep= de
+mov	escabullirse			  prep= de
+
+mov	aterrizar			  prep= en
+mov	entrar				  prep= en
+mov	montarse			  prep= en
+mov	abalanzarse			  prep= sobre
+mov	partir				  prep= hacia|a
+mov	volver				  prep= de
+mov	llegar				  prep= a|de
+mov	regresar			  prep= a|de
+
+% verbos con que (interrogativas)
+interr  acentuar
+interr  aceptar
+interr  aconsejar
+interr  acordar
+interr  admitir
+interr  advertir
+interr  afirmar
+interr  alegar
+interr  alertar
+interr  anticipar
+interr  anunciar
+interr  añadir
+interr  apostar
+interr  apoyar
+interr  apreciar
+interr  aprender
+interr  apuntar
+interr  asegurar
+interr  asumir
+interr  avalar
+interr  calcular
+interr  comentar
+interr  comunicar
+interr  concluir
+interr  confesar
+interr  confirmar
+interr  considerar
+interr  contar
+interr  contestar
+interr  controlar
+interr  convencer
+interr  creer
+interr  decidir
+interr  decir
+interr  declarar
+interr  demostrar
+interr  denunciar
+interr  descartar
+interr  desconfiar
+interr  descubrir
+interr  desestimar
+interr  desmentir
+interr  detectar
+interr  determinar
+interr  discrepar
+interr  discutir
+interr  disponer
+interr  divulgar
+interr  documentar
+interr  dudar
+interr  encontrar
+interr  enfatizar
+interr  enseñar
+interr  entender
+interr  escribir
+interr  especificar
+interr  especular
+interr  esperar
+interr  establecer
+interr  estimar
+interr  estipular
+interr  evaluar
+interr  evitar
+interr  excluir
+interr  exigir
+interr  explicar
+interr  exponer
+interr  expresar
+interr  favorecer
+interr  figurar
+interr  fomentar
+interr  garantizar
+interr  ignorar
+interr  ilustrar
+interr  imaginar
+interr  impedir
+interr  implicar
+interr  implorar
+interr  importar
+interr  indicar
+interr  informar
+interr  insinuar
+interr  insistir
+interr  jurar
+interr  justificar
+interr  lamentar
+interr  leer
+interr  mandar
+interr  mantener
+interr  mencionar
+interr  molestar
+interr  mostrar
+interr  necesitar
+interr  negar
+interr  notar
+interr  observar
+interr  ofrecer
+interr  olvidar
+interr  omitir
+interr  opinar
+interr  ordenar
+interr  pedir
+interr  pensar
+interr  percibir
+interr  permitir
+interr  pedir
+interr  planear
+interr  plantear
+interr  precisar
+interr  predecir
+interr  preferir
+interr  preguntar
+interr  preocupar
+interr  presumir
+interr  prevenir
+interr  prever
+interr  probar
+interr  proclamar
+interr  prometer
+interr  pronosticar
+interr  proponer
+interr  publicar
+interr  querer
+interr  rebatir
+interr  rechazar
+interr  reclamar
+interr  recomendar
+interr  reconocer
+interr  recordar
+interr  refutar
+interr  reiterar
+interr  reivindicar
+interr  remarcar
+interr  repetir
+interr  requerir
+interr  responder
+interr  resultar
+interr  revelar
+interr  saber
+interr  sentir
+interr  señalar
+interr  significar
+interr  solicitar
+interr  sospechar
+interr  sostener
+interr  subrayar
+interr  sugerir
+interr  suponer
+interr  temer
+interr  teorizar
+interr  transmitir
+interr  valorar
+interr  ver
+
+</CLASS>

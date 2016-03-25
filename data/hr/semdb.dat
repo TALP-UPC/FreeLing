@@ -1,0 +1,12 @@
+<WNposMap>
+N n L
+A a L
+R r L
+V v L
+</WNposMap>
+
+<DataFiles>
+senseDictFile  ./senses30.src
+wnFile  ../common/wn30.src
+</DataFiles>
+

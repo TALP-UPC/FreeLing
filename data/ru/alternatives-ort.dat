@@ -1,0 +1,17 @@
+<General>
+Type orthographic
+Dictionary ./dicc.src
+</General>
+
+<Distance>
+### for keyboard-based distance, use
+### CostMatrix ../common/alternatives/cost-kbd
+CostMatrix ../common/alternatives/cost-ort
+Threshold 2000
+MaxSizeDiff 3
+</Distance>
+
+<Target>
+UnknownWords yes
+KnownWords none
+</Target>

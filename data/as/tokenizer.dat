@@ -1,0 +1,321 @@
+
+## macros to be used in RegExps rules
+<Macros>
+ALPHA	   [[:alpha:]]
+ALPHANUM   [[:alnum:]º°]
+NOALPHANUM [^[:alnum:]º°]
+SYMNUM     [\.:,_/\\=\*\+\-º°&$€£¢¥#%]
+OTHERS     .
+</Macros>
+
+## Tokenization rules. They are applied in the order of definition.
+## The first matching the *beginning* of the line is applied
+## and a token built. The process is repeated until the line 
+## has been completely processed.
+##    -The first field in the rule is the rule name. If it starts
+##     with a "*", the RegExp will only produce a token if the 
+##     match is found in abbreviation list <Abbreviations> below.
+##    -The second field in the rule is the substring to form the token/s with
+##     It may be 0 (the match of the whole expression) or any number
+##     from 1 to the number of substrings (up to 9). A token will be
+##     created for each substring from 1 to the specified value.
+##    -The third field is the regexp to match against the line
+## 
+<RegExps>
+INDEX_SEQUENCE  0  (\.{4,}|-{2,}|\*{2,}|_{2,}|/{2,})
+INITIALS1       1  ([A-Z](\.[A-Z])+)(\.\.\.)
+INITIALS2 	0  ([A-Z]\.)+
+NAMES_CODES	0  ({ALPHA}|{SYMNUM})*[0-9]({ALPHA}|[0-9]|{SYMNUM}+{ALPHANUM})*
+THREE_DOTS 	0  (\.\.\.)
+QUOTES	        0  (``|<<|>>|'')
+MAILS 	        0  {ALPHANUM}+([\._]{ALPHANUM}+)*@{ALPHANUM}+([\._]{ALPHANUM}+)*
+APOSTR_AS      1  (([dlmtsnpDLMTSNP]|qu|Qu|QU)')({ALPHA})
+APOSTR_AS2      2  ({ALPHA}*)('l)({NOALPHANUM}|$)
+PRON_AS1	2  ({ALPHA}*)(\-(y|yos|lu|lo|la|los|les))({NOALPHANUM}|$)
+URLS1 	        0  ((mailto:|(news|http|https|ftp|ftps)://)[\w\.\-/]+|^(www(\.[\w\-/]+)+))
+URLS2           1  ([\w\.\-/]+\.(com|org|net))[\s]
+KEEP_COMPOUNDS  0  {ALPHA}+(['_\-\+]{ALPHA}+)+
+*ABREVIATIONS1  0  (({ALPHA}+\.)+)(?!\.\.)
+WORD            0  {ALPHANUM}+[\+]*
+OTHERS_C        0  {OTHERS}
+</RegExps>
+
+## Abbreviations.  The dot is not tokenized separately
+## in the cases listed below.
+<Abbreviations>
+a.c.
+aa.rr.
+abrev.
+ax.
+adm.
+admón.
+afma.
+afmas.
+afmo.
+afmos.
+ag.
+am.
+ap.
+apdo.
+art.
+arts.
+arz.
+arzbpo.
+assn.
+atte.
+av.
+avda.
+bros.
+bv.
+cap.
+caps.
+cg.
+cgo.
+cia.
+cit.
+cl.
+cm.
+co.
+col.
+corp.
+cos.
+cta.
+cte.
+ctra.
+cts.
+cía.
+d.c.
+dcha.
+deptu.
+dptu.
+dg.
+dl.
+dm.
+doc.
+docs.
+dpt.
+dpto.
+dr.
+dra.
+dras.
+dres.
+dto.
+dupdo.
+ed.
+ee.uu.
+ex.
+emma.
+emmas.
+emmo.
+emmos.
+entlu.
+entpu.
+esp.
+etc.
+ex.
+excm.
+excma.
+excmas.
+excmu.
+excmos.
+fasc.
+fao.
+fig.
+figs.
+fol.
+fra.
+gb.
+xral.
+ha.
+hnos.
+hros.
+hz.
+ib.
+ibid.
+ibíd.
+id.
+ilm.
+ilma.
+ilmas.
+ilmu.
+ilmos.
+iltre.
+inc.
+intr.
+izq.
+izqda.
+izqdu.
+izdu.
+jr.
+kc.
+kcal.
+kg.
+khz.
+kl.
+km.
+kw.
+llda.
+lláu.
+lib.
+lim.
+loc.
+ltd.
+ltda.
+lám.
+ma.
+mg.
+mhz.
+min.
+mons.
+mr.
+mrs.
+ms.
+mss.
+mtro.
+máx.
+mín.
+ntra.
+ntro.
+núm.
+ob.
+obpo.
+op.
+pd.
+ph.
+pje.
+pl.
+plc.
+pm.
+pp.
+ppal.
+pral.
+prof.
+prov.
+pról.
+ps.
+pta.
+ptas.
+pte.
+pts.
+pza.
+pax.
+párr.
+rda.
+rdu.
+ref.
+rex.
+rel.
+rev.
+revda.
+revdo.
+rma.
+rmu.
+rte.
+s.
+sdad.
+sec.
+secret.
+seg.
+sg.
+sig.
+smo.
+sr.
+sra.
+sras.
+sres.
+srs.
+srta.
+ss.mm.
+sta.
+sto.
+sust.
+tech.
+tel.
+telf.
+teléf.
+ten.
+tfono.
+tlf.
+tít.
+ud.
+uds.
+vda.
+vdo.
+vid.
+vol.
+vols.
+vra.
+vro.
+vta.
+íd.
+ít.
+mm.
+mms.
+ms.
+pulg.
+yda.
+mi.
+Ha.
+ac.
+ml.
+dl.
+hl.
+ac-pie.
+oz.
+qt.
+gal.
+pk.
+bu.
+cr.
+crt.
+tz.
+pt.
+mpa.
+pa.
+psi.
+lb.
+mmhg.
+cmhg.
+mhg.
+mol.
+mg.
+gr.
+grs.
+kg.
+kgs.
+mgr.
+oz.
+lb.
+ton.
+tm.
+milgal.
+lt.
+lps.
+gps.
+gpm.
+gph.
+gpd.
+mgd.
+gal.
+gpcd.
+mph.
+lbf.
+yb.
+zb.
+eb.
+pb.
+tb.
+gb.
+mb.
+kb.
+wb.
+cd.
+rad.
+sr.
+hz.
+lm.
+lx.
+nq.
+gy.
+sv.
+</Abbreviations>

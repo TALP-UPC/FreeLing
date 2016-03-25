@@ -1,0 +1,167 @@
+%%% FREELING SHALLOW PARSER: CHUNKING TAGS FOR CATALAN %%%%%%%%%%%%%%%%%%%
+%                                                                        %
+%   		   MARINA LLOBERES          LLUIS PADRO			 %
+%  	        mlloberes@lsi.upc.edu    padro@lsi.upc.edu		 %
+%                                                                        %
+%                                                                        %
+%     	    Departament de Llenguatges i Sistemes Informàtics      	 %
+%                 (Universitat Politecnica de Catalunya)                 %
+%                         Jordi Girona 1-3                               %
+%                          08034 Barcelona                               %
+%                                                                        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+(document in progress)
+
+
+a-fp			adjective, adjective feminine plural
+a-fs			adjective, adjective feminine singular
+a-mp			adjective, adjective masculine plural
+a-ms			adjective, adjective masculine singular
+s-a-fp			adjective, adjective phrase feminine plural
+s-a-fs			adjective, adjective phrase feminine singular
+s-a-mp			adjective, adjective phrase masculine plural
+s-a-ms			adjective, adjective phrase masculine singular
+s-adj			adjective, adjective phrase
+sadv			adverb, adverb phrase
+quasi			adverb, adverbs 'quasi' & 'gairebé'
+cuantif			adverb, adverb which expresses quantification
+adv-interrog		adverb, interrogative adverb
+neg			adverb, negation
+coord			conjunction, coordinating conjunction
+conj-subord		conjunction, subordinating conjunction
+data			date
+grup-complex-spec-fp	determiner, complex determiner feminine plural
+grup-complex-spec-fs	determiner, complex determiner feminine singular
+grup-complex-spec-mp	determiner, complex determiner masculine plural
+grup-complex-spec-ms	determiner, complex determiner masculine singular
+j-fp			determiner, definite determiner feminine plural
+j-fs			determiner, definite determiner feminine singluar
+j-mp			determiner, definite determiner masculine plural
+j-ms			determiner, definite determiner masculine singular
+dem-fp			determiner, demonstrative determiner feminine plural
+dem-fs			determiner, demonstrative determiner feminine singular
+dem-mp			determiner, demonstrative determiner masculine plural
+dem-ms			determiner, demonstrative determiner masculine singular
+espec-fp		determiner, determiner feminine plural
+espec-fs		determiner, determiner feminine singular
+espec-mp		determiner, determiner masculine plural
+espec-ms		determiner, determiner masculine singular
+exc-fp			determiner, exclamative determiner feminine plural
+exc-fs			determiner, exclamative determiner feminine singular
+exc-mp			determiner, exclamative determiner masculine plural
+exc-ms			determiner, exclamative determiner masculine singular
+indef-fp		determiner, indefinite determiner feminine plural
+indef-fs		determiner, indefinite determiner feminine singular
+indef-ms		determiner, indefinite determiner feminine singular
+indef-mp		determiner, indefinite determiner masculine plural
+int-fp			determiner, interrogative determiner feminine plural
+int-fs			determiner, interrogative determiner feminine singular
+int-mp			determiner, interrogative determiner masculine plural
+int-ms			determiner, interrogative determiner masculine singular
+quant-fp		determiner, numeral determiner feminine plural
+quant-fs		determiner, numeral determiner feminine singular
+quant-mp		determiner, numeral determiner masculine plural
+quant-ms		determiner, numeral determiner masculine singular
+interjeccio		interjection
+grup-nom-fp		noun, nominal chunk feminine plural
+grup-nom-fs		noun, nominal chunk feminine singular
+grup-nom-mp		noun, nominal chunk masculine plural
+grup-nom-ms		noun, nominal chunk masculine singular
+grup-nom		noun, nominal chunk neuter
+n-fp			noun, noun feminine plural
+n-fs			noun, noun feminine singular
+n-mp			noun, noun masculine plural
+n-ms			noun, noun masculine singular
+nom-tmp-fp		noun, noun feminine plural - time expression
+nom-tmp-fs		noun, noun feminine singluar - time expression
+nom-tmp-mp		noun, noun masculine plural - time expression
+nom-tmp-ms		noun, noun masculine singular - time expression
+sn			noun, noun phrase
+sn-tmp			noun, noun phrase - time expression
+w-fp			noun, proper noun feminine plural
+w-fs			noun, proper noun feminine singular
+w-mp			noun, proper noun masculine plural
+w-ms			noun, proper noun masculine singular
+num-fp			number, number feminine plural
+num-fs			number, number feminine singluar
+num-mp			number, number masculine plural
+num-ms			number, number masculine singular
+numero			number
+morf-pron		particle, pronoun morpheme 'es'
+morfema-verbal		particle, verbal morpheme 'es'
+prep			preposition
+grup-sp			preposition, prepositional chunk
+sp-de			preposition, prepositional phrase 'de'
+prepc-mp		preposition, preposition + definite determiner masculine plural
+prepc-ms		preposition, preposition + definite determiner masculine singular
+prep-de			preposition, preposition 'de'
+prel-adv		pronoun, adverbial relative pronoun
+paton-fp		pronoun, clitic 3rd person feminine plural
+paton-fs		pronoun, clitic 3rd person feminine singular
+paton-mp		pronoun, clitic 3rd person masculine plural
+paton-ms		pronoun, clitic 3rd person masculine singular
+paton-p			pronoun, clitic 3rd person neuter plural
+paton-s			pronoun, clitic 3rd person neuter singluar
+patons			pronoun, clitic 3rd person
+relatiu			pronoun, complex relative pronoun
+pdem-fp			pronoun, demonstrative pronoun feminine plural
+pdem-fs			pronoun, demonstrative pronoun feminine singular
+pdem-mp			pronoun, demonstrative pronoun masculine plural
+pdem-ms			pronoun, demonstrative pronoun masculine singular
+pindef-fp		pronoun, indefinite pronoun feminine plural
+pindef-fs		pronoun, indefinite pronoun feminine singular
+pindef-mp		pronoun, indefinite pronoun masculine plural
+pindef-ms		pronoun, indefinite pronoun masculine singular
+pinterrog-fp		pronoun, interrogative pronoun feminine plural
+pinterrog-fs		pronoun, interrogative pronoun feminine singular
+pinterrog-mp		pronoun, interrogative pronoun masculine plural
+pinterrog-ms		pronoun, interrogative pronoun masculine singular
+pinterrog-s		pronoun, interrogative pronoun neuter singular
+pnum-fp			pronoun, numeral pronoun feminine plural
+pnum-fs			pronoun, numeral pronoun feminine singular
+pnum-mp			pronoun, numeral pronoun masculine plural
+pnum-ms			pronoun, numeral pronoun masculine singular
+psubj-p			pronoun, personal pronoun 1st / 2nd person plural
+psubj-s			pronoun, personal pronoun 1st / 2nd person singular
+psubj-fp		pronoun, personal pronoun 3rd person feminine plural
+psubj-fs		pronoun, personal pronoun 3rd person feminine singular
+psubj-mp		pronoun, personal pronoun 3rd person masculine plural
+psubj-ms		pronoun, personal pronoun 3rd person masculine singular
+psubj			pronoun, personal pronoun
+ptonic			pronoun, personal pronouns 'mi' & 'si'
+pron			pronoun
+pron-fp			pronoun, pronoun feminine plural
+pron-fs			pronoun, pronoun feminine singular
+pron-mp			pronoun, pronoun masculine plural
+pron-ms			pronoun, pronoun masculine singular
+qual-p			pronoun, relative pronoun 'qual' plural
+qual-s			pronoun, relative pronoun 'qual' singular
+que-a			pronoun, relative pronoun 'que'
+que-t			pronoun, relative pronoun 'què'
+qui			pronoun, relative pronoun 'qui'
+F-no-c			punctuation
+vaux			verb, auxiliary verb
+geraux			verb, gerund as auxiliary verb
+ger			verb, gerund
+gerundi			verb, gerund - periphrasis
+geraux-ser		verb, gerund 'ser' as auxiliary verb
+infaux			verb, infinitive as auxiliary verb
+infaux-ser		verb, infinitive 'ser' as auxiliary verb
+infinitiu		verb, infinitive - prepositional head & periphrasis
+inf			verb, infinitive - verbal head
+parti-aux		verb, participle as auxiliary verb
+parti-fp		verb, participle feminine plural
+parti-fs		verb, participle feminine singular
+parti-mp		verb, participle masculine plural
+parti-ms		verb, participle masculine singular
+parti			verb, participle
+parti-ser		verb, participle 'ser' as auxiliary verb
+parti-flex		verb, participle with gender and number
+ger-pas			verb, passive gerund
+inf-pas			verb, passive infinitive
+vser			verb, passive verb 'ser'
+verb-pass		verb, passive verb
+verb			verb
+grup-verb		verb, verbal chunk
+v-fer-3p		verb, verb 'fer' singular - time expression

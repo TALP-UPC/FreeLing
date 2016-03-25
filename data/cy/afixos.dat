@@ -1,0 +1,31 @@
+# ===============================================
+#            Affixation rules file
+# ===============================================
+
+# === Each line is a affixation rule, with the following fields:
+# 1 Affix to erase form word form (e.g: gatito - ito = gat)
+# 2 Affix (* for emtpy string) to add to the resulting root
+#   to rebuild the lemma that must be searched in dictionary 
+#   (e.g:  gat+o = gato)
+# 3 Regexp condition on the parole tag of found dictionary entry
+# 4 Parole tag for suffixed word (* = keep tag in dictionary entry)
+# 5 Check lemma adding accents
+# 6 Enclitic suffix (special accent behaviour in Spanish)
+# 7 Prevent later modules from assigning more tags to the word
+# 8 Lemma to assign: F=original form, R=root found in dict, L=lemma in matching dict entry, 
+#                    AF/AR/AL=affix followed by F/R/L, FA/RA/LA=F/R/L followed by affix
+# 9 Consider the suffix always, not only for unknown words.
+# 10 How to retokenize the word if necessary (see uer manual).
+#==============================================================
+
+<Prefixes>
+</Prefixes>
+
+<Suffixes>
+### Adverbs with -ly
+ally	*	^JJ	RB	0	0	0	F	0	-
+bely	ble	^JJ	RB	0	0	0	F	0	-
+ly	*|l|le	^JJ	RB	0	0	0	F	0	-
+ily	y	^JJ	RB	0	0	0	F	0	-
+ly	*	^VBG	RB	0	0	0	F	0	-
+</Suffixes>

@@ -1,0 +1,80 @@
+
+  #######################################################################
+  #####             Java API for Freeling library                  ######
+  #######################################################################
+
+  This directory contains required files to generate a java API for FreeLing.
+
+  HOW TO BUILD THE API IN Linux/MacOS
+
+    1.- Install FreeLing 
+
+    2.- Install Java SDK and JNI headers
+
+    3.- Edit Makefile in this directory to adjust the right values of
+          FREELINGDIR = directory prefix where you installed freeling (probably /usr/local)
+          SWIGDIR = directory where swig share files are installed in your system
+                    (e.g. /usr/local/share/swig2.0)
+          JAVADIR = directory where java is installed (e.g. /usr/lib/jvm/java-7-oracle)
+
+    4.- Run 'make' to build the java API
+
+
+  HOW TO USE THE API FROM A JAVA PROGRAM IN Linux/MacOS
+ 
+    1.- Make sure that the directory contanining libfreeling.so
+        ($FREELINGDIR/lib) is in your LD_LIBRARY_PATH
+
+    2.- Make sure that the directory contanining libfreeling_javaAPI.so (created 
+        by 'make' above) is in your LD_LIBRARY_PATH.
+
+    3.- Make sure that the package "freeling.jar" created by make is in your CLASSPATH
+ 
+    4.- Compile and execute the sample programs (or your own java program): 
+
+         javac Analyzer.java
+         java Analyzer
+
+         javac SemGraph.java
+         java SemGraph
+
+   See FreeLing documentation and sample programs in src/main to
+   understand what this sample program is doing.
+
+  ================================================================================
+
+  HOW TO BUILD THE API IN WINDOWS, USING MSVC
+
+    1. Install java 
+
+    2. Download and install swig (http://www.swig.org/)
+
+    3. Open msvc project named msvc/10.0/swig/java/freeling_javaAPI
+       Click right button over freeling_javaAPI.i, select
+         Properties -> Custom build tool -> Command line -> Edit
+       and change JAVA_HOME and SWIG_HOME to your local installations of Java and SWIG.
+
+    4. Build the project, and when it completes successfully you'll find freeling.jar 
+       and freeling_javaAPI.dll in freeling\APIs\java directory.
+
+
+  HOW TO USE THE API FROM A JAVA PROGRAM IN WINDOWS
+ 
+    1.- Make sure libfreeling.dll, libboost, and libicu are in a path where 
+        they will be found.
+        (e.g. set PATH=%PATH%;C:\my\freeling\installation;C:\my\libicu\installation)
+
+    2.- Make sure libfreeling_javaAPI.dll (created by swig) is in a path 
+        where it will be found.
+        (e.g. set PATH=%PATH%;C:\my\freeling\javaAPI\installation)
+
+    3.- Make sure that the package "freeling.jar" created by make is in your CLASSPATH
+ 
+    4.- Compile and execute the sample program (or your program): 
+        E.g.
+         C:\my\java\installation\javac.exe Analyzer.java
+         C:\my\java\installation\java.exe Analyzer
+
+   See FreeLing documentation and sample programs in src/main to
+   understand what this sample program is doing.
+

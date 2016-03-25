@@ -1,0 +1,39 @@
+<ExtractorType>
+SPR
+</ExtractorType>
+
+<NE_Tag>
+NP
+</NE_Tag>
+
+<SemanticDB>
+../semdb.dat
+</SemanticDB>
+
+<KnowledgeBases>
+WordNet http://wordnet-rdf.princeton.edu/wn30/
+OpenCYC http://sw.opencyc.org/concept/
+SUMO http://ontologyportal.org/SUMO.owl#
+</KnowledgeBases>
+
+<NE_Classes>
+NP00SP0 person
+NP00G00 location
+NP00O00 organization
+NP00V00 other
+NP00000 unknown
+</NE_Classes>
+
+<ArgumentRoles>
+MapType synset-arg
+MapFile ../../common/wn2roles.dat
+A0_label A0
+A1_label A1
+</ArgumentRoles>
+
+<ExtractionRules>
+$L1:N:suj > $L2:VM:* < $L3:N:cd                         extract $L1 $L2 $L3
+$L1:N:suj > $L2:VMP:* < per:SP:cag < $L3:N:sn           extract $L3 $L2 $L1
+$L1:N:suj > *:VS:* < $L2:VMP:* < per:SP:cag < $L3:N:sn  extract $L3 $L2 $L1
+</ExtractionRules>
+

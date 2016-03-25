@@ -1,0 +1,43 @@
+----------------
+     README     
+----------------
+
+
+AUTHORS
+	Marina Lloberes
+	GRIAL Research Group
+	University of Barcelona
+	Gran Via de les Corts Catalanes 585
+	08007 Barcelona
+	mllobesa8@alumnes.ub.edu
+
+
+VERSION
+	Spanish Computational Lexicon of Verb Subcategorization Frames 1.0
+	Released in April 2015
+
+LICENSE
+	Creative Commons Attribution-ShareAlike 3.0 Unported License
+	http://creativecommons.org/licenses/by-sa/3.0/
+
+
+DOWNLOAD
+	http://grial.uab.es/descarregues.php
+
+
+DESCRIPTION
+	The Computational Lexicon of Verb Subcategorization Frames relies on the annotated patterns of the SenSem Corpus. Syntactic--semantic patterns have been extracted automatically from the corpus according to the idea that every verbal lemma with a different subcategorization frame expresses a different meaning.
+
+	Therefore, a new lexicon entry is created every time an annotated verbal lemma with a different frame is detected.
+
+	Certain patterns have been blocked because they are non-prototypical in the corpus (e.g. clitic left dislocations), they alter the sentence order (e.g. relative clauses), they are controversial argument classes (e.g. prepositional phrases seen as arguments or adjuncts depending on the context).
+
+	Every new lexicon entry contains the syntactic function of every argument (fs), the grammatical category (cat) and the thematic role (rs). Accessing to the annotations about the predicate and the aspect, the type of construction has been inferred (e.g. active, passive, impersonal, etc.).
+
+	Some non-annotated lexical items of the sentence have also been inserted into the subcategorization frame because the information that they provide is crucial for the argument structure configuration (e.g. the particle 'se' and the lexical value of the prepostional phrase head).
+
+	In addition, meta-linguistic information has been added to every entry, id and relative frequency of the pattern in the corpus (freq). A threshold frequency has been established at 0.000070 (for Spanish) and at 0.000085 (Catalan). Patterns under this threshold have been discarded because they are marginal in the corpus.
+
+	Every pattern contains a link to the frame and subcategorization class that they belong to (ref). For example, if a entry has the reference 1:1, it means that the pattern corresponds to a monoargumental verb whose unique argument is a subject.
+
+	The current version contains 3102 syntactic patterns in the Spanish lexicon and 2630 patterns in the Catalan lexicon. They are organized into 15 subcategorization frames as well as into 4 subcategoriztion classes.

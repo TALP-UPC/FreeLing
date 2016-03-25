@@ -1,0 +1,37 @@
+#############################################
+##
+## initialization procedure to execute
+## FreeLing "analyzer" under default conditions
+##
+#############################################
+
+##--- Get FreeLing installation from the location of this script
+FREELING=$(dirname $(cd $(dirname $0) && echo $PWD))
+
+##--- define FREELINGSHARE (if not already defined), which is used in default config files
+if [ "x$FREELINGSHARE" = "x" ]; then
+  export FREELINGSHARE=$FREELING/share/freeling
+fi
+
+#--- Prepare libraries required to execute FreeLing
+export LD_LIBRARY_PATH=$FREELING/lib:$LD_LIBRARY_PATH
+
+#--- Pass all parameters to the executable, fixing the config file path if necessary
+i=1;  eval arg=\${$i}
+param=""
+while [[ $i -le $# ]]; do
+
+   param="$param $arg"
+
+   if [ "$arg" == "-f" ]; then
+     let i=$i+1; eval arg=\${$i}
+
+     if [ -e $arg ]; then
+       param="$param $arg"
+     else 
+       param="$param $FREELING/share/freeling/config/$arg"
+     fi
+   fi
+
+   let i=$i+1;  eval arg=\${$i}
+done

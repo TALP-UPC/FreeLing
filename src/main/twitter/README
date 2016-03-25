@@ -1,0 +1,50 @@
+##
+##  This directory contains a simple example of how to tune FreeLing to analyze tweets. 
+##
+##  Note that this is *just* an example. Not a full tweet processor. 
+##  You will need to do further modifications to have a fully customized tweeter analyzer.
+##
+##  In this folder, you'll find the following files:
+##
+##    es-twitter.txt      Sample Spanish tweets
+##    en-twitter.txt      Sample English tweets
+##
+##    es-twit-tok.dat      Adapted Spanish (es) and English (en) tokenizer.dat, with some new 
+##    en-twit-tok.dat     rules to deal with typical twitter tokens such as hashtags, RT@, 
+##                        smileys, URLs, etc.
+##                         Some tokens may be wrongly recognized, since this is just an example. 
+##                        You may need to adapt this tokenization rules to your specific
+##                        needs and whishes.  See the user manual section about tokenization rules.
+##
+##    es-twit-map.dat      Configuration file for usermap module, for Spanish (es) and English (en).
+##    en-twit-map.dat      Usermap module allows the directy anotation of tokens matching certain
+##                        regular expressions, and bypasses the morphological analayzer.
+##                         It is intended to deal with certain tokens that can not be easily included
+##                        in the dictionary or handled by other morphological modules. For instance,
+##                        you can add regular expressions to annotate smileys, hastags, etc.
+##                         Usermap module tests *all* defined regular expression on *each* word,
+##                        so it slows down the system, specially if you use a very large set
+##                        of expressions.
+##                         Se the user manual section about defining UserMap files.
+##
+##  To call FreeLing with this modified configurations, use a command line as the one below.
+##  Use option --ftok to use the customized tokenization file.
+##  Use option --usr to activate usermap module, and option --fmap to specify the file with map rules.
+##
+
+# Location of FreeLing
+FLDIR=/usr/local
+
+
+# Call freeling. This command assumes that each tweet is in a different line in the input file (that's 
+# why it uses option --flush)
+# Note that your input tweets may need some formatting (e.g. removing XML/HTML marks, inserting 
+# whitespaces bewtween some URLS or "RT @" that are fused with the text, etc...) 
+
+
+# Spanish demo
+$FLDIR/bin/analyze -f es.cfg --flush --ftok es-twit-tok.dat --usr --fmap es-twit-map.dat < es-twitter.txt 
+
+
+# English demo
+$FLDIR/bin/analyze -f en.cfg --flush --ftok en-twit-tok.dat --usr --fmap en-twit-map.dat < en-twitter.txt 

@@ -1,0 +1,70 @@
+
+<UnknownWordsOnly>
+yes
+</UnknownWordsOnly>
+
+<JoinChars>
+## list of chars that may join compound elements (one char per line)
+-
+</JoinChars>
+
+<CompoundPatterns>
+
+## the syntactic class of the compound is the same as the syntactic
+## class of the final element of the compound.
+
+## Noun-Noun: hubcap, schoolteacher
+NN_+NN
+
+## Adjective-Noun: smallpox, bluebird 
+JJ_+NN
+
+## Preposition-Noun: underdog, afterthought 
+IN_+NN
+
+## Verb-Noun: whetstone, rattlesnake	
+## VB_+NN 
+
+
+## Noun-Adjective: headstrong,skin-deep 
+NN_+JJ
+
+## Adjective-Adjective: white-hot, widespread 	
+JJ_+JJ
+
+## Preposition-Adjective: overwide, ingrown
+IN_+JJ
+
+## Noun-Verb: spoonfeed	
+NN_+VBN
+NN_+VBD
+NN_+VBS
+NN_+VBP
+NN_+VBG
+NN_+VB
+
+## Adjective-Verb: dry-clean, white-haired, green-eyed
+JJ_+VBN
+JJ_+VBD
+JJ_+VBS
+JJ_+VBP
+JJ_+VBG
+JJ_+VB
+
+## Preposition-Verb: outlive
+IN_+VBN
+IN_+VBD		
+IN_+VBS	
+IN_+VBP		
+IN_+VBG
+IN_+VB		
+
+## Verb-Verb: sleepwalk
+VB_+VBN
+VB_+VBD
+VB_+VBS
+VB_+VBP
+VB_+VBG
+VB_+VB
+
+</CompoundPatterns>

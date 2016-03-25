@@ -1,0 +1,40 @@
+<DecompositionRules>
+N 0,1,4 noun type/C:common;P:proper gen/M:m;F:f;N:n num/S:s;D:d;P:p case/N:nominative;G:genitive;D:dative;A:accusative;L:locative;I:instrumental animate/N:no;Y:yes
+V 0,1,3 verb type/M:main;A:auxiliary aspect/E:perfective;P:progressive;B:biaspectual vform/N:infinitive;U:supine;P:participle;R:present;F:future;C:conditional;M:imperative person/1:1;2:2;3:3 num/S:s;D:d;P:p gen/M:m;F:f;N:n negative/N:no;Y:yes
+A 0,1,5 adjective type/G:general;S:possessive;P:participle degree/P:positive;C:comparative;S:superlative gen/M:m;F:f;N:n num/S:s;D:d;P:p case/N:nominative;G:genitive;D:dative;A:accusative;L:locative;I:instrumental definite/N:no;Y:yes
+R 2 adverb type/G:general;R:participle degree/P:positive;C:comparative;S:superlative 
+P 0,1,5 pronoun type/P:personal;S:possessive;D:demonstrative;R:relative;X:reflexive;C:General;Q:interrogative;I:indefinite;Z:negative person/1:1;2:2;3:3 gen/M:m;F:f;N:n num/S:s;D:d;P:p case/N:nominative;G:genitive;D:dative;A:accusative;L:locative;I:instrumental possessornum/S:s;D:d;P:p possessorgen/M:m;F:f;N:n clitic/Y:yes;B:bound
+M 0,2,5 number form/D:digit;R:roman;L:letter type/C:cardinal;O:ordinal;P:pronomial;S:special gen/M:m;F:f;N:n num/S:s;D:d;P:p case/N:nominative;G:genitive;D:dative;A:accusative;L:locative;I:instrumental definite/N:no;Y:yes
+S 0 preposition case/N:nominative;G:genitive;D:dative;A:accusative;L:locative;I:instrumental
+C 0 conjunction type/C:coordinating;S:subordinating
+Q 0 particle
+I 0 interjection
+Y 0 abbreviation
+X 0 residual type/F:foreign;T:typo;P:program
+Z 0 number type/d:partitive;m:currency;p:percentage;u:unit
+W 0 date
+</DecompositionRules>
+<DirectTranslations>
+Fc Fc pos=punctuation|type=comma
+Fs Fs pos=punctuation|type=etc
+Fd Fd pos=punctuation|type=colon
+Fx Fx pos=punctuation|type=semicolon
+Fg Fg pos=punctuation|type=hyphen
+Fe Fe pos=punctuation|type=quotation
+Fh Fh pos=punctuation|type=slash
+Fp Fp pos=punctuation|type=period
+Fia Fia pos=punctuation|type=questionmark|punctenclose=open
+Fit Fit pos=punctuation|type=questionmark|punctenclose=close
+Faa Faa pos=punctuation|type=exclamationmark|punctenclose=open
+Fat Fat pos=punctuation|type=exclamationmark|punctenclose=close
+Ft Ft pos=punctuation|type=percentage
+Fla Fla pos=punctuation|type=curlybracket|punctenclose=open
+Flt Flt pos=punctuation|type=curlybracket|punctenclose=close
+Fca Fca pos=punctuation|type=squarebracket|punctenclose=open
+Fct Fct pos=punctuation|type=squarebracket|punctenclose=close
+Fpa Fpa pos=punctuation|type=parenthesis|punctenclose=open
+Fpt Fpt pos=punctuation|type=parenthesis|punctenclose=close
+Fra Fra pos=punctuation|type=quotation|punctenclose=open
+Frc Frc pos=punctuation|type=quotation|punctenclose=close
+Fz Fz pos=punctuation|type=other
+</DirectTranslations>

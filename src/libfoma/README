@@ -1,0 +1,27 @@
+
+Code in the directory  src/libfoma
+
+Is straightforwardly extracted from FOMA project
+(http://code.google.com/p/foma)
+
+The following modifications have been done to ease integration in FreeLing:
+
+1) Add a line in "fomalib.h", exporting function to load a cost matrix:
+    FEXPORT void my_cmatrixparse(struct fsm *net, char *my_string);
+
+2) Replace the following function in "io.c" (and header in fomalib.h)
+     struct fsm *fsm_read_text_file(char *filename);
+
+   with:
+     struct fsm *fsm_read_text_file(const char *buffer);
+
+   The new function loads a dictionary from a text buffer
+   instead of from a text file. 
+
+3) Added fake function to "io.c"
+     int isatty(int x) {return 0;}
+   to prevent errors when compiling with MSVC
+   (Foma tty interface is not used by FreeLing anyway)
+
+4) Added ifdefs to the top of "fomalib.h" to deal with MSVC
+

@@ -1,0 +1,72 @@
+%%%%%%%%%%%%%%%%%%%%%
+%%% GENERAL
+%%%%%%%%%%%%%%%%%%%%%
+
+<Language>
+ENGLISH
+</Language>
+
+%%%%%%%%%%%%%%%%%%%%%
+%%% MENTION DETECTION
+%%%%%%%%%%%%%%%%%%%%%
+
+%%% Labels useful to detect mentions 
+<Labels>
+COOR_NP ^sn-coor$
+NP ^(sn|n)-chunk$
+NP_PARENTH ^sn-parenth$
+# Pronouns: personal=PRP, relative=WP$, who/what=WP, genitive=POS
+# WDT (who-determiner) is also considered
+PRON ^WDT|WP\$?|PRP\$?$
+% Warning: filter out WPs at the beginning of the interrogative sentences
+XPRON ^WP$
+% possessive particles
+POSS ^PRP\$|WP\$|POS$
+
+% Proper names and Named Entities including money and data
+PN ^(NP.*|Z.|W)$
+% Subordinate clauses
+SUB ^rel-cl$
+% Colon: to detect explanatory subordinate clauses
+PC ^Fc$
+% Common names
+NC ^NN
+NCS ^NN$
+NCP ^NNS$
+% Adjectives
+ADJ ^JJ$
+% Dets
+DET ^DT$
+% Verbs
+VERB ^VB
+NUM ^Z
+</Labels>
+
+%%% List of prohibited nouns to be head of mention
+<ProhibitedHeads>
+%% temporal nouns
+%month
+%day
+%year
+while
+%century
+%minute
+%second
+%time
+%season
+%decade
+%week
+%hour
+%morning
+%afternoon
+%evening
+%tomorrow
+%today
+%yesterday
+</ProhibitedHeads>
+
+%%% Limit mentions to NE, pronouns and NPs that either are alias of a NE 
+%%% or the head is repeated at least once
+<ReduceMentions>
+no
+</ReduceMentions>

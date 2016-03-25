@@ -1,0 +1,12 @@
+dict-words = ../maps/words.map
+dict-lemmas = ../maps/lemmas.map
+dict-cpos = ../maps/cpos.map
+dict-fpos = ../maps/fpos.map
+dict-morphos = ../maps/morphos.map
+dict-dependencies = ../maps/dependencies.map
+dict-roles = ../maps/roles.map
+wdir = .
+wt = 034
+wavg = 1
+scope = direct
+syn-offset = 1

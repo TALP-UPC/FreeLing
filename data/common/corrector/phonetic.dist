@@ -1,0 +1,118 @@
+# Constant values
+CONSTANT: Cskip  -1000
+CONSTANT: Cspace -1000
+CONSTANT: Csub    3500
+CONSTANT: Cexp    3500
+CONSTANT: Cvowel  1000
+
+# List of phonemes
+VOWELS:     a e i o u j w y A E I O Q U V { @
+CONSONANTS: b c d f g h k l m n p r 4 s t x z B D G J L N R S T Z
+
+# List of features and comparisonal groups
+FEATURES: voice nasal retroflex lateral manner place syllabic round long high back
+FVOWELS: syllabic nasal high back round long
+FOTHER:  syllabic manner voice nasal retroflex lateral place
+
+# Numerical values of the categorical features
+
+# place
+VALUE: bilabial      100
+VALUE: labiodental    95
+VALUE: dental         90
+VALUE: alveolar       80
+VALUE: palato-alveolar 75
+VALUE: palatal        70
+VALUE: velar          60
+VALUE: uvular         50
+VALUE: pharyngeal     30
+VALUE: glottal        10
+
+# manner
+VALUE: stop          100
+VALUE: fricative      90
+VALUE: affricate      80
+VALUE: flap           70
+VALUE: trill          60
+VALUE: approximant    50
+VALUE: high_vowel     40
+VALUE: mid_vowel      20
+VALUE: low_vowel       0
+
+# high
+VALUE: high          100
+VALUE: mid            50
+VALUE: low             0
+
+# back
+VALUE: front         100
+VALUE: central        50
+VALUE: back            0
+
+
+# Matric of attribute values for phonemes
+#    F	voice	nasal	rtrflx	lateral	manner		place		syllab	round	long	high	back
+#============================================================================================================
+
+FON: a	+	-	-	-	low_vowel	velar		+	-	-	low	front
+FON: e	+	-	-	-	mid_vowel	palatal		+	-	-	mid	front
+FON: i	+	-	-	-	high_vowel	palatal		+	-	+	high	front
+FON: o	+	-	-	-	mid_vowel	velar		+	+	-	mid	back
+FON: u	+	-	-	-	high_vowel	velar		+	+	+	high	back
+FON: j	+	-	-	-	high_vowel	velar		-	-	-	high	front
+FON: w	+	-	-	-	high_vowel	velar		-	+	-	high	back
+FON: y	+	-	-	-	high_vowel	velar		+	+	-	high	front
+
+FON: A	+	-	-	-	low_vowel	velar		+	-	+	low	back
+FON: E	+	-	-	-	mid_vowel	palatal		+	-	-	mid	front
+FON: I	+	-	-	-	high_vowel	palatal		+	-	-	high	front
+FON: O	+	-	-	-	mid_vowel	velar		+	+	+	mid	back
+FON: U	+	-	-	-	high_vowel	velar		+	+	-	high	back
+FON: Q	+	-	-	-	low_vowel	velar		+	+	-	low	back
+FON: V	+	-	-	-	mid_vowel	velar		+	-	-	mid	back
+FON: {	+	-	-	-	low_vowel	velar		+	-	-	low	front
+FON: @	+	-	-	-	mid_vowel	velar		+	-	-	mid	mid
+
+FON: b	+	-	-	-	stop		bilabial	-	-	-	-	-
+FON: d	+	-	-	-	stop		alveolar	-	-	-	-	-
+FON: f	-	-	-	-	fricative	labiodental	-	-	-	-	-
+FON: g	+	-	-	-	stop		velar		-	-	-	-	-
+FON: h	-	-	-	-	fricative	glottal		-	-	-	-	-
+FON: k	-	-	-	-	stop		velar		-	-	-	-	-
+FON: l	+	-	-	+	approximant	alveolar	-	-	-	-	-
+FON: m	+	+	-	-	stop		bilabial	-	-	-	-	-
+FON: n	+	+	-	-	stop		alveolar	-	-	-	-	-
+FON: p	-	-	-	-	stop		bilabial	-	-	-	-	-
+FON: r	+	-	+	-	approximant	palato-alveolar	-	-	-	-	-
+FON: 4	+	-	+	-	trill	    palato-alveolar	-	-	-	-	-
+FON: s	-	-	-	-	fricative	alveolar	-	-	-	-	-
+FON: t	-	-	-	-	stop		alveolar	-	-	-	-	-
+FON: z	+	-	-	-	fricative	alveolar	-	-	-	-	-
+
+FON: B	+	-	-	-	fricative	bilabial	-	-	-	-	-
+FON: D	+	-	-	-	fricative	dental		-	-	-	-	-
+FON: L	+	-	-	-	approximant	palatal		-	-	-	-	-
+FON: N	+	+	-	-	stop		velar		-	-	-	-	-
+FON: S	-	-	-	-	affricate	alveolar	-	-	-	-	-
+FON: T	-	-	-	-	fricative	dental		-	-	-	-	-
+FON: Z	+	-	-	-	affricate	alveolar	-	-	-	-	-
+
+FON: c	-	-	-	-	stop		palatal		-	-	-	-	-
+FON: x  -	-	-	-	fricative	velar		-	-	-	-	-
+FON: G	+	-	-	-	fricative	velar		-	-	-	-	-
+FON: J	+	+	-	-	stop		palatal		-	-	-	-	-
+FON: R	+	-	-	-	fricative	uvular		-	-	-	-	-
+
+
+# Weight(salience) of the features
+WEIGHT: syllabic     5
+WEIGHT: voice        10
+WEIGHT: lateral      10
+WEIGHT: high         5
+WEIGHT: manner       50
+WEIGHT: long         1
+WEIGHT: place        40
+WEIGHT: nasal        10
+WEIGHT: back         5
+WEIGHT: retroflex    10
+WEIGHT: round        5

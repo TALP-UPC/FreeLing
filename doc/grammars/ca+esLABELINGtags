@@ -1,0 +1,111 @@
+%%% FREELING DEPENDENCY PARSER: LABELING TAGS FOR CATALAN AND SPANISH %%%%
+%                                                                        %
+%                  MARINA LLOBERES          LLUIS PADRO                  %
+%               mlloberes@lsi.upc.edu    padro@lsi.upc.edu               %
+%                                                                        %
+%                                                                        %
+%           Departament de Llenguatges i Sistemes Informàtics            %
+%                 (Universitat Politecnica de Catalunya)                 %
+%                         Jordi Girona 1-3                               %
+%                          08034 Barcelona                               %
+%                                                                        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In FreeLing 4.0, syntactic function labels produced by Txala parser have changed
+
+Here is the list of correspondences with the old label set.
+
+OLD TAG		| NEW TAG	 | DESCRIPTION
+----------------+----------------+-----------------------------------------------------------+
+---             | advc		 | adverbial complement
+adj-mod		| mod            | modifier
+ador		| adjt           | sentence adjunt
+agent		| agnt           | agent in passive sentences
+att		| attr           | complement that goes with copulative verbs
+aux		| aux            | auxiliary verb
+cc		| adjt           | predicate adjunt
+co-adj		| coor           | coordinated node (adjective phrase)
+co-adv		| coor           | coordinated node (adverb)
+co-ger		| coor           | coordinated node (gerund or gerund clause)
+co-inf		| coor           | coordinated node (infinitive or infinitve clause)
+co-n		| coor           | coordinated node (noun phrase)
+co-part		| coor           | coordinated node (participe or participle clause)
+co-sp		| coor           | coordinated node (prepositional phrase)
+co-subord	| coor           | coordinated node (subordinate clause)
+co-v		| coor           | coordinated node (verb phrase)
+dconj		| prt            | particle of raising or modal verbs (conjunction)
+dep		| ---            | dummy tag (disabled)
+dep-adv		| gap            | elision (adverb)
+dep-ger		| gap            | elision (gerund)
+dep-inf		| gap            | elision (infinitive)
+dep-noun	| gap            | elision (noun)
+dep-part	| gap            | elision (participle)
+dep-prep	| gap            | elision (preposition)
+dep-subord	| gap            | elision (subordinate clause)
+dobj		| dobj           | direct object
+dprep		| prt            | particle of raising or modal verbs (preposition)
+dverb		| prt            | particle of raising or modal verbs (verb)
+es		| mphes          | particle 'se' (passive, impèrsonal, pronominal morpheme)
+espec		| spec           | specifier
+iobj		| iobj           | indirect object
+obj-prep	| comp           | complement (of a preposition)
+pred		| pred           | predicative complement
+sn-mod		| mod            | modifier (noun)
+sp-mod		| mod            | modifier (preposition)
+sp-obj		| pobj           | prepositional object
+subj		| subj           | subject
+subj-pac	| subj           | subject (in passive sentences)
+subord-mod	| mod            | modifier (subordinate clause)
+term		| punc           | punctuation
+vsubord		| comp           | complement (of a subordinate conjunction)
+
+
+
+Previous documentation for OLD label set:
+------------------------------------------
+adj-mod		adjectival modifier (adjectives modifying a noun)
+ador		sentence adjunct (sentence elaboration introduced by discourse markers 
+                such as "but", "thanks to", "eventhough", "for this reason", etc.)
+agent		agent in passive sentences
+att		attribute of predicate whose head is a copulative verb ("John is tall")
+aux		auxiliary verbs
+cc		adjunct (tipically specifying time, place, manner, etc. of the verb)
+co-adj		coordinated adjective
+co-adv		coordinated adverb
+co-ger		coordinated gerund
+co-inf		coordinated infinitive
+co-n		coordinated noun
+co-part		coordinated participle
+co-sp		coordinated prepositional phrase
+co-subord	coordinated clause
+co-v		coordinated verb or sentence
+dconj		subordinating conjunction of a verb - periphrasis ("I think that he will come")
+dep-adv		adverbs - verbless sentences
+dep-ger		gerund clauses - verbless sentences
+dep-inf		infinitive clauses - verbless sentences
+dep-noun	nouns - verbless sentences
+dep-part	participle clauses - verbless sentences
+dep-prep	prepostitional phrases - verbless sentences
+dep-subord	finite clauses - verbless sentences
+dep		clitic pronouns
+dobj		direct object
+dprep		verb + preposition - periphrasis
+dverb		verb + verb - periphrasis
+es		"se" passive, impersonal, pronominal morpheme, reflexive pronouns
+espec		nominal and verbal determiners
+iobj		indirect object
+obj-prep    prepositional object in a PP ("in the house")
+pred		attribute of (non-copulative) predicative verbs  ("they remained silent")
+prepos		objects whose head is prepositional
+sn-mod		nominal modifier (noun phrase modifying another)
+sp-mod		prepositional modifier (prepositional phrases modifying a noun or adjectival phrase)
+sp-obj		prepositional object ("I believe in ghosts", "He pointed towards the crowd")
+subj-pac	patient - passive
+subj		subject
+subord-mod	relative clauses modifying a nominal head.
+term		punctuation
+top	        sentence head (highest head)
+vsubord		verb subordinated to an interrogative pronoun or to subordinating conjunction 
+                ("I don't know who washed the dishes", "I think that he called her")
+
+

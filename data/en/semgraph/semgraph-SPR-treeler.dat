@@ -1,0 +1,46 @@
+<ExtractorType>
+SPR
+</ExtractorType>
+
+<NE_Tag>
+NP
+</NE_Tag>
+
+<SemanticDB>
+../semdb.dat
+</SemanticDB>
+
+<KnowledgeBases>
+WordNet http://wordnet-rdf.princeton.edu/wn30/
+OpenCYC http://sw.opencyc.org/concept/
+SUMO http://ontologyportal.org/SUMO.owl#
+</KnowledgeBases>
+
+<NE_Classes>
+NP00SP0 person
+NP00G00 location
+NP00O00 organization
+NP00V00 other
+NP00000 unknown
+</NE_Classes>
+
+<ArgumentRoles>
+MapType synset-arg
+MapFile ../../common/wn2roles.dat
+A0_label A0
+A1_label A1
+</ArgumentRoles>
+
+<ExtractionRules>
+$L1:N:SBJ > $L2:VB:* < $L3:N:OBJ   extract $L1 $L2 $L3
+$L1:N:SBJ > $L2:VB:* < $L3:N:PRD   extract $L1 $L2 $L3
+$L1:N:SBJ > have:VB:* < $L2:V:VC < $L3:N:OBJ   extract $L1 $L2 $L3
+$L1:N:SBJ > be:VB:* < $L2:V:VC < $L3:N:OBJ   extract $L1 $L2 $L3
+$L1:N:SBJ > be:VB:* < to:TO:PRD < $L2:VB:IM < $L3:N:OBJ   extract $L1 $L2 $L3
+$L1:N:SBJ > be:VB:* < $L2:V:VC < by:IN:LGS < $L3:N:PMOD    extract $L3 $L2 $L1
+$L1:N:SBJ > $L2:VB:* < $L3:Z:OBJ   extract $L1 $L2 $L3
+$L1:N:SBJ > have:VB:* < $L2:V:VC < $L3:Z:OBJ   extract $L1 $L2 $L3
+$L1:N:SBJ > be:VB:* < $L2:V:VC < $L3:Z:OBJ   extract $L1 $L2 $L3
+$L1:Z:SBJ > be:VB:* < $L2:V:VC < by:IN:LGS < $L3:N:PMOD    extract $L3 $L2 $L1
+</ExtractionRules>
+

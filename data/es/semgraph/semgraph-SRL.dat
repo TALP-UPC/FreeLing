@@ -1,0 +1,48 @@
+<ExtractorType>
+SRL
+</ExtractorType>
+
+<NE_Tag>
+NP
+</NE_Tag>
+
+<SemanticDB>
+../semdb.dat
+</SemanticDB>
+
+<KnowledgeBases>
+WordNet http://wordnet-rdf.princeton.edu/wn30/
+OpenCYC http://sw.opencyc.org/concept/
+SUMO http://ontologyportal.org/SUMO.owl#
+</KnowledgeBases>
+
+<NE_Classes>
+NP00SP0 person
+NP00G00 location
+NP00O00 organization
+NP00V00 other
+NP00000 unknown
+</NE_Classes>
+
+<ContentArgument>
+^[NVRAPW]
+</ContentArgument>
+
+<NonHeadRelatives>
+que PR
+quien PR
+donde PR
+cuando PR
+como PR
+</NonHeadRelatives>
+
+<AuxiliaryVerbs>
+haber V
+ser V
+estar V
+</AuxiliaryVerbs>
+
+<ArgumentRoles>
+MapType synset-arg
+MapFile ../../common/wn2roles.dat
+</ArgumentRoles>

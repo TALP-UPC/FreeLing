@@ -1,0 +1,10 @@
+dict-words = ../maps/dep/words.map
+dict-lemmas = ../maps/dep/lemmas.map
+dict-cpos = ../maps/dep/cpos.map
+dict-fpos = ../maps/dep/fpos.map
+dict-morphos = ../maps/dep/morphos.map
+dict-dependencies = ../maps/dep/dependencies.map
+wdir = .
+wt = 001
+wavg = 1
+multiroot = 1

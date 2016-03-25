@@ -1,0 +1,205 @@
+# ===============================================
+#            Affixation rules file
+# ===============================================
+
+# === Each line is a affixation rule, with the following fields:
+# 1 Affix to erase from word form (e.g: gatito - ito = gat)
+# 2 Affix (* for emtpy string) to add to the resulting root
+#   to rebuild the lemma that must be searched in dictionary 
+#   (e.g:  gat+o = gato)
+# 3 Regexp condition on the parole tag of found dictionary entry
+# 4 Parole tag for suffixed word (* = keep tag in dictionary entry)
+# 5 Check lemma adding accents
+# 6 Enclitic suffix (special accent behaviour in Spanish)
+# 7 Prevent later modules from assigning more tags to the word
+# 8 Lemma to assign: any combination of: F,R,L,A,<literal> separated with '+'
+#                    where: F=original form, R=root found in dict, 
+# 		            L=lemma in matching dict entry, A=affix
+#                    examples:  A+L=affix+lemma,  R=root,  R+mente= root+"mente"
+# 9 Consider the suffix always, not only for unknown words.
+# 10 How to retokenize the word if necessary (see uer manual).
+#==============================================================
+
+
+<Prefixes>
+u	*	^(AQ|VAP0000)   *	0	0	1	F	0	-
+u	*	^NC		*	0	0	1	A+L	0	-
+kjempe	*	^AQ	*	0	0	1	A+L	0	-
+mis	*	^V	*	0	0	1	A+L	0	-
+sam	*	^V	N00000000	0	0	1	A+L	0	-
+gjen	*	^(V|N)	*	0	0	1	A+L	0	-
+anti	*	^AQ	*	0	0	1	A+L	0	-
+preste	*	^N	*	0	0	1	A+L	0	-
+super	*	^N		*	0	0	1	A+L	0	-
+multi   *	^(N|A)	*	0	0	1	A+L	0	-
+inter	*	^AQ	*	0	0	1	A+L	0	-
+semi	*	^AQ	*	0	0	1	A+L	0	-
+selv	*	^(N|A)	*	0	0	1	A+L	0	-
+lang	*	^(N|A)	*	0	0	1	A+L	0	-
+under	*	^(N|A|V)	*	0	0	1	A+L	0	-
+halv	*	^N	*	0	0	1	A+L	0	-
+om	*	^(N|A|V)	*	0	0	1	A+L	0	-
+non	*	^N	*	0	0	1	A+L	0	-
+god	*	^N	*	0	0	1	A+L	0	-
+</Prefixes>
+
+<Suffixes>
+
+### Adjectives with -lig  ----------------
+lig	*	^N	AQPCS000	0	0	1	L+A	0	-
+lige	*	^N	AQPCP000	0	0	1	L+A	0	-
+ligere	*	^N	AQM00000	0	0	1	L+A	0	-
+ligst	*	^N	AQS0000U	0	0	1	L+A	0	-
+ligste	*	^N	AQS0000D	0	0	1	L+A	0	-
+
+
+### Adjectives with -abel
+abel	e	^V	AQPCS00U	0	0	1	L+A	0	-
+abelt	e	^V	AQPNS00U	0	0	1	L+A	0	-
+able	e	^V	AQP0P000	0	0	1	L+A	0	-
+ablere	e	^V	AQM00000	0	0	1	L+A	0	-
+ablest	e	^V	AQS0000U	0	0	1	L+A	0	-
+ableste	e	^V	AQS0000D	0	0	1	L+A	0	-
+
+
+### Adjectives with -bar
+bar	e	^V	AQPCS00U	0	0	1	L+A	0	-
+bare	e	^V	AQP0P000	0	0	1	L+A	0	-
+barere	e	^V	AQM00000	0	0	1	L+A	0	-
+barest	e	^V	AQS0000U	0	0	1	L+A	0	-
+bareste	e	^V	AQS0000D	0	0	1	L+A	0	-
+bart	e	^V	AQPNS00U	0	0	1	L+A	0	-
+
+
+### Adjectives with -ig
+ig	*	^A	AQPCS00U	0	0	1	L+A	0	-
+ige	*	^A	AQP0P000	0	0	1	L+A	0	-
+igere	*	^A	AQM00000	0	0	1	L+A	0	-
+igst	*	^A	AQS0000U	0	0	1	L+A	0	-
+igste	*	^A	AQS0000D	0	0	1	L+A	0	-
+
+### Adjectives with -al
+al	*	^N	AQPCS00U	0	0	1	L+A	0	-
+ale	*	^N	AQP0P000	0	0	1	L+A	0	-
+alere	*	^N	AQM00000	0	0	1	L+A	0	-
+alest	*	^N	AQS0000U	0	0	1	L+A	0	-
+aleste	*	^N	AQS0000D	0	0	1	L+A	0	-
+alt	*	^N	AQPNS00U	0	0	1	L+A	0	-
+
+
+### Adjectives with -som; e.g. vakt > vaktsom; var > varsom; vill > villsom
+som	*	^A	AQPCS00U	0	0	1	L+A	0	-
+somme	*	^A	AQP0P000	0	0	1	L+A	0	-
+sommelig	*	^A	AQPCS00U	0	0	1	L+A	0	-
+sommelige	*	^A	AQP0P000	0	0	1	L+A	0	-
+sommeligere	*	^A	AQM00000	0	0	1	L+A	0	-
+sommeligst	*	^A	AQS0000U	0	0	1	L+A	0	-
+sommeligste	*	^A	AQS0000D	0	0	1	L+A	0	-
+sommere	*	^A	AQM00000	0	0	1	L+A	0	-
+somst	*	^A	AQS0000U	0	0	1	L+A	0	-
+somste	*	^A	AQS0000D	0	0	1	L+A	0	-
+somt	*	^A	AQPNS00U	0	0	1	L+A	0	-
+
+
+### Nouns with -ing
+ing	e	^V	NCMS0000U	0	0	1	L+A	0	-
+inga	e	^V	NCFS0000D	0	0	1	L+A	0	-
+ingen	e	^V	NCMS0000D	0	0	1	L+A	0	-
+ingene	e	^V	NCMP0000D	0	0	1	L+A	0	-
+inger	e	^V	NCMP0000U	0	0	1	L+A	0	-
+
+
+### Comparatives ------------
+# pen->penere, glad->gladere
+ere	*|e	^AQ	AQM00000	0	0	0	L	0	-
+
+# same for adverbs
+ere	*|e	^RG	*	0	0	0	L	0	-
+
+
+### Superlatives -----------
+
+# pen->penest, varm->varmest
+est	*|e	^AQ	AQS00000	0	0	0	L	0	-
+
+# billig->billigst, dårlig->dårligst
+igst	ig	^AQ	AQS00000	0	0	0	L	0	-
+
+# same for adverbs
+est	*|e	^RG	*	0	0	0	L	0	-
+igst	ig	^RG	*	0	0	0	L	0	-
+
+### Saxon genitive -----------
+
+# same for all types of nouns
+s	*	^N00000000	N000000G0	0	0	1	L+A	0	-
+s	*	^N00P00000	N00P000G0	0	0	1	L+A	0	-
+s	*	^NC0000000	NC00000G0	0	0	1	L+A	0	-
+s	*	^NC000000U	NC00000GU	0	0	1	L+A	0	-
+s	*	^NC0P0000D	NC0P000GD	0	0	1	L+A	0	-
+s	*	^NC0P0000U	NC0P000GU	0	0	1	L+A	0	-
+s	*	^NC0S0000U	NC0S000GU	0	0	1	L+A	0	-
+s	*	^NCF000000	NCF0000G0	0	0	1	L+A	0	-
+s	*	^NCFP0000D	NCFP000GD	0	0	1	L+A	0	-
+s	*	^NCFP0000U	NCFP000GU	0	0	1	L+A	0	-
+s	*	^NCFS0000D	NCFS000GD	0	0	1	L+A	0	-
+s	*	^NCFS0000U	NCFS000GU	0	0	1	L+A	0	-
+s	*	^NCM000000	NCM0000G0	0	0	1	L+A	0	-
+s	*	^NCMP0000D	NCMP000GD	0	0	1	L+A	0	-
+s	*	^NCMP0000U	NCMP000GU	0	0	1	L+A	0	-
+s	*	^NCMS0000D	NCMS000GD	0	0	1	L+A	0	-
+s	*	^NCMS0000U	NCMS000GU	0	0	1	L+A	0	-
+s	*	^NCN000000	NCN0000G0	0	0	1	L+A	0	-
+s	*	^NCNP0000D	NCNP000GD	0	0	1	L+A	0	-
+s	*	^NCNP0000U	NCNP000GU	0	0	1	L+A	0	-
+s	*	^NCNS0000D	NCNS000GD	0	0	1	L+A	0	-
+s	*	^NCNS0000U	NCNS000GU	0	0	1	L+A	0	-
+s	*	^NP0000000	NP00000G0	0	0	1	L+A	0	-
+s	*	^NPF000000	NPF0000G0	0	0	1	L+A	0	-
+s	*	^NPM000000	NPM0000G0	0	0	1	L+A	0	-
+s	*	^NPN000000	NPN0000G0	0	0	1	L+A	0	-
+
+
+# same for adjectives and (quantitative, demonstrative) determiners
+s	*	^A0000000	A00000G0	0	0	1	L+A	0	-
+s	*	^AOP0P000	AOP0P0G0	0	0	1	L+A	0	-
+s	*	^AOP0S00D	AOP0S0GD	0	0	1	L+A	0	-
+s	*	^AOPCS00U	AOPCS0GU	0	0	1	L+A	0	-
+s	*	^AOPNS00U	AOPNS0GU	0	0	1	L+A	0	-
+s	*	^AQ000000	AQ0000G0	0	0	1	L+A	0	-
+s	*	^AQ000R00	AQ000RG0	0	0	1	L+A	0	-
+s	*	^AQ00PP00	AQ00PPG0	0	0	1	L+A	0	-
+s	*	^AQ00SP0D	AQ00SPGD	0	0	1	L+A	0	-
+s	*	^AQ0CSP0U	AQ0CSPGU	0	0	1	L+A	0	-
+s	*	^AQ0NSP0U	AQ0NSPGU	0	0	1	L+A	0	-
+s	*	^AQM00000	AQM000G0	0	0	1	L+A	0	-
+s	*	^AQP00000	AQP000G0	0	0	1	L+A	0	-
+s	*	^AQP0P000	AQP0P0G0	0	0	1	L+A	0	-
+s	*	^AQP0S00D	AQP0S0GD	0	0	1	L+A	0	-
+s	*	^AQPCS000	AQPCS0G0	0	0	1	L+A	0	-
+s	*	^AQPCS00U	AQPCS0GU	0	0	1	L+A	0	-
+s	*	^AQPFS00U	AQPFS0GU	0	0	1	L+A	0	-
+s	*	^AQPNS00U	AQPNS0GU	0	0	1	L+A	0	-
+s	*	^AQS00000	AQS000G0	0	0	1	L+A	0	-
+s	*	^AQS0000D	AQS000GD	0	0	1	L+A	0	-
+s	*	^AQS0000U	AQS000GU	0	0	1	L+A	0	-
+s	*	^DD0000D00	DD0000DG0	0	0	1	L+A	0	-
+s	*	^DD00P0000	DD00P00G0	0	0	1	L+A	0	-
+s	*	^DD00S0D00	DD00S0DG0	0	0	1	L+A	0	-
+s	*	^DD0FS0000	DD0FS00G0	0	0	1	L+A	0	-
+s	*	^DD0FS0U00	DD0FS0UG0	0	0	1	L+A	0	-
+s	*	^DD0MS0000	DD0MS00G0	0	0	1	L+A	0	-
+s	*	^DD0MS0U00	DD0MS0UG0	0	0	1	L+A	0	-
+s	*	^DD0NS0000	DD0NS00G0	0	0	1	L+A	0	-
+s	*	^DD0NS0U00	DD0NS0UG0	0	0	1	L+A	0	-
+s	*	^DQ0000000	DQ00000G0	0	0	1	L+A	0	-
+s	*	^DQ0000D00	DQ0000DG0	0	0	1	L+A	0	-
+s	*	^DQ00P0000	DQ00P00G0	0	0	1	L+A	0	-
+s	*	^DQ00S0D00	DQ00S0DG0	0	0	1	L+A	0	-
+s	*	^DQ0FS0000	DQ0FS00G0	0	0	1	L+A	0	-
+s	*	^DQ0MS0000	DQ0MS00G0	0	0	1	L+A	0	-
+s	*	^DQ0NS0000	DQ0NS00G0	0	0	1	L+A	0	-
+
+
+	
+</Suffixes>

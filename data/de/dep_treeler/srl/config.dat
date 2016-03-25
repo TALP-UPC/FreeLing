@@ -1,0 +1,12 @@
+dict-words = ../maps/srl/words.map
+dict-lemmas = ../maps/srl/lemmas.map
+dict-cpos = ../maps/srl/cpos.map
+dict-fpos = ../maps/srl/fpos.map
+dict-morphos = ../maps/srl/morphos.map
+dict-dependencies = ../maps/srl/dependencies.map
+dict-roles = ../maps/srl/roles.map
+wdir = .
+wt = 020
+wavg = 1
+use-gold-syntax = 0
+scope = ancestor

@@ -1,0 +1,968 @@
+<Currency>
+$
+</Currency>
+<Measure>
+$ ADP
+$ AED
+$ AFA
+$ ALL
+$ AMD
+$ ARA
+$ ARS
+$ ATS
+$ AUD
+$ AWK
+$ AZM
+$ BAD
+$ BBD
+$ BDT
+$ BEF
+$ BGL
+$ BHD
+$ BIF
+$ BMD
+$ BND
+$ BOB
+$ BRL
+$ BSD
+$ BTN
+$ BWP
+$ BYR
+$ BZD
+$ CAD
+$ CHF
+$ CLP
+$ COP
+$ CRC
+$ CUP
+$ CYP
+$ CZK
+$ DEM
+$ DKK
+$ DOP
+$ DZD
+$ ECS
+$ ECU
+$ EEK
+$ EGP
+$ ESP
+$ ETB
+$ FIM
+$ FJD
+$ FRF
+$ GBP
+$ GEK
+$ GHC
+$ GMD
+$ GNF
+$ GRD
+$ GTQ
+$ GWP
+$ GYD
+$ HNL
+$ HRD
+$ HRK
+$ HTG
+$ HUF
+$ IDR
+$ IEP
+$ ILS
+$ INR
+$ IQD
+$ IRR
+$ ISK
+$ ITL
+$ JMD
+$ JOD
+$ JPY
+$ KES
+$ KHR
+$ KPW
+$ KRW
+$ KWD
+$ KZT
+$ LAK
+$ LBP
+$ LKR
+$ LRD
+$ LSL
+$ LTL
+$ LUF
+$ LVL
+$ LYD
+$ MAD
+$ MDL
+$ MGF
+$ MMK
+$ MNT
+$ MOP
+$ MRO
+$ MTL
+$ MWK
+$ MXN
+$ MYR
+$ MZM
+$ NGN
+$ NIO
+$ NLG
+$ NOK
+$ NPR
+$ NZD
+$ OMR
+$ PAB
+$ PEI
+$ PEN
+$ PGK
+$ PHP
+$ PKR
+$ PLN
+$ PTE
+$ PYG
+$ QAR
+$ RMB
+$ ROL
+$ RUR
+$ RWF
+$ SAR
+$ SCR
+$ SDP
+$ SEK
+$ SGD
+$ SIT
+$ SKK
+$ SLL
+$ SOS
+$ SRG
+$ SVC
+$ SYP
+$ SZL
+$ THB
+$ TJR
+$ TMM
+$ TND
+$ TPE
+$ TRL
+$ TZS
+$ UAH
+$ UAK
+$ UDS
+$ UGS
+$ USD
+$ UYP
+$ UYU
+$ VEB
+$ VND
+$ VUV
+$ WST
+$ XAF
+$ XCD
+$ XOF
+$ ZAR
+$ ZMK
+$ ZWD
+AR ac
+AR cm2
+AR hA
+AR km2
+AR mi2
+AR mm2
+AR m2
+AR ft2
+AR in2
+AR yd2
+CB cm3/s
+CB gal/ac/d
+CB gal/ft2/d
+CB gal/ft2
+CB gal/ft2/min
+CB gal/cap/d
+CB gal/d
+CB gal/h
+CB gal/min
+CB gal/s
+CB l/s
+CB l/d
+CB ml/d
+CB l/d/cap
+CB l/m2/d
+CB l/m2
+CB l/m2/min
+CB l/m2/s
+CB l/min
+CB m3/d
+CB m3/ha/d
+CB m3/h
+CB m3/m2/d
+CB m3/m2/h
+CB m3/s
+CB ft3/min
+CB ft3/s
+IF bit
+IF byte
+IF eB
+IF gb
+IF gB
+IF kb
+IF kB
+IF mb
+IF mB
+IF nibble
+IF pB
+IF tB
+IF yB
+IF zB
+IF mbps
+EN Wb
+EN cal
+EN Kcal
+EN Kwh
+EN Bq
+EN cd
+EN Gy
+EN ohm
+EN V
+EN Cb
+DN hab/km2
+FQ Hz
+FQ lm
+FQ lx
+LN rad
+LN srad
+FQ sv
+LN Å
+LN cm
+SP m/s
+SP cm/s
+EN J/K
+EN J
+EN w
+EN T
+FR kg/s
+SP km/h
+AC km/h/s
+LN km
+SP km/s
+FR lbF
+LN mi
+LN m
+LN mm
+SP mi/h
+FR N
+FR Pa·s
+SP ft/h
+SP ft/min
+LN ft
+AC ft/s2
+SP ft/s
+LN in
+AC in/s2
+AC rad/s2
+SP rad/s
+FR V/m
+FR w/m/K
+FR w/srad
+LN yd
+PR Bar
+PR cmHg
+PR kg/cm2
+PR kg/m2
+PR lb/ft2
+PR mmHg
+PR MPa
+PR HPa
+PR N/m2
+PR Pa
+PR ftH2O
+PR lb/in2
+PR inH2O
+PR inHg
+TM d
+TM h
+TM min
+TM ms
+TM s
+TP K
+TP C
+TP F
+VL ac·ft
+VL bu
+VL cl
+VL cm3
+VL Dl
+VL gal
+VL Hl
+VL l
+VL ml
+VL mm3
+VL floz
+VL ft3
+VL pk
+VL pt
+VL in3
+VL qt
+VL yd3
+WG g
+WG kg
+DN kg/m3
+WG lb
+DN lb/milgal
+DN lb/ft3
+WG mg
+WG Mg
+WG oz
+WG mol
+WG tm
+WG tr
+WG uma
+DN g/l
+DN g/m3
+</Measure>
+<MeasureNames>
+$ USD NCMN000 I
+€ ECU NCMN000 I
+£ GBP NCFN000 I
+¥ JPY NCMN000 I
+<afghani> AFA $1:NC I
+<afghani>_<afganès> AFA $1:NC I
+<austral> ARA $1:NC I
+<austral>_<argentí> ARA $1:NC I
+<baht> THB $1:NC I
+<baht>_<tailandès> THB $1:NC I
+<balboa> PAB $1:NC I
+<balboa>_<panameny> PAB $1:NC I
+<birr> ETB $1:NC I
+<birr>_<etíop> ETB $1:NC I
+<boliviano> BOB $1:NC I
+<boliviano>_<bolivià> BOB $1:NC I
+<bolívar> VEB $1:NC I
+<bolívar>_<veneçolà> VEB $1:NC I
+<cedi> GHC $1:NC I
+<cedi>_<ghanès> GHC $1:NC I
+<xil·ling> ATS $1:NC I
+<xil·ling>_<austríac> ATS $1:NC I
+<xil·ling>_<ugandès> UGS $1:NC I
+<xil·ling>_<tanzà> TZS $1:NC I
+<xil·ling>_<somali> SOS $1:NC I
+<xil·ling>_<kenyà> KES $1:NC I
+<colon> SVC $1:NC I
+<colon>_<salvadoreny> SVC $1:NC I
+<colon>_<costa-riqueny> CRC $1:NC I
+<corona> DKK $1:NC I
+<corona>_<danès> DKK $1:NC I
+<corona>_<estonià> EEK $1:NC I
+<corona>_<islandès> ISK $1:NC I
+<corona>_<noruec> NOK $1:NC I
+<corona>_<suec> SEK $1:NC I
+<corona>_<eslovac> SKK $1:NC I
+<córdoba> NIO $1:NC I
+<córdoba>_<nicaragüenc> NIO $1:NC I
+<dalasi> GMD $1:NC I
+<dalasi>_<gambià> GMD $1:NC I
+<dinar> IQD $1:NC I
+<dinar>_<iraquià> IQD $1:NC I
+<dinar>_<bosnià> BAD $1:NC I
+<dinar>_<bareinès> BHD $1:NC I
+<dinar>_<argelí> DZD $1:NC I
+<dinar>_<croata> HRD $1:NC I
+<dinar>_<jordà> JOD $1:NC I
+<dinar>_<kuwaitià> KWD $1:NC I
+<dinar>_<libi> LYD $1:NC I
+<dinar>_<tunisenc> TND $1:NC I
+<dirham> MAD $1:NC I
+<dirham>_<marroquí> MAD $1:NC I
+<dirham>_dels_emirats_àrabs AED $1:NC I
+<dong> VND $1:NC I
+<dong>_<vietnamita> VND $1:NC I
+<dracma> GRD $1:NC I
+<dracma>_<grec> GRD $1:NC I
+<dram> AMD $1:NC I
+<dram>_<armeni> AMD $1:NC I
+<dòlar> USD $1:NC I
+<dòlar>_<nord-americà> USD $1:NC I
+<dòlar>_<americà> USD $1:NC I
+<dòlar>_<canadenc> CAD $1:NC I
+<dòlar>_<australià> AUD $1:NC I
+<dòlar>_de_les_barbados BBD $1:NC I
+<dòlar>_de_les_bermudes BMD $1:NC I
+<dòlar>_de_brunei BND $1:NC I
+<dòlar>_de_les_bahames BSD $1:NC I
+<dòlar>_de_belize BZD $1:NC I
+<dòlar>_de_les_fiji FJD $1:NC I
+<dòlar>_<guaianès> GYD $1:NC I
+<dòlar>_<jamaicà> JMD $1:NC I
+<dòlar>_<liberià> LRD $1:NC I
+<dòlar>_<neozelandès> NZD $1:NC I
+<dòlar>_de_singapur SGD $1:NC I
+<dòlar>_<caribeny> XCD $1:NC I
+<dòlar>_<zimbabwès> ZWD $1:NC I
+<escut> PTE $1:NC I
+<escut>_<portuguès> PTE $1:NC I
+<escut>_<timorès> TPE $1:NC I
+<euro> ECU $1:NC I
+<euro>_<europeu> ECU $1:NC I
+<florí> HUF $1:NC I
+<florí>_<hongarès> HUF $1:NC I
+<franc> FRF $1:NC I
+<franc>_<francès> FRF $1:NC I
+<franc>_<belga> BEF $1:NC I
+<franc>_<suís> CHF $1:NC I
+<franc>_<guineà> GNF $1:NC I
+<franc>_de_madagascar MGF $1:NC I
+<franc>_<rwandès> RWF $1:NC I
+<franc>_de_gabón XAF $1:NC I
+<franc>_de_benín XOF $1:NC I
+<franc>_de_burundi BIF $1:NC I
+<franc>_<luxemburguès> LUF $1:NC I
+<gourde> HTG $1:NC I
+<gourde>_<haitià> HTG $1:NC I
+<guaraní> PYG $1:NC I
+<guaraní>_<paraguaià> PYG $1:NC I
+<guilder> NLG $1:NC I
+<guilder>_<holandès> NLG $1:NC I
+<guilder>_de_surinam SRG $1:NC I
+<inti> PEI $1:NC I
+<inti>_<peruà> PEI $1:NC I
+<hryvnia> UAH $1:NC I
+<hryvnia>_<ucrainià> UAH $1:NC I
+<karbowanez> UAK $1:NC I
+<karbowanez>_<ucrainià> UAK $1:NC I
+<kina> PGK $1:NC I
+<kina>_de_papua_nova_guinea PGK $1:NC I
+<kip> LAK $1:NC I
+<kip>_<letó> LAK $1:NC I
+<krona> CZK $1:NC I
+<krona>_<txec> CZK $1:NC I
+<kuna> HRK $1:NC I
+<kuna>_<croata> HRK $1:NC I
+<kupon> GEK $1:NC I
+<kupon>_<georgià> GEK $1:NC I
+<kwacha> ZMK $1:NC I
+<kwacha>_<zambià> ZMK $1:NC I
+<kwacha>_<malawià> MWK $1:NC I
+<kwanza> AWK $1:NC I
+<kwanza>_<angolès> AWK $1:NC I
+<kyat> MMK $1:NC I
+<kyat>_<myanmarès> MMK $1:NC I
+<lat> LVL $1:NC I
+<lat>_<latonià> LVL $1:NC I
+<leu> ROL $1:NC I
+<leu>_<romanès> ROL $1:NC I
+<leu>_<moldau> MDL $1:NC I
+<lek> ALL $1:NC I
+<lek>_<albanès> ALL $1:NC I
+<lempira> HNL $1:NC I
+<lempira>_<hondureny> HNL $1:NC I
+<leone> SLL $1:NC I
+<leone>_<sierraleonès> SLL $1:NC I
+<leva> BGL $1:NC I
+<leva>_<búlgar> BGL $1:NC I
+<lliura> GBP $1:NC I
+<lliura>_<britànic> GBP $1:NC I
+<lliura>_<esterlí> GBP $1:NC I
+<lliura>_<irlandès> IEP $1:NC I
+<lliura>_<xipriota> CYP $1:NC I
+<lliura>_<egipci> EGP $1:NC I
+<lliura>_<sudanès> SDP $1:NC I
+<lliura>_<sirià> SYP $1:NC I
+<lliura>_<libanès> LBP $1:NC I
+<lilangeni> SZL $1:NC I
+<lilangeni>_de_swazilandia SZL $1:NC I
+<lira> ITL $1:NC I
+<lira>_<italià> ITL $1:NC I
+<lira>_<maltès> MTL $1:NC I
+<lira>_<turc> TRL $1:NC I
+<lita> LTL $1:NC I
+<lita>_<lituà> LTL $1:NC I
+<loti> LSL $1:NC I
+<loti>_de_lesotho LSL $1:NC I
+<manat> AZM $1:NC I
+<manat>_<azerbaidjanès> AZM $1:NC I
+<manat>_<turkmenistà> TMM $1:NC I
+<marc> DEM $1:NC I
+<marc>_<alemany> DEM $1:NC I
+<marc>_<finlandès> FIM $1:NC I
+<metical> MZM $1:NC I
+<metical>_<moçambiquès> MZM $1:NC I
+<naira> NGN $1:NC I
+<naira>_<nigerià> NGN $1:NC I
+<ngultrum> BTN $1:NC I
+<ngultrum>_<buthanés> BTN $1:NC I
+<ouguiya> MRO $1:NC I
+<ouguiya>_<maurità> MRO $1:NC I
+<pataca> MOP $1:NC I
+<pataca>_de_macao MOP $1:NC I
+<pesseta> ESP $1:NC I
+<pesseta>_<espanyol> ESP $1:NC I
+<pesseta>_<andorrà> ADP $1:NC I
+<peso> CUP $1:NC I
+<peso>_<cubà> CUP $1:NC I
+<peso>_<argentí> ARS $1:NC I
+<peso>_<xilè> CLP $1:NC I
+<peso>_<colombià> COP $1:NC I
+<peso>_<dominicà> DOP $1:NC I
+<peso>_<guineà> GWP $1:NC I
+<peso>_<mexicà> MXN $1:NC I
+<peso>_<filipí> PHP $1:NC I
+<peso>_<uruguaià> UYP $1:NC I
+<pula> BWP $1:NC I
+<pula>_de_botswana BWP $1:NC I
+<quetzal> GTQ $1:NC I
+<quetzal>_<guatemalenc> GTQ $1:NC I
+<rand> ZAR $1:NC I
+<rand>_<sud-africà> ZAR $1:NC I
+<real> BRL $1:NC I
+<real>_<brasiler> BRL $1:NC I
+<yuan> RMB $1:NC I
+<yuan>_<xinès> RMB $1:NC I
+<rial> IRR $1:NC I
+<rial>_<iranià> IRR $1:NC I
+<rial>_d'_omán OMR $1:NC I
+<riel> KHR $1:NC I
+<riel>_<cambodjà> KHR $1:NC I
+<ringgit> MYR $1:NC I
+<ringgit>_<malai> MYR $1:NC I
+<riyal> SAR $1:NC I
+<riyal>_<saudita> SAR $1:NC I
+<riyal>_<qatarià> QAR $1:NC I
+<ruble> RUR $1:NC I
+<ruble>_<rus> RUR $1:NC I
+<ruble>_<bielorús> BYR $1:NC I
+<ruble>_<tadziquistà> TJR $1:NC I
+<rúpia> INR $1:NC I
+<rúpia>_<indi> INR $1:NC I
+<rúpia>_<indonesi> IDR $1:NC I
+<rúpia>_<nepalès> NPR $1:NC I
+<rúpia>_<pakistanès> PKR $1:NC I
+<rúpia>_de_ceilàn LKR $1:NC I
+<rúpia>_de_les_seychelles SCR $1:NC I
+<shekel> ILS $1:NC I
+<shekel>_<israelita> ILS $1:NC I
+<sol> PEN $1:NC I
+<sol>_<peruà> PEN $1:NC I
+<sucre> ECS $1:NC I
+<sucre>_<equatorià> ECS $1:NC I
+<taka> BDT $1:NC I
+<taka>_de_bangladesh BDT $1:NC I
+<tala> WST $1:NC I
+<tala>_<samoà> WST $1:NC I
+<tenge> KZT $1:NC I
+<tenge>_<kazakhstanita> KZT $1:NC I
+<tugrik> MNT $1:NC I
+<tugrik>_<mongol> MNT $1:NC I
+<tòlar> SIT $1:NC I
+<tòlar>_<eslovè> SIT $1:NC I
+<vatu> VUV $1:NC I
+<vatu>_<vanuatu> VUV $1:NC I
+<won> KRW $1:NC I
+<won>_<sud-coreà> KRW $1:NC I
+<won>_<nord-coreà> KPW $1:NC I
+<ien> JPY $1:NC I
+<ien>_<japonès> JPY $1:NC I
+<zloty> PLN $1:NC I
+<zloty>_<polonès> PLN $1:NC I
+Å Å NCMP000 I
+<amstrong> Å $1:NC I
+ac-ft ac·ft NCMP000 I
+ac·ft ac·ft NCMP000 I
+<acre>_<peu> ac·ft $1:NC I
+<acre> ac $1:NC I
+<bit> bit $1:NC I
+<bushel> bu $1:NC I
+<byte> byte $1:NC I
+<candela> cd $1:NC I
+<centilitre> cl $1:NC I
+cl cl NCMP000 I
+<centímetre> cm $1:NC I
+cm_Fh_s cm/s NCFS000 I
+<centímetre>_Fh_s cm/s $1:NC I
+<centímetre>_Fh_segon cm/s $1:NC I
+<centímetre>_per_segon cm/s $1:NC I
+<centímetre>_segon cm/s $1:NC I
+<centímetre>_<quadrat> cm2 $1:NC I
+cm cm NCMP000 I
+cm2 cm2 NCMP000 I
+<centímetre>_<cúbic> cm3 $1:NC I
+cm3 cm3 NCMP000 I
+<centímetre>_<cúbic>_Fh_segon cm3/s $1:NC I
+cm3_Fh_s cm3/s NCFS000 I
+cm3_Fh_seg cm3/s NCFS000 I
+<centímetre>_de_hg cmHg $1:NC I
+<centímetre>_de_mercuri cmHg $1:NC I
+cmhg cmHg NCMP000 I
+<coulomb> Cb $1:NC I
+<decalitre> Dl $1:NC I
+<estereoradiant> srad $1:NC I
+<exabyte> eB $1:NC I
+ft2 ft2 NCMP000 I
+ft3_Fh_min ft3/min NCMS000 I
+ft3_Fh_s ft3/s NCMS000 I
+ft3 ft3 NCMP000 I
+ft_Fh_h ft/h NCMS000 I
+ft_Fh_min ft/min NCMS000 I
+ft_Fh_s2 ft/s2 NCMS000 I
+ft_Fh_s ft/s NCMS000 I
+fth2o ftH2O NCMP000 I
+gal_Fh_ac_Fh_d gal/ac/d NCMS000 I
+gal_Fh_cap_Fh_d gal/cap/d NCMS000 I
+gal_Fh_d gal/d NCMS000 I
+gal_Fh_ft2_d gal/ft2/d NCMS000 I
+gal_Fh_ft2_Fh_min gal/ft2/min NCMS000 I
+gal_Fh_ft2 gal/ft2 NCMS000 I
+gal_Fh_h gal/h NCMS000 I
+gal_Fh_min gal/min NCMS000 I
+gal_Fh_s gal/s $1:NC I
+<gal·ló>_acre_Fh_dia gal/ac/d $1:NC I
+<gal·ló>_acre_per_dia gal/ac/d $1:NC I
+<gal·ló>_càpita_Fh_dia gal/cap/d $1:NC I
+<gal·ló>_càpita_per_dia gal/cap/d $1:NC I
+<gal·ló>_dia gal/d $1:NC I
+<gal·ló> gal $1:NC I
+<gal·ló>_Fh_acre_dia gal/ac/d $1:NC I
+<gal·ló>_Fh_acre_Fh_dia gal/ac/d $1:NC I
+<gal·ló>_Fh_acre_per_dia gal/ac/d $1:NC I
+<gal·ló>_Fh_càpita_dia gal/cap/d $1:NC I
+<gal·ló>_Fh_càpita_Fh_dia gal/cap/d $1:NC I
+<gal·ló>_Fh_càpita_per_dia gal/cap/d $1:NC I
+<gal·ló>_Fh_dia gal/d $1:NC I
+<gal·ló>_Fh_hora gal/h $1:NC I
+<gal·ló>_Fh_minut gal/min $1:NC I
+<gal·ló>_Fh_peu_quadrat_dia gal/ft2/d $1:NC I
+<gal·ló>_Fh_peu_quadrat_Fh_dia gal/ft2/d $1:NC I
+<gal·ló>_Fh_peu_quadrat_Fh_minut gal/ft2/min $1:NC I
+<gal·ló>_Fh_peu_quadrat gal/ft2 $1:NC I
+<gal·ló>_Fh_peu_quadrat_minut gal/ft2/min $1:NC I
+<gal·ló>_Fh_peu_quadrat_per_dia gal/ft2/d $1:NC I
+<gal·ló>_Fh_peu_quadrat_per_minut gal/ft2/min $1:NC I
+<gal·ló>_Fh_segon gal/s $1:NC I
+<gal·ló>_hora gal/h $1:NC I
+<gal·ló>_minut gal/min $1:NC I
+<gal·ló>_per_càpita_dia gal/cap/d $1:NC I
+<gal·ló>_per_càpita_Fh_dia gal/cap/d $1:NC I
+<gal·ló>_per_càpita_per_dia gal/cap/d $1:NC I
+<gal·ló>_peu_quadrat_Fh_dia gal/ft2/d $1:NC I
+<gal·ló>_peu_quadrat_Fh_minut gal/ft2/min $1:NC I
+<gal·ló>_peu_quadrat_per_dia gal/ft2/d $1:NC I
+<gal·ló>_peu_quadrat_per_minut gal/ft2/min $1:NC I
+<gal·ló>_per_acre_dia gal/ac/d $1:NC I
+<gal·ló>_per_acre_Fh_dia gal/ac/d $1:NC I
+<gal·ló>_per_acre_per_dia gal/ac/d $1:NC I
+<gal·ló>_per_acre_i_dia gal/ac/d $1:NC I
+<gal·ló>_per_càpita_dia gal/cap/d $1:NC I
+<gal·ló>_per_càpita_Fh_dia gal/cap/d $1:NC I
+<gal·ló>_per_càpita_per_dia gal/cap/d $1:NC I
+<gal·ló>_per_dia gal/d $1:NC I
+<gal·ló>_per_hora gal/h $1:NC I
+<gal·ló>_per_minut gal/min $1:NC I
+<gal·ló>_per_peu_quadrat_dia gal/ft2/d $1:NC I
+<gal·ló>_per_peu_quadrat_Fh_dia gal/ft2/d $1:NC I
+<gal·ló>_per_peu_quadrat_Fh_minut gal/ft2/min $1:NC I
+<gal·ló>_per_peu_quadrat gal/ft2 $1:NC I
+<gal·ló>_per_peu_quadrat_minut gal/ft2/min $1:NC I
+<gal·ló>_per_peu_quadrat_per_dia gal/ft2/d $1:NC I
+<gal·ló>_per_peu_quadrat_per_minut gal/ft2/min $1:NC I
+<gal·ló>_per_peu_quadrat_i_dia gal/ft2/d $1:NC I
+<gal·ló>_per_peu_quadrat_i_minut gal/ft2/min $1:NC I
+<gal·ló>_per_segon gal/s $1:NC I
+<gal·ló>_segon gal/s $1:NC I
+<gray> Gy $1:NC I
+ºc C NCMP000 I
+ºf F NCMP000 I
+ºk K NCMP000 I
+<grau>_celsius C $1:NC I
+<grau>_<centígrad> C $1:NC I
+<grau>_farenheit F $1:NC I
+<grau>_kelvin K $1:NC I
+<gram>_Fh_litre g/l $1:NC I
+<gram>_Fh_metre_cúbic g/m3 $1:NC I
+<gram> g $1:NC I
+<gram>_per_litre g/l $1:NC I
+g_Fh_l g/l NCMP000 I
+g_Fh_m3 g/m3 NCMP000 I
+<gram>_per_metre_cúbic g/m3 $1:NC I
+<gigabit> gb $1:NC I
+<gigabyte> gB $1:NC I
+hab_Fh_km2 hab/km2 NCFS000 I
+<habitant>_Fh_km2 hab/km2 $1:NC I
+<habitant>_Fh_kms2 hab/km2 $1:NC I
+<habitant>_per_quilòmetre_quadrat hab/km2 $1:NC I
+<habitant>_per_km2 hab/km2 $1:NC I
+<hectàrea> hA $1:NC I
+<hectolitre> Hl $1:NC I
+hl Hl NCMP000 I
+<hectopascal> HPa $1:NC I
+<hertz> Hz $1:NC I
+hz Hz NCMP000 I
+in2 in2 NCFP000 I
+in3 in3 NCFP000 I
+in_Fh_s2 in/s2 NCFS000 I
+inh2o inH2O NCFP000 I
+inhg inHg NCFP000 I
+j_Fh_k J/K NCFS000 I
+<joule>_Fh_grau_kelvin J/K $1:NC I
+<joule>_Fh_kelvin J/K $1:NC I
+<joule>_Fh_k J/K $1:NC I
+<joule> J $1:NC I
+<joule>_per_grau_kelvin J/K $1:NC I
+<joule>_per_kelvin J/K $1:NC I
+j_Fh_kg·k J/kg·K NCMP000 I
+kg_Fh_cm2 kg/cm2 NCMP000 I
+kg_Fh_m2 kg/m2 NCMP000 I
+kg_Fh_m3 kg/m3 NCMP000 I
+kg_Fh_s kg/s NCFS000 I
+kg kg NCMP000 I
+<quilobit> kb $1:NC I
+<quilobyte> kB $1:NC I
+<quilogram>_Fh_centímetre_quadrat kg/cm2 $1:NC I
+<quilogram>_Fh_metre_quadrat kg/m2 $1:NC I
+<quilogram>_Fh_metre_cúbic kg/m3 $1:NC I
+<quilogram>_Fh_segon kg/s $1:NC I
+<quilogram> kg $1:NC I
+<quilogram>_per_centímetre_quadrat kg/cm2 $1:NC I
+<quilogram>_per_metre_quadrat kg/m2 $1:NC I
+<quilogram>_per_metre_cúbic kg/m3 $1:NC I
+<quilogram>_per_segon kg/s $1:NC I
+<quilòmetre>_<quadrat> km2 $1:NC I
+<quilòmetre>_Fh_h_Fh_s km/h/s $1:NC I
+<quilòmetre>_Fh_h km/h $1:NC I
+<quilòmetre>_Fh_hora_Fh_segon km/h/s $1:NC I
+<quilòmetre>_Fh_hora km/h $1:NC I
+<quilòmetre>_Fh_hora_per_segon km/h/s $1:NC I
+<quilòmetre>_Fh_hora_segon km/h/s $1:NC I
+<quilòmetre>_Fh_segon km/s $1:NC I
+<quilòmetre>_Fh_s km/s $1:NC I
+<quilòmetre>_hora_Fh_segon km/h/s $1:NC I
+<quilòmetre>_hora_per_segon km/h/s $1:NC I
+<quilòmetre>_hora_segon km/h/s $1:NC I
+<quilòmetre> km $1:NC I
+<quilòmetre>_per_hora_Fh_segon km/h/s $1:NC I
+<quilòmetre>_per_hora km/h $1:NC I
+<quilòmetre>_per_hora_per_segon km/h/s $1:NC I
+<quilòmetre>_per_segon km/s $1:NC I
+<quilòmetre>_segon km/s $1:NC I
+km2 km2 NCMP000 I
+km_Fh_h_Fh_s km/h/s NCFS000 I
+km_Fh_h km/h NCFS000 I
+km_Fh_s km/s NCFS000 I
+lb_Fh_ft2 lb/ft2 NCFP000 I
+lb_Fh_ft3 lb/ft3 NCFP000 I
+lb_Fh_in2 lb/in2 NCFP000 I
+lb_Fh_milgal lb/milgal NCFP000 I
+lbf lbF NCMP000 I
+l_Fh_dia l/d NCFS000 I
+l_Fh_d l/d NCFS000 I
+l_Fh_m2_Fh_d l/m2/d NCFS000 I
+l_Fh_m2_Fh_min l/m2/min NCFS000 I
+l_Fh_m2_Fh_s l/m2/s NCFS000 I
+l_Fh_m2 l/m2 NCFS000 I
+l_Fh_min l/min NCFS000 I
+l_Fh_s l/s NCFS000 I
+<lliura>_Fh_milgal·ló lb/milgal $1:NC I
+<lliura>_Fh_peu_quadrat lb/ft2 $1:NC I
+<lliura>_Fh_peu_cúbic lb/ft3 $1:NC I
+<lliura>_Fh_polzada_cuadrada lb/in2 $1:NC I
+<lliura>_força lbF $1:NC I
+<lliura>_milgal·ló lb/milgal $1:NC I
+<lliura>_per_milgal·ló lb/milgal $1:NC I
+<lliura>_per_peu_quadrat lb/ft2 $1:NC I
+<lliura>_per_peu_cúbic lb/ft3 $1:NC I
+<lliura>_per_polzada_cuadrada lb/in2 $1:NC I
+<lliura> lb $1:NC I
+<litre>_dia_càpita l/d/cap $1:NC I
+<litre>_dia_per_càpita l/d/cap $1:NC I
+<litre>_dia_per_càpita l/d/cap $1:NC I
+<litre>_Fh_dia_Fh_càpita l/d/cap $1:NC I
+<litre>_Fh_dia_per_càpita l/d/cap $1:NC I
+<litre>_Fh_metre_quadrat_Fh_dia l/m2/d $1:NC I
+<litre>_Fh_metre_quadrat_Fh_minut l/m2/min $1:NC I
+<litre>_Fh_metre_quadrat_Fh_segon l/m2/s $1:NC I
+<litre>_Fh_metre_quadrat l/m2 $1:NC I
+<litre>_Fh_metre_quadrat_per_dia l/m2/d $1:NC I
+<litre>_Fh_metre_quadrat_per_minut l/m2/min $1:NC I
+<litre>_Fh_metre_quadrat_per_segon l/m2/s $1:NC I
+<litre>_Fh_minut l/min $1:NC I
+<litre>_Fh_segon l/s $1:NC I
+<litre> l $1:NC I
+<litre>_metre_quadrat_per_dia l/m2/d $1:NC I
+<litre>_metre_quadrat_per_minut l/m2/min $1:NC I
+<litre>_metre_quadrat_per_segon l/m2/s $1:NC I
+<litre>_per_dia_càpita l/d/cap $1:NC I
+<litre>_per_dia_Fh_càpita l/d/cap $1:NC I
+<litre>_per_dia l/d $1:NC I
+<litre>_per_dia_per_càpita l/d/cap $1:NC I
+<litre>_per_dia_per_càpita l/d/cap $1:NC I
+<litre>_per_metre_quadrat_dia l/m2/d $1:NC I
+<litre>_per_metre_quadrat_Fh_dia l/m2/d $1:NC I
+<litre>_per_metre_quadrat_Fh_minut l/m2/min $1:NC I
+<litre>_per_metre_quadrat_Fh_segon l/m2/s $1:NC I
+<litre>_per_metre_quadrat l/m2 $1:NC Il
+<litre>_per_metre_quadrat_minut l/m2/min $1:NC I
+<litre>_per_metre_quadrat_per_dia l/m2/d $1:NC I
+<litre>_per_metre_quadrat_per_minut l/m2/min $1:NC I
+<litre>_per_metre_quadrat_per_segon l/m2/s $1:NC I
+<litre>_per_metre_quadrat_segon l/m2/s $1:NC I
+<litre>_per_metre_quadrat_i_dia l/m2/d $1:NC I
+<litre>_per_metre_quadrat_i_minut l/m2/min $1:NC I
+<litre>_per_metre_quadrat_i_segon l/m2/s $1:NC I
+<litre>_per_minut l/min $1:NC I
+<litre>_per_segon l/s $1:NC I
+lt_Fh_d_per_càpita l/d/cap NCFS000 I
+lt_Fh_d_per_càpita l/d/cap NCFS000 I
+lt_Fh_m2_Fh_d l/m2/d NCFS000 I
+lt_Fh_m2_Fh_min l/m2/min NCFS000 I
+lt_Fh_m2_Fh_s l/m2/s NCFS000 I
+lt_Fh_m2 l/m2 NCFS000 I
+lt l NCMP000 I
+<lumen> lm $1:NC I
+<lux> lx $1:NC I
+m m NCMP000 I
+m2 m2 NCMP000 I
+m3_Fh_ha_Fh_d m3/ha/d NCFS000 I
+m3_Fh_h m3/h NCFS000 I
+m3_Fh_hora m3/h NCFS000 I
+m3_Fh_m2_Fh_d m3/m2/d NCFS000 I
+m3_Fh_m2_Fh_h m3/m2/h NCFS000 I
+m3_Fh_seg m3/s NCFS000 I
+m3_Fh_s m3/s NCFS000 I
+<metre>_<quadrat> m2 $1:NC I
+<metre>_<cúbic>_Fh_hora m3/h $1:NC I
+<metre>_<cúbic>_Fh_segon m3/s $1:NC I
+<metre>_<cúbic>_per_hora m3/h $1:NC I
+<metre>_<cúbic>_per_segon m3/s $1:NC I
+<metre>_Fh_segon m/s $1:NC I
+<metre>_Fh_s m/s $1:NC I
+<metre> m $1:NC I
+<metre>_per_segon m/s $1:NC I
+<metre>_segon m/s $1:NC I
+m_Fh_s m/s NCFS000 I
+mg mg NCMP000 I
+mi2 mi2 NCFP000 I
+<megabit> mb $1:NC I
+<megabyte> mB $1:NC I
+<megagram> tm $1:NC I
+<megapascal> MPa $1:NC I
+mbps mbps NCMP000 I
+<megabit>_per_segon mbps $1:NC I
+<megabit>_Fh_segon mbps $1:NC I
+<megabit>_Fh_s mbps $1:NC I
+mi_Fh_h mi/h NCFS000 I
+<mil·ligram> mg $1:NC I
+<mil·lilitre> ml $1:NC I
+<mil·límetre>_<quadrat> mm2 $1:NC I
+<mil·límetre>_<cúbic> mm3 $1:NC I
+<mil·límetre>_de_hg mmHg $1:NC I
+<mil·límetre>_de_mercuri mmHg $1:NC I
+<mil·límetre> mm $1:NC I
+<mil·lisegon> ms $1:NC I
+<segon> s $1:NC I
+<milla>_<quadrat> mi2 $1:NC I
+<milla>_Fh_hora mi/h $1:NC I
+<milla> mi $1:NC I
+<milla>_per_hora mi/h $1:NC I
+ml_Fh_d ml/d NCFS000 I
+ml ml NCMP000 I
+mlt_Fh_d ml/d NCFS000 I
+mm2 mm2 NCMP000 I
+mm3 mm3 NCMP000 I
+mmhg mmHg NCMP000 I
+<mol> mol $1:NC I
+ms ms NCMP000 I
+<newton>_Fh_metre_quadrat N/m2 $1:NC I
+<newton> N $1:NC I
+<newton>_per_metre_quadrat N/m2 $1:NC I
+n_Fh_m2 N/m2 NCMP000 I
+<nibble> nibble $1:NC I
+<ohm> ohm $1:NCMP000 I
+<unça>_<fluid> floz $1:NC I
+<unça> oz $1:NC I
+<pascal> Pa $1:NC I
+<peck> pk $1:NC I
+<petabyte> pB $1:NC I
+<peu> ft $1:NC I
+<peu>_<quadrat> ft2 $1:NC I
+<peu>_<cúbic>_Fh_minut ft3/min $1:NC I
+<peu>_<cúbic>_Fh_segon ft3/s $1:NC I
+<peu>_<cúbic> ft3 $1:NC I
+<peu>_<cúbic>_per_minut ft3/min $1:NC I
+<peu>_<cúbic>_per_segon ft3/s $1:NC I
+<peu>_de_agua ftH2O $1:NC I
+<peu>_Fh_hora ft/h $1:NC I
+<peu>_Fh_minut ft/min $1:NC I
+<peu>_Fh_segon_Fh_segon ft/s2 $1:NC I
+<peu>_Fh_segon ft/s $1:NC I
+<peu>_Fh_segon_per_segon ft/s2 $1:NC I
+<peu>_Fh_segon_segon ft/s2 $1:NC I
+<peu>_hora ft/h $1:NC I
+<peu>_minut ft/min $1:NC I
+<peu>_per_hora ft/h $1:NC I
+<peu>_per_minut ft/min $1:NC I
+<peu>_per_segon_al_quadrat ft/s2 $1:NC I
+<peu>_per_segon_quadrat ft/s2 $1:NC I
+<peu>_per_segon_Fh_segon ft/s2 $1:NC I
+<peu>_per_segon ft/s $1:NC I
+<peu>_per_segon_per_segon ft/s2 $1:NC I
+<peu>_per_segon_segon ft/s2 $1:NC I
+<peu>_segon_Fh_segon ft/s2 $1:NC I
+<peu>_segon ft/s $1:NC I
+<peu>_segon_per_segon ft/s2 $1:NC I
+<peu>_segon_segon ft/s2 $1:NC 
+<polzada>_aigua inH2O $1:NC I
+<polzada>_<quadrat> in2 $1:NC I
+<polzada>_<cúbic> in3 $1:NC I
+<polzada>_d'_aigua inH2O $1:NC I
+<polzada>_de_hg inHg $1:NC I
+<polzada>_Fh_segon_Fh_segon in/s2 $1:NC I
+<polzada>_Fh_segon_per_segon in/s2 $1:NC I
+<polzada>_Fh_segon_segon in/s2 $1:NC I
+<polzada>_hg inHg $1:NC I
+<polzada> in $1:NC I
+<polzada>_per_segon_al_quadrat in/s2 $1:NC I
+<polzada>_per_segon_quadrat in/s2 $1:NC I
+<polzada>_per_segon_Fh_segon in/s2 $1:NC I
+<polzada>_per_segon_per_segon in/s2 $1:NC I
+<polzada>_per_segon_segon in/s2 $1:NC I
+<polzada>_segon_Fh_segon in/s2 $1:NC I
+<polzada>_segon_per_segon in/s2 $1:NC I
+<polzada>_segon_segon in/s2 $1:NC I
+rad_Fh_s rad/s NCFS000 I
+<radiant>_Fh_segon rad/s $1:NC I
+<radiant>_per_segon rad/s $1:NC I
+<radiant> rad $1:NC I
+tm tm NCFP000 I
+<tona>_<mètric> tm $1:NC I
+<tona> tm $1:NC I
+<terabyte> tB $1:NC I
+<tesla> T $1:NC I
+<unitat>_de_masa_atòmica uma $1:NC I
+u.m.a. uma NCMP000 I
+uma uma NCMP000 I
+<volt> V $1:NC I
+<volt>_Fh_metre V/m $1:NC I
+<volt>_per_metre V/m $1:NC I
+v_Fh_m V/m NCMP000 I
+<watt>_Fh_estereoradiant w/srad $1:NC I
+<watt>_Fh_metre_Fh_grau_kelvin w/m/K $1:NC I
+<watt>_Fh_metre_Fh_kelvin w/m/K $1:NC I
+<watt>_Fh_metre_per_grau_kelvin w/m/K $1:NC I
+<watt>_Fh_metre_per_kelvin w/m/K $1:NC I
+<watt>_per_estereoradiant w/srad $1:NC I
+<watt>_per_metre_Fh_grau_kelvin w/m/K $1:NC I
+<watt>_per_metre_Fh_kelvin w/m/K $1:NC I
+<watt>_per_metre_per_grau_kelvin w/m/K $1:NC I
+<watt>_per_metre_per_kelvin w/m/K $1:NC I
+watt_per_metre_Fh_grau_kelvin w/m/K $1:NC I
+watt_per_metre_Fh_kelvin w/m/K $1:NC I
+watt_per_metre_per_grau_kelvin w/m/K $1:NC I
+watt_per_metre_per_kelvin w/m/K $1:NC I
+<watt> w $1:NC I
+webers Wb NCMP000 I
+weber Wb NCMP000 I
+w_Fh_m_K w/m/K NCFS000 I
+w_Fh_srad w/srad NCFS000 I
+<iarda>_<quadrat> yd2 $1:NC I
+<iarda>_<cúbic> yd3 $1:NC I
+<iarda> yd $1:NC I
+yd2 yd2 NCFP000 I
+yd3 yd3 NCFP000 I
+<yottabyte> yB NCMP000 I
+<zettabyte> zB NCMP000 I
+</MeasureNames>

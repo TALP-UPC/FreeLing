@@ -1,0 +1,166 @@
+//////////////////////////////////////////////////////////////////
+//
+//    Omlet - Open-source Machine Learning Enhanced Toolkit
+//
+//    Copyright (C) 2014   TALP Research Center
+//                         Universitat Politecnica de Catalunya
+//
+////////////////////////////////////////////////////////////////
+
+
+ SAMPLE USAGE PROGRAMS
+
+   The files on this directory are a sample usage of Omlet library.
+   There are two subdirectories (sample1 and sample2), each containing
+   two programs:
+
+   train - illustrates how to use Omlet library to learn an
+           adaboost model from a set of annotated examples.
+
+   classify - illustrates how to use Omlet library to classify 
+              a set of examples using a previously learnt adaboost
+              model.
+
+   Directory sample1 illustrates the use of the library "as is" to learn
+   adaboost-on-decision-tree models.
+
+   Directory sample2 illustrates how to declare and use your own weak
+   rule class, to learn adaboost-on-myOwnWeakrule models.
+
+   To compile the sample programs, once libomlet is compiled and
+   installed, issue the commands:
+
+     cd sample1
+     g++ -o train train.cc -lomlet
+     g++ -o classify classify.cc -lomlet
+     cd ..
+
+     cd sample2
+     g++ -o train train.cc -lomlet
+     g++ -o classify classify.cc -lomlet
+     cd ..
+
+   If you installed libomlet in a non-standard library directory
+   (i.e., different than the default /usr/local/lib, or than /usr/lib)
+   you will have to add the appropriate -L and -I options to the
+   compilation command, something like:
+     
+    g++ -o train train.cc -lomlet -I/my/omlet/dir/include/ -L/my/omlet/dir/lib/
+    g++ -o classify classify.cc -lomlet -I/my/omlet/dir/include/ -L/my/omlet/dir/lib/
+
+
+ SAMPLE DATA FILES
+
+   Apart from the programs, the directory contains two data files:
+   train.cod and test.cod
+
+   train.cod - contains a set of annotated examples. 
+
+   test.cod - contains a set (not interesecting with training set) of
+              examples to classify.  The right class is also given in
+              order to enable performance checking of the classifer.
+
+    The format of the data files consists of one example per line. The
+    first field of the line is the class nummerical code (starting at
+    zero). The following fields are a list of nummerical codes each
+    one corresponding to one possible feature of the example.
+
+    To use Omlet, you have to encode your examples in the form of a
+    set of features. The feature codes have to be integers. You can
+    use your favorite feature extractor for this. Features can also be
+    real-valued, if real values are missing, 1.0 is taken as default.
+
+    The provided data files correspond to a Named Entity Detection
+    task, and are extracted from CoNLL-2002 (www.conll.org) shared
+    task data set for Spanish.  A feature extraction and encoding
+    process has been perfomed using libfries (www.lsi.upc.edu/~nlp/omlet+fries)
+
+
+ USING SAMPLE PROGRAMS
+
+  - LEARNING MODELS
+
+     To obtain a trained model for the given set of examples, you have
+     to issue:
+
+     ./sample1/train ner-dt "0 Out 1 Beg 2 In" <train.cod
+
+     This will create a "ner-dt.abm" file containing the model.  The
+     string "0 Out 1 Beg 2 In" is only informative (but required). 
+     It associates each class code (0,1,2) with an alphanumeric 
+     string (Out,Beg,In), and will be included in the model file, 
+     in order to enable classifiers using this model to provide 
+     resulting classes either in nummerical or symbolic form.
+      
+     Programs in sample1 directory use the default decision tree class
+     as weak rules for adaboost.
+
+     If you issue:
+
+     ./sample2/train ner-dummy "0 Out 1 Beg 2 In" <train.cod
+
+     You will obtain a ner-dummy.abm file with an adaboost model
+     based on another kind of weak rules (very simple hiperplanes).
+     Check the code and comments in ./sample2/dummy_rule.h to see
+     how can you define new kinds of weak rules in application space, 
+     without recompiling the omlet library.
+   
+
+  - USING AdaBoost MODELS TO CLASSIFY    
+
+     To classify the test data using the learned model, issue the command:
+
+     ./sample1/classify ner-dt.abm <test.cod
+
+     or either
+
+     ./sample2/classify ner-dummy.abm <test.cod
+
+     Note that ./sample1/classify.cc and ./sample2/classify.cc are actually
+     the same program, except that sample2 program includes dummy_rule.h and
+     thus is able to load ner-dummy.abm file. In fact, ./sample2/classify.cc
+     is also able to load ner-dt.abm, since decision trees weak rules are
+     included in the base library.
+
+      This enables any  application calling omlet to define as many weak rule
+     types as needed, and to create any number of adaboost objects each of them
+     using a different kind of weak rule.
+
+
+ DEVELOPING YOUR OWN APPLICATIONS
+
+      To develop you own programs using the library, have a look to the
+     sample programs (train and classify), and the comments in them.  Both
+     are only one or two pages of well commented code, so they are the best
+     way to understand how to use the library.
+
+      You can use program "train" almost as is (maybe changing some parameters, 
+     as tree depth or the number of weak rules..), since training a model will 
+     usually be done offline.
+
+      Your classifier will behave very much like "classify" programs, but
+     you will probably be interested in integrating it in a larger
+     application, so the main difference will be that the "main" program
+     in classify.cc that reads and classifies each example, will be
+     replaced by a function in your application, which will be called whenever
+     a set of examples has to be classified (or simply, your application will 
+     call directly to the "classify" method of an adaboost object each time
+      it wants to classify an instance).
+
+
+ ENCODING EXAMPLES
+
+     Omlet works on encoded examples with integer features, and usually applications
+    have real-world objects in a data structure. So, applications have to encode
+    their real-world objects before calling the learner or classifier.
+
+     In the case of the learner, this may be performed off-line in a preprocessing 
+    step, but in the case of the classifier, it must be done on the fly.
+
+     A good way to do such things is using a feature extractor, that is, a program
+    or library that is given a real-world object of a certain kind, applies a set 
+    of feature-extraction rules, and returns a set of features encoding the object.
+
+     If your real-world objects are Natural Language sentences, you may be interested
+    in using the libfries (www.lsi.upc.edu/~nlp/omlet+fries) to convert each sentence
+    or word into a set of features.

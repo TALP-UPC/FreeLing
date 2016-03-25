@@ -1,0 +1,75 @@
+## tagset description used to compute short tag versions
+TAGSET ../../tagset.dat
+
+## features extracted for all words
+RULES ALL
+
+  is_punct@      [-3,3]  t matches ^F
+  is_num@        [-3,3]  W matches ^([0-9]\.?)+$
+  has_num@       [-3,3]  W matches [0-9]
+  cap@           [-3,3]  W matches ^[[:upper:]][[:lower:]]
+  initial@       [-3,3]  W matches ^[[:upper:]]\.?$
+  has_acr@       [-3,3]  W matches ([[:upper:]][[:upper:]\.]+_)|(_[[:upper:]][[:upper:]\.]+)
+  has_dot@       [-3,3]  W matches \.
+  has_dash@      [-3,3]  W matches ^[[:alpha:]]+\-
+  has_under@     [-3,3]  W matches ^[[:alpha:]]+_
+  is_under@      [-3,3]  W matches ^_$
+  funct@         [-3,3]  l in_set ../data/function.dat
+  roman@         [-3,3]  W matches ^[IVX]+$ 
+  no_analysis@   [-3,3]  na is 0     
+  url@           [-3,3]  W matches ^www[.]*\.[a-z]+$
+  url@           [-3,3]  W matches ^http[.]*\.[a-z]+$
+
+  possible_noun@ [-4,4]  pt matches ^N
+  possible_adj@  [-4,4]  pt matches ^A
+
+  gaz@      [-3,3]    pl in_set ../data/gazPER-c.dat
+  gaz@      [-3,3]    pl in_set ../data/gazLOC-c.dat
+  gaz@      [-3,3]    pl in_set ../data/gazORG-c.dat
+  igaz@     [-3,3]    pl.split("_") in_set ../data/gazPER-c.dat
+  igaz@     [-3,3]    pl.split("_") in_set ../data/gazLOC-c.dat
+  igaz@     [-3,3]    pl.split("_") in_set ../data/gazORG-c.dat
+  itw@      [-3,3]    pl.split("_") in_set ../data/twPER.dat
+  itw@      [-3,3]    pl.split("_") in_set ../data/twLOC.dat
+  itw@      [-3,3]    pl.split("_") in_set ../data/twORG.dat
+  itw@      [-3,3]    pl.split("_") in_set ../data/twGENT.dat
+    
+  city@     [-3,3]   l in_set ../../../common/nec/cities.dat
+  icity@    [-3,3]   l.split("_") in_set ../../../common/nec/cities.dat
+
+  W@:$W(0)    [-3,3]  pt !matches ^[ZWF]
+  w@:$w(0)    [-3,3]  na !is 0
+  pl@:$pl(0)  [-3,3]  pt !matches ^[ZWF]
+  pt@:$pt(0)  [-3,3]  na !is 0
+  pa@:$pa(0)  [-3,3]  pt !matches ^[ZWF]
+
+  wbg@:$w(0)_$w(1)        [-3,3]   na !is 0
+  tbg@:$t(0)_$t(1)        [-3,3]   na !is 0
+  ttg@:$t(0)_$t(1)_$t(2)  [-3,3]   na !is 0
+
+  bow:$w(0)   [-5,-1]  pt matches ^[ANV] AND na is 0
+  bow:$w(0)   [1,5]    pt matches ^[ANV] AND na is 0
+  bol:$pl(0)  [-5,-1]  pt matches ^[ANV]
+  bol:$pl(0)  [1,5]    pt matches ^[ANV]
+
+  suf3@:{$0}     [-3,3]  w matches ...$
+  pre3@:{$0}     [-3,3]  w matches ^...
+  suf4@:{$0}     [-3,3]  w matches ....$
+  pre4@:{$0}     [-3,3]  w matches ^....
+
+  pat@:{pattern(0)} [-3,3]  ALL
+  {quoted(0)}       [-3,3]  ALL
+  {parenthesis(0)}  [-3,3]  ALL  
+
+  p1L:{pattern(-1)}_{pattern(0)}                             [0,0] ALL
+  p2L:{pattern(-2)}_{pattern(-1)}_{pattern(0)}               [0,0] ALL
+  p3L:{pattern(-3)}_{pattern(-2)}_{pattern(-1)}_{pattern(0)} [0,0] ALL
+  p1R:{pattern(0)}_{pattern(1)}                              [0,0] ALL
+  p2R:{pattern(0)}_{pattern(1)}_{pattern(2)}                 [0,0] ALL
+  p3R:{pattern(0)}_{pattern(1)}_{pattern(2)}_{pattern(3)}    [0,0] ALL
+
+  pt:$pt(0)&pat:{pattern(0)}@  [-3,3]    ALL
+ENDRULES
+
+
+

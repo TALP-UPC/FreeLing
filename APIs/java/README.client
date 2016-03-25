@@ -1,0 +1,31 @@
+
+  #######################################################################
+  #####           Java client for Freeling server                  ######
+  #######################################################################
+
+  The file FreelingSocketClient.java in this directory contains a sample client
+  for the "analyze" freeling front-end, when used in server mode.
+
+  To build the program just compile it:
+    javac FreelingSocketClient.java
+
+  To run it, you need to launch a freeling server.
+  E.g.:
+    analyze -f en.cfg --flush --server --port 50005
+ 
+     (Please read FreeLing user manual to find out more about 
+      client-server mode and freeling configuration options).
+
+  Then, you can run the client: 
+    java FreelingSocketClient
+
+
+  [[[
+    DISCLAIMER: FreeLing server mode is just an extended demo program 
+    to show how FreeLing can be used in a client-serve environment.
+    It does not allow access to all FreeLing functionalities, it
+    does not use standard client-server or web-service protocols,
+    and it is not guaranteed to be robust in a multithreaded server
+    production environment. 
+  ]]]
+

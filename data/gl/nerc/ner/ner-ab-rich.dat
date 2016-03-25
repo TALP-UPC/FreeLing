@@ -1,0 +1,40 @@
+<Type>
+bio
+</Type>
+<Lexicon>
+ner-f86-rich-9abs.lex
+</Lexicon>
+<ModelFile>
+ner-f86-rich-9abs.abm
+</ModelFile>
+<RGF>
+ner-f86.rgf
+</RGF>
+<NE_Tag>
+NP00000
+</NE_Tag>
+<Classifier>
+AdaBoost
+</Classifier>
+<Classes>
+0 B 1 I 2 O
+</Classes>
+<UseSoftMax>
+yes
+</UseSoftMax>
+<InitialProb>
+B 0.0947221
+I 0
+O 0.905103
+</InitialProb>
+<TransitionProb>
+B B 0.00486381
+B I 0.34425
+B O 0.650886
+I B 0.00274123
+I I 0.417946
+I O 0.579313
+O B 0.047624
+O I 0
+O O 0.952376
+</TransitionProb>

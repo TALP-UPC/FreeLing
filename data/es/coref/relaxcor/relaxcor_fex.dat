@@ -1,0 +1,164 @@
+%%%%%%%%%%%%%%%%%%%%%
+%%% GENERAL
+%%%%%%%%%%%%%%%%%%%%%
+
+<Language>
+SPANISH
+</Language>
+
+%%%%%%%%%%%%%%%%%%%%%
+%%% FEATURE EXTRACTOR
+%%%%%%%%%%%%%%%%%%%%%
+
+<SemDB>
+../../semdb.dat
+</SemDB>
+
+%%% POS Tagset
+<Tagset>
+../../tagset.dat
+</Tagset>
+
+<ActiveFeatures>
+0xFFFFFFFF
+</ActiveFeatures>
+
+%%% Labels useful to extract features
+<Labels>
+COOR_NP ^coor-n$
+NP ^sn|grup-nom
+% propouns: personal=PP, demonstrative=PD, relative=PR, indefinite=PI, interrogative=PT, possesive=PX
+% possessive determiners: DP
+PRON ^P[PDRTX]|DP
+% Warning: filter out PT at the beginning of the interrogative sentences
+XPRON ^PT
+% possessive particles
+POSS ^PX|DP 
+
+% Proper names and Named Entities
+PN ^NP
+% Subordinate clauses
+SUB ^relativa$
+% Colon: to detect explanatory subordinate clauses
+PC ^Fc$
+% Common names
+NC ^NC
+% Adjectives
+ADJ ^AQ
+% Dets
+DET ^D
+% Verbs
+VERB ^V
+NUM ^Z
+</Labels>
+
+%%% List of words being Determinant
+%%% Used to compute some features
+<DetWords>
+un
+una
+unos
+unas
+el
+la
+los
+las
+este
+esta
+ese
+esa
+esos
+esas
+aquel
+aquella
+aquellos
+aquellas
+</DetWords>
+
+%%% List of words being pronouns with gender of the possible referent
+%%% columns: pronoun/possesive referent_gender person number
+%%% (referent_gender: 'm'-male, 'f'-female, 'a'-both 'n'-neutral, '-'-any
+%%% Used to compute some features
+<PronWords>
+él m 3 s
+ella f 3 s
+yo a 1 s
+tú a 2 s
+ti a 2 s
+te a 2 s
+nosotros a 1 p
+nosotras f 1 p
+vosotros a 2 p
+vosotras f 2 p
+ellos a 3 p
+ellas f 3 p
+mí a 1 s
+me a 1 s
+nos a 1 p
+os a 2 p
+vos a 2 p
+mío a 1 s
+mía a 1 s
+mios a 1 p
+mias a 1 p
+tuyo a 2 s
+tuya a 2 s
+tuyos a 2 p
+tuyas a 2 p
+suyo a 3 s
+suya a 3 s
+suyos a 3 p
+suyas a 3 p
+le a 3 s
+les a 3 p
+nuestro a 1 p
+nuestra a 1 p
+nuestros a 1 p
+nuestras a 1 p
+vuestro a 2 p
+vuestra a 2 p
+vuestros a 2 p
+vuestras a 2 p
+lo n 3 s
+ello n - s
+eso n - s
+esto n - s
+aquello n - s
+</PronWords>
+
+%%% List of semantic classes and their synsets ("-" when not necessary) and a regexp for sense-words (^$ when not necessary).
+<SemClass>
+person 00007846-n ^(person|.+_person)$
+male - ^(male|male\_.+|.+\_male|man|man\_.+|.+\_man)$
+female - ^(female|female\_.+|.+\_female|woman|woman\_.+|.+\_woman)$
+location 00027167-n ^$
+organization 08164585-n ^$
+</SemClass>
+
+%%% Gazeeters
+%%% Used to compute aliases
+<Capitals>
+./resources/capitals.txt
+</Capitals>
+<Nationalities>
+./resources/gentilicis.txt
+</Nationalities>
+<GPEregexps>
+./resources/gpe-regexps.txt
+</GPEregexps>
+<NickNames>
+./resources/llista-nicknames.txt
+</NickNames>
+<ForenameAlias>
+./resources/forenames.txt
+</ForenameAlias>
+<AcroTerms>
+INFIX ^(and|und|et|y|\&)$
+SUFFIX ^([Ii]nc|[Cc]orp|SL|sl|SA|sa|Bro|bro)\\.?$
+</AcroTerms>
+<PersonNames>
+./resources/person-names.txt
+</PersonNames>
+<Titles>
+./resources/titles.txt
+</Titles>

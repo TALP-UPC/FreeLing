@@ -1,0 +1,129 @@
+## tagset description used to compute short tag versions
+TAGSET ../../tagset.dat
+
+## features extracted for all words
+RULES ALL
+  possible_noun@  [-4,4]    pt matches ^N
+  punct_mark@     [-3,1]    pt matches ^F
+  no_analysis@    [-3,3]    na is 0
+  cap@            [-4,4]    W matches ^[[:upper:]][[:lower:]]
+  ini@            [-2,2]    W matches ^[[:upper:]]\.
+  acr@            [-2,2]    W matches ^[[:upper:]](\.[[:upper:]])+$
+  rom@            [-2,2]    W matches ^[VIX]+$
+  has_num@        [-2,2]    W matches [0-9]
+  is_num@         [-2,2]    W matches ^([0-9]\.?)+$
+  guio@           [-2,2]    W matches ^[[:alpha:]]+\-
+  subgio@         [-2,2]    W matches ^[[:alpha:]]+_
+  web@            [-2,2]    W matches ^www[.]*[.][a-z]+$
+  auxw@           [-4,4]    w in_set ../data/function.dat
+  is_dot@         [-3,1]    W matches ^[.]$
+  has_dot@        [-2,2]    W matches [.]
+
+  gaz@      [0,0]    pl in_set ../data/gazPER-c.dat
+  gaz@      [0,0]    pl in_set ../data/gazLOC-c.dat
+  gaz@      [0,0]    pl in_set ../data/gazORG-c.dat
+  igaz@     [0,0]    pl.split("_") in_set ../data/gazPER-p.dat
+  igaz@     [0,0]    pl.split("_") in_set ../data/gazLOC-p.dat
+  igaz@     [0,0]    pl.split("_") in_set ../data/gazORG-p.dat
+  itw@      [0,0]    pl.split("_") in_set ../data/twPER.dat
+  itw@      [0,0]    pl.split("_") in_set ../data/twLOC.dat
+  itw@      [0,0]    pl.split("_") in_set ../data/twORG.dat
+  itw@      [0,0]    pl.split("_") in_set ../data/twGENT.dat
+  
+  ctxgaz@   [-3,-1]  pl in_set ../data/gazPER-c.dat
+  ctxgaz@   [1,3]    pl in_set ../data/gazPER-c.dat
+  ctxgaz@   [-3,-1]  pl in_set ../data/gazLOC-c.dat
+  ctxgaz@   [1,3]    pl in_set ../data/gazLOC-c.dat
+  ctxgaz@   [-3,-1]  pl in_set ../data/gazORG-c.dat
+  ctxgaz@   [1,3]    pl in_set ../data/gazORG-c.dat
+  ctxigaz@  [-3,-1]  pl.split("_") in_set ../data/gazPER-p.dat
+  ctxigaz@  [1,3]    pl.split("_") in_set ../data/gazPER-p.dat
+  ctxigaz@  [-3,-1]  pl.split("_") in_set ../data/gazLOC-p.dat
+  ctxigaz@  [1,3]    pl.split("_") in_set ../data/gazLOC-p.dat
+  ctxigaz@  [-3,1]   pl.split("_") in_set ../data/gazORG-p.dat
+  ctxigaz@  [1,3]    pl.split("_") in_set ../data/gazORG-p.dat
+  ctxitw@   [-3,-1]  pl.split("_") in_set ../data/twPER.dat
+  ctxitw@   [1,3]    pl.split("_") in_set ../data/twPER.dat
+  ctxitw@   [-3,-1]  pl.split("_") in_set ../data/twLOC.dat
+  ctxitw@   [1,3]    pl.split("_") in_set ../data/twLOC.dat
+  ctxitw@   [-3,-1]  pl.split("_") in_set ../data/twORG.dat
+  ctxitw@   [1,3]    pl.split("_") in_set ../data/twORG.dat
+  ctxitw@   [-3,-1]  pl.split("_") in_set ../data/twGENT.dat
+  ctxitw@   [1,3]    pl.split("_") in_set ../data/twGENT.dat
+  
+  f@:$w(0)             [-4,4]    na !is 0
+  pl@:$pl(0)           [-4,4]    na !is 0
+  pT@:$pT(0)           [-4,4]    na !is 0
+  pt@:$pt(0)           [-3,3]    na !is 0
+  pbig@:$w(0)_$pt(1)   [-3,3]    na !is 0
+  bow:$w(0)            [-6,-1]   na !is 0
+  bow:$w(0)            [1,6]     na !is 0
+  bol:$pl(0)           [-6,-1]   na !is 0
+  bol:$pl(0)           [1,6]     na !is 0
+  pa@:$pa(0)           [-3,3]    na !is 0
+  wpt@:$w(0)_$pt(0)    [-3,3]    na !is 0
+  plpt@:$pl(0)_$pt(0)  [-3,3]    na !is 0
+
+  suf@:{$0}           [0,0]     w matches ...$
+  pre@:{$0}           [0,0]     w matches ^...
+  cap&pnoun@        [-3,-1]   W matches ^[[:upper:]] AND pt matches ^N
+  cap&pnoun@        [1,3]     W matches ^[[:upper:]] AND pt matches ^N
+  cap&na=0@         [-3,-1]   W matches ^[[:upper:]] AND na is 0
+  cap&na=0@         [1,3]     W matches ^[[:upper:]] AND na is 0
+  has_dot&na=0@     [-2,2]    W matches [.] AND na is 0
+  
+  pat@:d      [-3,3]    w matches ^del?$
+  pat@:e      [-3,3]    w matches ^(el|los?|las?)$
+  pat@:S      [-3,3]    W matches ^[[:upper:]]\.?$
+  pat@:A      [-3,3]    W matches ^[[:upper:]]+\.?$
+  pat@:M      [-3,3]    W matches ^[[:upper:]][[:lower:]]+\.?$
+  pat@:9      [-3,3]    W matches [0-9]+
+  pat@:w      [-3,3]    W matches ^[[:lower:]]+\.?$
+  
+  rquot:$w(0)_"     [-5,-2]   w is "
+  lquot:"_$w(0)     [2,5]     w is "
+  
+  pT@:$pT(0)&pT@:$pT(0) [-1,1] ALL
+  
+  pT@:$pT(0)&pat@:d [-2,2]    w matches ^del?$
+  pT@:$pT(0)&pat@:e [-2,2]    w matches ^(el|los?|las?)$
+  pT@:$pT(0)&pat@:S [-2,2]    W matches ^[[:upper:]]\.?$
+  pT@:$pT(0)&pat@:A [-2,2]    W matches ^[[:upper:]]+\.?$
+  pT@:$pT(0)&pat@:M [-2,2]    W matches ^[[:upper:]][[:lower:]]+\.?$
+  pT@:$pT(0)&pat@:9 [-2,2]    W matches [0-9]+
+  pT@:$pT(0)&pat@:w [-2,2]    W matches ^[[:lower:]]+\.?$
+ENDRULES
+
+
+RULES na !is 0
+  pt0:$pt&auxw@     [-2,2]    w in_set ../data/function.dat
+  pt0:$pt&cap@      [-2,2]    W matches ^[[:upper:]]
+
+  pT0:$pT&f@:$w(0)  [-2,2]    ALL
+
+  pT0:$pT&pat@:d    [-2,2]    w matches ^del?$
+  pT0:$pT&pat@:e    [-2,2]    w matches ^(el|los?|las?)$
+  pT0:$pT&pat@:S    [-2,2]    W matches ^[[:upper:]]\.?$
+  pT0:$pT&pat@:A    [-2,2]    W matches ^[[:upper:]]+\.?$
+  pT0:$pT&pat@:M    [-2,2]    W matches ^[[:upper:]][[:lower:]]+\.?$
+  pT0:$pT&pat@:9    [-2,2]    W matches [0-9]+
+  pT0:$pT&pat@:w    [-2,2]    W matches ^[[:lower:]]+\.?$
+ENDRULES
+
+
+RULES W matches ^[[:upper:]]
+  cap0&pat@:d     [-3,3]    w matches ^del?$
+  cap0&pat@:e     [-3,3]    w matches ^(el|los?|las?)$
+  cap0&pat@:S     [-3,3]    W matches ^[[:upper:]]\.?$
+  cap0&pat@:A     [-3,3]    W matches ^[[:upper:]]+\.?$
+  cap0&pat@:M     [-3,3]    W matches ^[[:upper:]][[:lower:]]+\.?$
+  cap0&pat@:9     [-3,3]    W matches [0-9]+
+  cap0&pat@:w     [-3,3]    W matches ^[[:lower:]]+\.?$
+
+  cap0&cap@       [-2,-1]   W matches ^[[:upper:]]
+  cap0&cap@       [1,2]     W matches ^[[:upper:]]
+
+  cap0&auxw@      [-1,-1]   w in_set ../data/function.dat
+ENDRULES
+
+

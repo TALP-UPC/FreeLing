@@ -1,0 +1,138 @@
+##########################################################
+#
+#  This file contains rules for phonetic encoding of
+#  Spanish words in an adapted SAMPA standard, to
+#  meet the needs of the corrector.
+#
+##########################################################
+
+# Rules change from a sound (one or more letters) or a category
+# to another sound or category, in a certain context.
+#
+# Category names can have only one letter are usually uppercase.
+#
+# Contexts must contain a "_" symbol indicating where the replacement
+# takes place; they may also contain letters, categories, and the special
+# symbols ( ) (to enclose optional parts), ^ (word beginning), or $ (word end)
+#
+# Rules can only change letters/sounds to sounds, and categories to categories.
+# If a category is to be changed to another category, they should contain the 
+# same number of characteers. Otherwise the second category will have its last
+# letter repeated until it has the same length as the first (if it is
+# shorter), or characters in the second category that don't match
+# characters in the first will be ignored.
+#
+# Don't use regex metacharacters (except for the parentheses, ^, and $) in
+# context specifications, category names, or sound codes.
+
+<Rules>
+
+############
+# Categories
+############
+
+# vowels, long, short
+U=áéíóú
+V=aeiou
+F=aou
+W=ei
+
+##########
+## Rules
+##########
+
+# remove accents
+U/V/_
+
+## remove duplicated letters
+aa/a/_
+ee/e/_
+ii/i/_
+oo/o/_
+uu/u/_
+dd/d/_
+ff/f/_
+gg/g/_
+jj/x/_
+mm/m/_
+ññ/ñ/_
+ss/s/_
+yy/j/_
+zz/z/_
+
+## numbers soud as their names
+1/uno/_
+2/dos/_
+3/tres/_
+4/cuatro/_
+5/cinco/_
+6/seis/_
+7/siete/_
+8/ocho/_
+9/nueve/_
+0/cero/_
+
+# strong and soft "r" in Spanish.
+# NOTE: "4" is not SAMPA standard (should be "rr")
+# This is adapted to get an encoding of one character
+# per sound, which is convenient for the corrector.
+rr/4/_
+r/4/^_
+r/4/_$
+
+# make these first to avoid interactions with 
+# rules handling "c" or producing "x".
+# NOTE: "X" is not SAMPA standard (should be "tS").
+# This is adapted to get an encoding of one character
+# per sound, which is convenient for the corrector.
+ch/X/_
+x/X/_
+
+# occlusive k sound for strong (F) and weak (W) vowels
+# and /T/ sound of "c" with weak vowels (cero,cielo)
+qu/k/_W
+qu/ku/_F
+qü/ku/_
+q/k/_
+cc/kT/_W
+c/T/_W
+c/k/_F
+c/k/_
+
+# gutural fricative (girafa,jarra) vs plosive (gato,guerra) g/j sound in Spanish
+j/x/_
+g/x/_W
+gu/g/_W
+gu/gu/_
+gü/gu/_
+
+# other sounds
+ph/f/_
+ll/L/_
+
+z/T/_
+h//_
+v/b/_
+i/j/_V
+y/j/_
+ñ/J/_
+
+# rules for special characters
+\-//_
+\_//_
+\&//_
+\*//_
+\+//_
+\.//_
+\$//_
+\-//_
+
+</Rules>
+
+
+<Exceptions>
+software sofwar
+hardware xardwar
+whisky wiski
+shakespeare Xespir
+</Exceptions>

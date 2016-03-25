@@ -1,0 +1,18 @@
+<WNposMap>
+N n L
+J a L
+R r L
+V v L
+VBG a F
+</WNposMap>
+
+<DataFiles>
+relationFile  ../common/xwn30-ukb.bin
+UKBSenseDictFile ./senses30.ukb
+formDictFile ./dicc.src
+</DataFiles>
+
+<StopParameters>
+Epsilon 0.03
+MaxIterations 10 
+</StopParameters>

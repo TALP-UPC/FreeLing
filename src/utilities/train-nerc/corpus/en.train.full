@@ -1,0 +1,161 @@
+CRICKET O cricket NN # cricket NN -1
+- O - Fg # - Fg -1
+LEICESTERSHIRE B-ORG leicestershire NP00O00 # 
+TAKE O take VB # take NN -1 take VB -1 take VBP -1
+OVER O over RP # over IN -1 over RB -1 over RP -1
+AT O at IN # at IN -1 at RP -1
+TOP O top NN # top JJ -1 top NN -1 top VB -1 top VBP -1
+AFTER O after IN # after IN -1 after RB -1
+INNINGS O inning NN # inning NNS -1
+VICTORY O victory NN # victory NN -1
+. O . Fp # . Fp -1
+
+LONDON B-LOC london NP00G00 # london JJ -1
+1996-08-30 O 1996-08-30 Z # 1996-08-30 Z -1
+
+West B-MISC west_indian NP00V00 # west JJ -1 west NN -1 west RB -1
+Indian I-MISC west_indian NP00V00 # indian JJ -1
+all-rounder O all-rounder NN # all-rounder NN -1
+Phil B-PER phil_simmons NP00SP0 # 
+Simmons I-PER phil_simmons NP00SP0 # 
+took O take VBD # take VBD -1
+four O 4 Z # 4 Z -1 four DT -1
+for O for IN # for IN -1 for RP -1
+38 O 38 Z # 38 Z -1
+on O on IN # on IN -1 on RB -1 on RP -1
+Friday O [V:??/??/??:??.??:??] W # [V:??/??/??:??.??:??] W -1
+as O as IN # as IN -1 as RB -1
+Leicestershire B-ORG leicestershire NP00O00 # 
+beat O beat VB # beat JJ -1 beat NN -1 beat VB -1 beat VBD -1 beat VBP -1
+Somerset B-ORG somerset NP00O00 # 
+by O by IN # by IN -1 by RB -1 by RP -1
+an O 1 Z # 1 Z -1 a DT -1
+innings O inning NN # inning NNS -1
+and O and CC # and CC -1
+39 O 39 Z # 39 Z -1
+runs O run NNS # run NNS -1 run VBZ -1
+in O in IN # in IN -1 in RB -1 in RP -1
+two O 2 Z # 2 Z -1 two DT -1
+days O day NNS # day NNS -1
+to O to TO # to IN -1 to TO -1
+take O take VB # take NN -1 take VB -1 take VBP -1
+over O over RP # over IN -1 over RB -1 over RP -1
+at O at IN # at IN -1 at RP -1
+the O the DT # the DT -1
+head O head NN # head JJ -1 head NN -1 head VB -1 head VBP -1
+of O of IN # of IN -1 of RP -1
+the O the DT # the DT -1
+county O county NN # county NN -1
+championship O championship NN # championship NN -1
+. O . Fp # . Fp -1
+
+After O after IN # after IN -1 after RB -1
+bowling O bowl VBG # bowl VBG -1
+Somerset B-ORG somerset NP00O00 # 
+out O out RP # out IN -1 out NN -1 out RB -1 out RP -1
+for O for IN # for IN -1 for RP -1
+83 O 83 Z # 83 Z -1
+on O on IN # on IN -1 on RB -1 on RP -1
+the O the DT # the DT -1
+opening O opening JJ # open VBG -1 opening NN -1
+morning O morning NN # morning NN -1
+at O at IN # at IN -1 at RP -1
+Grace B-LOC grace_road NP00G00 # grace NN -1 grace VB -1 grace VBP -1
+Road I-LOC grace_road NP00G00 # road NN -1
+, O , Fc # , Fc -1
+Leicestershire B-ORG leicestershire NP00O00 # 
+extended O extend VBD # extend VBD -1 extend VBN -1
+their O their PRP$ # their PRP -1 their PRP$ -1
+first O 1 JJ # 1 JJ -1 first NN -1 first RB -1
+innings O inning NN # inning NNS -1
+by O by IN # by IN -1 by RB -1 by RP -1
+94 O 94 Z # 94 Z -1
+runs O run NNS # run NNS -1 run VBZ -1
+before O before IN # before IN -1 before RB -1
+being O be VBG # be VBG -1 being JJ -1 being NN -1
+bowled O bowl VBN # bowl VBD -1 bowl VBN -1
+out O out RP # out IN -1 out NN -1 out RB -1 out RP -1
+for O for IN # for IN -1 for RP -1
+296 O 296 Z # 296 Z -1
+with O with IN # with IN -1 with RP -1
+England B-LOC england NP00G00 # 
+discard O discard VB # discard NN -1 discard VB -1 discard VBP -1
+Andy B-PER andy_caddick NP00SP0 # 
+Caddick I-PER andy_caddick NP00SP0 # 
+taking O take VBG # take VBG -1 taking NN -1
+three O 3 Z # 3 Z -1 three DT -1
+for O for IN # for IN -1 for RP -1
+83 O 83 Z # 83 Z -1
+. O . Fp # . Fp -1
+
+Essex B-ORG essex NP00O00 # 
+, O , Fc # , Fc -1
+however O however RB # however RB -1 however WRB -1
+, O , Fc # , Fc -1
+look O look VBP # look NN -1 look VB -1 look VBP -1
+certain O certain JJ # certain JJ -1
+to O to TO # to IN -1 to TO -1
+regain O regain VB # regain VB -1 regain VBP -1
+their O their PRP$ # their PRP -1 their PRP$ -1
+top O top JJ # top JJ -1 top NN -1 top VB -1 top VBP -1
+spot O spot NN # spot JJ -1 spot NN -1 spot VB -1 spot VBP -1
+after O after IN # after IN -1 after RB -1
+Nasser B-PER nasser_hussain NP00SP0 # 
+Hussain I-PER nasser_hussain NP00SP0 # 
+and O and CC # and CC -1
+Peter B-PER peter_such NP00SP0 # peter VB -1 peter VBP -1
+Such I-PER peter_such NP00SP0 # such PDT -1 such RB -1
+gave O give VBD # give VBD -1
+them O them PRP # them PRP -1
+a O 1 Z # 1 Z -1 a DT -1 a NN -1
+firm O firm NN # firm JJ -1 firm NN -1 firm VB -1 firm VBP -1
+grip O grip NN # grip NN -1 grip VB -1 grip VBP -1
+on O on IN # on IN -1 on RB -1 on RP -1
+their O their PRP$ # their PRP -1 their PRP$ -1
+match O match NN # match NN -1 match VB -1 match VBP -1
+against O against IN # against IN -1
+Yorkshire B-ORG yorkshire NP00O00 # 
+at O at IN # at IN -1 at RP -1
+Headingley B-LOC headingley NP00G00 # 
+. O . Fp # . Fp -1
+
+By O by IN # by IN -1 by RB -1 by RP -1
+the O the DT # the DT -1
+close O close NN # close JJ -1 close NN -1 close RB -1 close VB -1 close VBP -1
+Yorkshire B-ORG yorkshire NP00O00 # 
+had O have VBD # have VBD -1 have VBN -1
+turned O turn VBN # turn VBD -1 turn VBN -1
+that O that IN # that DT -1 that IN -1 that PRP -1 that RB -1 that WDT -1 that WP -1
+into O into IN # into IN -1
+a O 1 Z # 1 Z -1 a DT -1 a NN -1
+37-run O 37-run Z # 37-run Z -1
+advantage O advantage NN # advantage NN -1 advantage VB -1 advantage VBP -1
+but O but CC # but CC -1 but IN -1 but RB -1
+off-spinner O off-spinner NN # 
+Such B-PER such NP00SP0 # such PDT -1 such RB -1
+had O have VBD # have VBD -1 have VBN -1
+scuttled O scuttle VBN # scuttle VBD -1 scuttle VBN -1
+their O their PRP$ # their PRP -1 their PRP$ -1
+hopes O hope NNS # hope NNS -1 hope VBZ -1
+, O , Fc # , Fc -1
+taking O take VBG # take VBG -1 taking NN -1
+four O 4 Z # 4 Z -1 four DT -1
+for O for IN # for IN -1 for RP -1
+24 O 24 Z # 24 Z -1
+in O in IN # in IN -1 in RB -1 in RP -1
+48 O 48 Z # 48 Z -1
+balls O ball NNS # ball NNS -1 ball VBZ -1
+and O and CC # and CC -1
+leaving O leave VBG # leave VBG -1
+them O them PRP # them PRP -1
+hanging O hang VBG # hang VBG -1 hanging NN -1
+on O on IN # on IN -1 on RB -1 on RP -1
+119 O 119 Z # 119 Z -1
+for O for IN # for IN -1 for RP -1
+five O 5 Z # 5 Z -1 five DT -1
+and O and CC # and CC -1
+praying O pray VBG # pray VBG -1
+for O for IN # for IN -1 for RP -1
+rain O rain NN # rain NN -1 rain VB -1 rain VBP -1
+. O . Fp # . Fp -1
+

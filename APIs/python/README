@@ -1,0 +1,25 @@
+
+  ##### Python API for FreeLing    ######
+
+
+  INSTALLATION
+
+  To get a python API library, after installing FreeLing, follow the steps:
+
+   1.- Make sure python development headers are installed (e.g. package python3-dev or the like)
+   2.- Edit Makefile in this directory to adjust the right values of
+        FREELINGDIR: must be your FreeLing installation directory --e.g. /usr/local
+        PYTHONDIR: must be the libraries directory of your local python installation --e.g /usr/include/python3.4
+
+   3. issue 'make' to compile the python API
+
+   4. Make sure that the directory contanining libfreeling.so (FREELINGDIR/lib) is
+      in your LD_LIBRARY_PATH.
+
+   5. Test the interface with the "sample.py" script in this directory 
+      (after editing it to adjust FREELINGDIR)
+
+   USAGE
+
+    - Write your python programms using freeling as seen in sample.py
+

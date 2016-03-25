@@ -1,0 +1,888 @@
+# ===============================================
+#            Affixation rules file
+# ===============================================
+
+# === Each line is a affixation rule, with the following fields:
+# 1 Affix to erase form word form (e.g: gatito - ito = gat)
+# 2 Affix (* for emtpy string) to add to the resulting root
+#   to rebuild the lemma that must be searched in dictionary 
+#   (e.g:  gat+o = gato)
+# 3 Regexp condition on the parole tag of found dictionary entry
+# 4 Parole tag for suffixed word (* = keep tag in dictionary entry)
+# 5 Check lemma adding accents
+# 6 Enclitic suffix (special accent behaviour in Spanish)
+# 7 Prevent later modules from assigning more tags to the word
+# 8 Lemma to assign: F=original form, R=root found in dict, L=lemma in matching dict entry, 
+#                    AF/AR/AL=affix followed by F/R/L, FA/RA/LA=F/R/L followed by affix
+# 9 Consider the suffix always, not only for unknown words.
+# 10 How to retokenize the word if necessary (see user manual).
+#==============================================================
+
+<Prefixes>
+#Prefixos extraídos do Bosque completo (mantêm o - no token/lema para a avaliação).
+#contra-      *    ^N|A   *    0    0    1    R    1   contra-+$$:AQ0CN0+*
+#vice-        *    ^N|A   *    0    0    1    R    1   cive-+$$:AQ0CN0+*
+#mal-         *    ^N|A   *    0    0    1    R    1   mal-+$$:AQ0CN0+*
+#ex-          *    ^N|A   *    0    0    1    R    1   ex-+$$:AQ0CN0+*
+#anti-        *    ^N|A   *    0    0    1    R    1   anti-+$$:AQ0CN0+*
+#pós-         *    ^N|A   *    0    0    1    R    1   pós-+$$:AQ0CN0+*
+#auto-        *    ^N|A   *    0    0    1    R    1   auto-+$$:AQ0CN0+*
+#sub-         *    ^N|A   *    0    0    1    R    1   sub-+$$:AQ0CN0+*
+#inter-       *    ^N|A   *    0    0    1    R    1   inter-+$$:AQ0CN0+*
+#neo-         *    ^N|A   *    0    0    1    R    1   neo-+$$:AQ0CN0+*
+#recém-       *    ^N|A   *    0    0    1    R    1   recém-+$$:AQ0CN0+*
+#pré-         *    ^N|A   *    0    0    1    R    1   pré-+$$:AQ0CN0+*
+#intra-       *    ^N|A   *    0    0    1    R    1   intra-+$$:AQ0CN0+*
+#arqui-       *    ^N|A   *    0    0    1    R    1   arqui-+$$:AQ0CN0+*
+</Prefixes>
+
+<Suffixes>
+
+-de		 *    ^V    *	 0    0	   0    1	$$+de:$$+SPS
+
+
+### Regras de lematização de verbos não conhecidos
+#rinto     *           ^N|V     VMIP1S0  0       0       0 R+rintar 0	-
+#eio     *           ^N|V     VMIP1S0  0       0       0 R+ear 0	-
+
+
+## Contracções ambíguas.
+
+elo	  or	      ^S   	 *  	0	0	0 L	1	$$+o:SPS+DA
+ela	  or	      ^S	 *	0	0	0 L	1	$$+a:SPS+DA
+elas	  or	      ^S	 *	0	0	0 L	1	$$+as:SPS+DA
+
+este	  e	      ^S	 *	0	0	0 L	1	$$+este:SPS+DD
+estes	  e	      ^S	 *	0	0	0 L	1	$$+estes:SPS+DD
+esse	  e	      ^S	 *	0	0	0 L	1	$$+esse:SPS+DD
+esses	  e	      ^S	 *	0	0	0 L	1	$$+esses:SPS+DD
+
+essa	  e	      ^S	 *	0	0	0 L	1	$$+essa:SPS+DD
+essas	  e	      ^S	 *	0	0	0 L	1	$$+essas:SPS+DD
+isto	  e	      ^S	 *	0	0	0 L	1	$$+isto:SPS+PD
+uma	  e	      ^S	 *	0	0	0 L	1	$$+uma:SPS+DI
+umas	  e	      ^S	 *	0	0	0 L	1	$$+umas:SPS+DI
+#onde	  *	      ^S	 *	0	0	0 L	1	$$+onde:SPS+RG
+
+
+
+
+################ ENCLITICOS ###################
+
+
+-lho-ei		ei	^V	*	1    1	0	L	1	$$+lhe+o:$$+PP+PP
+azer-lho-ei	arei	^VMIF	*	1    1	0	L	1	$$+lhe+o:$$+PP+PP
+-lho-íamos	íamos	^V	*	1    1	0	L	1	$$+lhe+o:$$+PP+PP
+azer-lho-íamos	aríamos	^VMIC	*	1    1	0	L	1	$$+lhe+o:$$+PP+PP
+-lho-á		á	^V	*	1    1	0	L	1	$$+lhe+o:$$+PP+PP
+azer-lho-á	ará	^VMIC	*	1    1	0	L	1	$$+lhe+o:$$+PP+PP
+-lho-eis	eis	^V	*	1    1	0	L	1	$$+lhe+o:$$+PP+PP
+azer-lho-eis	areis	^VMIF	*	1    1	0	L	1	$$+lhe+o:$$+PP+PP
+-lho-íeis	íeis	^V	*	1    1	0	L	1	$$+lhe+o:$$+PP+PP
+azer-lho-íeis	aríeis	^VMIC	*	1    1	0	L	1	$$+lhe+o:$$+PP+PP
+-lho-emos	emos	^V	*	1    1	0	L	1	$$+lhe+o:$$+PP+PP
+azer-lho-emos	aremos	^VMIF	*	1    1	0	L	1	$$+lhe+o:$$+PP+PP
+-lho-ia		ia	^V	*	1    1	0	L	1	$$+lhe+o:$$+PP+PP
+azer-lho-ia	aria	^VMIC	*	1    1	0	L	1	$$+lhe+o:$$+PP+PP
+-lho-iam	iam	^V	*	1    1	0	L	1	$$+lhe+o:$$+PP+PP
+azer-lho-iam	ariam	^VMIC	*	1    1	0	L	1	$$+lhe+o:$$+PP+PP
+-lho-ias	ias	^V	*	1    1	0	L	1	$$+lhe+o:$$+PP+PP
+azer-lho-ias	arias	^VMIC	*	1    1	0	L	1	$$+lhe+o:$$+PP+PP
+-lho-ão		ão	^V	*	1    1	0	L	1	$$+lhe+o:$$+PP+PP
+azer-lho-ão	arão	^VMIF	*	1    1	0	L	1	$$+lhe+o:$$+PP+PP
+-lho-ás		ás	^V	*	1    1	0	L	1	$$+lhe+o:$$+PP+PP
+azer-lho-ás	arás	^VMIF	*	1    1	0	L	1	$$+lhe+o:$$+PP+PP
+
+-lhos-ei	ei   	^V	*	1    1  0    	L 	1	$$+lhe+os:$$+PP+PP
+azer-lhos-ei	arei  	^VMIF	*   	1    1  0	L 	1	$$+lhe+os:$$+PP+PP
+-lhos-íamos	íamos 	^V	*   	1    1  0    	L 	1	$$+lhe+os:$$+PP+PP
+azer-lhos-íamos	aríamos ^VMIC	* 	1    1  0	L 	1	$$+lhe+os:$$+PP+PP
+-lhos-á		á     	^V	*   	1    1  0    	L 	1	$$+lhe+os:$$+PP+PP
+azer-lhos-á	arás  	^VMIF	*   	1    1  0	L 	1	$$+lhe+os:$$+PP+PP
+-lhos-eis	eis   	^V	*  	1    1  0    	L 	1	$$+lhe+os:$$+PP+PP
+azer-lhos-eis	areis  	^VMIF	*  	1    1  0	L 	1	$$+lhe+os:$$+PP+PP
+-lhos-íeis	íeis  	^V	*   	1    1  0    	L 	1	$$+lhe+os:$$+PP+PP
+azer-lhos-íeis	aríeis  ^VMIC	*  	1    1  0	L 	1	$$+lhe+os:$$+PP+PP
+-lhos-emos	emos  	^V	*    	1    1  0    	L 	1	$$+lhe+os:$$+PP+PP
+azer-lhos-emos	aremos  ^VMIF	*  	1    1  0	L 	1	$$+lhe+os:$$+PP+PP
+-lhos-ia	ia    	^V	*    	1    1  0    	L 	1	$$+lhe+os:$$+PP+PP
+azer-lhos-ia	aria  	^VMIC	*    	1    1  0	L 	1	$$+lhe+os:$$+PP+PP
+-lhos-iam	iam   	^V	*    	1    1  0    	L 	1	$$+lhe+os:$$+PP+PP
+azer-lhos-iam	ariam 	^VMIC	*    	1    1  0	L 	1	$$+lhe+os:$$+PP+PP
+-lhos-ias	ias   	^V	*    	1    1  0    	L 	1	$$+lhe+os:$$+PP+PP
+azer-lhos-ias	arias 	^VMIC	*    	1    1  0	L 	1	$$+lhe+os:$$+PP+PP
+-lhos-ão	ão    	^V	*    	1    1  0    	L 	1	$$+lhe+os:$$+PP+PP
+azer-lhos-ão	arão  	^VMIF	*    	1    1  0	L 	1	$$+lhe+os:$$+PP+PP
+-lhos-ás	ás    	^V	*    	1    1  0    	L 	1	$$+lhe+os:$$+PP+PP
+azer-lhos-ás	arás  	^VMIF	*    	1    1  0	L 	1	$$+lhe+os:$$+PP+PP
+
+ê-lo-ei 	erei    ^V    *    1    1    0    L 1	$$+o:$$+PP
+á-lo-ei 	arei    ^V    *    1    1    0    L 1	$$+o:$$+PP
+ô-lo-ei 	orei    ^V    *    1    1    0    L 1	$$+o:$$+PP
+i-lo-ei 	irei	^V    *    1	1    0    L 1	$$+o:$$+PP
+azê-lo-ei 	arei  	^VMIF *    1    1    0    L 1	$$+o:$$+PP
+ê-lo-íamos 	eríamos ^V *    1    1    0    L 1	$$+o:$$+PP
+á-lo-íamos 	aríamos ^V *    1    1    0    L 1	$$+o:$$+PP
+ô-lo-íamos 	oríamos ^V *    1    1    0    L 1	$$+o:$$+PP
+i-lo-íamos 	iríamos ^V *    1	1    0    L 1	$$+o:$$+PP
+azê-lo-íamos 	aríamos ^VMIC * 1  1    0    L 1	$$+o:$$+PP
+ê-lo-á 		erá     ^V    *    1    1    0    L 1	$$+o:$$+PP
+á-lo-á 		ará     ^V    *    1    1    0    L 1	$$+o:$$+PP
+ô-lo-á 		orá     ^V    *    1    1    0    L 1	$$+o:$$+PP
+i-lo-á 		irá     ^V    *    1    1    0    L 1	$$+o:$$+PP	
+azê-lo-á 	ará  	^VMIF   *    1    1    0    L 1	$$+o:$$+PP
+ê-lo-eis 	ereis  	^V    *    1    1    0    L 1	$$+o:$$+PP
+á-lo-eis 	areis  	^V    *    1    1    0    L 1	$$+o:$$+PP
+ô-lo-eis 	oreis  	^V    *    1    1    0    L 1	$$+o:$$+PP
+i-lo-eis 	ireis  	^V    *    1    1    0    L 1	$$+o:$$+PP
+azê-lo-eis 	areis 	^VMIC *   1    1    0    L 1	$$+o:$$+PP
+ê-lo-íeis 	eríeis 	^V   *    1    1    0    L 1	$$+o:$$+PP
+á-lo-íeis 	aríeis 	^V   *    1    1    0    L 1	$$+o:$$+PP
+ô-lo-íeis 	oríeis 	^V   *    1    1    0    L 1	$$+o:$$+PP
+i-lo-íeis 	iríeis 	^V   *    1    1    0    L 1	$$+o:$$+PP
+azê-lo-íeis 	aríeis 	^VMIC * 1    1    0    L 1	$$+o:$$+PP
+ê-lo-emos 	eremos 	^V   *    1    1    0    L 1	$$+o:$$+PP
+á-lo-emos 	aremos 	^V   *    1    1    0    L 1	$$+o:$$+PP
+ô-lo-emos 	oremos 	^V   *    1    1    0    L 1	$$+o:$$+PP
+i-lo-emos 	iremos 	^V   *    1    1    0    L 1	$$+o:$$+PP
+azê-lo-emos 	aremos 	^VMIF * 1    1    0    L 1	$$+o:$$+PP
+ê-lo-ia 	eria    ^V    *    1    1    0    L 1	$$+o:$$+PP
+á-lo-ia 	aria    ^V    *    1    1    0    L 1	$$+o:$$+PP
+ô-lo-ia 	oria    ^V    *    1    1    0    L 1	$$+o:$$+PP
+i-lo-ia 	iria    ^V    *    1    1    0    L 1	$$+o:$$+PP
+azê-lo-ia 	aria  	^VMIC *    1    1    0    L 1	$$+o:$$+PP
+ê-lo-iam 	eriam  	^V    *    1    1    0    L 1	$$+o:$$+PP
+á-lo-iam 	ariam  	^V    *    1    1    0    L 1	$$+o:$$+PP
+ô-lo-iam 	oriam  	^V    *    1    1    0    L 1	$$+o:$$+PP
+i-lo-iam 	iriam  	^V    *    1    1    0    L 1	$$+o:$$+PP
+azê-lo-iam 	ariam 	^VMIC *   1    1    0    L 1	$$+o:$$+PP
+ê-lo-ias 	erias  	^V    *    1    1    0    L 1	$$+o:$$+PP
+á-lo-ias 	arias  	^V    *    1    1    0    L 1	$$+o:$$+PP
+ô-lo-ias 	orias  	^V    *    1    1    0    L 1	$$+o:$$+PP
+i-lo-ias 	irias  	^V    *    1    1    0    L 1	$$+o:$$+PP
+azê-lo-ias 	arias 	^VMIC *   1    1    0    L 1	$$+o:$$+PP
+ê-lo-ão 	erão    ^V    *    1    1    0    L 1	$$+o:$$+PP
+á-lo-ão 	arão    ^V    *    1    1    0    L 1	$$+o:$$+PP
+ô-lo-ão 	orão    ^V    *    1    1    0    L 1	$$+o:$$+PP
+i-lo-ão 	irão    ^V    *    1    1    0    L 1	$$+o:$$+PP
+azê-lo-ão 	arão  	^VMIC *    1    1    0    L 1	$$+o:$$+PP
+ê-lo-ás 	erás    ^V    *    1    1    0    L 1	$$+o:$$+PP
+á-lo-ás 	arás    ^V    *    1    1    0    L 1	$$+o:$$+PP
+ô-lo-ás 	orás    ^V    *    1    1    0    L 1	$$+o:$$+PP
+i-lo-ás 	irás    ^V    *    1    1    0    L 1	$$+o:$$+PP
+azê-lo-ás 	arás  	^VMIF *    1    1    0    L 1	$$+o:$$+PP
+
+ê-los-ei 	erei    ^V    *    1    1    0    L 1	$$+os:$$+PP
+á-los-ei 	arei    ^V    *    1    1    0    L 1	$$+os:$$+PP
+ô-los-ei 	orei    ^V    *    1    1    0    L 1	$$+os:$$+PP
+i-los-ei 	irei    ^V    *    1    1    0    L 1	$$+os:$$+PP
+azê-los-ei 	arei  	^VMIF *    1    1    0    L 1	$$+os:$$+PP
+ê-los-íamos	eríamos ^V *    1    1    0    L 1	$$+os:$$+PP
+á-los-íamos 	aríamos ^V *    1    1    0    L 1	$$+os:$$+PP
+ô-los-íamos 	oríamos ^V *    1    1    0    L 1	$$+os:$$+PP
+i-los-íamos 	iríamos ^V *    1    1    0    L 1	$$+os:$$+PP
+azê-los-íamos 	aríamos ^VMIC * 1  1    0    L 1	$$+os:$$+PP
+ê-los-á 	erá     ^V    *    1    1    0    L 1	$$+os:$$+PP
+á-los-á 	ará     ^V    *    1    1    0    L 1	$$+os:$$+PP
+ô-los-á 	orá     ^V    *    1    1    0    L 1	$$+os:$$+PP
+i-los-á 	irá     ^V    *    1    1    0    L 1	$$+os:$$+PP
+azê-los-á 	ará    	^VMIF *    1    1    0    L 1	$$+os:$$+PP
+ê-los-eis 	ereis  	^V    *    1    1    0    L 1	$$+os:$$+PP
+á-los-eis 	areis  	^V    *    1    1    0    L 1	$$+os:$$+PP
+ô-los-eis 	oreis  	^V    *    1    1    0    L 1	$$+os:$$+PP
+i-los-eis 	ireis  	^V    *    1    1    0    L 1	$$+os:$$+PP
+azê-los-eis 	areis 	^VMIC *   1    1    0    L 1	$$+os:$$+PP
+ê-los-íeis 	eríeis 	^V   *    1    1    0    L 1	$$+os:$$+PP
+á-los-íeis 	aríeis 	^V   *    1    1    0    L 1	$$+os:$$+PP
+ô-los-íeis 	oríeis 	^V   *    1    1    0    L 1	$$+os:$$+PP
+i-los-íeis 	iríeis 	^V   *    1    1    0    L 1	$$+os:$$+PP
+azê-los-íeis 	aríeis 	^VMIC * 1    1    0    L 1	$$+os:$$+PP
+ê-los-emos 	eremos 	^V   *    1    1    0    L 1	$$+os:$$+PP
+á-los-emos 	aremos 	^V   *    1    1    0    L 1	$$+os:$$+PP
+ô-los-emos 	oremos 	^V   *    1    1    0    L 1	$$+os:$$+PP
+i-los-emos 	iremos 	^V   *    1    1    0    L 1	$$+os:$$+PP
+azê-los-emos 	aremos 	^VMIF * 1    1    0    L 1	$$+os:$$+PP
+ê-los-ia 	eria    ^V    *    1    1    0    L 1	$$+os:$$+PP
+á-los-ia 	aria    ^V    *    1    1    0    L 1	$$+os:$$+PP
+ô-los-ia 	oria    ^V    *    1    1    0    L 1	$$+os:$$+PP
+i-los-ia 	iria    ^V    *    1    1    0    L 1	$$+os:$$+PP
+azê-los-ia 	aria  	^VMIC *    1    1    0    L 1	$$+os:$$+PP
+ê-los-iam 	eriam  	^V    *    1    1    0    L 1	$$+os:$$+PP
+á-los-iam 	ariam  	^V    *    1    1    0    L 1	$$+os:$$+PP
+ô-los-iam 	oriam  	^V    *    1    1    0    L 1	$$+os:$$+PP
+i-los-iam 	iriam  	^V    *    1    1    0    L 1	$$+os:$$+PP
+azê-los-iam 	ariam 	^VMIC *   1    1    0    L 1	$$+os:$$+PP
+ê-los-ias 	erias  	^V    *    1    1    0    L 1	$$+os:$$+PP
+á-los-ias 	arias  	^V    *    1    1    0    L 1	$$+os:$$+PP
+ô-los-ias 	orias  	^V    *    1    1    0    L 1	$$+os:$$+PP
+i-los-ias 	irias  	^V    *    1    1    0    L 1	$$+os:$$+PP
+azê-los-ias 	arias 	^VMIC *   1    1    0    L 1	$$+os:$$+PP
+ê-los-ão 	erão    ^V    *    1    1    0    L 1	$$+os:$$+PP
+á-los-ão 	arão    ^V    *    1    1    0    L 1	$$+os:$$+PP
+ô-los-ão 	orão    ^V    *    1    1    0    L 1	$$+os:$$+PP
+i-los-ão 	irão    ^V    *    1    1    0    L 1	$$+os:$$+PP
+azê-los-ão 	arão  	^VMIF *    1    1    0    L 1	$$+os:$$+PP
+ê-los-ás 	erás    ^V    *    1    1    0    L 1	$$+os:$$+PP
+á-los-ás 	arás    ^V    *    1    1    0    L 1	$$+os:$$+PP
+ô-los-ás 	orás    ^V    *    1    1    0    L 1	$$+os:$$+PP
+i-los-ás 	irás    ^V    *    1    1    0    L 1	$$+os:$$+PP
+azê-los-ás 	arás  	^VMIF *    1    1    0    L 1	$$+os:$$+PP
+
+
+ê-la-ei erei    ^V    *    1    1    0  L  1	$$+a:$$+PP
+á-la-ei arei    ^V    *    1    1    0  L  1	$$+a:$$+PP
+ô-la-ei orei    ^V    *    1    1    0  L  1	$$+a:$$+PP
+i-la-ei irei	^V    *    1	1    0  L  1	$$+a:$$+PP
+azê-la-ei arei  ^VMIF *    1    1    0  L  1	$$+a:$$+PP
+ê-la-íamos eríamos ^V *    1    1    0  L  1	$$+a:$$+PP
+á-la-íamos aríamos ^V *    1    1    0  L  1	$$+a:$$+PP
+ô-la-íamos oríamos ^V *    1    1    0  L  1	$$+a:$$+PP
+i-la-íamos iríamos ^V *    1	1    0  L  1	$$+a:$$+PP
+azê-la-íamos aríamos ^VMIC * 1  1    0  L  1	$$+a:$$+PP
+ê-la-á erá      ^V    *    1    1    0  L  1	$$+a:$$+PP
+á-la-á ará      ^V    *    1    1    0  L  1	$$+a:$$+PP
+ô-la-á orá      ^V    *    1    1    0  L  1	$$+a:$$+PP
+i-la-á irá      ^V    *    1    1    0  L  1	$$+a:$$+PP	
+azê-la-á ará  ^VMIF   *    1    1    0  L  1	$$+a:$$+PP
+ê-la-eis ereis  ^V    *    1    1    0  L  1	$$+a:$$+PP
+á-la-eis areis  ^V    *    1    1    0  L  1	$$+a:$$+PP
+ô-la-eis oreis  ^V    *    1    1    0  L  1	$$+a:$$+PP
+i-la-eis ireis  ^V    *    1    1    0  L  1	$$+a:$$+PP
+azê-la-eis areis ^VMIC *   1    1    0  L  1	$$+a:$$+PP
+ê-la-íeis eríeis ^V   *    1    1    0  L  1	$$+a:$$+PP
+á-la-íeis aríeis ^V   *    1    1    0  L  1	$$+a:$$+PP
+ô-la-íeis oríeis ^V   *    1    1    0  L  1	$$+a:$$+PP
+i-la-íeis iríeis ^V   *    1    1    0  L  1	$$+a:$$+PP
+azê-la-íeis aríeis ^VMIC * 1    1    0  L  1	$$+a:$$+PP
+ê-la-emos eremos ^V   *    1    1    0  L  1	$$+a:$$+PP
+á-la-emos aremos ^V   *    1    1    0  L  1	$$+a:$$+PP
+ô-la-emos oremos ^V   *    1    1    0  L  1	$$+a:$$+PP
+i-la-emos iremos ^V   *    1    1    0  L  1	$$+a:$$+PP
+azê-la-emos aremos ^VMIF * 1    1    0  L  1	$$+a:$$+PP
+ê-la-ia eria    ^V    *    1    1    0  L  1	$$+a:$$+PP
+á-la-ia aria    ^V    *    1    1    0  L  1	$$+a:$$+PP
+ô-la-ia oria    ^V    *    1    1    0  L  1	$$+a:$$+PP
+i-la-ia iria    ^V    *    1    1    0  L  1	$$+a:$$+PP
+azê-la-ia aria  ^VMIC *    1    1    0  L  1	$$+a:$$+PP
+ê-la-iam eriam  ^V    *    1    1    0  L  1	$$+a:$$+PP
+á-la-iam ariam  ^V    *    1    1    0  L  1	$$+a:$$+PP
+ô-la-iam oriam  ^V    *    1    1    0  L  1	$$+a:$$+PP
+i-la-iam iriam  ^V    *    1    1    0  L  1	$$+a:$$+PP
+azê-la-iam ariam ^VMIC *   1    1    0  L  1	$$+a:$$+PP
+ê-la-ias erias  ^V    *    1    1    0  L  1	$$+a:$$+PP
+á-la-ias arias  ^V    *    1    1    0  L  1	$$+a:$$+PP
+ô-la-ias orias  ^V    *    1    1    0  L  1	$$+a:$$+PP
+i-la-ias irias  ^V    *    1    1    0  L  1	$$+a:$$+PP
+azê-la-ias arias ^VMIC *   1    1    0  L  1	$$+a:$$+PP
+ê-la-ão erão    ^V    *    1    1    0  L  1	$$+a:$$+PP
+á-la-ão arão    ^V    *    1    1    0  L  1	$$+a:$$+PP
+ô-la-ão orão    ^V    *    1    1    0  L  1	$$+a:$$+PP
+i-la-ão irão    ^V    *    1    1    0  L  1	$$+a:$$+PP
+azê-la-ão arão  ^VMIC *    1    1    0  L  1	$$+a:$$+PP
+ê-la-ás erás    ^V    *    1    1    0  L  1	$$+a:$$+PP
+á-la-ás arás    ^V    *    1    1    0  L  1	$$+a:$$+PP
+ô-la-ás orás    ^V    *    1    1    0  L  1	$$+a:$$+PP
+i-la-ás irás    ^V    *    1    1    0  L  1	$$+a:$$+PP
+azê-la-ás arás  ^VMIF *    1    1    0  L  1	$$+a:$$+PP
+
+ê-las-ei erei    ^V    *    1    1    0  L  1	$$+as:$$+PP
+á-las-ei arei    ^V    *    1    1    0  L  1	$$+as:$$+PP
+ô-las-ei orei    ^V    *    1    1    0  L  1	$$+as:$$+PP
+i-las-ei irei    ^V    *    1    1    0  L  1	$$+as:$$+PP
+azê-las-ei arei  ^VMIF *    1    1    0  L  1	$$+as:$$+PP
+ê-las-íamos eríamos ^V *    1    1    0  L  1	$$+as:$$+PP
+á-las-íamos aríamos ^V *    1    1    0  L  1	$$+as:$$+PP
+ô-las-íamos oríamos ^V *    1    1    0  L  1	$$+as:$$+PP
+i-las-íamos iríamos ^V *    1    1    0  L  1	$$+as:$$+PP
+azê-las-íamos aríamos ^VMIC * 1  1    0  L  1	$$+as:$$+PP
+ê-las-á erá      ^V    *    1    1    0  L  1	$$+as:$$+PP
+á-las-á ará      ^V    *    1    1    0  L  1	$$+as:$$+PP
+ô-las-á orá      ^V    *    1    1    0  L  1	$$+as:$$+PP
+i-las-á irá      ^V    *    1    1    0  L  1	$$+as:$$+PP
+azê-las-á ará    ^VMIF *    1    1    0  L  1	$$+as:$$+PP
+ê-las-eis ereis  ^V    *    1    1    0  L  1	$$+as:$$+PP
+á-las-eis areis  ^V    *    1    1    0  L  1	$$+as:$$+PP
+ô-las-eis oreis  ^V    *    1    1    0  L  1	$$+as:$$+PP
+i-las-eis ireis  ^V    *    1    1    0  L  1	$$+as:$$+PP
+azê-las-eis areis ^VMIC *   1    1    0  L  1	$$+as:$$+PP
+ê-las-íeis eríeis ^V   *    1    1    0  L  1	$$+as:$$+PP
+á-las-íeis aríeis ^V   *    1    1    0  L  1	$$+as:$$+PP
+ô-las-íeis oríeis ^V   *    1    1    0  L  1	$$+as:$$+PP
+i-las-íeis iríeis ^V   *    1    1    0  L  1	$$+as:$$+PP
+azê-las-íeis aríeis ^VMIC * 1    1    0  L  1	$$+as:$$+PP
+ê-las-emos eremos ^V   *    1    1    0  L  1	$$+as:$$+PP
+á-las-emos aremos ^V   *    1    1    0  L  1	$$+as:$$+PP
+ô-las-emos oremos ^V   *    1    1    0  L  1	$$+as:$$+PP
+i-las-emos iremos ^V   *    1    1    0  L  1	$$+as:$$+PP
+azê-las-emos aremos ^VMIF * 1    1    0  L  1	$$+as:$$+PP
+ê-las-ia eria    ^V    *    1    1    0  L  1	$$+as:$$+PP
+á-las-ia aria    ^V    *    1    1    0  L  1	$$+as:$$+PP
+ô-las-ia oria    ^V    *    1    1    0  L  1	$$+as:$$+PP
+i-las-ia iria    ^V    *    1    1    0  L  1	$$+as:$$+PP
+azê-las-ia aria  ^VMIC *    1    1    0  L  1	$$+as:$$+PP
+ê-las-iam eriam  ^V    *    1    1    0  L  1	$$+as:$$+PP
+á-las-iam ariam  ^V    *    1    1    0  L  1	$$+as:$$+PP
+ô-las-iam oriam  ^V    *    1    1    0  L  1	$$+as:$$+PP
+i-las-iam iriam  ^V    *    1    1    0  L  1	$$+as:$$+PP
+azê-las-iam ariam ^VMIC *   1    1    0  L  1	$$+as:$$+PP
+ê-las-ias erias  ^V    *    1    1    0  L  1	$$+as:$$+PP
+á-las-ias arias  ^V    *    1    1    0  L  1	$$+as:$$+PP
+ô-las-ias orias  ^V    *    1    1    0  L  1	$$+as:$$+PP
+i-las-ias irias  ^V    *    1    1    0  L  1	$$+as:$$+PP
+azê-las-ias arias ^VMIC *   1    1    0  L  1	$$+as:$$+PP
+ê-las-ão erão    ^V    *    1    1    0  L  1	$$+as:$$+PP
+á-las-ão arão    ^V    *    1    1    0  L  1	$$+as:$$+PP
+ô-las-ão orão    ^V    *    1    1    0  L  1	$$+as:$$+PP
+i-las-ão irão    ^V    *    1    1    0  L  1	$$+as:$$+PP
+azê-las-ão arão  ^VMIF *    1    1    0  L  1	$$+as:$$+PP
+ê-las-ás erás    ^V    *    1    1    0  L  1	$$+as:$$+PP
+á-las-ás arás    ^V    *    1    1    0  L  1	$$+as:$$+PP
+ô-las-ás orás    ^V    *    1    1    0  L  1	$$+as:$$+PP
+i-las-ás irás    ^V    *    1    1    0  L  1	$$+as:$$+PP
+azê-las-ás arás  ^VMIF *    1    1    0  l  1	$$+as:$$+PP
+
+-lhe-ei		ei    	^V    *    1    1    0    L 1	$$+lhe:$$+PP
+azer-lhe-ei	arei  	^VMIF *    1    1    0    L 1	$$+lhe:$$+PP
+-lhe-íamos	íamos 	^V    *    1    1    0    L 1	$$+lhe:$$+PP
+azer-lhe-íamos 	aríamos ^VMIC *  1    1    0    L 1	$$+lhe:$$+PP
+-lhe-á		á     	^V    *    1    1    0    L 1	$$+lhe:$$+PP
+azer-lhe-á	ará   	^VMIF *    1    1    0    L 1	$$+lhe:$$+PP
+-lhe-eis	eis   	^V    *    1    1    0    L 1	$$+lhe:$$+PP
+azer-lhe-eis	areis 	^VMIF *    1    1    0    L 1	$$+lhe:$$+PP
+-lhe-íeis	íeis  	^V    *    1    1    0    L 1	$$+lhe:$$+PP
+azer-lhe-íeis 	aríeis 	^VMIC *   1    1    0    L 1	$$+lhe:$$+PP
+-lhe-emos	emos   	^V    *    1    1    0    L 1	$$+lhe:$$+PP
+azer-lhe-emos 	aremos 	^VMIF *   1    1    0    L 1	$$+lhe:$$+PP
+-lhe-ia		ia    	^V    *    1    1    0    L 1	$$+lhe:$$+PP
+azer-lhe-ia 	aria  	^VMIC *    1    1    0    L 1	$$+lhe:$$+PP
+-lhe-iam	iam   	^V    *    1    1    0    L 1	$$+lhe:$$+PP
+azer-lhe-iam 	ariam 	^VMIC *    1    1    0    L 1	$$+lhe:$$+PP
+-lhe-ias	ias   	^V    *    1    1    0    L 1	$$+lhe:$$+PP
+azer-lhe-ias 	arias 	^VMIC *    1    1    0    L 1	$$+lhe:$$+PP
+-lhe-ão		ão    	^V    *    1    1    0    L 1	$$+lhe:$$+PP
+azer-lhe-ão 	arão  	^VMIF *    1    1    0    L 1	$$+lhe:$$+PP
+-lhe-ás		ás    	^V    *    1    1    0    L 1	$$+lhe:$$+PP
+azer-lhe-ás 	arás  	^VMIF *    1    1    0    L 1	$$+lhe:$$+PP
+
+-lhes-ei	ei    	^V    *    1    1    0    L 1	$$+lhes:$$+PP
+-lhes-íamos	íamos 	^V    *    1    1    0    L 1	$$+lhes:$$+PP
+-lhes-á		á     	^V    *    1    1    0    L 1	$$+lhes:$$+PP
+-lhes-eis	eis   	^V    *    1    1    0    L 1	$$+lhes:$$+PP
+-lhes-íeis	íeis  	^V    *    1    1    0    L 1	$$+lhes:$$+PP
+-lhes-emos	emos  	^V    *    1    1    0    L 1	$$+lhes:$$+PP
+-lhes-ia	ia    	^V    *    1    1    0    L 1	$$+lhes:$$+PP
+-lhes-iam	iam   	^V    *    1    1    0    L 1	$$+lhes:$$+PP
+-lhes-ias	ias   	^V    *    1    1    0    L 1	$$+lhes:$$+PP
+-lhes-ão	ão    	^V    *    1    1    0    L 1	$$+lhes:$$+PP
+-lhes-ás	ás    	^V    *    1    1    0    L 1	$$+lhes:$$+PP
+azer-lhes-ei	arei  	^VMIF *    1    1    0    L 1	$$+lhes:$$+PP
+azer-lhes-íamos aríamos ^VMIC *  1    1    0    L 1	$$+lhes:$$+PP
+azer-lhes-á	ará   	^VMIF *    1    1    0    L 1	$$+lhes:$$+PP
+azer-lhes-eis	areis 	^VMIF *    1    1    0    L 1	$$+lhes:$$+PP
+azer-lhes-íeis 	aríeis	^VMIC *   1    1    0    L 1	$$+lhes:$$+PP
+azer-lhes-emos 	aremos 	^VMIF *   1    1    0    L 1	$$+lhes:$$+PP
+azer-lhes-ia 	aria  	^VMIC *    1    1    0    L 1	$$+lhes:$$+PP
+azer-lhes-iam 	ariam 	^VMIC *    1    1    0    L 1	$$+lhes:$$+PP
+azer-lhes-ias 	arias 	^VMIC *    1    1    0    L 1	$$+lhes:$$+PP
+azer-lhes-ão 	arão  	^VMIF *    1    1    0    L 1	$$+lhes:$$+PP
+azer-lhes-ás 	arás  	^VMIF *    1    1    0    L 1	$$+lhes:$$+PP
+
+-me-ei		ei    	^V    *    1    1    0    L 1	$$+me:$$+PP
+-me-íamos	íamos 	^V    *    1    1    0    L 1	$$+me:$$+PP
+-me-á		á     	^V    *    1    1    0    L 1	$$+me:$$+PP
+-me-eis		eis   	^V    *    1    1    0    L 1	$$+me:$$+PP
+-me-íeis	íeis  	^V    *    1    1    0    L 1	$$+me:$$+PP
+-me-emos	emos  	^V    *    1    1    0    L 1	$$+me:$$+PP
+-me-ia		ia    	^V    *    1    1    0    L 1	$$+me:$$+PP
+-me-iam		iam   	^V    *    1    1    0    L 1	$$+me:$$+PP
+-me-ias		ias   	^V    *    1    1    0    L 1	$$+me:$$+PP
+-me-ão		ão    	^V    *    1    1    0    L 1	$$+me:$$+PP
+-me-ás		ás    	^V    *    1    1    0    L 1	$$+me:$$+PP
+azer-me-ei	arei  	^VMIF *    1    1    0    L 1	$$+me:$$+PP
+azer-me-íamos   aríamos ^VMIC *  1    1    0    L 1	$$+me:$$+PP
+azer-me-á	ará   	^VMIF *    1    1    0    L 1	$$+me:$$+PP
+azer-me-eis	areis 	^VMIF *    1    1    0    L 1	$$+me:$$+PP
+azer-me-íeis 	aríeis	^VMIC *   1    1    0    L 1	$$+me:$$+PP
+azer-me-emos 	aremos	^VMIF *   1    1    0    L 1	$$+me:$$+PP
+azer-me-ia 	aria  	^VMIC *    1    1    0    L 1	$$+me:$$+PP
+azer-me-iam 	ariam 	^VMIC *    1    1    0    L 1	$$+me:$$+PP
+azer-me-ias 	arias 	^VMIC *    1    1    0    L 1	$$+me:$$+PP
+azer-me-ão 	arão  	^VMIF *    1    1    0    L 1	$$+me:$$+PP
+azer-me-ás 	arás  	^VMIF *    1    1    0    L 1	$$+me:$$+PP
+
+-te-ei		ei    	^V    *    1    1    0    L 1	$$+te:$$+PP
+-te-íamos	íamos 	^V    *    1    1    0    L 1	$$+te:$$+PP
+-te-á		á     	^V    *    1    1    0    L 1	$$+te:$$+PP
+-te-eis		eis   	^V    *    1    1    0    L 1	$$+te:$$+PP
+-te-íeis	íeis  	^V    *    1    1    0    L 1	$$+te:$$+PP
+-te-emos	emos  	^V    *    1    1    0    L 1	$$+te:$$+PP
+-te-ia		ia    	^V    *    1    1    0    L 1	$$+te:$$+PP
+-te-iam		iam   	^V    *    1    1    0    L 1	$$+te:$$+PP
+-te-ias		ias   	^V    *    1    1    0    L 1	$$+te:$$+PP
+-te-ão		ão    	^V    *    1    1    0    L 1	$$+te:$$+PP
+-te-ás		ás    	^V    *    1    1    0    L 1	$$+te:$$+PP
+azer-te-ei	arei  	^VMIF *    1    1    0    L 1	$$+te:$$+PP
+azer-te-íamos 	aríamos ^VMIC *  1    1    0    L 1	$$+te:$$+PP
+azer-te-á	ará   	^VMIF *    1    1    0    L 1	$$+te:$$+PP
+azer-te-eis	areis 	^VMIF *    1    1    0    L 1	$$+te:$$+PP
+azer-te-íeis 	aríeis 	^VMIC *   1    1    0    L 1	$$+te:$$+PP
+azer-te-emos 	aremos 	^VMIF *   1    1    0    L 1	$$+te:$$+PP
+azer-te-ia 	aria  	^VMIC *    1    1    0    L 1	$$+te:$$+PP
+azer-te-iam 	ariam 	^VMIC *    1    1    0    L 1	$$+te:$$+PP
+azer-te-ias 	arias 	^VMIC *    1    1    0    L 1	$$+te:$$+PP
+azer-te-ão 	arão  	^VMIF *    1    1    0    L 1	$$+te:$$+PP
+azer-te-ás 	arás  	^VMIF *    1    1    0    L 1	$$+te:$$+PP
+
+-nos-ei		ei    	^V    *    1    1    0    L 1	$$+nos:$$+PP1
+-nos-íamos	íamos 	^V    *    1    1    0    L 1	$$+nos:$$+PP1
+-nos-á		á     	^V    *    1    1    0    L 1	$$+nos:$$+PP1
+-nos-eis	eis   	^V    *    1    1    0    L 1	$$+nos:$$+PP1
+-nos-íeis	íeis  	^V    *    1    1    0    L 1	$$+nos:$$+PP1
+-nos-emos	emos  	^V    *    1    1    0    L 1	$$+nos:$$+PP1
+-nos-ia		ia    	^V    *    1    1    0    L 1	$$+nos:$$+PP1
+-nos-iam	iam   	^V    *    1    1    0    L 1	$$+nos:$$+PP1
+-nos-ias	ias   	^V    *    1    1    0    L 1	$$+nos:$$+PP1
+-nos-ão		ão    	^V    *    1    1    0    L 1	$$+nos:$$+PP1
+-nos-ás		ás    	^V    *    1    1    0    L 1	$$+nos:$$+PP1
+azer-nos-ei	arei  	^VMIF *    1    1    0    L 1	$$+nos:$$+PP1
+azer-nos-íamos 	aríamos ^VMIC *  1    1    0    L 1	$$+nos:$$+PP1
+azer-nos-á	ará   	^VMIF *    1    1    0    L 1	$$+nos:$$+PP1
+azer-nos-eis	areis 	^VMIF *    1    1    0    L 1	$$+nos:$$+PP1
+azer-nos-íeis 	aríeis	^VMIC *   1    1    0    L 1	$$+nos:$$+PP1
+azer-nos-emos 	aremos	^VMIF *   1    1    0    L 1	$$+nos:$$+PP1
+azer-nos-ia 	aria  	^VMIC *    1    1    0    L 1	$$+nos:$$+PP1
+azer-nos-iam 	ariam 	^VMIC *    1    1    0    L 1	$$+nos:$$+PP1
+azer-nos-ias 	arias 	^VMIC *    1    1    0    L 1	$$+nos:$$+PP1
+azer-nos-ão 	arão  	^VMIF *    1    1    0    L 1	$$+nos:$$+PP1
+azer-nos-ás 	arás  	^VMIF *    1    1    0    L 1	$$+nos:$$+PP1
+
+-vos-ei		ei    	^V    *    1    1    0    L 1	$$+vos:$$+PP
+-vos-íamos	íamos 	^V    *    1    1    0    L 1	$$+vos:$$+PP
+-vos-á		á     	^V    *    1    1    0    L 1	$$+vos:$$+PP
+-vos-eis	eis   	^V    *    1    1    0    L 1	$$+vos:$$+PP
+-vos-íeis	íeis  	^V    *    1    1    0    L 1	$$+vos:$$+PP
+-vos-emos	emos  	^V    *    1    1    0    L 1	$$+vos:$$+PP
+-vos-ia		ia    	^V    *    1    1    0    L 1	$$+vos:$$+PP
+-vos-iam	iam   	^V    *    1    1    0    L 1	$$+vos:$$+PP
+-vos-ias	ias   	^V    *    1    1    0    L 1	$$+vos:$$+PP
+-vos-ão		ão    	^V    *    1    1    0    L 1	$$+vos:$$+PP
+-vos-ás		ás    	^V    *    1    1    0    L 1	$$+vos:$$+PP
+azer-vos-ei	arei  	^VMIF *    1    1    0    L 1	$$+vos:$$+PP
+azer-vos-íamos  aríamos ^VMIC *  1    1    0    L 1	$$+vos:$$+PP
+azer-vos-á	ará   	^VMIF *    1    1    0    L 1	$$+vos:$$+PP
+azer-vos-eis	areis 	^VMIF *    1    1    0    L 1	$$+vos:$$+PP
+azer-vos-íeis 	aríeis	^VMIC *   1    1    0    L 1	$$+vos:$$+PP
+azer-vos-emos 	aremos 	^VMIF *   1    1    0    L 1	$$+vos:$$+PP
+azer-vos-ia 	aria  	^VMIC *    1    1    0    L 1	$$+vos:$$+PP
+azer-vos-iam 	ariam 	^VMIC *    1    1    0    L 1	$$+vos:$$+PP
+azer-vos-ias 	arias 	^VMIC *    1    1    0    L 1	$$+vos:$$+PP
+azer-vos-ão 	arão  	^VMIF *    1    1    0    L 1	$$+vos:$$+PP
+azer-vos-ás 	arás  	^VMIF *    1    1    0    L 1	$$+vos:$$+PP
+
+-se-ei		ei    	^V    *    1    1    0    L 1	$$+se:$$+PP
+-se-íamos	íamos 	^V    *    1    1    0    L 1	$$+se:$$+PP
+-se-á		á     	^V    *    1    1    0    L 1	$$+se:$$+PP
+-se-eis		eis   	^V    *    1    1    0    L 1	$$+se:$$+PP
+-se-íeis	íeis  	^V    *    1    1    0    L 1	$$+se:$$+PP
+-se-emos	emos  	^V    *    1    1    0    L 1	$$+se:$$+PP
+-se-ia		ia    	^V    *    1    1    0    L 1	$$+se:$$+PP
+-se-iam		iam   	^V    *    1    1    0    L 1	$$+se:$$+PP
+-se-ias		ias   	^V    *    1    1    0    L 1	$$+se:$$+PP
+-se-ão		ão    	^V    *    1    1    0    L 1	$$+se:$$+PP
+-se-ás		ás    	^V    *    1    1    0    L 1	$$+se:$$+PP
+azer-se-ei	arei  	^VMIF *    1    1    0    L 1	$$+se:$$+PP
+azer-se-íamos   aríamos ^VMIC *  1    1    0    L 1	$$+se:$$+PP
+azer-se-á	ará   	^VMIF *    1    1    0    L 1	$$+se:$$+PP
+azer-se-eis	areis 	^VMIF *    1    1    0    L 1	$$+se:$$+PP
+azer-se-íeis 	aríeis 	^VMIC *   1    1    0    L 1	$$+se:$$+PP
+azer-se-emos 	aremos 	^VMIF *   1    1    0    L 1	$$+se:$$+PP
+azer-se-ia 	aria  	^VMIC *    1    1    0    L 1	$$+se:$$+PP
+azer-se-iam 	ariam 	^VMIC *    1    1    0    L 1	$$+se:$$+PP
+azer-se-ias 	arias 	^VMIC *    1    1    0    L 1	$$+se:$$+PP
+azer-se-ão 	arão  	^VMIF *    1    1    0    L 1	$$+se:$$+PP
+azer-se-ás 	arás  	^VMIF *    1    1    0    L 1	$$+se:$$+PP
+
+-ma-ei		ei    	^V    *    1    1    0    L 1	$$+me+a:$$+PP+PP
+-ma-íamos	íamos 	^V    *    1    1    0    L 1	$$+me+a:$$+PP+PP
+-ma-á		á     	^V    *    1    1    0    L 1	$$+me+a:$$+PP+PP
+-ma-eis		eis   	^V    *    1    1    0    L 1	$$+me+a:$$+PP+PP
+-ma-íeis	íeis  	^V    *    1    1    0    L 1	$$+me+a:$$+PP+PP
+-ma-emos	emos  	^V    *    1    1    0    L 1	$$+me+a:$$+PP+PP
+-ma-ia		ia    	^V    *    1    1    0    L 1	$$+me+a:$$+PP+PP
+-ma-iam		iam   	^V    *    1    1    0    L 1	$$+me+a:$$+PP+PP
+-ma-ias		ias   	^V    *    1    1    0    L 1	$$+me+a:$$+PP+PP
+-ma-ão		ão    	^V    *    1    1    0    L 1	$$+me+a:$$+PP+PP
+-ma-ás		ás    	^V    *    1    1    0    L 1	$$+me+a:$$+PP+PP
+azer-ma-ei	arei  	^VMIF *    1    1    0    L 1	$$+me+a:$$+PP+PP
+azer-ma-íamos   aríamos ^VMIC *  1    1    0    L 1	$$+me+a:$$+PP+PP
+azer-ma-á	ará   	^VMIF *    1    1    0    L 1	$$+me+a:$$+PP+PP
+azer-ma-eis	areis 	^VMIF *    1    1    0    L 1	$$+me+a:$$+PP+PP
+azer-ma-íeis 	aríeis 	^VMIC *   1    1    0    L 1	$$+me+a:$$+PP+PP
+azer-ma-emos 	aremos 	^VMIF *   1    1    0    L 1	$$+me+a:$$+PP+PP
+azer-ma-ia 	aria  	^VMIC *    1    1    0    L 1	$$+me+a:$$+PP+PP
+azer-ma-iam 	ariam 	^VMIC *    1    1    0    L 1	$$+me+a:$$+PP+PP
+azer-ma-ias 	arias 	^VMIC *    1    1    0    L 1	$$+me+a:$$+PP+PP
+azer-ma-ão 	arão  	^VMIF *    1    1    0    L 1	$$+me+a:$$+PP+PP
+azer-ma-ás 	arás  	^VMIF *    1    1    0    L 1	$$+me+a:$$+PP+PP
+
+-mas-ei		ei    	^V    *    1    1    0    L 1	$$+me+as:$$+PP+PP
+-mas-íamos	íamos 	^V    *    1    1    0    L 1	$$+me+as:$$+PP+PP
+-mas-á		á     	^V    *    1    1    0    L 1	$$+me+as:$$+PP+PP
+-mas-eis	eis   	^V    *    1    1    0    L 1	$$+me+as:$$+PP+PP
+-mas-íeis	íeis  	^V    *    1    1    0    L 1	$$+me+as:$$+PP+PP
+-mas-emos	emos  	^V    *    1    1    0    L 1	$$+me+as:$$+PP+PP
+-mas-ia		ia    	^V    *    1    1    0    L 1	$$+me+as:$$+PP+PP
+-mas-iam	iam   	^V    *    1    1    0    L 1	$$+me+as:$$+PP+PP
+-mas-ias	ias   	^V    *    1    1    0    L 1	$$+me+as:$$+PP+PP
+-mas-ão		ão    	^V    *    1    1    0    L 1	$$+me+as:$$+PP+PP
+-mas-ás		ás    	^V    *    1    1    0    L 1	$$+me+as:$$+PP+PP
+azer-mas-ei	arei  	^VMIF *    1    1    0    L 1	$$+me+as:$$+PP+PP
+azer-mas-íamos  aríamos ^VMIC *  1    1    0    L 1	$$+me+as:$$+PP+PP
+azer-mas-á	ará   	^VMIF *    1    1    0    L 1	$$+me+as:$$+PP+PP
+azer-mas-eis	areis 	^VMIF *    1    1    0    L 1	$$+me+as:$$+PP+PP
+azer-mas-íeis 	aríeis 	^VMIC *   1    1    0    L 1	$$+me+as:$$+PP+PP
+azer-mas-emos 	aremos 	^VMIF *   1    1    0    L 1	$$+me+as:$$+PP+PP
+azer-mas-ia 	aria  	^VMIC *    1    1    0    L 1	$$+me+as:$$+PP+PP
+azer-mas-iam 	ariam 	^VMIC *    1    1    0    L 1	$$+me+as:$$+PP+PP
+azer-mas-ias 	arias 	^VMIC *    1    1    0    L 1	$$+me+as:$$+PP+PP
+azer-mas-ão 	arão  	^VMIF *    1    1    0    L 1	$$+me+as:$$+PP+PP
+azer-mas-ás 	arás  	^VMIF *    1    1    0    L 1	$$+me+as:$$+PP+PP
+
+-mo-ei		ei    	^V    *    1    1    0    L 1	$$+me+o:$$+PP+PP
+-mo-íamos	íamos 	^V    *    1    1    0    L 1	$$+me+o:$$+PP+PP
+-mo-á		á     	^V    *    1    1    0    L 1	$$+me+o:$$+PP+PP
+-mo-eis		eis   	^V    *    1    1    0    L 1	$$+me+o:$$+PP+PP
+-mo-íeis	íeis  	^V    *    1    1    0    L 1	$$+me+o:$$+PP+PP
+-mo-emos	emos  	^V    *    1    1    0    L 1	$$+me+o:$$+PP+PP
+-mo-ia		ia    	^V    *    1    1    0    L 1	$$+me+o:$$+PP+PP
+-mo-iam		iam   	^V    *    1    1    0    L 1	$$+me+o:$$+PP+PP
+-mo-ias		ias   	^V    *    1    1    0    L 1	$$+me+o:$$+PP+PP
+-mo-ão		ão    	^V    *    1    1    0    L 1	$$+me+o:$$+PP+PP
+-mo-ás		ás    	^V    *    1    1    0    L 1	$$+me+o:$$+PP+PP
+azer-mo-ei	arei  	^VMIF *    1    1    0    L 1	$$+me+o:$$+PP+PP
+azer-mo-íamos   aríamos ^VMIC *  1    1    0    L 1	$$+me+o:$$+PP+PP
+azer-mo-á	ará   	^VMIF *    1    1    0    L 1	$$+me+o:$$+PP+PP
+azer-mo-eis	areis 	^VMIF *    1    1    0    L 1	$$+me+o:$$+PP+PP
+azer-mo-íeis 	aríeis 	^VMIC *   1    1    0    L 1	$$+me+o:$$+PP+PP
+azer-mo-emos 	aremos 	^VMIF *   1    1    0    L 1	$$+me+o:$$+PP+PP
+azer-mo-ia 	aria  	^VMIC *    1    1    0    L 1	$$+me+o:$$+PP+PP
+azer-mo-iam 	ariam 	^VMIC *    1    1    0    L 1	$$+me+o:$$+PP+PP
+azer-mo-ias 	arias 	^VMIC *    1    1    0    L 1	$$+me+o:$$+PP+PP
+azer-mo-ão 	arão  	^VMIF *    1    1    0    L 1	$$+me+o:$$+PP+PP
+azer-mo-ás 	arás  	^VMIF *    1    1    0    L 1	$$+me+o:$$+PP+PP
+
+-mos-ei		ei    	^V    *    1    1    0    L 1	$$+me+os:$$+PP+PP
+-mos-íamos	íamos 	^V    *    1    1    0    L 1	$$+me+os:$$+PP+PP
+-mos-á		á     	^V    *    1    1    0    L 1	$$+me+os:$$+PP+PP
+-mos-eis	eis   	^V    *    1    1    0    L 1	$$+me+os:$$+PP+PP
+-mos-íeis	íeis  	^V    *    1    1    0    L 1	$$+me+os:$$+PP+PP
+-mos-emos	emos  	^V    *    1    1    0    L 1	$$+me+os:$$+PP+PP
+-mos-ia		ia    	^V    *    1    1    0    L 1	$$+me+os:$$+PP+PP
+-mos-iam	iam   	^V    *    1    1    0    L 1	$$+me+os:$$+PP+PP
+-mos-ias	ias   	^V    *    1    1    0    L 1	$$+me+os:$$+PP+PP
+-mos-ão		ão    	^V    *    1    1    0    L 1	$$+me+os:$$+PP+PP
+-mos-ás		ás    	^V    *    1    1    0    L 1	$$+me+os:$$+PP+PP
+azer-mos-ei	arei  	^VMIF *    1    1    0    L 1	$$+me+os:$$+PP+PP
+azer-mos-íamos  aríamos ^VMIC *  1    1    0    L 1	$$+me+os:$$+PP+PP
+azer-mos-á	ará   	^VMIF *    1    1    0    L 1	$$+me+os:$$+PP+PP
+azer-mos-eis	areis 	^VMIF *    1    1    0    L 1	$$+me+os:$$+PP+PP
+azer-mos-íeis 	aríeis 	^VMIC *   1    1    0    L 1	$$+me+os:$$+PP+PP
+azer-mos-emos 	aremos 	^VMIF *   1    1    0    L 1	$$+me+os:$$+PP+PP
+azer-mos-ia 	aria  	^VMIC *    1    1    0    L 1	$$+me+os:$$+PP+PP
+azer-mos-iam 	ariam 	^VMIC *    1    1    0    L 1	$$+me+os:$$+PP+PP
+azer-mos-ias 	arias 	^VMIC *    1    1    0    L 1	$$+me+os:$$+PP+PP
+azer-mos-ão 	arão  	^VMIF *    1    1    0    L 1	$$+me+os:$$+PP+PP
+azer-mos-ás 	arás  	^VMIF *    1    1    0    L 1	$$+me+os:$$+PP+PP
+
+-lhas-ei	ei    	^V    *    1    1    0    L 1	$$+lhe+as:$$+PP+PP
+-lhas-íamos	íamos 	^V    *    1    1    0    L 1	$$+lhe+as:$$+PP+PP
+-lhas-á		á     	^V    *    1    1    0    L 1	$$+lhe+as:$$+PP+PP
+-lhas-eis	eis   	^V    *    1    1    0    L 1	$$+lhe+as:$$+PP+PP
+-lhas-íeis	íeis  	^V    *    1    1    0    L 1	$$+lhe+as:$$+PP+PP
+-lhas-emos	emos  	^V    *    1    1    0    L 1	$$+lhe+as:$$+PP+PP
+-lhas-ia	ia    	^V    *    1    1    0    L 1	$$+lhe+as:$$+PP+PP
+-lhas-iam	iam   	^V    *    1    1    0    L 1	$$+lhe+as:$$+PP+PP
+-lhas-ias	ias   	^V    *    1    1    0    L 1	$$+lhe+as:$$+PP+PP
+-lhas-ão	ão    	^V    *    1    1    0    L 1	$$+lhe+as:$$+PP+PP
+-lhas-ás	ás    	^V    *    1    1    0    L 1	$$+lhe+as:$$+PP+PP
+azer-lhas-ei	arei  	^VMIF *    1    1    0    L 1	$$+lhe+as:$$+PP+PP
+azer-lhas-íamos aríamos ^VMIC *  1    1    0    L 1	$$+lhe+as:$$+PP+PP
+azer-lhas-á	ará   	^VMIF *    1    1    0    L 1	$$+lhe+as:$$+PP+PP
+azer-lhas-eis	areis 	^VMIF *    1    1    0    L 1	$$+lhe+as:$$+PP+PP
+azer-lhas-íeis 	aríeis 	^VMIC *   1    1    0    L 1	$$+lhe+as:$$+PP+PP
+azer-lhas-emos 	aremos 	^VMIF *   1    1    0    L 1	$$+lhe+as:$$+PP+PP
+azer-lhas-ia 	aria  	^VMIC *    1    1    0    L 1	$$+lhe+as:$$+PP+PP
+azer-lhas-iam 	ariam 	^VMIC *    1    1    0    L 1	$$+lhe+as:$$+PP+PP
+azer-lhas-ias 	arias 	^VMIC *    1    1    0    L 1	$$+lhe+as:$$+PP+PP
+azer-lhas-ão 	arão  	^VMIF *    1    1    0    L 1	$$+lhe+as:$$+PP+PP
+azer-lhas-ás 	arás  	^VMIF *    1    1    0    L 1	$$+lhe+as:$$+PP+PP
+
+
+-lhe 		*    ^V    *    1    1    0    L 1	$$+lhe:$$+PP
+-lhes  		*    ^V    *    1    1    0    L 1	$$+lhes:$$+PP
+-me    		*    ^V    *    1    1    0    L 1	$$+me:$$+PP
+-te    		*    ^V    *    1    1    0    L 1	$$+te:$$+PP
+-nos   		*    ^V    *    1    1    0    L 1	$$+nos:$$+PP # Lematiza sempre PP1, e nunca PP3 (fazem-nos: "fazem a nós", e não "fazem os") 
+-vos   		*    ^V    *    1    1    0    L 1	$$+vos:$$+PP
+-se    		*    ^VMG  *    1    1    0    L 1	$$+se:$$+PP
+-se    		*    ^VMIP3 *   1    1    0    L 1	$$+se:$$+PP
+-se    		*    ^VMIS3 *   1    1    0    L 1	$$+se:$$+PP
+-se    		*    ^VMII3 *   1    1    0    L 1	$$+se:$$+PP
+-se    		*    ^VMIM3 *   1    1    0    L 1	$$+se:$$+PP
+-se    		*    ^VMIF3 *   1    1    0    L 1	$$+se:$$+PP # Apresentará-se vs apresentar-se-á
+-se    		*    ^VMIC3 *   1    1    0    L 1	$$+se:$$+PP
+-se    		*    ^VMSI3 *   1    1    0    L 1	$$+se:$$+PP
+-se    		*    ^VMSP3 *   1    1    0    L 1	$$+se:$$+PP
+-se    		*    ^VMSF3 *   1    1    0    L 1	$$+se:$$+PP
+-se    		*    ^VMN03 *   1    1    0    L 1	$$+se:$$+PP
+-se    		*    ^VMM03 *   1    1    0    L 1	$$+se:$$+PP
+-o    		*    ^VMIP3 *   1    1    0    L 1	$$+o:$$+PP
+-o    		*    ^VMIP1 *   1    1    0    L 1	$$+o:$$+PP
+-o    		*    ^VMIS1 *   1    1    0    L 1	$$+o:$$+PP
+-o    		*    ^VMIS2S *  1    1    0    L 1	$$+o:$$+PP
+-o    		*    ^VMIS3 *   1    1    0    L 1	$$+o:$$+PP
+-o    		*    ^VMIC1 *   1    1    0    L 1	$$+o:$$+PP
+-o    		*    ^VMIC3 *   1    1    0    L 1	$$+o:$$+PP
+-o    		*    ^VMII1 *   1    1    0    L 1	$$+o:$$+PP
+-o    		*    ^VMII3 *   1    1    0    L 1	$$+o:$$+PP
+-o    		*    ^VMIM1 *   1    1    0    L 1	$$+o:$$+PP
+-o    		*    ^VMIM3 *   1    1    0    L 1	$$+o:$$+PP
+-o    		*    ^VMSP1 *   1    1    0    L 1	$$+o:$$+PP
+-o    		*    ^VMSP3 *   1    1    0    L 1	$$+o:$$+PP
+-o    		*    ^VMSI1 *   1    1    0    L 1	$$+o:$$+PP
+-o    		*    ^VMSI3 *   1    1    0    L 1	$$+o:$$+PP
+-o    		*    ^VMIF1 *   1    1    0    L 1	$$+o:$$+PP
+-o    		*    ^VMIF3 *   1    1    0    L 1	$$+o:$$+PP
+-o    		*    ^VMM02 *   1    1    0    L 1	$$+o:$$+PP
+-o    		*    ^VMM03 *   1    1    0    L 1	$$+o:$$+PP
+-o    		*    ^VMM01P *  1    1    0    L 1	$$+o:$$+PP
+-o		*    ^VMG   *	1    1	  0    L 1	$$+o:$$+PP # Não estava: piora alguma coisa?
+i-lo		iz   ^V     *   1    1    0    L 1	$$+o:$$+PP
+-lo    		s    ^VMIP2 *   1    1    0    L 1	$$+o:$$+PP
+-lo    		s    ^VMIP1P *  1    1    0    L 1	$$+o:$$+PP
+-lo    		s    ^VMIS1P *  1    1    0    L 1	$$+o:$$+PP
+-lo    		s    ^VMIS2P *  1    1    0    L 1	$$+o:$$+PP
+-lo    		s    ^VMII2 *   1    1    0    L 1	$$+o:$$+PP
+-lo    		s    ^VMII1P *  1    1    0    L 1	$$+o:$$+PP
+-lo    		s    ^VMIM2 *   1    1    0    L 1	$$+o:$$+PP
+-lo    		s    ^VMIM1P *  1    1    0    L 1	$$+o:$$+PP
+-lo    		s    ^VMIF2 *   1    1    0    L 1	$$+o:$$+PP
+-lo    		s    ^VMIF1P *  1    1    0    L 1	$$+o:$$+PP
+-lo    		s    ^VMIC2 *   1    1    0    L 1	$$+o:$$+PP
+-lo    		s    ^VMIC1P *  1    1    0    L 1	$$+o:$$+PP
+-lo    		s    ^VMSP2 *   1    1    0    L 1	$$+o:$$+PP
+-lo    		s    ^VMSP1P *  1    1    0    L 1	$$+o:$$+PP
+-lo    		s    ^VMSI2 *   1    1    0    L 1	$$+o:$$+PP
+-lo    		s    ^VMSI1P *  1    1    0    L 1	$$+o:$$+PP
+-lo    		s    ^VMSF2 *   1    1    0    L 1	$$+o:$$+PP
+-lo    		s    ^VMSF1P *  1    1    0    L 1	$$+o:$$+PP
+-lo    		*    ^VMN   *   1    1    0    L 1	$$+o:$$+PP # Não se acrescenta "r" porque estão os lemas sem "r" no dicc.src (acrescentado "torná".)
+-lo    		s    ^VMM01P *  1    1    0    L 1	$$+o:$$+PP
+-los    	s    ^VMIP2 *   1    1    0    L 1	$$+os:$$+PP
+-los    	s    ^VMIP1P *  1    1    0    L 1	$$+os:$$+PP
+-los    	s    ^VMIS1P *  1    1    0    L 1	$$+os:$$+PP
+-los    	s    ^VMIS2P *  1    1    0    L 1	$$+os:$$+PP
+-los    	s    ^VMII2 *   1    1    0    L 1	$$+os:$$+PP
+-los    	s    ^VMII1P *  1    1    0    L 1	$$+os:$$+PP
+-los    	s    ^VMIM2 *   1    1    0    L 1	$$+os:$$+PP
+-los    	s    ^VMIM1P *  1    1    0    L 1	$$+os:$$+PP
+-los    	s    ^VMIF2 *   1    1    0    L 1	$$+os:$$+PP
+-los    	s    ^VMIF1P *  1    1    0    L 1	$$+os:$$+PP
+-los    	s    ^VMIC2 *   1    1    0    L 1	$$+os:$$+PP
+-los    	s    ^VMIC1P *  1    1    0    L 1	$$+os:$$+PP
+-los    	s    ^VMSP2 *   1    1    0    L 1	$$+os:$$+PP
+-los    	s    ^VMSP1P *  1    1    0    L 1	$$+os:$$+PP
+-los    	s    ^VMSI2 *   1    1    0    L 1	$$+os:$$+PP
+-los    	s    ^VMSI1P *  1    1    0    L 1	$$+os:$$+PP
+-los    	s    ^VMSF2 *   1    1    0    L 1	$$+os:$$+PP
+-los    	s    ^VMSF1P *  1    1    0    L 1	$$+os:$$+PP
+-los    	*    ^VMN   *   1    1    0    L 1	$$+os:$$+PP # Não se acrescenta "r" porque estão os lemas sem "r" no dicc.src (acrescentado "torná".)
+-los    	s    ^VMM01P *  1    1    0    L 1	$$+os:$$+PP
+-la    		s    ^VMIP2 *   1    1    0    L 1	$$+a:$$+PP
+-la    		s    ^VMIP1P *  1    1    0    L 1	$$+a:$$+PP
+-la    		s    ^VMIS1P *  1    1    0    L 1	$$+a:$$+PP
+-la    		s    ^VMIS2P *  1    1    0    L 1	$$+a:$$+PP
+-la    		s    ^VMII2 *   1    1    0    L 1	$$+a:$$+PP
+-la    		s    ^VMII1P *  1    1    0    L 1	$$+a:$$+PP
+-la    		s    ^VMIM2 *   1    1    0    L 1	$$+a:$$+PP
+-la    		s    ^VMIM1P *  1    1    0    L 1	$$+a:$$+PP
+-la    		s    ^VMIF2 *   1    1    0    L 1	$$+a:$$+PP
+-la    		s    ^VMIF1P *  1    1    0    L 1	$$+a:$$+PP
+-la    		s    ^VMIC2 *   1    1    0    L 1	$$+a:$$+PP
+-la    		s    ^VMIC1P *  1    1    0    L 1	$$+a:$$+PP
+-la    		s    ^VMSP2 *   1    1    0    L 1	$$+a:$$+PP
+-la    		s    ^VMSP1P *  1    1    0    L 1	$$+a:$$+PP
+-la    		s    ^VMSI2 *   1    1    0    L 1	$$+a:$$+PP
+-la    		s    ^VMSI1P *  1    1    0    L 1	$$+a:$$+PP
+-la    		s    ^VMSF2 *   1    1    0    L 1	$$+a:$$+PP
+-la    		s    ^VMSF1P *  1    1    0    L 1	$$+a:$$+PP
+-la    		*    ^VMN   *   1    1    0    L 1	$$+a:$$+PP # Não se acrescenta "r" porque estão os lemas sem "r" no dicc.src (acrescentado "torná".)
+-la    		s    ^VMM01P *  1    1    0    L 1	$$+a:$$+PP
+-las   		s    ^VMIP2 *   1    1    0    L 1	$$+as:$$+PP
+-las   		s    ^VMIP1P *  1    1    0    L 1	$$+as:$$+PP
+-las   		s    ^VMIS1P *  1    1    0    L 1	$$+as:$$+PP
+-las   		s    ^VMIS2P *  1    1    0    L 1	$$+as:$$+PP
+-las   		s    ^VMII2 *   1    1    0    L 1	$$+as:$$+PP
+-las   		s    ^VMII1P *  1    1    0    L 1	$$+as:$$+PP
+-las   		s    ^VMIM2 *   1    1    0    L 1	$$+as:$$+PP
+-las   		s    ^VMIM1P *  1    1    0    L 1	$$+as:$$+PP
+-las   		s    ^VMIF2 *   1    1    0    L 1	$$+as:$$+PP
+-las   		s    ^VMIF1P *  1    1    0    L 1	$$+as:$$+PP
+-las   		s    ^VMIC2 *   1    1    0    L 1	$$+as:$$+PP
+-las   		s    ^VMIC1P *  1    1    0    L 1	$$+as:$$+PP
+-las   		s    ^VMSP2 *   1    1    0    L 1	$$+as:$$+PP
+-las   		s    ^VMSP1P *  1    1    0    L 1	$$+as:$$+PP
+-las   		s    ^VMSI2 *   1    1    0    L 1	$$+as:$$+PP
+-las   		s    ^VMSI1P *  1    1    0    L 1	$$+as:$$+PP
+-las   		s    ^VMSF2 *   1    1    0    L 1	$$+as:$$+PP
+-las   		s    ^VMSF1P *  1    1    0    L 1	$$+as:$$+PP
+-las   		*    ^VMN   *   1    1    0    L 1	$$+as:$$+PP # Não se acrescenta "r" porque estão os lemas sem "r" no dicc.src (acrescentado "torná".)
+-las   		s    ^VMM01P *  1    1    0    L 1	$$+as:$$+PP
+
+-no    		*    ^V    *    1    1    0    L 1	$$+o:$$+PP
+-os    		*    ^V    *    1    1    0    L 1	$$+os:$$+PP
+-a    		*    ^V    *    1    1    0    L 1	$$+a:$$+PP
+-na		*    ^V	   *	1    1	  0    L 1	$$+a:$$+PP
+-as    		*    ^V    *    1    1    0    L 1	$$+as:$$+PP
+-nas		*    ^V	   *	1    1	  0    L 1	$$+as:$$+PP
+
+
+## combinações de dois enclíticos
+
+-ma    	*    ^V    *    1    1    0    L 1	$$+me+a:$$+PP+PP
+-mas   	*    ^V    *    1    1    0    L 1	$$+me+as:$$+PP+PP
+-mo    	*    ^V    *    1    1    0    L 1	$$+me+o:$$+PP+PP
+-mos   	*    ^V    *    1    1    0    L 1	$$+me+os:$$+PP+PP
+-lha   	*    ^V    *    1    1    0    L 1	$$+lhe+a:$$+PP+PP
+-lhas   *    ^V    *    1    1    0    L 1	$$+lhe+as:$$+PP+PP
+-lho   	*    ^V    *    1    1    0    L 1	$$+lhe+o:$$+PP+PP
+-lhos   *    ^V    *    1    1    0    L 1	$$+lhe+os:$$+PP+PP
+-no-la  *    ^V    *    1    1    0    L 1	$$+nos+a:$$+PP+PP1
+-no-las *    ^V    *    1    1    0    L 1	$$+nos+as:$$+PP+PP1
+-no-lo  *    ^V    *    1    1    0    L 1	$$+nos+o:$$+PP+PP1
+-no-los *    ^V    *    1    1    0    L 1	$$+nos+os:$$+PP+PP1
+-vo-la  *    ^V    *    1    1    0    L 1	$$+vos+a:$$+PP+PP
+-vo-las *    ^V    *    1    1    0    L 1	$$+vos+as:$$+PP+PP
+-vo-lo  *    ^V    *    1    1    0    L 1	$$+vos+o:$$+PP+PP
+-vo-los *    ^V    *    1    1    0    L 1	$$+vos+os:$$+PP+PP
+-se-me  *    ^V    *    1    1    0    L 1	$$+se+me:$$+PP+PP
+-se-lhe *    ^V    *    1    1    0    L 1	$$+se+lhe:$$+PP+PP
+-se-nos *    ^V    *    1    1    0    L 1	$$+se+nos:$$+PP+PP
+-se-vos *    ^V    *    1    1    0    L 1	$$+se+vos:$$+PP+PP
+-se-lhes *   ^V    *    1    1    0    L 1	$$+se+lhes:$$+PP+PP
+
+
+################ ADVERBIOS -mente ##############
+
+mente    *    ^AQ0CS    RG    0    0    0   L  1 -
+mente    *    ^AQ0FS    RG    0    0    0   L  1 -
+
+
+################ DIMINUTIVOS ##############
+
+# pólenzinho #
+
+nzinhas	n	^NCMS	NCFP00D	1	0	0	L 0	-
+nzinha	n	^NCMS	NCFS00D	1	0	0	L 0	-
+nzinhos	n	^NCMS	NCMP00D	1	0	0	L 0	-
+nzinho	n	^NCMS	NCMS00D	1	0	0	L 0	-
+
+# papãozinho # alemãzinha #
+
+ãozinho	 ão	^NCMS	NCMS00D	1	0	0	L 0	-
+ãezinhos ão	^NCMS   NCMP00D	1	0	0	L 0	-
+õezinhos ão	^NCMS   NCMP00D	1	0	0	L 0	-
+ãzinha   ã	^NCMS	NCFS00D	1	0	0	L 0	-
+ãzinhas  ã	^NCMS	NCFP00D	1	0	0	L 0	-
+
+# papãozinho # alemãzinha #
+
+ãozinho	 ão	^AQ0MS	AQDMS0	1	0	0	L 0	-
+ãezinhos ão	^AQ0MS  AQDMP0	1	0	0	L 0	-
+õezinhos ão	^AQ0MS  AQDMP0	1	0	0	L 0	-
+ãzinha   ã	^AQ0MS	AQDFS0	1	0	0	L 0	-
+ãzinhas  ã	^AQ0MS	AQDFP0	1	0	0	L 0	-
+
+# rapazinho #
+
+zinhas	z	^NCMS	NCFP00D	1	0	0	L 0	-
+zinha	z	^NCMS	NCFS00D	1	0	0	L 0	-
+zinhos	z	^NCMS	NCMP00D	1	0	0	L 0	-
+zinho	z	^NCMS	NCMS00D	1	0	0	L 0	-
+
+# luzinha # Pode-se unir ao anterior mudando o género? E acrescentar também AQ?
+
+zinhas	z	^NCFS	NCFP00D	1	0	0	L 0	-
+zinha	z	^NCFS	NCFS00D	1	0	0	L 0	-
+
+# francesinho # 
+
+esinhas	ês	^NCMS	NCFP00D	1	0	0	L 0	-
+esinha	ês	^NCMS	NCFS00D	1	0	0	L 0	-
+esinhos	ês	^NCMS	NCMP00D	1	0	0	L 0	-
+esinho	ês	^NCMS	NCMS00D	1	0	0	L 0	-
+
+# francesinho # 
+
+sinhas	s	^AQ0	AQDFP0	1	0	0	L 0	-
+sinha	s	^AQ0	AQDFS0	1	0	0	L 0	-
+sinhos	s	^AQ0	AQDMP0	1	0	0	L 0	-
+sinho	s	^AQ0	AQDMS0	1	0	0	L 0	-
+
+# cachecolzinho #
+
+izinhas	l	^NCMS	NCFP00D	1	0	0	L 0	-
+lzinha	l	^NCMS	NCFS00D	1	0	0	L 0	-
+izinhos	l	^NCMS	NCMP00D	1	0	0	L 0	-
+lzinho	l	^NCMS	NCMS00D	1	0	0	L 0	-
+
+# galeguinho #
+
+inhas	a|e|i|o|u	^AQ0	AQDFP0	1	0	0	L 0	-
+inha	a|e|i|o|u	^AQ0	AQDFS0	1	0	0	L 0	-
+inhos	a|e|i|o|u	^AQ0	AQDMP0	1	0	0	L 0	-
+inho	a|e|i|o|u	^AQ0	AQDMS0	1	0	0	L 0	-
+#inho	e		^AQ0CS	AQDMS0	1	0	0	L 0	-
+#inha	e		^AQ0CS	AQDFS0	1	0	0	L 0	-
+#inhos	e		^AQ0CS	AQDMP0	1	0	0	L 0	-
+#inhas	e		^AQ0CS	AQDFP0	1	0	0	L 0	-
+
+# directorzinho #
+
+rzinhas	r	^NCMS	NCFP00D	1	0	0	L 0	-
+rzinha	r	^NCMS	NCFS00D	1	0	0	L 0	-
+rzinhos	r	^NCMS	NCMP00D	1	0	0	L 0	-
+rzinho	r	^NCMS	NCMS00D	1	0	0	L 0	-
+
+# cuzinho #
+
+zinhas	*	^NC	NCFP00D	1	0	0	L 0	-
+zinha	*	^NC	NCFS00D	1	0	0	L 0	-
+zinhos	*	^NC	NCMP00D	1	0	0	L 0	-
+zinho	*	^NC	NCMS00D	1	0	0	L 0	-
+
+# bordelinho #
+
+inho	*	^NC	NCMS00D 1	0	0	L 0	-
+inhos	*	^NC	NCMP00D 1	0	0	L 0	-
+inha	*	^NC	NCFS00D 1	0	0	L 0	-
+inhas	*	^NC	NCFP00D 1	0	0	L 0	-
+
+
+################ SUPERLATIVOS ##############
+
+# altíssimo
+
+íssimo	a|e|o|*		^AQ0MS	AQDMS0	1	0	0	L 0	-
+íssimos	a|e|o|*		^AQ0MS	AQDMP0	1	0	0	L 0	-
+íssima	a|e|o|*		^AQ0MS	AQDFS0	1	0	0	L 0	-
+íssimas	a|e|o|* 	^AQ0MS	AQDFP0	1	0	0	L 0	-
+
+# amabilíssimo
+
+bilíssimo  vel	^AQ0CS	AQSMS0	0	0	0	L 0	-
+bilíssimos veis	^AQ0CP	AQSMP0	0	0	0	L 0	-
+bilíssima  vel	^AQ0CS	AQSFS0	0	0	0	L 0	-
+bilíssimas veis	^AQ0CP	AQSFP0	0	0	0	L 0	-
+
+</Suffixes>

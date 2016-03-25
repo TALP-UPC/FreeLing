@@ -1,0 +1,23 @@
+<DecompositionRules>
+A 2 postype/O:ordinal;Q:qualificative grade/S:superlative gen/F:f;M:m;C:c num/S:s;P:p;N:c
+C 2 postype/C:coordinating;S:subordinating
+D 2 postype/A:article;D:demonstrative;E:exclamative;I:indefinite;T:interrogative;N:numeral;P:possessive person/1:1;2:2;3:3 gen/F:f;M:m;C:c num/S:s;P:p;N:c possessornum/S:s;P:p
+N 2 postype/C:common;P:proper gen/F:f;M:m;C:c num/S:s;P:p;N:c neclass/S:person;G:location;O:organization;V:other grade/A:augmentative;D:diminutive
+P 2 postype/D:demonstrative;E:exclamative;I:indefinite;T:interrogative;N:numeral;P:personal;X:possessive;R:relative person/1:1;2:2;3:3 gen/F:f;M:m;C:c num/S:s;P:p;N:c case/N:nominative;A:accusative;D:dative;O:oblique possessornum/S:s;P:p polite/P:yes
+R 2 postype/N:negative
+S 2 postype/P:preposition contracted/S:0;C:yes gen/M:m num/S:s
+V 3 postype/M:main;A:auxiliary;S:semiauxiliary mood/I:indicative;S:subjunctive;M:imperative;P:pastparticiple;G:gerund;N:infinitive tense/P:present;I:imperfect;F:future;S:past;C:conditional person/1:1;2:2;3:3 num/S:s;P:p gen/F:f;M:m
+Z 2 postype/d:partitive;m:currency;p:ratio;u:unit
+F 0 punct/c:comma;s:etc;d:colon;x:semicolon;g:hyphen;e:quotation;h:slash;p:period;i:questionmark;a:exclamationmark;t:percent;l:curlybracket;q:squarebracket;r:roundbracket;z:other punctenclose/a:open;t:close
+W 0
+I 0
+</DecompositionRules>
+<DirectTranslations>
+Fpa Fpa punct=parenthesis|punctenclose=open
+Fpt Fpt punct=parenthesis|punctenclose=close
+Fca Fca punct=squarebracket|punctenclose=open
+Fct Fct punct=squarebracket|punctenclose=close
+Fra Fra punct=quotation|punctenclose=open
+Frc Frc punct=quotation|punctenclose=close
+</DirectTranslations>
+

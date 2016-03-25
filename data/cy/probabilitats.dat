@@ -1,0 +1,3214 @@
+<TagsetFile>
+./tagset.dat
+</TagsetFile>
+<UnknownTags>
+AQ0000 1345
+AQ0CN0 1
+AQ0CP0 1
+AQ0CS0 1
+AQ0FN0 1
+AQ0FP0 1
+AQ0FS0 1
+AQ0MP0 1
+AQ0MS0 1
+AQCCN0 1
+AQCCP0 1
+AQCCS0 1
+AQCFP0 1
+AQCFS0 1
+AQCMP0 1
+AQCMS0 1
+AQDFS0 1
+AQSFP0 1
+AQSFS0 1
+AQSMP0 1
+AQSMS0 1
+I 1
+NC00000 1
+NCCN000 1
+NCCP000 1
+NCCS000 1
+NCFN000 1
+NCFP000 1
+NCFS000 1
+NCMN000 1
+NCMP000 1
+NCMS000 1
+NP00000 1
+RG 503
+VMG0000 1
+VMIC1P0 1
+VMIC1S0 1
+VMIC2P0 1
+VMIC2S0 1
+VMIC3P0 1
+VMIC3S0 1
+VMIF000 1
+VMIF1P0 1
+VMIF1S0 1
+VMIF2P0 1
+VMIF2S0 1
+VMIF3P0 1
+VMIF3S0 1
+VMII1P0 1
+VMII1S0 1
+VMII2P0 1
+VMII2S0 1
+VMII3P0 34
+VMII3S0 88
+VMIP000 1
+VMIP1P0 1
+VMIP1S0 1
+VMIP2P0 5
+VMIP2S0 6
+VMIP3P0 2
+VMIP3S0 15
+VMIS000 1
+VMIS1P0 2
+VMIS1S0 4
+VMIS2P0 6
+VMIS2S0 1
+VMIS3P0 4
+VMIS3S0 335
+VMM01P0 6
+VMM02P0 27
+VMM02S0 18
+VMN0000 2328
+VMP0000 1
+VMP00PF 1
+VMP00PM 1
+VMP00SF 1
+VMP00SM 1
+VMSI1P0 1
+VMSI1S0 1
+VMSI2P0 1
+VMSI2S0 1
+VMSI3P0 1
+VMSI3S0 1
+VMSP000 1
+VMSP1P0 1
+VMSP1S0 1
+VMSP2P0 1
+VMSP2S0 1
+VMSP3P0 1
+VMSP3S0 9
+</UnknownTags>
+<Theeta>
+0.00370717340606955
+</Theeta>
+<Suffixes>
+rydol 13 AQ0000 2
+feddwl 3 VMN0000 3
+nhinol 5 AQ0000 5
+sod 15 AQ0000 12 VMN0000 3
+rafu 1 VMN0000 1
+orddi 7 VMN0000 7
+wyrchus 1 AQ0000 1
+flwyno 33 VMN0000 33
+yn_hyn 1 RG 1
+drefnu 4 VMN0000 4
+af 96 AQ0000 55
+udodd 4 VMIS3S0 4
+thlon 4 AQ0000 4
+angen 46 AQ0000 3
+terfynol 2 AQ0000 2
+mi 36 VMN0000 2
+fnyddio 42 VMN0000 42
+sylwebu 1 VMN0000 1
+na 166 RG 95
+ahanol 12 AQ0000 12
+ithiol 4 AQ0000 4
+rthwyo 7 VMN0000 7
+rniadol 2 AQ0000 2
+posib 4 AQ0000 4
+hwilio 11 VMN0000 11
+id 137 VMN0000 24
+hio 45 VMN0000 45
+orrodd 2 VMIS3S0 2
+om 1 VMIS1P0 1
+ddiannus 13 AQ0000 13
+ir 107 AQ0000 20
+ffredin 12 AQ0000 12
+rioed 1 RG 1
+gwariant 1 VMIP3P0 1
+dymu 2 VMN0000 2
+barthu 8 VMN0000 8
+ron 32 RG 15
+eisoes 8 RG 8
+hori 3 VMN0000 3
+arnu 2 VMN0000 2
+n_oed 4 RG 4
+nnwys 31 VMN0000 2
+ilmio 1 VMN0000 1
+yddu 4 VMN0000 4
+arhaol 1 AQ0000 1
+diddanu 3 VMN0000 3
+yddio 42 VMN0000 42
+debyg 5 AQ0000 5
+byg 8 AQ0000 8
+yried 20 VMN0000 20
+goll 2 AQ0000 2
+rri 6 VMN0000 6
+roseddu 2 VMN0000 2
+nlynol 2 AQ0000 2
+brwd 3 AQ0000 3
+hwilio_i 4 VMN0000 4
+mryd 24 VMN0000 24
+odedig 3 AQ0000 3
+yso 2 VMN0000 2
+rymus 3 AQ0000 3
+nar 11 AQ0000 11
+codi 21 VMN0000 21
+heddol 11 AQ0000 11
+hlon 4 AQ0000 4
+wch_Ã¢ 3 VMM02P0 3
+edrych 21 VMN0000 21
+ofio 4 VMN0000 4
+cyfrannu 1 VMN0000 1
+nd 157 RG 7 VMN0000 53
+_Ã¢ 30 VMN0000 18 VMM02P0 3
+ireddu 4 VMN0000 4
+iheuro 6 VMN0000 6
+ysgu 15 VMN0000 15
+obi 1 VMN0000 1
+losgi 3 VMN0000 3
+bron 15 RG 15
+ymudol 3 AQ0000 3
+camu 3 VMN0000 3
+aeg 51 AQ0000 38
+ymdopi 2 VMN0000 2
+pharhau 1 VMN0000 1
+rru 3 VMN0000 3
+siodd 3 VMIS3S0 3
+iomi 2 VMN0000 2
+rheidiol 5 AQ0000 5
+ymdeimlo 1 VMN0000 1
+y 1096 RG 9 AQ0000 20
+itro 8 VMN0000 8
+swyddo 5 VMN0000 5
+rtal 3 AQ0000 3
+ll 144 RG 3 AQ0000 21 VMN0000 25
+treulio 2 VMN0000 2
+osib 32 AQ0000 32
+o_bryd 3 RG 3
+-lein 4 AQ0000 4
+osi 2 VMN0000 2
+ydlodd 4 VMIS3S0 4
+lodd 4 VMIS3S0 4
+o_am 1 VMN0000 1
+uno 2 VMN0000 2
+la 33 VMM02S0 6 VMN0000 21
+nodd 20 VMIS3S0 9 AQ0000 11
+ysgol 24 AQ0000 4
+oeddus 8 AQ0000 8
+lawr 11 RG 3
+gyrru 3 VMN0000 3
+mlaen 19 RG 15
+dedfrydu 2 VMN0000 2
+ynnodd 3 VMIS3S0 3
+od 598 RG 4 AQ0000 19 VMN0000 87
+ddasu 10 VMN0000 10
+yfrannu 3 VMN0000 3
+eg 87 RG 4 AQ0000 44 VMN0000 6
+lchÃ¯o 3 VMN0000 3
+anfon 5 VMN0000 5
+´l 144 RG 19 AQ0000 4
+gwahardd 1 VMN0000 1
+olynu 1 VMN0000 1
+uwchradd 9 AQ0000 9
+hwelyd 8 VMN0000 8
+onio 7 VMN0000 7
+eithu 4 VMN0000 4
+mynnu 2 VMN0000 2
+misiynu 4 VMN0000 4
+alchÃ¯wn 1 VMM01P0 1
+iswyddo 5 VMN0000 5
+d-eang 6 AQ0000 6
+b 177 AQ0000 32 VMN0000 13
+agorodd 2 VMIS3S0 2
+nghywir 3 AQ0000 3
+_wrth 8 VMN0000 6
+ithaf 2 AQ0000 2
+lladd 5 VMN0000 5
+diweddar 13 AQ0000 13
+yfieithu 4 VMN0000 4
+fodol 19 AQ0000 2
+trafod 11 VMN0000 2
+chel 4 AQ0000 4
+or 122 RG 9 AQ0000 2 VMN0000 14
+nhau 12 VMN0000 12
+wneud 73 VMN0000 73
+egluro 2 VMN0000 2
+esblygu 2 VMN0000 2
+eiladu 5 VMN0000 5
+gwael 8 AQ0000 8
+hun 1 RG 1
+gwybod 22 VMN0000 22
+gwario 2 VMN0000 2
+mhellach 4 RG 4
+aethu 4 VMN0000 4
+ithiau 14 RG 4
+anegol 19 AQ0000 19
+ata 4 VMN0000 4
+gor 97 VMN0000 14
+chafodd 8 VMIS3S0 8
+ordirol 2 AQ0000 2
+iwch_Ã¢ 3 VMM02P0 3
+e 764 RG 14
+blu 6 VMN0000 6
+fydlu 22 VMN0000 22
+gwympo 6 VMN0000 6
+yw 89 AQ0000 22 VMN0000 2
+gwnaeth 3 VMIS3S0 3
+chol 4 AQ0000 4
+mweld_Ã¢ 11 VMN0000 11
+ddwi 3 VMN0000 3
+cwbl 1 AQ0000 1
+thaf 11 AQ0000 11
+holl 10 AQ0000 10
+asu 10 VMN0000 10
+no 70 RG 13 VMSP3S0 8 VMN0000 43
+lwyddo 6 VMN0000 6
+fnydd 4 VMM02S0 1
+bala 12 VMM02S0 6
+ysylltu 16 VMN0000 16
+ywed 47 VMII3P0 33 VMN0000 14
+sitif 3 AQ0000 3
+onol 4 AQ0000 4
+nwch 3 VMM02P0 3
+drodd 3 VMN0000 3
+ynu 23 VMN0000 23
+hradd 9 AQ0000 9
+newydd 36 AQ0000 36
+brynu 2 VMN0000 2
+go 9 VMN0000 4
+drol 3 AQ0000 3
+erthu 4 VMN0000 4
+iolch 3 VMN0000 1
+laethol 20 AQ0000 20
+lhau 4 VMN0000 4
+n_adeg 4 RG 4
+hub 1 VMN0000 1
+esyddol 1 AQ0000 1
+fod 164 VMN0000 10
+clywed 6 VMN0000 6
+idyddol 2 AQ0000 2
+ifol 12 AQ0000 12
+lach 11 RG 4
+mio 2 VMN0000 2
+siomedig 5 AQ0000 5
+wladol 9 AQ0000 9
+ifo 4 VMN0000 4
+ern 2 AQ0000 2
+gall 9 AQ0000 3
+fyddol 2 AQ0000 2
+ychioli 2 VMN0000 2
+nabod 8 VMN0000 8
+ddanu 3 VMN0000 3
+diw 2 RG 2
+aint 15 AQ0000 12
+ogol 1 AQ0000 1
+r_gael 1 RG 1
+riannu 7 VMN0000 7
+torri 6 VMN0000 6
+hael 2 VMN0000 2
+hoffwn 1 VMM01P0 1
+thasol 7 AQ0000 7
+'r_blaen 3 RG 3
+hwyn 7 VMN0000 7
+eud 105 VMN0000 105
+cherdded 2 VMN0000 2
+rol 11 AQ0000 11
+redol 2 AQ0000 2
+alu 15 VMN0000 15
+ar 381 AQ0000 24 VMN0000 21
+mprydio 2 VMN0000 2
+h_ar 10 VMN0000 10
+leisio 7 VMN0000 7
+frous 3 AQ0000 3
+opeaidd 8 AQ0000 8
+maidd 9 AQ0000 9
+rus 7 AQ0000 7
+ond 100 RG 7
+yglus 3 AQ0000 3
+fynd_Ã¢ 2 VMN0000 2
+eddoli 2 VMN0000 2
+dim_ond 7 RG 7
+wahÃ¢n 2 AQ0000 2
+reulio 2 VMN0000 2
+ybu 5 VMN0000 5
+ded 9 VMN0000 9
+weddw 2 AQ0000 2
+mleiddio 3 VMN0000 3
+ilfeddwl 3 VMN0000 3
+dodiadol 2 AQ0000 2
+oesi 10 VMN0000 10
+edi 323 VMN0000 6
+lly 9 RG 9
+ulio 2 VMN0000 2
+yllt 12 AQ0000 12
+ewiswch 4 VMM02P0 4
+fonwch 3 VMM02P0 3
+rdirol 2 AQ0000 2
+igo 2 VMN0000 2
+lywed 14 VMN0000 14
+rthu 12 VMN0000 12
+hoeddus 8 AQ0000 8
+rach 12 RG 2
+lwg 20 AQ0000 2
+ithio 42 VMN0000 42
+ladol 9 AQ0000 9
+cyntaf 13 AQ0000 13
+rhannu 2 VMN0000 2
+lir 10 AQ0000 4
+eryglus 3 AQ0000 3
+yl 27 VMN0000 15
+gyfrannu 2 VMN0000 2
+d_Ã¢ 17 VMN0000 17
+nlinellu 4 VMN0000 4
+ofyn_am 4 VMN0000 4
+abod 8 VMN0000 8
+ed_am 16 VMN0000 16
+hwystro 4 VMN0000 4
+fnu 7 VMN0000 7
+iffodd 8 VMN0000 8
+leiddio 3 VMN0000 3
+ygwth 2 VMN0000 2
+amodol 3 AQ0000 3
+gynnig 8 VMN0000 8
+alchÃ¯o 3 VMN0000 3
+ryd_rhan 7 VMN0000 7
+efydlu 22 VMN0000 22
+din 15 AQ0000 12
+diwch_Ã¢ 3 VMM02P0 3
+fael 2 VMN0000 2
+adigol 2 AQ0000 2
+ddo 32 VMN0000 13
+pi 2 VMN0000 2
+esa 2 VMM02S0 2
+caled 4 AQ0000 4
+eld_Ã¢ 11 VMN0000 11
+dderbyn 2 VMN0000 2
+dorrodd 2 VMIS3S0 2
+nychu 6 VMN0000 6
+lli 16 VMN0000 14
+chynnal 8 VMN0000 8
+elu 7 VMN0000 7
+wynhau 6 VMN0000 6
+chosi 2 VMN0000 2
+fat 7 AQ0000 7
+dysgu 15 VMN0000 15
+eddwl 33 VMN0000 7
+wid 33 VMN0000 24
+rddangos 1 VMN0000 1
+wio 2 VMN0000 2
+ebachu 3 VMN0000 3
+ynllunio 18 VMN0000 18
+yrchu 5 VMN0000 5
+maint 12 AQ0000 12
+hyrchu 3 VMN0000 3
+iliwn 17 VMM01P0 3
+roesawu 2 VMN0000 2
+loesol 1 AQ0000 1
+diwethaf 9 AQ0000 9
+fodern 2 AQ0000 2
+in 168 AQ0000 20 VMN0000 14
+chau 2 VMN0000 2
+rraedd 9 VMN0000 9
+fi 8 VMN0000 8
+fol 12 AQ0000 12
+ynghori 3 VMN0000 3
+fu_ar 1 VMN0000 1
+icr 6 AQ0000 6
+ino 4 VMN0000 4
+euro 6 VMN0000 6
+pwyso 2 VMN0000 2
+asnachol 4 AQ0000 4
+cafodd 81 VMIS3S0 81
+soddi 17 VMN0000 17
+uro 8 VMN0000 8
+sig 8 AQ0000 8
+bodol 7 AQ0000 7
+_hyn 1 RG 1
+llweddol 4 AQ0000 4
+dw 19 AQ0000 2 VMN0000 17
+anc 15 AQ0000 13
+northwyo 7 VMN0000 7
+eddodd 1 VMIS3S0 1
+orfforol 1 AQ0000 1
+baratoi 7 VMN0000 7
+gynnar 11 AQ0000 11
+mwybodol 7 AQ0000 7
+siynol 11 AQ0000 11
+byddu 4 VMN0000 4
+ylwebu 1 VMN0000 1
+llunio 18 VMN0000 18
+esennol 17 AQ0000 17
+iedig 2 AQ0000 2
+rbenigol 6 AQ0000 6
+adael 16 VMN0000 16
+yddogol 1 AQ0000 1
+weud 32 VMN0000 32
+haol 1 AQ0000 1
+cryno 8 VMSP3S0 8
+iladu 5 VMN0000 5
+wn 222 RG 35 AQ0000 5 VMM01P0 5
+cymraeg 22 AQ0000 16
+lleihau 2 VMN0000 2
+ta 8 AQ0000 1 VMN0000 7
+rod 9 AQ0000 4
+cerdded 7 VMN0000 7
+wan 3 RG 3
+omaidd 9 AQ0000 9
+wyr 134 AQ0000 15 VMN0000 5
+awr 53 RG 13 AQ0000 19
+ynnwys 31 VMN0000 2
+ddar 13 AQ0000 13
+lyn 10 VMN0000 6
+adre 14 RG 14
+ng 106 AQ0000 13 VMN0000 2
+ala 12 VMM02S0 6
+lurodd 1 VMIS3S0 1
+mlo 7 VMN0000 7
+tyried 20 VMN0000 20
+os 123 VMN0000 31
+raddio 3 VMN0000 3
+ra 8 VMM02S0 2
+adeiladu 5 VMN0000 5
+dywedodd 116 VMIS3S0 116
+cyflogi 5 VMN0000 5
+onni 4 VMN0000 4
+weidiol 3 AQ0000 3
+ebrwng 2 VMN0000 2
+eddig 1 AQ0000 1
+ori 8 VMN0000 8
+pam 3 RG 3
+ario 4 VMN0000 4
+iol 38 AQ0000 38
+wahanol 12 AQ0000 12
+nodol 4 AQ0000 4
+bennig 24 AQ0000 24
+bwriadu 10 VMN0000 10
+gwledig 4 AQ0000 4
+c_ati 1 RG 1
+llawer 4 AQ0000 4
+eihau 2 VMN0000 2
+nachol 4 AQ0000 4
+lo 11 VMN0000 9
+amor 2 AQ0000 2
+illio 3 VMN0000 3
+rwyddo 5 VMN0000 2
+di 477 VMN0000 102
+dennill 3 VMN0000 3
+clywodd 5 VMIS3S0 5
+ch 226 VMIS2P0 5 RG 6 AQ0000 28 VMIP2P0 4 VMN0000 26 VMM02P0 23
+eu 183 VMN0000 16
+rbennig 24 AQ0000 24
+cyffro 3 VMM02S0 3
+esi 10 VMN0000 10
+yfeddol 2 AQ0000 2
+an 433 RG 11 AQ0000 39 VMN0000 19
+estyn 5 VMN0000 5
+isio 40 VMN0000 40
+bed 4 VMN0000 4
+n_llwyr 5 VMN0000 5
+ddai 143 VMII3S0 87
+ilio_am 1 VMN0000 1
+_gwrs 3 RG 3
+dwyn 11 VMN0000 11
+arad 2 VMN0000 2
+ieithu 4 VMN0000 4
+adref 5 RG 5
+_i 24 RG 7 VMN0000 4
+addasu 10 VMN0000 10
+el 332 RG 1 AQ0000 29 VMN0000 236
+derchog 6 AQ0000 6
+yfartal 3 AQ0000 3
+cwyno 4 VMN0000 4
+yd 274 RG 60 AQ0000 16 VMN0000 32
+uais 3 VMIS1S0 3
+hio_ar 4 VMN0000 4
+mÃ¢n 6 AQ0000 6
+rafod 36 VMN0000 10
+gweithio 10 VMN0000 10
+ddu 11 VMN0000 11
+hinol 5 AQ0000 5
+reiddiol 13 AQ0000 13
+ygoel 8 AQ0000 8
+ansio 1 VMN0000 1
+d_yn_oed 4 RG 4
+prif 15 AQ0000 15
+gweill 3 RG 3
+odlon 8 AQ0000 8
+fach 6 AQ0000 6
+iddio 5 AQ0000 2 VMN0000 3
+glu 20 VMN0000 20
+ud_wrth 6 VMN0000 6
+dangos 14 VMN0000 14
+l_i 7 RG 7
+_gilydd 7 RG 7
+fed 6 AQ0000 1
+nyddol 9 AQ0000 9
+osgoi 1 VMN0000 1
+cyhoeddi 4 VMN0000 4
+ledig 4 AQ0000 4
+fan 58 AQ0000 24
+tbwys 2 AQ0000 2
+iddanu 3 VMN0000 3
+hoeddodd 1 VMIS3S0 1
+nebu 18 VMN0000 18
+rmio 1 VMN0000 1
+ynnol 9 AQ0000 9
+dewr 3 AQ0000 3
+as 27 AQ0000 3
+marferol 5 AQ0000 5
+tyn 7 VMN0000 5
+d 3289 VMII3P0 33 VMM02S0 1 VMIS3S0 292 RG 96 AQ0000 132 VMN0000 444
+deiladu 5 VMN0000 5
+elio 20 VMN0000 20
+orri 6 VMN0000 6
+pus 2 AQ0000 2
+odol 33 AQ0000 16
+eddygol 7 AQ0000 7
+chub 1 VMN0000 1
+yo 7 VMN0000 7
+fynnodd 1 VMIS3S0 1
+fforddio 9 VMN0000 9
+ewid 33 VMN0000 24
+u_ar 1 VMN0000 1
+ithrin 3 VMN0000 3
+dechrau 7 VMN0000 7
+fforddi 7 VMN0000 7
+yno 58 RG 13 VMSP3S0 8 VMN0000 37
+ydro 4 VMN0000 4
+oddi 20 VMN0000 17
+rwan 3 RG 3
+ar-lein 4 AQ0000 4
+rau 48 VMN0000 7
+gelwch 15 VMM02P0 15
+olchi 1 VMN0000 1
+brydoli 6 VMN0000 6
+ych_ar 10 VMN0000 10
+drechu 1 VMN0000 1
+darlledu 3 VMN0000 3
+rfoddol 3 AQ0000 3
+hybu 5 VMN0000 5
+if 27 AQ0000 24
+rdio 8 VMN0000 8
+raethu 4 VMN0000 4
+elfrydol 2 AQ0000 2
+reddu 4 VMN0000 4
+ithyddol 2 AQ0000 2
+adu 19 VMN0000 19
+meddwi 3 VMN0000 3
+yfan 27 AQ0000 24
+mwynhau 6 VMN0000 6
+mynd 37 VMN0000 37
+ramor 2 AQ0000 2
+hy 12 AQ0000 9
+achosodd 3 VMIS3S0 3
+rechu 1 VMN0000 1
+hanfodol 2 AQ0000 2
+drafod 25 VMN0000 8
+teledu 2 VMN0000 2
+nod 52 RG 4
+wblhau 4 VMN0000 4
+ryno 8 VMSP3S0 8
+s 594 RG 11 AQ0000 71 VMIS1S0 3 VMN0000 39
+dre 14 RG 14
+eoli 9 VMN0000 9
+rbed 4 VMN0000 4
+dodd 128 VMIS3S0 125
+nghori 3 VMN0000 3
+ymedrol 3 AQ0000 3
+ithredol 2 AQ0000 2
+ibynnol 9 AQ0000 9
+iant 38 VMIP3P0 1
+wybodol 7 AQ0000 7
+sgubol 2 AQ0000 2
+gen 52 AQ0000 3
+mdrechu 1 VMN0000 1
+_un_adeg 4 RG 4
+lewyrchu 2 VMN0000 2
+arferol 5 AQ0000 5
+lyd 8 VMN0000 8
+ethu 6 VMN0000 6
+fodd 106 VMIS3S0 98 VMN0000 8
+ganolog 2 AQ0000 2
+oloesol 1 AQ0000 1
+ardal 20 AQ0000 9
+lawni 6 VMN0000 6
+sol 10 AQ0000 10
+eithasol 7 AQ0000 7
+diweddu 1 VMN0000 1
+ymdrechu 1 VMN0000 1
+_lawer 3 RG 3
+fodlon 8 AQ0000 8
+fuan 15 AQ0000 15
+orffen 2 VMN0000 2
+ddygol 7 AQ0000 7
+meithrin 3 VMN0000 3
+io 275 AQ0000 2 VMN0000 264
+rhy 6 AQ0000 6
+aros 17 VMN0000 17
+einiodd 6 VMIS3S0 6
+nawr 16 RG 10
+oesawu 2 VMN0000 2
+urodd 1 VMIS3S0 1
+glwyddo 4 VMN0000 4
+hiol 4 AQ0000 4
+annu 15 VMN0000 15
+lweddol 7 AQ0000 7
+iogel 5 AQ0000 5
+lltu 16 VMN0000 16
+alch 12 AQ0000 12
+nhaodd 3 VMIS3S0 3
+irfoddol 3 AQ0000 3
+cynnwys 17 VMN0000 2
+eddu 7 VMN0000 7
+dlu 62 VMN0000 22
+unwaith 4 RG 4
+eidyddol 2 AQ0000 2
+hod 5 VMN0000 5
+restio 4 VMN0000 4
+gorodd 2 VMIS3S0 2
+eddyliol 1 AQ0000 1
+diadol 2 AQ0000 2
+ghori 3 VMN0000 3
+gau 12 VMN0000 8
+radd 9 AQ0000 9
+wd 3 AQ0000 3
+wledig 4 AQ0000 4
+osod 15 AQ0000 12 VMN0000 3
+bygol 4 AQ0000 4
+glywed 8 VMN0000 8
+hwynebu 3 VMN0000 3
+ai 291 AQ0000 17 VMII3S0 87
+swyddodd 1 VMIS3S0 1
+ub 1 VMN0000 1
+uno_Ã¢ 1 VMN0000 1
+ioli 2 VMN0000 2
+byn_hyn 1 RG 1
+lynu 1 VMN0000 1
+onheddig 1 AQ0000 1
+rfynol 2 AQ0000 2
+frydol 13 AQ0000 2
+nitro 8 VMN0000 8
+ill 32 RG 3 VMN0000 5
+wydro 4 VMN0000 4
+ifrifol 7 AQ0000 7
+omi 28 VMN0000 2
+bi 14 VMN0000 1
+ied 20 VMN0000 20
+unrhyw 18 AQ0000 18
+stro 4 VMN0000 4
+ddifrodi 6 VMN0000 6
+rifol 12 AQ0000 12
+ch_ar 10 VMN0000 10
+bwyta 3 VMN0000 3
+nomaidd 9 AQ0000 9
+ddiolch 1 VMN0000 1
+haf 13 AQ0000 11
+iogelu 4 VMN0000 4
+adwy 3 AQ0000 3
+ogel 5 AQ0000 5
+hyddol 2 AQ0000 2
+byniol 11 AQ0000 11
+wedyn 12 RG 12
+hosib 1 AQ0000 1
+efnogi 12 VMN0000 12
+eio 6 VMN0000 6
+aw 20 VMIP3S0 6
+blesio 3 VMN0000 3
+redeg 6 VMN0000 6
+gwaredu 2 VMN0000 2
+aratoi 9 VMN0000 9
+tal 30 RG 13 AQ0000 3 VMN0000 14
+archebu 3 VMN0000 3
+wer 7 RG 3 AQ0000 4
+bell 3 AQ0000 3
+rhwystro 4 VMN0000 4
+yna 70 RG 57
+paratoi 2 VMN0000 2
+rnu 2 VMN0000 2
+cheddol 11 AQ0000 11
+wyta 3 VMN0000 3
+afael 2 VMN0000 2
+_Ã´l 139 RG 19
+yflawni 6 VMN0000 6
+da 57 AQ0000 23
+hleth 4 AQ0000 4
+gwyn 3 AQ0000 2
+oed 40 RG 5
+wyddodd 4 VMIS3S0 4
+gwadu 4 VMN0000 4
+atganoli 6 VMN0000 6
+ihau 2 VMN0000 2
+ffro 3 VMM02S0 3
+wariant 1 VMIP3P0 1
+ethol 20 AQ0000 20
+rnhau 6 VMN0000 6
+idol 3 AQ0000 3
+wnaeth 31 VMIS3S0 31
+hrau 7 VMN0000 7
+chreu 2 VMN0000 2
+wyso 2 VMN0000 2
+ach 47 RG 6 AQ0000 16
+ddoli 7 VMN0000 7
+diddori 2 VMN0000 2
+hi 42 VMN0000 1
+diogelu 4 VMN0000 4
+clo 2 VMN0000 2
+yn_Ã´l_i 7 RG 7
+oedi 6 VMN0000 6
+odiadol 2 AQ0000 2
+negodd 25 VMIS3S0 25
+ld_Ã¢ 11 VMN0000 11
+Ã´l 144 RG 19 AQ0000 4
+falchÃ¯o 3 VMN0000 3
+¯o 3 VMN0000 3
+lmio 1 VMN0000 1
+m 414 VMIS1P0 1 RG 48 VMN0000 21
+hyll 3 AQ0000 3
+yddus 12 AQ0000 12
+ynebu 18 VMN0000 18
+sglu 20 VMN0000 20
+iannus 13 AQ0000 13
+wrs 5 RG 3
+hoch 5 VMIS2P0 5
+wy 106 AQ0000 3
+nfon 5 VMN0000 5
+mus 3 AQ0000 3
+ddisgyn 6 VMN0000 6
+clir 2 AQ0000 2
+ddechrau 4 VMN0000 4
+yfrifol 5 AQ0000 5
+ngyfarch 4 VMN0000 4
+ifat 7 AQ0000 7
+olaf 5 AQ0000 5
+cwtogi 3 VMN0000 3
+mu 7 VMN0000 7
+hefyd 57 RG 57
+ella 21 VMN0000 21
+n_hyn 1 RG 1
+hlu 4 VMN0000 2
+diannus 13 AQ0000 13
+hir 3 AQ0000 3
+efydlodd 4 VMIS3S0 4
+gyfnewid 3 VMN0000 3
+rwydro 4 VMN0000 4
+ddi 72 VMN0000 41
+glus 3 AQ0000 3
+raedd 9 VMN0000 9
+positif 3 AQ0000 3
+erol 5 AQ0000 5
+flogi 5 VMN0000 5
+egodd 25 VMIS3S0 25
+adeirio 2 VMN0000 2
+o_ar 4 VMN0000 4
+colli 11 VMN0000 11
+wilio 11 VMN0000 11
+mhleth 4 AQ0000 4
+fredinol 12 AQ0000 12
+eleni 9 RG 9
+fesiynol 9 AQ0000 9
+thrio 9 VMN0000 9
+diodd 2 VMIS3S0 2
+gofyn_am 4 VMN0000 4
+weddu 1 VMN0000 1
+_hun 1 RG 1
+isgrifio 1 VMN0000 1
+erfynu 16 VMN0000 16
+ral 10 AQ0000 10
+apus 2 AQ0000 2
+meddwl 30 VMN0000 4
+nnal 50 VMN0000 50
+iodd 11 VMIS3S0 11
+dig 32 AQ0000 23
+orddio 9 VMN0000 9
+yddodd 4 VMIS3S0 4
+nnodd 3 VMIS3S0 3
+crhau 22 VMN0000 22
+wybyddu 4 VMN0000 4
+fer 92 RG 1 AQ0000 7 VMN0000 5
+lcheddol 11 AQ0000 11
+hu 37 VMN0000 37
+lpu 17 VMN0000 17
+byn 32 VMN0000 13
+amlwg 2 AQ0000 2
+adeg 5 RG 4
+diol 22 AQ0000 22
+olch 3 VMN0000 1
+ganoli 6 VMN0000 6
+iwn 28 VMM01P0 3
+dros_dro 5 RG 5
+methu 2 VMN0000 2
+swch 4 VMM02P0 4
+marw 9 AQ0000 9
+ddiol 14 AQ0000 14
+anhygoel 8 AQ0000 8
+_llwyr 5 VMN0000 5
+ant 63 VMIS3P0 3 AQ0000 4 VMIP3P0 1
+ofyn 11 VMN0000 11
+io_am 1 VMN0000 1
+chreuodd 4 VMIS3S0 4
+eidio 4 VMN0000 4
+ynta 1 AQ0000 1
+chÃ¯wn 1 VMM01P0 1
+weddara 2 VMM02S0 2
+raffu_ar 1 VMN0000 1
+yrwyddo 2 VMN0000 2
+delio 2 VMN0000 2
+ddara 2 VMM02S0 2
+hreu 2 VMN0000 2
+eill 3 RG 3
+enu 4 VMN0000 4
+ladu 5 VMN0000 5
+styried 20 VMN0000 20
+iswch 4 VMM02P0 4
+mestyn 1 VMN0000 1
+ang 11 AQ0000 11
+_gweill 3 RG 3
+welyd 8 VMN0000 8
+ddwyn 8 VMN0000 8
+iau 139 RG 4
+_am 21 VMN0000 21
+hanu 2 VMN0000 2
+rdal 20 AQ0000 9
+mawr 10 AQ0000 10
+dus 27 AQ0000 27
+arestio 4 VMN0000 4
+yn 1441 RG 13 AQ0000 12 VMN0000 59
+erchog 6 AQ0000 6
+diddymu 2 VMN0000 2
+ddiogelu 4 VMN0000 4
+n_o_bryd 3 RG 3
+gohebu 1 VMN0000 1
+gwyddodd 3 VMIS3S0 3
+ympo 6 VMN0000 6
+enwi 2 VMN0000 2
+ndant 4 AQ0000 4
+wbl 6 AQ0000 6
+eang 11 AQ0000 11
+beidio 3 VMN0000 3
+ynnes 3 AQ0000 3
+forddi 7 VMN0000 7
+pu 17 VMN0000 17
+thio_ar 4 VMN0000 4
+esiynol 9 AQ0000 9
+ltiedig 2 AQ0000 2
+peidio 1 VMN0000 1
+odus 7 AQ0000 7
+rhyw 22 AQ0000 22
+weill 3 RG 3
+ddewr 3 AQ0000 3
+g 534 RG 4 AQ0000 143 VMN0000 29
+dderchog 6 AQ0000 6
+ain 74 VMN0000 11
+ddelio 2 VMN0000 2
+hebu 4 VMN0000 4
+ros_dro 5 RG 5
+ryd 47 RG 3 VMN0000 24
+muno 2 VMN0000 2
+nesaf 13 AQ0000 13
+_adeg 4 RG 4
+rdded 9 VMN0000 9
+ara 4 VMM02S0 2
+ithrio 9 VMN0000 9
+ryf 6 AQ0000 6
+rychioli 2 VMN0000 2
+haru 3 VMN0000 3
+yta 3 VMN0000 3
+tebyg 3 AQ0000 3
+hyrwyddo 2 VMN0000 2
+wyrchu 2 VMN0000 2
+ddori 2 VMN0000 2
+refyddol 2 AQ0000 2
+n_Ã´l 66 RG 19
+wysig 8 AQ0000 8
+riannol 9 AQ0000 9
+lwyr 41 AQ0000 15 VMN0000 5
+llawn 3 AQ0000 3
+fieithu 4 VMN0000 4
+arbennig 24 AQ0000 24
+gefnogi 3 VMN0000 3
+atblygu 11 VMN0000 11
+iadol 5 AQ0000 5
+ddweud 7 VMN0000 7
+ymateb 7 VMN0000 3
+ffen 2 VMN0000 2
+wtogi 3 VMN0000 3
+brofi 2 VMN0000 2
+nheddig 1 AQ0000 1
+anodd 11 AQ0000 11
+hyllidol 2 AQ0000 2
+flawni 6 VMN0000 6
+esu 8 VMN0000 8
+aidd 17 AQ0000 17
+leoli 5 VMN0000 5
+bynnol 9 AQ0000 9
+unedol 7 AQ0000 7
+ld 38 VMN0000 38
+redu 24 VMN0000 24
+h_Ã¢ 3 VMM02P0 3
+lwyd 8 AQ0000 2
+biliwn 3 VMM01P0 3
+wchradd 9 AQ0000 9
+mdopi 2 VMN0000 2
+igol 12 AQ0000 12
+osbarthu 8 VMN0000 8
+diangen 3 AQ0000 3
+alw 38 VMN0000 24
+so 7 VMN0000 2
+wyddus 12 AQ0000 12
+gubol 2 AQ0000 2
+nesyddol 1 AQ0000 1
+r 2187 RG 26 AQ0000 110 VMN0000 45
+ffederal 10 AQ0000 10
+chnata 4 VMN0000 4
+bryderus 7 AQ0000 7
+at 51 AQ0000 7 VMN0000 7
+cordio 8 VMN0000 8
+cyflawni 5 VMN0000 5
+sgo 2 VMN0000 2
+deledu 4 VMN0000 4
+ddsoddi 17 VMN0000 17
+nal 50 VMN0000 50
+ymlaen 15 RG 15
+denu 4 VMN0000 4
+ogi 24 VMN0000 24
+hioli 2 VMN0000 2
+ynd_Ã¢ 2 VMN0000 2
+yg 18 AQ0000 8 VMN0000 3
+llwyddo 2 VMN0000 2
+eulio 2 VMN0000 2
+sblygu 2 VMN0000 2
+yflogi 5 VMN0000 5
+iweddar 13 AQ0000 13
+aesneg 4 AQ0000 4
+anfodol 2 AQ0000 2
+isgyn 6 VMN0000 6
+ein 26 AQ0000 4
+ddig 1 AQ0000 1
+asesu 4 VMN0000 4
+parhaol 1 AQ0000 1
+rebachu 3 VMN0000 3
+heuro 6 VMN0000 6
+oes 13 RG 8
+wella 21 VMN0000 21
+ar_gael 1 RG 1
+frodi 6 VMN0000 6
+negol 19 AQ0000 19
+iannol 9 AQ0000 9
+atod 3 AQ0000 3
+yddhau 8 VMN0000 8
+iddori 2 VMN0000 2
+drych 21 VMN0000 21
+dalu 9 VMN0000 9
+thu 22 VMN0000 22
+ilio_i 4 VMN0000 4
+annol 9 AQ0000 9
+'na 38 RG 38
+ag 28 AQ0000 2
+nnol 35 AQ0000 35
+_bryd 3 RG 3
+nill 9 VMN0000 5
+fwriadol 1 AQ0000 1
+lltiedig 2 AQ0000 2
+riadu 10 VMN0000 10
+rfformio 1 VMN0000 1
+wodd 5 VMIS3S0 5
+int 15 AQ0000 12
+i_hun 1 RG 1
+dern 2 AQ0000 2
+eglurodd 1 VMIS3S0 1
+rin 7 AQ0000 4 VMN0000 3
+datgelu 3 VMN0000 3
+ddangos 10 VMN0000 10
+yhoeddi 17 VMN0000 17
+eadigol 2 AQ0000 2
+fu 9 VMN0000 1
+geisio 9 VMN0000 9
+frifol 12 AQ0000 12
+yf 14 AQ0000 6
+tganoli 6 VMN0000 6
+rth 120 VMN0000 6
+un 162 RG 1
+wag 2 AQ0000 2
+dyliol 1 AQ0000 1
+dwy 19 AQ0000 3
+yddol 16 AQ0000 16
+aiff 8 VMIP3S0 8
+arthu 8 VMN0000 8
+soes 8 RG 8
+estio 4 VMN0000 4
+m_ond 7 RG 7
+adennill 3 VMN0000 3
+yntio 2 VMN0000 2
+eglur 4 AQ0000 4
+dnabod 8 VMN0000 8
+hyfeddol 2 AQ0000 2
+ysgubol 2 AQ0000 2
+lwyno 33 VMN0000 33
+_lawr 3 RG 3
+erchyll 3 AQ0000 3
+riadol 1 AQ0000 1
+achosi 2 VMN0000 2
+rddi 7 VMN0000 7
+dopi 2 VMN0000 2
+eto 4 RG 4
+gwrs 3 RG 3
+idd 17 AQ0000 17
+federal 10 AQ0000 10
+is 82 VMIS1S0 3 VMN0000 6
+nwys 31 VMN0000 2
+nrhyw 18 AQ0000 18
+ael_ar 2 VMN0000 2
+awni 6 VMN0000 6
+hrio 9 VMN0000 9
+chÃ¯o 3 VMN0000 3
+glir 2 AQ0000 2
+ceisio 24 VMN0000 24
+annatod 3 AQ0000 3
+ybyddu 4 VMN0000 4
+recordio 8 VMN0000 8
+bwys 2 AQ0000 2
+disgwyl 15 VMN0000 15
+hwyo 7 VMN0000 7
+mpo 6 VMN0000 6
+artal 3 AQ0000 3
+lchÃ¯wn 1 VMM01P0 1
+aled 11 AQ0000 8
+cymryd 17 VMN0000 17
+glur 4 AQ0000 4
+symudol 3 AQ0000 3
+reithlon 4 AQ0000 4
+siwr 3 AQ0000 3
+wth 2 VMN0000 2
+fnewid 3 VMN0000 3
+wilio_i 4 VMN0000 4
+addio 3 VMN0000 3
+dasu 10 VMN0000 10
+thod 5 VMN0000 5
+ddiweddu 1 VMN0000 1
+dyblu 6 VMN0000 6
+webu 1 VMN0000 1
+wed_am 16 VMN0000 16
+yll 3 AQ0000 3
+nnill 9 VMN0000 5
+rfoddoli 3 VMN0000 3
+¯wn 1 VMM01P0 1
+ddogol 1 AQ0000 1
+hyddhau 2 VMN0000 2
+ml 3 AQ0000 3
+yml 3 AQ0000 3
+wl 41 VMN0000 7
+ywodd 5 VMIS3S0 5
+troseddu 2 VMN0000 2
+ac_ati 1 RG 1
+drych_ar 10 VMN0000 10
+chwilio 11 VMN0000 11
+adol 14 AQ0000 14
+ol 425 AQ0000 368
+fynychu 6 VMN0000 6
+wrth 74 VMN0000 6
+wystro 4 VMN0000 4
+rbyniol 11 AQ0000 11
+i_lawr 3 RG 3
+yhoeddus 8 AQ0000 8
+gafodd 9 VMIS3S0 9
+th 715 VMIS3S0 42 RG 4 AQ0000 4 VMN0000 8
+naethoch 5 VMIS2P0 5
+arod 4 AQ0000 4
+aethant 3 VMIS3P0 3
+erbyniol 11 AQ0000 11
+leisiodd 3 VMIS3S0 3
+unigol 4 AQ0000 4
+iach 4 AQ0000 4
+ethaf 9 AQ0000 9
+holi 1 VMN0000 1
+gyntaf 13 AQ0000 13
+l 1389 RG 36 AQ0000 461 VMN0000 349
+ynd 53 VMN0000 53
+edd 407 RG 13 VMN0000 12
+ogelu 4 VMN0000 4
+tif 3 AQ0000 3
+sonol 4 AQ0000 4
+dru 2 VMN0000 2
+nedol 7 AQ0000 7
+iawn 35 RG 35
+arwain 11 VMN0000 11
+rad 2 VMN0000 2
+hÃ¯wn 1 VMM01P0 1
+wnaethom 1 VMIS1P0 1
+dewiswch 4 VMM02P0 4
+sgyn 6 VMN0000 6
+meddai 87 VMII3S0 87
+toi 9 VMN0000 9
+daw 6 VMIP3S0 6
+ri 27 VMN0000 14
+ti 6 RG 1
+ffodd 8 VMN0000 8
+yddo 16 VMN0000 13
+beio 6 VMN0000 6
+yfnewid 3 VMN0000 3
+odi 55 VMN0000 55
+neddol 7 AQ0000 7
+u 1625 RG 4 VMN0000 488
+anio 3 VMN0000 3
+isiynu 4 VMN0000 4
+opi 2 VMN0000 2
+li 50 VMN0000 48
+credu 12 VMN0000 12
+icrhau 22 VMN0000 22
+pa 4 VMN0000 4
+hnata 4 VMN0000 4
+niadol 2 AQ0000 2
+amu 3 VMN0000 3
+dio 82 AQ0000 2 VMN0000 71
+felly 9 RG 9
+dant 4 AQ0000 4
+lch 20 AQ0000 12 VMN0000 1
+dygol 7 AQ0000 7
+o 922 VMM02S0 6 RG 22 VMSP3S0 8 AQ0000 2 VMN0000 379
+rs 46 RG 3
+mor 13 RG 9 AQ0000 2
+foddoli 3 VMN0000 3
+wyllt 12 AQ0000 12
+ferol 5 AQ0000 5
+tgelu 3 VMN0000 3
+ystro 4 VMN0000 4
+thyddol 2 AQ0000 2
+ddod 4 VMN0000 4
+gos 14 VMN0000 14
+rhai 17 AQ0000 17
+gyfarch 4 VMN0000 4
+laf 10 AQ0000 5
+eddw 2 AQ0000 2
+mud 9 VMN0000 9
+-eang 6 AQ0000 6
+chioli 2 VMN0000 2
+nhwysol 2 AQ0000 2
+im 45 RG 45
+rydoli 6 VMN0000 6
+hom 1 VMIS1P0 1
+_at 8 VMN0000 7
+aeth 336 VMIS3S0 42
+aethoch 5 VMIS2P0 5
+thom 1 VMIS1P0 1
+gluro 2 VMN0000 2
+asol 7 AQ0000 7
+ynnig 26 VMN0000 8
+r-lein 4 AQ0000 4
+ddw 2 AQ0000 2
+medru 2 VMN0000 2
+omisiynu 4 VMN0000 4
+sesu 8 VMN0000 8
+ithlon 4 AQ0000 4
+ardd 5 VMN0000 4
+anegodd 25 VMIS3S0 25
+iweidiol 3 AQ0000 3
+nolog 2 AQ0000 2
+wrogi 4 VMN0000 4
+rchwilio 6 VMN0000 6
+ymestyn 1 VMN0000 1
+cewch 4 VMIP2P0 4
+rchus 1 AQ0000 1
+aliadwy 3 AQ0000 3
+gyhoeddi 13 VMN0000 13
+og 89 AQ0000 9 VMN0000 10
+fyn 11 VMN0000 11
+esneg 4 AQ0000 4
+rodd 8 VMIS3S0 5 VMN0000 3
+rddio 9 VMN0000 9
+hynnal 8 VMN0000 8
+awgrymu 2 VMN0000 2
+au 703 RG 4 VMN0000 87
+hol 26 AQ0000 26
+dref 19 RG 5
+rchu 5 VMN0000 5
+rffen 2 VMN0000 2
+hymryd 3 VMN0000 3
+ioed 1 RG 1
+lfrydol 2 AQ0000 2
+odoli 3 VMN0000 3
+_Ã´l_i 7 RG 7
+nydd 25 VMM02S0 1
+yllidol 3 AQ0000 3
+gymryd 4 VMN0000 4
+ymus 3 AQ0000 3
+yniol 11 AQ0000 11
+edu 36 VMN0000 36
+diheuro 6 VMN0000 6
+hafodd 8 VMIS3S0 8
+yn_oed 4 RG 4
+hosi 2 VMN0000 2
+ni 114 RG 9 VMIP2S0 5 VMN0000 15
+fonio 7 VMN0000 7
+hadw 5 VMN0000 5
+cau 15 VMN0000 12
+wiswch 4 VMM02P0 4
+ebyg 8 AQ0000 8
+thoch 5 VMIS2P0 5
+deg 16 RG 4 AQ0000 2 VMN0000 6
+ddyddiol 1 AQ0000 1
+waethygu 4 VMN0000 4
+nus 13 AQ0000 13
+chymryd 3 VMN0000 3
+nwaith 4 RG 4
+fynodd 6 VMIS3S0 6
+ddiddymu 2 VMN0000 2
+lannu 1 VMN0000 1
+ddhau 8 VMN0000 8
+adfer 2 VMN0000 2
+pelio 18 VMN0000 18
+sylltu 16 VMN0000 16
+edodd 116 VMIS3S0 116
+ahÃ¢n 2 AQ0000 2
+f 231 VMIP3S0 8 RG 5 AQ0000 85
+ymweld 3 VMN0000 3
+olog 2 AQ0000 2
+waredu 4 VMN0000 4
+nnes 3 AQ0000 3
+wahardd 4 VMN0000 4
+ro 49 VMM02S0 3 RG 5 VMN0000 24
+anghywir 3 AQ0000 3
+cryf 6 AQ0000 6
+dawelwch 1 VMM02P0 1
+trefnu 3 VMN0000 3
+oneddol 7 AQ0000 7
+yffredin 12 AQ0000 12
+nnig 50 AQ0000 24 VMN0000 8
+hygoel 8 AQ0000 8
+gyd 10 AQ0000 10
+rpar 4 VMN0000 4
+wyddogol 1 AQ0000 1
+eiddio 5 AQ0000 2 VMN0000 3
+rdd 55 VMN0000 4
+_ei_hun 1 RG 1
+elpu 17 VMN0000 17
+adnabod 8 VMN0000 8
+ogystal 13 RG 13
+eifat 7 AQ0000 7
+dori 2 VMN0000 2
+ais 30 VMIS1S0 3
+io_i 4 VMN0000 4
+iomedig 5 AQ0000 5
+hanol 18 AQ0000 12
+nnus 13 AQ0000 13
+hardd 4 VMN0000 4
+greu 4 VMN0000 4
+thiol 4 AQ0000 4
+gofyn 7 VMN0000 7
+nol 89 AQ0000 83
+hredol 2 AQ0000 2
+atgelu 3 VMN0000 3
+ddyblu 3 VMN0000 3
+och 7 VMIS2P0 5
+hellach 4 RG 4
+nio 31 VMN0000 31
+canlynol 2 AQ0000 2
+deillio 3 VMN0000 3
+osgi 3 VMN0000 3
+mchwilio 5 VMN0000 5
+o_Ã¢ 1 VMN0000 1
+ewch 4 VMIP2P0 4
+achol 4 AQ0000 4
+eaidd 8 AQ0000 8
+rchnata 4 VMN0000 4
+aru 3 VMN0000 3
+teimlo 6 VMN0000 6
+es 95 RG 8 AQ0000 3
+dsoddi 17 VMN0000 17
+_o_bryd 3 RG 3
+muno_Ã¢ 1 VMN0000 1
+rhydd 6 AQ0000 6
+nllunio 18 VMN0000 18
+wyn 75 AQ0000 4 VMN0000 18
+hebrwng 2 VMN0000 2
+arfer 6 RG 1 VMN0000 3
+cyfarpar 4 VMN0000 4
+gystal 13 RG 13
+sbrydoli 6 VMN0000 6
+ffodus 7 AQ0000 7
+weld 38 VMN0000 38
+datblygu 11 VMN0000 11
+brwydro 4 VMN0000 4
+efyddol 2 AQ0000 2
+mlaen_at 7 VMN0000 7
+hannu 2 VMN0000 2
+byr 3 AQ0000 3
+gael 45 RG 1 VMN0000 44
+llan 8 RG 8
+fnogi 12 VMN0000 12
+w 343 VMIP3S0 6 RG 2 AQ0000 58 VMN0000 43
+trach 2 RG 2
+thio 45 VMN0000 45
+r_blaen 3 RG 3
+hoeddi 17 VMN0000 17
+ydu 2 VMN0000 2
+arafu 1 VMN0000 1
+no_Ã¢ 1 VMN0000 1
+ltu 16 VMN0000 16
+hai 17 AQ0000 17
+ymu 4 VMN0000 4
+fanc 13 AQ0000 13
+eol 43 AQ0000 43
+gofnodi 1 VMN0000 1
+hus 1 AQ0000 1
+werthu 4 VMN0000 4
+fynol 2 AQ0000 2
+aclo 2 VMN0000 2
+eithiau 14 RG 4
+barod 4 AQ0000 4
+fartal 3 AQ0000 3
+rif 24 AQ0000 21
+cynnal 23 VMN0000 23
+cofio 4 VMN0000 4
+rthod 5 VMN0000 5
+d_am 16 VMN0000 16
+ederal 10 AQ0000 10
+eithio 42 VMN0000 42
+irniadol 2 AQ0000 2
+os_dro 5 RG 5
+iadu 10 VMN0000 10
+nog 10 VMN0000 10
+ych 31 VMN0000 21
+gwneud 26 VMN0000 26
+neg 4 AQ0000 4
+wanegol 19 AQ0000 19
+ddas 3 AQ0000 3
+rydu 2 VMN0000 2
+yddiol 1 AQ0000 1
+nnar 11 AQ0000 11
+sgoi 1 VMN0000 1
+dwl 33 VMN0000 7
+weithiau 7 RG 4
+eledu 6 VMN0000 6
+cyfan 17 AQ0000 17
+rfynu 16 VMN0000 16
+adrodd 3 VMN0000 3
+ymraeg 51 AQ0000 38
+ariant 1 VMIP3P0 1
+rfer 6 RG 1 VMN0000 3
+bachu 3 VMN0000 3
+el_ar 2 VMN0000 2
+phosib 1 AQ0000 1
+opa 4 VMN0000 4
+offwn 1 VMM01P0 1
+enodol 4 AQ0000 4
+rogan 6 VMN0000 6
+gaiff 2 VMIP3S0 2
+eimlo 7 VMN0000 7
+erthol 2 AQ0000 2
+ei_hun 1 RG 1
+dai 150 VMII3S0 87
+_gyd 8 AQ0000 8
+cyflwyno 12 VMN0000 12
+gel 7 AQ0000 5
+wisgo 2 VMN0000 2
+laen_at 7 VMN0000 7
+ydd 538 VMM02S0 1 RG 7 AQ0000 42 VMN0000 12
+myg 3 VMN0000 3
+eb 68 VMN0000 12
+rwd 3 AQ0000 3
+snachol 4 AQ0000 4
+roesi 10 VMN0000 10
+mharu 3 VMN0000 3
+eisiodd 3 VMIS3S0 3
+lw 57 VMN0000 24
+meddygol 7 AQ0000 7
+all 60 AQ0000 3 VMN0000 20
+ynol 15 AQ0000 15
+nodi 9 VMN0000 9
+ethom 1 VMIS1P0 1
+galed 4 AQ0000 4
+ddysgu 6 VMN0000 6
+lein 4 AQ0000 4
+welwch 1 VMM02P0 1
+aedd 9 VMN0000 9
+deimlo 1 VMN0000 1
+rynu 2 VMN0000 2
+ychwyn 7 VMN0000 7
+unio 21 VMN0000 21
+idio 4 VMN0000 4
+ddio 59 AQ0000 2 VMN0000 57
+yr 409 AQ0000 18 VMN0000 5
+add 20 AQ0000 9 VMN0000 8
+blygu 13 VMN0000 13
+medrol 3 AQ0000 3
+dfywio 2 VMN0000 2
+allan 8 RG 8
+ymudodd 4 VMIS3S0 4
+_yn_oed 4 RG 4
+godd 25 VMIS3S0 25
+affu_ar 1 VMN0000 1
+wr 104 RG 13 AQ0000 25
+dleisio 7 VMN0000 7
+thol 22 AQ0000 22
+sodd 3 VMIS3S0 3
+ywir 10 AQ0000 10
+wthio 3 VMN0000 3
+ymuno_Ã¢ 1 VMN0000 1
+idiol 8 AQ0000 8
+iraddio 3 VMN0000 3
+nodedig 3 AQ0000 3
+creu 10 VMN0000 10
+yn_Ã´l 66 RG 19
+hrin 3 VMN0000 3
+heddiw 2 RG 2
+wi 49 VMN0000 5
+sneg 4 AQ0000 4
+nnatod 3 AQ0000 3
+eall 20 VMN0000 20
+gymedrol 3 AQ0000 3
+Ã¢ 61 VMN0000 18 VMM02P0 3
+yderus 7 AQ0000 7
+t 238 RG 3 VMIS3P0 3 AQ0000 35 VMIP3P0 1 VMN0000 7
+gwerthu 1 VMN0000 1
+gymharu 3 VMN0000 3
+saf 17 AQ0000 13
+mudol 3 AQ0000 3
+nibynnol 5 AQ0000 5
+rio 15 VMN0000 15
+lleoli 3 VMN0000 3
+sglwyddo 4 VMN0000 4
+rferol 5 AQ0000 5
+n 3338 RG 93 AQ0000 109 VMM01P0 5 VMN0000 99
+ysig 8 AQ0000 8
+ambell 3 AQ0000 3
+nesa 2 VMM02S0 2
+ffwn 1 VMM01P0 1
+ntio 2 VMN0000 2
+leni 9 RG 9
+onomaidd 9 AQ0000 9
+ddatgelu 3 VMN0000 3
+edrol 3 AQ0000 3
+refnu 7 VMN0000 7
+ofnodi 1 VMN0000 1
+fodus 7 AQ0000 7
+farw 25 AQ0000 25
+goel 8 AQ0000 8
+dolygu 2 VMN0000 2
+ddwl 33 VMN0000 7
+han 40 VMN0000 7
+bod 269 VMN0000 32
+rous 3 AQ0000 3
+symud 9 VMN0000 9
+anffodus 6 AQ0000 6
+chog 6 AQ0000 6
+ymud 9 VMN0000 9
+ositif 3 AQ0000 3
+ud 115 VMN0000 114
+peaidd 8 AQ0000 8
+lus 3 AQ0000 3
+lchi 1 VMN0000 1
+nellu 4 VMN0000 4
+ynychu 6 VMN0000 6
+parhau 9 VMN0000 9
+atal 14 VMN0000 14
+hiau 14 RG 4
+lunio 21 VMN0000 21
+eithrio 9 VMN0000 9
+anlynol 2 AQ0000 2
+daeth 38 VMIS3S0 8
+gyflwyno 21 VMN0000 21
+wario 4 VMN0000 4
+thiau 14 RG 4
+grymus 3 AQ0000 3
+stal 13 RG 13
+ell 37 AQ0000 3
+wireddu 4 VMN0000 4
+od_Ã¢ 4 VMN0000 4
+h_gwrs 3 RG 3
+niol 11 AQ0000 11
+ddysgol 4 AQ0000 4
+chradd 9 AQ0000 9
+lifo 4 VMN0000 4
+rchog 6 AQ0000 6
+lynol 2 AQ0000 2
+cysylltu 3 VMN0000 3
+gan 109 VMN0000 6
+nffodus 6 AQ0000 6
+ur 27 AQ0000 4
+gymraeg 29 AQ0000 22
+lwebu 1 VMN0000 1
+wael 12 AQ0000 12
+diswyddo 5 VMN0000 5
+taf 27 AQ0000 26
+derbyn 13 VMN0000 13
+arch 9 VMN0000 4
+eddol 29 AQ0000 29
+nhyrchu 3 VMN0000 3
+anhapus 2 AQ0000 2
+reoli 2 VMN0000 2
+adolygu 2 VMN0000 2
+ystal 13 RG 13
+ymaint 12 AQ0000 12
+reithiol 4 AQ0000 4
+orodd 2 VMIS3S0 2
+odd 330 VMIS3S0 292 AQ0000 11 VMN0000 11
+eithlon 4 AQ0000 4
+ed_arian 6 VMN0000 6
+wyo 7 VMN0000 7
+diflannu 1 VMN0000 1
+eddus 8 AQ0000 8
+chi 9 VMN0000 1
+aethol 20 AQ0000 20
+das 3 AQ0000 3
+fawrogi 4 VMN0000 4
+ygol 11 AQ0000 11
+a 726 VMM02S0 10 RG 102 AQ0000 24 VMN0000 32
+anu 5 VMN0000 5
+dyddol 2 AQ0000 2
+nedd 52 RG 13
+ma 41 RG 7
+dathlu 2 VMN0000 2
+sennol 17 AQ0000 17
+¢ 61 VMN0000 18 VMM02P0 3
+rthol 2 AQ0000 2
+dychymyg 3 VMN0000 3
+ith 170 RG 4
+goi 1 VMN0000 1
+n_am 4 VMN0000 4
+mlwg 2 AQ0000 2
+formio 1 VMN0000 1
+euais 3 VMIS1S0 3
+rchebu 3 VMN0000 3
+ry 11 AQ0000 8
+diffodd 8 VMN0000 8
+nta 1 AQ0000 1
+n_at 7 VMN0000 7
+dael 16 VMN0000 16
+weld_Ã¢ 11 VMN0000 11
+darnhau 6 VMN0000 6
+dilyn 6 VMN0000 6
+aen_at 7 VMN0000 7
+wain 43 VMN0000 11
+yn_am 4 VMN0000 4
+ymryd 24 VMN0000 24
+arnhau 6 VMN0000 6
+on 271 RG 15 AQ0000 12 VMN0000 5
+ewydd 36 AQ0000 36
+cr 6 AQ0000 6
+saesneg 4 AQ0000 4
+crebachu 3 VMN0000 3
+onwch 3 VMM02P0 3
+ddeng 2 AQ0000 2
+groesi 6 VMN0000 6
+fredin 12 AQ0000 12
+seddu 2 VMN0000 2
+anol 18 AQ0000 12
+lywodd 5 VMIS3S0 5
+hyn 79 RG 1
+ryn 5 AQ0000 3
+ubol 2 AQ0000 2
+tio 6 VMN0000 6
+gynnes 3 AQ0000 3
+edol 9 AQ0000 9
+sgu 15 VMN0000 15
+ynt 13 RG 3
+y_gweill 3 RG 3
+nig 54 AQ0000 28 VMN0000 8
+n_ei_hun 1 RG 1
+nsio 1 VMN0000 1
+logi 5 VMN0000 5
+roi 8 VMN0000 8
+rannu 5 VMN0000 5
+eddara 2 VMM02S0 2
+_rhan 7 VMN0000 7
+ewis 20 VMN0000 6
+cael 172 VMN0000 172
+ddiheuro 6 VMN0000 6
+fydlodd 4 VMIS3S0 4
+log 7 AQ0000 2
+yd-eang 6 AQ0000 6
+ymprydio 2 VMN0000 2
+ib 32 AQ0000 32
+awer 7 RG 3 AQ0000 4
+lawer 7 RG 3 AQ0000 4
+rhoi 28 VMN0000 28
+llu 28 VMN0000 4
+blhau 4 VMN0000 4
+own 2 AQ0000 2
+weithio 14 VMN0000 14
+sgrifio 1 VMN0000 1
+Ã¢n 49 AQ0000 8
+modol 3 AQ0000 3
+siomi 2 VMN0000 2
+_oed 24 RG 4
+ormio 1 VMN0000 1
+erdded 9 VMN0000 9
+ysol 2 AQ0000 2
+ilio 11 VMN0000 11
+beithio 21 VMN0000 21
+iwr 10 AQ0000 3
+cymaint 7 AQ0000 7
+anolog 2 AQ0000 2
+fyd-eang 3 AQ0000 3
+wgrymu 2 VMN0000 2
+dwys 4 AQ0000 4
+gyn 10 AQ0000 4 VMN0000 6
+ariannu 7 VMN0000 7
+dirol 2 AQ0000 2
+iddymu 2 VMN0000 2
+rymu 2 VMN0000 2
+ynhyrchu 3 VMN0000 3
+deall 20 VMN0000 20
+heddig 1 AQ0000 1
+mbell 3 AQ0000 3
+_arfer 1 RG 1
+wyddo 16 VMN0000 13
+fynu 16 VMN0000 16
+ryderus 7 AQ0000 7
+imlo 7 VMN0000 7
+naliadwy 3 AQ0000 3
+cefnogi 9 VMN0000 9
+hog 6 AQ0000 6
+to 7 VMM02S0 3 RG 4
+wanegodd 25 VMIS3S0 25
+hant 3 VMIS3P0 3
+llosgi 3 VMN0000 3
+bersonol 4 AQ0000 4
+echrau 7 VMN0000 7
+_ati 1 RG 1
+galw 33 VMN0000 20
+ybodol 7 AQ0000 7
+byd-eang 3 AQ0000 3
+hau 94 VMN0000 60
+er 271 RG 4 AQ0000 11 VMN0000 5
+yfforddi 7 VMN0000 7
+uddsoddi 17 VMN0000 17
+ddol 48 AQ0000 48
+thwyo 7 VMN0000 7
+naeth 81 VMIS3S0 31
+iniodd 6 VMIS3S0 6
+naethant 3 VMIS3P0 3
+udol 3 AQ0000 3
+chebu 3 VMN0000 3
+hen 8 AQ0000 8
+yflwyno 33 VMN0000 33
+ylio 1 VMN0000 1
+iynu 4 VMN0000 4
+cywir 7 AQ0000 7
+odern 2 AQ0000 2
+arnhaodd 3 VMIS3S0 3
+gwyllt 12 AQ0000 12
+isiodd 3 VMIS3S0 3
+rych_ar 10 VMN0000 10
+harhau 1 VMN0000 1
+eirio 2 VMN0000 2
+oi 46 VMN0000 46
+ddiw 2 RG 2
+chreuais 3 VMIS1S0 3
+iweddara 2 VMM02S0 2
+chrau 7 VMN0000 7
+diolch 3 VMN0000 1
+profi 6 VMN0000 6
+hosodd 3 VMIS3S0 3
+deral 10 AQ0000 10
+ydoli 6 VMN0000 6
+sbarthu 8 VMN0000 8
+ychu 6 VMN0000 6
+hreuais 3 VMIS1S0 3
+ewr 3 AQ0000 3
+lwch 22 VMM02P0 16
+siynu 4 VMN0000 4
+liol 1 AQ0000 1
+par 4 VMN0000 4
+ngos 14 VMN0000 14
+gychwyn 3 VMN0000 3
+newid 24 VMN0000 24
+daclo 2 VMN0000 2
+du 68 VMN0000 68
+reifat 7 AQ0000 7
+bol 2 AQ0000 2
+rwg 6 AQ0000 6
+rogi 4 VMN0000 4
+herdded 2 VMN0000 2
+esio 3 VMN0000 3
+ros 58 VMN0000 17
+teithio 4 VMN0000 4
+ngen 46 AQ0000 3
+haodd 3 VMIS3S0 3
+igwydd 12 VMN0000 12
+mudodd 4 VMIS3S0 4
+gwth 2 VMN0000 2
+Ã´l_i 7 RG 7
+barnu 2 VMN0000 2
+wir 13 AQ0000 13
+dyn 36 RG 12 AQ0000 1
+uan 24 AQ0000 15
+wni 6 VMN0000 6
+chwelyd 8 VMN0000 8
+togi 3 VMN0000 3
+gu 44 VMN0000 44
+Ã¯wn 1 VMM01P0 1
+wylio 1 VMN0000 1
+waith 75 RG 4
+dinol 12 AQ0000 12
+foddol 3 AQ0000 3
+rwng 4 VMN0000 2
+ian 61 VMN0000 6
+oroesi 4 VMN0000 4
+liwn 17 VMM01P0 3
+el_arfer 1 RG 1
+gwladol 9 AQ0000 9
+linellu 4 VMN0000 4
+dysgol 4 AQ0000 4
+leol 43 AQ0000 43
+drwg 6 AQ0000 6
+ryglus 3 AQ0000 3
+ael 252 RG 1 AQ0000 12 VMN0000 236
+o_lawer 3 RG 3
+ylltu 16 VMN0000 16
+ofynnodd 1 VMIS3S0 1
+afael_ar 2 VMN0000 2
+golli 3 VMN0000 3
+oel 8 AQ0000 8
+eithrin 3 VMN0000 3
+wedig 8 AQ0000 8
+hydd 6 AQ0000 6
+difrodi 6 VMN0000 6
+osodd 3 VMIS3S0 3
+edyn 12 RG 12
+oseddu 2 VMN0000 2
+d_rhan 7 VMN0000 7
+esol 1 AQ0000 1
+luro 2 VMN0000 2
+ynnal 50 VMN0000 50
+ennig 24 AQ0000 24
+efyd 57 RG 57
+siarad 2 VMN0000 2
+eni 21 RG 9 VMN0000 5
+sgi 3 VMN0000 3
+cychwyn 4 VMN0000 4
+nfodol 2 AQ0000 2
+ff 24 VMIP3S0 8
+i_gilydd 7 RG 7
+lino 4 VMN0000 4
+nyddio 42 VMN0000 42
+ithasol 7 AQ0000 7
+ried 20 VMN0000 20
+hymyg 3 VMN0000 3
+raddiodd 2 VMIS3S0 2
+fawr 9 AQ0000 9
+yrru 3 VMN0000 3
+addysgol 4 AQ0000 4
+rbyn_hyn 1 RG 1
+ymharu 3 VMN0000 3
+blino 4 VMN0000 4
+olygu 12 VMN0000 12
+sicr 6 AQ0000 6
+fael_ar 2 VMN0000 2
+styn 5 VMN0000 5
+reuodd 4 VMIS3S0 4
+niodd 6 VMIS3S0 6
+heidiol 5 AQ0000 5
+ddewis 2 VMN0000 2
+iangen 3 AQ0000 3
+gynghori 3 VMN0000 3
+nwedig 8 AQ0000 8
+syddol 1 AQ0000 1
+eth 390 VMIS3S0 42 AQ0000 4
+unig 4 AQ0000 4
+ddiddori 2 VMN0000 2
+dhau 8 VMN0000 8
+rchyll 3 AQ0000 3
+gynt 3 RG 3
+poeni 5 VMN0000 5
+fo 7 VMN0000 4
+arpar 4 VMN0000 4
+lio 37 VMN0000 37
+gynnal 19 VMN0000 19
+dar 13 AQ0000 13
+awn 45 RG 35 AQ0000 3
+bwysig 8 AQ0000 8
+cyrraedd 3 VMN0000 3
+efnu 7 VMN0000 7
+wch 68 VMIP2P0 4 VMM02P0 23
+ersonol 4 AQ0000 4
+eddwi 3 VMN0000 3
+fyn_am 4 VMN0000 4
+rrodd 2 VMIS3S0 2
+edig 29 AQ0000 22
+_ar 17 VMN0000 17
+yn_llwyr 5 VMN0000 5
+fio 5 VMN0000 5
+ymhleth 4 AQ0000 4
+bosib 27 AQ0000 27
+rbyn 32 VMN0000 13
+i_gyd 8 AQ0000 8
+wng 24 VMN0000 2
+idleisio 7 VMN0000 7
+rhan 40 VMN0000 7
+elyd 8 VMN0000 8
+llwyd 2 AQ0000 2
+eld 38 VMN0000 38
+llwyr 22 AQ0000 15 VMN0000 5
+iff 8 VMIP3S0 8
+hasol 7 AQ0000 7
+dro 9 RG 5 VMN0000 4
+si 18 VMN0000 12
+eddiw 2 RG 2
+ystyried 20 VMN0000 20
+lio_i 4 VMN0000 4
+stio 4 VMN0000 4
+godi 19 VMN0000 19
+gyfan 7 AQ0000 7
+yd_rhan 7 VMN0000 7
+erfynodd 6 VMIS3S0 6
+tblygu 11 VMN0000 11
+enhinol 5 AQ0000 5
+grymu 2 VMN0000 2
+liadwy 3 AQ0000 3
+rheoli 2 VMN0000 2
+rfynodd 6 VMIS3S0 6
+nni 9 VMN0000 4
+ddisgwyl 2 VMN0000 2
+ref 41 RG 5
+dibynnol 4 AQ0000 4
+ddus 20 AQ0000 20
+ddiogel 3 AQ0000 3
+aethom 1 VMIS1P0 1
+erioed 1 RG 1
+d_wrth 6 VMN0000 6
+llynedd 13 RG 13
+oeddi 17 VMN0000 17
+ydlu 22 VMN0000 22
+nes 39 AQ0000 3
+eithredu 8 VMN0000 8
+ynod 4 RG 4
+brif 6 AQ0000 6
+r_afael 2 VMN0000 2
+ytbwys 2 AQ0000 2
+inol 17 AQ0000 17
+th_gwrs 3 RG 3
+iopa 4 VMN0000 4
+preifat 7 AQ0000 7
+odraethu 4 VMN0000 4
+cyfartal 3 AQ0000 3
+eillio 3 VMN0000 3
+¢n 49 AQ0000 8
+beryglus 3 AQ0000 3
+farpar 4 VMN0000 4
+s_dro 5 RG 5
+ofi 8 VMN0000 8
+esaf 13 AQ0000 13
+hoi 28 VMN0000 28
+byw 5 VMN0000 2
+edeg 6 VMN0000 6
+afodd 98 VMIS3S0 98
+digwydd 12 VMN0000 12
+feddol 2 AQ0000 2
+hredu 8 VMN0000 8
+yrchus 1 AQ0000 1
+eddai 87 VMII3S0 87
+_arian 6 VMN0000 6
+ffonio 7 VMN0000 7
+gwisgo 2 VMN0000 2
+gi 28 VMN0000 27
+addiodd 2 VMIS3S0 2
+arhau 10 VMN0000 10
+bwyntio 2 VMN0000 2
+d_arian 6 VMN0000 6
+hÃ¯o 3 VMN0000 3
+nnu 22 VMN0000 22
+derus 7 AQ0000 7
+disgyn 6 VMN0000 6
+enigol 6 AQ0000 6
+gysylltu 13 VMN0000 13
+lywed_am 16 VMN0000 16
+benodol 4 AQ0000 4
+sgwyl 15 VMN0000 15
+gyfrifol 5 AQ0000 5
+ffrous 3 AQ0000 3
+reu 16 VMN0000 16
+dfer 2 VMN0000 2
+achub 1 VMN0000 1
+mweld 3 VMN0000 3
+bygwth 2 VMN0000 2
+dlaethol 20 AQ0000 20
+yma 37 RG 7
+ellach 11 RG 4
+wriadol 1 AQ0000 1
+cyllidol 1 AQ0000 1
+ddymu 2 VMN0000 2
+wyl 17 VMN0000 15
+difrifol 7 AQ0000 7
+ladd 11 VMN0000 8
+ru 223 VMN0000 8
+ddiffodd 2 VMN0000 2
+irol 2 AQ0000 2
+dim 45 RG 45
+orol 1 AQ0000 1
+bodoli 3 VMN0000 3
+wadu 4 VMN0000 4
+wed 47 VMII3P0 33 VMN0000 14
+lla 21 VMN0000 21
+redinol 12 AQ0000 12
+ddodd 5 VMIS3S0 5
+filmio 1 VMN0000 1
+chadw 5 VMN0000 5
+dol 126 AQ0000 95
+mynnodd 2 VMIS3S0 2
+syml 3 AQ0000 3
+gol 67 AQ0000 47
+ebygol 4 AQ0000 4
+ifrodi 6 VMN0000 6
+ethoch 5 VMIS2P0 5
+natod 3 AQ0000 3
+rych 21 VMN0000 21
+nhygoel 8 AQ0000 8
+dewis 12 VMN0000 6
+chu 15 VMN0000 15
+fynd 16 VMN0000 16
+ad 403 VMN0000 2
+ous 3 AQ0000 3
+rth_gwrs 3 RG 3
+rlledu 3 VMN0000 3
+arfog 1 AQ0000 1
+rnhaodd 3 VMIS3S0 3
+lawn 3 AQ0000 3
+wybod 24 VMN0000 24
+doli 16 VMN0000 16
+wis 20 VMN0000 6
+diogel 5 AQ0000 5
+cadw 3 VMN0000 3
+gelu 7 VMN0000 7
+medd 3 VMN0000 3
+nnog 10 VMN0000 10
+tanio 3 VMN0000 3
+ynedd 46 RG 13
+talu 6 VMN0000 6
+gwahanol 7 AQ0000 7
+Ã¯o 3 VMN0000 3
+caiff 6 VMIP3S0 6
+ddiodd 2 VMIS3S0 2
+ntaf 26 AQ0000 26
+atoi 9 VMN0000 9
+ordio 8 VMN0000 8
+ychanu 2 VMN0000 2
+rodi 6 VMN0000 6
+fwn 1 VMM01P0 1
+obeithio 21 VMN0000 21
+onitro 8 VMN0000 8
+edru 2 VMN0000 2
+aith 161 RG 4
+gwrthod 2 VMN0000 2
+ylweddol 3 AQ0000 3
+deirio 2 VMN0000 2
+oddol 3 AQ0000 3
+annog 10 VMN0000 10
+dymuno 2 VMN0000 2
+endant 4 AQ0000 4
+weddar 13 AQ0000 13
+afu 1 VMN0000 1
+´l_i 7 RG 7
+ifanc 13 AQ0000 13
+am 187 RG 3 VMN0000 21
+hynod 4 RG 4
+rofi 8 VMN0000 8
+awyddus 12 AQ0000 12
+arlledu 3 VMN0000 3
+ilyn 6 VMN0000 6
+golygu 8 VMN0000 8
+frannu 3 VMN0000 3
+medig 5 AQ0000 5
+digol 2 AQ0000 2
+monitro 8 VMN0000 8
+frydu 2 VMN0000 2
+wys 46 AQ0000 6 VMN0000 2
+oli 34 VMN0000 34
+pobi 1 VMN0000 1
+wethaf 9 AQ0000 9
+prin 4 AQ0000 4
+llio 3 VMN0000 3
+ithu 4 VMN0000 4
+rfog 1 AQ0000 1
+wympo 6 VMN0000 6
+iw 18 RG 2
+anoli 6 VMN0000 6
+eisio 40 VMN0000 40
+fyd 57 RG 57
+irio 2 VMN0000 2
+ifio 1 VMN0000 1
+uodd 4 VMIS3S0 4
+riant 1 VMIP3P0 1
+debygol 4 AQ0000 4
+gosod 9 AQ0000 6 VMN0000 3
+weddoli 2 VMN0000 2
+ydio 2 VMN0000 2
+lan 10 RG 8
+thrin 3 VMN0000 3
+arbed 4 VMN0000 4
+ed 181 VMII3P0 33 RG 5 AQ0000 15 VMN0000 47
+hapus 2 AQ0000 2
+rian 50 VMN0000 6
+ngwladol 9 AQ0000 9
+eiddiol 13 AQ0000 13
+ithredu 8 VMN0000 8
+nfonwch 3 VMM02P0 3
+n_Ã´l_i 7 RG 7
+resennol 17 AQ0000 17
+oeddodd 1 VMIS3S0 1
+lesio 3 VMN0000 3
+aredu 4 VMN0000 4
+ynnar 11 AQ0000 11
+lbwyntio 2 VMN0000 2
+mateb 7 VMN0000 3
+nu 63 VMN0000 63
+gyrraedd 6 VMN0000 6
+glurodd 1 VMIS3S0 1
+iannu 7 VMN0000 7
+nc 23 AQ0000 13
+eud_wrth 6 VMN0000 6
+lleol 21 AQ0000 21
+agor 14 VMN0000 14
+chwyn 7 VMN0000 7
+danu 3 VMN0000 3
+chyll 3 AQ0000 3
+ddal 2 VMN0000 2
+ys 80 AQ0000 6 VMN0000 2
+deng 2 AQ0000 2
+fro 6 VMM02S0 3
+ly 9 RG 9
+derfynu 16 VMN0000 16
+tramor 2 AQ0000 2
+orthwyo 7 VMN0000 7
+wriadu 10 VMN0000 10
+lu 162 VMN0000 76
+dara 2 VMM02S0 2
+led 20 AQ0000 14
+llach 11 RG 4
+sib 32 AQ0000 32
+nerthol 2 AQ0000 2
+ddiangen 3 AQ0000 3
+wu 2 VMN0000 2
+itif 3 AQ0000 3
+edinol 12 AQ0000 12
+chymyg 3 VMN0000 3
+dedig 3 AQ0000 3
+l_ar 2 VMN0000 2
+yrraedd 9 VMN0000 9
+wilio_am 1 VMN0000 1
+mraeg 51 AQ0000 38
+gilydd 7 RG 7
+i 2216 RG 17 AQ0000 17 VMII3S0 87 VMIP2S0 5 VMN0000 287
+lynedd 39 RG 13
+hÃ¢n 5 AQ0000 2
+llt 12 AQ0000 12
+ryddhau 6 VMN0000 6
+tiedig 2 AQ0000 2
+ithio_ar 4 VMN0000 4
+sio 44 VMN0000 44
+ygu 29 VMN0000 29
+en_at 7 VMN0000 7
+bendant 4 AQ0000 4
+ariannol 9 AQ0000 9
+lio_am 1 VMN0000 1
+do 32 VMN0000 13
+raeg 51 AQ0000 38
+wg 33 AQ0000 8
+addysgu 6 VMN0000 6
+deithio 3 VMN0000 3
+wysol 2 AQ0000 2
+io_ar 4 VMN0000 4
+lori 3 VMN0000 3
+thygu 4 VMN0000 4
+lon 12 AQ0000 12
+_dro 5 RG 5
+gryn 3 AQ0000 3
+nd_Ã¢ 2 VMN0000 2
+ahardd 4 VMN0000 4
+goroesi 4 VMN0000 4
+ilydd 7 RG 7
+ch_Ã¢ 3 VMM02P0 3
+oddoli 3 VMN0000 3
+edin 12 AQ0000 12
+arw 34 AQ0000 34
+chus 1 AQ0000 1
+inellu 4 VMN0000 4
+_ond 7 RG 7
+tynnu 5 VMN0000 5
+symudodd 4 VMIS3S0 4
+gwblhau 4 VMN0000 4
+ig 129 AQ0000 59 VMN0000 8
+achu 3 VMN0000 3
+thredu 8 VMN0000 8
+bach 6 AQ0000 6
+osiynol 2 AQ0000 2
+gymaint 5 AQ0000 5
+oll 12 AQ0000 12
+thredol 2 AQ0000 2
+athlu 2 VMN0000 2
+cyd 4 AQ0000 4
+isoes 8 RG 8
+sefydlu 22 VMN0000 22
+iarad 2 VMN0000 2
+naethom 1 VMIS1P0 1
+cynta 1 AQ0000 1
+eithaf 2 AQ0000 2
+yfarpar 4 VMN0000 4
+leihau 2 VMN0000 2
+yffro 3 VMM02S0 3
+erbyn 32 VMN0000 13
+nderfynu 16 VMN0000 16
+wyd 38 AQ0000 2
+apelio 18 VMN0000 18
+fywio 2 VMN0000 2
+re 38 RG 14
+dd 1376 VMM02S0 1 VMIS3S0 292 RG 20 AQ0000 79 VMN0000 47
+adw 17 VMN0000 17
+olli 14 VMN0000 14
+eddi 17 VMN0000 17
+reuais 3 VMIS1S0 3
+wyntio 2 VMN0000 2
+nata 4 VMN0000 4
+thwynebu 3 VMN0000 3
+ydyn 3 AQ0000 1
+gweld 18 VMN0000 18
+ydol 16 AQ0000 2
+gadw 9 VMN0000 9
+erfynol 2 AQ0000 2
+eidiol 8 AQ0000 8
+ymunedol 7 AQ0000 7
+iwethaf 9 AQ0000 9
+_blaen 3 RG 3
+sawu 2 VMN0000 2
+elwch 16 VMM02P0 16
+arian 50 VMN0000 6
+nogi 12 VMN0000 12
+gasglu 5 VMN0000 5
+gwyl 15 VMN0000 15
+eithiol 4 AQ0000 4
+forddio 9 VMN0000 9
+cadeirio 2 VMN0000 2
+ffu_ar 1 VMN0000 1
+dwi 47 VMN0000 3
+teb 16 VMN0000 12
+hywir 3 AQ0000 3
+hytrach 2 RG 2
+forol 1 AQ0000 1
+enwedig 8 AQ0000 8
+heoli 2 VMN0000 2
+omedig 5 AQ0000 5
+gwbl 5 AQ0000 5
+fformio 1 VMN0000 1
+gadael 6 VMN0000 6
+sa 2 VMM02S0 2
+rydio 2 VMN0000 2
+neud 73 VMN0000 73
+nigol 10 AQ0000 10
+sgol 24 AQ0000 4
+efnyddio 42 VMN0000 42
+archnata 4 VMN0000 4
+iadwy 3 AQ0000 3
+nwi 2 VMN0000 2
+gwydd 12 VMN0000 12
+ogan 6 VMN0000 6
+hel 4 AQ0000 4
+yffrous 3 AQ0000 3
+dfrydu 2 VMN0000 2
+wrthod 5 VMN0000 5
+ghywir 3 AQ0000 3
+dyddiol 1 AQ0000 1
+eral 10 AQ0000 10
+gwthio 3 VMN0000 3
+leth 4 AQ0000 4
+dded 9 VMN0000 9
+rw 34 AQ0000 34
+esawu 2 VMN0000 2
+lledu 3 VMN0000 3
+sydyn 1 AQ0000 1
+fon 11 VMN0000 5
+lweddoli 2 VMN0000 2
+laen 30 RG 18
+casglu 15 VMN0000 15
+bryd 6 RG 3
+lidol 3 AQ0000 3
+ymyg 3 VMN0000 3
+aol 1 AQ0000 1
+helpu 17 VMN0000 17
+ymuno 2 VMN0000 2
+tu 18 VMN0000 16
+ddod_Ã¢ 4 VMN0000 4
+chael 2 VMN0000 2
+honni 4 VMN0000 4
+c 186 AQ0000 13
+ewyrchus 1 AQ0000 1
+ynodd 6 VMIS3S0 6
+awrogi 4 VMN0000 4
+ledu 12 VMN0000 12
+ynhwysol 2 AQ0000 2
+rn 42 AQ0000 2
+_afael 2 VMN0000 2
+egol 19 AQ0000 19
+gytbwys 2 AQ0000 2
+addas 3 AQ0000 3
+rown 2 AQ0000 2
+ecordio 8 VMN0000 8
+weiniodd 6 VMIS3S0 6
+rhyddhau 2 VMN0000 2
+o_i 6 VMN0000 4
+imeiddio 2 AQ0000 2
+ddyliol 1 AQ0000 1
+readigol 2 AQ0000 2
+iogelwch 15 VMM02P0 15
+hymhleth 4 AQ0000 4
+renhinol 5 AQ0000 5
+blaen 8 RG 3
+falch 12 AQ0000 12
+chosodd 3 VMIS3S0 3
+ropeaidd 8 AQ0000 8
+ynhau 6 VMN0000 6
+ef 49 RG 5
+ewyrchu 2 VMN0000 2
+diraddio 3 VMN0000 3
+rfforol 1 AQ0000 1
+l_arfer 1 RG 1
+prydio 2 VMN0000 2
+sicrhau 22 VMN0000 22
+iddiol 13 AQ0000 13
+echu 1 VMN0000 1
+eng 2 AQ0000 2
+awelwch 1 VMM02P0 1
+noloesol 1 AQ0000 1
+ychymyg 3 VMN0000 3
+asglu 20 VMN0000 20
+fen 12 VMN0000 2
+grifio 1 VMN0000 1
+ddigwydd 4 VMN0000 4
+isgo 2 VMN0000 2
+ebu 23 VMN0000 23
+pigo 2 VMN0000 2
+fog 1 AQ0000 1
+ffilmio 1 VMN0000 1
+rsonol 4 AQ0000 4
+farch 4 VMN0000 4
+darogan 6 VMN0000 6
+aodd 3 VMIS3S0 3
+noli 6 VMN0000 6
+lansio 1 VMN0000 1
+gwella 17 VMN0000 17
+ywed_am 16 VMN0000 16
+_gael 1 RG 1
+bu 61 VMN0000 28
+benigol 6 AQ0000 6
+lynyddol 9 AQ0000 9
+meiddio 2 AQ0000 2
+dlodd 4 VMIS3S0 4
+gwylio 1 VMN0000 1
+iynol 11 AQ0000 11
+angos 14 VMN0000 14
+wyno 37 VMN0000 37
+uchel 4 AQ0000 4
+redin 12 AQ0000 12
+adarnhau 6 VMN0000 6
+rifio 1 VMN0000 1
+ywio 2 VMN0000 2
+iweddu 1 VMN0000 1
+wedodd 116 VMIS3S0 116
+dod_Ã¢ 4 VMN0000 4
+nwybyddu 4 VMN0000 4
+oeni 5 VMN0000 5
+oesol 1 AQ0000 1
+hreuodd 4 VMIS3S0 4
+weddol 9 AQ0000 9
+al 140 RG 13 AQ0000 30 VMN0000 66
+fnodi 1 VMN0000 1
+rch 29 VMN0000 4
+aethygu 4 VMN0000 4
+munedol 7 AQ0000 7
+hwysol 2 AQ0000 2
+mdeimlo 1 VMN0000 1
+nt 107 RG 3 VMIS3P0 3 AQ0000 16 VMIP3P0 1
+ogelwch 15 VMM02P0 15
+lfeddwl 3 VMN0000 3
+dogol 1 AQ0000 1
+ellu 4 VMN0000 4
+ratoi 9 VMN0000 9
+dod 42 VMN0000 37
+iflannu 1 VMN0000 1
+erus 7 AQ0000 7
+yliol 1 AQ0000 1
+llidol 3 AQ0000 3
+en 160 RG 18 AQ0000 11 VMN0000 2
+prosesu 4 VMN0000 4
+annus 13 AQ0000 13
+ennill 9 VMN0000 5
+ynnu 7 VMN0000 7
+ddim 38 RG 38
+elly 9 RG 9
+draethu 4 VMN0000 4
+dal 30 AQ0000 17 VMN0000 2
+osesu 4 VMN0000 4
+bl 83 AQ0000 6
+gwireddu 2 VMN0000 2
+isgwyl 15 VMN0000 15
+arogan 6 VMN0000 6
+rosesu 4 VMN0000 4
+mosiynol 2 AQ0000 2
+rhau 32 VMN0000 32
+nsicr 3 AQ0000 3
+wynebu 18 VMN0000 18
+rhaol 1 AQ0000 1
+dweithio 2 VMN0000 2
+defnydd 4 VMM02S0 1
+hyw 22 AQ0000 22
+tro 20 VMN0000 12
+ateb 16 VMN0000 12
+ansicr 3 AQ0000 3
+'r_afael 2 VMN0000 2
+edfrydu 2 VMN0000 2
+bychanu 2 VMN0000 2
+hygu 4 VMN0000 4
+yfarch 4 VMN0000 4
+ethygu 4 VMN0000 4
+brwng 2 VMN0000 2
+us 59 AQ0000 59
+euodd 4 VMIS3S0 4
+wydd 159 AQ0000 36 VMN0000 12
+hfawrogi 4 VMN0000 4
+ohebu 1 VMN0000 1
+im_ond 7 RG 7
+ioneddol 7 AQ0000 7
+su 18 VMN0000 18
+fforol 1 AQ0000 1
+thlu 4 VMN0000 2
+po 6 VMN0000 6
+brown 2 AQ0000 2
+ati 6 RG 1
+addoli 2 VMN0000 2
+yntaf 26 AQ0000 26
+yblu 6 VMN0000 6
+groesawu 2 VMN0000 2
+anfonwch 3 VMM02P0 3
+flannu 1 VMN0000 1
+ynyddol 9 AQ0000 9
+lydd 11 RG 7
+awu 2 VMN0000 2
+aen 53 RG 18
+efnydd 4 VMM02S0 1
+ethant 3 VMIS3P0 3
+nhapus 2 AQ0000 2
+un_adeg 4 RG 4
+tod 30 AQ0000 3
+lygu 25 VMN0000 25
+lur 4 AQ0000 4
+siopa 4 VMN0000 4
+afod 36 VMN0000 10
+thant 3 VMIS3P0 3
+ybod 24 VMN0000 24
+ychwelyd 8 VMN0000 8
+adfywio 2 VMN0000 2
+gyffrous 3 AQ0000 3
+dywed 33 VMII3P0 33
+ennol 17 AQ0000 17
+lt 12 AQ0000 12
+ytrach 2 RG 2
+eddar 13 AQ0000 13
+ywedodd 116 VMIS3S0 116
+fordirol 2 AQ0000 2
+gyflawni 1 VMN0000 1
+dweud 32 VMN0000 32
+hwanegol 19 AQ0000 19
+h 944 VMIS2P0 5 VMIS3S0 42 RG 10 AQ0000 32 VMIP2P0 4 VMN0000 34 VMM02P0 23
+rwain 11 VMN0000 11
+chanu 2 VMN0000 2
+dlon 8 AQ0000 8
+</Suffixes>
+<SingleTagFreq>
+AQ 1527
+CC 617
+CS 119
+DA 1614
+DD 53
+DI 42
+DO 22
+DP 602
+DQ 2
+DT 8
+Fc 451
+Fg 57
+Fp 1540
+GA 190
+GN 43
+GV 6
+NC 5377
+NP 886
+PD 122
+PP 177
+PR 122
+PT 22
+RG 502
+RV 36
+SP 4417
+VAI 56
+VAM 17
+VMI 529
+VMM 49
+VMN 2327
+VMS 8
+VSC 60
+VSI 1166
+VSM 2
+VSN 348
+VSS 35
+Z 443
+Zm 53
+</SingleTagFreq>
+<ClassTagFreq>
+-AQ-DT  0 AQ 0 DT 3
+-CC-SP  0 CC 0 SP 9
+-DT-RV  0 DT 0 RV 5
+-NC-Z  0 NC 0 Z 3
+-VMI-Z  0 VMI 0 Z 4
+5.-AQ-NC-Z-te 5. 0 AQ 2 NC 0 Z 0 te 0
+7.-CC-CS-GI-da-na 7. 0 CC 38 CS 9 GI 0 da 0 na 0
+AQ-CS-SP AQ 0 CS 0 SP 27
+AQ-DA-Fz-NC-PP-RG-SP AQ 0 DA 0 Fz 0 NC 0 PP 0 RG 3 SP 0
+AQ-JJ-NN-VB AQ 8 JJ 0 NN 0 VB 0
+AQ-NC AQ 69 NC 17
+AQ-NN AQ 38 NN 0
+AQ-NN-VB AQ 4 NN 0 VB 0
+AQ-NP AQ 2 NP 7
+AQ-RG AQ 0 RG 7
+AQ-SP AQ 24 SP 4
+AQ-VAM AQ 0 VAM 6
+AQ-VMI AQ 14 VMI 0
+AQ-VMI-VMM-VMN AQ 8 VMI 0 VMM 0 VMN 0
+AQ-VMI-VMN AQ 12 VMI 0 VMN 3
+CC-DA-GV CC 42 DA 0 GV 0
+CC-DP-GV CC 12 DP 0 GV 0
+CC-GV CC 273 GV 0
+CC-NP CC 0 NP 4
+CS-DA-SP CS 0 DA 0 SP 31
+CS-DP-Fz-NC-RG-SP CS 0 DP 0 Fz 0 NC 0 RG 3 SP 0
+CS-DP-SP CS 0 DP 0 SP 7
+CS-NC CS 0 NC 12
+CS-NC-SP CS 0 NC 12 SP 97
+CS-SP CS 0 SP 465
+CS-SP-VMI CS 0 SP 137 VMI 0
+DA-Fe-JJ-NN-RB-VB DA 3 Fe 0 JJ 0 NN 0 RB 0 VB 0
+DA-Fz-NC-NP DA 0 Fz 0 NC 0 NP 9
+DA-Fz-SP DA 0 Fz 0 SP 25
+DA-GA DA 1086 GA 83
+DA-PP-SP DA 0 PP 0 SP 104
+DA-SP DA 0 SP 5
+DD-DP-RG-SP DD 3 DP 0 RG 0 SP 0
+DD-PD DD 16 PD 89
+DD-RG DD 21 RG 102
+DP-Fe-JJ-NN-RB-VB DP 1 Fe 0 JJ 0 NN 0 RB 0 VB 0
+DP-GN-PP-SP-VMI-VMM DP 0 GN 0 PP 19 SP 0 VMI 0 VMM 0
+DP-JJ-NN-PR-RB-SP DP 0 JJ 0 NN 0 PR 69 RB 0 SP 0
+DP-NC-PP-SP DP 0 NC 0 PP 4 SP 0
+DP-PP-SP DP 0 PP 60 SP 2
+DP-SP DP 0 SP 253
+DP-VMI DP 390 VMI 0
+Fat-Fp Fat 0 Fp 1
+Fc-Fpa Fc 2 Fpa 0
+Fc-Fpt Fc 2 Fpt 0
+Fd-Fp Fd 0 Fp 5
+Fit-Fp Fit 0 Fp 5
+Fz-SP Fz 0 SP 31
+GA-PP-PT GA 103 PP 0 PT 0
+GA-RG GA 4 RG 0
+GN-NC-VMI GN 9 NC 0 VMI 3
+GN-PP-VMI-VMM GN 5 PP 4 VMI 5 VMM 0
+JJ-NC-NN JJ 0 NC 69 NN 0
+JJ-NC-NN-RB JJ 0 NC 18 NN 0 RB 0
+JJ-NC-NN-RB-VB JJ 0 NC 12 NN 0 RB 0 VB 0
+JJ-NC-NN-VB JJ 0 NC 49 NN 0 VB 0
+JJ-NN-NP JJ 0 NN 0 NP 73
+JJ-NN-NP-RB JJ 0 NN 0 NP 4 RB 0
+JJ-NN-NP-RB-VB JJ 0 NN 0 NP 45 RB 0 VB 0
+JJ-NN-NP-VB JJ 0 NN 0 NP 61 VB 0
+JJ-NN-NP-VBD JJ 0 NN 0 NP 59 VBD 0
+JJ-NN-NP-VBN JJ 0 NN 0 NP 2 VBN 0
+JJ-NN-RB-SP-VB JJ 0 NN 0 RB 0 SP 33 VB 0
+JJ-NN-RB-VB-VMM JJ 0 NN 0 RB 0 VB 0 VMM 3
+JJ-NN-RB-VB-VMN JJ 0 NN 0 RB 0 VB 0 VMN 35
+JJ-NN-RB-VMN JJ 0 NN 0 RB 0 VMN 6
+JJ-NN-SP JJ 0 NN 0 SP 14
+JJ-NN-VMN JJ 0 NN 0 VMN 13
+JJ-NP-VB JJ 0 NP 3 VB 0
+NC-NN NC 48 NN 0
+NC-NN-VB NC 1 NN 0 VB 0
+NC-NP NC 0 NP 5
+NC-PD NC 0 PD 11
+NC-PP NC 0 PP 6
+NC-PT NC 0 PT 18
+NC-RG NC 3 RG 64
+NC-RV NC 0 RV 21
+NC-VMI NC 19 VMI 3
+NC-VMI-VMM NC 14 VMI 0 VMM 15
+NC-VMI-VMM-VMN NC 6 VMI 0 VMM 0 VMN 5
+NC-VMI-VMM-VMS NC 10 VMI 0 VMM 6 VMS 0
+NC-VMI-VMN NC 56 VMI 0 VMN 30
+NC-VMM NC 19 VMM 1
+NC-VMN NC 136 VMN 45
+NC-VMS NC 9 VMS 0
+NC-VSI NC 19 VSI 0
+NC-VSI-VSS NC 3 VSI 18 VSS 0
+NC-VSS NC 9 VSS 8
+NN-NP NN 0 NP 534
+NN-NP-RB NN 0 NP 10 RB 0
+NN-NP-RB-VBZ NN 0 NP 8 RB 0 VBZ 0
+NN-NP-VB NN 0 NP 43 VB 0
+NN-NP-VBD-VBN NN 0 NP 7 VBD 0 VBN 0
+NN-NP-VBN NN 0 NP 2 VBN 0
+NN-SP NN 0 SP 6
+NN-VMN NN 0 VMN 39
+NP-VMI NP 3 VMI 0
+NP-VMI-VMM NP 4 VMI 0 VMM 0
+NP-Z NP 3 Z 0
+PP-SP PP 28 SP 981
+PP-VSS PP 0 VSS 3
+SP-VMI SP 285 VMI 0
+VAI-al VAI 3 al 0
+VAI-el VAI 2 el 0
+VAI-ga VAI 19 ga 0
+VAI-ge VAI 5 ge 0
+VAM-al VAM 3 al 0
+VAM-ga VAM 8 ga 0
+VMI-VMM VMI 1 VMM 23
+VMI-VMM-VMN VMI 0 VMM 0 VMN 122
+VMI-VMN VMI 0 VMN 479
+VMM-VMN VMM 0 VMN 17
+VMM-VMS VMM 1 VMS 0
+VMN-VMS VMN 379 VMS 0
+VSC-VSI-VSM VSC 0 VSI 14 VSM 0
+VSI-VSM VSI 196 VSM 0
+Z-Zm Z 0 Zm 53
+Z-Zp Z 15 Zp 0
+</ClassTagFreq>
+<FormTagFreq>
+! Fat-Fp Fat 0 Fp 1
+'n DP-SP DP 0 SP 209
+'na DD-RG DD 0 RG 38
+( Fc-Fpa Fc 2 Fpa 0
+) Fc-Fpt Fc 2 Fpt 0
+60% Z-Zp Z 1 Zp 0
+7% Z-Zp Z 2 Zp 0
+70% Z-Zp Z 3 Zp 0
+90% Z-Zp Z 3 Zp 0
+99% Z-Zp Z 6 Zp 0
+: Fd-Fp Fd 0 Fp 5
+? Fit-Fp Fit 0 Fp 5
+a CC-GV CC 273 GV 0
+a'i CC-DP-GV CC 8 DP 0 GV 0
+a'r CC-DA-GV CC 42 DA 0 GV 0
+a'u CC-DP-GV CC 4 DP 0 GV 0
+a493 NP-Z NP 3 Z 0
+abertawe NN-NP-VB NN 0 NP 16 VB 0
+aberystwyth NN-NP NN 0 NP 8
+acau JJ-NC-NN JJ 0 NC 3 NN 0
+achos CS-NC CS 0 NC 12
+achosi VMI-VMN VMI 0 VMN 2
+achub VMI-VMN VMI 0 VMN 1
+adael VMI-VMM-VMN VMI 0 VMM 0 VMN 10
+adam NN-NP NN 0 NP 2
+addoli VMI-VMN VMI 0 VMN 2
+adennill VMI-VMN VMI 0 VMN 3
+adfer VMI-VMN VMI 0 VMN 2
+adfywio VMN-VMS VMN 2 VMS 0
+adrodd VMI-VMN VMI 0 VMN 3
+afael_ar JJ-NN-RB-VB-VMN JJ 0 NN 0 RB 0 VB 0 VMN 2
+ag -CC-SP  0 CC 0 SP 9
+agor VMI-VMN VMI 0 VMN 14
+aled JJ-NP-VB JJ 0 NP 3 VB 0
+all VAM-al VAM 2 al 0
+allai VAI-al VAI 3 al 0
+allwn VAM-al VAM 1 al 0
+alun JJ-NN-NP-VB JJ 0 NN 0 NP 7 VB 0
+alw NC-VMN NC 1 VMN 4
+am CS-SP-VMI CS 0 SP 137 VMI 0
+amber NN-NP NN 0 NP 12
+amdanyn_nhw JJ-NN-RB-SP-VB JJ 0 NN 0 RB 0 SP 3 VB 0
+andrew NN-NP NN 0 NP 1
+anfon VMI-VMN VMI 0 VMN 5
+anfonwch VMI-VMM VMI 0 VMM 3
+apelio VMN-VMS VMN 18 VMS 0
+ar SP-VMI SP 285 VMI 0
+arbed VMI-VMN VMI 0 VMN 4
+arbed_arian JJ-NN-VMN JJ 0 NN 0 VMN 6
+archwilio VMN-VMS VMN 6 VMS 0
+ardal AQ-NC AQ 9 NC 11
+arddangos VMI-VMN VMI 0 VMN 1
+arestio VMN-VMS VMN 4 VMS 0
+arfer NC-VMI-VMN NC 0 VMI 0 VMN 3
+arnoch_chi JJ-NN-SP JJ 0 NN 0 SP 2
+ashley NN-NP NN 0 NP 1
+atal VMI-VMM-VMN VMI 0 VMM 0 VMN 14
+ateb VMI-VMN VMI 0 VMN 9
+bag_plastig JJ-NC-NN JJ 0 NC 3 NN 0
+bagiau_plastig JJ-NC-NN JJ 0 NC 3 NN 0
+bai NC-VSS NC 9 VSS 8
+baker NN-NP NN 0 NP 2
+bala VMI-VMM VMI 0 VMM 6
+bangladesh NN-NP NN 0 NP 3
+bangor NN-NP NN 0 NP 2
+bara NC-VMI-VMM-VMN NC 2 VMI 0 VMM 0 VMN 0
+baratoi VMI-VMN VMI 0 VMN 7
+batagonia NN-NP NN 0 NP 3
+bbc_cymru NN-NP NN 0 NP 6
+bbc_radio_cymru NN-NP NN 0 NP 1
+beidio VMN-VMS VMN 3 VMS 0
+beio VMN-VMS VMN 6 VMS 0
+berfformio VMN-VMS VMN 1 VMS 0
+beth NC-PT NC 0 PT 18
+bhutan JJ-NN-NP JJ 0 NN 0 NP 3
+biliwn VMI-VMM VMI 0 VMM 3
+birmingham NN-NP NN 0 NP 4
+blaen AQ-NC AQ 0 NC 5
+bleidleisio VMN-VMS VMN 5 VMS 0
+blesio VMN-VMS VMN 3 VMS 0
+blino VMN-VMS VMN 4 VMS 0
+bodoli VMI-VMN VMI 0 VMN 3
+brif_weinidog JJ-NC-NN JJ 0 NC 7 NN 0
+bro_morgannwg NN-NP NN 0 NP 7
+brofi VMI-VMN VMI 0 VMN 2
+bron NC-RG NC 0 RG 15
+bruce NN-NP NN 0 NP 3
+brwydro VMN-VMS VMN 4 VMS 0
+bryan NN-NP NN 0 NP 12
+brydain JJ-NC-NN-VB JJ 0 NC 6 NN 0 VB 0
+buddsoddi VMI-VMN VMI 0 VMN 10
+bydd VSI-VSM VSI 120 VSM 0
+byddwch VSI-VSM VSI 10 VSM 0
+byddwn VSC-VSI-VSM VSC 0 VSI 6 VSM 0
+bygwth NC-VMN NC 0 VMN 2
+byw NC-VMN NC 3 VMN 2
+cadeirio VMN-VMS VMN 2 VMS 0
+cae NC-VMI NC 4 VMI 0
+caerdydd JJ-NN-NP-VB JJ 0 NN 0 NP 8 VB 0
+caernarfon JJ-NN-NP-RB-VB JJ 0 NN 0 NP 2 RB 0 VB 0
+cam NC-VMN NC 6 VMN 0
+canolbwyntio VMN-VMS VMN 1 VMS 0
+carter JJ-NN-NP JJ 0 NN 0 NP 3
+cefnogi VMI-VMN VMI 0 VMN 9
+ceir NC-VMI NC 0 VMI 2
+ceisio VMN-VMS VMN 24 VMS 0
+ceredigion NN-NP NN 0 NP 6
+charles NN-NP NN 0 NP 1
+chi NC-PP NC 0 PP 6
+chi'n DP-NC-PP-SP DP 0 NC 0 PP 4 SP 0
+china JJ-NN-NP JJ 0 NN 0 NP 3
+chwarae NC-VMI-VMN NC 5 VMI 0 VMN 0
+chwefror NC-NN-VB NC 1 NN 0 VB 0
+chwilio_am NN-VMN NN 0 VMN 1
+chymru NN-NP NN 0 NP 4
+claire NN-NP NN 0 NP 1
+codi VMI-VMN VMI 0 VMN 21
+cofio VMN-VMS VMN 4 VMS 0
+cole JJ-NN-NP JJ 0 NN 0 NP 6
+colin NN-NP NN 0 NP 2
+colli VMI-VMN VMI 0 VMN 11
+congo NN-NP NN 0 NP 3
+connie NN-NP NN 0 NP 4
+courtney NN-NP NN 0 NP 2
+craffu_ar JJ-NN-RB-VB-VMN JJ 0 NN 0 RB 0 VB 0 VMN 1
+croeso NC-VMS NC 5 VMS 0
+cwmbrÃ¢n JJ-NN-NP-RB-VB JJ 0 NN 0 NP 2 RB 0 VB 0
+cwrdd NC-VMI-VMN NC 2 VMI 0 VMN 0
+cwtogi VMI-VMN VMI 0 VMN 3
+cwyno VMN-VMS VMN 4 VMS 0
+cychwyn VMI-VMN VMI 0 VMN 4
+cydymdeimlo VMN-VMS VMN 1 VMS 0
+cyfan AQ-NC AQ 17 NC 0
+cyfarpar NC-VMI-VMN NC 0 VMI 0 VMN 4
+cyffro NC-VMI-VMM-VMS NC 0 VMI 0 VMM 3 VMS 0
+cyflawni VMI-VMN VMI 0 VMN 5
+cyflogi VMI-VMN VMI 0 VMN 5
+cyflwyno VMN-VMS VMN 12 VMS 0
+cyhoeddi VMI-VMN VMI 0 VMN 4
+cymdeithas_yr_iaith NN-NP NN 0 NP 2
+cymdeithas_yr_iaith_gymraeg NN-NP NN 0 NP 2
+cymraeg AQ-NN AQ 16 NC 6 NN 0
+cymru NN-NP NN 0 NP 133
+cymry JJ-NC-NN JJ 0 NC 3 NN 0
+cymuned NC-VMM NC 4 VMM 0
+cyn AQ-CS-SP AQ 0 CS 0 SP 27
+cynllunio VMN-VMS VMN 16 VMS 0
+cynnig NC-VMN NC 18 VMN 0
+cynnwys NC-VMN NC 15 VMN 2
+cynorthwyo VMN-VMS VMN 5 VMS 0
+cynrychioli VMI-VMN VMI 0 VMN 2
+cyrraedd VMI-VMM-VMN VMI 0 VMM 0 VMN 3
+dachwedd NC-NN NC 7 NN 0
+daclo VMN-VMS VMN 2 VMS 0
+dal AQ-VMI-VMM-VMN AQ 8 VMI 0 VMM 0 VMN 0
+damian NN-NP NN 0 NP 4
+dangos VMI-VMN VMI 0 VMN 4
+darogan VMI-VMN VMI 0 VMN 6
+datganoli VMI-VMN VMI 0 VMN 4
+davies NN-NP NN 0 NP 5
+dawelwch VMI-VMM VMI 0 VMM 1
+ddal VMI-VMM-VMN VMI 0 VMM 0 VMN 2
+ddamwain NC-VMN NC 32 VMN 0
+ddangos VMI-VMN VMI 0 VMN 9
+ddatganoli VMI-VMN VMI 0 VMN 2
+ddefnyddio VMN-VMS VMN 20 VMS 0
+ddeg -NC-Z  0 NC 0 Z 3
+ddelio VMN-VMS VMN 2 VMS 0
+dderbyn VMI-VMM-VMN VMI 0 VMM 0 VMN 2
+ddewis NC-VMI-VMN NC 0 VMI 0 VMN 2
+ddiffodd VMI-VMN VMI 0 VMN 2
+ddifrodi VMI-VMN VMI 0 VMN 6
+ddigwydd VMI-VMN VMI 0 VMN 4
+ddim NC-RG NC 0 RG 38
+ddinbych JJ-NN-NP-RB-VB JJ 0 NN 0 NP 4 RB 0 VB 0
+ddiolch NC-VMI-VMN NC 0 VMI 0 VMN 1
+ddiraddio VMN-VMS VMN 3 VMS 0
+ddisgwyl VMI-VMM-VMN VMI 0 VMM 0 VMN 2
+ddisgyn VMI-VMN VMI 0 VMN 6
+ddiswyddo VMN-VMS VMN 3 VMS 0
+ddiweddara VMI-VMM VMI 0 VMM 2
+ddod_Ã¢ JJ-NN-RB-VB-VMN JJ 0 NN 0 RB 0 VB 0 VMN 4
+ddydd_gwener JJ-NC-NN JJ 0 NC 2 NN 0
+ddydd_iau JJ-NC-NN JJ 0 NC 5 NN 0
+ddydd_llun JJ-NC-NN-VB JJ 0 NC 10 NN 0 VB 0
+ddydd_mawrth JJ-NC-NN-RB JJ 0 NC 8 NN 0 RB 0
+ddydd_mercher NC-NN NC 5 NN 0
+ddydd_sadwrn JJ-NC-NN-VB JJ 0 NC 6 NN 0 VB 0
+ddydd_sul JJ-NC-NN JJ 0 NC 5 NN 0
+de NC-VSI NC 13 VSI 0
+deall VMI-VMN VMI 0 VMN 20
+defnydd NC-VMM NC 0 VMM 1
+defnyddio VMN-VMS VMN 22 VMS 0
+deg 5.-AQ-NC-Z-te 5. 0 AQ 2 NC 0 Z 0 te 0
+deillio VMN-VMS VMN 3 VMS 0
+deithio VMN-VMS VMN 3 VMS 0
+democratiaid_rhyddfrydol NN-NP NN 0 NP 11
+derbyn VMI-VMM-VMN VMI 0 VMM 0 VMN 11
+dewis NC-VMI-VMN NC 6 VMI 0 VMN 4
+dewiswch VMI-VMM VMI 0 VMM 4
+diffodd VMI-VMN VMI 0 VMN 6
+digwydd VMI-VMN VMI 0 VMN 8
+dilyn VMI-VMN VMI 0 VMN 6
+dim NC-RG NC 0 RG 7
+dioddef NC-VMI-VMN NC 4 VMI 0 VMN 0
+diogelwch NC-VMI-VMM NC 0 VMI 0 VMM 15
+diolch NC-VMI-VMN NC 2 VMI 0 VMN 0
+disgrifio VMN-VMS VMN 1 VMS 0
+disgwyl VMI-VMM-VMN VMI 0 VMM 0 VMN 13
+diswyddo VMN-VMS VMN 2 VMS 0
+diweddaraf AQ-VMI AQ 1 VMI 0
+dna NN-NP NN 0 NP 2
+dodd NP-VMI NP 3 VMI 0
+dr_dai_lloyd NN-NP NN 0 NP 1
+dr_terry_jewell NN-NP-RB NN 0 NP 4 RB 0
+dr_tony_jewell NN-NP-RB NN 0 NP 3 RB 0
+drafod NC-VMI-VMN NC 17 VMI 0 VMN 8
+drosglwyddo VMN-VMS VMN 2 VMS 0
+drwy'r DA-SP DA 0 SP 3
+dweud_wrth JJ-NN-RB-VMN JJ 0 NN 0 RB 0 VMN 6
+dwyn NC-VMN NC 0 VMN 3
+dychymyg NC-VMI-VMN NC 0 VMI 0 VMN 3
+dydd_llun JJ-NC-NN-VB JJ 0 NC 1 NN 0 VB 0
+dyfed-powys NN-NP-RB-VBZ NN 0 NP 2 RB 0 VBZ 0
+dymuno VMN-VMS VMN 2 VMS 0
+edrych VMI-VMN VMI 0 VMN 21
+edrych_ar JJ-NN-RB-VB-VMN JJ 0 NN 0 RB 0 VB 0 VMN 10
+edrych_ymlaen_at NN-VMN NN 0 VMN 7
+edwards NN-NP NN 0 NP 2
+edwina NP-VMI-VMM NP 4 VMI 0 VMM 0
+effeithio_ar JJ-NN-RB-VB-VMN JJ 0 NN 0 RB 0 VB 0 VMN 4
+egluro VMN-VMS VMN 2 VMS 0
+ei DP-VMI DP 390 VMI 0
+eithrio VMN-VMS VMN 9 VMS 0
+ellir VAI-el VAI 2 el 0
+ennill NC-VMI-VMM-VMN NC 4 VMI 0 VMM 0 VMN 2
+enwi VMI-VMN VMI 0 VMN 2
+er CS-SP CS 0 SP 14
+erbyn CS-SP CS 0 SP 13
+estonia NN-NP NN 0 NP 6
+estyn VMI-VMN VMI 0 VMN 4
+evans NN-NP NN 0 NP 3
+ewrop JJ-NN-NP-VB JJ 0 NN 0 NP 5 VB 0
+ewropeaidd AQ-JJ-NN-VB AQ 8 JJ 0 NN 0 VB 0
+fagiau_plastig JJ-NC-NN JJ 0 NC 9 NN 0
+fangor NN-NP NN 0 NP 2
+fe GA-PP-PT GA 103 PP 0 PT 0
+fehefin NC-NN NC 2 NN 0
+fel CS-SP CS 0 SP 36
+ffilmio VMN-VMS VMN 1 VMS 0
+ffonio VMN-VMS VMN 7 VMS 0
+fforddio VMN-VMS VMN 9 VMS 0
+ffrainc NN-NP NN 0 NP 3
+ffred NN-NP-VBD-VBN NN 0 NP 7 VBD 0 VBN 0
+fo PP-VSS PP 0 VSS 3
+fuddsoddi VMI-VMN VMI 0 VMN 7
+fwrdd_yr_iaith NN-NP NN 0 NP 3
+fwrdd_yr_iaith_gymraeg NN-NP NN 0 NP 2
+fydd VSI-VSM VSI 66 VSM 0
+fyddwn VSC-VSI-VSM VSC 0 VSI 8 VSM 0
+fynd_Ã¢ JJ-NN-RB-VB-VMN JJ 0 NN 0 RB 0 VB 0 VMN 2
+gadael VMI-VMM-VMN VMI 0 VMM 0 VMN 6
+gaerdydd JJ-NN-NP-VB JJ 0 NN 0 NP 3 VB 0
+gaerfyrddin NN-NP NN 0 NP 3
+gall AQ-VAM AQ 3 VAM 6
+gallai VAI-ga VAI 19 ga 0
+gallent VAM-ga VAM 2 ga 0
+gallwch VAM-ga VAM 6 ga 0
+galw NC-VMN NC 13 VMN 20
+gam NC-VMN NC 3 VMN 0
+gan CS-NC-SP CS 0 NC 2 SP 93
+ganddon_ni JJ-NN-SP JJ 0 NN 0 SP 3
+ganddyn_nhw JJ-NN-RB-SP-VB JJ 0 NN 0 RB 0 SP 4 VB 0
+ganolbwyntio VMN-VMS VMN 1 VMS 0
+gefnogi VMI-VMN VMI 0 VMN 3
+geir NC-VMI NC 4 VMI 0
+geisio VMN-VMS VMN 9 VMS 0
+gellid VAI-ge VAI 1 ge 0
+gellir VAI-ge VAI 4 ge 0
+german JJ-NN-NP JJ 0 NN 0 NP 3
+glo NC-VMI-VMM-VMS NC 2 VMI 0 VMM 0 VMS 0
+gloch NC-VMS NC 2 VMS 0
+glyn JJ-NN-NP JJ 0 NN 0 NP 2
+glywed_am NN-VMN NN 0 VMN 16
+gobeithio VMN-VMS VMN 21 VMS 0
+godi VMI-VMN VMI 0 VMN 19
+gofnodi VMI-VMN VMI 0 VMN 1
+gofyn VMI-VMN VMI 0 VMN 7
+gofyn_am NN-VMN NN 0 VMN 4
+golli VMI-VMN VMI 0 VMN 3
+gorau AQ-NC AQ 9 NC 0
+gordon NN-NP NN 0 NP 2
+goroesi VMI-VMN VMI 0 VMN 4
+gosod AQ-VMI-VMN AQ 6 VMI 0 VMN 3
+gray JJ-NN-NP JJ 0 NN 0 NP 2
+green JJ-NN-NP JJ 0 NN 0 NP 1
+greg NN-NP-VB NN 0 NP 2 VB 0
+groeg NN-NP-VB NN 0 NP 2 VB 0
+groesi VMI-VMN VMI 0 VMN 6
+gwahardd VMI-VMN VMI 0 VMN 1
+gwariant NC-VMI NC 0 VMI 1
+gwario VMN-VMS VMN 2 VMS 0
+gweithio VMN-VMS VMN 10 VMS 0
+gwella VMI-VMM-VMN VMI 0 VMM 0 VMN 17
+gwener VMM-VMS VMM 1 VMS 0
+gwent JJ-NN-NP-VBD JJ 0 NN 0 NP 5 VBD 0
+gwerthfawrogi VMI-VMN VMI 0 VMN 4
+gwirfoddoli VMI-VMN VMI 0 VMN 3
+gwisgo VMN-VMS VMN 2 VMS 0
+gwlad_basg NN-NP NN 0 NP 2
+gwmbrÃ¢n JJ-NN-NP-RB-VB JJ 0 NN 0 NP 4 RB 0 VB 0
+gwrthod VMI-VMN VMI 0 VMN 2
+gwthio VMN-VMS VMN 3 VMS 0
+gwylio VMN-VMS VMN 1 VMS 0
+gwympo VMN-VMS VMN 6 VMS 0
+gwyn AQ-NC AQ 2 NC 1
+gwynedd NN-NP-VB NN 0 NP 7 VB 0
+gychwyn VMI-VMN VMI 0 VMN 3
+gyda CS-SP CS 0 SP 34
+gyda'i_gilydd CS-DP-Fz-NC-RG-SP CS 0 DP 0 Fz 0 NC 0 RG 3 SP 0
+gyda'r CS-DA-SP CS 0 DA 0 SP 31
+gydweithio VMN-VMS VMN 2 VMS 0
+gyfan AQ-NC AQ 7 NC 0
+gyflawni VMI-VMN VMI 0 VMN 1
+gyflwyno VMN-VMS VMN 21 VMS 0
+gyfnewid VMI-VMM-VMN VMI 0 VMM 0 VMN 3
+gyhoeddi VMI-VMN VMI 0 VMN 13
+gymraeg AQ-NN AQ 22 NC 3 NN 0
+gymru NN-NP NN 0 NP 31
+gymryd_rhan JJ-NN-VMN JJ 0 NN 0 VMN 7
+gymuned NC-VMM NC 3 VMM 0
+gyn AQ-SP AQ 4 SP 0
+gynllunio VMN-VMS VMN 2 VMS 0
+gynnig NC-VMN NC 0 VMN 8
+gynnwys NC-VMN NC 14 VMN 0
+gynorthwyo VMN-VMS VMN 2 VMS 0
+gynt AQ-RG AQ 0 RG 3
+gyrraedd VMI-VMM-VMN VMI 0 VMM 0 VMN 6
+hafren JJ-NN-NP-VBN JJ 0 NN 0 NP 2 VBN 0
+hart NN-NP-VB NN 0 NP 4 VB 0
+hebrwng VMI-VMN VMI 0 VMN 2
+hi'n DP-PP-SP DP 0 PP 33 SP 0
+hoffwn VMI-VMM VMI 0 VMM 1
+holi VMI-VMN VMI 0 VMN 1
+honni VMI-VMN VMI 0 VMN 4
+hughes NN-NP NN 0 NP 1
+hutt NN-NP-VB NN 0 NP 7 VB 0
+huw JJ-NN-NP-RB-VB JJ 0 NN 0 NP 2 RB 0 VB 0
+hyd CS-NC-SP CS 0 NC 10 SP 4
+hyfforddi VMI-VMN VMI 0 VMN 7
+hyn DD-PD DD 11 PD 67
+hynny DD-PD DD 5 PD 22
+hynod AQ-RG AQ 0 RG 4
+hyrwyddo VMN-VMS VMN 2 VMS 0
+i PP-SP PP 4 SP 572
+i'w DP-SP DP 0 SP 44
+i_mi NN-SP NN 0 SP 4
+i_ni JJ-NN-SP JJ 0 NN 0 SP 9
+ian JJ-NN-NP JJ 0 NN 0 NP 7
+iau AQ-NC AQ 4 NC 0
+iddyn_nhw JJ-NN-RB-SP-VB JJ 0 NN 0 RB 0 SP 24 VB 0
+ieuan JJ-NN-NP JJ 0 NN 0 NP 9
+israel NN-NP NN 0 NP 3
+jane JJ-NN-NP-VB JJ 0 NN 0 NP 7 VB 0
+jay NN-NP NN 0 NP 1
+jenkins NN-NP NN 0 NP 3
+jones JJ-NN-NP JJ 0 NN 0 NP 21
+katherine NN-NP NN 0 NP 3
+ladd VMI-VMN VMI 0 VMN 3
+lansio VMN-VMS VMN 1 VMS 0
+led AQ-NC AQ 6 NC 0
+leoli VMI-VMN VMI 0 VMN 2
+lifo VMN-VMS VMN 4 VMS 0
+lladd VMI-VMN VMI 0 VMN 5
+llanelli NN-NP NN 0 NP 2
+llanelwy JJ-NN-NP-RB JJ 0 NN 0 NP 4 RB 0
+lle NC-RV NC 0 RV 15
+lleoli VMI-VMN VMI 0 VMN 3
+llongyfarch VMI-VMN VMI 0 VMN 2
+llosgi VMI-VMN VMI 0 VMN 3
+llundain JJ-NN-NP-VB JJ 0 NN 0 NP 2 VB 0
+llwyddo VMN-VMS VMN 2 VMS 0
+llywodraeth_y_cynulliad JJ-NN-NP-VBD JJ 0 NN 0 NP 39 VBD 0
+logo NC-VMS NC 2 VMS 0
+longyfarch VMI-VMN VMI 0 VMN 2
+lori VMI-VMN VMI 0 VMN 3
+lundain JJ-NN-NP-VB JJ 0 NN 0 NP 3 VB 0
+lunio VMN-VMS VMN 3 VMS 0
+lywodraeth_y_cynulliad JJ-NN-NP-VBD JJ 0 NN 0 NP 12 VBD 0
+machreth NN-NP-VB NN 0 NP 2 VB 0
+mae_caerdydd JJ-NN-NP-VB JJ 0 NN 0 NP 3 VB 0
+maen NC-VSI-VSS NC 3 VSI 18 VSS 0
+marc NC-NP NC 0 NP 3
+marchnata VMI-VMM-VMN VMI 0 VMM 0 VMN 4
+martin NN-NP NN 0 NP 3
+mawrth JJ-NC-NN-RB JJ 0 NC 4 NN 0 RB 0
+medd NC-VMI-VMM-VMN NC 0 VMI 0 VMM 0 VMN 3
+meddwi VMI-VMN VMI 0 VMN 3
+meddwl NC-VMN NC 26 VMN 4
+medi NC-VMI-VMN NC 5 VMI 0 VMN 0
+megis CS-SP CS 0 SP 3
+meithrin VMI-VMN VMI 0 VMN 3
+menna NN-NP NN 0 NP 2
+merthyr_tudful JJ-NN-NP JJ 0 NN 0 NP 2
+mhatagonia NN-NP NN 0 NP 3
+mhen-y-bont JJ-NN-NP-RB-VB JJ 0 NN 0 NP 4 RB 0 VB 0
+mhen-y-bont_ar_ogwr JJ-NN-NP-RB-VB JJ 0 NN 0 NP 4 RB 0 VB 0
+mhrydain JJ-NC-NN-VB JJ 0 NC 3 NN 0 VB 0
+mi GA-RG GA 4 RG 0
+mike NN-NP NN 0 NP 3
+miliwn NC-VMI-VMM NC 14 VMI 0 VMM 0
+miller NN-NP NN 0 NP 4
+mis_awst JJ-NC-NN-RB-VB JJ 0 NC 6 NN 0 RB 0 VB 0
+mis_gorffennaf JJ-NC-NN JJ 0 NC 6 NN 0
+mis_hydref JJ-NC-NN-VB JJ 0 NC 2 NN 0 VB 0
+mis_ionawr JJ-NC-NN-RB-VB JJ 0 NC 6 NN 0 RB 0 VB 0
+mis_mawrth JJ-NC-NN-RB JJ 0 NC 6 NN 0 RB 0
+mis_medi NC-NN NC 4 NN 0
+mis_mehefin NC-NN NC 6 NN 0
+mis_rhagfyr NC-NN NC 3 NN 0
+mis_tachwedd NC-NN NC 2 NN 0
+monitro VMN-VMS VMN 8 VMS 0
+morgan NN-NP NN 0 NP 6
+morris NN-NP NN 0 NP 2
+mr_ap_mihangel NN-NP NN 0 NP 2
+mr_baker NN-NP NN 0 NP 1
+mr_brooks NN-NP NN 0 NP 6
+mr_davies NN-NP NN 0 NP 5
+mr_evans NN-NP NN 0 NP 3
+mr_german JJ-NN-NP JJ 0 NN 0 NP 6
+mr_hiles NN-NP NN 0 NP 4
+mr_jones NN-NP NN 0 NP 9
+mr_lewis NN-NP NN 0 NP 8
+mr_lloyd NN-NP NN 0 NP 2
+mr_morgan NN-NP NN 0 NP 2
+mr_obama NN-NP NN 0 NP 4
+mr_opik NN-NP NN 0 NP 1
+mr_rae NN-NP NN 0 NP 2
+mr_ruane JJ-NN-NP-VB JJ 0 NN 0 NP 2 VB 0
+mr_smart JJ-NN-NP-VB JJ 0 NN 0 NP 2 VB 0
+mr_terfel NN-NP NN 0 NP 2
+mr_thomas NN-NP NN 0 NP 7
+mrs_griffiths NN-NP NN 0 NP 4
+mrs_randerson NN-NP NN 0 NP 2
+ms_jones NN-NP NN 0 NP 5
+ms_randerson NN-NP NN 0 NP 6
+murphy NN-NP NN 0 NP 3
+mynd_i'r_afael NN-VMN NN 0 VMN 2
+na 7.-CC-CS-GI-da-na 7. 0 CC 38 CS 9 GI 0 da 0 na 0
+nadolig JJ-NC-NN JJ 0 NC 7 NN 0
+naw -VMI-Z  0 VMI 0 Z 4
+neil NN-NP-VB NN 0 NP 3 VB 0
+nesa VMI-VMM VMI 0 VMM 2
+nesaf AQ-VMI AQ 13 VMI 0
+newid VMI-VMM-VMN VMI 0 VMM 0 VMN 21
+newid_yn_llwyr NN-VMN NN 0 VMN 5
+nghaerdydd JJ-NN-NP-VB JJ 0 NN 0 NP 5 VB 0
+nghaernarfon JJ-NN-NP-RB-VB JJ 0 NN 0 NP 4 RB 0 VB 0
+nghymru NN-NP NN 0 NP 37
+ngweriniaeth_iwerddon JJ-NN-NP-VB JJ 0 NN 0 NP 3 VB 0
+nhrelew JJ-NN-NP-VBD JJ 0 NN 0 NP 3 VBD 0
+nhrevelin NN-NP NN 0 NP 3
+nhw'n DP-PP-SP DP 0 PP 17 SP 0
+ni GN-PP-VMI-VMM GN 5 PP 4 VMI 5 VMM 0
+ni'n DP-GN-PP-SP-VMI-VMM DP 0 GN 0 PP 19 SP 0 VMI 0 VMM 0
+nid GN-NC-VMI GN 9 NC 0 VMI 3
+ninbych JJ-NN-NP-RB-VB JJ 0 NN 0 NP 4 RB 0 VB 0
+nod NC-VMN NC 5 VMN 0
+nodi VMI-VMN VMI 0 VMN 8
+nos_fercher NC-NN NC 6 NN 0
+nos_iau JJ-NC-NN JJ 0 NC 6 NN 0
+nos_lun JJ-NC-NN-VB JJ 0 NC 3 NN 0 VB 0
+nos_sadwrn JJ-NC-NN-VB JJ 0 NC 3 NN 0 VB 0
+nos_wener JJ-NC-NN JJ 0 NC 4 NN 0
+o PP-SP PP 24 SP 409
+o'i DP-PP-SP DP 0 PP 3 SP 0
+o'n DP-PP-SP DP 0 PP 7 SP 0
+o'r DA-PP-SP DA 0 PP 0 SP 104
+o'r_blaen AQ-DA-Fz-NC-PP-RG-SP AQ 0 DA 0 Fz 0 NC 0 PP 0 RG 3 SP 0
+o'u DP-PP-SP DP 0 PP 0 SP 2
+oedi VMI-VMN VMI 0 VMN 6
+oes NC-VSI NC 5 VSI 0
+ofyn VMI-VMN VMI 0 VMN 4
+ohonyn_nhw JJ-NN-RB-SP-VB JJ 0 NN 0 RB 0 SP 2 VB 0
+olchi VMI-VMN VMI 0 VMN 1
+orffen VMI-VMN VMI 0 VMN 2
+orffennaf NC-VMI NC 6 VMI 0
+osgoi VMI-VMN VMI 0 VMN 1
+osod AQ-VMI-VMN AQ 6 VMI 0 VMN 0
+paratoi VMI-VMN VMI 0 VMN 2
+paul NN-NP NN 0 NP 3
+peidio VMN-VMS VMN 1 VMS 0
+peidiwch_Ã¢ JJ-NN-RB-VB-VMM JJ 0 NN 0 RB 0 VB 0 VMM 3
+pen-y-bont JJ-NN-NP-RB-VB JJ 0 NN 0 NP 2 RB 0 VB 0
+pen-y-bont_ar_ogwr JJ-NN-NP-RB-VB JJ 0 NN 0 NP 8 RB 0 VB 0
+phlaid_cymru NN-NP NN 0 NP 3
+pigo VMN-VMS VMN 2 VMS 0
+pleidleisio VMN-VMS VMN 2 VMS 0
+pobi VMI-VMN VMI 0 VMN 1
+poeni VMI-VMN VMI 0 VMN 5
+powys NN-NP-RB-VBZ NN 0 NP 4 RB 0 VBZ 0
+prif_weinidog JJ-NC-NN JJ 0 NC 6 NN 0
+proffesiynol AQ-NC AQ 9 NC 0
+profi VMI-VMN VMI 0 VMN 6
+pryd NC-RV NC 0 RV 6
+prydain JJ-NC-NN-VB JJ 0 NC 12 NN 0 VB 0
+pwyso VMN-VMS VMN 2 VMS 0
+ragfyr NC-NN NC 3 NN 0
+recordio VMN-VMS VMN 8 VMS 0
+reece NN-NP NN 0 NP 1
+reoli VMI-VMN VMI 0 VMN 2
+rhag CS-SP CS 0 SP 11
+rhagfyr NC-NN NC 1 NN 0
+rhaglenni NC-VMI NC 3 VMI 0
+rheoli VMI-VMN VMI 0 VMN 2
+rhodd NC-VMI NC 2 VMI 0
+rhodri NN-NP NN 0 NP 6
+rhoi VMI-VMN VMI 0 VMN 28
+rhondda_cynon_taf JJ-NN-NP JJ 0 NN 0 NP 1
+rhwystro VMN-VMS VMN 4 VMS 0
+rhys NN-NP-RB-VBZ NN 0 NP 2 RB 0 VBZ 0
+rhywun NC-PD NC 0 PD 11
+richard NN-NP NN 0 NP 3
+roberts NN-NP NN 0 NP 9
+robin NN-NP NN 0 NP 2
+roi VMI-VMN VMI 0 VMN 8
+rspca NN-NP NN 0 NP 1
+russell NN-NP NN 0 NP 1
+saesneg AQ-NN-VB AQ 4 NN 0 VB 0
+san_steffan NN-NP NN 0 NP 10
+sawl -AQ-DT  0 AQ 0 DT 3
+siarad VMI-VMN VMI 0 VMN 2
+simon NN-NP NN 0 NP 1
+siomi VMI-VMN VMI 0 VMN 2
+siopa VMI-VMM-VMN VMI 0 VMM 0 VMN 4
+sir_benfro NN-NP-RB NN 0 NP 3 RB 0
+sir_ddinbych JJ-NN-NP-RB-VB JJ 0 NN 0 NP 2 RB 0 VB 0
+sir_gaerhirfryn JJ-NN-NP JJ 0 NN 0 NP 2
+stuart NN-NP NN 0 NP 2
+sut -DT-RV  0 DT 0 RV 5
+swyddfa'r_post DA-Fz-NC-NP DA 0 Fz 0 NC 0 NP 9
+sy'n DP-JJ-NN-PR-RB-SP DP 0 JJ 0 NN 0 PR 69 RB 0 SP 0
+sylweddoli VMI-VMN VMI 0 VMN 2
+symleiddio VMN-VMS VMN 3 VMS 0
+symud VMI-VMN VMI 0 VMN 9
+tanio VMN-VMS VMN 3 VMS 0
+teimlo VMN-VMS VMN 6 VMS 0
+teithio VMN-VMS VMN 4 VMS 0
+to NC-VMI-VMM-VMS NC 0 VMI 0 VMM 3 VMS 0
+torfaen NN-NP-VBN NN 0 NP 2 VBN 0
+torri VMI-VMN VMI 0 VMN 6
+trafod NC-VMI-VMN NC 9 VMI 0 VMN 2
+tramor AQ-NC AQ 2 NC 0
+treulio VMN-VMS VMN 2 VMS 0
+tro NC-VMI-VMM-VMS NC 8 VMI 0 VMM 0 VMS 0
+trosglwyddo VMN-VMS VMN 2 VMS 0
+trwy'r DA-SP DA 0 SP 2
+uned NC-VMM NC 12 VMM 0
+urdd JJ-NC-NN-VB JJ 0 NC 3 NN 0 VB 0
+uwch AQ-SP AQ 20 SP 4
+wahardd VMI-VMN VMI 0 VMN 3
+walker NN-NP NN 0 NP 2
+wario VMN-VMS VMN 2 VMS 0
+wedi CS-SP CS 0 SP 306
+wedi'i CS-DP-SP CS 0 DP 0 SP 7
+weithiau NC-RG NC 3 RG 4
+weithio VMN-VMS VMN 2 VMS 0
+wella VMI-VMM-VMN VMI 0 VMM 0 VMN 4
+william NN-NP NN 0 NP 2
+williams NN-NP NN 0 NP 9
+wlad_y_basg NN-NP NN 0 NP 2
+wladfa NN-NP NN 0 NP 3
+wnaed VMI-VMM VMI 1 VMM 0
+wrecsam NN-NP NN 0 NP 5
+wrth CS-SP CS 0 SP 48
+wrthod VMI-VMN VMI 0 VMN 3
+wy NC-VSI NC 1 VSI 0
+wyn AQ-NP AQ 2 NP 7
+y DA-GA DA 830 GA 74
+y_bala NN-NP NN 0 NP 6
+y_deyrnas_unedig JJ-NN-NP-VB JJ 0 NN 0 NP 7 VB 0
+y_trallwng JJ-NN-NP-RB-VB JJ 0 NN 0 NP 1 RB 0 VB 0
+yma DD-RG DD 21 RG 7
+yma'n DD-DP-RG-SP DD 3 DP 0 RG 0 SP 0
+ymarfer NC-VMI-VMN NC 2 VMI 0 VMN 0
+ymateb NC-VMI-VMN NC 4 VMI 0 VMN 3
+ymchwilio VMN-VMS VMN 5 VMS 0
+ymchwilio_i NN-VMN NN 0 VMN 4
+ymddiddori VMI-VMN VMI 0 VMN 2
+ymddiheuro VMN-VMS VMN 6 VMS 0
+ymdopi VMI-VMN VMI 0 VMN 2
+ymestyn VMI-VMN VMI 0 VMN 1
+ymfalchÃ¯o VMN-VMS VMN 3 VMS 0
+ymfalchÃ¯wn VMI-VMM VMI 0 VMM 1
+ymgynghori VMI-VMN VMI 0 VMN 3
+ymprydio VMN-VMS VMN 2 VMS 0
+ymuno_Ã¢ JJ-NN-RB-VB-VMN JJ 0 NN 0 RB 0 VB 0 VMN 1
+ymweld_Ã¢ JJ-NN-RB-VB-VMN JJ 0 NN 0 RB 0 VB 0 VMN 11
+yna DD-RG DD 0 RG 57
+yno_i NN-SP NN 0 SP 2
+ynys_mÃ´n JJ-NN-NP-RB-VB JJ 0 NN 0 NP 2 RB 0 VB 0
+yr DA-GA DA 256 GA 9
+yr_alban JJ-NN-NP-VB JJ 0 NN 0 NP 4 VB 0
+yr_unol_daleithiau JJ-NN-NP JJ 0 NN 0 NP 2
+ysbrydoli VMI-VMN VMI 0 VMN 6
+ystyried VMM-VMN VMM 0 VMN 17
+Â£1,000 Z-Zm Z 0 Zm 8
+Â£10 Z-Zm Z 0 Zm 4
+Â£13.96 Z-Zm Z 0 Zm 3
+Â£18,135 Z-Zm Z 0 Zm 2
+Â£2,000 Z-Zm Z 0 Zm 4
+Â£200,000 Z-Zm Z 0 Zm 3
+Â£225,000 Z-Zm Z 0 Zm 2
+Â£28,136 Z-Zm Z 0 Zm 2
+Â£30,000 Z-Zm Z 0 Zm 1
+Â£35,000 Z-Zm Z 0 Zm 2
+Â£45,000 Z-Zm Z 0 Zm 2
+Â£478 Z-Zm Z 0 Zm 2
+Â£6.48 Z-Zm Z 0 Zm 3
+Â£60 Z-Zm Z 0 Zm 7
+Â£7 Z-Zm Z 0 Zm 2
+Â£7.2 Z-Zm Z 0 Zm 2
+Â£700,000 Z-Zm Z 0 Zm 2
+Â£95,000 Z-Zm Z 0 Zm 2
+Ã¢ Fz-SP Fz 0 SP 31
+Ã¢'r DA-Fz-SP DA 0 Fz 0 SP 25
+Ã´l AQ-NC AQ 4 NC 0
+</FormTagFreq>

@@ -1,0 +1,6 @@
+#[^\s]+ $$ NP00000
+RT .response-to. NN
+@[^\s]+ $$ NP00000
+([HhJj][AaEe])+ .laugh. I
+[:8][·\-]?[\)\(\}SP] .smiley. Fz
+http://.+ .url. Fz

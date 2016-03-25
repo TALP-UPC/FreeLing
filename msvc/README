@@ -1,0 +1,116 @@
+
+This folder contains information about how to install FreeLing on MS-Windows.
+
+Here you'll find information about:
+
+OPTION (A). Install FreeLing from a binary package.
+
+    Use this option if you only want to use FreeLing as an out-of-the-box analyzer 
+    or as an external library.
+
+OPTION (B). Compile FreeLing with Visual Studio 2013.
+      
+     Use this option if you need to compile FreeLing (e.g. because you want to
+     tune the code to alter its behaviour, or because your architecture or OS 
+     do not match the provided binaries).
+
+
+OPTION (A). INSTALLING FREELING FROM BINARY PACKAGES
+=====================================================
+
+   (1) Go to download section in FreeLing webpage and download
+       the binary package freeling_4.0_win.zip
+
+   (2) Uncompress the file in a folder of your choice.
+       You will obtain the structure:
+
+      freeling ___ bin
+                |_ data
+                |_ dependencies
+                |_ include
+                |_ lib
+                \_ README
+
+ With this, you can execute FreeLing analyzer by running the script 
+ "analyzer.bat" located in the "bin" subfolder.
+
+ For details about how to use the "analyzer.bat" sample program, 
+ check FreeLing user manual.
+
+  If you want to compile and link your own programs with FreeLing library, 
+  you'll need to add the folders "freeling\include" and  "freeling\lib" to
+  the PATHs for includes and libraries in your compiler.
+
+
+OPTION (B). COMPILING FREELING (requires MS Visual Studio 2013 Update 5 or newer)
+=================================================================================
+
+  (1) Get and install MS Visual Studio 2013 Update 5
+      (older versions or updates will fail to compile)
+
+  (2) You will need to install the needed pre-requisites:  
+      libicu, libboost, zlib, and FreeLing language data.
+
+      The easiest way is downloading FreeLing binary package and extracting folders
+      "dependencies" and "data", so you get:
+
+      freeling ___ data
+                |_ dependencies
+                \_ README
+ 
+
+      If you prefer to compile boost, icu and zlib yourself, it is also possible.
+      But it is something out of the scope of this README.
+      If you do, make sure to put the headers and binaries of the compiled libraries
+      in folder "dependencies" with the same structure than FreeLing binary package 
+      (otherwise, you'll need to adjust paths in the MSVC solution to build FreeLing)
+
+  (3) Download FreeLing source file, and uncompress the "src" folder it contains in
+     the same directory where "data" and "dependencies" are located, obtaining:
+
+      freeling ___ data
+                |_ dependencies
+                |_ README
+                \_ src
+
+
+   (4) Launch Open Visual Studio 2013 Update 5, and once inside:
+
+    4.1) Open the solution file you'll find at "freeling/src/msvc/13.0/FreeLing.sln" 
+    4.2) Select "build solution"
+    4.3) Go for lunch while it compiles
+
+
+   (5) Once compilation is finished, binaries can be found at "freeling/src/msvc/13.0/Release" 
+
+      You can create folders "freeling/lib" and "freeling/bin" directories and copy all 
+      created libraries in "freeling/src/msvc/13.0/Release" to "freeling/lib", and 
+      programs "analyzer.bat" and "analyzer.exe" to "freeling/bin"
+
+      With this, you'll get the same structure provided by "freeling_4.0_win.zip" binary package.
+
+
+
+FINAL SYSTEM CONFIGURATION
+=================================================================================
+
+ If you just want to use FreeLing as an independent analyzer, you can skip this step,
+ since the "analyzer.bat" script already takes care of path configuration
+
+ If you want to use it as an external library to compile your own programs calling 
+ FreeLing, you will also need to adjust your %PATH% environment variable to include
+ folders where freeling binaries and libraries are installed, i.e.:
+     mysrc\freeling_win\bin
+     mysrc\freeling_win\lib
+     mysrc\freeling_win_libraries\boost\lib
+     mysrc\freeling_win_libraries\icu\lib
+     mysrc\freeling_win_libraries\zlib\lib
+ 
+ To add these folders to your %PATH%, do
+      press WindowsKey+X 
+         -> select "system" 
+           -> select "advanced system configuration" 
+             -> click "environment variables"
+               -> Edit "PATH" and add the required folders.
+
+ (Note that this sequence of actions may slightly differ in your windows version)

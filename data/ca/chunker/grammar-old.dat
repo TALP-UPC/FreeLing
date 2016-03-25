@@ -1,0 +1,998 @@
+%   Autor: Montserrat Civit Torruella  
+%   e-mail: 	civit@clic. fil. ub. es
+%   updated:	19 de maig de 2003
+
+%%%%%%%GRAMA-CAT2%%%%%%%%%%%%%%%%%%%%%%%%
+%%   no conté les perífrasis verbals   %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%Agrupacions de sintagmes: 
+%grup-nom, grup-verb, grup-sp, grup-adj, grup-adv
+%grup-verb= formes simples, formes pasives, formes compostes
+%grup-sp= preposicio + 1grup-nom
+%grup-nom= det+nom; det+nom+(grup-adj)+ (grup-sp(de))
+%grup-adj= adj; adv+adj
+%grup-adv=
+%relatius=
+%conj-subord=
+%sn= det + grup-nom
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%Regles que afegeixo per provarles:
+
+
+grup-nom ==> Zm | Zp.  % monedes | proporcions
+
+sn ==> espec-ms, +grup-nom.
+sn ==> espec-fs, +grup-nom.
+sn ==> espec-mp, +grup-nom.
+sn ==> espec-fp, +grup-nom.
+
+%Nom propi
+w-ms ==> NP*.
+w-fs ==> NP*.
+w-mp ==> NP*.
+w-fp ==> NP*.
+
+%hace un mes / dos semanas, etc.
+sn ==> +v-fer-3p, sn-tmp.
+v-fer-3p ==> VMIP3S0<fer> | VMII3S0<fer> | VMSP3S0<fer> 
+	   | VMIF3S0<fer> | VMIC3S0<fer> | VMSI3S0<fer> 
+           | VMSF3S0<fer> | VMIP3S0<fer> | VMIS3S0<fer>.
+sn-tmp ==> quant-ms, s-a-ms, +nom-tmp-ms | quant-ms, +nom-tmp-ms | s-a-ms, +nom-tmp-ms | nom-tmp-ms 
+         | quant-fs, s-a-fs, +nom-tmp-fs | quant-fs, +nom-tmp-fs | s-a-fs, +nom-tmp-fs
+         | quant-mp, s-a-mp, +nom-tmp-mp | quant-mp, +nom-tmp-mp | s-a-mp, +nom-tmp-mp | nom-tmp-mp 
+         | quant-fp, s-a-fp, +nom-tmp-fp | quant-fp, +nom-tmp-fp | s-a-fp, +nom-tmp-fp | nom-tmp-fp.
+nom-tmp-ms ==> NCMS000<mes> | NCMS000<dia> | NCMS000<any> | NCMS000<segle>  
+             | NCMS000<lustre> | NCMS000<minut> | NCMS000<segon> | NCMS000<temps>.
+nom-tmp-fs ==> NCFS000<temporada> | NCFS000<década> | NCFS000<semana> | NCFS000<hora> | NCFS000<estona>.
+nom-tmp-mp ==> NCMP000<mes> | NCMP000<dia> | NCMP000<any> | NCMP000<segle>  
+             | NCMP000<lustre> | NCMP000<minut> | NCMP000<segon> | NCMP000<temps>.
+nom-tmp-fp ==> NCFP000<temporada> | NCFP000<década> | NCFP000<semana> | NCFP000<hora> | NCFP000<estona>.
+
+quant-ms ==> num-ms | numero | indef-ms.
+quant-fs ==> num-fs | numero | indef-fs.
+quant-mp ==> num-mp | numero | indef-mp.
+quant-fp ==> num-fp | numero | indef-fp.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%%	elements pseudoterminals  ==>  terminals
+%%%	elements literals
+%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Interjeccions
+interjeccio ==> I.
+
+%DATES
+data ==> W.
+data ==> espec-ms, +W.		%el martes 13-05-02
+data ==> data, +coord, data.	%(d2)
+
+% xifres
+numero ==> Z.
+
+%Adjectius
+a-ms ==> AQ0000|AQ0CN0|AQ0CS0|AQ0MS0|AQ0MSP|AO0MS0
+	 |AQD000|AQDCN0|AQDCS0|AQDMS0|AQDMSP|AODMS0
+	 |AQA000|AQACN0|AQACS0|AQAMS0|AQAMSP|AOAMS0
+	 |AQX000|AQXCN0|AQXCS0|AQXMS0|AQXMSP|AOXMS0
+	 |AQS000|AQSCN0|AQSCS0|AQSMS0|AQSMSP|AOSMS0
+	 |AQC000|AQCCN0|AQCCS0|AQCMS0|AQCMSP|AOCMS0. % ?|?|alegre|bonito|castigado|primero
+a-fs ==> AQ0000|AQ0CN0|AQ0CS0|AQ0FS0|AQ0FSP|AO0FS0
+	 |AQD000|AQDCN0|AQDCS0|AQDFS0|AQDFSP|AODFS0
+	 |AQA000|AQACN0|AQACS0|AQAFS0|AQAFSP|AOAFS0
+	 |AQX000|AQXCN0|AQXCS0|AQXFS0|AQXFSP|AOXFS0
+	 |AQS000|AQSCN0|AQSCS0|AQSFS0|AQSFSP|AOSFS0
+	 |AQC000|AQCCN0|AQCCS0|AQCFS0|AQCFSP|AOCFS0. % ?|?|alegre|bonita|castigada|primera
+a-mp ==> AQ0000|AQ0CN0|AQ0CP0|AQ0MP0|AQ0MPP|AO0MP0
+	 |AQD000|AQDCN0|AQDCP0|AQDMP0|AQDMPP|AODMP0
+	 |AQA000|AQACN0|AQACP0|AQAMP0|AQAMPP|AOAMP0
+	 |AQX000|AQXCN0|AQXCP0|AQXMP0|AQXMPP|AOXMP0
+	 |AQS000|AQSCN0|AQSCP0|AQSMP0|AQSMPP|AOSMP0
+	 |AQC000|AQCCN0|AQCCP0|AQCMP0|AQCMPP|AOCMP0. % ?|?|alegres|bonitos|castigados|primeros
+a-fp ==> AQ0000|AQ0CN0|AQ0CP0|AQ0FP0|AQ0FPP|AO0FP0
+	 |AQD000|AQDCN0|AQDCP0|AQDFP0|AQDFPP|AODFP0
+	 |AQA000|AQACN0|AQACP0|AQAFP0|AQAFPP|AOAFP0
+	 |AQX000|AQXCN0|AQXCP0|AQXFP0|AQXFPP|AOXFP0
+	 |AQS000|AQSCN0|AQSCP0|AQSFP0|AQSFPP|AOSFP0
+	 |AQC000|AQCCN0|AQCCP0|AQCFP0|AQCFPP|AOCFP0. % ?|?|alegres|bonitas|castigadas|primeras
+
+%Adverbis
+neg ==> RN.
+cuantif ==> RG(més).
+cuantif ==> RG(menys).
+cuantif ==> RG(molt).
+cuantif ==> quasi.
+quasi ==> RG(quasi) | RG(gairebé).
+
+%Preposicions
+prep ==> SPS00.
+prep ==> CS(com).
+
+%Preposicions en contracció
+prepc-ms ==> SPCMS.  %al, pel, del
+prepc-mp ==> SPCMP.  %als, pels, dels
+
+%Conjuncions de subordinacio
+conj-subord ==> CS.
+
+%Conjuncions de coordinacio
+coord ==> CC.
+
+%Pronoms subjecte
+psubj ==> psubj-s | psubj-ms | psubj-fs | psubj-mp | psubj-fp. %per agrupar tots els psubj.
+psubj-s ==> PP1CSN00 | PP2CSN00 | PP2CN00P | PP2CS00P.   % jo | tu | vos | vostè
+psubj-p ==>  PP1CP000 | PP2CP000 | PP2CP00P.	%nosaltres|vosaltres|vostès
+psubj-ms ==> PP3MS000.  % ell
+psubj-fs ==> PP3FS000.  % ella
+psubj-mp ==> PP3MP000.	%ells
+psubj-fp ==> PP3FP000.	%elles
+
+sn ==>   +psubj-s, DI0MS0(mateix)    | +psubj-s, DI0FS0(mateixa)
+       | +psubj-ms, DI0MS0(mateix)   | +psubj-fs, DI0FS0(mmateixa)
+       | +psubj-p, DI0MP0(mateixos)  | +psubj-p, DI0FP0(mateixes)
+       | +psubj-mp, DI0MP0(mateixos) | +psubj-fp, DI0FP0(mateixes)
+       | +ptonic, DI0MS0(mateix)     | +ptonic, DI0FS0(mateixa)
+       | +ptonic, DI0MP0(mateixos)   | +ptonic, DI0FP0(mateixes).
+
+ptonic ==> PP1CSO00 | PP3CNO00. % mi|si
+
+%Pronoms atons
+patons ==> paton-s | paton-p | paton-mp | paton-fp | paton-ms | paton-fs.
+patons ==> PP3CN000.        %SE, ES, S', EN, HI% TENEN TOTS LA MATEIXA ETIQUETA
+
+% me | te | le | le (acusatiu) | ME, EM, M' | TE, ET, T' | ho
+paton-s ==>  PP1CS000 | PP2CS000 | PP3CSD00 | PP3CSA00
+           | PP2CS000(te) | PP2CS000(et) | PP2CS000(t') | PP3NS000.
+
+%SE-PRONOMINAL
+morf-pron ==> P0300000 | P010S000 | P010P000 | P020S000 | P020P000.
+morfema-verbal ==> P0000000.  %SE IMPERSONAL/PASSIU
+
+paton-s ==> PP3CSD00 | PP3CSA00.   %LI, L'
+paton-p ==> PP1CP000(ens) | PP2CP000(us) | PP3CPD00.  %ENS, US, ELS
+paton-mp ==> PP3MPA00.    %ELS
+paton-fp ==> PP3FPA00.    %LES
+paton-fs ==> PP3FSA00.    %LA
+paton-ms ==> PP3MSA00.    %EL
+
+%Pronoms demostratius
+pdem-ms ==> PD0MS000 | PD0NS000 | PD0CS000.  %AQUEST, AQUEIX, AQUELL, EIX | AIXò, ALLò, Açò, çO | tal
+pdem-fs ==> PD0FS000 | PD0CS000.
+pdem-mp ==> PD0CP000 | PD0MP000.   %TALS | ?
+pdem-fp ==> PD0FP000 | PD0CP000.
+
+
+%Pronoms interrogatius
+adv-interrog ==> PT000000.    %ON, COM, QUAN
+pinterrog-ms ==> PT0MS000.    %QUANT, QUIN
+pinterrog-fs ==> PT0FS000.    %QUANTA, QUINA
+pinterrog-mp ==> PT0MP000.
+pinterrog-fp ==> PT0FP000.
+pinterrog-s ==> PT0CS000.    %QUè, qui
+
+%Pronoms possessius 
+
+%el_meu|el_teu|el_seu|el_nostre|el_vostre|llur
+pposs-ms ==> DA0MS0,+DP1MSS | DA0MS0,+DP1MSP | DA0MS0,+DP2MSS | DA0MS0,+DP2MSP | DA0MS0,+DP3MS0. 
+%la_meva|la_teva|la_seva|la_nostra|la_vostra|llur
+pposs-fs ==> DA0FS0,+DP1FSS | DA0FS0,+DP1FSP | DA0FS0,+DP2FSS | DA0FS0,+DP2FSP | DA0FS0,+DP3FS0.
+%els_meus|els_teus|els_seus|els_nostres|els_vostres|llurs
+pposs-mp ==> DA0MP0, +DP1MPS | DA0MP0,+DP1MPP | DA0MP0,+DP2MPS | DA0MP0,+DP2MPP | DA0MP0,+DP3MP0.
+%les_meves|les_teves|les_seves|les_nostres|les_vostres|llurs
+pposs-fp ==> DA0FP0,+DP1FPS | DA0FP0,+DP1FPP | DA0FP0,+DP2FPS | DA0FP0,+DP2FPP | DA0FP0,+DP3FP0.
+
+%Pronoms relatius
+%Pronoms relatius de lloc
+prel-adv ==> PR000000.     %ON, COM, QUAN
+qual-s ==> PR0CS000(qual).
+qual-p ==> PR0CP000(quals).
+qui ==> PR0CN000(qui).
+que-a ==> PR0CN000(que).   % FORMA àTONA
+que-t ==> PR0CN000(què).   % FORMA TòNICA
+ 
+%Pronoms indefinits
+%MOLT | PROU, QUISVULLA | NINGú, RES, HOM, CAP
+pindef-ms ==> PI0MS000 | PI0CN000 | PI0CS000 
+            | PI0CS000(bastant) | PI0CS000(qualsevol) | PI0CS000(qualsevulla).
+pindef-fs ==> PI0FS000 | PI0CS000(bastant) | PI0CS000(qualsevol) | PI0CS000(qualsevulla).
+pindef-mp ==> PI0MP000 | PI0CP000(bastants) | PI0CP000(qualssevol) | PI0CP000(qualssevulla).
+pindef-fp ==> PI0FP000 | PI0CP000(bastants) | PI0CP000(qualssevol) | PI0CP000(qualssevulla).
+
+%%%%Pronoms numerals% Estudiar la sintaxi per veure si els poso
+%separats com a dos tipus de pronoms o no.
+%de moment: separats
+
+%%%Pronoms Numerals
+pnum-mp ==> PN0CP000 | PN0MP000. %DEU
+pnum-fp ==> PN0CP000 | PN0FP000. %DEU
+pnum-ms ==> PN0CS000 | PN0MS000. %TRIPLE
+pnum-fs ==> PN0CS000 | PN0FS000. %TRIPLA
+
+pnum-mp ==> Z.
+pnum-fp ==> Z.
+pnum-ms ==> Z. %cuádruple, doble, triple, ...
+pnum-fs ==> Z.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%NOM
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Nom comu
+%etiqueta desconeguda | noi | activista | aguantallibres | cerca-raons
+n-ms ==> NC0000* | NCMS00* | NCCS00* | NCMN00* | NCCN00*.
+n-fs ==> NC0000* | NCFS00* | NCCS00* | NCFN00* | NCCN00*.
+n-mp ==> NC0000* | NCMP00* | NCCP00* | NCMN00* | NCCN00*.
+n-fp ==> NC0000* | NCFP00* | NCCP00* | NCFN00* | NCCN00*.
+
+%Articles
+j-ms ==> DA0MS0 | DA0CS0 | DA0MN0.   % EL, EN | L', N', S' | ES
+j-fs ==> DA0CS0 | DA0FS0.   % L', N', S' | LA, NA, SA
+j-mp ==> DA0MP0 | DA0MN0.   % ELS | ES
+j-fp ==> DA0FP0.   % LES | SES
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%Determinants
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%determinants cardinals
+
+%%%Determinants cardinals
+num-ms ==> Z.
+num-fs ==> Z.
+num-mp ==> Z.
+num-fp ==> Z.
+
+%Determinants demostratius
+dem-ms ==> DD0MS0 | DD0CS0. % aquest | tal
+dem-fs ==> DD0FS0 | DD0CS0. % aquesta | tal
+
+dem-mp ==> DD0MP0 | DD0CP0. % aquests | tals
+dem-fp ==> DD0FP0 | DD0CP0. % aquestes | tals
+
+%Determinants  possesius
+
+pos-mp ==> DP1MPP | DP1MPS | DP2MPP | DP2MPS | DP3CPP | DP3MP0 | DP3MPS.  %ELS_NOSTRES|MEUS,MONS|ELS_VOSTRES|TONS,TEUS|LLURS|SEUS|sons
+pos-fp ==> DP1FPP | DP1FPS | DP2FPP | DP2FPS | DP3CPP | DP3FP0 | DP3FPS.  %les_NOSTRES|MEves,MeS|les_VOSTRES|Tes,TEves|LLURS|SEves|ses
+pos-fs ==> DP1FSP | DP1FSS | DP2FSP | DP2FSS | DP3CSP | DP3FS0 | DP3FSS.  %la_NOSTRa|MEva,Ma|la_VOSTRa|Ta,Teva|LLUR|SEva|sa
+pos-ms ==> DP1MSP | DP1MSS | DP2MSP | DP2MSS | DP3CSP | DP3MS0 | DP3MSS.  %EL_NOSTRE|MEU,MON|EL_VOSTRE|TON,TEU|LLUR|SEU|son
+
+%Determinants interrogatius%
+int-ms ==> DT0MS0.%QUANT, QUIN
+int-fs ==> DT0FS0.%QUANTA, QUINA
+int-mp ==> DT0MP0.%QUANTS, QUINS
+int-fp ==> DT0FP0.%QUANTES, QUINES
+
+%Determinants exclamatius
+exc-ms ==> DE0MS0.%QUANT, QUIN
+exc-mp ==> DE0MP0.
+exc-fs ==> DE0FS0.
+exc-fp ==> DE0FP0.
+
+%Determinants indefinits
+indef-ms ==> DI0CS0 | DI0MS0 | DI0CN0. % CADA | algun | prou,gens
+indef-fs ==> DI0CS0 | DI0FS0 | DI0CN0. % CADA | alguna | prou,gens
+indef-mp ==> DI0CP0 | DI0MP0 | DI0CN0. % bastants | alguns | prou,gens
+indef-fp ==> DI0CP0 | DI0FP0 | DI0CN0. % bastants | algunes | prou,gens
+
+relatiu ==> qui | que-a
+          | j-ms, +qual-s | j-fs, +qual-s 
+          | j-mp, +qual-p | j-fp, +qual-p.  % EL QUAL | la qual | els quals | les quals
+
+%AMB QUè |  ON, COM, QUAN | PER ON | AL/DEL/PEL QUAL
+relatiu ==> +prep, que-t
+           | prel-adv  
+           | prep, +prel-adv(on)
+           | +prepc-ms, qual-s.
+
+ %AMB EL/la/els/les QUAL/s
+relatiu ==> +prep, j-ms, qual-s | +prep, j-fs, qual-s | +prep, j-mp, qual-p | +prep, j-fp, qual-p.
+
+%%%%%%%%%%%%%%%%%%%
+%% ELS PRONOMS PORTEN TOTS "p" DAVANT I DESPRES EL TIPUS%%
+%%%%%%%%%%%%%%%%%%%
+pron-ms ==> pinterrog-ms | pinterrog-s | psubj-ms | psubj-mp | pdem-ms 
+          | pinterrog-ms | pinterrog-s | pposs-ms | pindef-ms | pnum-ms.
+
+pron-fs ==> pinterrog-fs | psubj-fs | pdem-fs | pinterrog-fs 
+          | pposs-fs | pindef-fs | pnum-fs.
+
+pron-mp ==> pinterrog-mp | pdem-mp | pinterrog-mp 
+          | pposs-mp | pindef-mp | pnum-mp.
+
+pron-fp ==> pinterrog-fp | psubj-fp | pdem-fp 
+          | pinterrog-fp | pposs-fp | pindef-fp | pnum-fp.
+
+pron ==> psubj-s | psubj-p.
+
+
+
+%%%%%%%%%%%%%
+% determinants
+%%%%%%%%%%%%%
+
+espec-fp ==> cuantif | dem-fp | exc-fp | grup-complex-spec-fp | indef-fp | int-fp | j-fp | num-fp | pos-fp.
+espec-fs ==> cuantif | dem-fs | exc-fs | grup-complex-spec-fs | indef-fs | int-fs | j-fs | num-fs | pos-fs.
+espec-mp ==> cuantif | dem-mp | exc-mp | grup-complex-spec-mp | indef-mp | int-mp | j-mp | num-mp | pos-mp.
+espec-ms ==> cuantif | dem-ms | exc-ms | grup-complex-spec-ms | indef-ms | int-ms | j-ms | num-ms | pos-ms.
+
+grup-complex-spec-ms ==> indef-ms, +indef-ms, num-ms.   
+grup-complex-spec-mp ==> indef-mp, +indef-mp, num-mp.   %UNS ALTRES 12 mesos
+grup-complex-spec-mp ==> num-mp, +coord, num-mp.   %DOS O TRES LLIBRES
+grup-complex-spec-fp ==> num-fp, +coord, num-fp.   %DUES O TRES COSES
+grup-complex-spec-mp ==> num-ms, +coord, num-mp.   %UN O DOS LLIBRES
+grup-complex-spec-fp ==> num-fs, +coord, num-fp.   %UNA O DUES
+grup-complex-spec-ms ==> +indef-ms, coord, indef-ms.   %UN I ALTRE
+grup-complex-spec-fs ==> +indef-fs, coord, indef-fs.   %UNA I ALTRA
+grup-complex-spec-mp ==> +indef-mp, coord, indef-mp.   %UNS Y ALTRES
+grup-complex-spec-fp ==> +indef-fp, coord, indef-fp.   %UNES I ALTRES
+grup-complex-spec-ms ==> +indef-ms, dem-ms.   %TOT AQUEST DIA
+grup-complex-spec-mp ==> +indef-mp, dem-mp.
+grup-complex-spec-ms ==> +indef-ms, j-ms.   %TOT EL DIA
+grup-complex-spec-mp ==> +indef-mp, j-mp.
+grup-complex-spec-ms ==> quasi, +indef-ms, j-ms.   %QUASI/GAIREBE TOT EL...
+grup-complex-spec-mp ==> quasi, +indef-mp, j-mp.
+grup-complex-spec-ms ==> +indef-ms, indef-ms.   %UNS QUANTS LLIBRES
+grup-complex-spec-mp ==> +indef-mp, indef-mp.
+grup-complex-spec-ms ==> +indef-ms, pos-ms.   %TOTS ELS_MEUS LLIBRES
+grup-complex-spec-mp ==> +indef-mp, pos-mp.
+grup-complex-spec-ms ==> dem-ms, +num-ms.   %AQUESTS TRES LLIBRES
+grup-complex-spec-mp ==> dem-mp, +num-mp.
+grup-complex-spec-ms ==> pos-ms, +num-ms.   %ELS_MEUS TRES LLIBRES
+grup-complex-spec-mp ==> pos-mp, +num-mp.
+grup-complex-spec-ms ==> j-ms, +num-ms.   %ELS DOS LLIBRES
+grup-complex-spec-mp ==> j-mp, +num-mp.
+grup-complex-spec-ms ==> j-ms, +indef-ms, indef-ms.   %???
+grup-complex-spec-mp ==> j-mp, +indef-mp, indef-mp.   %???
+grup-complex-spec-ms ==> j-ms, +indef-ms.   %ELS POCS LLIBRES
+grup-complex-spec-mp ==> j-mp, +indef-mp.
+
+grup-complex-spec-fs ==> indef-fs, +indef-fs, num-fs.
+grup-complex-spec-fp ==> indef-fp, +indef-fp, num-fp.
+grup-complex-spec-fs ==> +num-fs, num-fs.
+grup-complex-spec-fp ==> +num-fp, num-fp.
+grup-complex-spec-fs ==> +indef-fs, dem-fs.
+grup-complex-spec-fp ==> +indef-fp, dem-fp.
+grup-complex-spec-fs ==> +indef-fs, j-fs.
+grup-complex-spec-fp ==> +indef-fp, j-fp.
+grup-complex-spec-fs ==> quasi, +indef-fs, j-fs.
+grup-complex-spec-fp ==> quasi, +indef-fp, j-fp.
+grup-complex-spec-fs ==> +indef-fs, indef-fs.
+grup-complex-spec-fp ==> +indef-fp, indef-fp.
+grup-complex-spec-fs ==> +indef-fs, pos-fs.
+grup-complex-spec-fp ==> +indef-fp, pos-fp.
+grup-complex-spec-fs ==> dem-fs, +num-fs.
+grup-complex-spec-fp ==> dem-fp, +num-fp.
+grup-complex-spec-fs ==> pos-fs, +num-fs.
+grup-complex-spec-fp ==> pos-fp, +num-fp.
+grup-complex-spec-fs ==> j-fs, +num-fs.
+grup-complex-spec-fp ==> j-fp, +num-fp.
+grup-complex-spec-fs ==> j-fs, +indef-fs, indef-fs.   %??
+grup-complex-spec-fp ==> j-fp, +indef-fp, indef-fp.   %??
+grup-complex-spec-fs ==> j-fs, +indef-fs.
+grup-complex-spec-fp ==> j-fp, +indef-fp.
+
+grup-complex-spec-fs ==> pos-fs, +indef-fs.   %LA_MEVA POCA GRàCIA
+grup-complex-spec-fp ==> pos-fp, +indef-fp.
+grup-complex-spec-ms ==> pos-ms, +indef-ms.
+grup-complex-spec-mp ==> pos-mp, +indef-mp.
+
+grup-complex-spec-fs ==> indef-fs, +num-fs.   %TOTA UNA(?) VIDA
+grup-complex-spec-fp ==> indef-fp, +num-fp.   %TOTES TRES VIDES
+grup-complex-spec-ms ==> indef-ms, +num-ms.
+grup-complex-spec-mp ==> indef-mp, +num-mp.
+
+grup-complex-spec-fp ==> +num-fp, num-fp.   %MIL SEISCIENTAS
+grup-complex-spec-mp ==> +num-mp, num-mp.
+grup-complex-spec-fp ==> +num-fp, num-fp, num-fp.   %MIL SEISCIENTAS SETENTA
+grup-complex-spec-mp ==> +num-mp, num-mp, num-mp.
+
+%%%%%%%%%%%%%%
+% grup nominal
+%%%%%%%%%%%%%%
+grup-nom-ms ==> n-ms.
+grup-nom-mp ==> n-mp.
+grup-nom-fs ==> n-fs.
+grup-nom-fp ==> n-fp.
+
+grup-nom-ms ==> n-ms | +n-ms, n-fs | +n-ms, n-ms | +n-ms, n-mp  | +n-ms, n-fp .    %GAS MOSTASSA
+grup-nom-mp ==> n-mp | +n-mp, n-fs | +n-mp, n-ms | +n-mp, n-mp  | +n-mp, n-fp.    %GASOS MOSTASSA
+grup-nom-fs ==> n-fs | +n-fs, n-fs | +n-fs, n-ms | +n-fs, n-mp  | +n-fs, n-fp.   %LA PARAULA CULTURA
+grup-nom-fs ==> n-fp | +n-fp, n-fs | +n-fp, n-ms | +n-fp, n-mp  | +n-fp, n-fp.   %LA PARAULA LLIBRE
+	%no sé si hi pot haver altres combinacions...
+
+%%%%%amb SP(de) i a veure què passa
+
+grup-nom-ms ==> n-ms, +sp-de | pnum-ms, +sp-de. %%%cientos de miles de personas
+grup-nom-mp ==> n-mp, +sp-de | pnum-mp, +sp-de.
+grup-nom-fs ==> n-fs, +sp-de | pnum-fs, +sp-de.
+grup-nom-fp ==> n-fp, +sp-de | pnum-fp, +sp-de.
+
+prep-de ==> SPS00(de) | SPS00(d').
+
+sp-de ==> +prep-de, sn | +SPCMS(del), grup-nom-ms | +SPCMP(dels), grup-nom-mp.
+
+grup-nom-mp ==> w-mp.
+grup-nom-ms ==> w-ms.
+grup-nom-fp ==> w-fp.
+grup-nom-fs ==> w-fs.
+
+grup-nom-ms ==> +w-ms, w-ms.%PODEN HAVER-N'HI MéS! DE NOMS PROPIS...
+grup-nom-ms ==> +n-ms, w-ms.%EX.: EL PRESIDENTE CHIRAC
+grup-nom-ms ==> +n-ms, s-a-ms.
+grup-nom-mp ==> +n-mp, s-a-mp.
+grup-nom-ms ==> +w-ms, s-a-ms.
+grup-nom-mp ==> +w-mp, s-a-mp.
+grup-nom-ms ==> s-a-ms, +grup-nom-ms.
+grup-nom-mp ==> s-a-mp, +grup-nom-mp.
+
+grup-nom-fs ==> +w-fs, w-fs.
+grup-nom-fs ==> +n-fs, w-fs.
+grup-nom-fs ==> +n-fs, s-a-fs.
+grup-nom-fp ==> +n-fp, s-a-fp.
+grup-nom-fs ==> +w-fs, s-a-fs.
+grup-nom-fp ==> +w-fp, s-a-fp.
+grup-nom-fs ==> s-a-fs, +grup-nom-fs.
+grup-nom-fp ==> s-a-fp, +grup-nom-fp.
+
+grup-nom-mp ==> grup-c-nom-mp.
+grup-nom-fp ==> grup-c-nom-fp.
+
+grup-nom-mp ==> +grup-c-nom-mp, s-a-mp.
+grup-nom-fp ==> +grup-c-nom-fp, s-a-fp.
+
+%les deixo tal qual; peró el relax aquí no va gaire bé...
+grup-nom-fp ==> +pnum-fp, pnum-fp.
+grup-nom-mp ==> +pnum-mp, pnum-mp.
+grup-nom-fp ==> +pnum-fp, pnum-fp, pnum-fp.
+grup-nom-mp ==> +pnum-mp, pnum-mp, pnum-mp.
+grup-nom-fp ==> +pnum-fp, pnum-fp, coord, pnum-fp.
+grup-nom-mp ==> +pnum-mp, pnum-mp, coord, pnum-mp.
+grup-nom-fp ==> +pnum-fp, pnum-fp, pnum-fp, coord, pnum-fp.
+grup-nom-mp ==> +pnum-mp, pnum-mp, pnum-mp, coord, pnum-mp.
+
+grup-nom-ms ==> +n-ms, pos-ms.   %AMIC SEU : PERò SEU = PX (BY RELAX)
+grup-nom-mp ==> +n-mp, pos-mp.
+grup-nom-fs ==> +n-fs, pos-fs.
+grup-nom-fp ==> +n-fp, pos-fp.
+
+grup-nom-ms ==> +n-ms, pdem-ms.  %EL NOI AQUEST
+grup-nom-mp ==> +n-mp, pdem-mp.
+grup-nom-fs ==> +n-fs, pdem-fs.
+grup-nom-fp ==> +n-fp, pdem-fp.
+
+%%%Participi que funciona com a nom "un impres" "un comunicat"  "uns comunicats" ... (una impresa ??)
+
+grup-nom-ms ==> espec-ms, +parti-ms.
+grup-nom-mp ==> espec-mp, +parti-mp.
+grup-nom-fs ==> espec-fs, +parti-fs.
+grup-nom-fp ==> espec-fp, +parti-fp.
+
+
+
+
+%%%%%%%%%%%%%%%%%%
+%% SN %%%Recordar que els "numer" ja no existeixen
+%%%%%%%%%%%%%%%%%%
+
+sn ==> grup-nom.%PELS NOMS PROPIS...
+
+sn ==> grup-nom-ms.
+sn ==> grup-nom-fs.
+sn ==> grup-nom-mp.
+sn ==> grup-nom-fp.
+
+sn ==> pron-ms.
+sn ==> pron-fs.
+sn ==> pron-mp.
+sn ==> pron-fp.
+sn ==> pron.
+sn ==> +psubj-mp, num-mp.
+sn ==> +psubj-fp, num-fp.
+
+pron ==> psubj-s | pinterrog-s.
+
+sn ==> +pdem-ms, indef-ms.  %AQUEST MATEIX
+sn ==> +pdem-fs, indef-fs.
+sn ==> +pdem-mp, indef-mp.
+sn ==> +pdem-fp, indef-fp.
+
+sn ==> espec-ms, +grup-nom-ms | espec-mp, +grup-nom-mp 
+     | espec-fs, +grup-nom-fs | espec-fp, +grup-nom-fp.
+
+sn ==> pinterrog-s | pinterrog-mp | pinterrog-fp.
+
+sn ==> j-ms, +pindef-ms. % L'UN (DEIA QUE...)
+sn ==> j-fs, +pindef-fs.
+sn ==> j-mp, +pindef-mp.
+sn ==> j-fp, +pindef-fp.
+
+sn ==> +pindef-ms, s-a-ms.%QUELCOM (MOLT) BONIC
+sn ==> +pindef-fs, s-a-fs.
+sn ==> +pindef-mp, s-a-mp.
+sn ==> +pindef-fp, s-a-fp.
+
+sn ==> indef-ms, +pnum-ms. %TOTS TRES
+sn ==> indef-fs, +pnum-fs.
+sn ==> indef-mp, +pnum-mp.
+sn ==> indef-fp, +pnum-fp.
+
+sn ==> indef-ms, +pindef-ms. %UN ALTRE
+sn ==> indef-fs, +pindef-fs.
+sn ==> indef-mp, +pindef-mp.
+sn ==> indef-fp, +pindef-fp.
+
+sn ==> pindef-mp, prep-de, +psubj-mp.%MOLTS DE NOSALTRES / D'ELLS
+sn ==> pindef-fp, prep-de, +psubj-fp.
+sn ==> pindef-ms, prep-de, +psubj-mp.%ALGUN DE NOSALTRES / D'ELLS
+sn ==> pindef-fs, prep-de, +psubj-fp.
+sn ==> pindef-ms, +sp-de | pindef-fs, +sp-de | pindef-mp, +sp-de | pindef-fp, +sp-de.
+
+sn ==> espec-ms, Fe, +grup-nom-ms, Fe. %EL grup-nom ENTRE COMENTES
+sn ==> espec-fs, Fe, +grup-nom-fs, Fe.
+sn ==> espec-mp, Fe, +grup-nom-mp, Fe.
+sn ==> espec-fp, Fe, +grup-nom-fp, Fe.
+
+sn ==> espec-ms, Fpa, +grup-nom-ms, Fpt.%EL grup-nom ENTRE PARèNTESIS
+sn ==> espec-fs, Fpa, +grup-nom-fs, Fpt.
+sn ==> espec-mp, Fpa, +grup-nom-mp, Fpt.
+sn ==> espec-fp, Fpa, +grup-nom-fp, Fpt.
+
+sn ==> j-ms, +s-a-ms. %SUBSTANTIVACIó DE L'ADJECTIU
+sn ==> j-fs, +s-a-fs.
+sn ==> j-mp, +s-a-mp.
+sn ==> j-fp, +s-a-fp.
+
+sn ==> j-ms, +grup-sp. %SUBSTANTIVACIó DE L'SP
+sn ==> j-fs, +grup-sp.
+sn ==> j-mp, +grup-sp.
+sn ==> j-fp, +grup-sp.
+
+sn ==> Fe, +sn, Fe.  %SN ENTRE COMENTES
+sn ==> Fpa, +sn, Fpt.
+
+sn ==> numero. % (N'HI HA) 324.
+sn ==> espec-ms, +numero.%(LI VAN POSAR) UN 10.
+
+sn ==> espec-mp, +numero. % UNS ALTRES 20
+sn ==> espec-fp, +numero.
+
+sn ==> indef-ms, +s-a-ms. %UN INSATISFET
+sn ==> indef-fs, +s-a-fs.
+sn ==> indef-mp, +s-a-mp.
+sn ==> indef-fp, +s-a-fp.
+
+sn ==> indef-ms, +pdem-ms.%TOT AQUEST
+sn ==> indef-ms, +psubj-ms.%TOT ELL
+sn ==> indef-mp, +pdem-mp.
+sn ==> indef-mp, +psubj-mp.
+sn ==> indef-fs, +pdem-fs.
+sn ==> indef-fs, +psubj-fs.
+sn ==> indef-fp, +pdem-fp.
+sn ==> indef-fp, +psubj-fp.
+
+sn ==> indef-ms, j-ms, +pindef-mp. %???????(todo lo demas...)
+sn ==> indef-fs, j-fs, +pindef-fp. %???????
+
+sn ==> numero, +grup-nom-fp.%10 PERSONES
+sn ==> numero, +grup-nom-fs.
+sn ==> numero, +grup-nom-mp.
+sn ==> numero, +grup-nom-ms.
+
+sn ==> pdem-mp, +num-mp.%AQUESTS TRES
+sn ==> pdem-fp, +num-fp.
+
+sn ==> pdem-ms, +s-a-ms.%AQUEST úLTIM
+sn ==> pdem-fs, +s-a-fs.
+sn ==> pdem-mp, +s-a-mp.
+sn ==> pdem-fp, +s-a-fp.
+
+sn  ==>  +CC(ni), sn, CC(ni), sn.
+sn  ==>  numero, +s-a-mp | numero, +s-a-fp.	%30 italianos (d2)
+
+%considerar "ella sola"
+%considerar "un amigo suyo": OK
+%considerar "el chico ése": OK
+%pendent: la substantivació
+
+%%%coordinació de noms a l'interior d'un grup-c-nom:
+%Coordinació purament lèxica de noms (no admeten adjacents)
+
+grup-c-nom ==> grup-nom, +coord, grup-nom. %COORD DE NPS(C2).
+
+grup-c-nom-mp ==> n-mp, +coord, n-fs.
+grup-c-nom-mp ==> n-mp, +coord, n-fp.
+grup-c-nom-mp ==> n-mp, +coord, n-ms.
+grup-c-nom-mp ==> n-mp, +coord, n-mp.
+grup-c-nom-mp ==> n-ms, +coord, n-fs.
+grup-c-nom-mp ==> n-ms, +coord, n-fp.
+grup-c-nom-mp ==> n-ms, +coord, n-ms.
+grup-c-nom-mp ==> n-ms, +coord, n-mp.
+
+grup-c-nom-mp ==> n-fs, +coord, n-mp.
+grup-c-nom-mp ==> n-fp, +coord, n-mp.
+grup-c-nom-mp  ==> n-ms, +coord, n-mp.
+grup-c-nom-mp ==> n-fs, +coord, n-ms.
+grup-c-nom-mp ==> n-fp, +coord, n-ms.
+grup-c-nom-mp  ==> n-mp, +coord, n-ms. 
+
+grup-c-nom-fp ==> n-fs, +coord, n-fs.
+grup-c-nom-fp ==> n-fs, +coord, n-fp.
+grup-c-nom-fp ==> n-fp, +coord, n-fs.
+grup-c-nom-fp ==> n-fp, +coord, n-fp.
+
+%%coordinació en forma: nom, Fc, n-coord
+grup-c-nom-mp ==> n-ms, +Fc, grup-c-nom-mp. 
+grup-c-nom-mp ==> n-fs, +Fc, grup-c-nom-mp. 
+grup-c-nom-mp ==> n-mp, +Fc, grup-c-nom-mp. 
+grup-c-nom-mp ==> n-fp, +Fc, grup-c-nom-mp. 
+grup-c-nom-fp ==> n-fs, +Fc, grup-c-nom-fp. 
+grup-c-nom-fp ==> n-fp, +Fc, grup-c-nom-fp. 
+
+
+%%%%
+%adjectius
+%%%%
+
+s-adj ==> s-a-ms | s-a-fs | s-a-mp | s-a-fp.
+
+s-a-ms ==> Fe, +s-a-ms, Fe | Fpa, +s-a-ms, Fpt.
+s-a-ms ==> a-ms | s-a-ms, +Fc, s-a-ms | s-a-ms, +Fc, s-a-ms, Fs. %enumeració amb .../etc al final
+s-a-ms ==> s-a-ms, +coord, s-a-ms | sadv, +a-ms | +a-ms, s-a-ms. 
+
+s-a-fs ==> Fe, +s-a-fs, Fe | Fpa, +s-a-fs, Fpt.
+s-a-fs ==> a-fs | s-a-fs, +Fc, s-a-fs | s-a-fs, +Fc, s-a-fs, Fs.
+s-a-fs ==> s-a-fs, +coord, s-a-fs | sadv, +a-fs | +a-fs, s-a-fs.
+ 
+s-a-mp ==> Fe, +s-a-mp, Fe | Fpa, +s-a-mp, Fpt.
+s-a-mp ==> a-mp | s-a-mp, +Fc, s-a-mp | s-a-mp, +Fc, s-a-mp, Fs.	
+s-a-mp ==> s-a-mp, +coord, s-a-mp | sadv, +a-mp | +a-mp, s-a-mp. 
+
+s-a-fp ==> Fe, +s-a-fp, Fe | Fpa, +s-a-fp, Fpt.
+s-a-fp ==> a-fp | s-a-fp, +Fc, s-a-fp | s-a-fp, +Fc, s-a-fp, Fs.
+s-a-fp ==> s-a-fp, +coord, s-a-fp | sadv, +a-fp | +a-fp, s-a-fp.
+
+
+%%%%%%
+% spreps
+%%%%%%
+
+grup-sp ==> +prep, infinitiu.%DE SER REVENTADA
+grup-sp ==> +prep, inf.
+grup-sp ==> +prepc-ms, grup-nom-ms.%NO HI HAURà "SN"!!
+grup-sp ==> +prepc-ms, sn.%AL SEU COL·LEGA
+grup-sp ==> +prepc-mp, grup-nom-mp.%NO HI HAURà "SN"!!
+grup-sp ==> +prepc-mp, sn.%ALS SEUS COL·LEGUES
+grup-sp ==> +prepc-ms, pindef-ms.%DEL TOT
+grup-sp ==> +prepc-ms, pposs-ms.%DEL MEU
+grup-sp ==> +prepc-mp, pposs-mp.%DEL MEUS
+grup-sp ==> +prep, numero.
+grup-sp ==> +prep, s-a-ms.
+grup-sp ==> +prep, s-a-mp.
+grup-sp ==> +prep, s-a-fs.
+grup-sp ==> +prep, s-a-fp.
+grup-sp ==> +prep, sadv.
+grup-sp ==> +prep, sn.
+grup-sp ==> +prep, ptonic.%AMB Mí.
+grup-sp ==> +SPS00(per), SPS00(a), ptonic.%PER A MI
+grup-sp ==> +prepc-ms, s-a-ms.%DEL CIENTíFIC: SUBSTANTIVACIó AMB SPCMS
+grup-sp ==> +prepc-mp, s-a-mp.
+grup-sp ==> +prep, data.%POTSER ALGUN DIA FUNCIONARà...
+grup-sp ==> +prepc-ms, W.%IDEM...
+
+grup-sp ==> +SPS00(entre), sn, CC(i), sn.
+
+
+%%%%%%%%
+%EL SINTAGMA ADVERBIAL
+%%%%%%%%%
+
+sadv ==> adv-interrog.
+sadv ==> cuantif, +sadv.
+sadv ==> RG.
+
+%adverbis 'transitius(+/-)'	%13-05-02
+sadv ==> RG(prop), prep-de, +sn.%CERCA DE 10 PERSONAS
+sadv ==> RG(vora), prep-de, +sn.
+sadv ==> RG(lluny), prep-de, +sn.
+sadv ==> RG(dalt), prep-de, +sn.
+sadv ==> RG(sota), prep-de, +sn.
+sadv ==> RG(sobre), prep-de, +sn.
+sadv ==> RG(després), prep-de, +sn.
+sadv ==> RG(abans), prep-de, +sn.
+sadv ==> RG(fora), prep-de, +sn.
+sadv ==> RG(dintre), prep-de, +sn.
+sadv ==> RG(davant), prep-de, +sn.
+sadv ==> RG(darrere), prep-de, +sn.
+sadv ==> RG(damunt), prep-de, +sn.
+sadv ==> RG(més), prep-de, +sn.
+sadv ==> RG(menys), prep-de, +sn.
+sadv ==> RG(davant), prep-de, +sn.
+sadv ==> RG(junt), SPS00(a), +sn.
+
+sadv ==> RG(prop), prep-de, +sadv.%CERCA DE 10 PERSONAS
+sadv ==> RG(vora), prep-de, +sadv.
+sadv ==> RG(lluny), prep-de, +sadv.
+sadv ==> RG(dalt), prep-de, +sadv.
+sadv ==> RG(sota), prep-de, +sadv.
+sadv ==> RG(sobre), prep-de, +sadv.
+sadv ==> RG(després), prep-de, +sadv.
+sadv ==> RG(abans), prep-de, +sadv.
+sadv ==> RG(fora), prep-de, +sadv.
+sadv ==> RG(dintre), prep-de, +sadv.
+sadv ==> RG(davant), prep-de, +sadv.
+sadv ==> RG(darrere), prep-de, +sadv.
+sadv ==> RG(damunt), prep-de, +sadv.
+sadv ==> RG(més), prep-de, +sadv.
+sadv ==> RG(menys), prep-de, +sadv.
+sadv ==> RG(davant), prep-de, +sadv.
+sadv ==> RG(junt), SPS00(a), +sadv.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%     verbs     %%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%formes personals%%%%%%%%%%%%%%%
+%%formes passives
+%verb SER (lema SER)
+
+vser ==> VSI* | VSM* | VSS*.
+
+% verbs principals
+%mode indicatiu
+verb ==> VMI* | VMM* | VMS*.
+
+% verb ser com a principal: oracions atributives
+verb ==> VSI* | VSM* | VSS*.
+
+%només por ser principal la 3 pers sing
+% (HI) HA| HAVIA | HAGUE | HAURA ...
+verb ==> VAIP3S0 | VAII3S0 | VAIS3S0 | VAIF3S0
+       | VAIC3S0 | VASP3S0 | VASI3S0.
+
+%El pretèrit perfet perifràstic
+verb ==> VAIP*<anar>, +inf.   %VA|VAS|VEU|VAN... CANTAR
+
+%%%%%Verbs auxiliars: dels temps compostos: 
+%%les formes presents del verb ANAR també queden aquí
+%verb  ==>  vaux. 	%%no sé què passarà!!
+vaux ==> VAIP*<haver>.
+vaux ==> VAI* | VAM* | VAS*.
+
+% aquests participis nomes apareixen en  perífrasis determinades 
+parti-aux ==> VAP00SM.%HAGUT
+parti-ser ==> VSP00SM.%ESTAT (ULL-AVITZOR: TAMBé Té ETIQUETA VMP)
+
+%participi de formes compostes no finites
+parti ==> VMP00SM.
+
+%participis flexius
+parti-ms ==> VMP00SM.%MEJAT
+parti-mp ==> VMP00PM.%MENJATS
+parti-fs ==> VMP00SF.%MENJADA
+parti-fp ==> VMP00PF.%MENJADES
+
+infaux-ser ==> VSN0000.
+infaux ==> VAN0000.
+inf ==> VAN0000.%HAVER
+inf ==> VSN0000.%SER
+inf ==> VMN0000.%MENJAR
+
+ger ==> VMG0000.%MENJANT
+ger ==> VAG0000.%ESSENT
+geraux ==> VAG0000.
+geraux-ser ==> VSG0000.
+
+parti-flex ==> parti-ms.
+parti-flex ==> parti-fs.
+parti-flex ==> parti-mp.
+parti-flex ==> parti-fp.
+
+gerundi ==> ger.
+gerundi ==> ger-pas.
+gerundi ==> geraux-ser.%NO HAURIA D'AFECTAR LES REGLES QUE TENEN geraux-ser A
+				%la dreta (passa el mateix amb l'infinitiu)
+ger ==> geraux, +parti.%HAVENT MENJAT
+ger ==> geraux, +parti-ser.%HAVENT ESTAT
+ger-pas ==> geraux-ser, +parti-flex.
+ger-pas ==> geraux, parti-aux, +parti-flex.
+
+infinitiu ==> inf.
+infinitiu ==> inf-pas.
+infinitiu ==> infaux-ser.
+inf ==> infaux, +parti.%HAVER CANTAT
+
+inf ==> infaux, +parti-ser.%HAVER ESTAT
+inf-pas ==> infaux-ser, +parti-flex.%SER CANTAT, CANTADA, CANTATS, CANTADES
+inf-pas ==> infaux, +parti-ser, parti-flex.%HAVER ESTAT ESTIMAT
+
+
+verb ==> vaux, +inf.
+verb ==> vaux, +parti-flex.%HE DIT/(LES) HE VISTES
+verb ==> vaux, +parti-ser.% HAN ESTAT (POCS) VE AIXI DEL MACO
+
+verb-pass ==> vser, +parti-flex. %SóC ESTIMAT
+verb-pass ==> vaux, +parti-ser, parti-flex. % HA ESTAT ESTIMAT
+
+
+grup-verb ==> verb | verb-pass.
+
+%% el valor se calcula
+grup-verb ==> morfema-verbal, +grup-verb.
+grup-verb ==> morfema-verbal, patons, +grup-verb.
+grup-verb ==> patons, +grup-verb.
+
+%% per si el tagger separa clitics
+grup-verb ==> +verb, PP* | +verb, PP*, PP* | +verb, PP*, PP*, PP*.
+
+
+
+%Formes finites de les perífrasis
+verb ==> VM*<començar>, SPS00(a), +infinitiu.
+verb ==> VM*<tornar>, SPS00(a), +infinitiu.
+verb ==> VM*<posar>, SPS00(a), +infinitiu.
+verb ==> VM*<anar>, +gerundi.
+verb ==> VM*<estar>, +gerundi.
+verb ==> VM*<seguir>, +gerundi.
+verb ==> VM*<continuar>, +gerundi.
+verb ==> VM*<estar>, SPS00(a_punt_de), +infinitiu.
+verb ==> VM*<estar>, SPS00(a_punt_d'), +infinitiu.
+verb ==> VM*<acabar>, prep-de, +infinitiu.
+verb ==> VM*<parar>, prep-de, +infinitiu.
+verb ==> VM*<deixar>, prep-de, +infinitiu.
+verb ==> VA*<haver>, prep-de, +infinitiu.
+verb ==> VM*<soler>, +infinitiu.
+verb ==> VM*<poder>, +infinitiu.
+verb ==> VM*<deure>, +infinitiu.
+verb ==> VM*<voler>, +infinitiu.
+verb ==> VM*<saber>, +infinitiu.
+verb ==> VM*<gosar>, +infinitiu.
+
+
+%Formes de gerundi de les perífrasis
+gerundi ==> VMG0000(tornant), SPS00(a), +infinitiu.
+gerundi ==> VMG0000(anant), +gerundi.
+gerundi ==> VMG0000(estant), +gerundi.
+gerundi ==> VMG0000(seguint), +gerundi.
+gerundi ==> VMG0000(continuant), +gerundi.
+gerundi ==> VMG0000(estant), SPS00(a_punt_de), +infinitiu.
+gerundi ==> VMG0000(estant), SPS00(a_punt_d'), +infinitiu.
+gerundi ==> VMG0000(començant), SPS00(a), +infinitiu.
+gerundi ==> VMG0000(posant), SPS00(a), +infinitiu.
+gerundi ==> VMG0000(acabant), prep-de, +infinitiu.
+gerundi ==> VMG0000(parant), prep-de, +infinitiu.
+gerundi ==> VMG0000(deixant), prep-de, +infinitiu.
+gerundi ==> VMG0000(solent), +infinitiu.
+gerundi ==> VMG0000(podent), +infinitiu.
+gerundi ==> VMG0000(devent), +infinitiu.
+gerundi ==> VMG0000(volent), +infinitiu.
+gerundi ==> VMG0000(sabent), +infinitiu.
+gerundi ==> VMG0000(gosant), +infinitiu.
+gerundi ==> VAG0000(havent), prep-de, +infinitiu.
+
+%Formes infinitives de les perífrasis
+infinitiu ==> VMN0000(tornar), A, +infinitiu.
+infinitiu ==> VMN0000(anar), +gerundi.
+infinitiu ==> VMN0000(estar), +gerundi.
+infinitiu ==> VMN0000(seguir), +gerundi.
+infinitiu ==> VMN0000(continuar), +gerundi.
+infinitiu ==> VMN0000(estar), SPS00(a_punt_de), +infinitiu.
+infinitiu ==> VMN0000(estar), SPS00(a_punt_d'), +infinitiu.
+infinitiu ==> VMN0000(començar), SPS00(a), +infinitiu.
+infinitiu ==> VMN0000(posar), SPS00(a), +infinitiu.
+infinitiu ==> VMN0000(acabar), prep-de, +infinitiu.
+infinitiu ==> VMN0000(parar), prep-de, +infinitiu.
+infinitiu ==> VMN0000(deixar), prep-de, +infinitiu.
+infinitiu ==> VMN0000(soler), +infinitiu.
+infinitiu ==> VMN0000(poder), +infinitiu.
+infinitiu ==> VMN0000(deure), +infinitiu.
+infinitiu ==> VMN0000(voler), +infinitiu.
+infinitiu ==> VMN0000(saber), +infinitiu.
+infinitiu ==> VMN0000(gosar), +infinitiu.
+infinitiu ==> VAN0000(haure), prep-de, +infinitiu.
+infinitiu ==> VAN0000(haver), prep-de, +infinitiu.
+infinitiu ==> VAN0000(heure), prep-de, +infinitiu.
+
+%%Formes participials de les perífrasis
+parti-flex ==> VMP*<començar>, SPS00(a), +infinitiu.
+parti-flex ==> VMP*<tornar>, SPS00(a), +infinitiu.
+parti-flex ==> VMP*<posar>, SPS00(a), +infinitiu.
+parti-flex ==> VMP*<anar>, +gerundi.
+parti-flex ==> VMP*<estar>, +gerundi.
+parti-flex ==> VMP*<seguir>, +gerundi.
+parti-flex ==> VMP*<continuar>, +gerundi.
+parti-flex ==> VMP*<estar>, SPS00(a_punt_de), +infinitiu.
+parti-flex ==> VMP*<estar>, SPS00(a_punt_d'), +infinitiu.
+parti-flex ==> VMP*<acabar>, prep-de, +infinitiu.
+parti-flex ==> VMP*<parar>, prep-de, +infinitiu.
+parti-flex ==> VMP*<deixar>, prep-de, +infinitiu.
+parti-flex ==> VAP*<haver>, prep-de, +infinitiu.
+parti-flex ==> VMP*<soler>, +infinitiu.
+parti-flex ==> VMP*<poder>, +infinitiu.
+parti-flex ==> VMP*<deure>, +infinitiu.
+parti-flex ==> VMP*<voler>, +infinitiu.
+parti-flex ==> VMP*<saber>, +infinitiu.
+parti-flex ==> VMP*<gosar>, +infinitiu.
+
+
+F-no-c ==> Faa | Fat | Fca | Fct | Fd | Fe | Fg | Fh | Fia | Fit | Fla | Flt | Fp | Fpa | Fpt | Fra
+| Frc | Fs | Ft | Fx | Fz.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Control directives
+
+%% -------------------------
+%% NOTOP: Categories not considered as valid tree roots.
+%% -------------------------
+% @NOTOP xyz.
+
+%% -------------------------
+%% START: Specify which is the start symbol of the grammar. If the result of the parsing
+%% is not a complete tree, or no valid root nodes are found, a fictitious root node is
+%%  created  with this label.
+%% -------------------------
+@START S.
+
+%% -------------------------
+%% FLAT: Trees for "flat" categories are flattened when the category is recursive.
+%% Only the highest occurrence appears in the final tree.
+%% -------------------------
+@FLAT grup-nom-ms grup-nom-fs grup-nom-mp grup-nom-fp.
+
+%% -------------------------
+%% HIDDEN: Categories that will not appear in the final parse tree.
+%% -------------------------
+@HIDDEN a-ms a-fs a-mp a-fp.
+@HIDDEN pron-ms pron-fs pron-mp pron-fp adv-interrog pposs-ms pposs-fs.
+@HIDDEN pposs-mp pposs-fp.
+@HIDDEN prel-adv.
+@HIDDEN j-ms j-fs j-mp j-fp.
+@HIDDEN grup-complex-spec-ms grup-complex-spec-fs grup-complex-spec-mp.
+@HIDDEN grup-complex-spec-fp pos-ms pos-fs pos-mp pos-fp exc-ms exc-fs.
+@HIDDEN exc-mp exc-fp vser vaux parti parti-ms parti-fs parti-mp parti-fp.
+@HIDDEN grup-c-nom-fp grup-c-nom-mp.
+@HIDDEN cuantif dem-fp dem-fs dem-mp pron.
+@HIDDEN dem-ms ger-pas geraux geraux-ser.
+@HIDDEN indef-fp indef-fs indef-mp indef-ms.
+@HIDDEN inf inf-pas infaux infaux-ser int-fp int-fs int-mp int-ms.
+@HIDDEN n-fp n-fs n-mp n-ms pinterrog-s.
+@HIDDEN num-fp num-fs num-mp num-ms parti-aux parti-ser.
+@HIDDEN parti-flex paton-p paton-s pdem-fp pdem-fs pdem-mp pdem-ms.
+@HIDDEN pindef-fp pindef-fs pindef-mp pindef-ms.
+@HIDDEN pinterrog-fp pinterrog-fs pinterrog-mp pinterrog-ms.
+@HIDDEN verb verb-pass vser w-fp w-fs w-mp w-ms.
+@HIDDEN prepc-ms psubj-fp psubj-fs psubj-mp psubj-ms ptonic.
+@HIDDEN paton-fp paton-fs paton-mp paton-ms ger psubj-s.
+@HIDDEN morf-pron.
+@HIDDEN v-fer-3p sn-tmp quant-ms quant-fs quant-mp quant-fp
+        nom-tmp-ms nom-tmp-fs nom-tmp-mp nom-tmp-fp.
+
+
+%% -------------------------
+%% ONLYTOP: Categories that are HIDDEN unless they are the tree root
+%% -------------------------
+@ONLYTOP data.
+@ONLYTOP pnum-ms pnum-fs pnum-mp pnum-fp.
+
+
+%% -------------------------
+%% Priority definitions: decreasing priority downwards and rightwards in
+%% the following list.  When two chart edges cover the same subsentence,
+%% the edge with highest prioriy will be included the final parse tree.
+%% -------------------------
+@PRIOR verb-pass grup-verb.
+@PRIOR data s-adj parti-flex.
+@PRIOR sn patons.
+@PRIOR verb vaux vser.
+@PRIOR grup-nom-ms grup-nom-fs grup-nom-mp grup-nom-fp.
+@PRIOR sadv espec-ms espec-fs espec-mp espec-fp.
+@PRIOR sp-de.
+@PRIOR F-no-c.  %te prioritat la regla per qualsevol puntuacio que no sigui coma.
+@PRIOR psubj.
+
