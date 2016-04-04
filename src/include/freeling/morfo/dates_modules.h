@@ -76,6 +76,22 @@ namespace freeling {
   const std::wstring RE_TIME_RU=L"^(?:((?:(?:[0-1])?(?:\\d))|(?:2(?:[0-4])))(?:ч\\.?|:)(?:((?:[0-5])?(?:\\d))(?:минуты?|мин\\.?)?)?)$";
   const std::wstring RE_MINUTES_RU=L"^(?:((?:[0-5])?(?:\\d))(?:минуты?|мин\\.?))$";
 
+  // French:
+  const std::wstring RE_DATE_FR=L"^(?:(?:((?:[0-3])?(?:\\d))/)(?:((?:(?:[0-1])?(?:\\d))|janvier|février|fevrier|mars|avril|mai|juin|juillet|aout|août|septembre|octobre|novembre|décembre|decembre|fév|fev|mar|avr|juil|aou|sep|oct|nov|déc|dec)/)(\\d{1,4}))$";
+  const std::wstring RE_TIME1_FR=L"^(?:((?:(?:[0-1])?(?:\\d))|(?:2(?:[0-4])))(?:h|:)(?:((?:[0-5])?(?:\\d))(?:minutos|min|m)?)?)$";
+  const std::wstring RE_TIME2_FR=L"^(?:((?:[0-5])?(?:\\d))(?:minutes|min\\.?|m\\.?))$";
+
+// Welsh:
+  const std::wstring RE_DATE_CY=L"^(?:(?:((?:[0-3])?(?:\\d))/)(?:((?:(?:[0-1])?(?:\\d))|ionawr|chwefror|[mf]awrth|ebrill|[fm]ai|[fm]ehefin|n?gorffennaf|orffennaf|awst|[mf]edi|hydref|th?achwedd|dachwedd|nhachwedd|dd?u|ion|chwe|maw|ebr|meh|gorff|hyd|tach)/)(\\d{1,4}))$";
+  const std::wstring RE_TIME1_CY=L"^(?:((?:(?:[0-1])?(?:\\d))|(?:2(?:[0-4])))(?:h|:)(?:((?:[0-5])?(?:\\d))(?:munud|min|m)?)?)$";
+  const std::wstring RE_TIME2_CY=L"^(?:((?:[0-5])?(?:\\d))(?:munud|mun\\.?|m\\.?))$";
+
+ // German:
+  const std::wstring RE_DATE_DE=L"^(?:(?:((?:[0-3])?(?:\\d))[/\\.] ?)(?:((?:(?:[0-1])?(?:\\d))|januar|februar|märz|april|mai|juni|juli|august|september|oktober|november|dezember|jan|feb|märz|apr|mai|jun|jul|aug|sep|okt|nov|dez)[/\\.] ?)(\\d{1,4}))$";
+  const std::wstring RE_TIME1_DE=L"^(?:((?:(?:[0-1])?(?:\\d))|(?:2(?:[0-4])))(?:h|:)(?:((?:[0-5])?(?:\\d))(?:minuten|min|m)?)?)$";
+  const std::wstring RE_TIME2_DE=L"^(?:((?:[0-5])?(?:\\d))(?:minuten|min\\.?|m\\.?))$";
+
+
   // Value of unspecified fields in normalized date
   const std::wstring UNKNOWN_SYMB = L"??";
 
@@ -257,6 +273,90 @@ namespace freeling {
   public:
     /// Constructor
     dates_ru();
+  };
+
+ ////////////////////////////////////////////////////////////////
+  ///   The derived class dates_es implements a French date/time
+  ///   recognizer.
+  ////////////////////////////////////////////////////////////////
+
+#define FRDEBUG
+  class dates_fr : public dates_module {
+
+  private:
+
+    int ComputeToken(int, sentence::iterator &, sentence &) const;
+    void StateActions(int, int, int, sentence::const_iterator, dates_status*) const;
+    void SetMultiwordAnalysis(sentence::iterator, int, const dates_status*) const;
+   // for tracing
+#ifdef FRDEBUG
+   std::map<int, std::wstring> stateNames;
+   std::map<int, std::wstring> tokenNames;
+   std::wstring tokenName(const int token) const;
+   std::wstring stateName(const int state) const;
+#endif
+  public:
+    /// Constructor
+    dates_fr();
+  };
+
+
+ ////////////////////////////////////////////////////////////////
+  ///   The derived class dates_es implements a German date/time
+  ///   recognizer.
+  ////////////////////////////////////////////////////////////////
+
+#define DEDEBUG
+  class dates_de : public dates_module {
+
+  private:
+
+    int ComputeToken(int, sentence::iterator &, sentence &) const;
+    void StateActions(int, int, int, sentence::const_iterator, dates_status*) const;
+    void SetMultiwordAnalysis(sentence::iterator, int, const dates_status*) const;
+
+    /// translate number names to numbers
+    std::map<std::wstring,int> nNumbers;
+    /// stocks numeric values for cases like "um 10 nach 4" or "um 10" when we do not know yet whether its 10 hours or 10 minutes
+
+    mutable int lastValue;
+
+   // for tracing
+#ifdef DEDEBUG
+   std::map<int, std::wstring> stateNames;
+   std::map<int, std::wstring> tokenNames;
+   std::wstring tokenName(const int token) const;
+   std::wstring stateName(const int state) const;
+#endif
+  public:
+    /// Constructor
+    dates_de();
+  };
+
+
+ ////////////////////////////////////////////////////////////////
+  ///   The derived class dates_es implements a Welsh date/time
+  ///   recognizer.
+  ////////////////////////////////////////////////////////////////
+
+#define CYDEBUG
+  class dates_cy : public dates_module {
+
+  private:
+
+    int ComputeToken(int, sentence::iterator &, sentence &) const;
+    void StateActions(int, int, int, sentence::const_iterator, dates_status*) const;
+    void SetMultiwordAnalysis(sentence::iterator, int, const dates_status*) const;
+   // for tracing
+#ifdef CYDEBUG
+   std::map<int, std::wstring> stateNames;
+   std::map<int, std::wstring> tokenNames;
+   std::wstring tokenName(const int token) const;
+   std::wstring stateName(const int state) const;
+#endif
+  public:
+    /// Constructor
+    dates_cy();
   };
 
 } // namespace
