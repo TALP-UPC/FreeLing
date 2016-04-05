@@ -3,7 +3,7 @@
 DependencyTreeler ./dep/config.dat
 
 ## Tagset description file
-Tagset ./tagset.dat
+Tagset ../tagset.dat
 </Dependencies>
 
 ## No SRL for Slovene available,

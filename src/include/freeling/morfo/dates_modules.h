@@ -339,7 +339,7 @@ namespace freeling {
   ///   recognizer.
   ////////////////////////////////////////////////////////////////
 
-#define CYDEBUG
+  #define CYDEBUG
   class dates_cy : public dates_module {
 
   private:

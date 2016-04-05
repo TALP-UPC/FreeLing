@@ -1,12 +1,12 @@
 <DecompositionRules>
-A 2 adjective type/O:ordinal;Q:qualificative degree/S:superlative;A:augmentative;D:diminutive gen/F:f;M:m;C:c;N:n num/S:s;P:p;N:c
+A 2 adjective type/O:ordinal;Q:qualificative degree/S:superlative;A:augmentative;D:diminutive gen/F:feminine;M:masculine;C:common;N:neuter num/S:singular;P:plural;N:invariable
 C 2 conjunction type/C:coordinating;S:subordinating
-D 2 determiner type/A:article;D:demonstrative;E:exclamative;I:indefinite;T:interrogative;N:numeral;P:possessive;R:relative person/1:1;2:2;3:3 gen/F:f;M:m;C:c;N:n num/S:s;P:p;N:c possessornum/S:s;P:p
-N 2 noun type/C:common;P:proper gen/F:f;M:m;C:c;N:n num/S:s;P:p;N:c neclass/S:person;G:location;O:organization;V:other nesubclass/0:0;P:0 degree/A:augmentative;D:diminutive
-P 2 pronoun type/D:demonstrative;E:exclamative;I:indefinite;T:interrogative;N:numeral;P:personal;X:possessive;R:relative person/1:1;2:2;3:3 gen/F:f;M:m;C:c;N:n num/S:s;P:p;N:c case/N:nominative;A:accusative;D:dative;O:oblique possessornum/S:s;P:p;C:c polite/P:yes
+D 2 determiner type/A:article;D:demonstrative;E:exclamative;I:indefinite;T:interrogative;N:numeral;P:possessive;R:relative person/1:1;2:2;3:3 gen/F:feminine;M:masculine;C:common;N:neuter num/S:singular;P:plural;N:invariable possessornum/S:singular;P:plural
+N 2 noun type/C:common;P:proper gen/F:feminine;M:masculine;C:common;N:neuter num/S:singular;P:plural;N:invariable neclass/S:person;G:location;O:organization;V:other nesubclass/0:0;P:0 degree/A:augmentative;D:diminutive
+P 2 pronoun type/D:demonstrative;E:exclamative;I:indefinite;T:interrogative;N:numeral;P:personal;X:possessive;R:relative person/1:1;2:2;3:3 gen/F:feminine;M:masculine;C:common;N:neuter num/S:singular;P:plural;N:invariable case/N:nominative;A:accusative;D:dative;O:oblique possessornum/S:singular;P:plural;C:common polite/P:yes
 R 2 adverb type/N:negative;G:0
-S 2 adposition type/P:preposition contracted/S:0;C:yes gen/M:m num/S:s;P:p
-V 3 verb type/M:main;A:auxiliary;S:semiauxiliary mood/I:indicative;S:subjunctive;M:imperative;P:participle;G:gerund;N:infinitive tense/P:present;I:imperfect;F:future;S:past;C:conditional person/1:1;2:2;3:3 num/S:s;P:p gen/F:f;M:m;C:c;N:n
+S 2 adposition type/P:preposition contracted/S:0;C:yes gen/M:masculine num/S:singular;P:plural
+V 3 verb type/M:main;A:auxiliary;S:semiauxiliary mood/I:indicative;S:subjunctive;M:imperative;P:participle;G:gerund;N:infinitive tense/P:present;I:imperfect;F:future;S:past;C:conditional person/1:1;2:2;3:3 num/S:singular;P:plural gen/F:feminine;M:masculine;C:common;N:neuter
 Z 2 number type/d:partitive;m:currency;p:percentage;u:unit
 W 0 date
 I 0 interjection

@@ -1,12 +1,12 @@
-0 num=s 28671
+0 num=singular 28671
 1 pos=noun 18185
-2 gen=m 14962
+2 gen=masculine 14962
 3 type=common 14733
-4 gen=f 11324
+4 gen=feminine 11324
 5 case=genitive 10224
 6 formation=simple 9988
 7 pos=verb 9658
-8 num=p 9597
+8 num=plural 9597
 9 case=nominative 8821
 10 degree=positive 7617
 11 case=accusative 7525
@@ -20,7 +20,7 @@
 19 vform=indicative 5686
 20 type=main 5658
 21 tense=present 5478
-22 gen=n 4481
+22 gen=neuter 4481
 23 definite=yes 4233
 24 pos=conjunction 4198
 25 pos=pronoun 3926
@@ -82,4 +82,4 @@
 81 type=modal 5
 82 type=slash 2
 83 type=relative 1
-84 possessorgen=n 1
+84 possessorgen=neuter 1
