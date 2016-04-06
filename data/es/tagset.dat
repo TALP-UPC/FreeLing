@@ -4,7 +4,7 @@ C 2 conjunction type/C:coordinating;S:subordinating
 D 2 determiner type/A:article;D:demonstrative;I:indefinite;P:possessive;T:interrogative;E:exclamative person/1:1;2:2;3:3 gen/F:feminine;M:masculine;C:common num/S:singular;P:plural;N:invariable possessornum/S:singular;P:plural;N:invariable
 N 2 noun type/C:common;P:proper gen/F:feminine;M:masculine;C:common num/S:singular;P:plural;N:invariable neclass/S:person;G:location;O:organization;V:other nesubclass/0:0;P:0 degree/V:evaluative
 P 2 pronoun type/D:demonstrative;E:exclamative;I:indefinite;P:personal;R:relative;T:interrogative person/1:1;2:2;3:3 gen/F:feminine;M:masculine;C:common num/S:singular;P:plural;N:invariable case/N:nominative;A:accusative;D:dative;O:oblique polite/P:yes
-R 2 adverb type/N:negative;G:0
+R 2 adverb type/N:negative;G:general
 S 2 adposition type/P:preposition
 V 3 verb type/M:main;A:auxiliary;S:semiauxiliary mood/I:indicative;S:subjunctive;M:imperative;P:participle;G:gerund;N:infinitive tense/P:present;I:imperfect;F:future;S:past;C:conditional person/1:1;2:2;3:3 num/S:singular;P:plural gen/F:feminine;M:masculine;C:common
 Z 2 number type/d:partitive;m:currency;p:percentage;u:unit

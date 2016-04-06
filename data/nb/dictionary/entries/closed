@@ -135,7 +135,6 @@ by by I
 bygdimellom bygdimellom SPS00
 byss byss I
 & & CC
-c c Z
 contra contra SPS00
 da da CS
 dægeren dægeren I
@@ -510,7 +509,6 @@ igjennom igjennom SPS00
 i i PP2CPN0H
 i i PP30PNP0
 i i SPS00
-i i Z
 ikring ikring SPS00
 imellom imellom SPS00
 imot imot SPS00
@@ -611,7 +609,6 @@ langvegs langvegs SPS00
 langveisfra langveisfra SPS00
 langveis langveis SPS00
 likesom likesom CS
-l l Z
 mang mang DQ0FS00
 mang mang DQ0MS00
 mangt mang DQ0NS00
@@ -638,7 +635,6 @@ mitt min DP0NS00
 mjau mjau I
 mm mm I
 m/ m/ SPS00
-m m Z
 mø mø I
 mon mon DT00000
 morna morna I
@@ -740,7 +736,6 @@ omkring omkring SPS00
 omkr. omkr. SPS00
 om om CS
 om om SPS00
-o o Z
 oppå oppå SPS00
 oppe oppe SPS00
 oppetter oppetter SPS00
@@ -1062,6 +1057,4 @@ voff voff I
 von von SPS00
 vov vov I
 v/ v/ SPS00
-v v Z
-x x Z
 zero zero DQ00P00

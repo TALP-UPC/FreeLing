@@ -12659,9 +12659,7 @@ cendo cendo NCMS000
 cendos cendo NCMP000
 cenestesia cenestesia NCFS000
 cenestesias cenestesia NCFP000
-cenfollas cenfollas NCMC000
-cenfollas cenfollas NCMP000
-cenfollas cenfollas NCMS000
+cenfollas cenfollas NCMN000
 cóengo cóengo NCMS000
 cóengos cóengo NCMP000
 cenmillonésimo cenmillonésimo NCFS000
@@ -25133,8 +25131,8 @@ etarra etarra NCMS000
 etarras etarra NCFP000
 etarras etarra NCMP000
 etas eta NCMP000
-etc. etc. NCMC000
-etcétera etcétera NCMC000
+etc. etc. NCMN000
+etcétera etcétera NCMN000
 eterismo eterismo NCMS000
 eterismos eterismo NCMP000
 eterización eterización NCFS000
@@ -28510,9 +28508,7 @@ funís funil NCMP000
 funxicida funxicida NCMS000
 funxicidas funxicida NCMP000
 fura fura NCFS000
-furabolos furabolos NCMC000
-furabolos furabolos NCMP000
-furabolos furabolos NCMS000
+furabolos furabolos NCMN000
 furacán furacán NCMS000
 furacáns furacán NCMP000
 furaco furaco NCMS000
@@ -36548,9 +36544,7 @@ lunaria lunaria NCFS000
 lunarias lunaria NCFP000
 lunario lunario NCMS000
 lunarios lunario NCMP000
-luns luns NCMC000
-luns luns NCMP000
-luns luns NCMS000
+luns luns NCMN000
 lupa lupa NCFS000
 lupanar lupanar NCMS000
 lupanares lupanar NCMP000
@@ -37702,9 +37696,7 @@ marcación marcación NCFS000
 marcacións marcación NCFP000
 marcador marcador NCMS000
 marcadores marcador NCMP000
-marcapasos marcapasos NCMC000
-marcapasos marcapasos NCMP000
-marcapasos marcapasos NCMS000
+marcapasos marcapasos NCMN000
 marcas marca NCFP000
 marcasita marcasita NCFS000
 marcasitas marcasita NCFP000
@@ -37796,9 +37788,7 @@ marica marica NCMS000
 maricallo maricallo NCMS000
 maricallos maricallo NCMP000
 maricas marica NCMP000
-maricas maricas NCMC000
-maricas maricas NCMP000
-maricas maricas NCMS000
+maricas maricas NCMN000
 maricón maricón NCMS000
 maricóns maricón NCMP000
 maridanza maridanza NCFS000
@@ -40853,9 +40843,7 @@ mozárabes mozárabe NCMP000
 ímpetos ímpeto NCMP000
 máquina máquina NCFS000
 máquinas máquina NCFP000
-mércores mércores NCMC000
-mércores mércores NCMP000
-mércores mércores NCMS000
+mércores mércores NCMN000
 márdea márdea NCFS000
 márdeas márdea NCFP000
 mérito mérito NCMS000
@@ -56773,7 +56761,7 @@ sortilexio sortilexio NCMS000
 sortilexios sortilexio NCMP000
 ósos óso NCMP000
 soás soá NCFP000
-S.O.S S.O.S NCMS000
+s.o.s. s.o.s. NCCS000
 sosa sosa NCFS000
 sosas sosa NCFP000
 sosego sosego NCMS000
@@ -56786,7 +56774,6 @@ sospeitosa sospeitoso NCFS000
 sospeitosas sospeitoso NCFP000
 sospeitoso sospeitoso NCMS000
 sospeitosos sospeitoso NCMP000
-S.O.Ss S.O.S NCMP000
 sostemento sostemento NCMS000
 sostementos sostemento NCMP000
 sostenido sostenido NCMS000
@@ -62352,9 +62339,7 @@ venia venia NCFS000
 venialidade venialidade NCFS000
 venialidades venialidade NCFP000
 venias venia NCFP000
-venres venres NCMC000
-venres venres NCMP000
-venres venres NCMS000
+venres venres NCMN000
 ventá ventá NCFS000
 ventada ventada NCFS000
 ventadas ventada NCFP000
@@ -62393,8 +62378,8 @@ ventrullos ventrullo NCMP000
 ventás ventá NCFP000
 ventura ventura NCFS000
 venturas ventura NCFP000
-Venus Venus NCFP000
-Venus Venus NCFS000
+venus venus NCFP000
+venus venus NCFS000
 venustade venustade NCFS000
 venustades venustade NCFP000
 veo veo NCMS000
@@ -63044,9 +63029,7 @@ virtuoso virtuoso NCMS000
 virtuosos virtuoso NCMP000
 virulencia virulencia NCFS000
 virulencias virulencia NCFP000
-virus virus NCMC000
-virus virus NCMP000
-virus virus NCMS000
+virus virus NCMN000
 viruta viruta NCFS000
 virutas viruta NCFP000
 viruxe viruxe NCFS000
@@ -64369,9 +64352,7 @@ xovenco xovenco NCMS000
 xovencos xovenco NCMP000
 xoves xove NCFP000
 xoves xove NCMP000
-xoves xoves NCMC000
-xoves xoves NCMP000
-xoves xoves NCMS000
+xoves xoves NCMN000
 xovialidade xovialidade NCFS000
 xovialidades xovialidade NCFP000
 éxtase éxtase NCMS000
