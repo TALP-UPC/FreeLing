@@ -1,27 +1,28 @@
 <Multiwords>
+ac_eithrio ac_eithrio SP
 yn_fyw yn_fyw RG 
-tu_draw_i tu_draw_i SPS000 
+tu_draw_i tu_draw_i SP 
 pan_fo_angen pan_fo_angen RG 
-ar_draws ar_draws SPS000 
-tuag_at tuag_at SPS000 
+ar_draws ar_draws SP 
+tuag_at tuag_at SP 
 ei_hunain ei_hun PP3CSN00 
-er_mwyn er_mwyn SPS000 er_mwyn CS 
+er_mwyn er_mwyn SP er_mwyn CS 
 wedi_syfrdanwyd wedi_syfrdanu VMISIP0 
 wedi_syfrdanwyf wedi_syfrdanu VMSP1S0 
-o_fewn o_fewn SPS000 
+o_fewn o_fewn SP 
 mono_ti mono_ti RG 
-tu_cefn_i tu_cefn_i SPS000 
+tu_cefn_i tu_cefn_i SP 
 ar_eich_pennau_eich_hun ar_eich_pennau_eich_hun RG 
 ar_ein_pennau_ein_hunain ar_ein_pennau_ein_hun RG 
 mwy_a_mwy mwy_a_mwy RG 
 wedi_syfrdanasech wedi_syfrdanu VMIX2P0 
 yn_eu_gÅµydd yn_eu_gÅµydd RG 
-yn_anad yn_anad SPS000 
-o_achos o_achos CS o_achos SPS000 
+yn_anad yn_anad SP 
+o_achos o_achos CS o_achos SP 
 fel_ag_y_mae fel_ag_y_mae RG 
 fel_rheol fel_rheol RG 
 mohonoch_chi mohonoch_chi RG 
-gyferbyn_Ã¢ gyferbyn_Ã¢ SPS000 
+gyferbyn_Ã¢ gyferbyn_Ã¢ SP 
 fesul_gair fesul_gair RG 
 ar_hap ar_hap RG 
 monon_ni monon_ni RG 
@@ -33,11 +34,11 @@ trwy_gydol_y_drafodaeth trwy_gydol_y_drafodaeth RG
 yn_dra_pherthnasol yn_dra_pherthnasol RG 
 fel_petai fel_petai RG 
 wedi_syfrdana wedi_syfrdanu VMIP3S0 wedi_syfrdanu VMM02S0 
-ar_ben ar_ben SPS000 
+ar_ben ar_ben SP 
 ac_ati ac_ati RG 
 ar_ei_phen_ei_hunan ar_ei_phen_ei_hun RG 
 unwaith_ac_am_byth unwaith_ac_am_byth RG 
-ar_ymyl ar_ymyl SPS000 
+ar_ymyl ar_ymyl SP 
 gan_mai gan_mai CS 
 faint_o faint_o DT0CN0 
 ar_adnau ar_adnau RG 
@@ -61,18 +62,18 @@ gyda'i_gilydd gyda'i_gilydd RG
 wedi_syfrdanasom wedi_syfrdanu VMIS1P0 
 drosodd_a_drosodd drosodd_a_throsodd RG 
 yn_fuan_wedyn yn_fuan_wedyn RG 
-nesaf_at nesaf_at SPS000 
+nesaf_at nesaf_at SP 
 nid_er_elw nid-er-elw AQ0000 
 ymhen_amser ymhen_amser RG 
 yr_eiddoch_yn_gywir yr_eiddoch_yn_gywir RG 
 fel_y_cyfryw fel_y_cyfryw RG 
-gan_hynny gan_hynny SPS000 
+gan_hynny gan_hynny SP 
 heb_os_nac_onibai heb_os_nac_onibai RG 
 ar_eu_pennau_eu_hun ar_eu_pennau_eu_hun RG 
 naill_ai naill_ai CC 
 i_fyny i_fyny RG 
 mohono_hi mohono_hi RG 
-ar_fedr ar_fedr SPS000 
+ar_fedr ar_fedr SP 
 lawer_iawn_o llawer_iawn_o DQ0CP0 
 rhywun_arall rhywun_arall PD0MS000 
 ar_y_goriwaered ar_y_goriwaered RG 
@@ -83,7 +84,7 @@ rhag_ofn rhag_ofn CS
 dy_hun dy_hun PP2CSN00 
 croeso_cynnes_i croeso_cynnes_i RG 
 drosodd_a_throsodd drosodd_a_throsodd RG 
-yn_lle yn_lle SPS000 
+yn_lle yn_lle SP 
 nid_er_elwed nid-er-elw AQ0000 
 y_lall y_llall PD0CS000 
 i_gyded i_gyd AQ0000 
@@ -94,20 +95,20 @@ o_ddifrif o_ddifrif RG
 yn_weddill_i yn_weddill_i RG 
 ar_ei_ben_ei_hunan ar_ei_ben_ei_hun RG 
 dim_ond dim_ond RG 
-ynghyd_Ã¢ ynghyd_Ã¢ SPS000 
-wrth_ochr wrth_ochr SPS000 
+ynghyd_Ã¢ ynghyd_Ã¢ SP 
+wrth_ochr wrth_ochr SP 
 yn_ddiymyrraeth yn_ddiymyrraeth RG 
 yn_unsain yn_unsain RG 
 erbyn_hyn erbyn_hyn RG 
-yng_ngÅµydd yng_ngÅµydd SPS000 
-ar_Ã´l ar_Ã´l SPS000 ar_Ã´l CS 
-yn_ystod yn_ystod SPS000 
+yng_ngÅµydd yng_ngÅµydd SP 
+ar_Ã´l ar_Ã´l SP ar_Ã´l CS 
+yn_ystod yn_ystod SP 
 yn_hunan fy_hun PP1CSN00 
 dros_dro dros_dro RG 
-oddi_wrth oddi_wrth SPS000 
+oddi_wrth oddi_wrth SP 
 mono_i mono_i RG 
 dy_hunan dy_hun PP2CSN00 
-yn_Ã´l yn_Ã´l SPS000 yn_Ã´l RG 
+yn_Ã´l yn_Ã´l SP yn_Ã´l RG 
 wedi_syfrdanaf wedi_syfrdanu VMIP1S0 
 ar_hyn_o_bryd ar_hyn_o_bryd RG 
 ein_hun ein_hun PP1CPN00 
@@ -123,7 +124,7 @@ ar_eich_pennau_eich_hunain ar_eich_pennau_eich_hun RG
 ar_ein_pennau_ein_hun ar_ein_pennau_ein_hun RG 
 bob_amser bob_amser RG 
 ar_dy_ben_dy_hunan ar_dy_ben_dy_hun RG 
-gogyfer_Ã¢ gogyfer_Ã¢ SPS000 
+gogyfer_Ã¢ gogyfer_Ã¢ SP 
 ei_hun ei_hun PP3CSN00 
 fy_hun fy_hun PP1CSN00 
 fesul_gwesteiwr fesul_gwesteiwr RG 
@@ -133,21 +134,21 @@ mwy_na_thebyg mwy_na_thebyg RG
 ar_ei_phen_ei_hun ar_ei_phen_ei_hun RG 
 ar_fy_mhen_fy_hun ar_fy_mhen_fy_hun RG 
 ar_un_adeg ar_un_adeg RG 
-ar_bwys ar_bwys SPS000 
+ar_bwys ar_bwys SP 
 ar_gyfartaledd ar_gyfartaledd RG 
 yn_llygad_ei_le yn_llygad_ei_le RG 
 wedi_syfrdaned wedi_syfrdanu VMM03S0 
 union_gywir union_gywir RG 
-ar_fin ar_fin SPS000 
+ar_fin ar_fin SP 
 wedi_syfrdanaswn wedi_syfrdanu VMIX1S0 
 wedi_syfrdanem wedi_syfrdanu VMII1P0 
-wrth_ymyl wrth_ymyl SPS000 
+wrth_ymyl wrth_ymyl SP 
 ar_werth ar_werth RG 
 wedi_syfrdaner wedi_syfrdanu VMSPIP0 wedi_syfrdanu VMM0IP0 
 o'r_blaen o'r_blaen RG 
 wedi_syfrdanasem wedi_syfrdanu VMIX1P0 
 monoch_chi monoch_chi RG 
-eg_ar_ben eg_ar_ben SPS000 
+eg_ar_ben eg_ar_ben SP 
 eu_hunain eu_hun PP3CPN00 
 am_amser_hir am_amser_hir RG 
 ei_gilydd ei_gilydd RG 
@@ -158,26 +159,26 @@ o_lawer o_lawer RG
 i'r_chwith i'r_chwith RG 
 faint_mor faint_mor DT0CN0 
 wedi_syfrdanai wedi_syfrdanu VMII3S0 
-tu_hwnt_i tu_hwnt_i SPS000 
+tu_hwnt_i tu_hwnt_i SP 
 y_llall y_llall PD0CS000 
 eich_hun eich_hun PP2CPN00 
 i_gyd i_gyd AQ0000 
-o_gylch o_gylch SPS000 
+o_gylch o_gylch SP 
 drwy_gydol_y_nos drwy_gydol_y_nos RG 
 fesul_llinell fesul_llinell RG 
 eu_hun eu_hun PP3CPN00 
 wedi_syfrdanasai wedi_syfrdanu VMIX3S0 
-ar_gyfyl ar_gyfyl SPS000 
-ynglÅ·n_Ã¢ ynglÅ·n_Ã¢ SPS000 
+ar_gyfyl ar_gyfyl SP 
+ynglÅ·n_Ã¢ ynglÅ·n_Ã¢ SP 
 wedi_syfrdanaist wedi_syfrdanu VMIS2S0 
 eich_hunain eich_hun PP2CPN00 
 pa_fath_o pa_fath_o DT0CN0 
 ar_unrhyw_adeg ar_unrhyw_adeg RG 
-o_flaen o_flaen SPS000 
+o_flaen o_flaen SP 
 mohonot_ti mohonot_ti RG 
-i_mewn_i i_mewn_i SPS000 
+i_mewn_i i_mewn_i SP 
 mohono_i mohono_i RG 
-ar_ochr ar_ochr SPS000 
+ar_ochr ar_ochr SP 
 slawer_dydd slawer_dydd RG 
 fodd_bynnag fodd_bynnag RG 
 ar_ei_ben_ei_hun ar_ei_ben_ei_hun RG 
@@ -203,11 +204,11 @@ ar_eich_pen_eich_hunan ar_eich_pen_eich_hun RG
 pa_rai pa_rai PT0CP000 
 wedi'i_luosi_Ã¢ wedi'i_luosi_Ã¢ RG 
 mohono_fi mohono_fi RG 
-ar_hyd ar_hyd SPS000 
+ar_hyd ar_hyd SP 
 am_faint am_faint DT0CS0 
 mohono_fe mohono_fe RG 
 croeso_i croeso_i RG 
-er_gwaethaf er_gwaethaf SPS000 
+er_gwaethaf er_gwaethaf SP 
 wedi_syfrdanasent wedi_syfrdanu VMIX3P0 
 er_cof_am er_cof_am RG 
 llawer_iawn_o llawer_iawn_o DQ0CP0 
@@ -220,11 +221,11 @@ y_rheini y_rheiny DD0CP0
 wedi_syfrdanwch wedi_syfrdanu VMIP2P0 wedi_syfrdanu VMM02P0 
 lawer_o llawer_o DQ0CP0 
 y_rheiny y_rheiny DD0CP0 
-am_ben am_ben SPS000 
+am_ben am_ben SP 
 ar_oledd ar_oledd RG 
 fel_arall fel_arall RG 
 wedi_syfrdanasit wedi_syfrdanu VMIX2S0 
-o_gwmpas o_gwmpas SPS000 
+o_gwmpas o_gwmpas SP 
 wedi_syfrdanasid wedi_syfrdanu VMIXIP0 
 mohonyn_nhw mohonyn_nhw RG 
 wedi_syfrdanent wedi_syfrdanu VMM03P0 wedi_syfrdanu VMII3P0 
@@ -238,16 +239,16 @@ wedi_syfrdanasant wedi_syfrdanu VMIS3P0
 fesul_tudalen fesul_tudalen RG 
 mohono_fo mohono_fo RG 
 y_leill y_llall PD0CP000 
-o_amgylch o_amgylch SPS000 
-ar_gyfer ar_gyfer SPS000 
+o_amgylch o_amgylch SP 
+ar_gyfer ar_gyfer SP 
 yn_gyfangwbl yn_gyfangwbl RG 
 erbyn_meddwl erbyn_meddwl RG 
 mohonon_ni mohonon_ni RG 
-yn_erbyn yn_erbyn SPS000 
+yn_erbyn yn_erbyn SP 
 mha_rai pa_rai PT0CP000 
 heb_siw_na_miw heb_siw_na_miw RG 
 fesul_dyfais fesul_dyfais RG 
 ers_faint ers_faint DT0CS0 
-tu_allan_i tu_allan_i SPS000 
+tu_allan_i tu_allan_i SP 
 gan_amlaf gan_amlaf RG 
 </Multiwords>
