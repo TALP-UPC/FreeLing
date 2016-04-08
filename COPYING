@@ -75,7 +75,7 @@
 
  4.- Data for Portuguese WordNet in file data/pt/senses30.src are
      extracted from brazilian-wn project
-     (https://github.com/arademaker/wordnet-br).  It is distributed
+     (http://github.com/own-pt/openWordnet-PT).  It is distributed
      under its original Creative Commons Attribution 3.0
      License.  You'll find the license in the file
      LICENSES/CC-BY.license included in this package or at
