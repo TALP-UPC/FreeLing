@@ -44098,7 +44098,7 @@
 44098 lt@2:el_montsià_NP 3
 44099 lt@2:el_nostre_DP 3
 44100 lt@2:el_seu_DP 130
-44101 lt@2:el_seu_PX 2
+44101 lt@2:el_seu_AP 2
 44102 lt@2:el_vallès_oriental_NP 4
 44103 lt@2:el_vendrell_NP 2
 44104 lt@2:elaborar_VMP 4
@@ -78754,7 +78754,7 @@
 78754 t@2:PP 126
 78755 t@2:PR 819
 78756 t@2:PT 9
-78757 t@2:PX 4
+78757 t@2:AP 4
 78758 t@2:RG 437
 78759 t@2:RN 100
 78760 t@2:SP 2241
@@ -79595,7 +79595,7 @@
 79595 tbg@1:CC_PI 7
 79596 tbg@1:CC_PP 20
 79597 tbg@1:CC_PR 37
-79598 tbg@1:CC_PX 3
+79598 tbg@1:CC_AP 3
 79599 tbg@1:CC_RG 41
 79600 tbg@1:CC_RN 9
 79601 tbg@1:CC_SP 301
@@ -82423,7 +82423,7 @@
 82423 ttg@0:NP_CC_PI 7
 82424 ttg@0:NP_CC_PP 20
 82425 ttg@0:NP_CC_PR 37
-82426 ttg@0:NP_CC_PX 3
+82426 ttg@0:NP_CC_AP 3
 82427 ttg@0:NP_CC_RG 41
 82428 ttg@0:NP_CC_RN 9
 82429 ttg@0:NP_CC_SP 301

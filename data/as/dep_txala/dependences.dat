@@ -5420,8 +5420,8 @@ verb-pass  dverb  d.label=VM*
 inf-pass  dverb  d.label=VM*
 
 %%% PERIFRASIS VERBALS: PREPOSICIONS %%%
-grup-verb  dprep  d.label=SPS00
-numero-nopart  dprep  d.label=SPS00
+grup-verb  dprep  d.label=SP
+numero-nopart  dprep  d.label=SP
 
 %%% PERIFRASIS VERBALS: CONJUNCIONS %%%
 grup-verb  dconj  d.label=CS

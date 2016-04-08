@@ -58,7 +58,7 @@ CONSTRAINTS
 
 %% better tag "que" as a CS after a verb, punctuation, adverb or prepossition 
 1.5 CS<que>
-    (-1 VMI* or VMS* or VAI* or VAS* or VSI* or VSS* or Fp or RG or SPS00);
+    (-1 VMI* or VMS* or VAI* or VAS* or VSI* or VSS* or Fp or RG or SP);
 
 %%% haga lo que haga 
 5.0 VMS*

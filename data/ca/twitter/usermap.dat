@@ -2,7 +2,7 @@
 RT .response-to. NCFS000
 @[^\s]+ $$ NP00000
 http://.+ .url. Fz
-x per SPS000
+x per SP
 [px]q perque CS
 q que CS que PR0CN000 què PT0CN000
 
