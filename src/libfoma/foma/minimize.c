@@ -66,12 +66,12 @@ struct agenda {
   _Bool index;
 };
 
-struct trans_list {
+static struct trans_list {
     int inout;
     int source;
 } *trans_list;
 
-struct trans_array {
+static struct trans_array {
     struct trans_list *transitions;
     unsigned int size;
     unsigned int tail;
