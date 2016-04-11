@@ -66,7 +66,7 @@ struct agenda {
   _Bool index;
 };
 
-struct trans_list {
+static struct trans_list {
     int inout;
     int source;
 } *trans_list;

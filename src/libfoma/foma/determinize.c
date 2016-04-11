@@ -59,7 +59,7 @@ struct T_memo {
     unsigned int set_offset;
 };
 
-struct trans_list {
+static struct trans_list {
     int inout;
     int target;
 } *trans_list;
