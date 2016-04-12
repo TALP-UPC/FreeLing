@@ -9,19 +9,14 @@ pkgdata_DATA =
 configdatadir = $(pkgdatadir)/config
 configdata_DATA = config/*
 
-if ON_MACOSX
-  INSTFLAG=-d
-else
-  INSTFLAG=-D
-endif
-
 install-data-hook:
 	-@ldconfig &> /dev/null || echo "Could not run 'ldconfig'. If you get installation errors below, execute 'ldconfig' as root and try 'make install' again.";
 	@echo "Indexing language dictionaries. This will take some minutes.";
 	@for lg in $(languages); do \
 	   echo "Installing files for language '"$$lg"'. Please wait."; \
 	   pushd $(top_builddir)/data/$$lg >/dev/null; \
-	   find . -name '.svn' -prune -o -name '*~' -prune -o -name 'dictionary' -prune -o -type f -exec install $(INSTFLAG) {} $(DESTDIR)/$(pkgdatadir)/$$lg/{} \; ; \
+           find . -name '.svn' -prune -o -name '*~' -prune -o -name 'dictionary' -prune -o -type d -exec install -d {} $(DESTDIR)/$(pkgdatadir)/$$lg/{} \; ; \
+	   find . -name '.svn' -prune -o -name '*~' -prune -o -name 'dictionary' -prune -o -type f -exec install {} $(DESTDIR)/$(pkgdatadir)/$$lg/{} \; ; \
 	   popd >/dev/null; \
 	   if (test -d "$(top_builddir)/data/$$lg/dictionary/entries" ); then \
 	     echo "  - Creating "$$lg" dictionary..."; \
@@ -56,7 +51,8 @@ install-data-hook:
 	@for d in common config; do \
 	   echo "Installing "$$d" files."; \
 	   pushd $(top_builddir)/data/$$d >/dev/null; \
-	   find . -name '.svn' -prune -o -name '*~' -prune -o -type f -exec install $(INSTFLAG) {} $(DESTDIR)/$(pkgdatadir)/$$d/{} \; ; \
+	   find . -name '.svn' -prune -o -name '*~' -prune -o -type d -exec install -d {} $(DESTDIR)/$(pkgdatadir)/$$d/{} \; ; \
+	   find . -name '.svn' -prune -o -name '*~' -prune -o -type f -exec install {} $(DESTDIR)/$(pkgdatadir)/$$d/{} \; ; \
 	   popd >/dev/null; \
 	done
 

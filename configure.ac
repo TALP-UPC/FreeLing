@@ -22,7 +22,6 @@ case "$host_os" in
    system="linux"
    ;;
 esac
-AM_CONDITIONAL([ON_MACOSX],[test "$system" = "macosx"])
 
 using_xpressive="no"
 using_boost_locale="no"
