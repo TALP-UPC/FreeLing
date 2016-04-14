@@ -1,0 +1,244 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "FreeLing Analyzed Document",
+
+  "type": "object",
+  "properties": {
+    "paragraphs": {
+      "type": "array",
+      "items": {
+        "id": "paragraph",
+        "type": "object",
+        "properties": {
+          "sentences": {
+            "type": "array",
+            "items": [
+              {
+                "id": "sentence",
+                "type": "object",
+                "properties": {
+                  "id": { "type": "string" },
+                  "tokens": {
+                    "id": "tokens",
+                    "type": "array",
+                    "items": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": { "type": "string" },
+                          "form": {"type": "string" },
+                          "lemma": {"type": "string" },
+                          "tag": { "type": "string" },
+                          "ctag": { "type": "string" },
+                          "pos": { "type": "string" },
+                          "type": { "type": "string" },
+                          "gen": { "type": "string" },
+                          "num": { "type": "string" },
+                          "wn": { "type": "string" },
+                          "neclass": { "type": "string" },
+                          "nec": { "type": "string" },
+                          "mood": { "type": "string" },
+                          "tense": { "type": "string" },
+                          "person": { "type": "string" }
+                        }
+                      }
+                    ]
+                  }, 
+                  "constituents": {
+                    "id": "constituents",
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "label": { "type": "string" },
+                        "head": { "type": "string" },
+                        "children": {
+	                  "type" : "object",
+                          "$ref" : "constituents"
+                        }
+                      }
+                    }
+                  },
+                  "dependencies": {
+                    "id": "dependencies",
+                    "type": "object",
+                    "properties": {
+                      "token": { "type": "string" },
+                      "function": { "type": "string" },
+                      "word": { "type": "string" },
+                      "children": {
+                        "type": "array",
+                        "items": [
+                           {
+                             "type": "object",
+	                     "$ref": "dependencies"
+                           }
+                        ]
+                      }
+                    }
+                  },
+                  "predicates": {
+                    "type": "array",
+                    "items": [
+                      {
+                        "id": "predicate",
+                        "type": "object",
+                        "properties": {
+                          "id": { "type": "string" },
+                          "head_token": { "type": "string" },
+                          "sense": { "type": "string" },
+                          "words": { "type": "string" },
+                          "arguments": {
+                            "type": "array",
+                            "items": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "role": { "type": "string" },
+                                  "words": { "type": "string" },
+                                  "head_token": { "type": "string" },
+                                  "from": { "type": "string" },
+                                  "to": { "type": "string" }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "tokens"
+                ]
+              }
+            ]
+          }
+        },
+        "required": [
+          "sentences"
+        ]
+      }
+    },
+    "coreferences": {
+      "id": "coreferences",
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "id": { "type": "string" },
+            "mentions": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "string" },
+                    "from": { "type": "string" },
+                    "to": { "type": "string" },
+                    "words": { "type": "string" }
+                 }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "semantic_graph": {
+      "id": "semantic_graph",
+      "type": "array",
+      "items": [
+        {
+          "id": "entity",
+          "type": "object",
+          "properties": {
+            "id": {  "type": "string" },
+            "lemma": { "type": "string" },
+            "class": { "type": "string" },
+            "sense": { "type": "string" },
+            "mentions": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "string" },
+                    "from": { "type": "string" },
+                    "to": { "type": "string" },
+                    "words": { "type": "string" }
+                 }
+                }
+              ]
+            },
+            "synonyms": {
+              "type": "array",
+              "items": [
+                { "type": "string" }
+              ]
+            },
+            "URIs": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "knowledgeBase": { "type": "string" },
+                    "URI": { "type": "string" }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "frame",
+          "type": "object",
+          "properties": {
+            "id": { "type": "string" },
+            "token": { "type": "string" },
+            "lemma": { "type": "string" },
+            "sense": { "type": "string" },
+            "arguments": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "role": { "type": "string" },
+                    "entity": { "type": "string" }
+                  }
+                }
+              ]
+            },
+            "synonyms": {
+              "type": "array",
+              "items": [
+                { "type": "string" }
+              ]
+            },
+            "URIs": {
+               "type": "array",
+               "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "knowledgeBase": { "type": "string" },
+                    "URI": { "type": "string" }
+                  }
+                 }
+               ]
+            }            
+          }
+        }
+      ]
+    }
+  },
+  "required": [
+    "paragraphs",
+  ]
+}
+
+
