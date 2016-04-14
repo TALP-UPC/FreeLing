@@ -3,8 +3,13 @@ abend abend RG
 abends abends RG
 aber aber RG
 abermals abermals RG
+<<<<<<< HEAD
 abschliessend abschliessend RG
 abschließend abschliessend RG
+=======
+abschliessend abschließend RG
+abschließend abschließend RG
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 abseits abseits RG
 absolut absolut RG
 abwärts abwärts RG
@@ -48,8 +53,13 @@ anno anno RG
 annähernd annähernd RG
 ansatzweise ansatzweise RG
 anscheinend anscheinend RG
+<<<<<<< HEAD
 anschliessend anschliessend RG
 anschließend anschliessend RG
+=======
+anschliessend anschließend RG
+anschließend anschließend RG
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 ansonsten ansonsten RG
 anstandshalber anstandshalber RG
 apropos apropos RG
@@ -64,6 +74,7 @@ ausfindig ausfindig RG
 ausgerechnet ausgerechnet RG
 ausgerechnet ausrechnen RG
 ausnahmsweise ausnahmsweise RG
+<<<<<<< HEAD
 ausschliesslich ausschliesslich RG
 ausschließlich ausschliesslich RG
 aussen aussen RG
@@ -86,6 +97,30 @@ barfuß barfuss RG
 bedauerlicherweise bedauerlicherweise RG
 befehlsgemäss befehlsgemäss RG
 befehlsgemäß befehlsgemäss RG
+=======
+ausschliesslich ausschließlich RG
+ausschließlich ausschließlich RG
+aussen außen RG
+ausser außer RG
+ausserdem außerdem RG
+ausserdem außerdem RP
+ausserhalb außerhalb RG
+ausserstande außerstande RG
+außen außen RG
+außer außer RG
+außerdem außerdem RG
+außerdem außerdem RP
+außerhalb außerhalb RG
+außerstande außerstande RG
+bald bald RG
+baldmöglichst baldmöglichst RG
+bange bange RG
+barfuss barfuß RG
+barfuß barfuß RG
+bedauerlicherweise bedauerlicherweise RG
+befehlsgemäss befehlsgemäß RG
+befehlsgemäß befehlsgemäß RG
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 befristet befristet RG
 begreiflicherweise begreiflicherweise RG
 beiderseits beiderseits RG
@@ -94,8 +129,13 @@ beinahe beinahe RG
 beisammen beisammen RG
 beiseite beiseite RG
 beispielsweise beispielsweise RG
+<<<<<<< HEAD
 bekanntermassen bekanntermassen RG
 bekanntermaßen bekanntermassen RG
+=======
+bekanntermassen bekanntermaßen RG
+bekanntermaßen bekanntermaßen RG
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 bekanntlich bekanntlich RG
 bereits bereits RG
 bergab bergab RG
@@ -117,8 +157,13 @@ bitte bitte RG
 bitteschön bitteschön RG
 bittschön bittschön RG
 bißchen bisschen RG
+<<<<<<< HEAD
 bloss bloss RG
 bloß bloss RG
+=======
+bloss bloß RG
+bloß bloß RG
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 brutto brutto RG
 cash cash RG
 circa circa RG
@@ -163,8 +208,13 @@ dennoch dennoch RG
 derart derart RG
 dereinst dereinst RG
 dergestalt dergestalt RG
+<<<<<<< HEAD
 dermassen dermassen RG
 dermaßen dermassen RG
+=======
+dermassen dermaßen RG
+dermaßen dermaßen RG
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 derweil derweil RG
 derzeit derzeit RG
 desgleichen desgleichen RG
@@ -184,8 +234,13 @@ dorthin dorthin RG
 dran dran RG
 drauf drauf RG
 draus draus RP
+<<<<<<< HEAD
 draussen draussen RG
 draußen draussen RG
+=======
+draussen draußen RG
+draußen draußen RG
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 dreimal dreimal RG
 drin drin RG
 drinnen drinnen RG
@@ -220,11 +275,19 @@ einander sich RG
 einerseits einerseits RG
 einfach einfach RG
 eingangs eingangs RG
+<<<<<<< HEAD
 einigermassen einigermassen RG
 einigermaßen einigermassen RG
 einmal einmal RG
 einschliesslich einschliesslich RG
 einschließlich einschliesslich RG
+=======
+einigermassen einigermaßen RG
+einigermaßen einigermaßen RG
+einmal einmal RG
+einschliesslich einschließlich RG
+einschließlich einschließlich RG
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 einst einst RG
 einstmals einstmals RG
 einstweilen einstweilen RG
@@ -241,8 +304,13 @@ erstenmal erstenmal RG
 erstens erstens RG
 erstmal erstmal RG
 erstmals erstmals RG
+<<<<<<< HEAD
 erwartungsgemäss erwartungsgemäss RG
 erwartungsgemäß erwartungsgemäss RG
+=======
+erwartungsgemäss erwartungsgemäß RG
+erwartungsgemäß erwartungsgemäß RG
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 etc etc RG
 etwa etwa RG
 etwas etwas RG
@@ -259,8 +327,13 @@ flussabwärts flussabwärts RG
 flussaufwärts flussaufwärts RG
 flußabwärts flussabwärts RG
 flußaufwärts flussaufwärts RG
+<<<<<<< HEAD
 folgendermassen folgendermassen RG
 folgendermaßen folgendermassen RG
+=======
+folgendermassen folgendermaßen RG
+folgendermaßen folgendermaßen RG
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 folglich folglich RG
 fort fort RG
 fortan fortan RG
@@ -303,18 +376,32 @@ gerne gerne RG
 geschweige geschweige RG
 gestern gestern RG
 gewiss gewiss RG
+<<<<<<< HEAD
 gewissermassen gewissermassen RG
 gewissermaßen gewissermassen RG
+=======
+gewissermassen gewissermaßen RG
+gewissermaßen gewissermaßen RG
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 gewiß gewiss RG
 glatt glatt RG
 gleich gleich RG
 gleichauf gleichauf RG
+<<<<<<< HEAD
 gleichermassen gleichermassen RG
 gleichermaßen gleichermassen RG
 gleicherweise gleicherweise RG
 gleichfalls gleichfalls RG
 gleichmassen gleichmassen RG
 gleichmaßen gleichmassen RG
+=======
+gleichermassen gleichermaßen RG
+gleichermaßen gleichermaßen RG
+gleicherweise gleicherweise RG
+gleichfalls gleichfalls RG
+gleichmassen gleichmaßen RG
+gleichmaßen gleichmaßen RG
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 gleichoft gleichoft RG
 gleichsam gleichsam RG
 gleichwohl gleichwohl RG
@@ -324,8 +411,13 @@ gottlob gottlob RG
 gratis gratis RG
 grundsätzlich grundsätzlich RG
 gruppenweit gruppenweit RG
+<<<<<<< HEAD
 grösstenteils grösstenteils RG
 größtenteils grösstenteils RG
+=======
+grösstenteils größtenteils RG
+größtenteils größtenteils RG
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 gut gut RG
 gängigerweise gängigerweise RG
 halbtags halbtags RG
@@ -600,6 +692,7 @@ rüber rüber RP
 rückwärts rückwärts RG
 samstags samstags RG
 schade schade RG
+<<<<<<< HEAD
 schariagemäss schariagemäss RG
 schariagemäß schariagemäss RG
 schlankweg schlankweg RG
@@ -607,6 +700,15 @@ schlechthin schlechthin RG
 schlichtweg schlichtweg RG
 schliesslich schliesslich RG
 schließlich schliesslich RG
+=======
+schariagemäss schariagemäß RG
+schariagemäß schariagemäß RG
+schlankweg schlankweg RG
+schlechthin schlechthin RG
+schlichtweg schlichtweg RG
+schliesslich schließlich RG
+schließlich schließlich RG
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 schlimmstenfalls schlimmstenfalls RG
 schnellstens schnellstens RG
 schnurstracks schnurstracks RG
@@ -634,8 +736,13 @@ selten selten RG
 sicher sicher RG
 sicherheitshalber sicherheitshalber RG
 sicherlich sicherlich RG
+<<<<<<< HEAD
 sinngemäss sinngemäss RG
 sinngemäß sinngemäss RG
+=======
+sinngemäss sinngemäß RG
+sinngemäß sinngemäß RG
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 so so RG
 sobald sobald RG
 sodann sodann RG
@@ -645,8 +752,13 @@ sogar sogar RG
 sogleich sogleich RG
 solange solange RG
 solcherart solcherart RG
+<<<<<<< HEAD
 solchermassen solchermassen RG
 solchermaßen solchermassen RG
+=======
+solchermassen solchermaßen RG
+solchermaßen solchermaßen RG
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 somit somit RG
 sondergleichen sondergleichen RG
 sonnabends sonnabends RG
@@ -698,10 +810,17 @@ unterdessen unterdessen RG
 untereinander untereinander RG
 unterschiedslos unterschiedslos RG
 unterwegs unterwegs RG
+<<<<<<< HEAD
 unverdientermassen unverdientermassen RG
 unverdientermaßen unverdientermassen RG
 unverhältnismässig unverhältnismässig RG
 unverhältnismäßig unverhältnismässig RG
+=======
+unverdientermassen unverdientermaßen RG
+unverdientermaßen unverdientermaßen RG
+unverhältnismässig unverhältnismäßig RG
+unverhältnismäßig unverhältnismäßig RG
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 unverschämterweise unverschämterweise RG
 unversehens unversehens RG
 unverändert unverändert RG
@@ -828,8 +947,13 @@ zuallererst zuallererst RG
 zudem zudem RG
 zueinander zueinander RG
 zuerst zuerst RG
+<<<<<<< HEAD
 zugegebenermassen zugegebenermassen RG
 zugegebenermaßen zugegebenermassen RG
+=======
+zugegebenermassen zugegebenermaßen RG
+zugegebenermaßen zugegebenermaßen RG
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 zugleich zugleich RG
 zugrunde zugrunde RG
 zugute zugute RG
@@ -867,8 +991,13 @@ zwischen zwischen RG
 zwischendrin zwischendrin RG
 zwischendurch zwischendurch RG
 ärztlicherseits ärztlicherseits RG
+<<<<<<< HEAD
 äusserst äusserst RG
 äußerst äusserst RG
+=======
+äusserst äußerst RG
+äußerst äußerst RG
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 öffentlich öffentlich RG
 öfter öfter RG
 öfters öfters RG

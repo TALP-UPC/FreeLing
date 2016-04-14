@@ -20,7 +20,14 @@
 #include <time.h>
 #include <string.h>
 #include <limits.h>
+<<<<<<< HEAD
 #include "foma.h"
+=======
+
+#define MAIN_MODULE
+#include "foma.h"
+#undef MAIN_MODULE
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 
 #define RANDOM 1
 #define ENUMERATE 2

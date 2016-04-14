@@ -1,4 +1,5 @@
 <DecompositionRules>
+<<<<<<< HEAD
 A 2 adjective type/O:ordinal;Q:qualificative degree/S:superlative;A:augmentative;D:diminutive gen/F:f;M:m;C:c;N:n num/S:s;P:p;N:c
 C 2 conjunction type/C:coordinating;S:subordinating
 D 2 determiner type/A:article;D:demonstrative;E:exclamative;I:indefinite;T:interrogative;N:numeral;P:possessive;R:relative person/1:1;2:2;3:3 gen/F:f;M:m;C:c;N:n num/S:s;P:p;N:c possessornum/S:s;P:p
@@ -7,6 +8,16 @@ P 2 pronoun type/D:demonstrative;E:exclamative;I:indefinite;T:interrogative;N:nu
 R 2 adverb type/N:negative;G:0
 S 2 adposition type/P:preposition contracted/S:0;C:yes gen/M:m num/S:s;P:p
 V 3 verb type/M:main;A:auxiliary;S:semiauxiliary mood/I:indicative;S:subjunctive;M:imperative;P:participle;G:gerund;N:infinitive tense/P:present;I:imperfect;F:future;S:past;C:conditional person/1:1;2:2;3:3 num/S:s;P:p gen/F:f;M:m;C:c;N:n
+=======
+A 2 adjective type/O:ordinal;Q:qualificative;P:possessive degree/S:superlative;V:evaluative gen/F:feminine;M:masculine;C:common num/S:singular;P:plural;N:invariable possessorpers/1:1;2:2;3:3 possessornum/S:singular;P:plural;N:invariable
+C 2 conjunction type/C:coordinating;S:subordinating
+D 2 determiner type/A:article;D:demonstrative;E:exclamative;I:indefinite;T:interrogative;N:numeral;P:possessive;R:relative person/1:1;2:2;3:3 gen/F:feminine;M:masculine;C:common;N:neuter num/S:singular;P:plural;N:invariable possessornum/S:singular;P:plural
+N 2 noun type/C:common;P:proper gen/F:feminine;M:masculine;C:common;N:neuter num/S:singular;P:plural;N:invariable neclass/S:person;G:location;O:organization;V:other nesubclass/0:0;P:0 degree/A:augmentative;D:diminutive
+P 2 pronoun type/D:demonstrative;E:exclamative;I:indefinite;T:interrogative;N:numeral;P:personal;X:possessive;R:relative person/1:1;2:2;3:3 gen/F:feminine;M:masculine;C:common;N:neuter num/S:singular;P:plural;N:invariable case/N:nominative;A:accusative;D:dative;O:oblique polite/P:yes
+R 2 adverb type/N:negative;G:general
+S 2 adposition type/P:preposition
+V 3 verb type/M:main;A:auxiliary;S:semiauxiliary mood/I:indicative;S:subjunctive;M:imperative;P:participle;G:gerund;N:infinitive tense/P:present;I:imperfect;F:future;S:past;C:conditional person/1:1;2:2;3:3 num/S:singular;P:plural gen/F:feminine;M:masculine;C:common;N:neuter
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 Z 2 number type/d:partitive;m:currency;p:percentage;u:unit
 W 0 date
 I 0 interjection
@@ -15,7 +26,11 @@ I 0 interjection
 Fc Fc pos=punctuation|type=comma
 Fs Fs pos=punctuation|type=etc
 Fd Fd pos=punctuation|type=colon
+<<<<<<< HEAD
 Fx Fx pos=punctuation|type=semicolon
+=======
+Fx Fx pos=punctuation|type=semicolonk
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 Fg Fg pos=punctuation|type=hyphen
 Fe Fe pos=punctuation|type=quotation
 Fh Fh pos=punctuation|type=slash

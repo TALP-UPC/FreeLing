@@ -61,7 +61,11 @@ input_conll::input_conll(const wstring &cfgFile) : input_handler(), conll_handle
 
   config_file cfg(true);
   cfg.add_section(L"Type",INPUT_TYPE);
+<<<<<<< HEAD
   cfg.add_section(L"Type",TAGSET);
+=======
+  cfg.add_section(L"TagsetFile",TAGSET);
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
   
   if (not cfg.open(cfgFile))
     ERROR_CRASH(L"Error opening file "+cfgFile);

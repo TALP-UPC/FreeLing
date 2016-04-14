@@ -1,4 +1,5 @@
 <DecompositionRules>
+<<<<<<< HEAD
 A 2 adjective case/N:nominative;G:genitive;D:dative;F:accusative;C:instrumental;O:prepositional;P:partitive;L:locative;V:vocative num/S:singular;P:plural gen/M:m;F:f;N:n;C:c animate/A:yes;I:no form/F:full;S:short degree/E:superlative;C:comparative;P:positive other/P:transition;D:difficult;V:corrupted;R:predicative;I:spoken;A:uncommon;B:abbreviation;E:outdated obscene/H:yes
 B 2 preposition other/P:transition;D:difficult;V:corrupted;R:predicative;I:spoken;A:uncommon;B:abbreviation;E:outdated
 C 2 conjunction other/P:transition;D:difficult;V:corrupted;R:predicative;I:spoken;A:uncommon;B:abbreviation;E:outdated
@@ -14,6 +15,23 @@ T 2 particle other/P:transition;D:difficult;V:corrupted;R:predicative;I:spoken;A
 V 3 verb mood/G:gerund;I:infinitive;D:indicative;M:imperative num/S:singular;P:plural gen/M:m;F:f;N:n;C:c tense/P:present;F:future;S:past person/1:1;2:2;3:3 aspect/F:perfective;N:imperfective voice/A:active;P:passive transitive/M:yes;A:no other/P:transition;D:difficult;V:corrupted;R:predicative;I:spoken;A:uncommon;B:abbreviation;E:outdated obscene/H:yes
 Y 2 ordinal case/N:nominative;G:genitive;D:dative;F:accusative;C:instrumental;O:prepositional;P:partitive;L:locative;V:vocative num/S:singular;P:plural gen/M:m;F:f;N:n;C:c animate/A:yes;I:no
 Z 2 number case/N:nominative;G:genitive;D:dative;F:accusative;C:instrumental;O:prepositional;P:partitive;L:locative;V:vocative num/S:singular;P:plural gen/M:m;F:f;N:n;C:c animate/A:yes;I:no other/P:transition;D:difficult;V:corrupted;R:predicative;I:spoken;A:uncommon;B:abbreviation;E:outdated
+=======
+A 2 adjective case/N:nominative;G:genitive;D:dative;F:accusative;C:instrumental;O:prepositional;P:partitive;L:locative;V:vocative num/S:singular;P:plural gen/M:masculine;F:feminine;N:neuter;C:common animate/A:yes;I:no form/F:full;S:short degree/E:superlative;C:comparative;P:positive other/P:transition;D:difficult;V:corrupted;R:predicative;I:spoken;A:uncommon;B:abbreviation;E:outdated obscene/H:yes
+B 2 preposition other/P:transition;D:difficult;V:corrupted;R:predicative;I:spoken;A:uncommon;B:abbreviation;E:outdated
+C 2 conjunction other/P:transition;D:difficult;V:corrupted;R:predicative;I:spoken;A:uncommon;B:abbreviation;E:outdated
+D 3 adverb degree/E:superlative;C:comparative;P:positive other/P:transition;D:difficult;V:corrupted;R:predicative;I:spoken;A:uncommon;B:abbreviation;E:outdated obscene/H:yes
+E 2 pronoun case/N:nominative;G:genitive;D:dative;F:accusative;C:instrumental;O:prepositional;P:partitive;L:locative;V:vocative num/S:singular;P:plural gen/M:masculine;F:feminine;N:neuter;C:common animate/A:yes;I:no person/1:1;2:2;3:3 other/P:transition;D:difficult;V:corrupted;R:predicative;I:spoken;A:uncommon;B:abbreviation;E:outdated
+J 2 interjection other/P:transition;D:difficult;V:corrupted;R:predicative;I:spoken;A:uncommon;B:abbreviation;E:outdated obscene/H:yes
+M 2 compound other/P:transition;D:difficult;V:corrupted;R:predicative;I:spoken;A:uncommon;B:abbreviation;E:outdated
+N 3 noun type/C:common;P:proper case/N:nominative;G:genitive;D:dative;F:accusative;C:instrumental;O:prepositional;P:partitive;L:locative;V:vocative num/S:singular;P:plural gen/M:masculine;F:feminine;N:neuter;C:common animate/A:yes;I:no info/G:geographical;N:name;S:patronymic;F:surname other/P:transition;D:difficult;V:corrupted;R:predicative;I:spoken;A:uncommon;B:abbreviation;E:outdated obscene/H:yes neclass/S:person;G:location;O:organization;V:other
+P 2 pronominal-adv other/P:transition;D:difficult;V:corrupted;R:predicative;I:spoken;A:uncommon;B:abbreviation;E:outdated
+Q 2 participle mood/G:gerund;I:infinitive;D:indicative;M:imperative num/S:singular;P:plural gen/M:masculine;F:feminine;N:neuter;C:common tense/P:present;F:future;S:past person/1:1;2:2;3:3 aspect/F:perfective;N:imperfective voice/A:active;P:passive transitive/M:yes;A:no other/P:transition;D:difficult;V:corrupted;R:predicative;I:spoken;A:uncommon;B:abbreviation;E:outdated obscene/H:yes
+R 2 pronominal-adj case/N:nominative;G:genitive;D:dative;F:accusative;C:instrumental;O:prepositional;P:partitive;L:locative;V:vocative num/S:singular;P:plural gen/M:masculine;F:feminine;N:neuter;C:common animate/A:yes;I:no other/P:transition;D:difficult;V:corrupted;R:predicative;I:spoken;A:uncommon;B:abbreviation;E:outdated
+T 2 particle other/P:transition;D:difficult;V:corrupted;R:predicative;I:spoken;A:uncommon;B:abbreviation;E:outdated
+V 3 verb mood/G:gerund;I:infinitive;D:indicative;M:imperative num/S:singular;P:plural gen/M:masculine;F:feminine;N:neuter;A:ambiguous tense/P:present;F:future;S:past person/1:1;2:2;3:3 aspect/F:perfective;N:imperfective voice/A:active;S:passive transitive/M:yes;A:no other/P:transition;D:difficult;V:corrupted;R:predicative;I:spoken;A:uncommon;B:abbreviation;E:outdated obscene/H:yes
+Y 2 ordinal case/N:nominative;G:genitive;D:dative;F:accusative;C:instrumental;O:prepositional;P:partitive;L:locative;V:vocative num/S:singular;P:plural gen/M:masculine;F:feminine;N:neuter;C:common animate/A:yes;I:no
+Z 2 number case/N:nominative;G:genitive;D:dative;F:accusative;C:instrumental;O:prepositional;P:partitive;L:locative;V:vocative num/S:singular;P:plural gen/M:masculine;F:feminine;N:neuter;C:common animate/A:yes;I:no other/P:transition;D:difficult;V:corrupted;R:predicative;I:spoken;A:uncommon;B:abbreviation;E:outdated
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 W 0 date
 I 0 interjection
 </DecompositionRules>

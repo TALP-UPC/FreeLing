@@ -327,7 +327,11 @@ canto_menos canto_menos RG
 cara_abaixo cara_abaixo RG
 cara_a cara_a CA
 cara_aí cara_aí RG
+<<<<<<< HEAD
 cara_a cara_a SPS00
+=======
+cara_a cara_a SP
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 cara_a_cara cara_a_cara RG
 cara_adentro cara_adentro RG
 cara_adiante cara_adiante RG

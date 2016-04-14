@@ -1323,8 +1323,13 @@ barnevik barnevik NPNMS0
 barneviks barnevik NPG0S0
 barnhelm barnhelm NPGFS0
 barnier barnier NPNMS0
+<<<<<<< HEAD
 barockstrasse barockstrasse NPDFS0
 barockstraße barockstrasse NPDFS0
+=======
+barockstrasse barockstraße NPDFS0
+barockstraße barockstraße NPDFS0
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 barre barre NPNMS0
 barrier barrier NP0000
 barrios barrios NPN0S0
@@ -4334,8 +4339,13 @@ dora-mittelbau dora-mittelbau NPNNS0
 dorabella dorabella NPNFS0
 dorada dorada NPDFS0
 dorazio dorazio NPNMS0
+<<<<<<< HEAD
 dorfstrasse dorfstrasse NPNFS0
 dorfstraße dorfstrasse NPNFS0
+=======
+dorfstrasse dorfstraße NPNFS0
+dorfstraße dorfstraße NPNFS0
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 doris doris NPAFSP
 doris doris NPDFSP
 doris doris NPGFSP
@@ -4433,7 +4443,11 @@ dreyfus dreyfus NPN0S0
 dreßler dressler NPNMS0
 driese driese NPN0S0
 driese driese NPNMS0
+<<<<<<< HEAD
 driessen driessen NPDMS0
+=======
+driessen drießen NPDMS0
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 dritte-welt-netzwerk dritte-welt-netzwerk NPDNS0
 drk drk NPGNS0
 dromi dromi NPN0S0
@@ -4789,8 +4803,13 @@ eichel eichel NPNMS0
 eichmann eichmann NPD0S0
 eichmann eichmann NPN0S0
 eichmanns eichmann NPG0S0
+<<<<<<< HEAD
 eichstrasse eichstrasse NPNFS0
 eichstraße eichstrasse NPNFS0
+=======
+eichstrasse eichstraße NPNFS0
+eichstraße eichstraße NPNFS0
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 eickmann eickmann NPAFSP
 eickmann eickmann NPAMSP
 eickmann eickmann NPDFSP
@@ -4844,8 +4863,13 @@ elbe elbe NPDFSG
 elbe elbe NPGFSG
 elbe elbe NPNFSG
 elberfeld elberfeld NPDNS0
+<<<<<<< HEAD
 elbestrasse elbestrasse NPNFS0
 elbestraße elbestrasse NPNFS0
+=======
+elbestrasse elbestraße NPNFS0
+elbestraße elbestraße NPNFS0
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 elbregion elbregion NPGFS0
 elbschloss elbschloss NPNNS0
 electric electric NPN0S0
@@ -6366,8 +6390,13 @@ gerster gerster NPNMS0
 gerstner gerstner NPD0S0
 gerstner gerstner NPN0S0
 gerstner gerstner NPNMS0
+<<<<<<< HEAD
 gerstäckerstrasse gerstäckerstrasse NPDFS0
 gerstäckerstraße gerstäckerstrasse NPDFS0
+=======
+gerstäckerstrasse gerstäckerstraße NPDFS0
+gerstäckerstraße gerstäckerstraße NPDFS0
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 gert gert NPAMSP
 gert gert NPDMSP
 gert gert NPGMSP
@@ -6449,7 +6478,11 @@ gica gica NPNMS0
 gideon gideon NPNMS0
 gierig gierig NPDMS0
 giesing giesing NPNMS0
+<<<<<<< HEAD
 giessen giessen NPNNS0
+=======
+giessen gießen NPNNS0
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 giger giger NPAMS0
 gilbert gilbert NPNMS0
 gilles gilles NPN0S0
@@ -6808,6 +6841,7 @@ groove groove NP0000
 gropp gropp NPNMS0
 grosny grosny NPDNS0
 grosny grosny NPNNS0
+<<<<<<< HEAD
 gross gross NPDMS0
 gross gross NPN0S0
 gross gross NPNMS0
@@ -6843,10 +6877,48 @@ grosswallstadt grosswallstadt NPDNSG
 grosswallstadt grosswallstadt NPGNSG
 grosswallstadt grosswallstadt NPNNSG
 grosswallstadts grosswallstadt NPGNSG
+=======
+gross groß NPDMS0
+gross groß NPN0S0
+gross groß NPNMS0
+gross-aserbeidschan groß-aserbeidschan NPDNS0
+gross-aserbeidschan groß-aserbeidschan NPNNS0
+gross-israel groß-israel NPANS0
+gross-israel groß-israel NPDNS0
+grossauheim großauheim NPANSG
+grossauheim großauheim NPDNSG
+grossauheim großauheim NPGNSG
+grossauheim großauheim NPNNSG
+grossauheims großauheim NPGNSG
+grossbritannien großbritannien NPANSG
+grossbritannien großbritannien NPDNSG
+grossbritannien großbritannien NPGNSG
+grossbritannien großbritannien NPNNSG
+grossbritanniens großbritannien NPGNSG
+grosse große NPN0S0
+grosse große NPNMS0
+grosse-brockhoff große-brockhoff NPN0S0
+grosse-brockhoff große-brockhoff NPNMS0
+grosshadern großhadern NPNNS0
+grosskrotzenburg großkrotzenburg NPANSG
+grosskrotzenburg großkrotzenburg NPDNSG
+grosskrotzenburg großkrotzenburg NPGNSG
+grosskrotzenburg großkrotzenburg NPNNSG
+grosskrotzenburgs großkrotzenburg NPGNSG
+grossmann großmann NPNMS0
+grossmann-vendrey großmann-vendrey NPDFS0
+grosso grosso NPNNS0
+grosswallstadt großwallstadt NPANSG
+grosswallstadt großwallstadt NPDNSG
+grosswallstadt großwallstadt NPGNSG
+grosswallstadt großwallstadt NPNNSG
+grosswallstadts großwallstadt NPGNSG
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 grotowskis grotowski NPG0S0
 groucho groucho NPDMS0
 group group NPN0S0
 grove grove NPNMS0
+<<<<<<< HEAD
 groß-aserbeidschan gross-aserbeidschan NPDNS0
 groß-aserbeidschan gross-aserbeidschan NPNNS0
 groß-israel gross-israel NPANS0
@@ -6875,6 +6947,36 @@ großwallstadt grosswallstadt NPDNSG
 großwallstadt grosswallstadt NPGNSG
 großwallstadt grosswallstadt NPNNSG
 großwallstadts grosswallstadt NPGNSG
+=======
+groß-aserbeidschan groß-aserbeidschan NPDNS0
+groß-aserbeidschan groß-aserbeidschan NPNNS0
+groß-israel groß-israel NPANS0
+groß-israel groß-israel NPDNS0
+großauheim großauheim NPANSG
+großauheim großauheim NPDNSG
+großauheim großauheim NPGNSG
+großauheim großauheim NPNNSG
+großauheims großauheim NPGNSG
+großbritannien großbritannien NPANSG
+großbritannien großbritannien NPDNSG
+großbritannien großbritannien NPGNSG
+großbritannien großbritannien NPNNSG
+großbritanniens großbritannien NPGNSG
+große große NPN0S0
+große große NPNMS0
+großhadern großhadern NPNNS0
+großkrotzenburg großkrotzenburg NPANSG
+großkrotzenburg großkrotzenburg NPDNSG
+großkrotzenburg großkrotzenburg NPGNSG
+großkrotzenburg großkrotzenburg NPNNSG
+großkrotzenburgs großkrotzenburg NPGNSG
+großmann großmann NPNMS0
+großwallstadt großwallstadt NPANSG
+großwallstadt großwallstadt NPDNSG
+großwallstadt großwallstadt NPGNSG
+großwallstadt großwallstadt NPNNSG
+großwallstadts großwallstadt NPGNSG
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 gruber gruber NPDMS0
 gruda gruda NPDNS0
 grude grude NPNNS0
@@ -8615,8 +8717,13 @@ innsbruck innsbruck NPDNSG
 innsbruck innsbruck NPGNSG
 innsbruck innsbruck NPNNSG
 innsbrucks innsbruck NPGNSG
+<<<<<<< HEAD
 innstrasse innstrasse NPNFS0
 innstraße innstrasse NPNFS0
+=======
+innstrasse innstraße NPNFS0
+innstraße innstraße NPNFS0
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 inpe inpe NPN0S0
 instabile instabile NP0000
 institute institute NP0000
@@ -9450,8 +9557,13 @@ kanther kanther NPNMS0
 kanthers kanther NPG0S0
 kanton kanton NPDNS0
 kantor kantor NPNMS0
+<<<<<<< HEAD
 kantstrasse kantstrasse NPDFS0
 kantstraße kantstrasse NPDFS0
+=======
+kantstrasse kantstraße NPDFS0
+kantstraße kantstraße NPDFS0
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 kaplan kaplan NPNFS0
 kapprovinz kapprovinz NPDFS0
 kapstadt kapstadt NPNNS0
@@ -10121,8 +10233,13 @@ kohler kohler NPNFSP
 kohler kohler NPNMSP
 kohlers kohler NPGFSP
 kohlers kohler NPGMSP
+<<<<<<< HEAD
 kohlhaussen kohlhaussen NPN0S0
 kohlhaussen kohlhaussen NPNMS0
+=======
+kohlhaussen kohlhaußen NPN0S0
+kohlhaussen kohlhaußen NPNMS0
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 kohls kohl NPGFSP
 kohls kohl NPGMSP
 kohlwage kohlwage NPNMS0
@@ -10334,8 +10451,13 @@ krehberg krehberg NPDNSG
 krehberg krehberg NPGNSG
 krehberg krehberg NPNNSG
 krehbergs krehberg NPGNSG
+<<<<<<< HEAD
 kreittmayrstrasse kreittmayrstrasse NPDFS0
 kreittmayrstraße kreittmayrstrasse NPDFS0
+=======
+kreittmayrstrasse kreittmayrstraße NPDFS0
+kreittmayrstraße kreittmayrstraße NPDFS0
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 krekel krekel NPNMS0
 kreml kreml NPNMS0
 kremls kreml NPGMS0
@@ -10399,8 +10521,13 @@ krone krone NPNFS0
 krone krone NPNMS0
 kronebau kronebau NPAMS0
 kronenzeitung kronenzeitung NPDFS0
+<<<<<<< HEAD
 kronprinzenstrasse kronprinzenstrasse NPNFS0
 kronprinzenstraße kronprinzenstrasse NPNFS0
+=======
+kronprinzenstrasse kronprinzenstraße NPNFS0
+kronprinzenstraße kronprinzenstraße NPNFS0
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 kronshagen kronshagen NPDNS0
 kroppelin kroppelin NPNMS0
 krotzenburg krotzenburg NPANSG
@@ -11233,8 +11360,13 @@ linden linde NPDFP0
 linden linden NPDFP0
 linden linden NPDNS0
 linden linden NPNFP0
+<<<<<<< HEAD
 lindenstrasse lindenstrasse NPGFS0
 lindenstraße lindenstrasse NPGFS0
+=======
+lindenstrasse lindenstraße NPGFS0
+lindenstraße lindenstraße NPGFS0
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 lindh lindh NPNFS0
 line line NPN0S0
 ling ling NPN0S0
@@ -11785,8 +11917,13 @@ mannheim mannheim NPDNS0
 mannheim mannheim NPNNS0
 mannheims mannheim NPGNS0
 manni manni NPNMS0
+<<<<<<< HEAD
 mannstrasse mannstrasse NPDFS0
 mannstraße mannstrasse NPDFS0
+=======
+mannstrasse mannstraße NPDFS0
+mannstraße mannstraße NPDFS0
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 mans man NPGMS0
 mansfeld-kupfer mansfeld-kupfer NPN0S0
 manson manson NPNMS0
@@ -12517,8 +12654,13 @@ milan milan NPNNSG
 milanovic milanovic NPN0S0
 milanovic milanovic NPNMS0
 milans milan NPGNSG
+<<<<<<< HEAD
 milchstrasse milchstrasse NPGFS0
 milchstraße milchstrasse NPGFS0
+=======
+milchstrasse milchstraße NPGFS0
+milchstraße milchstraße NPGFS0
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 milde milde NPNMS0
 mile mile NPNMS0
 mill mill NPAFSP
@@ -13437,8 +13579,13 @@ niederdorfelden niederdorfelden NPDNSG
 niederdorfelden niederdorfelden NPGNSG
 niederdorfelden niederdorfelden NPNNSG
 niederdorfeldens niederdorfelden NPGNSG
+<<<<<<< HEAD
 niedergesäss niedergesäss NPNMS0
 niedergesäß niedergesäss NPNMS0
+=======
+niedergesäss niedergesäß NPNMS0
+niedergesäß niedergesäß NPNMS0
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 niederhöchstadt niederhöchstadt NPANSG
 niederhöchstadt niederhöchstadt NPDNSG
 niederhöchstadt niederhöchstadt NPGNSG
@@ -14059,8 +14206,13 @@ ost-timor ost-timor NPANS0
 ost-timor ost-timor NPDNS0
 ost-timors ost-timor NPGNS0
 ost-türkei ost-türkei NPDFS0
+<<<<<<< HEAD
 ost-west-strasse ost-west-strasse NPNFS0
 ost-west-straße ost-west-strasse NPNFS0
+=======
+ost-west-strasse ost-west-straße NPNFS0
+ost-west-straße ost-west-straße NPNFS0
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 ostafrika ostafrika NPNNS0
 ostbayern ostbayern NPDNS0
 ostbayern ostbayern NPNNS0
@@ -14092,8 +14244,13 @@ ostheims ostheim NPGNSG
 osthessen osthessen NPDNS0
 ostjerusalems ostjerusalem NPGNS0
 ostjerusalems ostjerusalems NPGNS0
+<<<<<<< HEAD
 ostpreussen ostpreussen NPNNS0
 ostpreußen ostpreussen NPNNS0
+=======
+ostpreussen ostpreußen NPNNS0
+ostpreußen ostpreußen NPNNS0
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 ostsee ostsee NPDFS0
 ostsee ostsee NPGFS0
 ostslawonien ostslawonien NPANS0
@@ -16624,8 +16781,13 @@ schmults schmults NPN0S0
 schmults schmults NPNMS0
 schnarrenberger schnarrenberger NPN0S0
 schnauz-wand schnauz-wand NPN0S0
+<<<<<<< HEAD
 schneckenhofstrasse schneckenhofstrasse NPNFS0
 schneckenhofstraße schneckenhofstrasse NPNFS0
+=======
+schneckenhofstrasse schneckenhofstraße NPNFS0
+schneckenhofstraße schneckenhofstraße NPNFS0
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 schneewittchen schneewittchen NPANSP
 schneewittchen schneewittchen NPDNSP
 schneewittchen schneewittchen NPGNSP
@@ -16687,8 +16849,13 @@ scholz scholz NPNMSP
 schoofs schoofs NPD0S0
 school school NP0000
 school school NPDFS0
+<<<<<<< HEAD
 schopstrasse schopstrasse NPNFS0
 schopstraße schopstrasse NPNFS0
+=======
+schopstrasse schopstraße NPNFS0
+schopstraße schopstraße NPNFS0
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 schorfheide schorfheide NPNFS0
 schorlemmer schorlemmer NPNMS0
 schoser schoser NPN0S0
@@ -16863,8 +17030,13 @@ schwab schwab NPGFSP
 schwab schwab NPGMSP
 schwab schwab NPNFSP
 schwab schwab NPNMSP
+<<<<<<< HEAD
 schwabenstrasse schwabenstrasse NPNFS0
 schwabenstraße schwabenstrasse NPNFS0
+=======
+schwabenstrasse schwabenstraße NPNFS0
+schwabenstraße schwabenstraße NPNFS0
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 schwabs schwab NPGFSP
 schwabs schwab NPGMSP
 schwaetzer schwaetzer NPNFS0
@@ -17098,8 +17270,13 @@ seidel seidel NPNFSP
 seidel seidel NPNMSP
 seidels seidel NPGFSP
 seidels seidel NPGMSP
+<<<<<<< HEAD
 seidenstrasse seidenstrasse NPAFS0
 seidenstraße seidenstrasse NPAFS0
+=======
+seidenstrasse seidenstraße NPAFS0
+seidenstraße seidenstraße NPAFS0
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 seidler seidler NPNMS0
 seifert seifert NPAFSP
 seifert seifert NPAMSP
@@ -17196,10 +17373,17 @@ service service NPN0S0
 service service NPNMS0
 services services NP0000
 services services NPN000
+<<<<<<< HEAD
 sesamstrasse sesamstrasse NPDFS0
 sesamstrasse sesamstrasse NPNFS0
 sesamstraße sesamstrasse NPDFS0
 sesamstraße sesamstrasse NPNFS0
+=======
+sesamstrasse sesamstraße NPDFS0
+sesamstrasse sesamstraße NPNFS0
+sesamstraße sesamstraße NPDFS0
+sesamstraße sesamstraße NPNFS0
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 sese sese NPNMS0
 seselj seselj NPNMS0
 sessinghaus sessinghaus NPNMS0
@@ -17535,8 +17719,13 @@ sonja sonja NPDFSP
 sonja sonja NPGFSP
 sonja sonja NPNFSP
 sonjas sonja NPGFSP
+<<<<<<< HEAD
 sonnenstrasse sonnenstrasse NPNFS0
 sonnenstraße sonnenstrasse NPNFS0
+=======
+sonnenstrasse sonnenstraße NPNFS0
+sonnenstraße sonnenstraße NPNFS0
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 sonntagspost sonntagspost NPDFS0
 sony sony NPD0S0
 sony sony NPDFS0
@@ -17545,6 +17734,7 @@ soo soo NPNMS0
 soon soon NP0000
 sopart sopart NPNMS0
 sophie sophie NPNFS0
+<<<<<<< HEAD
 sophienstrasse sophienstrasse NPAFSV
 sophienstrasse sophienstrasse NPDFSV
 sophienstrasse sophienstrasse NPGFSV
@@ -17553,6 +17743,16 @@ sophienstraße sophienstrasse NPAFSV
 sophienstraße sophienstrasse NPDFSV
 sophienstraße sophienstrasse NPGFSV
 sophienstraße sophienstrasse NPNFSV
+=======
+sophienstrasse sophienstraße NPAFSV
+sophienstrasse sophienstraße NPDFSV
+sophienstrasse sophienstraße NPGFSV
+sophienstrasse sophienstraße NPNFSV
+sophienstraße sophienstraße NPAFSV
+sophienstraße sophienstraße NPDFSV
+sophienstraße sophienstraße NPGFSV
+sophienstraße sophienstraße NPNFSV
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 sor sor NPN0S0
 sorbas sorbas NPNMS0
 sorbonne sorbonne NPDFS0

@@ -90,7 +90,11 @@ CONSTRAINTS
 
 %% better tag "que" as a CS after a verb, punctuation, adverb or prepossition 
 1.5 CS<que>
+<<<<<<< HEAD
     (-1 VMI* or VMS* or VAI* or VAS* or VSI* or VSS* or Fp or RG or SPS00);
+=======
+    (-1 VMI* or VMS* or VAI* or VAS* or VSI* or VSS* or Fp or RG or SP);
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 
 %%% haga lo que haga 
 5.0 VMS*
@@ -247,11 +251,19 @@ CONSTRAINTS
 % "sí" after preposition is pronoun (por sí, para sí), but otherwise, is adverb
 10.1 RG
     (0 PP3*)
+<<<<<<< HEAD
     (not -1 SPS00);
 
 10.1 PP3*
     (0 RG)
     (-1 SPS00);
+=======
+    (not -1 SP);
+
+10.1 PP3*
+    (0 RG)
+    (-1 SP);
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 
 %% lemma selection for "fue", "fui": before gerund, prefer "ir" (fui andando, fui sobreviviendo)
 12.0 <ir>
@@ -261,7 +273,11 @@ CONSTRAINTS
 %% lemma selection for "fue", "fui": before "a", prefer "ir" (fui a casa)
 3.0 <ir>
 	(0 <ser>)
+<<<<<<< HEAD
 	(1 SPS00(a));
+=======
+	(1 SP(a));
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 
 % prefer 3rd person to 1st
 0.5 VMSP3S0     (0 VMSP1S0);

@@ -38430,7 +38430,11 @@
 38430 lt@3:suponer_VMI 3
 38431 lt@3:sur_NC 5
 38432 lt@3:sustituir_VMI 4
+<<<<<<< HEAD
 38433 lt@3:suyo_PX 3
+=======
+38433 lt@3:suyo_AP 3
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 38434 lt@3:símbolo_NC 4
 38435 lt@3:sólo_RG 4
 38436 lt@3:tal_DD 3
@@ -66518,7 +66522,11 @@
 66518 t@3:PP 40
 66519 t@3:PR 232
 66520 t@3:PT 4
+<<<<<<< HEAD
 66521 t@3:PX 3
+=======
+66521 t@3:AP 3
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 66522 t@3:RG 488
 66523 t@3:RN 56
 66524 t@3:SP 1895
@@ -67532,7 +67540,11 @@
 67532 tbg@2:DA_NC 963
 67533 tbg@2:DA_NP 441
 67534 tbg@2:DA_PR 47
+<<<<<<< HEAD
 67535 tbg@2:DA_PX 3
+=======
+67535 tbg@2:DA_AP 3
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 67536 tbg@2:DA_RG 14
 67537 tbg@2:DA_SP 11
 67538 tbg@2:DA_VMN 9
@@ -69852,7 +69864,11 @@
 69852 ttg@1:CC_DA_DI 3
 69853 ttg@1:CC_DA_NC 130
 69854 ttg@1:CC_DA_NP 102
+<<<<<<< HEAD
 69855 ttg@1:CC_DA_PX 2
+=======
+69855 ttg@1:CC_DA_AP 2
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 69856 ttg@1:CC_DA_RG 2
 69857 ttg@1:CC_DA_SP 9
 69858 ttg@1:CC_DA_W 2

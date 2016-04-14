@@ -55221,7 +55221,11 @@
 55221 lt@3:suspender_VMN 2
 55222 lt@3:suspensión_NC 4
 55223 lt@3:sustituir_VMI 6
+<<<<<<< HEAD
 55224 lt@3:suyo_PX 4
+=======
+55224 lt@3:suyo_AP 4
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 55225 lt@3:sábado_W 2
 55226 lt@3:sí_RG 2
 55227 lt@3:símbolo_NC 6
@@ -92233,7 +92237,11 @@
 92233 t@3:PP 76
 92234 t@3:PR 351
 92235 t@3:PT 9
+<<<<<<< HEAD
 92236 t@3:PX 5
+=======
+92236 t@3:AP 5
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 92237 t@3:RG 811
 92238 t@3:RN 119
 92239 t@3:SP 2888
@@ -93735,7 +93743,11 @@
 93735 tbg@2:DA_PI 4
 93736 tbg@2:DA_PP 2
 93737 tbg@2:DA_PR 76
+<<<<<<< HEAD
 93738 tbg@2:DA_PX 4
+=======
+93738 tbg@2:DA_AP 4
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 93739 tbg@2:DA_RG 22
 93740 tbg@2:DA_SP 18
 93741 tbg@2:DA_VMN 25
@@ -94608,7 +94620,11 @@
 94608 tbg@3:PT_VMI 3
 94609 tbg@3:PT_VMN 2
 94610 tbg@3:PT_VSI 2
+<<<<<<< HEAD
 94611 tbg@3:PX_SP 2
+=======
+94611 tbg@3:AP_SP 2
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 94612 tbg@3:RG_AQ 63
 94613 tbg@3:RG_CC 6
 94614 tbg@3:RG_CS 91
@@ -97188,7 +97204,11 @@
 97188 ttg@1:CC_DA_NC 182
 97189 ttg@1:CC_DA_NP 138
 97190 ttg@1:CC_DA_PI 2
+<<<<<<< HEAD
 97191 ttg@1:CC_DA_PX 2
+=======
+97191 ttg@1:CC_DA_AP 2
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 97192 ttg@1:CC_DA_RG 2
 97193 ttg@1:CC_DA_SP 9
 97194 ttg@1:CC_DA_W 6
@@ -98245,7 +98265,11 @@
 98245 ttg@1:SP_DA_NP 337
 98246 ttg@1:SP_DA_PP 2
 98247 ttg@1:SP_DA_PR 47
+<<<<<<< HEAD
 98248 ttg@1:SP_DA_PX 2
+=======
+98248 ttg@1:SP_DA_AP 2
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 98249 ttg@1:SP_DA_VMN 25
 98250 ttg@1:SP_DA_VMP 9
 98251 ttg@1:SP_DA_W 31
@@ -98976,7 +99000,11 @@
 98976 ttg@2:DA_PR_VAI 5
 98977 ttg@2:DA_PR_VMI 33
 98978 ttg@2:DA_PR_VSI 2
+<<<<<<< HEAD
 98979 ttg@2:DA_PX_SP 2
+=======
+98979 ttg@2:DA_AP_SP 2
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 98980 ttg@2:DA_RG_AQ 16
 98981 ttg@2:DA_RG_NC 2
 98982 ttg@2:DA_RG_VMP 3
@@ -101573,7 +101601,11 @@
 101573 ttg@3:PR_Z_NC 3
 101574 ttg@3:PT_VMN_SP 2
 101575 ttg@3:PT_VSI_DA 2
+<<<<<<< HEAD
 101576 ttg@3:PX_SP_NC 2
+=======
+101576 ttg@3:AP_SP_NC 2
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 101577 ttg@3:RG_AQ_CC 6
 101578 ttg@3:RG_AQ_CS 8
 101579 ttg@3:RG_AQ_DA 2

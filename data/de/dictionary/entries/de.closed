@@ -1,6 +1,7 @@
 's es PPANS30
 's es PPNNS30
 ab ab RV
+<<<<<<< HEAD
 ab ab SP
 aber aber CC
 abseits abseits SP
@@ -35,6 +36,42 @@ aller alles PIDFS00
 aller alles PIG0P00
 aller alles PIGFS00
 aller alles PINMS00
+=======
+ab ab SP000
+aber aber CC
+abseits abseits SP000
+abwärts abwärts RV
+abzüglich abzüglich SP000
+acht acht RV
+alle alle DIA0P
+alle alle DIAFS
+alle alle DIN0P
+alle alle DINFS
+alle alle PIA0P00
+alle alle PIAFS00
+alle alle PIN0P00
+alle alle PINFS00
+allem alle DIDMS
+allem alle DIDNS
+allem alle PIDMS00
+allem alle PIDNS00
+allen alle DIAMS
+allen alle DID0P
+allen alle DIGMS
+allen alle DIGNS
+allen alle PIAMS00
+allen alle PID0P00
+allen alle PIGMS00
+allen alle PIGNS00
+aller alle DIDFS
+aller alle DIG0P
+aller alle DIGFS
+aller alle DINMS
+aller alle PIDFS00
+aller alle PIG0P00
+aller alle PIGFS00
+aller alle PINMS00
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 alles alles DIANS
 alles alles DIGMS
 alles alles DIGNS
@@ -46,11 +83,19 @@ alles alles PINNS00
 als als CC
 als als CM
 als als CS
+<<<<<<< HEAD
 als als SP
 an an RV
 an an SC
 an an SP
 an an SS
+=======
+als als SP000
+an an RV
+an an SC000
+an an SP000
+an an SS000
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 andere anderer DIA0P
 andere anderer DIAFS
 andere anderer DIANS
@@ -101,7 +146,11 @@ andern anderer PI00P00
 andern anderer PIAMS00
 andern anderer PID0S00
 andern anderer PIG0S00
+<<<<<<< HEAD
 andie andie SP
+=======
+andie andie SP000
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 andre anderer DIA0P
 andre anderer DIAFS
 andre anderer DIANS
@@ -136,6 +185,7 @@ andres anderer DIANS
 andres anderer DINNS
 andres anderer PIANS00
 andres anderer PINNS00
+<<<<<<< HEAD
 angesichts angesichts SP
 anhand anhand SP
 anlässlich anlässlich SP
@@ -165,6 +215,37 @@ außerhalb ausserhalb SP
 ball ball RV
 bei bei RV
 bei bei SP
+=======
+angesichts angesichts SP000
+anhand anhand SP000
+anlässlich anlässlich SP000
+anläßlich anlässlich SP000
+anstatt anstatt CS
+anstatt anstatt SP000
+anstelle anstelle SP000
+auch auch CC
+auf auf RV
+auf auf SC000
+auf auf SP000
+aufeinander aufeinander RV
+aufgrund aufgrund SP000
+aufrecht aufrecht RV
+aufseiten auf_seiten SP000
+aufwärts aufwärts RV
+aus aus RV
+aus aus SC000
+aus aus SP000
+aus aus SS000
+auseinander auseinander RV
+ausser außer SP000
+ausserhalb außerhalb SP000
+ausweislich ausweislich SP000
+außer außer SP000
+außerhalb außerhalb SP000
+ball ball RV
+bei bei RV
+bei bei SP000
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 beide beide DIA0P
 beide beide DIN0P
 beide beide PIA0P00
@@ -181,6 +262,7 @@ bestehen bestehen RV
 bevor bevor CS
 bevor bevor RV
 beziehungsweise beziehungsweise CC
+<<<<<<< HEAD
 bezüglich bezüglich SP
 binnen binnen SP
 bis bis CC
@@ -191,6 +273,18 @@ bleiben bleiben RV
 blind blind RV
 bloss bloss RV
 bloß bloss RV
+=======
+bezüglich bezüglich SP000
+binnen binnen SP000
+bis bis CC
+bis bis CS
+bis bis SP000
+blank blank RV
+bleiben bleiben RV
+blind blind RV
+bloss bloß RV
+bloß bloß RV
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 brach brach RV
 breit breit RV
 da da CS
@@ -203,7 +297,11 @@ dahin dahin RV
 dahinter dahinter RV
 damit damit CS
 daneben daneben RV
+<<<<<<< HEAD
 dank dank SP
+=======
+dank dank SP000
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 dann dann CC
 dar dar RV
 daran daran RV
@@ -430,7 +528,11 @@ dieses dieser PDANS00
 dieses dieser PDGMS00
 dieses dieser PDGNS00
 dieses dieser PDNNS00
+<<<<<<< HEAD
 diesseits diesseits SP
+=======
+diesseits diesseits SP000
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 dir dir PFD0S2F
 dir dir PPD0S2F
 doch doch CC
@@ -439,8 +541,13 @@ drauf drauf RV
 drin drin RV
 du du PPN0S2F
 durch durch RV
+<<<<<<< HEAD
 durch durch SP
 durch durch SS
+=======
+durch durch SP000
+durch durch SS000
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 durcheinander durcheinander RV
 ebendiese ebendieser DDA0P
 ebendiese ebendieser DDAFP
@@ -504,6 +611,7 @@ einiges einig DINNS
 einingen einig DI00P
 eins einer PIDNS00
 eins einer PINNS00
+<<<<<<< HEAD
 einschliesslich einschliesslich SP
 einschließlich einschliesslich SP
 eng eng RV
@@ -514,12 +622,25 @@ entlang entlang RV
 entlang entlang SP
 entlang entlang SS
 entsprechend entsprechend SP
+=======
+einschliesslich einschließlich SP000
+einschließlich einschließlich SP000
+eng eng RV
+entgegen entgegen RV
+entgegen entgegen SP000
+entgegen entgegen SS000
+entlang entlang RV
+entlang entlang SP000
+entlang entlang SS000
+entsprechend entsprechend SP000
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 entweder entweder CC
 entzwei entzwei RV
 er er PPNMS30
 ernst ernst RV
 es es PPANS30
 es es PPNNS30
+<<<<<<< HEAD
 etliche etliche DIA0P
 etliche etliche DIAFS
 etliche etliche DIN0P
@@ -552,6 +673,40 @@ etliches etliche PIANS00
 etliches etliche PIGMS00
 etliches etliche PIGNS00
 etliches etliche PINNS00
+=======
+etliche etlich DIA0P
+etliche etlich DIAFS
+etliche etlich DIN0P
+etliche etlich DINFS
+etliche etlich PIA0P00
+etliche etlich PIAFS00
+etliche etlich PIN0P00
+etliche etlich PINFS00
+etlichem etlich DIDMS
+etlichem etlich DIDNS
+etlichem etlich PIDMS00
+etlichem etlich PIDNS00
+etlichen etlich DIAMS
+etlichen etlich DID0P
+etlichen etlich PIAMS00
+etlichen etlich PID0P00
+etlicher etlich DIDFS
+etlicher etlich DIG0P
+etlicher etlich DIGFS
+etlicher etlich DINMS
+etlicher etlich PIDFS00
+etlicher etlich PIG0P00
+etlicher etlich PIGFS00
+etlicher etlich PINMS00
+etliches etlich DIANS
+etliches etlich DIGMS
+etliches etlich DIGNS
+etliches etlich DINNS
+etliches etlich PIANS00
+etliches etlich PIGMS00
+etliches etlich PIGNS00
+etliches etlich PINNS00
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 etwas etwas DI000
 etwas etwas PI00000
 euch euch PFA0P20
@@ -604,6 +759,7 @@ flöten flöten RV
 fort fort RV
 frei frei RV
 fremd fremd RV
+<<<<<<< HEAD
 für für SP
 gefangen gefangen RV
 gegen gegen RV
@@ -614,6 +770,18 @@ geheim geheim RV
 gemäss gemäss SP
 gemäß gemäss SP
 gen gen SP
+=======
+für für SP000
+gefangen gefangen RV
+gegen gegen RV
+gegen gegen SP000
+gegenüber gegenüber RV
+gegenüber gegenüber SP000
+geheim geheim RV
+gemäss gemäß SP000
+gemäß gemäß SP000
+gen gen SP000
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 genug genug DI000
 genug genug PI00000
 gerade gerade RV
@@ -625,12 +793,17 @@ gleich gleich RV
 gleichwohl gleichwohl CS
 gut gut RV
 haften haften RV
+<<<<<<< HEAD
 halber halber SS
+=======
+halber halber SS000
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 halt halt RV
 hart hart RV
 heilig heilig RV
 heim heim RV
 her her RV
+<<<<<<< HEAD
 her her SC
 heran heran RV
 herauf herauf RV
@@ -661,6 +834,38 @@ hinterher hinterher RV
 hinunter hinunter RV
 hinweg hinweg RV
 hinweg hinweg SC
+=======
+her her SC000
+heran heran RV
+herauf herauf RV
+heraus heraus RV
+heraus heraus SC000
+herbei herbei RV
+herein herein RV
+herum herum RV
+herum herum SC000
+herunter herunter RV
+herunter herunter SC000
+hervor hervor RV
+hierher hierher RV
+hin hin RV
+hin hin SC000
+hin hin SP000
+hinab hinab RV
+hinauf hinauf RV
+hinaus hinaus RV
+hinaus hinaus SC000
+hinaus hinaus SS000
+hinein hinein RV
+hinein hinein SC000
+hinsichtlich hinsichtlich SP000
+hinter hinter RV
+hinter hinter SP000
+hinterher hinterher RV
+hinunter hinunter RV
+hinweg hinweg RV
+hinweg hinweg SC000
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 hinzu hinzu RV
 hoch hoch RV
 hängen hängen RV
@@ -707,6 +912,7 @@ ihres ihr DXGMS
 ihres ihr DXGNS
 ihres ihr PXGMS00
 ihres ihr PXGNS00
+<<<<<<< HEAD
 in in SP
 indem indem CS
 indes indes CS
@@ -716,6 +922,17 @@ inklusive inklusive SP
 inmitten inmitten SP
 inne inne RV
 innerhalb innerhalb SP
+=======
+in in SP000
+indem indem CS
+indes indes CS
+indessen indessen CS
+infolge infolge SP000
+inklusive inklusive SP000
+inmitten inmitten SP000
+inne inne RV
+innerhalb innerhalb SP000
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 inwieweit inwieweit PT00000
 irgendein irgendein DIANS
 irgendein irgendein DINMS
@@ -746,6 +963,7 @@ irgendjemand irgendjemand PI00000
 irgendwas irgendetwas PI00000
 irgendwelche irgendwelche DI000
 irre irre RV
+<<<<<<< HEAD
 jede jeder DIAFS
 jede jeder DINFS
 jede jeder PIAFS00
@@ -768,16 +986,49 @@ jeder jeder DINMS
 jeder jeder PIDFS00
 jeder jeder PIGFS00
 jeder jeder PINMS00
+=======
+jede jede DIAFS
+jede jede DINFS
+jede jede PIAFS00
+jede jede PINFS00
+jedem jede DIDMS
+jedem jede DIDNS
+jedem jede DIGNS
+jedem jede PIDMS00
+jedem jede PIDNS00
+jedem jede PIGNS00
+jeden jede DIAMS
+jeden jede DID0S
+jeden jede DIG0S
+jeden jede PIAMS00
+jeden jede PID0S00
+jeden jede PIG0S00
+jeder jede DIDFS
+jeder jede DIGFS
+jeder jede DINMS
+jeder jede PIDFS00
+jeder jede PIGFS00
+jeder jede PINMS00
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 jedermann jedermann PIA0000
 jedermann jedermann PID0000
 jedermann jedermann PIN0000
 jedermanns jedermann PIG0000
+<<<<<<< HEAD
 jedes jeder DIANS
 jedes jeder DIGMS
 jedes jeder DINNS
 jedes jeder PIANS00
 jedes jeder PIGMS00
 jedes jeder PINNS00
+=======
+jedes jede DIANS
+jedes jede DIGMS
+jedes jede DINNS
+jedes jede PIANS00
+jedes jede PIGMS00
+jedes jede PINNS00
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 jedwede jedweder DIAFS
 jedwede jedweder DINFS
 jedwede jedweder PIAFS00
@@ -806,6 +1057,7 @@ jedwedes jedweder PIANS00
 jedwedes jedweder PIGMS00
 jedwedes jedweder PIGNS00
 jedwedes jedweder PINNS00
+<<<<<<< HEAD
 jegliche jeglicher DIAFS
 jegliche jeglicher DINFS
 jegliche jeglicher PIAFS00
@@ -834,6 +1086,36 @@ jegliches jeglicher PIANS00
 jegliches jeglicher PIGMS00
 jegliches jeglicher PIGNS00
 jegliches jeglicher PINNS00
+=======
+jegliche jeglich DIAFS
+jegliche jeglich DINFS
+jegliche jeglich PIAFS00
+jegliche jeglich PINFS00
+jeglichem jeglich DIDMS
+jeglichem jeglich DIDNS
+jeglichem jeglich PIDMS00
+jeglichem jeglich PIDNS00
+jeglichen jeglich DIAMS
+jeglichen jeglich DID0S
+jeglichen jeglich DIG0S
+jeglichen jeglich PIAMS00
+jeglichen jeglich PID0S00
+jeglichen jeglich PIG0S00
+jeglicher jeglich DIDFS
+jeglicher jeglich DIGFS
+jeglicher jeglich DINMS
+jeglicher jeglich PIDFS00
+jeglicher jeglich PIGFS00
+jeglicher jeglich PINMS00
+jegliches jeglich DIANS
+jegliches jeglich DIGMS
+jegliches jeglich DIGNS
+jegliches jeglich DINNS
+jegliches jeglich PIANS00
+jegliches jeglich PIGMS00
+jegliches jeglich PIGNS00
+jegliches jeglich PINNS00
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 jemand jemand PIA0S00
 jemand jemand PID0S00
 jemand jemand PIN0S00
@@ -873,6 +1155,7 @@ jenes jener PDANS00
 jenes jener PDGMS00
 jenes jener PDGNS00
 jenes jener PDNNS00
+<<<<<<< HEAD
 jenseits jenseits SP
 kahl kahl RV
 kalt kalt RV
@@ -905,6 +1188,40 @@ keiner keine DIGFS
 keiner keine PIDFS00
 keiner keine PIG0P00
 keiner keine PIGFS00
+=======
+jenseits jenseits SP000
+kahl kahl RV
+kalt kalt RV
+kaputt kaputt RV
+kein kein DIANS
+kein kein DINMS
+kein kein DINNS
+kein kein PIANS00
+kein kein PINMS00
+kein kein PINNS00
+keine kein DIA0P
+keine kein DIAFS
+keine kein DIN0P
+keine kein DINFS
+keine kein PIA0P00
+keine kein PIAFS00
+keine kein PIN0P00
+keine kein PINFS00
+keinem kein DIDMS
+keinem kein DIDNS
+keinem kein PIDMS00
+keinem kein PIDNS00
+keinen kein DIAMS
+keinen kein DID0P
+keinen kein PIAMS00
+keinen kein PID0P00
+keiner kein DIDFS
+keiner kein DIG0P
+keiner kein DIGFS
+keiner kein PIDFS00
+keiner kein PIG0P00
+keiner kein PIGFS00
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 keinerleie keinerlei DIA0P
 keinerleie keinerlei DIAFS
 keinerleie keinerlei DIANS
@@ -922,23 +1239,39 @@ keinerleier keinerlei DIGFS
 keinerleier keinerlei DINMS
 keinerleies keinerlei DIANS
 keinerleies keinerlei DINNS
+<<<<<<< HEAD
 keines keine DIGMS
 keines keine DIGNS
 keines keine PIGMS00
 keines keine PIGNS00
+=======
+keines kein DIGMS
+keines kein DIGNS
+keines kein PIGMS00
+keines kein PIGNS00
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 kennen kennen RV
 klar klar RV
 kleben kleben RV
 klein klein RV
 knapp knapp RV
+<<<<<<< HEAD
 kontra kontra SP
 kraft kraft SP
+=======
+kontra kontra SP000
+kraft kraft SP000
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 krank krank RV
 kund kund RV
 kurz kurz RV
 lahm lahm RV
 lang lang RV
+<<<<<<< HEAD
 laut laut SP
+=======
+laut laut SP000
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 leck leck RV
 leer leer RV
 leicht leicht RV
@@ -946,7 +1279,11 @@ lieb lieb RV
 liegen liegen RV
 locker locker RV
 los los RV
+<<<<<<< HEAD
 längs längs SP
+=======
+längs längs SP000
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 mal mal RV
 man man PI00S00
 manche manch DIA0P
@@ -1002,10 +1339,17 @@ manches manch PIANS00
 manches manch PIGMS00
 manches manch PIGNS00
 manches manch PINNS00
+<<<<<<< HEAD
 mangels mangels SP
 mass mass RV
 matt matt RV
 maß mass RV
+=======
+mangels mangels SP000
+mass maß RV
+matt matt RV
+maß maß RV
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 mehr mehr DI000
 mehr mehr PI00000
 mehrere mehrer DIA0P
@@ -1055,6 +1399,7 @@ meisten meisten DI000
 meisten meisten PI00000
 mich mich PFA0S10
 mich mich PPA0S10
+<<<<<<< HEAD
 minus minus SP
 mir mir PFD0S10
 mir mir PPD0S10
@@ -1072,6 +1417,25 @@ nahe nahe SS
 namens namens SP
 neben neben SP
 nebst nebst SP
+=======
+minus minus SP000
+mir mir PFD0S10
+mir mir PPD0S10
+mit mit RV
+mit mit SP000
+mitsamt mitsamt SP000
+mittels mittels SP000
+nach nach RV
+nach nach SP000
+nach nach SS000
+nachdem nachdem CS
+nahe nahe RV
+nahe nahe SP000
+nahe nahe SS000
+namens namens SP000
+neben neben SP000
+nebst nebst SP000
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 neu neu RV
 nichts nichts DI000
 nichts nichts PI00000
@@ -1087,16 +1451,25 @@ nix nichts DI000
 nix nichts PI00000
 noch noch CC
 not not RV
+<<<<<<< HEAD
 nächst nächst SP
 näher näher RV
 ob ob CS
 ob ob SP
 oberhalb oberhalb SP
+=======
+nächst nächst SP000
+näher näher RV
+ob ob CS
+ob ob SP000
+oberhalb oberhalb SP000
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 obgleich obgleich CS
 obschon obschon CS
 obwohl obwohl CS
 oder oder CC
 offen offen RV
+<<<<<<< HEAD
 ohne ohne SP
 paar paar DI000
 parat parat RV
@@ -1106,6 +1479,17 @@ pleite pleite RV
 plus plus SP
 preis preis RV
 pro pro SP
+=======
+ohne ohne SP000
+paar paar DI000
+parat parat RV
+per per SP000
+platt platt RV
+pleite pleite RV
+plus plus SP000
+preis preis RV
+pro pro SP000
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 quer quer RV
 rad rad RV
 rauf rauf RV
@@ -1116,7 +1500,11 @@ rum rum RV
 rund rund RV
 runter runter RV
 rückwärts rückwärts RV
+<<<<<<< HEAD
 samt samt SP
+=======
+samt samt SP000
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 sauber sauber RV
 scharf scharf RV
 schwarz schwarz RV
@@ -1160,9 +1548,15 @@ seines sein PXNNS00
 seins sein PXANS00
 seins sein PXNNS00
 seit seit CS
+<<<<<<< HEAD
 seit seit SP
 seitdem seitdem CS
 seitens seitens SP
+=======
+seit seit SP000
+seitdem seitdem CS
+seitens seitens SP000
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 selbige selbig DDA0P
 selbige selbig DDAFS
 selbige selbig DDN00
@@ -1250,7 +1644,11 @@ spitz spitz RV
 stand stand RV
 stark stark RV
 statt statt RV
+<<<<<<< HEAD
 statt statt SP
+=======
+statt statt SP000
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 staub staub RV
 stehen stehen RV
 still still RV
@@ -1290,6 +1688,7 @@ sämtliches sämtlich PIANS00
 sämtliches sämtlich PINNS00
 teil teil RV
 tot tot RV
+<<<<<<< HEAD
 trotz trotz SP
 um um CS
 um um RV
@@ -1299,6 +1698,17 @@ umhin umhin RV
 und und CC
 ungeachtet ungeachtet SP
 ungeachtet ungeachtet SS
+=======
+trotz trotz SP000
+um um CS
+um um RV
+um um SP000
+umher umher RV
+umhin umhin RV
+und und CC
+ungeachtet ungeachtet SP000
+ungeachtet ungeachtet SS000
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 uns uns PFA0P10
 uns uns PFD0P10
 uns uns PPA0P10
@@ -1337,6 +1747,7 @@ unseres unser DXGNS
 unseres unser PXGMS00
 unseres unser PXGNS00
 unter unter RV
+<<<<<<< HEAD
 unter unter SP
 unterhalb unterhalb SP
 unweit unweit SP
@@ -1344,6 +1755,15 @@ verantwortlich verantwortlich RV
 verloren verloren RV
 versus versus SP
 via via SP
+=======
+unter unter SP000
+unterhalb unterhalb SP000
+unweit unweit SP000
+verantwortlich verantwortlich RV
+verloren verloren RV
+versus versus SP000
+via via SP000
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 viel viel DI000
 viel viel PI00000
 viel viel RV
@@ -1396,6 +1816,7 @@ vieles viel PIGNS00
 vieles viel PIN0000
 vieles viel PINNS00
 voll voll RV
+<<<<<<< HEAD
 von von SP
 vor vor RV
 vor vor SP
@@ -1403,6 +1824,15 @@ voran voran RV
 voraus voraus RV
 vorbei vorbei RV
 vorbei vorbei SC
+=======
+von von SP000
+vor vor RV
+vor vor SP000
+voran voran RV
+voraus voraus RV
+vorbei vorbei RV
+vorbei vorbei SC000
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 vorher vorher RV
 vorwärts vorwärts RV
 vorüber vorüber RV
@@ -1417,6 +1847,7 @@ wat was PR00000
 wat was PT00000
 weder weder CC
 weg weg RV
+<<<<<<< HEAD
 wegen wegen SP
 weh weh RV
 weil weil CS
@@ -1449,6 +1880,40 @@ welchs welcher DTANS
 welchs welcher DTNNS
 welchs welcher PTANS00
 welchs welcher PTNNS00
+=======
+wegen wegen SP000
+weh weh RV
+weil weil CS
+weiter weiter RV
+welche welch DTA0P
+welche welch DTAFS
+welche welch DTN0P
+welche welch DTNFS
+welche welch PTA0P00
+welche welch PTAFS00
+welche welch PTN0P00
+welche welch PTNFS00
+welchem welch DTDMS
+welchem welch DTDNS
+welchem welch PTDMS00
+welchem welch PTDNS00
+welchen welch DTAMS
+welchen welch DTD0P
+welchen welch PTAMS00
+welchen welch PTD0P00
+welcher welch DTDFS
+welcher welch DTNMS
+welcher welch PTDFS00
+welcher welch PTNMS00
+welches welch DTANS
+welches welch DTNNS
+welches welch PTANS00
+welches welch PTNNS00
+welchs welch DTANS
+welchs welch DTNNS
+welchs welch PTANS00
+welchs welch PTNNS00
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 wem wer PTD0000
 wen wer PTA0000
 wenn wenn CS
@@ -1458,7 +1923,11 @@ wer wer PTN0000
 weshalb weshalb PT00000
 wessen wer PTG0000
 wider wider RV
+<<<<<<< HEAD
 wider wider SP
+=======
+wider wider SP000
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 wie wie CC
 wie wie CM
 wie wie CS
@@ -1470,7 +1939,11 @@ wieviel wie_viel PT00000
 wieviele wie_viele DT000
 wieviele wie_viele PT00000
 wiewohl wiewohl CS
+<<<<<<< HEAD
 willen willen SC
+=======
+willen willen SC000
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 wir wir PPN0P10
 wo wo PT00000
 wogegen wogegen CS
@@ -1492,6 +1965,7 @@ wovor wovor PT00000
 wozu wozu PR00000
 wozu wozu PT00000
 während während CS
+<<<<<<< HEAD
 während während SP
 zu zu RV
 zu zu SP
@@ -1501,6 +1975,17 @@ zugrunde zugrunde RV
 zugunsten zugunsten SP
 zugute zugute RV
 zuliebe zuliebe SS
+=======
+während während SP000
+zu zu RV
+zu zu SP000
+zu zu SZ000
+zufrieden zufrieden RV
+zugrunde zugrunde RV
+zugunsten zugunsten SP000
+zugute zugute RV
+zuliebe zuliebe SS000
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 zumal zumal CS
 zunichte zunichte RV
 zurecht zurecht RV
@@ -1511,6 +1996,7 @@ zutage zutage RV
 zuteil zuteil RV
 zuvor zuvor RV
 zuwider zuwider RV
+<<<<<<< HEAD
 zuzüglich zuzüglich SP
 zwecks zwecks SP
 zwischen zwischen RV
@@ -1522,3 +2008,38 @@ zwischen zwischen SP
 überein überein RV
 überhand überhand RV
 übrig übrig RV
+=======
+zuzüglich zuzüglich SP000
+zwecks zwecks SP000
+zwischen zwischen RV
+zwischen zwischen SP000
+übel übel RV
+über über RV
+über über SP000
+über über SS000
+überein überein RV
+überhand überhand RV
+übrig übrig RV
+eins eins ZU
+zwei zwei ZU
+drei drei ZU
+vier vier ZU
+fünf fünf ZU
+sechs sechs ZU
+sieben sieben ZU
+acht acht ZU
+neun neun ZU
+zehn zehn ZU
+zwanzig zwanzig ZU
+dreißig dreißig ZU
+vierzig vierzig ZU
+fünfzig fünfzig ZU
+sechzig sechzig ZU
+siebzig siebzig ZU
+achtzig achtzig ZU
+neunzig neunzig ZU
+hundert hundert ZU
+tausend tausend ZU
+million million ZU
+milliarde milliarde ZU
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f

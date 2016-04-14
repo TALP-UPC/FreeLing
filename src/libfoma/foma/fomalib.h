@@ -43,7 +43,11 @@ extern "C" {
 #endif
 
 /* deal with newer API for zlib */
+<<<<<<< HEAD
 #if ZLIB_VERNUM < 0x1280
+=======
+#if ZLIB_VERNUM < 0x1252
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 #define gzFile gzFile*
 #endif
 

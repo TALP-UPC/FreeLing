@@ -26,9 +26,15 @@ NP00G00 N pos=noun|type=proper|neclass=location
 NP00O00 N pos=noun|type=proper|neclass=organization
 NP00V00 N pos=noun|type=proper|neclass=other
 NP00000 N pos=noun|type=proper
+<<<<<<< HEAD
 NP0P000 N pos=noun|type=proper|num=p
 NNP N pos=noun|type=proper
 NNPS N pos=noun|type=proper|num=p
+=======
+NP0P000 N pos=noun|type=proper|num=plural
+NNP N pos=noun|type=proper
+NNPS N pos=noun|type=proper|num=plural
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 NP N pos=noun|type=proper
 CC CC pos=conjunction|type=coordinating
 DT DT pos=determiner
@@ -38,8 +44,13 @@ JJ J pos=adjective
 JJR J pos=adjective|degree=comparative
 JJS J pos=adjective|degree=superlative
 MD MD pos=verb|type=modal
+<<<<<<< HEAD
 NN N pos=noun|num=s
 NNS N pos=noun|num=p
+=======
+NN N pos=noun|num=singular
+NNS N pos=noun|num=plural
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 PDT PDT pos=determiner|type=predeterminer
 POS POS pos=adposition|type=possessive
 PRP PRP pos=pronoun|type=personal

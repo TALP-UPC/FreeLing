@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 0 num=s 160797
 1 pos=noun 98723
 2 gen=m 92059
@@ -7,12 +8,27 @@
 6 type=preposition 64673
 7 pos=adposition 64673
 8 num=p 56519
+=======
+0 num=singular 160797
+1 pos=noun 98723
+2 gen=masculine 92059
+3 type=common 75181
+4 gen=feminine 67892
+5 pos=determiner 67357
+6 type=preposition 64673
+7 pos=adposition 64673
+8 num=plural 56519
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 9 pos=verb 55392
 10 pos=punctuation 52924
 11 type=article 49896
 12 type=main 46661
 13 person=3 42864
+<<<<<<< HEAD
 14 gen=c 33844
+=======
+14 gen=common 33844
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 15 mood=indicative 32402
 16 type=comma 24387
 17 pos=adjective 24183
@@ -23,7 +39,11 @@
 22 tense=present 18534
 23 pos=adverb 15369
 24 type=period 14171
+<<<<<<< HEAD
 25 num=n 12773
+=======
+25 num=invariable 12773
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 26 type=coordinating 12501
 27 type=indefinite 12488
 28 tense=past 9884
@@ -36,7 +56,11 @@
 35 type=semiauxiliary 5140
 36 type=personal 4635
 37 type=possessive 4420
+<<<<<<< HEAD
 38 possessornum=n 3983
+=======
+38 possessornum=invariable 3983
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 39 type=auxiliary 3591
 40 tense=imperfect 3337
 41 person=1 3152
@@ -61,8 +85,13 @@
 60 type=interrogative 395
 61 type=semicolon 259
 62 mood=imperative 252
+<<<<<<< HEAD
 63 possessornum=s 220
 64 possessornum=p 217
+=======
+63 possessornum=singular 220
+64 possessornum=plural 217
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 65 case=nominative 127
 66 case=oblique 98
 67 type=exclamationmark 94

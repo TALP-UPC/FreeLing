@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 0 num=s 89765
 1 pos=noun 58284
 2 type=common 49392
@@ -6,6 +7,16 @@
 5 pos=verb 37113
 6 pos=punctuation 35544
 7 num=p 35435
+=======
+0 num=singular 89765
+1 pos=noun 58284
+2 type=common 49392
+3 gen=masculine 47205
+4 gen=feminine 38541
+5 pos=verb 37113
+6 pos=punctuation 35544
+7 num=plural 35435
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 8 degree=positive 33139
 9 type=general 31642
 10 case=nominative 29210
@@ -18,7 +29,11 @@
 17 type=main 20649
 18 vform=present 20238
 19 pos=conjunction 18210
+<<<<<<< HEAD
 20 gen=n 18167
+=======
+20 gen=neuter 18167
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 21 type=comma 17551
 22 type=auxiliary 16464
 23 pos=pronoun 15553
@@ -45,7 +60,11 @@
 44 type=parenthesis 2292
 45 punctenclose=close 2266
 46 vform=infinitive 2089
+<<<<<<< HEAD
 47 num=d 2015
+=======
+47 num=dual 2015
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 48 type=quotation 1938
 49 type=possessive 1938
 50 definite=yes 1916
@@ -60,13 +79,18 @@
 59 type=interrogative 1089
 60 type=hyphen 1073
 61 pos=residual 759
+<<<<<<< HEAD
 62 possessornum=s 741
+=======
+62 possessornum=singular 741
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 63 type=colon 731
 64 degree=superlative 685
 65 type=foreign 653
 66 pos=abbreviation 650
 67 type=indefinite 634
 68 animate=yes 569
+<<<<<<< HEAD
 69 possessornum=p 519
 70 vform=imperative 459
 71 type=relative 410
@@ -80,9 +104,28 @@
 79 type=slash 180
 80 clitic=bound 171
 81 possessornum=d 49
+=======
+69 possessornum=plural 519
+70 vform=imperative 459
+71 type=relative 410
+72 type=questionmark 366
+73 possessorgen=masculine 361
+74 type=semicolon 284
+75 type=other 281
+76 type=negative 242
+77 possessorgen=feminine 222
+78 type=exclamationmark 205
+79 type=slash 180
+80 clitic=bound 171
+81 possessornum=dual 49
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 82 pos=interjection 44
 83 vform=supine 24
 84 type=percentage 15
 85 type=curlybracket 5
 86 type=squarebracket 2
+<<<<<<< HEAD
 87 possessorgen=n 2
+=======
+87 possessorgen=neuter 2
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f

@@ -3,7 +3,11 @@
 DependencyTreeler ./dep/config.dat
 
 ## Tagset description file
+<<<<<<< HEAD
 Tagset ./tagset.dat
+=======
+Tagset ../tagset.dat
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 </Dependencies>
 
 ## No SRL for Slovene available,

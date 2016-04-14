@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 0 num=s 273313
 1 pos=noun 165780
 2 type=common 130759
@@ -6,12 +7,26 @@
 5 case=nominative 108707
 6 case=dative 90783
 7 num=p 90653
+=======
+0 num=singular 273313
+1 pos=noun 165780
+2 type=common 130759
+3 gen=feminine 117516
+4 gen=masculine 110379
+5 case=nominative 108707
+6 case=dative 90783
+7 num=plural 90653
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 8 pos=punctuation 82990
 9 pos=determiner 81715
 10 pos=verb 76725
 11 case=accusative 73655
 12 type=definite 69597
+<<<<<<< HEAD
 13 gen=n 68513
+=======
+13 gen=neuter 68513
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 14 pos=adposition 67552
 15 type=preposition 63825
 16 person=3 60257

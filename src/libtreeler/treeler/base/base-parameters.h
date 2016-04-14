@@ -117,11 +117,19 @@ namespace treeler {
 
 
     /* compute the inner product of W with a batch of feature vectors */
+<<<<<<< HEAD
     void dot(double* const S, 
 	     const struct Fvec* const F,
 	     const int R) const {
       for (int r = 0; r < R; ++r) { S[r] = D::dot(F + r); }
     }
+=======
+    //    void dot(double* const S, 
+    //	     const struct Fvec* const F,
+    //	     const int R) const {
+    //      for (int r = 0; r < R; ++r) { S[r] = D::dot(F + r); }
+    //      }
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
     
     /* compute the inner product of W with a batch of feature vectors */
     void dot(double* const S, 

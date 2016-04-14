@@ -36914,7 +36914,11 @@ baile NC-VMM-VMS NC 4 VMM 0 VMS 0
 baja AQ-NC-VMI-VMM AQ 15 NC 19 VMI 2 VMM 0
 bajada NC-VMP NC 5 VMP 1
 bajas AQ-NC-VMI AQ 6 NC 8 VMI 0
+<<<<<<< HEAD
 bajo AQ-NC-RG-SP-VMI AQ 20 NC 1 RG 0 SP 94 VMI 0
+=======
+bajo AQ-NC-RG-SP-VMI AQ 7 NC 1 RG 0 SP 94 VMI 1
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 bajos AQ-NC AQ 10 NC 1
 bala NC-VMI-VMM NC 4 VMI 0 VMM 0
 balear AQ-NC-VMN AQ 5 NC 0 VMN 0
@@ -38681,6 +38685,10 @@ peruana AQ-NC AQ 9 NC 1
 peruano AQ-NC AQ 7 NC 0
 pesado AQ-NC-VMP AQ 4 NC 0 VMP 2
 pesca NC-VMI-VMM NC 7 VMI 0 VMM 0
+<<<<<<< HEAD
+=======
+pescado NC-VMP NC 5 VMP 1
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 pescadores AQ-NC AQ 0 NC 4
 peso NC-VMI NC 23 VMI 0
 pesquero AQ-NC AQ 2 NC 2

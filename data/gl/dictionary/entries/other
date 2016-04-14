@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 á a+a SPS00+DA0FS0
 ó ó I
 ó a+o SPS00+DA0MS0
@@ -6,6 +7,16 @@ a o DA0FS0
 a o PP3FSA00
 abur abur I
 agás agás SPS00
+=======
+á a+a SP+DA0FS0
+ó ó I
+ó a+o SP+DA0MS0
+a a SP
+a o DA0FS0
+a o PP3FSA00
+abur abur I
+agás agás SP
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 ah ah I
 ai ai I
 ala ala I
@@ -27,9 +38,15 @@ ambos ambos DI0MP0
 ambos ambos PI0MP000
 amén amén I
 aínda aínda CS
+<<<<<<< HEAD
 ante ante SPS00
 ao a+o SPS00+DA0MS0
 aos a+os SPS00+DA0MP0
+=======
+ante ante SP
+ao a+o SP+DA0MS0
+aos a+os SP+DA0MP0
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 aquel aquel DD0MS0
 aquel aquel PD0MS000
 aquela aquel DD0FS0
@@ -46,6 +63,7 @@ aquilo aquilo PD0CN000
 arre arre I
 as o DA0FP0
 as o PP3FPA00
+<<<<<<< HEAD
 até até SPS00
 ata ata SPS00
 bah bah I
@@ -54,6 +72,16 @@ cá ca+a CS+DA
 có ca+o CS+DA
 ca ca CS
 cabo cabo SPS00
+=======
+até até SP
+ata ata SP
+bah bah I
+baixo baixo SP
+cá ca+a CS+DA
+có ca+o CS+DA
+ca ca CS
+cabo cabo SP
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 cada cada DI0NN0
 cada cada PI0CN000
 cal cal PR0CS000
@@ -88,19 +116,30 @@ chas che+as PP+PP
 che che PP2CSD00
 cho che+o PP+PP
 chos che+os PP+PP
+<<<<<<< HEAD
 co con+o SPS00+DA
 coa con+a SPS00+DA
 coas con+as SPS00+DA
+=======
+co con+o SP+DA
+coa con+a SP+DA
+coas con+as SP+DA
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 coma coma CS
 comigo comigo PP1CSO00
 como como CS
 como como PR0CN000
+<<<<<<< HEAD
 con con SPS00
+=======
+con con SP
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 cona cona I
 connosco connosco PP1CPO00
 conque conque CS
 consigo consigo PP3CSO00
 contigo contigo PP2CSO00
+<<<<<<< HEAD
 contra contra SPS00
 convosco convosco PP2CPO00
 cos con+os SPS00+DA
@@ -110,10 +149,22 @@ cun con+un SPS00+*
 cunha con+unha SPS00+*
 cunhas con+unhas SPS00+*
 cuns con+uns SPS00+*
+=======
+contra contra SP
+convosco convosco PP2CPO00
+cos con+os SP+DA
+cás ca+as CS+DA
+cós ca+os CS+DA
+cun con+un SP+*
+cunha con+unha SP+*
+cunhas con+unhas SP+*
+cuns con+uns SP+*
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 cuxa cuxo PR0FS000
 cuxas cuxo PR0FP000
 cuxo cuxo PR0MS000
 cuxos cuxo PR0MP000
+<<<<<<< HEAD
 da de+a SPS00+DA
 dalgún de+algún SPS00+*
 dalgúns de+algúns SPS00+*
@@ -171,6 +222,65 @@ dunha de+unha SPS00+*
 dunhas de+unhas SPS00+*
 duns de+uns SPS00+*
 durante durante SPS00
+=======
+da de+a SP+DA
+dalgún de+algún SP+*
+dalgúns de+algúns SP+*
+dalgunha de+algunha SP+*
+dalgunhas de+algunhas SP+*
+dalgures de+algures SP+RG
+daquel de+aquel SP+*
+daquela daquela CS
+daquela de+aquela SP+*
+daquelas de+aquelas SP+*
+daqueles de+aqueles SP+*
+daqueloutra de+aquela+outra SP+*+*
+daqueloutras de+aquelas+outras SP+*+*
+daqueloutro de+aquel+outro SP+*+*
+daqueloutros de+aqueles+outros SP+*+*
+daquilo de+aquilo SP+PD
+das de+as SP+DA
+de de SP
+deica deica SP
+del de+el SP+PP
+dela de+ela SP+PP3FS000
+delas de+elas SP+PP3FP000
+deles de+eles SP+PP
+demais demais DI0CN0
+dende dende SP
+desa de+esa SP+*
+desas de+esas SP+*
+desde desde SP
+dese de+ese SP+DD
+dese de+ese SP+PD
+deste de+este SP+*
+desoutra de+esa+outra SP+*+*
+desoutras de+esas+outras SP+*+*
+desoutro de+ese+outro SP+*+*
+desoutros de+eses+outros SP+*+*
+desta de+esta SP+*
+destas de+estas SP+*
+deses de+eses SP+DD
+deses de+eses SP+PD
+destes de+estes SP+*
+destoutra de+esta+outra SP+*+*
+destoutras de+estas+outras SP+*+*
+destoutro de+este+outro SP+*+*
+destoutros de+estes+outros SP+*+*
+diso de+iso SP+PD0CN000
+disto de+isto SP+PD
+do de+o SP+DA
+dos de+os SP+DA
+doutra de+outra SP+*
+doutras de+outras SP+*
+doutro de+outro SP+*
+doutros de+outros SP+*
+dun de+un SP+*
+dunha de+unha SP+*
+dunhas de+unhas SP+*
+duns de+uns SP+*
+durante durante SP
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 e e CC
 ea ea I
 eh eh I
@@ -179,13 +289,21 @@ ela el PP3FS000
 elas el PP3FP000
 eles el PP3MP000
 emporiso emporiso CC
+<<<<<<< HEAD
 en en SPS00
+=======
+en en SP
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 entón entón CS
 entrambas entrambos DI0FP0
 entrambas entrambos PI0FP000
 entrambos entrambos DI0MP0
 entrambos entrambos PI0MP000
+<<<<<<< HEAD
 entre entre SPS00
+=======
+entre entre SP
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 entrementres entrementres CS
 entrámbolas entrambas+as DI+DA
 entrámbolos entrambos+os DI+DA
@@ -215,7 +333,11 @@ estoutras estas+outras DD+*
 estoutro este+outro DD+*
 estoutros estes+outros DD+*
 eu eu PP1CSN00
+<<<<<<< HEAD
 excepto excepto SPS00
+=======
+excepto excepto SP
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 hurra hurra I
 inclusive inclusive CS
 incluso incluso CS
@@ -244,7 +366,11 @@ mas me+as PP+PP
 ámbalas ambas+as DI+DA
 ámbolos ambos+os DI+DA
 me me PP1CS000
+<<<<<<< HEAD
 mediante mediante SPS00
+=======
+mediante mediante SP
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 mentres mentres CS
 mesma mesmo DI0FS0
 mesma mesmo PI0FS000
@@ -269,6 +395,7 @@ moito moito PI0MS000
 moitos moito DI0MP0
 moitos moito PI0MP000
 mos me+os PP+PP
+<<<<<<< HEAD
 na en+a SPS00+DA
 nada nada PI0CN000
 nalgún en+algún SPS00+*
@@ -307,6 +434,46 @@ nestoutra en+esta+outra SPS00+*+*
 nestoutras en+estas+outras SPS00+*+*
 nestoutro en+este+outro SPS00+*+*
 nestoutros en+estes+outros SPS00+*+*
+=======
+na en+a SP+DA
+nada nada PI0CN000
+nalgún en+algún SP+*
+nalgúns en+algúns SP+*
+nalgunha en+algunha SP+*
+nalgunhas en+algunhas SP+*
+nalgures en+algures SP+RG
+namentres namentres CS
+naquel en+aquel SP+*
+naquela en+aquela SP+*
+naquelas en+aquelas SP+*
+naqueles en+aqueles SP+*
+naqueloutra en+aquela+outra SP+*+*
+naqueloutras en+aquelas+outras SP+*+*
+naqueloutro en+aquel+outro SP+*+*
+naqueloutros en+aqueles+outros SP+*+*
+naquilo en+aquilo SP+PD
+nas en+as SP+DA
+nel en+el SP+PP
+nela en+ela SP+PP
+nelas en+elas SP+PP
+neles en+eles SP+PP
+nesa en+esa SP+*
+nesas en+esas SP+*
+nese en+ese SP+*
+neses en+eses SP+*
+nesoutra en+esa+outra SP+*+*
+nesoutras en+esas+outras SP+*+*
+nesoutro en+ese+outro SP+*+*
+nesoutros en+eses+outros SP+*+*
+nesta en+esta SP+*
+nestas en+estas SP+*
+neste en+este SP+*
+nestes en+estes SP+*
+nestoutra en+esta+outra SP+*+*
+nestoutras en+estas+outras SP+*+*
+nestoutro en+este+outro SP+*+*
+nestoutros en+estes+outros SP+*+*
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 nin nin CC
 ningún ningún DI0MS0
 ningún ningún PI0MS000
@@ -317,11 +484,19 @@ ningunha ningún DI0FS0
 ningunha ningún PI0FS000
 ningunhas ningún DI0FP0
 ningunhas ningún PI0FP000
+<<<<<<< HEAD
 niso en+iso SPS00+PD
 nisto en+isto SPS00+PD
 nó-las nós+as PP+DA
 nó-los nós+os PP+DA
 no en+o SPS00+DA0MS0
+=======
+niso en+iso SP+PD
+nisto en+isto SP+PD
+nó-las nós+as PP+DA
+nó-los nós+os PP+DA
+no en+o SP+DA0MS0
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 no-la nos+a PP+DA
 nola nos+a PP+PP
 no-las nos+as PP+DA
@@ -332,13 +507,18 @@ no-los nos+os PP+DA
 nolos nos+os PP+PP
 nos nos PP1CP000
 nos o PP3MPA00
+<<<<<<< HEAD
 nos en+os SPS00+DA0MP0
+=======
+nos en+os SP+DA0MP0
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 nosa noso DP1FSP
 nosas noso DP1FPP
 noso noso DP1MSP
 nosos noso DP1MPP
 nosoutras nosoutros PP1FPO00
 nosoutros nosoutros PP1MPO00
+<<<<<<< HEAD
 noutra en+outra SPS00+*
 noutras en+outras SPS00+*
 noutro en+outro SPS00+*
@@ -348,6 +528,17 @@ nun en+un SPS00+*
 nunha en+unha SPS00+*
 nunhas en+unhas SPS00+*
 nuns en+uns SPS00+*
+=======
+noutra en+outra SP+*
+noutras en+outras SP+*
+noutro en+outro SP+*
+noutros en+outros SP+*
+nós nós PP1CPO00
+nun en+un SP+*
+nunha en+unha SP+*
+nunhas en+unhas SP+*
+nuns en+uns SP+*
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 o o DA0MS0
 o o PP3MSA00
 oh oh I
@@ -369,6 +560,7 @@ outros outro DI0MP0
 outros outro PI0MP000
 oxalá oxalá I
 paf paf I
+<<<<<<< HEAD
 para para SPS00
 pataplún pataplún I
 pero pero CC
@@ -378,6 +570,17 @@ polos por+os SPS00+DA0MP0
 pola por+a SPS00+DA0FS0
 polas por+as SPS00+DA0FP0
 por por SPS00
+=======
+para para SP
+pataplún pataplún I
+pero pero CC
+pois pois CS
+polo por+o SP+DA0MS0
+polos por+os SP+DA0MP0
+pola por+a SP+DA0FS0
+polas por+as SP+DA0FP0
+por por SP
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 porque porque CS
 pouca pouco DI0FS0
 pouca pouco PI0FS000
@@ -415,6 +618,7 @@ quer quer CC
 recoiro recoiro I
 ren ren PI0CN000
 res res PI0CN000
+<<<<<<< HEAD
 ós a+os SPS00+DA0MP0
 súa seu DP3FS0
 saúde saúde I
@@ -424,6 +628,17 @@ se se CS
 se se PP3CN000
 segundo segundo SPS00
 sen sen SPS00
+=======
+ós a+os SP+DA0MP0
+súa seu DP3FS0
+saúde saúde I
+salvo salvo SP
+súas seu DP3FP0
+se se CS
+se se PP3CN000
+segundo segundo SP
+sen sen SP
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 senllas senllos DI0FP0
 senllos senllos DI0MP0
 senón senón CC
@@ -431,8 +646,13 @@ seu seu DP3MS0
 seus seu DP3MP0
 sexa sexa CS
 si si PP3CNO00
+<<<<<<< HEAD
 so so SPS00
 sobre sobre SPS00
+=======
+so so SP
+sobre sobre SP
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 túa teu DP2FSS
 tal tal DI0CS0
 tales tal DI0CP0
@@ -459,11 +679,19 @@ todo todo DI0MS0
 todo todo PI0MS000
 todos todo DI0MP0
 todos todo PI0MP000
+<<<<<<< HEAD
 trala tras+a SPS00+DA
 tralas tras+as SPS00+DA
 tralo tras+o SPS00+DA0MS0
 tralos tras+os SPS00+DA0MP0
 tras tras SPS00
+=======
+trala tras+a SP+DA
+tralas tras+as SP+DA
+tralo tras+o SP+DA0MS0
+tralos tras+os SP+DA0MP0
+tras tras SP
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 uf uf I
 un un DI0MS0
 un un PI0MS000

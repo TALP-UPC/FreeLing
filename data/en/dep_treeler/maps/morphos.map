@@ -1,10 +1,18 @@
 0 pos=noun 249732
 1 pos=verb 138651
+<<<<<<< HEAD
 2 num=s 136903
 3 pos=punctuation 120888
 4 pos=preposition 97001
 5 pos=determiner 88299
 6 num=p 59211
+=======
+2 num=singular 136903
+3 pos=punctuation 120888
+4 pos=preposition 97001
+5 pos=determiner 88299
+6 num=plural 59211
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 7 type=proper 53618
 8 pos=adjective 51540
 9 type=comma 47473

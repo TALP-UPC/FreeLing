@@ -27,7 +27,11 @@ Fra Fra pos=punctuation|type=quotation|punctenclose=open
 Frc Frc pos=punctuation|type=quotation|punctenclose=close
 Fz Fz pos=punctuation|type=other
 NNP NP pos=noun|type=proper
+<<<<<<< HEAD
 NNPS NP pos=noun|type=proper|num=p
+=======
+NNPS NP pos=noun|type=proper|num=plural
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 NP NP pos=noun|type=proper
 NP00SP0 NP pos=noun|type=proper|neclass=person
 NP00G00 NP pos=noun|type=proper|neclass=location
@@ -42,8 +46,13 @@ JJ JJ pos=adjective
 JJR JJR pos=adjective|degree=comparative
 JJS JJS pos=adjective|degree=superlative
 MD MD pos=verb|type=modal
+<<<<<<< HEAD
 NN NN pos=noun|type=common|num=s
 NNS NNS pos=noun|type=common|num=p
+=======
+NN NN pos=noun|type=common|num=singular
+NNS NNS pos=noun|type=common|num=plural
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 PDT PDT pos=determiner|type=predeterminer
 POS POS pos=adposition|type=possessive
 PRP PRP pos=pronoun|type=personal

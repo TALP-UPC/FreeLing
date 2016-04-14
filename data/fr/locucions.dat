@@ -6,10 +6,17 @@ ab_absurdo ab_absurdo RG I
 ab_origine ab_origine RG I
 à_bout_portant à_bout_portant RG I
 à_brûle-pourpoint à_brûle-pourpoint RG I
+<<<<<<< HEAD
 à_califourchon à_califourchon AQ0CN0 I
 a_capella a_capella RG I
 à_ça_près_<que> à_ça_près_que CS I
 à_cause_<de> à_cause_de SPS00 I
+=======
+à_califourchon à_califourchon AQ0CN00 I
+a_capella a_capella RG I
+à_ça_près_<que> à_ça_près_que CS I
+à_cause_<de> à_cause_de SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 à_ceci_près_<que> à_ceci_près_que CS I
 à_cela_près_<que> à_cela_près_que CS I
 à_ces_mots à_ces_mots RG I
@@ -19,6 +26,7 @@ a_contrario a_contrario RG I
 à_contrecoeur à_contrecoeur RG I
 à_contre-pied à_contre-pied RG I
 à_<cor>_et_à_<cri> à_cor_et_à_cri RG I
+<<<<<<< HEAD
 à_côté_<de> à_côté_de SPS00 I
 à_coup_sûr à_coup_sûr RG I
 à_court_terme à_court_terme AQ0CN0 à_court_terme RG I
@@ -26,6 +34,15 @@ a_contrario a_contrario RG I
 à_demi à_demi RG I
 à_demi-voix à_demi-voix RG I
 ad_hoc ad_hoc AQ0CN0 ad_hoc RG I
+=======
+à_côté_<de> à_côté_de SP I
+à_coup_sûr à_coup_sûr RG I
+à_court_terme à_court_terme AQ0CN00 à_court_terme RG I
+à_défaut_<de> à_défaut_de SP I
+à_demi à_demi RG I
+à_demi-voix à_demi-voix RG I
+ad_hoc ad_hoc AQ0CN00 ad_hoc RG I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 ad_hominem ad_hominem RG I
 ad_libitum ad_libitum RG I
 ad_limina ad_limina RG I
@@ -39,15 +56,24 @@ ad_personam ad_personam RG I
 à_droite à_droite RG I
 ad_valorem ad_valorem RG I
 ad_vitam_aeternam ad_vitam_aeternam RG I
+<<<<<<< HEAD
 afin_<de> afin_de SPS00 I
 afin_<que> afin_que CS I
 à_fond à_fond RG I
 à_force à_force RG I
 à_force_<de> à_force_de SPS00 I
+=======
+afin_<de> afin_de SP I
+afin_<que> afin_que CS I
+à_fond à_fond RG I
+à_force à_force RG I
+à_force_<de> à_force_de SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 a_fortiori a_fortiori RG I
 à_gauche à_gauche RG I
 à_gogo à_gogo RG I
 à_gorge_déployée à_gorge_déployée RG I
+<<<<<<< HEAD
 à_hauteur_<de> à_hauteur_de SPS00 I
 à_hue_et_à_dia à_hue_et_à_dia RG I
 à_huis_clos à_huis_clos AQ0CN0 I
@@ -55,6 +81,15 @@ ainsi_de_suite ainsi_de_suite RG I
 ainsi_<que> ainsi_que CC ainsi_que CS I
 à_jamais à_jamais RG I
 à_jeun à_jeun AQ0CN0 I
+=======
+à_hauteur_<de> à_hauteur_de SP I
+à_hue_et_à_dia à_hue_et_à_dia RG I
+à_huis_clos à_huis_clos AQ0CN00 I
+ainsi_de_suite ainsi_de_suite RG I
+ainsi_<que> ainsi_que CC ainsi_que CS I
+à_jamais à_jamais RG I
+à_jeun à_jeun AQ0CN00 I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 à_juste_titre à_juste_titre RG I
 à_la_bourre à_la_bourre RG I
 à_la_cantonnade à_la_cantonnade RG I
@@ -64,6 +99,7 @@ ainsi_<que> ainsi_que CC ainsi_que CS I
 à_l'_arrache à_l'_arrache RG I
 à_la_six-quatre-deux à_la_six-quatre-deux RG I
 a_latere a_latere RG I
+<<<<<<< HEAD
 à_l'_aune_<de> à_l'_aune_de SPS00 I
 à_la_volée à_la_volée RG I
 à_l'_égard_<de> à_l'_égard_de SPS00 I
@@ -79,11 +115,32 @@ alors_même_<que> alors_même_que CS I
 alors_<que> alors_que CS I
 alter_ego alter_ego NCCN000 I
 à_même à_même AQ0CN0 à_même SPS00 I
+=======
+à_l'_aune_<de> à_l'_aune_de SP I
+à_la_volée à_la_volée RG I
+à_l'_égard_<de> à_l'_égard_de SP I
+à_l'_encontre_<de> à_l'_encontre_de SP I
+à_l'_heure_où à_l'_heure_où CS I
+à_l'_instar_<de> à_l'_instar_de SP I
+à_l'_insu_<de> à_l'_insu_de SP I
+allez_donc allez_donc I I
+à_l'_oeil_nu à_l'_oeil_nu RG I
+à_loisir à_loisir RG I
+à_long_terme à_long_terme AQ0CN00 à_long_terme RG I
+alors_même_<que> alors_même_que CS I
+alors_<que> alors_que CS I
+alter_ego alter_ego NCCN000 I
+à_même à_même AQ0CN00 à_même SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 à_merveille à_merveille RG I
 à_mesure_<que> à_mesure_que CS I
 à_mi-chemin à_mi-chemin RG I
 a_minima a_minima RG I
+<<<<<<< HEAD
 à_moins_<de> à_moins_de SPS00 I
+=======
+à_moins_<de> à_moins_de SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 à_moins_<que> à_moins_que CS I
 à_moitié à_moitié RG I
 à_moyen_terme à_moyen_terme RG I
@@ -93,7 +150,11 @@ annus_horribilis annus_horribilis NCMN000 I
 à_nouveau à_nouveau RG I
 à_outrance à_outrance RG I
 à_part à_part RG I
+<<<<<<< HEAD
 à_partir_<de> à_partir_de SPS00 I
+=======
+à_partir_<de> à_partir_de SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 à_partir_du_moment_où à_partir_du_moment_où CS I
 à_peine à_peine RG I
 à_petit_feu à_petit_feu RG I
@@ -109,12 +170,21 @@ après_<que> après_que CS I
 après_tout après_tout RG I
 a_priori a_priori RG I
 à_priori a_priori RG I
+<<<<<<< HEAD
 à_proportion_<de> à_proportion_de SPS00 I
 à_propos à_propos RG I
 à_propos_<de> à_propos_de SPS00 I
 à_quia à_quia AQ0CN0 I
 à_qui_mieux_mieux à_qui_mieux_mieux RG I
 à_raison_<de> à_raison_de SPS00 I
+=======
+à_proportion_<de> à_proportion_de SP I
+à_propos à_propos RG I
+à_propos_<de> à_propos_de SP I
+à_quia à_quia AQ0CN00 I
+à_qui_mieux_mieux à_qui_mieux_mieux RG I
+à_raison_<de> à_raison_de SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 à_reculons à_reculons RG I
 à_savoir à_savoir CC I
 à_seule_fin_<que> à_seule_fin_que CS I
@@ -137,6 +207,7 @@ assez_<du> assez_du DA0MS0 I
 à_tout_prix à_tout_prix RG I
 à_tout_va à_tout_va RG I
 à_tout-va à_tout_va RG I
+<<<<<<< HEAD
 à_travers à_travers SPS00 I
 attendu_<que> attendu_que CS I
 à_tue-tête à_tue-tête RG I
@@ -181,11 +252,58 @@ au_moment_où au_moment_où CS I
 au_moyen_<de> au_moyen_de SPS00 I
 au_noir au_noir RG I
 au_nom_<de> au_nom_de SPS00 I
+=======
+à_travers à_travers SP I
+attendu_<que> attendu_que CS I
+à_tue-tête à_tue-tête RG I
+au_beau_milieu_<de> au_beau_milieu_de SP I
+au_black au_black RG I
+au_bord_<de> au_bord_de SP I
+au_bout_<de> au_bout_de SP I
+au_cas_où au_cas_où CS I
+au_centre au_centre RG I
+au_centre_<de> au_centre_de SP I
+au_comble_<de> au_comble_de SP I
+au_côté_<de> au_côté_de SP I
+au_cours_<de> au_cours_de SP I
+au_débotté au_débotté RG I
+au_dedans au_dedans RG I
+au_dehors au_dehors RG I
+au_dehors_<de> au_dehors_de SP I
+au_delà au-delà RG I
+au_delà_<de> au_delà_de SP I
+au_demeurant au_demeurant RG I
+au-dessous_<de> au-dessous_de SP I
+au-dessus_<de> au-dessus_de SP I
+au_devant_<de> au_devant_de SP I
+au_fait au_fait AQ0CN00 I
+au_fil_de_l'_eau au_fil_de_l'_eau RG I
+au_fond_<de> au_fond_de SP I
+au_fur_et_à_mesure au_fur_et_à_mesure RG I
+au_fur_et_à_mesure_<de> au_fur_et_à_mesure_de SP I
+au_fur_et_à_mesure_<que> au_fur_et_à_mesure_que CS I
+au_grand_dam_<de> au_grand_dam_de SP I
+au_gré_<de> au_gré_de SP I
+au_jour_le_jour au_jour_le_jour RG I
+au_large_<de> au_large_de SP I
+au_lieu_<de> au_lieu_de SP I
+au_long_<de> au_long_de SP I
+au_même_titre_<que> au_même_titre_que CC au_même_titre_que CS I
+au_mieux au_mieux RG I
+au_milieu_<de> au_milieu_de SP I
+au_moins au_moins RG I
+au_moment_<de> au_moment_de SP I
+au_moment_où au_moment_où CS I
+au_moyen_<de> au_moyen_de SP I
+au_noir au_noir RG I
+au_nom_<de> au_nom_de SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 au_petit_bonheur_la_chance au_petit_bonheur_la_chance RG I
 au_plus au_plus RG I
 au_plus_tard au_plus_tard RG I
 au_plus_tôt au_plus_tôt RG I
 au_plus_vite au_plus_vite RG I
+<<<<<<< HEAD
 au_point_<de> au_point_de SPS00 I
 au_point_<que> au_point_que CS I
 au_préalable au_préalable RG I
@@ -196,16 +314,33 @@ au_ras_<de> au_ras_de SPS00 I
 au_revoir au_revoir I I
 au_sein_<de> au_sein_de SPS00 I
 au_sortir_<de> au_sortir_de SPS00 I
+=======
+au_point_<de> au_point_de SP I
+au_point_<que> au_point_que CS I
+au_préalable au_préalable RG I
+auprès_<de> auprès_de SP I
+au_prorata_<de> au_prorata_de SP I
+au_quart_de_tour au_quart_de_tour RG I
+au_ras_<de> au_ras_de SP I
+au_revoir au_revoir I I
+au_sein_<de> au_sein_de SP I
+au_sortir_<de> au_sortir_de SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 aussi_bien aussi_bien RG I
 aussi_bien_<que> aussi_bien_que CS I
 aussi_longtemps_<que> aussi_longtemps_que CS I
 aussi_sec aussi_sec RG I
 aussitôt_<que> aussitôt_que CS I
+<<<<<<< HEAD
 au_sujet_<de> au_sujet_de SPS00 I
+=======
+au_sujet_<de> au_sujet_de SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 autant_<de> autant_de DI0CN0 I
 autant_dire_<que> autant_dire_que CS I
 autant_<du> autant_du DA0MS0 I
 autant_<que> autant_que CS I
+<<<<<<< HEAD
 au_terme_<de> au_terme_de SPS00 I
 au_total au_total RG I
 autour_<de> autour_de SPS00 I
@@ -226,6 +361,28 @@ avant_même_<de> avant_même_de SPS00 I
 avant_même_<que> avant_même_que CS I
 avant_<que> avant_que CS I
 avant_que_<de> avant_que_de SPS00 I
+=======
+au_terme_<de> au_terme_de SP I
+au_total au_total RG I
+autour_<de> autour_de SP I
+au_travers_<de> au_travers_de SP I
+autre_chose autre_chose PP3MN00 I
+au_tréfonds_<de> au_tréfonds_de SP I
+autrement_dit autrement_dit RG I
+au_vu_<de> au_vu_de SP I
+au_vu_et_au_su_<de> au_vu_et_au_su_de SP I
+aux_abois aux_abois AQ0CN00 I
+aux_aguets aux_aguets AQ0CN00 I
+aux_bons_soins_<de> aux_bons_soins_de SP I
+aux_confins_<de> aux_confins_de SP I
+aux_cotés_<de> aux_cotés_de SP I
+aux_dépens_<de> aux_dépens_de SP I
+avant_<de> avant_de SP I
+avant_même_<de> avant_même_de SP I
+avant_même_<que> avant_même_que CS I
+avant_<que> avant_que CS I
+avant_que_<de> avant_que_de SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 avant_tout avant_tout RG I
 à_vau-l'_eau à_vau-l'_eau RG I
 à_vol_d'_oiseau à_vol_d'_oiseau RG I
@@ -244,30 +401,52 @@ bien_<du> bien_du DI0FS0 I
 bien_entendu bien_entendu RG I
 bien_<que> bien_que CS I
 bien_sûr bien_sûr RG I
+<<<<<<< HEAD
 bien_venu bien_venu AQ0MS0 I
 bien_venue bien_venu AQ0FS0 I
 bien_venues bien_venu AQ0FP0 I
 bien_venus bien_venu AQ0MP0 I
+=======
+bien_venu bien_venu AQ0MS00 I
+bien_venue bien_venu AQ0FS00 I
+bien_venues bien_venu AQ0FP00 I
+bien_venus bien_venu AQ0MP00 I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 bille_en_tête bille_en_tête RG I
 <boîte>_de_conserve boîte_de_conserve $1:NC I
 <boîte>_de_nuit boîte_de_nuit $1:NC I
 bon_an_mal_an bon_an_mal_an RG I
 bon_appétit bon_appétit I I
+<<<<<<< HEAD
 bon_marché bon_marché AQ0CN0 I
+=======
+bon_marché bon_marché AQ0CN00 I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 bonne_journée bonne_journée I I
 bonne_nuit bonne_nuit I I
 bottom_line bottom_line NCFS000 I
 bottom_lines bottom_line NCFP000 I
+<<<<<<< HEAD
 bottom_up bottom_up AQ0CN0 I
 bout_à_bout bout_à_bout RG I
 buenas_tardes buenas_tardes I I
 caca_d'_oie caca_d'_oie AQ0CN0 I
+=======
+bottom_up bottom_up AQ0CN00 I
+bout_à_bout bout_à_bout RG I
+buenas_tardes buenas_tardes I I
+caca_d'_oie caca_d'_oie AQ0CN00 I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 çà_et_là çà_et_là RG I
 cahin_caha cahin-caha RG I
 carpe_diem carpe_diem I I
 carpe_diem carpe_diem NCMN000 I
 casus_belli casus_belli NCMN000 I
+<<<<<<< HEAD
 cause_<de> cause_de SPS00 I
+=======
+cause_<de> cause_de SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 ce_faisant ce_faisant RG I
 <centre>_ville centre_ville $1:NC I
 cependant_<que> cependant_que CS I
@@ -298,8 +477,13 @@ comme_si comme_si CS I
 comme_un_coq_en_pâte comme_un_coq_en_pâte RG I
 compact_disk compact_disk NCMN000 I
 compact_disks compact_disk NCMP000 I
+<<<<<<< HEAD
 compte_tenu_<de> compte_tenu_de SPS00 I
 conformément_à conformément_à SPS00 I
+=======
+compte_tenu_<de> compte_tenu_de SP I
+conformément_à conformément_à SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 <conseil>_d'_administration conseil_d'_administration $1:NC I
 considérant_<que> considérant_que CS I
 considéré_<que> considéré_que CS I
@@ -307,8 +491,13 @@ cosa_nostra cosa_nostra NCFS000 I
 cosa_nostras cosa_nostra NCFP000 I
 coude_à_coude coude_à_coude RG I
 coup_sur_coup coup_sur_coup RG I
+<<<<<<< HEAD
 court_termiste court-termiste AQ0CS0 I
 court_termistes court-termiste AQ0CS0 I
+=======
+court_termiste court-termiste AQ0CS00 I
+court_termistes court-termiste AQ0CS00 I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 coûte_que_coûte coûte_que_coûte RG I
 curriculum_vitae curriculum_vitae NCMN000 I
 d'_âge_en_âge d'_âge_en_âge RG I
@@ -328,6 +517,7 @@ d'_autant_plus d'_autant_plus RG I
 d'_autant_plus_<que> d'_autant_plus_que CS I
 d'_autant_<que> d'_autant_que CS I
 d'_autre_part d'_autre_part RG I
+<<<<<<< HEAD
 d'_avis_<de> d'_avis_de SPS00 I
 de_auditu de_auditu RG I
 de_beaucoup_trop_près de_beaucoup_trop_près RG I
@@ -337,20 +527,41 @@ de_but_en_blanc de_but_en_blanc RG I
 de_ce_pas de_ce_pas RG I
 de_ce_<que> de_ce_que CS I
 de_chez de_chez SPS00 I
+=======
+d'_avis_<de> d'_avis_de SP I
+de_auditu de_auditu RG I
+de_beaucoup_trop_près de_beaucoup_trop_près RG I
+de_bon_aloi de_bon_aloi AQ0CN00 I
+de_bric_et_de_broc de_bric_et_de_broc AQ0CN00 I
+de_but_en_blanc de_but_en_blanc RG I
+de_ce_pas de_ce_pas RG I
+de_ce_<que> de_ce_que CS I
+de_chez de_chez SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 de_commodo de_commodo RG I
 de_conserve de_conserve RG I
 de_côté de_côté RG I
 de_crainte_<que> de_crainte_que CS I
 de_cujus de_cujus RG I
+<<<<<<< HEAD
 de_derrière de_derrière SPS00 I
+=======
+de_derrière de_derrière SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 de_façon_<que> de_façon_que CS I
 de_facto de_facto RG I
 de_fait de_fait RG I
 de_fil_en_aiguille de_fil_en_aiguille RG I
 de_force de_force RG I
+<<<<<<< HEAD
 de_fortune de_fortune AQ0CN0 I
 de_front de_front RG I
 de_guingois de_guingois AQ0CN0 I
+=======
+de_fortune de_fortune AQ0CN00 I
+de_front de_front RG I
+de_guingois de_guingois AQ0CN00 I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 de_gustibus de_gustibus RG I
 déjà_<que> déjà_que CS I
 de_jure de_jure RG I
@@ -359,9 +570,15 @@ de_la_sorte de_la_sorte RG I
 delirium_tremens delirium_tremens NCMN000 I
 de_loin de_loin RG I
 de_loin_en_loin de_loin_en_loin RG I
+<<<<<<< HEAD
 de_l'_ordre_<de> de_l'_ordre_de SPS00 I
 de_manière_à_ce_<que> de_manière_à_ce_que CS I
 de_manière_à de_manière_à SPS00 I
+=======
+de_l'_ordre_<de> de_l'_ordre_de SP I
+de_manière_à_ce_<que> de_manière_à_ce_que CS I
+de_manière_à de_manière_à SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 de_manière_<que> de_manière_que CS I
 de_même de_même RG I
 de_même_<que> de_même_que CS I
@@ -371,9 +588,15 @@ de_moitié de_moitié RG I
 de_nouveau de_nouveau RG I
 deo_gratias deo_gratias RG I
 de_parce_<que> de_parce_que CS I
+<<<<<<< HEAD
 de_par de_par SPS00 I
 de_part_en_part de_part_en_part RG I
 de_part_et_d'_autre_<de> de_part_et_d'_autre_de SPS00 I
+=======
+de_par de_par SP I
+de_part_en_part de_part_en_part RG I
+de_part_et_d'_autre_<de> de_part_et_d'_autre_de SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 de_part_et_d'_autre de_part_et_d'_autre RG I
 de_peur_<que> de_peur_que CS I
 de_plano de_plano RG I
@@ -382,7 +605,11 @@ de_plus de_plus RG I
 de_plus_en_plus de_plus_en_plus RG I
 de_plus_près de_plus_près RG I
 de_près de_près RG I
+<<<<<<< HEAD
 de_près de_près SPS00 I
+=======
+de_près de_près SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 de_prime_abord de_prime_abord RG I
 de_proche_en_proche de_proche_en_proche RG I
 de_profundis de_profundis RG I
@@ -392,9 +619,15 @@ depuis_<que> depuis_que CS I
 depuis_très_longtemps depuis_très_longtemps RG I
 depuis_très_très_longtemps depuis_très_très_longtemps RG I
 depuis_trop_longtemps depuis_trop_longtemps RG I
+<<<<<<< HEAD
 de_rigueur de_rigueur AQ0CN0 I
 dès_avant dès_avant RG I
 dès_avant dès_avant SPS00 I
+=======
+de_rigueur de_rigueur AQ0CN00 I
+dès_avant dès_avant RG I
+dès_avant dès_avant SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 des_drôle_<de> un_drôle_de DI0CP0 I
 des_fois_<que> des_fois_que CS I
 dès_lors dès_lors RG I
@@ -424,7 +657,11 @@ deus_ex_machina deus_ex_machina NCMN000 I
 deux_à_deux deux_à_deux RG I
 de_visu de_visu RG I
 de_vive_voix de_vive_voix RG I
+<<<<<<< HEAD
 d'_ici_à d'_ici_à SPS00 I
+=======
+d'_ici_à d'_ici_à SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 d'_ici_là d'_ici_là RG I
 dieu_sait_quel dieu_sait_quel DI0MS0 I
 dieu_sait_quelle dieu_sait_quel DI0FS0 I
@@ -436,7 +673,11 @@ don_quichottisme don_quichottisme NCMS000 I
 don_quichottismes don_quichottisme NCMP000 I
 d'_ores_et_déjà d'_ores_et_déjà RG I
 dos_à_dos dos_à_dos RG I
+<<<<<<< HEAD
 du_côté_<de> du_côté_de SPS00 I
+=======
+du_côté_<de> du_côté_de SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 du_fait_<que> du_fait_que CS I
 du_moins du_moins RG I
 du_moment_<que> du_moment_que CS I
@@ -447,6 +688,7 @@ ecce_homo ecce_homo RG I
 eh_ben eh_ben I I
 eh_bien eh_bien I I
 eh_quoi eh_quoi I I
+<<<<<<< HEAD
 en_absence_<de> en_absence_de SPS00 I
 en_accord_avec en_accord_avec SPS00 I
 en_admettant_<que> en_admettant_que CS I
@@ -481,11 +723,48 @@ en_delà_<de> en_delà_de SPS00 I
 en_dépit_<de> en_dépit_de SPS00 I
 en_dépit_<que> en_dépit_que CS I
 en_dessous_<de> en_dessous_de SPS00 I
+=======
+en_absence_<de> en_absence_de SP I
+en_accord_avec en_accord_avec SP I
+en_admettant_<que> en_admettant_que CS I
+en_âge_<de> en_âge_de SP I
+en_amont_>de> en_amont_de SP I
+en_arrière_<de> en_arrière_de SP I
+en_arrière en_arrière RG I
+en_aval_<de> en_aval_de SP I
+en_avant_<de> en_avant_de SP I
+en_avant en_avant RG I
+en_bas en_bas RG I
+en_cas_<de> en_cas_de SP I
+en_catimini en_catimini RG I
+en_ce_<que> en_ce_que CS I
+en_ce_sens_<que> en_ce_sens_que CS I
+en_charge en_charge AQ0CN00 I
+en_chien_de_fusil en_chien_de_fusil RG I
+en_commun en_commun RG I
+en_conséquence en_conséquence RG I
+en_contrebas_<de> en_contrebas_de SP I
+encore_<que> encore_que CS I
+en_cours en_cours AQ0CN00 I
+en_cours en_cours RG I
+en_début_<de> en_début_de SP I
+en_deçà_<de> en-deçà_de SP I
+en_deçà en-deçà RG I
+en_dedans_<de> en_dedans_de SP I
+en_dedans en_dedans RG I
+en_définitive en_définitive RG I
+en_dehors_<de> en_dehors_de SP I
+en_delà_<de> en_delà_de SP I
+en_dépit_<de> en_dépit_de SP I
+en_dépit_<que> en_dépit_que CS I
+en_dessous_<de> en_dessous_de SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 en_dessous en_dessous RG I
 en_dessus en_dessus RG I
 en_diable en_diable RG I
 en_effet en_effet RG I
 en_entier en_entier RG I
+<<<<<<< HEAD
 en_exercice en_exercice AQ0CN0 I
 en_face_<de> en_face_de SPS00 I
 en_fait_<de> en_fait_de SPS00 I
@@ -537,25 +816,90 @@ en_revanche en_revanche RG I
 en_rien en_rien RG I
 en_rond en_rond RG I
 en_signe_<de> en_signe_de SPS00 I
+=======
+en_exercice en_exercice AQ0CN00 I
+en_face_<de> en_face_de SP I
+en_fait_<de> en_fait_de SP I
+en_fait en_fait RG I
+en_faveur_<de> en_faveur_de SP I
+en_fin_<de> en_fin_de SP I
+en_général en_général RG I
+en_gros en_gros RG I
+en_guise_<de> en_guise_de SP I
+en_haut_<de> en_haut_de SP I
+en_haut en_haut RG I
+en_hommage_à en_hommage_à SP I
+en_instance_<de> en_instance_de SP I
+en_majorité en_majorité RG I
+en_manière_<de> en_manière_de SP I
+en_manque_<de> en_manque_de SP I
+en_matière_<de> en_matière_de SP I
+en_même_temps en_même_temps RG I
+en_même_temps_<que> en_même_temps_que CS I
+en_milieu_<de> en_milieu_de SP I
+en_moins en_moins RG I
+en_moyenne en_moyenne RG I
+en_outre_<de> en_outre_de SP I
+en_outre en_outre RG I
+en_particulier en_particulier RG I
+en_partie en_partie RG I
+en_perte_<de> en_perte_de SP I
+en_place en_place AQ0CN00 I
+en_plein_centre_<de> en_plein_centre_de SP I
+en_plein_dans en_plein_dans SP I
+en_plein en_plein SP I
+en_plein_sur en_plein_sur SP I
+en_plus_<de> en_plus_de SP I
+en_plus en_plus RG I
+en_porte_à_faux en_porte_à_faux RG I
+en_poste en_poste AQ0CN00 I
+en_principe en_principe RG I
+en_proie_à en_proie_à SP I
+en_quelque_sorte en_quelque_sorte RG I
+en_quelques_sortes en_quelques_sortes RG I
+en_quête_<de> en_quête_de SP I
+en_raison_<de> en_raison_de SP I
+en_rang_d'_oignon en_rang_d'_oignon AQ0CN00 I
+en_réalité en_réalité RG I
+en_regard_<de> en_regard_de SP I
+en_règlement_<de> en_règlement_de SP I
+en_relation_avec en_relation_avec SP I
+en_revanche en_revanche RG I
+en_rien en_rien RG I
+en_rond en_rond RG I
+en_signe_<de> en_signe_de SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 en_somme en_somme RG I
 en_sorte_<que> en_sorte_que CS I
 en_stand-by en_stand-by RG I
 en_supposant_<que> en_supposant_que CS I
 en_sus en_sus RG I
+<<<<<<< HEAD
 en_tant_<que> en_tant_que CS en_tant_que SPS00 I
 en_<terme>_<de> en_terme_de SPS00 I
 en_tête_à_tête en_tête_à_tête RG I
 en_titre en_titre AQ0CN0 I
+=======
+en_tant_<que> en_tant_que CS en_tant_que SP I
+en_<terme>_<de> en_terme_de SP I
+en_tête_à_tête en_tête_à_tête RG I
+en_titre en_titre AQ0CN00 I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 en_tout_cas en_tout_cas RG I
 en_tout en_tout RG I
 en_tout_état_de_cause en_tout_état_de_cause RG I
 en_tout_et_pour_tout en_tout_et_pour_tout RG I
+<<<<<<< HEAD
 en_train_<de> en_train_de SPS00 I
+=======
+en_train_<de> en_train_de SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 entre_<autre> entre_autre RG I
 entre_temps entre_temps RG I
 en_un_clin_d'_oeil en_un_clin_d'_oeil RG I
 en_vain en_vain RG I
 en_vérité en_vérité RG I
+<<<<<<< HEAD
 en_vertu_<de> en_vertu_de SPS00 I
 en_vigueur en_vigueur RG I
 en_voie_<de> en_voie_de SPS00 I
@@ -564,6 +908,16 @@ en_vue_<de> en_vue_de SPS00 I
 en_vue en_vue AQ0CN0 I
 <épée>_de_damoclès épée_de_damoclès $1:NC I
 est_-ce_que est-ce_que PT0CN000 I
+=======
+en_vertu_<de> en_vertu_de SP I
+en_vigueur en_vigueur RG I
+en_voie_<de> en_voie_de SP I
+en_vrac en_vrac RG I
+en_vue_<de> en_vue_de SP I
+en_vue en_vue AQ0CN00 I
+<épée>_de_damoclès épée_de_damoclès $1:NC I
+est_-ce_que est-ce_que PT0CN00 I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 et_al. et_alii RG I
 et_alii et_alii RG I
 et_alors et_alors CC I
@@ -575,7 +929,11 @@ et_encore et_encore CC I
 et_même et_même CC et_même CS I
 et_puis et_puis CC I
 et_tutti_quanti et_tutti_quanti RG I
+<<<<<<< HEAD
 eu_égard_à eu_égard_à SPS00 I
+=======
+eu_égard_à eu_égard_à SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 ex_abrupto ex_abrupto RG I
 ex_aequo ex_aequo RG I
 ex_cathedra ex_cathedra RG I
@@ -584,17 +942,29 @@ exempli_gratia exempli_gratia RG I
 ex_nihilo ex_nihilo RG I
 ex_professo ex_professo RG I
 ex_voto ex_voto NCCN000 I
+<<<<<<< HEAD
 face_à face_à SPS00 I
 face_à_face face_à_face AQ0CN0 face_à_face RG I
 fast_follower fast_follower NCMS000 I
 fast_followers fast_follower NCMP000 I
 faute_<de> faute_de SPS00 I
+=======
+face_à face_à SP I
+face_à_face face_à_face AQ0CN00 face_à_face RG I
+fast_follower fast_follower NCMS000 I
+fast_followers fast_follower NCMP000 I
+faute_<de> faute_de SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 faute_de_mieux faute_de_mieux RG I
 <front>_de_mer front_de_mer $1:NC I
 gentleman's_agreement gentleman's_agreement NCMS000 I
 gentleman's_agreements gentleman's_agreement NCMP000 I
 goutte_à_goutte goutte_à_goutte RG I
+<<<<<<< HEAD
 grâce_à grâce_à SPS00 I
+=======
+grâce_à grâce_à SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 gratis_pro_deo gratis RG I
 grosso_merdo grosso_modo RG I
 grosso_modo grosso_modo RG I
@@ -604,9 +974,15 @@ haut_la_main haut_la_main RG I
 help_desk help_desk NCFS000 I
 help_desks help_desk NCFP000 I
 hic_et_nunc hic_et_nunc RG I
+<<<<<<< HEAD
 high_cost high_cost AQ0CS0 I
 high_costs high_cost AQ0CP0 I
 high_tech high-tech AQ0CN0 I
+=======
+high_cost high_cost AQ0CS00 I
+high_costs high_cost AQ0CP00 I
+high_tech high-tech AQ0CN00 I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 homo_africanus homo_africanus NCCN000 I
 homo_economicus homo_economicus NCCN000 I
 homo_erectus homo_erectus NCCN000 I
@@ -627,11 +1003,19 @@ homo_sovieticus homo_sovieticus NCCN000 I
 honoris_causa honoris_causa RG I
 hormis_le_fait_<que> hormis_le_fait_que CS I
 hormis_<que> hormis_que CS I
+<<<<<<< HEAD
 hors_<de> hors_de SPS00 I
 hors_du_commun hors_du_commun AQ0CN0 I
 <hôtel>_de_ville hôtel_de_ville $1:NC I
 id_est id_est CC id_est RG I
 il_y_a il_y_a SPS00 I
+=======
+hors_<de> hors_de SP I
+hors_du_commun hors_du_commun AQ0CN00 I
+<hôtel>_de_ville hôtel_de_ville $1:NC I
+id_est id_est CC id_est RG I
+il_y_a il_y_a SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 in_abstracto in_abstracto RG I
 in_extenso in_extenso RG I
 in_extremis in_extremis RG I
@@ -654,25 +1038,40 @@ jusqu'à_ce_<que> jusqu'à_ce_que CS I
 jusqu'à_présent jusqu'à_présent RG I
 la_plupart_<de> la_plupart_de DI0CN0 I
 la_plupart_du_temps la_plupart_du_temps RG I
+<<<<<<< HEAD
 la_plupart la_plupart PP3CN000 I
 lato_sensu lato_sensu RG I
 le_cas_échéant le_cas_échéant RG I
 le_long_<de> le_long_de SPS00 I
+=======
+la_plupart la_plupart PP3CN00 I
+lato_sensu lato_sensu RG I
+le_cas_échéant le_cas_échéant RG I
+le_long_<de> le_long_de SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 le_mieux le_mieux RG I
 le_moins_<de> le_moins_de DA0CN0 I
 le_moins le_moins RG I
 le_moins_<que> le_moins_que CS I
 le_plus_<de> le_plus_de DA0CN0 I
 le_plus le_plus RG I
+<<<<<<< HEAD
 les_autres l'autre PI0CP000 I
 les_doigts_dans_le_nez les_doigts_dans_le_nez RG I
 les_unes l'un PI0FP000 I
 les_uns l'un PI0MP000 I
+=======
+les_autres l'autre PI0CP00 I
+les_doigts_dans_le_nez les_doigts_dans_le_nez RG I
+les_unes l'un PI0FP00 I
+les_uns l'un PI0MP00 I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 les_yeux_fermés les_yeux_fermés RG I
 le_temps_<que> le_temps_que CS I
 lingua_franca lingua_franca NCFN000 I
 loc._cit. locus_citatus RG I
 locus_citatus locus_citatus RG I
+<<<<<<< HEAD
 lors_<de> lors_de SPS00 I
 low_cost low_cos AQ0CS0 I
 low_costs low_cost AQ0CP0 I
@@ -680,6 +1079,15 @@ l'_une_et_l'_autre l'_un_et_l'_autre PP3FP000 I
 l'_une_ou_l'_autre l'_un_ou_l'_autre PP3FP000 I
 l'_un_et_l'_autre l'_un_et_l'_autre PP3MP000 I
 l'_un_ou_l'_autre l'_un_ou_l'_autre PP3MP000 I
+=======
+lors_<de> lors_de SP I
+low_cost low_cos AQ0CS00 I
+low_costs low_cost AQ0CP00 I
+l'_une_et_l'_autre l'_un_et_l'_autre PP3FP00 I
+l'_une_ou_l'_autre l'_un_ou_l'_autre PP3FP00 I
+l'_un_et_l'_autre l'_un_et_l'_autre PP3MP00 I
+l'_un_ou_l'_autre l'_un_ou_l'_autre PP3MP00 I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 magister_dixit magister_dixit RG I
 main_dans_la_main main_dans_la_main RG I
 maintenant_<que> maintenant_que CS I
@@ -688,6 +1096,7 @@ mais_alors mais_alors CC I
 mais_aussi mais_aussi CC I
 mais_encore mais_encore CC I
 mal_à_propos mal_à_propos RG I
+<<<<<<< HEAD
 mal_en_point mal_en_point AQ0CN0 I
 malgré_le_fait_<que> malgré_le_fait_que CS I
 malgré_<que> malgré_que CS I
@@ -696,6 +1105,16 @@ mal_venue mal_venu AQ0FS0 I
 mal_venues mal_venu AQ0FP0 I
 mal_venu mal_venu AQ0MS0 I
 mal_venus mal_venu AQ0MP0 I
+=======
+mal_en_point mal_en_point AQ0CN00 I
+malgré_le_fait_<que> malgré_le_fait_que CS I
+malgré_<que> malgré_que CS I
+malgré_tout malgré_tout RG I
+mal_venue mal_venu AQ0FS00 I
+mal_venues mal_venu AQ0FP00 I
+mal_venu mal_venu AQ0MS00 I
+mal_venus mal_venu AQ0MP00 I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 manu_militari manu_militari RG I
 mass_media mass_media NCMN000 I
 mea_culpa mea_culpa NCMN000 I
@@ -714,15 +1133,25 @@ motu_proprio motu_proprio RG I
 mutatis_mutandis mutatis_mutandis RG I
 nec_plus_ultra nec_plus_ultra NCMN000 I
 ne_fut_-ce_<que> ne_fut_-ce_que RG I
+<<<<<<< HEAD
 n'en_déplaise_à n'en_déplaise_à SPS00 I
+=======
+n'en_déplaise_à n'en_déplaise_à SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 ne_serait_-ce_<que> ne_serait_-ce_que RG I
 ne_varietur ne_varietur RG I
 nez_à_nez nez_à_nez RG I
 n_fois n_fois RG I
 nihil_obstat nihil_obstat RG I
+<<<<<<< HEAD
 ni_l'_une_ni_l'_autre ni_l'_un_ni_l'_autre PP3FP000 I
 ni_l'_un_ni_l'_autre ni_l'_un_ni_l'_autre PP3MP000 I
 n'_importe_où n'_importe_où PD0CN000 n'importe_où RG I
+=======
+ni_l'_une_ni_l'_autre ni_l'_un_ni_l'_autre PP3FP00 I
+ni_l'_un_ni_l'_autre ni_l'_un_ni_l'_autre PP3MP00 I
+n'_importe_où n'_importe_où PD0CN00 n'importe_où RG I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 n'_importe_<quel> n'_importe_quel $3:DI I
 ni_peu_ni_prou ni_peu_ni_prou RG I
 ni_plus_ni_moins ni_plus_ni_moins RG I
@@ -732,7 +1161,11 @@ nonobstant_<que> nonobstant_que CS I
 non_plus non_plus RG I
 non_plus_<que> non_plus_que CS I
 non_<que> non_que CS I
+<<<<<<< HEAD
 non_sans non_sans SPS00 I
+=======
+non_sans non_sans SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 nota_bene nota_bene RG I
 nouveau_venue nouveau_venu NCFS000 I
 nouveau_venues nouveau_venu NCFS000 I
@@ -773,6 +1206,7 @@ parce_<que> parce_que CS I
 par_coeur par_coeur RG I
 par_conséquent par_conséquent RG I
 par_contre par_contre RG I
+<<<<<<< HEAD
 par_delà par_delà SPS00 I
 par_devers par_devers SPS00 I
 par_égard_à par_égard_à SPS00 I
@@ -785,6 +1219,20 @@ par_le_fait_<que> par_le_fait_que CS I
 par_l'_entremise_<de> par_l'_entremise_de SPS00 I
 par_moments par_moments RG I
 par_rapport_à par_rapport_à SPS00 I
+=======
+par_delà par_delà SP I
+par_devers par_devers SP I
+par_égard_à par_égard_à SP I
+par_égard_pour par_égard_pour SP I
+par_excellence par_excellence AQ0CN00 I
+par_exemple par_exemple RG I
+par_hasard par_hasard RG I
+par_interim par_interim AQ0CN00 I
+par_le_fait_<que> par_le_fait_que CS I
+par_l'_entremise_<de> par_l'_entremise_de SP I
+par_moments par_moments RG I
+par_rapport_à par_rapport_à SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 par_trop par_trop RG I
 pas_à_pas pas_à_pas RG I
 pas_<de> pas_de DI0CN0 I
@@ -792,7 +1240,11 @@ pas_du_tout pas_du_tout RG I
 pas_du_tout pas_du_tout RN I
 pas_encore pas_encore RG I
 pas_encore pas_encore RN I
+<<<<<<< HEAD
 pas_grand-chose pas_grand-chose PI0CS000 I
+=======
+pas_grand-chose pas_grand-chose PI0CS00 I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 pas_mal_<de> pas_mal_de DI0CN0 I
 pas_moins_de pas_moins_de RG I
 pas_plus_de pas_plus_de RG I
@@ -806,11 +1258,19 @@ persona_non_grata persona_non_grata NCCN000 I
 petit_à_petit petit_à_petit RG I
 petit_à_petit petit-à-petit RG I
 peu_à_peu peu_à_peu RG I
+<<<<<<< HEAD
 peu_de_chose peu_de_chose PP3CN000 I
 peu_<de> peu_de SPS00 I
 peu_ou_prou peu_ou_prou RG I
 pied_à_pied pied_à_pied RG I
 plein_<de> plein_de DI0CN0 plein_de SPS00 I
+=======
+peu_de_chose peu_de_chose PP3CN00 I
+peu_<de> peu_de SP I
+peu_ou_prou peu_ou_prou RG I
+pied_à_pied pied_à_pied RG I
+plein_<de> plein_de DI0CN0 plein_de SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 <pleine>_aux_as plein_aux_as $1:AQ I
 plus_avant plus_avant RG I
 plus_<de> plus_de DI0CN0 I
@@ -819,7 +1279,11 @@ plus_jamais plus_jamais RG plus_jamais RN I
 plus_ou_moins plus_ou_moins RG I
 plus_que_jamais plus_que_jamais RG I
 plus_<que> plus_que CS plus_que RG I
+<<<<<<< HEAD
 plutôt_que_<de> plutôt_que_de SPS00 I
+=======
+plutôt_que_<de> plutôt_que_de SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 plutôt_<que> plutôt_que CS I
 point_pour_point point_pour_point RG I
 <pomme>_de_terre pomme_de_terre $1:NC I
@@ -827,9 +1291,15 @@ post_mortem post_mortem RG I
 post_scriptum post_scriptum RG I
 pour_autant pour_autant RG I
 pour_autant_<que> pour_autant_que CS I
+<<<<<<< HEAD
 pour_cause_<de> pour_cause_de SPS00 I
 pour_cette_raison_<que> pour_cette_raison_que CS I
 pour_comble_<de> pour_comble_de SPS00 I
+=======
+pour_cause_<de> pour_cause_de SP I
+pour_cette_raison_<que> pour_cette_raison_que CS I
+pour_comble_<de> pour_comble_de SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 pour_de_bon pour_de_bon RG I
 pour_la_plupart pour_la_plupart RG I
 pour_le_moins pour_le_moins RG I
@@ -840,12 +1310,21 @@ pour_toujours pour_toujours RG I
 pour_une_fois_<que> pour_une_fois_que CS I
 pour_un_peu pour_un_peu RG I
 pourvu_<que> pourvu_que CS I
+<<<<<<< HEAD
 premières_venues premier_venu AQ0FP0 I
 première_venue premier_venu AQ0FS0 I
 premiers_venus premier_venu AQ0MP0 I
 premier_venu premier_venu AQ0MS0 I
 <premier>_<ministre> premier_ministre $2:NC I
 près_<de> près_de SPS00 I
+=======
+premières_venues premier_venu AQ0FP00 I
+première_venue premier_venu AQ0FS00 I
+premiers_venus premier_venu AQ0MP00 I
+premier_venu premier_venu AQ0MS00 I
+<premier>_<ministre> premier_ministre $2:NC I
+près_<de> près_de SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 président_directeur_général président_directeur_général NCMS000 I
 preuve_<que> preuve_que CS I
 prime_time prime_time NCMN000 I
@@ -856,6 +1335,7 @@ punching_ball punching_ball NCMS000 I
 punching_balls punching_ball NCMP000 I
 quand_bien_même quand_bien_même CS I
 quand_même quand_même RG I
+<<<<<<< HEAD
 quant_à quant_à SPS00 I
 <quartier>_<général> quartier_général $1:NC I
 quatre_à_quatre quatre_à_quatre RG I
@@ -866,6 +1346,18 @@ qu'_est_-ce_<que> qu'est-ce_que PT0CN000 I
 qui_de_droit qui_de_droit PP3CS000 I
 qui_est_-ce_qui qui_est-ce_qui PT0CN000 I
 qui_que_ce_soit qui_que_ce_soit PP3CS000 I
+=======
+quant_à quant_à SP I
+<quartier>_<général> quartier_général $1:NC I
+quatre_à_quatre quatre_à_quatre RG I
+quelque_chose quelque_chose PI0MS00 I
+quelque_part quelque_part RG I
+quelque_peu quelque_peu RG I
+qu'_est_-ce_<que> qu'est-ce_que PT0CN00 I
+qui_de_droit qui_de_droit PP3CS00 I
+qui_est_-ce_qui qui_est-ce_qui PT0CN00 I
+qui_que_ce_soit qui_que_ce_soit PP3CS00 I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 quod_erat_demonstrandum quod_erat_demonstrandum RG I
 quoi_<que> quoi_que CS I
 quoi_qu'il_en_soit quoi_qu'il_en_soit RG I
@@ -882,7 +1374,11 @@ sans_doute sans_doute RG I
 sans_oublier_<que> sans_oublier_que CS I
 sans_<que> sans_que CS I
 sans_tambour_ni_trompette sans_tambour_ni_trompette RG I
+<<<<<<< HEAD
 sauf_à sauf_à SPS00 I
+=======
+sauf_à sauf_à SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 sauf_<que> sauf_que CS I
 <sécurité>_<sociale> sécurité_sociale $1:NC I
 selon_<que> selon_que CS I
@@ -901,7 +1397,11 @@ sine_qua_non sine_qua_non RG I
 sinon_<que> sinon_que CS I
 si_peu_<que> si_peu_que CS I
 si_peu si_peu RG I
+<<<<<<< HEAD
 si_près_<de> si_près_de SPS00 I
+=======
+si_près_<de> si_près_de SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 si_tant_est_<que> si_tant_est_que CS I
 site_internet site_internet NCMS000 I
 sites_internet site_internet NCMP000 I
@@ -910,11 +1410,19 @@ site_web site_internet NCMS000 I
 sitôt_<que> sitôt_que CS I
 <société>_<anonyme> société_anonyme $1:NC I
 soit_dit_en_passant soit_dit_en_passant RG I
+<<<<<<< HEAD
 soupe_au_lait soupe_au_lait AQ0CN0 I
 sous_la_forme_<de> sous_la_forme_de SPS00 I
 sous_la_main sous_la_main RG I
 sous_le_coup_<de> sous_le_coup_de SPS00 I
 sous_l'_effet_<de> sous_l'_effet_de SPS00 I
+=======
+soupe_au_lait soupe_au_lait AQ0CN00 I
+sous_la_forme_<de> sous_la_forme_de SP I
+sous_la_main sous_la_main RG I
+sous_le_coup_<de> sous_le_coup_de SP I
+sous_l'_effet_<de> sous_l'_effet_de SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 sous_prétexte_<que> sous_prétexte_que CS I
 sous_réserve_<que> sous_réserve_que CS I
 statu_quo statu_quo NCMN000 I
@@ -923,7 +1431,11 @@ stricto_sensu stricto_sensu RG I
 success_stories success_story NCFP000 I
 success_story success_story NCFS000 I
 sui_generis sui_generis RG I
+<<<<<<< HEAD
 suite_à suite_à SPS00 I
+=======
+suite_à suite_à SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 suivant_<que> suivant_que CS I
 sur_ces_entrefaites sur_ces_entrefaites RG I
 sur_ce sur_ce RG I
@@ -942,12 +1454,20 @@ tant_soit_peu tant_soit_peu RG I
 <tel>_ou_<tel> tel_ou_tel $1:DI tel_et_tel $1:PI I
 <tel>_<quel> tels_quel RG I
 terra_incognita terra_incognita NCFN000 I
+<<<<<<< HEAD
 terre_à_terre terre_à_terre AQ0CN0 I
+=======
+terre_à_terre terre_à_terre AQ0CN00 I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 <terre>_<cuite> terre_cuite $1:NC I
 tête_à_tête tête_à_tête NCMN000 tête_à_tête RG I
 <tirer>_par_les_cheveux tiré_par_les_cheveux $1:VMP I
 <toile>_de_fond toile_de_fond $1:NC I
+<<<<<<< HEAD
 top_down top_down AQ0CN0 I
+=======
+top_down top_down AQ0CN00 I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 toujours_autant toujours_autant RG I
 toujours_mieux toujours_mieux RG I
 toujours_moins toujours_moins RG I
@@ -960,8 +1480,13 @@ tout_à_coup tout_à_coup RG I
 tout_à_fait tout_à_fait RG I
 tout_à_la_fois tout_à_la_fois RG I
 tout_à_l'_heure tout_à_l'_heure RG I
+<<<<<<< HEAD
 tout_au_bout_<de> tout_au_bout_de SPS00 I
 tout_au_long_<de> tout_au_long_de SPS00 I
+=======
+tout_au_bout_<de> tout_au_bout_de SP I
+tout_au_long_<de> tout_au_long_de SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 tout_au_moins tout_au_moins RG I
 tout_au_plus tout_au_plus RG I
 tout_bas tout_bas RG I
@@ -973,6 +1498,7 @@ tout_de_même tout_de_même RG I
 tout_de_suite tout_de_suite RG I
 tout_du_moins tout_du_moins RG I
 tout_d'_un_coup tout_d'_un_coup RG I
+<<<<<<< HEAD
 tout_en_haut_<de> tout_en_haut_de SPS00 I
 tout_juste tout_juste RG I
 tout_le_monde tout_le_monde PP3MS000 I
@@ -980,6 +1506,15 @@ tout_le_temps tout_le_temps RG I
 tout_pareil tout_pareil RG I
 tout_plein_<de> tout_plein_de SPS00 I
 tout_près_<de> tout_près_de SPS00 I
+=======
+tout_en_haut_<de> tout_en_haut_de SP I
+tout_juste tout_juste RG I
+tout_le_monde tout_le_monde PP3MS00 I
+tout_le_temps tout_le_temps RG I
+tout_pareil tout_pareil RG I
+tout_plein_<de> tout_plein_de SP I
+tout_près_<de> tout_près_de SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 un_drôle_<de> un_drôle_de DI0MS0 I
 une_à_une une_à_une RG I
 une_drôle_<de> un_drôle_de DI0FS0 I
@@ -994,14 +1529,24 @@ un_tantinet un_tantinet RG I
 un_tant_soit_peu un_tant_soit_peu RG I
 un_tel un_tel DI0MS0 I
 un_tout_petit_peu un_tout_petit_peu RG I
+<<<<<<< HEAD
 urbi_et_orbi urbi_et_orbi AQ0CN0 urbi_et_orbi RG I
+=======
+urbi_et_orbi urbi_et_orbi AQ0CN00 urbi_et_orbi RG I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 vaille_que_vaille vaille_que_vaille RG I
 ventre_à_terre ventre_à_terre RG I
 ventre_saint_gris ventre_saint_gris RG I
 verbi_gratia verbi_gratia RG I
+<<<<<<< HEAD
 vert_de_gris vert_de_gris AQ0CN0 I
 vice_versa vice_versa RG I
 vis-à-vis_<de> vis-à-vis_de SPS00 I
+=======
+vert_de_gris vert_de_gris AQ0CN00 I
+vice_versa vice_versa RG I
+vis-à-vis_<de> vis-à-vis_de SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 voire_même voire_même CC I
 voix_off voix_off NCFN000 I
 volens_nolens volens_nolens RG I
@@ -1010,7 +1555,11 @@ vraiment_pas vraiment_pas RN I
 vulgum_pecus vulgum_pecus NCMN000 I
 vu_<que> vu_que CS I
 wie_geht's wie_geht's I I
+<<<<<<< HEAD
 y_compris y_compris SPS00 I
+=======
+y_compris y_compris SP I
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 <abandonner>_la_proie_pour_l'_ombre abandonner_la_proie_pour_l'_ombre $1:V I
 <accorder>_foi accorder_foi $1:V I
 <aimer>_mieux_ça aimer_mieux_ça $1:V I

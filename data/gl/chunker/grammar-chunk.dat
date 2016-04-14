@@ -87,7 +87,11 @@ cuantif ==> RG(case).
 cuantif ==> RG(moi).
 
 %Preposicions
+<<<<<<< HEAD
 prep ==> SPS00.
+=======
+prep ==> SP.
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 prep ==> CS(como).
 
 %Preposicions en contracció
@@ -415,7 +419,11 @@ grup-nom-mp ==> n-mp | +n-mp, n-fs | +n-mp, n-ms | +n-mp, n-mp  | +n-mp, n-fp.  
 grup-nom-fs ==> n-fs | +n-fs, n-fs | +n-fs, n-ms | +n-fs, n-mp  | +n-fs, n-fp.  %la palabra cultura (e2)
 grup-nom-fp ==> n-fp | +n-fp, n-fs | +n-fp, n-ms | +n-fp, n-mp  | +n-fp, n-fp.  %las palabras albergue
 
+<<<<<<< HEAD
 sp-de ==> +SPS00(de), sn | +SPCMS(del), grup-nom-ms. 
+=======
+sp-de ==> +SP(de), sn | +SPCMS(del), grup-nom-ms. 
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 
 %%%%%
 
@@ -504,8 +512,13 @@ sn ==> indef-ms, +pnum-ms | indef-fs, +pnum-fs | indef-mp, +pnum-mp | indef-fp, 
 sn ==> indef-ms, +pindef-ms | indef-mp, +pindef-mp | indef-fs, +pindef-fs | indef-fp, +pindef-fp.
 
 %alguno/s de ellos
+<<<<<<< HEAD
 sn ==> pindef-ms, SPS00(de), +psubj-mp | pindef-fs, SPS00(de), +psubj-fp.
 sn ==> pindef-mp, SPS00(de), +psubj-mp | pindef-fp, SPS00(de), +psubj-fp.
+=======
+sn ==> pindef-ms, SP(de), +psubj-mp | pindef-fs, SP(de), +psubj-fp.
+sn ==> pindef-mp, SP(de), +psubj-mp | pindef-fp, SP(de), +psubj-fp.
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 
 %JAB%% sn ==> pindef-mp, +sp-de | pindef-fp, +sp-de | pindef-ms, +sp-de | pindef-fs, +sp-de.
 
@@ -653,7 +666,11 @@ verb ==> VM*<haber>, CS(que), +infinitiu.
 verb ==> VMIP3S0(hai), CS(que), +infinitiu.
 
 
+<<<<<<< HEAD
 grup-sp ==> +SPS00(entre), sn, CC(e), sn.
+=======
+grup-sp ==> +SP(entre), sn, CC(e), sn.
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 parti-flex ==> parti-ms | parti-fs | parti-mp | parti-fp.
 
 gerundi ==> ger | ger-pas | geraux-ser.
@@ -684,12 +701,17 @@ grup-verb ==> +verb | +verb-pass.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %xgg
+<<<<<<< HEAD
 verb ==> VMI*<estar>, SPS00(a), +VMN* | VMS*<estar>, SPS00(a), +VMN*.
+=======
+verb ==> VMI*<estar>, SP(a), +VMN* | VMS*<estar>, SP(a), +VMN*.
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 
 %%perífrasis d'infinitiu en infinitiu  
 %Les formes auxiliars de les peri tbé poden
 %tenir la forma passiva i poden tbé ser simples o compostes
 inf ==>VMN0000(deber), +infinitiu.
+<<<<<<< HEAD
 inf ==>VMN0000(deber), SPS00(de), +infinitiu.
 inf ==>VMN0000(ter), CS(que), +infinitiu.
 inf ==>VMN0000(poder), +infinitiu.
@@ -705,6 +727,23 @@ inf ==>VMN0000(deixar), SPS00(de), +infinitiu.
 inf ==>VMN0000(vir), +infinitiu.
 inf ==>VMN0000(chegar), SPS00(a), +infinitiu.
 inf ==>VAN0000(haber), SPS00(de), +infinitiu.
+=======
+inf ==>VMN0000(deber), SP(de), +infinitiu.
+inf ==>VMN0000(ter), CS(que), +infinitiu.
+inf ==>VMN0000(poder), +infinitiu.
+inf ==>VMN0000(ir), +infinitiu.
+inf ==>VMN0000(empezar), SP(a), +infinitiu.
+inf ==>VMN0000(comezar), SP(a), +infinitiu.
+inf ==>VMN0000(botar), SP(a), +infinitiu.
+inf ==>VMN0000(romper), SP(a), +infinitiu.
+inf ==>VMN0000(volver), +infinitiu.
+inf ==>VMN0000(acabar), SP(de), +infinitiu.
+inf ==>VMN0000(rematar), SP(de), +infinitiu.
+inf ==>VMN0000(deixar), SP(de), +infinitiu.
+inf ==>VMN0000(vir), +infinitiu.
+inf ==>VMN0000(chegar), SP(a), +infinitiu.
+inf ==>VAN0000(haber), SP(de), +infinitiu.
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 
 
 %Perífrasis de gerundi en infinitiu
@@ -733,6 +772,7 @@ inf ==> infaux, VMP00SM(vido), +gerundi.
 
 %%perífrasis d'infinitiu en gerundi
 ger ==>VMG0000(debendo), +infinitiu.
+<<<<<<< HEAD
 ger ==>VMG0000(debendo), SPS00(de), +infinitiu.
 ger ==>VMG0000(tendo), CS(que), +infinitiu.
 ger ==>VMG0000(puidendo), +infinitiu.
@@ -748,6 +788,23 @@ ger ==>VMG0000(deixando), SPS00(de), +infinitiu.
 ger ==>VMG0000(vindo), +infinitiu.
 ger ==>VMG0000(chegando), SPS00(a), +infinitiu.
 ger ==>VAG0000(habendo), SPS00(de), +infinitiu.
+=======
+ger ==>VMG0000(debendo), SP(de), +infinitiu.
+ger ==>VMG0000(tendo), CS(que), +infinitiu.
+ger ==>VMG0000(puidendo), +infinitiu.
+ger ==>VMG0000(indo), +infinitiu.
+ger ==>VMG0000(empezando), SP(a), +infinitiu.
+ger ==>VMG0000(comezando), SP(a), +infinitiu.
+ger ==>VMG0000(botando), SP(a), +infinitiu.
+ger ==>VMG0000(rompendo), SP(a), +infinitiu.
+ger ==>VMG0000(volvendo), +infinitiu.
+
+ger ==>VMG0000(rematando), SP(de), +infinitiu.
+ger ==>VMG0000(deixando), SP(de), +infinitiu.
+ger ==>VMG0000(vindo), +infinitiu.
+ger ==>VMG0000(chegando), SP(a), +infinitiu.
+ger ==>VAG0000(habendo), SP(de), +infinitiu.
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 
 %Perífrasis de gerundi en gerundi : és possible???
 ger ==> VMG0000(estando), +gerundi.
@@ -758,6 +815,7 @@ ger ==> VMG0000(vindo), +gerundi.
 
 % perifrasis verbals indicatives i subjuntives
 verb ==> VMI*<deber>, +infinitiu | VMS*<deber>, +infinitiu.
+<<<<<<< HEAD
 verb ==> VMI*<deber>, SPS00(de), +infinitiu | VMS*<deber>, SPS00(de), +infinitiu.
 verb ==> VMI*<ter>, CS(que), +infinitiu | VMS*<ter>, CS(que), +infinitiu.
 verb ==> VMI*<ter>, SPS00(de), +infinitiu | VMS*<ter>, SPS00(de), +infinitiu.
@@ -767,14 +825,32 @@ verb ==> VMI*<empezar>, SPS00(a), +infinitiu | VMS*<empezar>, SPS00(a), +infinit
 verb ==> VMI*<comezar>, SPS00(a), +infinitiu | VMS*<comezar>, SPS00(a), +infinitiu.
 verb ==> VMI*<botar>, SPS00(a), +infinitiu | VMS*<botar>, SPS00(a), +infinitiu.
 verb ==> VMI*<romper>, SPS00(a), +infinitiu | VMS*<romper>, SPS00(a), +infinitiu.
+=======
+verb ==> VMI*<deber>, SP(de), +infinitiu | VMS*<deber>, SP(de), +infinitiu.
+verb ==> VMI*<ter>, CS(que), +infinitiu | VMS*<ter>, CS(que), +infinitiu.
+verb ==> VMI*<ter>, SP(de), +infinitiu | VMS*<ter>, SP(de), +infinitiu.
+verb ==> VMI*<poder>, +infinitiu | VMS*<poder>, +infinitiu.
+verb ==> VMI*<ir>, +infinitiu | VMS*<ir>, +infinitiu.
+verb ==> VMI*<empezar>, SP(a), +infinitiu | VMS*<empezar>, SP(a), +infinitiu.
+verb ==> VMI*<comezar>, SP(a), +infinitiu | VMS*<comezar>, SP(a), +infinitiu.
+verb ==> VMI*<botar>, SP(a), +infinitiu | VMS*<botar>, SP(a), +infinitiu.
+verb ==> VMI*<romper>, SP(a), +infinitiu | VMS*<romper>, SP(a), +infinitiu.
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 verb ==> VMI*<volver>, +infinitiu | VMS*<volver>, +infinitiu.
 
 verb ==> VMI*<estar>, CA(a_piques_de), +infinitiu | VMS*<estar>, CA(a_piques_de), +infinitiu.
 
+<<<<<<< HEAD
 verb ==> VMI*<acabar>, SPS00(de), +infinitiu | VMS*<acabar>, SPS00(de), +infinitiu.
 verb ==> VMI*<rematar>, SPS00(de), +infinitiu | VMS*<rematar>, SPS00(de), +infinitiu.
 verb ==> VMI*<deixar>, SPS00(de), +infinitiu | VMS*<deixar>, SPS00(de), +infinitiu.
 verb ==> VMI*<chegar>, SPS00(a), +infinitiu | VMS*<chegar>, SPS00(a), +infinitiu.
+=======
+verb ==> VMI*<acabar>, SP(de), +infinitiu | VMS*<acabar>, SP(de), +infinitiu.
+verb ==> VMI*<rematar>, SP(de), +infinitiu | VMS*<rematar>, SP(de), +infinitiu.
+verb ==> VMI*<deixar>, SP(de), +infinitiu | VMS*<deixar>, SP(de), +infinitiu.
+verb ==> VMI*<chegar>, SP(a), +infinitiu | VMS*<chegar>, SP(a), +infinitiu.
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 
 verb ==> VMI*<andar>, +gerundi | VMS*<andar>, +gerundi.
 verb ==> VMI*<comezar>, +gerundi | VMS*<comezar>, +gerundi.
@@ -787,8 +863,13 @@ verb ==> VMI*<seguir>, +gerundi | VMS*<seguir>, +gerundi.
 verb ==> VMI*<rematar>, +gerundi | VMS*<rematar>, +gerundi.
 verb ==> VMI*<vir>, +gerundi | VMS*<vir>, +gerundi.
 
+<<<<<<< HEAD
 verb ==> VMI*<haber>, SPS00(de), +infinitiu | VMS*<haber>, SPS00(de), +infinitiu 
        | VMC*<haber>, SPS00(de), +infinitiu.
+=======
+verb ==> VMI*<haber>, SP(de), +infinitiu | VMS*<haber>, SP(de), +infinitiu 
+       | VMC*<haber>, SP(de), +infinitiu.
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 
 
 %%%%%%%%
@@ -802,6 +883,7 @@ sadv ==> cuantif, +sadv.
 
 %adverbis 'transitius(+/-)'
 
+<<<<<<< HEAD
 sadv ==> +RG(alén), SPS00(de), sn.
 sadv ==> +RG(preto), SPS00(de), sn.
 sadv ==> +RG(cerca), SPS00(de), sn.
@@ -841,6 +923,47 @@ sadv ==> RG(menos), SPS00(de), +sadv.
 sadv ==> RG(fronte), SPS00(a), +sadv.
 sadv ==> RG(xunto), SPS00(a), +sadv.
 sadv ==> RG(xunto), SPS00(de), +sadv.
+=======
+sadv ==> +RG(alén), SP(de), sn.
+sadv ==> +RG(preto), SP(de), sn.
+sadv ==> +RG(cerca), SP(de), sn.
+sadv ==> +RG(lonxe), SP(de), sn.
+sadv ==> +RG(enriba), SP(de), sn.
+sadv ==> +RG(encima), SP(de), sn.
+sadv ==> +RG(debaixo), SP(de), sn.
+sadv ==> +RG(despois), SP(de), sn.
+sadv ==> +RG(antes), SP(de), sn.
+sadv ==> +RG(fóra), SP(de), sn.
+sadv ==> +RG(dentro), SP(de), sn.
+sadv ==> +RG(diante), SP(de), sn.
+sadv ==> +RG(detrás), SP(de), sn.
+sadv ==> +RG(encima), SP(de), sn.
+sadv ==> +RG(máis), SP(de), sn.
+sadv ==> +RG(menos), SP(de), sn.
+sadv ==> +RG(fronte), SP(a), sn.
+sadv ==> +RG(xunto), SP(a), sn.
+sadv ==> +RG(xunto), SP(de), sn.
+
+sadv ==> RG(alén), SP(de), +sn.
+sadv ==> RG(preto), SP(de), +sn.
+sadv ==> RG(cerca), SP(de), +sadv.
+sadv ==> RG(lonxe), SP(de), +sadv.
+sadv ==> RG(enriba), SP(de), +sadv.
+sadv ==> RG(encima), SP(de), +sn.
+sadv ==> RG(debaixo), SP(de), +sadv.
+sadv ==> RG(despois), SP(de), +sadv.
+sadv ==> RG(antes), SP(de), +sadv.
+sadv ==> RG(fóra), SP(de), +sadv.
+sadv ==> RG(dentro), SP(de), +sadv.
+sadv ==> RG(diante), SP(de), +sadv.
+sadv ==> RG(detrás), SP(de), +sadv.
+sadv ==> RG(encima), SP(de), +sadv.
+sadv ==> RG(máis), SP(de), +sadv.
+sadv ==> RG(menos), SP(de), +sadv.
+sadv ==> RG(fronte), SP(a), +sadv.
+sadv ==> RG(xunto), SP(a), +sadv.
+sadv ==> RG(xunto), SP(de), +sadv.
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 
 
 

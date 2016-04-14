@@ -57,7 +57,16 @@ namespace freeling {
     else if (Lang==L"en") who = new dates_en();
     // Russian dates handler
     else if (Lang==L"ru") who = new dates_ru();
+<<<<<<< HEAD
 
+=======
+    // French dates handler
+    else if (Lang==L"fr") who = new dates_fr();
+    // Welsh dates handler (not implemented yet)
+    //else if (Lang==L"cy") who = new dates_cy();
+    // German dates handler
+    else if (Lang==L"de") who = new dates_de();
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
     // Default dates handler.
     else       
       who = new dates_default();

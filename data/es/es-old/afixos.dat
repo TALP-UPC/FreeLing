@@ -1,0 +1,1191 @@
+# ===============================================
+#            Affixation rules file
+# ===============================================
+
+# === Each line is a affixation rule, with the following fields:
+# 1 Affix to erase form word form (e.g: gatito - ito = gat)
+# 2 Affix (* for empty string) to add to the resulting root
+#   to rebuild the lemma that must be searched in dictionary 
+#   (e.g:  gat+o = gato)
+# 3 Regexp condition on the parole tag of found dictionary entry
+# 4 Parole tag for suffixed word (* = keep tag in dictionary entry)
+# 5 Check lemma adding accents
+# 6 Enclitic suffix (special accent behaviour in Spanish)
+# 7 Prevent later modules from assigning more tags to the word
+# 8 Lemma to assign: any combination of: F,R,L,A,<literal> separated with '+'
+#                    where: F=original form, R=root found in dict, 
+# 		            L=lemma in matching dict entry, A=affix
+#                    examples:  A+L=affix+lemma,  R=root,  R+mente= root+"mente"
+# 9 Consider the suffix always, not only for unknown words.
+# 10 How to retokenize the word if necessary (see uer manual).
+#==============================================================
+
+
+<Prefixes>
+anti	*	^NC	AQ0CN0	0	0	1	A+L	0	-
+auto	*	^VM	*	0	0	1	A+L	0	-
+anti-	*	^NC	AQ0CN0	0	0	1	anti+L	0	-
+re	*	^VM	*	0	0	1	A+L	0	-
+semi	*	^RG	*	0	0	1	F	0	-
+semi	*	^AQ	*	0	0	1	A+L	0	-
+semi	*	^VM	*	0	0	1	A+L	0	-
+</Prefixes>
+
+<Suffixes>
+## CSM: -------------- VERB ENDINGS ----------------------
+## E.g. cantaua. Just applied to verbs in which the infinitive ends with -ar
+aua	ar	^V.	*	1	0	0	L	1	-
+auas	ar	^V.	*	1	0	0	L	1	-
+auamos	ar	^V.	*	1	0	0	L	1	-
+auais	ar	^V.	*	1	0	0	L	1	-
+auan	ar	^V.	*	1	0	0	L	1	-
+
+
+## -------------- ENCLITIC PRONOUNS ----------------------
+##	clitics	only	admited	after	gerund,	0		or	imperative
+## If you want to admit them after any form (e.g. ancient forms "Díjoselo", "Viósela")
+## you should replace the pattern "^V.[GNM]" below with just "^V" (CSM: 73 replacements)
+lo	*	^V	*	1	1	0	L	1	$$+lo:$$+PP
+los	*	^V	*	1	1	0	L	1	$$+los:$$+PP
+la	*	^V	*	1	1	0	L	1	$$+la:$$+PP
+las	*	^V	*	1	1	0	L	1	$$+las:$$+PP
+le	*	^V	*	1	1	0	L	1	$$+le:$$+PP
+les	*	^V	*	1	1	0	L	1	$$+les:$$+PP
+me	*	^V	*	1	1	0	L	1	$$+me:$$+PP
+te	*	^V	*	1	1	0	L	1	$$+te:$$+PP
+nos	*	^V	*	1	1	0	L	1	$$+nos:$$+PP
+os	*	^V.[GN]	*	1	1	0	L	1	$$+os:$$+PP
+## CSM: line 9 changed to 0, to prevent the tagger from identifying this suffix in any verb ending with -se
+se	*	^V	*	1	1	0	L	1	$$+se:$$+PP
+mela	*	^V	*	0	1	0	L	1	$$+me+la:$$+PP+PP
+melas	*	^V	*	0	1	0	L	1	$$+me+las:$$+PP+PP
+melo	*	^V	*	0	1	0	L	1	$$+me+lo:$$+PP+PP
+melos	*	^V	*	0	1	0	L	1	$$+me+los:$$+PP+PP
+tela	*	^V	*	0	1	0	L	1	$$+te+la:$$+PP+PP
+telas	*	^V	*	0	1	0	L	1	$$+te+las:$$+PP+PP
+telo	*	^V	*	0	1	0	L	1	$$+te+lo:$$+PP+PP
+telos	*	^V	*	0	1	0	L	1	$$+te+los:$$+PP+PP
+nosla	*	^V	*	0	1	0	L	1	$$+nos+la:$$+PP+PP
+noslas	*	^V	*	0	1	0	L	1	$$+nos+las:$$+PP+PP
+noslo	*	^V	*	0	1	0	L	1	$$+nos+lo:$$+PP+PP
+noslos	*	^V	*	0	1	0	L	1	$$+nos+los:$$+PP+PP
+osla	*	^V	*	0	1	0	L	1	$$+os+la:$$+PP+PP
+oslas	*	^V	*	0	1	0	L	1	$$+os+las:$$+PP+PP
+oslo	*	^V	*	0	1	0	L	1	$$+os+lo:$$+PP+PP
+oslos	*	^V	*	0	1	0	L	1	$$+os+los:$$+PP+PP
+seme	*	^V	*	0	1	0	L	1	$$+se+me:$$+PP+PP
+sete	*	^V	*	0	1	0	L	1	$$+se+te:$$+PP+PP
+senos	*	^V	*	0	1	0	L	1	$$+se+nos:$$+PP+PP
+seos	*	^V	*	0	1	0	L	1	$$+se+os:$$+PP+PP
+sela	*	^V	*	0	1	0	L	1	$$+se+la:$$+PP+PP
+selas	*	^V	*	0	1	0	L	1	$$+se+las:$$+PP+PP
+selo	*	^V	*	0	1	0	L	1	$$+se+lo:$$+PP+PP
+selos	*	^V	*	0	1	0	L	1	$$+se+los:$$+PP+PP
+sele	*	^V	*	0	1	0	L	1	$$+se+le:$$+PP+PP
+seles	*	^V	*	0	1	0	L	1	$$+se+les:$$+PP+PP
+nosle	*	^V	*	0	1	0	L	1	$$+nos+le:$$+PP+PP
+nosles	*	^V	*	0	1	0	L	1	$$+nos+les:$$+PP+PP
+osle	*	^V	*	0	1	0	L	1	$$+os+le:$$+PP+PP
+osles	*	^V	*	0	1	0	L	1	$$+os+les:$$+PP+PP
+semela	*	^V	*	0	1	0	L	1	$$+se+me+la:$$+PP+PP+PP
+semelas	*	^V	*	0	1	0	L	1	$$+se+me+las:$$+PP+PP+PP
+semelo	*	^V	*	0	1	0	L	1	$$+se+me+lo:$$+PP+PP+PP
+semelos	*	^V	*	0	1	0	L	1	$$+se+me+los:$$+PP+PP+PP
+setela	*	^V	*	0	1	0	L	1	$$+se+te+la:$$+PP+PP+PP
+setelas	*	^V	*	0	1	0	L	1	$$+se+te+las:$$+PP+PP+PP
+setelo	*	^V	*	0	1	0	L	1	$$+se+te+lo:$$+PP+PP+PP
+setelos	*	^V	*	0	1	0	L	1	$$+se+te+los:$$+PP+PP+PP
+senosla	*	^V	*	0	1	0	L	1	$$+se+nos+la:$$+PP+PP+PP
+senoslas	*	^V	*	0	1	0	L	1	$$+se+nos+las:$$+PP+PP+PP
+senoslo	*	^V	*	0	1	0	L	1	$$+se+nos+lo:$$+PP+PP+PP
+senoslos	*	^V	*	0	1	0	L	1	$$+se+nos+los:$$+PP+PP+PP
+seosla	*	^V	*	0	1	0	L	1	$$+se+os+la:$$+PP+PP+PP
+seoslas	*	^V	*	0	1	0	L	1	$$+se+os+las:$$+PP+PP+PP
+seoslo	*	^V	*	0	1	0	L	1	$$+se+os+lo:$$+PP+PP+PP
+seoslos	*	^V	*	0	1	0	L	1	$$+se+os+los:$$+PP+PP+PP
+temela	*	^V	*	0	1	0	L	1	$$+te+me+la:$$+PP+PP+PP
+temelas	*	^V	*	0	1	0	L	1	$$+te+me+las:$$+PP+PP+PP
+temelo	*	^V	*	0	1	0	L	1	$$+te+me+lo:$$+PP+PP+PP
+temelos	*	^V	*	0	1	0	L	1	$$+te+me+los:$$+PP+PP+PP
+tetela	*	^V	*	0	1	0	L	1	$$+te+te+la:$$+PP+PP+PP
+tetelas	*	^V	*	0	1	0	L	1	$$+te+te+las:$$+PP+PP+PP
+tetelo	*	^V	*	0	1	0	L	1	$$+te+te+lo:$$+PP+PP+PP
+tetelos	*	^V	*	0	1	0	L	1	$$+te+te+los:$$+PP+PP+PP
+tenosla	*	^V	*	0	1	0	L	1	$$+te+nos+la:$$+PP+PP+PP
+tenoslas	*	^V	*	0	1	0	L	1	$$+te+nos+las:$$+PP+PP+PP
+tenoslo	*	^V	*	0	1	0	L	1	$$+te+nos+lo:$$+PP+PP+PP
+tenoslos	*	^V	*	0	1	0	L	1	$$+te+nos+los:$$+PP+PP+PP
+teosla	*	^V	*	0	1	0	L	1	$$+te+os+la:$$+PP+PP+PP
+teoslas	*	^V	*	0	1	0	L	1	$$+te+os+las:$$+PP+PP+PP
+teoslo	*	^V	*	0	1	0	L	1	$$+te+os+lo:$$+PP+PP+PP
+teoslos	*	^V	*	0	1	0	L	1	$$+te+os+los:$$+PP+PP+PP
+
+#vete
+te	*	^VMM02S0	*	0	1	0	L	1	$$+te:$$+PP
+
+#duérmase/duérmanse
+se	*	^VMM03	*	0	1	0	L	1	$$+se:$$+PP
+
+#vámonos,comámonos
+nos	s	^VMM01P0	*	0	1	0	L	1	$$+nos:$$+PP
+
+#animaos, coméosla
+os	d	^VMM02P0	*	0	1	0	L	1	$$+os:$$+PP
+osla	d	^VMM02P0	*	0	1	0	L	1	$$+os+la:$$+PP+PP
+oslas	d	^VMM02P0	*	0	1	0	L	1	$$+os+las:$$+PP+PP
+oslo	d	^VMM02P0	*	0	1	0	L	1	$$+os+lo:$$+PP+PP
+oslos	d	^VMM02P0	*	0	1	0	L	1	$$+os+los:$$+PP+PP
+osle	d	^VMM02P0	*	0	1	0	L	1	$$+os+le:$$+PP+PP
+osles	d	^VMM02P0	*	0	1	0	L	1	$$+os+les:$$+PP+PP
+
+## CSM: added suffixes
+
+mel	*	^V	*	0	1	0	L	0	$$+me+l:$$+PP+PP
+tel	*	^V	*	0	1	0	L	0	$$+te+l:$$+PP+PP
+nosl	*	^V	*	0	1	0	L	0	$$+nos+l:$$+PP+PP
+sel	*	^V	*	0	1	0	L	0	$$+se+l:$$+PP+PP
+semel	*	^V	*	0	1	0	L	0	$$+se+me+l:$$+PP+PP+PP
+setel	*	^V	*	0	1	0	L	0	$$+se+te+l:$$+PP+PP+PP
+senosl	*	^V	*	0	1	0	L	0	$$+se+nos+l:$$+PP+PP+PP
+seosl	*	^V	*	0	1	0	L	0	$$+se+os+l:$$+PP+PP+PP
+temel	*	^V	*	0	1	0	L	0	$$+te+me+l:$$+PP+PP+PP
+tetel	*	^V	*	0	1	0	L	0	$$+te+te+l:$$+PP+PP+PP
+tenosl	*	^V	*	0	1	0	L	0	$$+te+nos+l:$$+PP+PP+PP
+teosl	*	^V	*	0	1	0	L	0	$$+te+os+l:$$+PP+PP+PP
+l	*	^V	*	1	1	0	L	0	$$+l:$$+PP
+li	*	^V	*	1	1	0	L	0	$$+li:$$+PP
+ge	*	^V	*	1	1	0	L	0	$$+ge:$$+PP
+geme	*	^V	*	0	1	0	L	0	$$+ge+me:$$+PP+PP
+gete	*	^V	*	0	1	0	L	0	$$+ge+te:$$+PP+PP
+genos	*	^V	*	0	1	0	L	0	$$+ge+nos:$$+PP+PP
+geos	*	^V	*	0	1	0	L	0	$$+ge+os:$$+PP+PP
+gel	*	^V	*	0	1	0	L	0	$$+ge+lo:$$+PP+PP
+gela	*	^V	*	0	1	0	L	0	$$+ge+la:$$+PP+PP
+gelas	*	^V	*	0	1	0	L	0	$$+ge+las:$$+PP+PP
+gelo	*	^V	*	0	1	0	L	0	$$+ge+lo:$$+PP+PP
+gelos	*	^V	*	0	1	0	L	0	$$+ge+los:$$+PP+PP
+gele	*	^V	*	0	1	0	L	0	$$+ge+le:$$+PP+PP
+geles	*	^V	*	0	1	0	L	0	$$+ge+les:$$+PP+PP
+gemela	*	^V	*	0	1	0	L	0	$$+ge+me+la:$$+PP+PP+PP
+gemelas	*	^V	*	0	1	0	L	0	$$+ge+me+las:$$+PP+PP+PP
+gemelo	*	^V	*	0	1	0	L	0	$$+ge+me+lo:$$+PP+PP+PP
+gemelos	*	^V	*	0	1	0	L	0	$$+ge+me+los:$$+PP+PP+PP
+getela	*	^V	*	0	1	0	L	0	$$+ge+te+la:$$+PP+PP+PP
+getelas	*	^V	*	0	1	0	L	0	$$+ge+te+las:$$+PP+PP+PP
+getelo	*	^V	*	0	1	0	L	0	$$+ge+te+lo:$$+PP+PP+PP
+getelos	*	^V	*	0	1	0	L	0	$$+ge+te+los:$$+PP+PP+PP
+genosla	*	^V	*	0	1	0	L	0	$$+ge+nos+la:$$+PP+PP+PP
+genoslas	*	^V	*	0	1	0	L	0	$$+ge+nos+las:$$+PP+PP+PP
+genoslo	*	^V	*	0	1	0	L	0	$$+ge+nos+lo:$$+PP+PP+PP
+genoslos	*	^V	*	0	1	0	L	0	$$+ge+nos+los:$$+PP+PP+PP
+geosla	*	^V	*	0	1	0	L	0	$$+ge+os+la:$$+PP+PP+PP
+geoslas	*	^V	*	0	1	0	L	0	$$+ge+os+las:$$+PP+PP+PP
+geoslo	*	^V	*	0	1	0	L	0	$$+ge+os+lo:$$+PP+PP+PP
+geoslos	*	^V	*	0	1	0	L	0	$$+ge+os+los:$$+PP+PP+PP
+
+
+################ ADVERBIS -mente ##############
+### CSM: The following suffixes have been added: -mientre, -mjentre, -mjente, -ment, -men
+
+# rapidamente, alegremente
+mente	*	^AQ0[CF]S	RG	0	0	0	F	1	-
+# cansadamente, extremadamente
+mente	*	^VMP00SF	RG	0	0	0	F	1	-
+# mismamente
+mente	*	^DI0FS	RG	0	0	0	F	0	-
+# rapidísimamente
+ísimamente	a	^AQ0[CF]S	RG	1	0	0	R+mente	0	-
+
+# rapidamientre, alegremientre
+mientre	*	^AQ0[CF]S	RG	0	0	0	F	1	-
+# cansadamientre, extremadamientre
+mientre	*	^VMP00SF	RG	0	0	0	F	1	-
+# mismamientre
+mientre	*	^DI0FS	RG	0	0	0	F	0	-
+# rapidísimamientre
+ísimamientre	a	^AQ0[CF]S	RG	1	0	0	R+mientre	0	-
+
+# rapidamjentre, alegremjentre
+mjentre	*	^AQ0[CF]S	RG	0	0	0	F	1	-
+# cansadamjentre, extremadamjentre
+mjentre	*	^VMP00SF	RG	0	0	0	F	1	-
+# mismamjentre
+mjentre	*	^DI0FS	RG	0	0	0	F	0	-
+# rapidísimamjentre
+ísimamjentre	a	^AQ0[CF]S	RG	1	0	0	R+mjentre	0	-
+
+# rapidamjente, alegremjente
+mjente	*	^AQ0[CF]S	RG	0	0	0	F	1	-
+# cansadamjente, extremadamjente
+mjente	*	^VMP00SF	RG	0	0	0	F	1	-
+# mismamjente
+mjente	*	^DI0FS	RG	0	0	0	F	0	-
+# rapidísimamjente
+ísimamjente	a	^AQ0[CF]S	RG	1	0	0	R+mjente	0	-
+
+# rapidament, alegrement
+ment	*	^AQ0[CF]S	RG	0	0	0	F	1	-
+# cansadament, extremadament
+ment	*	^VMP00SF	RG	0	0	0	F	1	-
+# mismament
+ment	*	^DI0FS	RG	0	0	0	F	0	-
+# rapidísimament
+ísimament	a	^AQ0[CF]S	RG	1	0	0	R+ment	0	-
+
+# rapidamen, alegremen
+men	*	^AQ0[CF]S	RG	0	0	0	F	1	-
+# cansadamen, extremadamen
+men	*	^VMP00SF	RG	0	0	0	F	1	-
+# mismamen
+men	*	^DI0FS	RG	0	0	0	F	0	-
+# rapidísimamen
+ísimamen	a	^AQ0[CF]S	RG	1	0	0	R+men	0	-
+
+
+######## SUFIXOS DIMINUTIUS, DESPECTIUS I AUGMENTATIUS #######
+
+# mocecita, crucecita
+cecita	z|za	^NCFS	NCFS00V	0	0	0	L	0	-
+cecitas	z|za	^NCFS	NCFP00V	0	0	0	L	0	-
+
+# fiestecita,
+ecita	a|e|*	^NCFS	NCFS00V	0	0	0	L	0	-
+ecitas	a|e|*	^NCFS	NCFP00V	0	0	0	L	0	-
+
+## ?
+ecita	o	^NCMS	NCFS00V	0	0	0	L	0	-
+ecitas	os	^NCMP	NCFP00V	0	0	0	L	0	-
+
+ecita	a	^AQ0FS	AQVFS00	0	0	0	L	0	-
+ecitas	as	^AQ0FP	AQVFP00	0	0	0	L	0	-
+ecita	e	^AQ0CS	AQVFS00	0	0	0	L	0	-
+ecitas	es	^AQ0CP	AQVFP00	0	0	0	L	0	-
+
+# huequecito
+quecito		que|co		^NCMS	NCMS00V	0	0	0	L	0	-
+quecitos	ques|cos	^NCMP	NCMP00V	0	0	0	L	0	-
+
+# jueguecito
+guecitos	go	^NCMS	NCMP00V	0	0	0	L	0	-
+guecito		gos	^NCMP	NCMP00V	0	0	0	L	0	-
+
+# altavocecito
+cecito	z	^NCMS	NCMS00V	0	0	0	L	0	-
+cecitos	ces	^NCMP	NCMP00V	0	0	0	L	0	-
+
+# ??
+ecito	e	^AQ0CS	AQVMS00	0	0	0	L	0	-
+ecitos	es	^AQ0CP	AQVMP00	0	0	0	L	0	-
+ecito	o	^AQ0MS	AQVMS00	0	0	0	L	0	-
+ecitos	os	^AQ0MP	AQVMP00	0	0	0	L	0	-
+
+# cochecito
+ecito	o|e|é|*	^NCMS	NCMS00V	0	0	0	L	0	-
+ecitos	o|e|é|*	^NCMS	NCMP00V	0	0	0	L	0	-
+
+# coquito
+quito	co	^NCMS	NCMS00V	0	0	0	L	0	-
+quitos	cos	^NCMP	NCMP00V	0	0	0	L	0	-
+quito	co	^AQ0MS	AQVMS00	0	0	0	L	0	-
+quitos	cos	^AQ0MP	AQVMP00	0	0	0	L	0	-
+quito	co	^[DP]I0MS	*	0	0	0	L	0	-
+quitos	cos	^[DP]I0MP	*	0	0	0	L	0	-
+quita	ca	^[DP]I0FS	*	0	0	0	L	0	-
+quitas	cas	^[DP]I0FP	*	0	0	0	L	0	-
+
+# ?
+quita	ca	^RG	*	0	0	0	L	0	-
+
+#dim roquita
+quita	ca	^NCFS	NCFS00V	0	0	0	L	0	-
+quitas	cas	^NCFP	NCFP00V	0	0	0	L	0	-
+quita	ca	^AQ0FS	AQVFS00	0	0	0	L	0	-
+quitas	cas	^AQ0FP	AQVFP00	0	0	0	L	0	-
+
+uito	o	^RG	*	0	0	0	L	0	-
+uito	o	^AQ0MS	AQVMS00	0	0	0	L	0	-
+uitos	os	^AQ0MP	AQVMP00	0	0	0	L	0	-
+
+# alaguito?
+uito	o	^NCMS	NCMS00V	0	0	0	L	0	-
+uitos	os	^NCMP	NCMP00V	0	0	0	L	0	-
+uita	a	^AQ0FS	AQVFS00	0	0	0	L	0	-
+uitas	as	^AQ0FP	AQVFP00	0	0	0	L	0	-
+uita	a	^NCFS	NCFS00V	0	0	0	L	0	-
+uitas	as	^NCFP	NCFP00V	0	0	0	L	0	-
+cito	*|zo	^AQ0MS	AQVMS00	0	0	0	L	0	-
+citos	*|zo	^AQ0MS	AQVMP00	0	0	0	L	0	-
+
+# dim lacito
+cito	*|zo	^NCMS	NCMS00V	1	0	0	L	0	-
+citos	*|zo	^NCMS	NCMP00V	1	0	0	L	0	-
+
+# mocita
+cita	za|*|a	^NCFS	NCFS00V	0	0	0	L	0	-
+citas	za|*|a	^NCFS	NCFP00V	0	0	0	L	0	-
+cita	*	^NCCS	NCFS00V	0	0	0	L	0	-
+citas	*	^NCCS	NCFP00V	0	0	0	L	0	-
+cita	*	^AQ0CS	AQVFS00	0	0	0	L	0	-
+citas	*	^AQ0CS	AQVFP00	0	0	0	L	0	-
+
+# cafelito
+elito	é	^NCMS	NCMS00V	0	0	0	L	0	-
+elitos	és	^NCMP	NCMP00V	0	0	0	L	0	-
+
+# prontito, despacito
+ito	o	^RG	*	1	0	0	L	0	-
+ito	io	^RG	*	0	0	0	L	0	-
+ito	o	^VMG	RG	0	0	0	L	0	-
+
+# 
+sito	o	^NCMS	NCMS00V	0	0	0	L	0	-
+sitos	os	^NCMP	NCMP00V	0	0	0	L	0	-
+
+# dim osito
+ito	o|e|ío|io|*	^NCMS	NCMS00V	1	0	1	L	0	-
+itos	o|e|ío|io|*	^NCMS	NCMP00V	1	0	1	L	0	-
+ito	o|io|*	^AQ0[CM]S	AQVMS00	1	0	1	L	0	-
+itos	o|io|*	^AQ0[CM]S	AQVMP00	1	0	1	L	0	-
+ito	o	^VMP00SM	*	1	0	1	L	0	-
+itos	os	^VMP00PM	*	1	0	1	L	0	-
+ita	a	^RG	*	0	0	0	L	0	-
+itita	a	^RG	*	0	0	0	L	0	-
+
+# dim osita
+ita	a|*	^NCFS	NCFS00V	0	0	1	L	0	-
+itas	a|*	^NCFS	NCFP00V	0	0	1	L	0	-
+ita	a|ia|*	^AQ0FS	AQVFS00	0	0	1	L	0	-
+itas	a|ia|*	^AQ0FS	AQVFP00	0	0	1	L	0	-
+ita	a	^VMP00SF	*	1	0	1	L	0	-
+itas	as	^VMP00PF	*	1	0	1	L	0	-
+
+# toditos, poquita
+ito	o	^PI	*	0	0	0	L	0	-
+itos	os	^PI	*	0	0	0	L	0	-
+ita	a	^PI	*	0	0	0	L	0	-
+itas	as	^PI	*	0	0	0	L	0	-
+
+# dim chiquillo
+quillo	co	^NCMS	NCMS00V	0	0	0	L	0	-
+quillos	cos	^NCMP	NCMP00V	0	0	0	L	0	-
+quillo	co	^AQ0MS	AQVMS00	0	0	0	L	0	-
+quillos	cos	^AQ0MP	AQVMP00	0	0	0	L	0	-
+quilla	ca	^NCFS	NCFS00V	0	0	0	L	0	-
+quillas	cas	^NCFP	NCFP00V	0	0	0	L	0	-
+quilla	ca	^AQ0FS	AQVFS00	0	0	0	L	0	-
+quillas	cas	^AQ0FP	AQVFP00	0	0	0	L	0	-
+
+# dim laguillo?
+uillo	o	^NCMS	NCMS00V	0	0	0	L	0	-
+uillos	os	^NCMP	NCMP00V	0	0	0	L	0	-
+uilla	a	^NCFS	NCFS00V	1	0	0	L	0	-
+uillas	as	^NCFP	NCFP00V	1	0	0	L	0	-
+
+# dim cacillo
+cillo	zo|*	^NCMS	NCMS00V	1	0	0	L	0	-
+cillos	zo|*	^NCMS	NCMP00V	1	0	0	L	0	-
+cillo	o|*	^AQ0MS	AQVMS00	1	0	0	L	0	-
+cillos	o|*	^AQ0MS	AQVMP00	1	0	0	L	0	-
+
+# dim muertecillo
+ecillo	o|*	^NCMS	NCMS00V	0	0	0	L	0	-
+ecillos	o|*	^NCMS	NCMP00V	0	0	0	L	0	-
+
+# dim arrocecillo?
+cecillo	z	^NCMS	NCMS00V	0	0	0	L	0	-
+cecillos	ces	^NCMP	NCMP00V	0	0	0	L	0	-
+cilla	*	^NCMS	NCFS00V	1	0	0	L	0	-
+cilla	*	^NCFS	NCFS00V	1	0	0	L	0	-
+cillas	*	^NCMS	NCFP00V	1	0	0	L	0	-
+cillas	*	^NCFS	NCFP00V	1	0	0	L	0	-
+cilla	*	^AQ0FS	AQVFS00	1	0	0	L	0	-
+cillas	*	^AQ0FS	AQVFP00	1	0	0	L	0	-
+
+# dim mocecilla?
+ecilla	a|*	^NCFS	NCFS00V	0	0	0	L	0	-
+ecillas	a|*	^NCFS	NCFP00V	0	0	0	L	0	-
+ecilla	a	^AQ0FS	AQVFS00	0	0	0	L	0	-
+ecillas	as	^AQ0FP	AQVFP00	0	0	0	L	0	-
+
+# dim cocecilla
+cecilla	z	^NCFS	NCFS00V	0	0	0	L	0	-
+cecillas	ces	^NCFP	NCFP00V	0	0	0	L	0	-
+
+# dim/pey empleadillo?  personajillo
+illo	e|o|*	^NCCS	NCMS00V	1	0	0	L	0	-
+illo	e|o|*	^NCMS	NCMS00V	1	0	0	L	0	-
+illos	e|o|*	^NCCS	NCMP00V	1	0	0	L	0	-
+illos	e|o|*	^NCMS	NCMP00V	1	0	0	L	0	-
+illo	o|*	^AQ0MS	AQVMS00	1	0	0	L	0	-
+illo	o|*	^AQ0MS	AQVMS00	1	0	0	L	0	-
+illos	o|*	^AQ0MS	AQVMP00	1	0	0	L	0	-
+illa	a	^NCFS	NCFS00V	1	0	0	L	0	-
+illas	as	^NCFP	NCFP00V	1	0	0	L	0	-
+illa	a	^AQ0FS	AQVFS00	0	0	0	L	0	-
+illas	as	^AQ0FP	AQVMP00	0	0	0	L	0	-
+
+# dim saquete
+quete	co	^NCMS	NCMS00V	0	0	0	L	0	-
+quetes	cos	^NCMP	NCMP00V	0	0	0	L	0	-
+queta	ca	^NCFS	NCFS00V	0	0	0	L	0	-
+quetas	cas	^NCFP	NCFP00V	0	0	0	L	0	-
+
+# dim laguete?
+uete	o	^NCMS	NCMS00V	0	0	0	L	0	-
+uetes	os	^NCMP	NCMP00V	0	0	0	L	0	-
+ueta	a	^NCFS	NCFS00V	0	0	0	L	0	-
+uetas	as	^NCFP	NCFP00V	0	0	0	L	0	-
+
+# dim durete
+ete	o|e|*	^NCMS	NCMS00V	1	0	0	L	0	-
+etes	o|e|*	^NCMS	NCMP00V	1	0	0	L	0	-
+ete	o|e|*	^AQ0MS	AQVMS00	0	0	0	L	0	-
+etes	o|e|*	^AQ0MS	AQVMP00	0	0	0	L	0	-
+
+# dim caseta?
+eta	a	^NCFS	NCFS00V	1	0	0	L	0	-
+etas	as	^NCFP	NCFP00V	1	0	0	L	0	-
+eta	a	^AQ0FS	AQVFS00	0	0	0	L	0	-
+etas	as	^AQ0MP	AQVFP00	0	0	0	L	0	-
+
+## reconoce briboncete, meloncete, y de mocete, resuelve que viene de mozo o 
+## moco ya que tenemos un sufijo anterior (-ete) al que se le añade la -o,
+##	para	formar	palabras	como	"dinerete",	0		"dinero"	-
+
+# dim mocete
+cete	*|zo	^NCMS	NCMS00V	0	0	0	L	0	-
+cetes	es|zos	^NCMP	NCMP00V	0	0	0	L	0	-
+
+# dim habichuela
+ichuela	a	^NCFS	NCFS00V	0	0	0	L	0	-
+ichuelas	as	^NCFS	NCFS00V	0	0	0	L	0	-
+
+# dim piecezuela
+ecezuela	ieza	^NCFS	NCFS00V	0	0	0	L	0	-
+ecezuelas	iezas	^NCFP	NCFP00V	0	0	0	L	0	-
+cezuela		za	^NCFS	NCFS00V	0	0	0	L	0	-
+cezuelas	zas	^NCFP	NCFP00V	0	0	0	L	0	-
+
+# pey tiendezuela
+ezuela	a	^NCFS	NCFS00V	0	0	0	L	0	-
+ezuelas	as	^NCFP	NCFP00V	0	0	0	L	0	-
+zuela	*|a	^AQ0CS	AQVFS00	0	0	0	L	0	-
+zuela	*|a	^AQ0FS	AQVFS00	0	0	0	L	0	-
+zuelas	*|a	^AQ0CS	AQVFP00	0	0	0	L	0	-
+zuelas	*|a	^AQ0FS	AQVFP00	0	0	0	L	0	-
+
+# dim plazuela
+zuela	za|a|*	^NCFS	NCFS00V	0	0	0	L	0	-
+zuelas	za|a|*	^NCFS	NCFP00V	0	0	0	L	0	-
+
+# dim?
+uela	a|e	^NCCS	NCFS00V	0	0	0	L	0	-
+uela	a|e	^NCFS	NCFS00V	0	0	0	L	0	-
+uelas	as|es	^NCCP	NCFP00V	0	0	0	L	0	-
+uelas	as|es	^NCFP	NCFP00V	0	0	0	L	0	-
+uela	a|e	^AQ0CS	AQVFS00	0	0	0	L	0	-
+uela	a|e	^AQ0FS	AQVFS00	0	0	0	L	0	-
+uelas	as|es	^AQ0CP	AQVFP00	0	0	0	L	0	-
+uelas	as|es	^AQ0FP	AQVFP00	0	0	0	L	0	-
+
+# dim?
+suela	sia	^NCFS	NCFS00V	0	0	0	L	0	-
+suelas	sias	^NCFP	NCFP00V	0	0	0	L	0	-
+zuelo	e|*	^AQ0CS	AQVMS00	1	0	0	L	0	-
+zuelos	e|*	^AQ0CS	AQVMP00	1	0	0	L	0	-
+
+# pey reyezuelo
+ezuelo	o|*	^NCMS	NCMS00V	1	0	0	L	0	-
+ezuelos	o|*	^NCMS	NCMP00V	1	0	0	L	0	-
+
+# dim pozuelo
+zuelo	zo|*	^NCMS	NCMS00V	1	0	0	L	0	-
+zuelos	zo|*	^NCMS	NCMP00V	1	0	0	L	0	-
+
+#dim?
+uelo	o|e|*	^NCCS	NCMS00V	0	0	0	L	0	-
+uelo	o|e|*	^NCMS	NCMS00V	0	0	0	L	0	-
+uelos	o|e|*	^NCCS	NCMP00V	0	0	0	L	0	-
+uelos	o|e|*	^NCMS	NCMP00V	0	0	0	L	0	-
+uelo	o|e|*	^AQ0CS	AQVMS00	0	0	0	L	0	-
+uelo	o|e|*	^AQ0MS	AQVMS00	0	0	0	L	0	-
+uelos	o|e|*	^AQ0CP	AQVMP00	0	0	0	L	0	-
+uelos	o|e|*	^AQ0MP	AQVMP00	0	0	0	L	0	-
+
+# dim muñequiño
+quiño	co	^NCMS	NCMS00V	0	0	0	L	0	-
+quiños	cos	^NCMS	NCMP00V	0	0	0	L	0	-
+quiña	ca	^NCFS	NCFS00V	0	0	0	L	0	-
+quiñas	cas	^NCFS	NCFP00V	0	0	0	L	0	-
+
+#quitín	co	^NCMS	*	0	0	0	L	0	-
+#quitín	co	^AQ0MS	*	0	0	0	L	0	-
+#quitines	co	^NCMS	NCMP00V	0	0	0	L	0	-
+#quitines	co	^NCMS	AQVMP00	0	0	0	L	0	-
+#quitines	co	^AQ0MS	NCMP00V	0	0	0	L	0	-
+#quitines	co	^AQ0MS	AQVMP00	0	0	0	L	0	-
+#quitina	ca	^NCFS	*	0	0	0	L	0	-
+#quitina	ca	^AQ0FS	*	0	0	0	L	0	-
+#quitinas	ca	^NCFS	NCFP00V	0	0	0	L	0	-
+#quitinas	ca	^NCFS	AQVFP00	0	0	0	L	0	-
+#quitinas	ca	^AQ0FS	NCFP00V	0	0	0	L	0	-
+#quitinas	ca	^AQ0FS	AQVFP00	0	0	0	L	0	-
+#quín	co	^NCMS	*	0	0	0	L	0	-
+#ín	*|o|e|a	^NCMS	*	1	0	0	L	0	-
+#ín	*|o|e|a	^AQ0MS	*	1	0	0	L	0	-
+#ín	*|o|e|a	^NCFS	*	1	0	0	L	0	-
+#ines	*|o|e|a	^NCMS	NCMP00V	0	0	0	L	0	-
+#ines	*|o|e|a	^NCMS	AQVMP00	0	0	0	L	0	-
+#ines	*|o|e|a	^AQ0MS	NCMP00V	0	0	0	L	0	-
+#ines	*|o|e|a	^AQ0MS	AQVMP00	0	0	0	L	0	-
+#ines	*|o|e|a	^NCFS)	NCMP00V	0	0	0	L	0	-
+#ines	*|o|e|a	^NCFS)	AQVMP00	0	0	0	L	0	-
+#ino	o|*|e	^NCMS	*	1	0	0	L	0	-
+#ino	o|*|e	^AQ0MS	*	1	0	0	L	0	-
+#ina	a|*|e	^NCFS	*	1	0	0	L	0	-
+#ina	a|*|e	^AQ0FS	*	1	0	0	L	0	-
+#inos	o|e|*	^NCMS	NCMP00V	1	0	0	L	0	-
+#inos	o|e|*	^NCMS	AQVMP00	1	0	0	L	0	-
+#inos	o|e|*	^AQ0MS	NCMP00V	1	0	0	L	0	-
+#inos	o|e|*	^AQ0MS	AQVMP00	1	0	0	L	0	-
+#inas	a|e|*	^NCFS	NCFP00V	1	0	0	L	0	-
+#inas	a|e|*	^NCFS	NCFP00V	1	0	0	L	0	-
+#inas	a|e|*	^AQ0FS	NCFP00V	1	0	0	L	0	-
+#inas	a|e|*	^AQ0FS	AQVFP00	1	0	0	L	0	-
+
+# cieguecico - ciego
+uecico	o	^NCMS	NCMS00V	0	0	0	L	0	-
+uecico	o	^AQ0MS	AQVMS00	0	0	0	L	0	-
+uecicos	os	^NCMP	NCMP00V	0	0	0	L	0	-
+uecicos	os	^AQ0MS	AQVMP00	0	0	0	L	0	-
+uecica	a	^NCFS	NCFS00V	0	0	0	L	0	-
+uecica	a	^AQ0FS	AQVFS00	0	0	0	L	0	-
+uecicas	as	^NCFP	NCFP00V	0	0	0	L	0	-
+uecicas	as	^AQ0FP	AQVFP00	0	0	0	L	0	-
+
+# dim cochecico
+ecico	o|e	^NCMS	NCMS00V	0	0	0	L	0	-
+ecicos	os|es	^NCMP	NCMP00V	0	0	0	L	0	-
+ecico	o|e	^AQ0CS	AQVMS00	0	0	0	L	0	-
+ecico	o|e	^AQ0MS	AQVMS00	0	0	0	L	0	-
+ecicos	os|es	^AQ0CP	AQVMP00	0	0	0	L	0	-
+ecicos	os|es	^AQ0MP	AQVMP00	0	0	0	L	0	-
+#ecica	a|e|*	^AQ0CS	AQVFS00	0	0	0	L	0	-
+#ecica	a|e|*	^AQ0FS	AQVFS00	0	0	0	L	0	-
+#ecicas	a|e|*	^AQ0CS	AQVFP00	0	0	0	L	0	-
+#ecicas	a|e|*	^AQ0FS	AQVFP00	0	0	0	L	0	-
+
+# dim nochecica
+ecica	e|*	^NCFS	NCFS00V	0	0	0	L	0	-
+ecicas	e|*	^NCFS	NCFP00V	0	0	0	L	0	-
+
+# caminandico
+ico	o	^VMG	RG	0	0	0	L	0	-
+
+# dim perrico
+ica	a	^NCFS	NCFS00V	1	0	0	L	0	-
+icas	as	^NCFP	NCFP00V	1	0	0	L	0	-
+ico	o	^NCMS	NCMS00V	1	0	0	L	0	-
+icos	os	^NCMP	NCMP00V	1	0	0	L	0	-
+ico	o	^AQ0MS	AQVMS00	1	0	0	L	0	-
+icos	os	^AQ0MP	AQVMP00	1	0	0	L	0	-
+ica	a	^AQ0FS	AQVFS00	1	0	0	L	0	-
+icas	as	^AQ0FP	AQVFP00	1	0	0	L	0	-
+
+# aum perrazo
+azo	o|*|e	^NCMS	NCMS00V	1	0	0	L	0	-
+azos	o|*|e	^NCMS	NCMP00V	1	0	0	L	0	-
+azo	a|e	^NCFS	NCMS00V	0	0	0	L	0	-
+azos	as|es	^NCFP	NCMP00V	0	0	0	L	0	-
+azo	o|*	^AQ0MS	AQVMS00	1	0	0	L	0	-
+azos	o|*	^AQ0MS	AQVMP00	1	0	0	L	0	-
+aza	a|*	^AQ0FS	AQVFS00	1	0	0	L	0	-
+azas	a|*	^AQ0FS	AQVFP00	1	0	0	L	0	-
+aza	a|e|*	^NCFS	NCFS00V	1	0	0	L	0	-
+azas	a|e|*	^NCFS	NCFP00V	1	0	0	L	0	-
+ón	a|o|e	^NC.S	NCMS00V	1	0	0	L	0	-
+ones	a|o|e	^NC.S	NCMP00V	1	0	0	L	0	-
+ona	a|o|e|*	^NC.S	NCFS00V	1	0	0	L	0	-
+onas	a|o|e|*	^NC.S	NCFP00V	1	0	0	L	0	-
+ón	o|e	^AQ0.S	AQVMS00	1	0	0	L	0	-
+ones	o|e	^AQ0.S	AQVMP00	1	0	0	L	0	-
+ona	a|o|e|*	^AQ0.S	AQVFS00	1	0	0	L	0	-
+onas	a|o|e|*	^AQ0.S	AQVFP00	1	0	0	L	0	-
+
+sote	*	^NCMS	NCMS00V	1	0	0	L	0	-
+sote	*	^NCMS	NCMP00V	1	0	0	L	0	-
+ote	o	^RG	*	0	0	0	L	0	-
+ote	o|e|*|a	^AQ0CS	AQVCS00	1	0	0	L	0	-
+ote	o|e|*|a	^AQ0MS	AQVMS00	1	0	0	L	0	-
+otes	o|e|*|a	^AQ0CS	AQVCP00	1	0	0	L	0	-
+otes	o|e|*|a	^AQ0MS	AQVMP00	1	0	0	L	0	-
+
+# aum besote
+ote	o|e|*	^NCMS	NCMS00V	1	0	0	L	0	-
+ote	o|e|*	^NCCS	NCCS00V	1	0	0	L	0	-
+otes	o|e|*	^NCMS	NCMP00V	1	0	0	L	0	-
+otes	o|e|*	^NCCS	NCCP00V	1	0	0	L	0	-
+
+# de femení a masc?
+ote	a	^NCFS	NCMS00V	1	0	0	L	0	-
+otes	as	^NCFP	NCMP00V	1	0	0	L	0	-
+
+# para que reconociese ángelota tendría que decirle que puede venir
+# de una palabra masculina, daría más ruido!	-
+ota	a|e|*|o	^NCCS	NCCS00V	1	0	0	L	0	-
+
+# aum mesota
+ota	a|e|*|o	^NCFS	NCFS00V	1	0	0	L	0	-
+otas	a|e|*|o	^NCFS	NCFP00V	1	0	0	L	0	-
+otas	a|e|*|o	^NCCS	NCCS00V	1	0	0	L	0	-
+ota	a|e|*|o	^AQ0CS	AQVCS00	1	0	0	L	0	-
+ota	a|e|*|o	^AQ0FS	AQVFS00	1	0	0	L	0	-
+otas	a|e|*|o	^AQ0FS	AQVFP00	1	0	0	L	0	-
+otas	a|e|*|o	^AQ0CS	AQVCP00	1	0	0	L	0	-
+#etudo	a	^NCFS	AQVMS00	0	0	0	F	0	-
+#etudo	a	^NCFS	NCMS00V	0	0	0	F	0	-
+#etudo	as	^NCFP	AQVMS00	0	0	0	F	0	-
+#etudo	as	^NCFP	NCMS00V	0	0	0	F	0	-
+#udo	a|e|o|*	^NCM	AQVMS00	1	0	0	F	0	-
+#udo	a|e|o|*	^NCM	NCMS00V	1	0	0	F	0	-
+#udo	a|e|o|*	^NCF	AQVMS00	1	0	0	F	0	-
+#udo	a|e|o|*	^NCF	NCMS00V	1	0	0	F	0	-
+#udos	a|e|o|*	^NCM	AQVMP00	1	0	0	F	0	-
+#udos	a|e|o|*	^NCM	NCMP00V	1	0	0	F	0	-
+#udos	a|e|o|*	^NCF	AQVMP00	1	0	0	F	0	-
+#udos	a|e|o|*	^NCF	NCMP00V	1	0	0	F	0	-
+#uda	a|e|o|*	^NCM	AQVFS00	1	0	0	F	0	-
+#uda	a|e|o|*	^NCM	NCFS00V	1	0	0	F	0	-
+#uda	a|e|o|*	^NCF	AQVFS00	1	0	0	F	0	-
+#uda	a|e|o|*	^NCF	NCFS00V	1	0	0	F	0	-
+#udas	a|e|o|*	^NCM	AQVFP00	1	0	0	F	0	-
+#udas	a|e|o|*	^NCM	NCFP00V	1	0	0	F	0	-
+#udas	a|e|o|*	^NCF	AQVFP00	1	0	0	F	0	-
+#udas	a|e|o|*	^NCF	NCFP00V	1	0	0	F	0	-
+#arraco	o	^NCMS	NCMS00V	1	0	0	L	0	-
+#arraco	o	^NCMS	AQVMS00	1	0	0	L	0	-
+#arracos	os	^NCMP	NCMP00V	1	0	0	L	0	-
+#arracos	os	^NCMP	AQVMP00	1	0	0	L	0	-
+#arraca	a|o	^NCMS	NCFS00V	0	0	0	L	0	-
+#arraca	a|o	^NCMS	AQVFS00	0	0	0	L	0	-
+#arraca	a|o	^NCFS	NCFS00V	0	0	0	L	0	-
+#arraca	a|o	^NCFS	AQVFS00	0	0	0	L	0	-
+#arracas	as|os	^NCMP	NCFP00V	0	0	0	L	0	-
+#arracas	as|os	^NCMP	AQVFP00	0	0	0	L	0	-
+#arracas	as|os	^NCFP	NCFP00V	0	0	0	L	0	-
+#arracas	as|os	^NCFP	AQVFP00	0	0	0	L	0	-
+#arracas	as|os	^NCMP	NCFP00V	0	0	0	L	0	-
+#arracas	as|os	^NCMP	AQVFP00	0	0	0	L	0	-
+#arracas	as|os	^NCFP	NCFP00V	0	0	0	L	0	-
+#arracas	as|os	^NCFP	AQVFP00	0	0	0	L	0	-
+#aco	o|a	^NCMS	NCMS00V	1	0	0	L	0	-
+#aco	o|a	^NCFS	NCMS00V	1	0	0	L	0	-
+#acos	os|as	^NCMP	NCMP00V	1	0	0	L	0	-
+#acos	os|as	^NCFP	NCMP00V	1	0	0	L	0	-
+#aco	o|a	^AQ0MS	AQVMS00	1	0	0	L	0	-
+#acos	os|as	^AQ0MP	AQVMP00	1	0	0	L	0	-
+#aca	a	^NCFS	NCFS00V	1	0	0	L	0	-
+#acas	a	^NCFS	NCFP00V	1	0	0	L	0	-
+#aca	a	^AQ0FS	AQVFS00	0	0	0	L	0	-
+#acas	as	^AQ0FP	AQVFP00	0	0	0	L	0	-
+#acho	o|a|*	^NCMS	NCMS00V	0	0	0	L	0	-
+#acho	o|a|*	^NCMS	AQVMP00	0	0	0	L	0	-
+#acho	o|a|*	^NCFS	NCMS00V	0	0	0	L	0	-
+#acho	o|a|*	^NCFS	AQVMP00	0	0	0	L	0	-
+#achos	o|a|*	^NCMS	NCMP00V	0	0	0	L	0	-
+#achos	o|a|*	^NCMS	AQVMP00	0	0	0	L	0	-
+#achos	o|a|*	^NCFS	NCMP00V	0	0	0	L	0	-
+#achos	o|a|*	^NCFS	AQVMP00	0	0	0	L	0	-
+#acha	a	^NCFS	NCFS00V	0	0	0	L	0	-
+#acha	a	^NCFS	AQVFS00	0	0	0	L	0	-
+#achas	as	^NCFP	NCFP00V	0	0	0	L	0	-
+#achas	as	^NCFP	AQVFP00	0	0	0	L	0	-
+#ajo	a|e|o	^NCMS	NCMS00V	1	0	0	L	0	-
+#ajo	a|e|o	^NCMS	AQVMS00	1	0	0	L	0	-
+#ajo	a|e|o	^NCFS	NCMS00V	1	0	0	L	0	-
+#ajo	a|e|o	^NCFS	AQVMS00	1	0	0	L	0	-
+#ajos	as|es|os	^NCMP	NCMP00V	1	0	0	L	0	-
+#ajos	as|es|os	^NCMP	AQVMP00	1	0	0	L	0	-
+#ajos	as|es|os	^NCFP	NCMP00V	1	0	0	L	0	-
+#ajos	as|es|os	^NCFP	AQVMP00	1	0	0	L	0	-
+ajo	o	^AQ0MS	AQVMS00	0	0	0	L	0	-
+ajos	os	^AQ0MP	AQVMP00	0	0	0	L	0	-
+aja	a	^AQ0FS	AQVFS00	0	0	0	L	0	-
+ajas	as	^AQ0FP	AQVFP00	0	0	0	L	0	-
+
+# pey muñecaja
+aja	a	^NCFS	NCFS00V	0	0	0	L	0	-
+ajas	as	^NCFP	NCFP00V	0	0	0	L	0	-
+
+# pey pelarro
+arro	o	^NCMS	NCMS00V	0	0	0	L	0	-
+arros	os	^NCMP	NCMP00V	0	0	0	L	0	-
+
+# pey gotarra?
+arra	a	^NCFS	NCFS00V	0	0	0	L	0	-
+arras	as	^NCFP	NCFP00V	0	0	0	L	0	-
+arra	a	^AQ0FS	AQVFS00	0	0	0	L	0	-
+arras	as	^AQ0FP	AQVFP00	0	0	0	L	0	-
+urro	o	^NCMS	NCMS00V	0	0	0	L	0	-
+urros	os	^NCMP	NCMP00V	0	0	0	L	0	-
+urro	o	^AQ0MS	AQVMS00	0	0	0	L	0	-
+urros	os	^AQ0MP	AQVMP00	0	0	0	L	0	-
+urra	a	^NCFS	NCFP00V	0	0	0	L	0	-
+urras	as	^NCFP	NCFP00V	0	0	0	L	0	-
+urra	a	^AQ0FS	AQVFS00	0	0	0	L	0	-
+urras	as	^AQ0FP	AQVFP00	0	0	0	L	0	-
+#orro	o|a	^NCMS	NCMS00V	0	0	0	L	0	-
+#orro	o|a	^NCFS	NCMS00V	0	0	0	L	0	-
+#orros	os|as	^NCMP	NCMP00V	0	0	0	L	0	-
+#orros	os|as	^NCFP	NCMP00V	0	0	0	L	0	-
+#orra	a|o	^NCMS	NCFS00V	0	0	0	L	0	-
+#orra	a|o	^NCFS	NCFS00V	0	0	0	L	0	-
+#orras	as|os	^NCMP	NCFP00V	0	0	0	L	0	-
+#orras	as|os	^NCFP	NCFP00V	0	0	0	L	0	-
+#astro	o|e|a	^NCMS	NCMS00V	1	0	0	L	0	-
+#astro	o|e|a	^NCCS	NCMS00V	1	0	0	L	0	-
+#astros	os|es|as	^NCMP	NCMP00V	1	0	0	L	0	-
+#astros	os|es|as	^NCCP	NCMP00V	1	0	0	L	0	-
+
+# neutre hermanastra
+astra	a|e	^NCFS	NCFS000	1	0	0	L	0	-
+astras	a|e	^NCFS	NCFP000	1	0	0	L	0	-
+
+# pey discursejo
+ejo	*|o	^NCMS	NCMS00V	1	0	0	L	0	-
+ejos	*|o	^NCMS	NCMP00V	1	0	0	L	0	-
+ejo	*|o	^AQ0CS	AQVMS00	0	0	0	L	0	-
+ejo	*|o	^AQ0MS	AQVMS00	0	0	0	L	0	-
+ejos	*|o	^AQ0CS	AQVMP00	0	0	0	L	0	-
+ejos	*|o	^AQ0MS	AQVMP00	0	0	0	L	0	-
+eja	*|a	^AQ0CS	AQVFS00	0	0	0	L	0	-
+eja	*|a	^AQ0FS	AQVFS00	0	0	0	L	0	-
+ejas	*|a	^AQ0CS	AQVFP00	0	0	0	L	0	-
+ejas	*|a	^AQ0FS	AQVFP00	0	0	0	L	0	-
+
+# pey palabreja
+eja	a|e|*	^NCFS	NCFS00V	1	0	0	L	0	-
+ejas	a|e|*	^NCFS	NCFP00V	1	0	0	L	0	-
+
+# cafetucho
+tucho	*	^NCMS	NCMS00V	1	0	0	L	0	-
+tuchos	*	^NCMS	NCMP00V	1	0	0	L	0	-
+
+# larguirucho
+uirucho	o	^AQ0MS	AQVMS00	0	0	0	L	0	-
+uiruchos	os	^AQ0MP	AQVMP00	0	0	0	L	0	-
+uirucha	a	^AQ0FS	AQVFS00	0	0	0	L	0	-
+uiruchas	as	^AQ0FP	AQVFP00	0	0	0	L	0	-
+ucho	o|*|e|a	^AQ0CS	AQVMS00	1	0	0	L	0	-
+ucho	o|*|e|a	^AQ0MS	AQVMS00	1	0	0	L	0	-
+uchos	o|*|e|a	^AQ0CS	AQVMP00	1	0	0	L	0	-
+uchos	o|*|e|a	^AQ0MS	AQVMP00	1	0	0	L	0	-
+#ucho	o|*|a	^NCMS	NCMS00V	1	0	0	L	0	-
+#ucho	o|*|a	^NCFS	NCMS00V	1	0	0	L	0	-
+#uchos	o|*|a	^NCMS	NCMP00V	1	0	0	L	0	-
+#uchos	o|*|a	^NCFS	NCMP00V	1	0	0	L	0	-
+
+# pey casucha
+ucha	a|*	^NCFS	NCFS00V	1	0	0	L	0	-
+uchas	a|*	^NCFS	NCFP00V	1	0	0	L	0	-
+ucha	a|*	^AQ0FS	AQVFS00	1	0	0	L	0	-
+uchas	a|*	^AQ0FS	AQVFP00	1	0	0	L	0	-
+
+#ales	o|a	^NCMS	NCCN00V	1	0	0	L	0	-
+#ales	o|a	^NCFS	NCCN00V	1	0	0	L	0	-
+#ales	os|as	^NCMP	NCCN00V	1	0	0	L	0	-
+#ales	os|as	^NCFP	NCCN00V	1	0	0	L	0	-
+#ales	o|a	^AQ0MS	AQVCN00	1	0	0	L	0	-
+#ales	o|a	^AQ0FS	AQVCN00	1	0	0	L	0	-
+#ales	os|as	^AQ0MP	AQVCN00	1	0	0	L	0	-
+#ales	os|as	^AQ0FP	AQVCN00	1	0	0	L	0	-
+
+#oide	o|*|a	^NCMS	NCMS00V	1	0	0	L	0	-
+#oide	o|*|a	^NCFS	NCMS00V	1	0	0	L	0	-
+#oides	o|*|a	^NCMS	NCMP00V	1	0	0	L	0	-
+#oides	o|*|a	^NCFS	NCMP00V	1	0	0	L	0	-
+
+# pey extranjeroide
+oide	o|*|a	^AQ0CS	AQVCS00	1	0	0	L	0	-
+oide	o|*|a	^AQ0MS	AQVCS00	1	0	0	L	0	-
+oides	o|*|a	^AQ0CS	AQVCP00	1	0	0	L	0	-
+oides	o|*|a	^AQ0MS	AQVCP00	1	0	0	L	0	-
+
+#engo	e|o|*	^NCMS	*	1	0	0	L	0	-
+#engo	e|o|*	^NCFS	*	1	0	0	L	0	-
+#engo	e|o|*	^AQ0CS	*	1	0	0	L	0	-
+#engos	e|o|*	^NCMS	NCMP00V	0	0	0	L	0	-
+#engos	e|o|*	^NCFS	AQVMP00	0	0	0	L	0	-
+#engos	e|o|*	^NCFS	NCMP00V	0	0	0	L	0	-
+#engos	e|o|*	^NCFS	NCMP00V	0	0	0	L	0	-
+#engos	e|o|*	^AQ0CS	NCMP00V	0	0	0	L	0	-
+#engos	e|o|*	^AQ0CS)	AQVMP00	0	0	0	L	0	-
+#engo	e|o|*	^NCMS	*	1	0	0	L	0	-
+#engo	e|o|*	^NCFS	*	1	0	0	L	0	-
+#engo	e|o|*	^AQ0CS	*	1	0	0	L	0	-
+#engos	e|o|*	^NCFS	NCMP00V	0	0	0	L	0	-
+#engos	e|o|*	^NCMS	AQVMP00	0	0	0	L	0	-
+#engos	e|o|*	^NCFS	NCMP00V	0	0	0	L	0	-
+#engos	e|o|*	^NCFS	AQVMP00	0	0	0	L	0	-
+#engos	e|o|*	^AQ0CS	NCMP00V	0	0	0	L	0	-
+#engos	e|o|*	^AQ0CS	AQVMP00	0	0	0	L	0	-
+#enga	e|o|*	^NCFS	*	1	0	0	L	0	-
+#enga	e|o|*	^NCMS	*	1	0	0	L	0	-
+#enga	e|o|*	^AQ0CS	*	1	0	0	L	0	-
+#engas	e|o|*	^NCFS	NCFP00V	1	0	0	L	0	-
+#engas	e|o|*	^NCFS	AQVMP00	1	0	0	L	0	-
+#engas	e|o|*	^NCMS	NCFP00V	1	0	0	L	0	-
+#engas	e|o|*	^NCMS	AQVMP00	1	0	0	L	0	-
+#engas	e|o|*	^AQ0CS	NCFP00V	1	0	0	L	0	-
+#engas	e|o|*	^AQ0CS	AQVMP00	1	0	0	L	0	-
+#engo	e|o|*	^NCF	NCMS00V	1	0	0	L	0	-
+#engo	e|o|*	^NCF	AQVMS00	1	0	0	L	0	-
+#engo	e|o|*	^AQ0CS	NCMS00V	1	0	0	L	0	-
+#engo	e|o|*	^AQ0CS	AQVMS00	1	0	0	L	0	-
+#engo	e|o|*	^NCM	NCMS00V	1	0	0	L	0	-
+#engo	e|o|*	^NCM	AQVMS00	1	0	0	L	0	-
+#engo	e|o|*	^AQ0CS	NCMS00V	1	0	0	L	0	-
+#engo	e|o|*	^AQ0CS	AQVMS00	1	0	0	L	0	-
+#engos	e|o|*	^NCF	NCMP00V	0	0	0	L	0	-
+#engos	e|o|*	^NCF	AQVMP00	0	0	0	L	0	-
+#engos	e|o|*	^AQ0CS	NCMP00V	0	0	0	L	0	-
+#engos	e|o|*	^AQ0CS	AQVMP00	0	0	0	L	0	-
+#engos	e|o|*	^NCM	NCMP00V	0	0	0	L	0	-
+#engos	e|o|*	^NCM	AQVMP00	0	0	0	L	0	-
+#engos	e|o|*	^AQ0CS	NCMP00V	0	0	0	L	0	-
+#engos	e|o|*	^AQ0CS	AQVMP00	0	0	0	L	0	-
+#enga	e|a|*	^NCMS	NCFS00V	0	0	0	L	0	-
+#enga	e|a|*	^NCMS	AQVFS00	0	0	0	L	0	-
+#enga	e|a|*	^AQ0CS	NCFS00V	0	0	0	L	0	-
+#enga	e|a|*	^AQ0CS	AQVFS00	0	0	0	L	0	-
+#enga	e|a|*	^NCFS	NCFS00V	0	0	0	L	0	-
+#enga	e|a|*	^NCFS	AQVFS00	0	0	0	L	0	-
+#enga	e|a|*	^AQ0CS	NCFS00V	0	0	0	L	0	-
+#enga	e|a|*	^AQ0CS	AQVFS00	0	0	0	L	0	-
+#engas	e|a|*	^NCMS	NCFP00	0	0	0	L	0	-
+#engas	e|a|*	^NCMS	AQVFP00	0	0	0	L	0	-
+#engas	e|a|*	^AQ0CS	NCFP00V	0	0	0	L	0	-
+#engas	e|a|*	^AQ0CS	AQVFP00	0	0	0	L	0	-
+#enga	e|a|*	^NCMS	NCFS00V	0	0	0	L	0	-
+#enga	e|a|*	^NCFS	NCFS00V	0	0	0	L	0	-
+#engas	e|a|*	^NCMS	NCFP00V	0	0	0	L	0	-
+#engas	e|a|*	^NCFS	NCFP00V	0	0	0	L	0	-
+#enga	e|a|*	^AQ0CS	AQVFS00	0	0	0	L	0	-
+#enga	e|a|*	^AQ0FS	AQVFS00	0	0	0	L	0	-
+#engas	e|a|*	^AQ0CS	AQVFP00	0	0	0	L	0	-
+#engas	e|a|*	^AQ0FS	AQVFP00	0	0	0	L	0	-
+
+# pey señoritingo
+itingo	*	^NCMS	NCMS00V	0	0	0	L	0	-
+itingos	*	^NCMS	NCMP00V	0	0	0	L	0	-
+itinga	a	^NCFS	NCFS00V	0	0	0	L	0	-
+itingas	a	^NCFS	NCFP00V	0	0	0	L	0	-
+#ingo	*	^NCMS	NCMS00V	0	0	0	L	0	-
+#ingos	*	^NCMS	NCMP00V	0	0	0	L	0	-
+#inga	a	^NCFS	NCFS00V	0	0	0	L	0	-
+#ingas	a	^NCFS	NCFP00V	0	0	0	L	0	-
+
+# pey carnuza, gentuza
+uza	e	^NCFS	NCFS00V	0	0	0	L	0	-
+uzas	es	^NCFP	NCFP00V	0	0	0	L	0	-
+
+#uco	o|e|*|a	^NCMS	*	1	0	0	L	0	-
+#uco	o|e|*|a	^AQ0MS	*	1	0	0	L	0	-
+#uco	o|e|*|a	^NCFS	*	1	0	0	L	0	-
+#ucos	o|e|*|a	^NCMS	NCMP00V	1	0	0	L	0	-
+#ucos	o|e|*|a	^NCMS	AQVMP00	1	0	0	L	0	-
+#ucos	o|e|*|a	^AQ0MS	NCMP00V	1	0	0	L	0	-
+#ucos	o|e|*|a	^AQ0MS	AQVMP00	1	0	0	L	0	-
+#ucos	o|e|*|a	^NCFS	NCMP00V	1	0	0	L	0	-
+#ucos	o|e|*|a	^NCFS	AQVMP00	1	0	0	L	0	-
+
+# dim mujeruca
+uca	a|*	^NCFS	NCFS00V	1	0	0	L	0	-
+uca	a|*	^AQ0FS	AQVFS00	1	0	0	L	0	-
+ucas	a|*	^NCFS	NCFP00V	1	0	0	L	0	-
+ucas	a|*	^AQ0FS	AQVFP00	1	0	0	L	0	-
+
+#usco	o|e|a	^AQ0CS	*	1	0	0	L	0	-
+#usco	o|e|a	^AQ0MS	*	1	0	0	L	0	-
+#usco	o|e|a	^NCMS	*	1	0	0	L	0	-
+#usco	o|e|a	^NCFS	*	1	0	0	L	0	-
+#uscos	o|e|a	^NCMS	AQVCP00	1	0	0	L	0	-
+#uscos	o|e|a	^NCMS	AQVMP00	1	0	0	L	0	-
+#uscos	o|e|a	^NCMS	NCMP00V	1	0	0	L	0	-
+#uscos	o|e|a	^NCFS	AQVCP00	1	0	0	L	0	-
+#uscos	o|e|a	^NCFS	AQVMP00	1	0	0	L	0	-
+#uscos	o|e|a	^NCFS	NCMP00V	1	0	0	L	0	-
+#uscos	o|e|a	^AQ0CS	AQVCP00	1	0	0	L	0	-
+#uscos	o|e|a	^AQ0CS	AQVMP00	1	0	0	L	0	-
+#uscos	o|e|a	^AQ0CS	NCMP00V	1	0	0	L	0	-
+#uscos	o|e|a	^AQ0MS	AQVCP00	1	0	0	L	0	-
+#uscos	o|e|a	^AQ0MS	AQVMP00	1	0	0	L	0	-
+#uscos	o|e|a	^AQ0MS	NCMP00V	1	0	0	L	0	-
+#usca	a	^NCFS	*	0	0	0	L	0	-
+#usca	a	^AQ0FS	*	0	0	0	L	0	-
+#uscas	a	^NCFS	NCFP00V	0	0	0	L	0	-
+#uscas	a	^NCFS	AQVFP00	0	0	0	L	0	-
+#uscas	a	^AQ0FS	NCFP00V	0	0	0	L	0	-
+#uscas	a	^AQ0FS	AQVFP00	0	0	0	L	0	-
+
+# funciona per blancuzco, a, os, as i verduzco, a, os, a
+uzco	o|e	^AQ0MS	AQVMS00	0	0	0	L	0	-
+uzco	o|e	^AQ0CS	AQVCS00	0	0	0	L	0	-
+uzcos	os|es	^AQ0CP	AQVCP00	0	0	0	L	0	-
+uzcos	os|es	^AQ0MP	AQVMP00	0	0	0	L	0	-
+uzca	a|e	^AQ0CS	AQVFS00	0	0	0	L	0	-
+uzca	a|e	^AQ0FS	AQVFS00	0	0	0	L	0	-
+uzcas	as|es	^AQ0CP	AQVFP00	0	0	0	L	0	-
+uzcas	as|es	^AQ0FP	AQVFP00	0	0	0	L	0	-
+
+
+################ SUFIXOS SUPERLATIUS ###################
+
+# durísimo, lejisimos, cerquisima, poquisimo
+ísimo	     	o	^RG	*	0	0	0	L	0	-
+ísimos	     	os	^RG	*	0	0	0	L	0	-
+quísima      	ca	^RG	*	0	0	0	L	0	-
+quísimo		co	^RG	*	0	0	0	L	0	-
+
+# mismísimo, muchísimo, tantisimo, escasisimo
+ísimo	o	^[DP]I0MS	*	0	0	0	L	0	-
+ísimos	os	^[DP]I0MP	*	0	0	0	L	0	-
+ísima	a	^[DP]I0FS	*	0	0	0	L	0	-
+ísimas	as	^[DP]I0FP	*	0	0	0	L	0	-
+
+# poquisimo
+quísimo		co	^[DP]I0MS	*	0	0	0	L	0	-
+quísimos	cos	^[DP]I0MP	*	0	0	0	L	0	-
+quísima		ca	^[DP]I0FS	*	0	0	0	L	0	-
+quísimas	cas	^[DP]I0FP	*	0	0	0	L	0	-
+
+# primerísimo/a/os/as
+ísimo	o	^AO0MS	AOSMS00	0	0	0	L	0	-
+ísimos	o	^AO0MS	AOSMP00	0	0	0	L	0	-
+ísima	o	^AO0MS	AOSFS00	0	0	0	L	0	-
+ísimas	o	^AO0MS	AOSFP00	0	0	0	L	0	-
+
+# "durísimo, cristianísimo,...", brillantísimo, elegantísimo, sumarisimo
+ísimo	o|e|io		^AQ0.S	AQSMS00	0	0	0	L	0	-
+ísimos	os|es|ios	^AQ0.P	AQSMP00	0	0	0	L	0	-
+ísima	a|e|ia		^AQ0.S	AQSFS00	0	0	0	L	0	-
+ísimas	as|es|ias	^AQ0.P	AQSFP00	0	0	0	L	0	-
+
+# "ferventísimo", "calentísimo", valentisimo, relucentisimo, recentisimo...
+entísimo	iente	^AQ0CS	AQSMS00	0	0	0	L	0	-
+entísimos	ientes	^AQ0CP	AQSMP00	0	0	0	L	0	-
+entísima	iente	^AQ0CS	AQSFS00	0	0	0	L	0	-
+entísimas	ientes	^AQ0CP	AQSFP00	0	0	0	L	0	-
+
+# amiguísimo, larguísimo
+uísimo	o	^AQ0MS	AQSMS00	0	0	0	L	0	-
+uísimos	os	^AQ0MP	AQSMP00	0	0	0	L	0	-
+uísima	a	^AQ0FS	AQSFS00	0	0	0	L	0	-
+uísimas	as	^AQ0FP	AQSFP00	0	0	0	L	0	-
+
+# universalísimo, vitalísimo, realísimo, dificilísimo.
+lísimo	l	^AQ0CS	AQSMS00	1	0	0	L	0	-
+lísimos	les	^AQ0CP	AQSMP00	1	0	0	L	0	-
+lísima	l	^AQ0CS	AQSFS00	1	0	0	L	0	-
+lísimas	les	^AQ0CP	AQSFP00	1	0	0	L	0	-
+
+# generalisimo, finalisima
+lísimo	l	^NC.S	*	0	0	0	L	0	-
+lísimos	l	^NC.S	*	0	0	0	L	0	-
+lísima	l	^NC.S	*	0	0	0	L	0	-
+lísimas	l	^NC.S	*	0	0	0	L	0	-
+
+# para "popularísimo", "singularísimo"
+rísimo		r	^AQ0CS	AQSMS00	0	0	0	L	0	-
+rísimos		res	^AQ0CP	AQSMP00	0	0	0	L	0	-
+rísima		r	^AQ0CS	AQSFS00	0	0	0	L	0	-
+rísimas		res	^AQ0CP	AQSFP00	0	0	0	L	0	-
+
+# per rico-riquísimo, comiquísimo, simpatiquísimo,  antiquisimo
+quísimo		co|guo		^AQ0MS	AQSMS00	1	0	0	L	0	-
+quísimos	cos|guos	^AQ0MP	AQSMP00	1	0	0	L	0	-
+quísima		ca|gua		^AQ0FS	AQSFS00	1	0	0	L	0	-
+quísimas	cas|guas	^AQ0FP	AQSFP00	1	0	0	L	0	-
+
+# pels que provenen dels participis acabado-acabadísimo
+ísimo	   	o	^VMP00SM	AQSMS00	0	0	0	R	0	-
+ísimos		o	^VMP00SM	AQSMP00	0	0	0	R	0	-
+ísima		o	^VMP00SM	AQSFS00	0	0	0	R	0	-
+ísimas		o	^VMP00SM	AQSFP00	0	0	0	R	0	-
+
+# pels que fan ble/bilísimo (amable-amabilísimo)
+bilísimo	ble	^AQ0CS	AQSMS00	0	0	0	L	0	-
+bilísimos	bles	^AQ0CP	AQSMP00	0	0	0	L	0	-
+bilísima	ble	^AQ0CS	AQSFS00	0	0	0	L	0	-
+bilísimas	bles	^AQ0CP	AQSFP00	0	0	0	L	0	-
+
+# per jovencisimo, felicísimo,  castizo-casticisimo, mestizo-mesticisimo, amicisimo, enemicisimo
+císimo		*|z|zo|go	^AQ0.S	AQSMS00	0	0	0	L	0	-
+císimos		*|z|zo|go	^AQ0.S	AQSMP00	0	0	0	L	0	-
+císima		*|z|zo|go	^AQ0.S	AQSFS00	0	0	0	L	0	-
+císimas		*|z|zo|go	^AQ0.S	AQSFP00	0	0	0	L	0	-
+
+# ?
+érrimo		ero	^AQ0MS	AQSMS00	0	0	0	L	0	-
+érrimos		eros	^AQ0MP	AQSMP00	0	0	0	L	0	-
+érrima		era	^AQ0FS	AQSFS00	0	0	0	L	0	-
+érrimas		eras	^AQ0FP	AQSFP00	0	0	0	L	0	-
+
+# fuerte, muerto, 
+ortísimo	uerte|uerto	^AQ0.S	AQSMS00	0	0	0	L	0	-
+ortísimos	uertes|uertos	^AQ0.P	AQSMP00	0	0	0	L	0	-
+ortísima	uerte|uerta	^AQ0.S	AQSFS00	0	0	0	L	0	-
+ortísimas	uertes|uertas	^AQ0.P	AQSFP00	0	0	0	L	0	-
+
+# (in)cierto-certisimo
+ertísimo	ierto	^AQ0MS	AQSMS00	0	0	0	L	0	-
+ertísimos	iertos	^AQ0MP	AQSMP00	0	0	0	L	0	-
+ertísima	ierta	^AQ0FS	AQSFS00	0	0	0	L	0	-
+ertísimas	iertas	^AQ0FP	AQSFP00	0	0	0	L	0	-
+
+# crudelisimo, fidelisimo
+delísimo	el	^AQ0CS	AQSMS00	0	0	0	L	0	-
+delísimos	eles	^AQ0CP	AQSMP00	0	0	0	L	0	-
+delísima	el	^AQ0CS	AQSFS00	0	0	0	L	0	-
+delísimas	eles	^AQ0CP	AQSFP00	0	0	0	L	0	-
+
+# ternisimo
+ernísimo	ierno	^AQ0MS	AQSMS00	0	0	0	L	0	-
+ernísimos	iernos	^AQ0MP	AQSMP00	0	0	0	L	0	-
+ernísima	ierna	^AQ0FS	AQSFS00	0	0	0	L	0	-
+ernísimas	iernas	^AQ0FP	AQSFP00	0	0	0	L	0	-
+
+# novisimo
+ovísimo		uevo	^AQ0MS	AQSMS00	0	0	0	L	0	-
+ovísimos	uevos	^AQ0MP	AQSMP00	0	0	0	L	0	-
+ovísima		ueva	^AQ0FS	AQSFS00	0	0	0	L	0	-
+ovísimas	uevas	^AQ0FP	AQSFP00	0	0	0	L	0	-
+
+# bonisimo
+onísimo		ueno	^AQ0MS	AQSMS00	0	0	0	L	0	-
+onísimos	uenos	^AQ0MP	AQSMP00	0	0	0	L	0	-
+onísima		uena	^AQ0FS	AQSFS00	0	0	0	L	0	-
+onísimas	uenas	^AQ0FP	AQSFP00	0	0	0	L	0	-
+
+### CSM: The following superlative suffixes, with a double ss have been added:
+
+# "duríssimo, cristianíssimo,...", brillantíssimo, elegantíssimo, sumarissimo
+íssimo	o|e|io	^AQ0.S	AQSMS0	0	0	0	L	0	-
+íssimos	os|es|ios	^AQ0.P	AQSMP0	0	0	0	L	0	-
+íssima	a|e|ia	^AQ0.S	AQSFS0	0	0	0	L	0	-
+íssimas	as|es|ias	^AQ0.P	AQSFP0	0	0	0	L	0	-
+
+# primeríssimo/a/os/as
+íssimo	o	^AO0MS	AOSMS0	0	0	0	L	0	-
+íssimos	o	^AO0MS	AOSMP0	0	0	0	L	0	-
+íssima	o	^AO0MS	AOSFS0	0	0	0	L	0	-
+íssimas	o	^AO0MS	AOSFP0	0	0	0	L	0	-
+
+# "ferventíssimo", "calentíssimo", valentissimo, relucentissimo, recentissimo...
+entíssimo	iente	^AQ0CS	AQSMS0	0	0	0	L	0	-
+entíssimos	ientes	^AQ0CP	AQSMP0	0	0	0	L	0	-
+entíssima	iente	^AQ0CS	AQSFS0	0	0	0	L	0	-
+entíssimas	ientes	^AQ0CP	AQSFP0	0	0	0	L	0	-
+
+# mismíssimo, muchíssimo, tantissimo, escassissimo
+íssimo	o	^[DP]I0MS	*	0	0	0	L	0	-
+íssimos	os	^[DP]I0MP	*	0	0	0	L	0	-
+íssima	a	^[DP]I0FS	*	0	0	0	L	0	-
+íssimas	as	^[DP]I0FP	*	0	0	0	L	0	-
+# poquissimo
+quíssimo	co	^[DP]I0MS	*	0	0	0	L	0	-
+quíssimos	cos	^[DP]I0MP	*	0	0	0	L	0	-
+quíssima	ca	^[DP]I0FS	*	0	0	0	L	0	-
+quíssimas	cas	^[DP]I0FP	*	0	0	0	L	0	-
+
+# lejissimos, cerquissima
+íssimos	os	^RG	*	0	0	0	L	0	-
+íssima	a	^RG	*	0	0	0	L	0	-
+
+
+# amiguíssimo, larguíssimo
+uíssimo	o	^AQ0MS	AQSMS0	0	0	0	L	0	-
+uíssimos	os	^AQ0MP	AQSMP0	0	0	0	L	0	-
+uíssima	a	^AQ0FS	AQSFS0	0	0	0	L	0	-
+uíssimas	as	^AQ0FP	AQSFP0	0	0	0	L	0	-
+
+# universalíssimo, vitalíssimo, realíssimo, dificilíssimo.
+líssimo	l	^AQ0CS	AQSMS0	1	0	0	L	0	-
+líssimos	les	^AQ0CP	AQSMP0	1	0	0	L	0	-
+líssima	l	^AQ0CS	AQSFS0	1	0	0	L	0	-
+líssimas	les	^AQ0CP	AQSFP0	1	0	0	L	0	-
+
+# generalissimo, finalissima
+líssimo	l	^NC.S	*	0	0	0	L	0	-
+líssimos	l	^NC.S	*	0	0	0	L	0	-
+líssima	l	^NC.S	*	0	0	0	L	0	-
+líssimas	l	^NC.S	*	0	0	0	L	0	-
+
+# para "popularíssimo", "ssingularíssimo"
+ríssimo	r	^AQ0CS	AQSMS0	0	0	0	L	0	-
+ríssimos	res	^AQ0CP	AQSMP0	0	0	0	L	0	-
+ríssima	r	^AQ0CS	AQSFS0	0	0	0	L	0	-
+ríssimas	res	^AQ0CP	AQSFP0	0	0	0	L	0	-
+
+# per rico-riquíssimo, comiquíssimo, ssimpatiquíssimo,  antiquissimo
+quíssimo	co|guo	^AQ0MS	AQSMS0	1	0	0	L	0	-
+quíssimos	cos|guos	^AQ0MP	AQSMP0	1	0	0	L	0	-
+quíssima	ca|gua	^AQ0FS	AQSFS0	1	0	0	L	0	-
+quíssimas	cas|guas	^AQ0FP	AQSFP0	1	0	0	L	0	-
+
+# pels que provenen dels participis acabado-acabadíssimo
+íssimo	o	^VMP00SM	AQSMS0	0	0	0	R	0	-
+íssimos	o	^VMP00SM	AQSMP0	0	0	0	R	0	-
+íssima	o	^VMP00SM	AQSFS0	0	0	0	R	0	-
+íssimas	o	^VMP00SM	AQSFP0	0	0	0	R	0	-
+
+# pels que fan ble/bilíssimo (amable-amabilíssimo)
+bilíssimo	ble	^AQ0CS	AQSMS0	0	0	0	L	0	-
+bilíssimos	bles	^AQ0CP	AQSMP0	0	0	0	L	0	-
+bilíssima	ble	^AQ0CS	AQSFS0	0	0	0	L	0	-
+bilíssimas	bles	^AQ0CP	AQSFP0	0	0	0	L	0	-
+
+# per jovencissimo, felicíssimo,  castizo-casticissimo, mestizo-mesticissimo, amicissimo, enemicissimo
+císsimo	*|z|zo|go	^AQ0.S	AQSMS0	0	0	0	L	0	-
+císsimos	*|z|zo|go	^AQ0.S	AQSMP0	0	0	0	L	0	-
+císsima	*|z|zo|go	^AQ0.S	AQSFS0	0	0	0	L	0	-
+císsimas	*|z|zo|go	^AQ0.S	AQSFP0	0	0	0	L	0	-
+
+
+# fuerte, muerto, 
+ortíssimo	uerte|uerto	^AQ0.S	AQSMS0	0	0	0	L	0	-
+ortíssimos	uertes|uertos	^AQ0.P	AQSMP0	0	0	0	L	0	-
+ortíssima	uerte|uerta	^AQ0.S	AQSFS0	0	0	0	L	0	-
+ortíssimas	uertes|uertas	^AQ0.P	AQSFP0	0	0	0	L	0	-
+
+# (in)cierto-certissimo
+ertíssimo	ierto	^AQ0MS	AQSMS0	0	0	0	L	0	-
+ertíssimos	iertos	^AQ0MP	AQSMP0	0	0	0	L	0	-
+ertíssima	ierta	^AQ0FS	AQSFS0	0	0	0	L	0	-
+ertíssimas	iertas	^AQ0FP	AQSFP0	0	0	0	L	0	-
+
+# crudelissimo, fidelissimo
+delíssimo	el	^AQ0CS	AQSMS0	0	0	0	L	0	-
+delíssimos	eles	^AQ0CP	AQSMP0	0	0	0	L	0	-
+delíssima	el	^AQ0CS	AQSFS0	0	0	0	L	0	-
+delíssimas	eles	^AQ0CP	AQSFP0	0	0	0	L	0	-
+
+# ternissimo
+erníssimo	ierno	^AQ0MS	AQSMS0	0	0	0	L	0	-
+erníssimos	iernos	^AQ0MP	AQSMP0	0	0	0	L	0	-
+erníssima	ierna	^AQ0FS	AQSFS0	0	0	0	L	0	-
+erníssimas	iernas	^AQ0FP	AQSFP0	0	0	0	L	0	-
+
+# novissimo
+ovíssimo	uevo	^AQ0MS	AQSMS0	0	0	0	L	0	-
+ovíssimos	uevos	^AQ0MP	AQSMP0	0	0	0	L	0	-
+ovíssima	ueva	^AQ0FS	AQSFS0	0	0	0	L	0	-
+ovíssimas	uevas	^AQ0FP	AQSFP0	0	0	0	L	0	-
+
+# bonissimo
+oníssimo	ueno	^AQ0MS	AQSMS0	0	0	0	L	0	-
+oníssimos	uenos	^AQ0MP	AQSMP0	0	0	0	L	0	-
+oníssima	uena	^AQ0FS	AQSFS0	0	0	0	L	0	-
+oníssimas	uenas	^AQ0FP	AQSFP0	0	0	0	L	0	-
+
+</Suffixes>

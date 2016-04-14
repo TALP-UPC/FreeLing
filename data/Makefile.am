@@ -1,5 +1,9 @@
 languages = as ca cs cy de en es fr gl hr it nb pt ru sl
+<<<<<<< HEAD
 variants = es/old-es es/es-ar ca/balear ca/valencia 
+=======
+variants = es/es-old es/es-ar ca/balear ca/valencia 
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 
 EXTRA_DIST = $(languages) common config
 
@@ -9,14 +13,22 @@ pkgdata_DATA =
 configdatadir = $(pkgdatadir)/config
 configdata_DATA = config/*
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 install-data-hook:
 	-@ldconfig &> /dev/null || echo "Could not run 'ldconfig'. If you get installation errors below, execute 'ldconfig' as root and try 'make install' again.";
 	@echo "Indexing language dictionaries. This will take some minutes.";
 	@for lg in $(languages); do \
 	   echo "Installing files for language '"$$lg"'. Please wait."; \
 	   pushd $(top_builddir)/data/$$lg >/dev/null; \
+<<<<<<< HEAD
 	   find . -name '.svn' -prune -o -name '*~' -prune -o -name 'dictionary' -prune -o -type f -exec install -D {} $(DESTDIR)/$(pkgdatadir)/$$lg/{} \; ; \
+=======
+           find . -name '.svn' -prune -o -name '*~' -prune -o -name 'dictionary' -prune -o -type d -exec install -d {} $(DESTDIR)/$(pkgdatadir)/$$lg/{} \; ; \
+	   find . -name '.svn' -prune -o -name '*~' -prune -o -name 'dictionary' -prune -o -type f -exec install {} $(DESTDIR)/$(pkgdatadir)/$$lg/{} \; ; \
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 	   popd >/dev/null; \
 	   if (test -d "$(top_builddir)/data/$$lg/dictionary/entries" ); then \
 	     echo "  - Creating "$$lg" dictionary..."; \
@@ -51,7 +63,12 @@ install-data-hook:
 	@for d in common config; do \
 	   echo "Installing "$$d" files."; \
 	   pushd $(top_builddir)/data/$$d >/dev/null; \
+<<<<<<< HEAD
 	   find . -name '.svn' -prune -o -name '*~' -prune -o -type f -exec install -D {} $(DESTDIR)/$(pkgdatadir)/$$d/{} \; ; \
+=======
+	   find . -name '.svn' -prune -o -name '*~' -prune -o -type d -exec install -d {} $(DESTDIR)/$(pkgdatadir)/$$d/{} \; ; \
+	   find . -name '.svn' -prune -o -name '*~' -prune -o -type f -exec install {} $(DESTDIR)/$(pkgdatadir)/$$d/{} \; ; \
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 	   popd >/dev/null; \
 	done
 

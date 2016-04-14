@@ -30,9 +30,15 @@ THREE_DOTS 	0  (\.\.\.)
 QUOTES	        0  (``|<<|>>|'')
 MAILS 	        0  {ALPHANUM}+([\._]{ALPHANUM}+)*@{ALPHANUM}+([\._]{ALPHANUM}+)*
 LON_FR		1  (l'on){NOALPHANUM} CI
+<<<<<<< HEAD
 APOSTR_FR       1  ((qu|[cdlmtsj])')({ALPHA}) CI
 URLS1 	        0  ((mailto:|(news|http|https|ftp|ftps)://)[\w\.\-/]+|^(www(\.[\w\-/]+)+))
 URLS2           1  ([\w\.\-/]+\.(com|org|net))[\s]
+=======
+APOSTR_FR       1  ((qu|[cdlmtsjn])')({ALPHA}) CI
+URLS1 	        0  ((mailto:|(news|http|https|ftp|ftps)://)[\w\.\-/]+|^(www(\.[\w\-/]+)+))
+URLS2           1  ([\w\.\-/]+\.(com|org|net|fr))[\s]
+>>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 KEEP_COMPOUNDS  0  {ALPHA}+(['_\-\+]{ALPHA}+)+
 *ABREVIATIONS1  0  (({ALPHA}+\.)+)(?!\.\.)
 WORD            0  {ALPHANUM}+[\+]*
