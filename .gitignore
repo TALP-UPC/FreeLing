@@ -26,3 +26,10 @@
 *.exe
 *.out
 *.app
+
+# backup files
+*~
+
+# MacOS
+.DS_Store
+

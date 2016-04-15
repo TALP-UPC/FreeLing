@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-à a+a SPS00+*
-a a SPS00
-=======
 à a+a SP+*
 a a SP
->>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 a o DA0FS0
 a o PD0FS00
 a o PP3FSA0
@@ -20,11 +15,7 @@ adei adei I
 adeus adeus I
 adiante adiante I
 afasta afasta I
-<<<<<<< HEAD
-afora afora SPS00
-=======
 afora afora SP
->>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 ah ah I
 ai ai I
 ailó ailó I
@@ -52,21 +43,12 @@ ambos ambos PI0MP00
 amen amen I
 amém amém I
 amén amén I
-<<<<<<< HEAD
-ante ante SPS00
-ao a+o SPS00+*
-aos a+os SPS00+*
-apenas apenas CC
-apesar apesar CC
-após após SPS00
-=======
 ante ante SP
 ao a+o SP+*
 aos a+os SP+*
 apenas apenas CC
 apesar apesar CC
 após após SP
->>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 aquando aquando CC
 aquela aquele DD0FS0
 aquela aquele PD0FS00
@@ -90,11 +72,7 @@ as o PD0FP00
 as o PP3FPA0
 assim assim CC
 asta asta I
-<<<<<<< HEAD
-até até SPS00
-=======
 até até SP
->>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 avante avante I
 ave ave I
 avonda avonda I
@@ -152,32 +130,20 @@ chupa chupa I
 chut chut I
 chuta chuta I
 chuts chut I
-<<<<<<< HEAD
-com com SPS00
-=======
 com com SP
->>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 comigo comigo PP1CSO0
 como como PT0CN00
 como como CS
 como como I
 conforme conforme CC
-<<<<<<< HEAD
-conforme conforme SPS00
-=======
 conforme conforme SP
->>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 connosco comigo PP1CPO0
 conquanto conquanto CC
 consequentemente consequentemente CS
 consigo comigo PP3CSO0
 consoante consoante CC
 contigo comigo PP2CSO0
-<<<<<<< HEAD
-contra contra SPS00
-=======
 contra contra SP
->>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 contro contro I
 contudo contudo CC
 convosco comigo PP2CPN0
@@ -187,68 +153,6 @@ cuja cujo PR0FS00
 cujas cujo PR0FP00
 cujo cujo PR0MS00
 cujos cujo PR0MP00
-<<<<<<< HEAD
-da de+a SPS00+*
-daí de+aí SPS00+RG
-dacolá de+acolá SPS00+RG
-dalgo de+algo SPS00+PI0CN00
-dalgum de+algum SPS00+*
-dalguém de+alguém SPS00+PI0CN00
-dalguma de+alguma SPS00+*
-dalgumas de+algumas SPS00+*
-dalguns de+alguns SPS00+*
-dalgures de+algures SPS00+RG
-dalhures de+alhures SPS00+RG
-dali de+ali SPS00+RG
-dalém de+além SPS00+RG
-dantes de+antes SPS00+RG
-daquela de+aquela SPS00+*
-daquelas de+aquelas SPS00+*
-daquele de+aquele SPS00+*
-daqueles de+aqueles SPS00+*
-daqueloutra de+aquela+outra SPS00+PD+PI
-daqueloutras de+aquelas+outras SPS00+PD+PI
-daqueloutro de+aquele+outro SPS00+PD+PI
-daqueloutros de+aqueles+outros SPS00+PD+PI
-daqui de+aqui SPS00+RG
-daquilo de+aquilo SPS00+PD0NN00
-daquém de+aquém SPS00+RG
-das de+as SPS00+*
-de de SPS00
-dela de+ela SPS00+PP3FS00
-delas de+elas SPS00+PP3FP00
-dele de+ele SPS00+PP3MS00
-deles de+eles SPS00+PP3MP00
-dentre de+entre SPS00+SPS0
-depós depós SPS00
-desde desde SPS00
-dessoutra de+essa+outra SPS00+PD+PI
-dessoutras de+essas+outras SPS00+PD+PI
-dessoutro de+esse+outro SPS00+PD+PI
-dessoutros de+esses+outros SPS00+PD+PI
-desta de+esta SPS00+*
-destas de+estas SPS00+*
-destoutra de+esta+outra SPS00+PD+PI
-destoutras de+estas+outras SPS00+PD+PI
-destoutro de+este+outro SPS00+PD+PI
-destoutros de+estes+outros SPS00+PD+PI
-disso de+isso SPS00+PD0NN00
-dlim dlim I
-do de+o SPS00+*
-domisteco domisteco I
-donde de+onde SPS00+*
-dos de+os SPS00+*
-doutra de+outra SPS00+*
-doutras de+outras SPS00+*
-doutrem de+outrem SPS00+PI0CN00
-doutro de+outro SPS00+*
-doutrora de+outrora SPS00+RG
-doutros de+outros SPS00+*
-dês dês SPS00
-dum de+um SPS00+DI0MS0
-duns de+uns SPS00+DI0MP0
-durante durante SPS00
-=======
 da de+a SP+*
 daí de+aí SP+RG
 dacolá de+acolá SP+RG
@@ -289,11 +193,18 @@ dessoutro de+esse+outro SP+PD+PI
 dessoutros de+esses+outros SP+PD+PI
 desta de+esta SP+*
 destas de+estas SP+*
+dessas de+estas SP+*
+dessa de+essas SP+*
 destoutra de+esta+outra SP+PD+PI
 destoutras de+estas+outras SP+PD+PI
 destoutro de+este+outro SP+PD+PI
 destoutros de+estes+outros SP+PD+PI
 disso de+isso SP+PD0NN00
+disto de+isto SP+PD0NN00
+destes de+estes SP+*
+deste de+este SP+*
+desse de+esse SP+*
+desses de+esses SP+*
 dlim dlim I
 do de+o SP+*
 domisteco domisteco I
@@ -309,7 +220,6 @@ dês dês SP
 dum de+um SP+DI0MS0
 duns de+uns SP+DI0MP0
 durante durante SP
->>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 e e CC
 eh eh I
 eia eia I
@@ -318,16 +228,6 @@ ela ele PP3FS00
 elas ele PP3FP00
 ele ele PP3MS00
 eles ele PP3MP00
-<<<<<<< HEAD
-em em SPS00
-embora embora CS
-embora embora I
-empós empós SPS00
-ena ena I
-enquanto enquanto CS
-então então I
-entre entre SPS00
-=======
 em em SP
 embora embora CS
 embora embora I
@@ -336,7 +236,6 @@ ena ena I
 enquanto enquanto CS
 então então I
 entre entre SP
->>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 essa esse DD0FS0
 essa esse PD0FS00
 essas esse DD0FP0
@@ -365,11 +264,7 @@ etc. etcétera Fs
 eu eu PP1CSN0
 exactamente exactamente I
 excepto excepto CC
-<<<<<<< HEAD
-excepto excepto SPS00
-=======
 excepto excepto SP
->>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 fó fó I
 fasta fasta I
 figas figas I
@@ -394,11 +289,7 @@ hui hui I
 hum hum I
 hurra hurra I
 ih ih I
-<<<<<<< HEAD
-in in SPS00
-=======
 in in SP
->>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 irra irra I
 isso isso PD0NN00
 isto isto PD0NN00
@@ -423,11 +314,7 @@ malgrado malgrado CC
 mas mas CC
 mas me+as PP1CS00+PP3FPA0
 me me PP1CS00
-<<<<<<< HEAD
-mediante mediante SPS00
-=======
 mediante mediante SP
->>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 melhor melhor I
 menos menos DI0CN0
 mentes mentes CC
@@ -448,14 +335,14 @@ mesmíssimo mesmo PI0MS00
 mesmíssimos mesmo DD0MP0
 mesmíssimos mesmo PI0MP00
 meu meu DP1MSS
-meu meu AP0MS1S
+meu meu AP1MS0S0
 meus meu DP1MPS
-meus meu AP0MP1S
+meus meu AP1MP0S0
 mim mim PP1CSO0
 minha meu DP1FSS
-minha meu AP0FS1S
+minha meu AP1FS0S0
 minhas meu DP1FPS
-minhas meu AP0FP1S
+minhas meu AP1FP0S0
 mo me+o PP+PP
 moita moita I
 morra morra I
@@ -476,28 +363,6 @@ muitíssimo muito DI0MS0
 muitíssimo muito PI0MS00
 muitíssimos muito DI0MP0
 muitíssimos muito PI0MP00
-<<<<<<< HEAD
-na em+a SPS00+DA
-nada nada PI0CN00
-nalgum em+algum SPS00+*
-nalguma em+alguma SPS00+*
-nalgumas em+algumas SPS00+*
-nalguns em+alguns SPS00+*
-naquela em+aquela SPS00+*
-naquelas em+aquelas SPS00+*
-naquele em+aquele SPS00+*
-naqueles em+aqueles SPS00+*
-naqueloutra em+aquela+outra SPS00+PD+PI
-naqueloutras em+aquelas+outras SPS00+PD+PI
-naqueloutro em+aquele+outro SPS00+PD+PI
-naqueloutros em+aqueles+outros SPS00+PD+PI
-naquilo em+aquilo SPS00+PD0NN00
-nas em+as SPS00+DA
-nela em+ela SPS00+PP3FS00
-nelas em+elas SPS00+PP3FP00
-nele em+ele SPS00+PP3MS00
-neles em+eles SPS00+PP3MP00
-=======
 na em+a SP+DA
 nada nada PI0CN00
 nalgum em+algum SP+*
@@ -513,12 +378,12 @@ naqueloutras em+aquelas+outras SP+PD+PI
 naqueloutro em+aquele+outro SP+PD+PI
 naqueloutros em+aqueles+outros SP+PD+PI
 naquilo em+aquilo SP+PD0NN00
+nas o PP3FPA0
 nas em+as SP+DA
 nela em+ela SP+PP3FS00
 nelas em+elas SP+PP3FP00
 nele em+ele SP+PP3MS00
 neles em+eles SP+PP3MP00
->>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 nem nem CC
 nenhum nenhum DI0MS0
 nenhum nenhum PI0MS00
@@ -528,31 +393,6 @@ nenhumas nenhum DI0FP0
 nenhumas nenhum PI0FP00
 nenhuns nenhum DI0MP0
 nenhuns nenhum PI0MP00
-<<<<<<< HEAD
-nessa em+essa SPS00+*
-nessas em+essas SPS00+*
-nesse em+esse SPS00+*
-nesses em+esses SPS00+*
-nessoutra em+essa+outra SPS00+PD+PI
-nessoutras em+essas+outras SPS00+PD+PI
-nessoutro em+esse+outro SPS00+PD+PI
-nessoutros em+esses+outros SPS00+PD+PI
-nesta em+esta SPS00+*
-nestas em+estas SPS00+*
-neste em+este SPS00+*
-nestes em+estes SPS00+*
-nestoutra em+esta+outra SPS00+PD+PI
-nestoutras em+estas+outras SPS00+PD+PI
-nestoutro em+este+outro SPS00+PD+PI
-nestoutros em+estes+outros SPS00+PD+PI
-ninguém ninguém PI0CN00
-nisso em+isso SPS00+PD0NN00
-nisto em+isto SPS00+PD0NN00
-no em+o SPS00+DA
-nos nos PP1CP00
-nos o PP3MPA0
-nos em+os SPS00+DA
-=======
 nessa em+essa SP+*
 nessas em+essas SP+*
 nesse em+esse SP+*
@@ -576,27 +416,14 @@ no em+o SP+DA
 nos nos PP1CP00
 nos o PP3MPA0
 nos em+os SP+DA
->>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 nossa nosso DP1FSP
-nossa nosso AP0FS1P
+nossa nosso AP1FS0P0
 nossas nosso DP1FPP
-nossas nosso AP0FP1P
+nossas nosso AP1FP0P0
 nosso nosso DP1MSP
-nosso nosso AP0MS1P
+nosso nosso AP1MS0P0
 nossos nosso DP1MPP
-nossos nosso AP0MP1P
-<<<<<<< HEAD
-noutra em+outra SPS00+*
-noutras em+outras SPS00+*
-noutrem em+outrem SPS00+*
-noutro em+outro SPS00+*
-noutros em+outros SPS00+*
-nós nós PP1CP00
-num em+um SPS00+DI0MS0
-numa em+uma SPS00+DI0FS0
-numas em+umas SPS00+DI0FP0
-nuns em+uns SPS00+DI0MP0
-=======
+nossos nosso AP1MP0P0
 noutra em+outra SP+*
 noutras em+outras SP+*
 noutrem em+outrem SP+*
@@ -607,7 +434,6 @@ num em+um SP+DI0MS0
 numa em+uma SP+DI0FS0
 numas em+umas SP+DI0FP0
 nuns em+uns SP+DI0MP0
->>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 o o DA0MS0
 o o PD0MS00
 o o PP3MSA0
@@ -644,25 +470,17 @@ paciência paciência I
 ápage ápage I
 palavrinha palavrinha I
 para para CC
-<<<<<<< HEAD
-para para SPS00
-pardeus pardeus I
-pardês pardês I
-patavina patavina PI0CN00
-pelos por+os SPS00+*
-per per SPS00
-peró peró CC
-perante perante SPS00
-=======
 para para SP
 pardeus pardeus I
 pardês pardês I
 patavina patavina PI0CN00
-pelos por+os SP+*
+pelos por+os SP+DA
+pelo por+o SP+DA
+pelas por+as SP+DA
+pela por+a SP+DA
 per per SP
 peró peró CC
 perante perante SP
->>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 pero pero CC
 pila pila I
 pimba pimba I
@@ -670,21 +488,13 @@ poche poche I
 poh poh I
 pois pois CS
 pois pois I
-<<<<<<< HEAD
-por por SPS00
-=======
 por por SP
->>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 porém porém CC
 porquanto porquanto CC
 porque porque CS
 porra porra I
 portanto portanto CC
-<<<<<<< HEAD
-pos pos SPS00
-=======
 pos pos SP
->>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 posto posto CC
 pouca pouco DI0FS0
 pouca pouco PI0FS00
@@ -718,11 +528,7 @@ pouquíssimo pouco DI0MS0
 pouquíssimo pouco PI0MS00
 pouquíssimos pouco DI0MP0
 pouquíssimos pouco PI0MP00
-<<<<<<< HEAD
-pra pra SPS00
-=======
 pra pra SP
->>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 pronto pronto I
 psiu psiu I
 péu péu I
@@ -764,36 +570,21 @@ que que CS
 que que PE0CN00
 que que PR0CN00
 que que PT0CN00
-<<<<<<< HEAD
-àquela a+aquela SPS00+*
-àquelas a+aquelas SPS00+*
-àquele a+aquele SPS00+*
-àqueles a+aqueles SPS00+*
-=======
 àquela a+aquela SP+*
 àquelas a+aquelas SP+*
 àquele a+aquele SP+*
 àqueles a+aqueles SP+*
->>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 quem quem PD0CN00
 quem quem PE0CN00
 quem quem PR0CN00
 quem quem PT0CN00
 quer quer CC
-<<<<<<< HEAD
-àquilo a+aquilo SPS00+PD0NN00
-=======
 àquilo a+aquilo SP+PD0NN00
->>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 quão quão PE0CN00
 ruda ruda I
 ruh ruh I
 ruma ruma I
-<<<<<<< HEAD
-às a+as SPS00+*
-=======
 às a+as SP+*
->>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 safa safa I
 salve salve I
 santiago santiago I
@@ -802,49 +593,33 @@ se se CS
 se se PP3CN00
 sebo sebo I
 segundo segundo CC
-<<<<<<< HEAD
-segundo segundo SPS00
-seja seja CS
-seja seja I
-sem sem SPS00
-=======
 segundo segundo SP
 seja seja CS
 seja seja I
 sem sem SP
->>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 senão senão CC
 sentido sentido I
 seu seu DP3MSS
-seu seu AP0MS3P
-seu seu AP0MS3S
+seu seu AP3MS0P0
+seu seu AP3MS0S0
 seus seu DP3MPS
-seus seu AP0MP3P
-seus seu AP0MP3S
+seus seu AP3MP0P0
+seus seu AP3MP0S0
 si si PP3CSO0
 silêncio silêncio I
 sim sim I
-<<<<<<< HEAD
-sob sob SPS00
-sobre sobre SPS00
-=======
 sob sob SP
 sobre sobre SP
->>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 soco soco I
 sua seu DP3FSS
-sua seu AP0FS3S
-sua sua AP0FS3P
+sua seu AP3FS0S0
+sua sua AP3FS0P0
 suas seu DP3FSP
-suas seu AP0FP3P
-suas seu AP0FP3S
+suas seu AP3FP0P0
+suas seu AP3FP0S0
 sus sus I
 tá tá I
-<<<<<<< HEAD
-té té SPS00
-=======
 té té SP
->>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 tó tó I
 ta te+a PP+PP
 tais tal DD0CP0
@@ -873,9 +648,9 @@ tau tau I
 te te PP2CS00
 tesconjuro tesconjuro I
 teu teu DP2MSS
-teu teu AP0MS2S
+teu teu AP2MS0S0
 teus teu DP2MPS
-teus teu AP0MP2S
+teus teu AP2MP0S0
 ti ti PP2CS00
 to te+o PP+PP
 toda todo DI0FS0
@@ -900,17 +675,13 @@ trape trape I
 trapuz trapuz I
 tris tris I
 trás trás I
-<<<<<<< HEAD
-trás trás SPS00
-=======
 trás trás SP
->>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 truz truz I
 tu tu PP2CSN0
 tua teu DP2FSS
-tua teu AP0FS2S
+tua teu AP2FS0S0
 tuas teu DP2FPS
-tuas teu AP0FP2S
+tuas teu AP2FP0S0
 tudo tudo PI0NN00
 tum tum I
 tura tura I
@@ -930,13 +701,8 @@ uns um PI0MP00
 upa upa I
 uxte uxte I
 vá vá I
-<<<<<<< HEAD
-versus versus SPS00
-visto visto SPS00
-=======
 versus versus SP
 visto visto SP
->>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 viva viva I
 vo vos PP2CP00
 vo vos PP3CP00
@@ -948,9 +714,9 @@ vos vos PP3CP00
 vosmecê vosmecê PP3CS00
 vosmecês vosmecê PP3CP00
 vossa vosso DP2FSP
-vossa vosso AP0FS2P
+vossa vosso AP2FS0P0
 vossas vosso DP2FPP
-vossas vosso AP0FP2P
+vossas vosso AP2FP0P0
 vosselência vosselência PP3CS00
 vosselências vosselência PP3CP00
 vossemecê vossemecê PP3CS00
@@ -958,18 +724,14 @@ vossemecês vossemecê PP3CP00
 vossência vossência PP3CS00
 vossências vossência PP3CP00
 vosso vosso DP2MSP
-vosso vosso AP0MS2P
+vosso vosso AP2MS0P0
 vossos vosso DP2MPP
-vossos vosso AP0MP2P
+vossos vosso AP2MP0P0
 várias vários DI0FP0
 várias vários PI0FP00
 vários vários DI0MP0
 vários vários PI0MP00
-<<<<<<< HEAD
-vs vs SPS00
-=======
 vs vs SP
->>>>>>> f9e2721d1116aeab2d33f63e5c826af400fcb01f
 vós vós PP2CP00
 vós vós PP3CS00
 víspere víspere I
