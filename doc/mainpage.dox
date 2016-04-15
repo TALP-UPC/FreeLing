@@ -1,0 +1,17 @@
+/*!
+ \mainpage FreeLing Technical Reference Manual
+ This is the main page for the Technical Reference Manual for FreeLing library.
+ 
+ Here you'll find detailed descriptions for all FreeLing classes:
+ <ul>
+   <li> Class APIs</li>
+   <li> Public and private members</li>
+   <li> Expected parameters and results</li>
+   <li> Inheritance hierarchy</li>
+   <li> Calling relations among classes</li>
+   <li> Source code where each class is defined</li>
+ </ul>
+
+ This manual has been automatically generated from code by <a href="http://www.doxygen.com">doxygen</a>, so it may be partially incomplete.
+
+*/
