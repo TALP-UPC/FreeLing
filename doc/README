@@ -33,19 +33,12 @@
             To generate it, use the commands:
                cd doc
                doxygen refman-freeling.cfg
+               doxygen refman-treeler.cfg
 
-  userman - User manual latex source
+  USER MANUAL
+  -----------
 
-            To generate as pdf:
-               cd doc/userman
-               latex userman.tex 
-               bibtex userman
-               latex userman.tex
-               dvipdf userman.dvi userman.pdf
-
-            To generate html documentation:
-               cd doc/userman
-               mkdir html 
-               latex2html userman.tex --dir html --local_icons
+   FreeLing user manual can be found at 
+   https://www.gitbook.com/book/talp-upc/freeling-user-manual  
 
 

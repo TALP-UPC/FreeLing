@@ -60,14 +60,14 @@
               <xs:element name="sentence" maxOccurs="unbounded" minOccurs="1">
                 <xs:complexType>
 
-	          <!-- a sentence contains tokens, parse_tree, dep_tree, and predicates -->
+                  <!-- a sentence contains tokens, parse_tree, dep_tree, and predicates -->
                   <xs:sequence>
 
                   <!-- A sentence contains a list of tokens -->
                   <xs:sequence>
                     <xs:element name="token" maxOccurs="unbounded" minOccurs="1">
                       <xs:complexType>
-	                <xs:sequence>
+                        <xs:sequence>
                            <xs:element name="analysis" maxOccurs="unbounded" minOccurs="0"> 
                            <xs:complexType>
                              <xs:attribute type="xs:string" name="lemma" use="optional"/>
@@ -85,7 +85,7 @@
                              <xs:attribute type="xs:double" name="prob" use="optional"/>
                            </xs:complexType>
                            </xs:element> 
- 	                </xs:sequence>
+                         </xs:sequence>
                         <xs:attribute type="xs:string" name="id" use="required"/>
                         <xs:attribute type="xs:string" name="form" use="required"/>
                         <xs:attribute type="xs:string" name="phon" use="optional"/>
@@ -114,7 +114,7 @@
                           <xs:element name="node" type="nodeType" />
                         </xs:all>
                       </xs:complexType>
-	            </xs:element>
+                    </xs:element>
                   </xs:sequence>
 
                   <!-- A sentence may contain a dependency tree -->
@@ -126,7 +126,7 @@
                           <xs:element name="depnode" type="depnodeType" />
                         </xs:all>
                       </xs:complexType>
-	            </xs:element>
+                    </xs:element>
                   </xs:sequence>
                     
                   <!-- A sentence may contain a list of predicates -->
@@ -174,7 +174,7 @@
                   </xs:sequence>
                   <!-- End of sentence subelements --> 
 
-		  <!-- 'sentence' element attributes -->
+                  <!-- 'sentence' element attributes -->
                   <xs:attribute type="xs:string" name="id" use="required"/>
 
                 </xs:complexType>
@@ -197,8 +197,8 @@
           <xs:complexType>
             <xs:sequence>
               <xs:element name="coref" maxOccurs="unbounded" minOccurs="1">
-                <xs:complexType>	
-   	          <!-- A coreference group contains a list of mentions -->
+                <xs:complexType>        
+                  <!-- A coreference group contains a list of mentions -->
                   <xs:sequence>
                     <xs:element name="mention" maxOccurs="unbounded" minOccurs="1">
                       <xs:complexType>
@@ -218,7 +218,6 @@
         </xs:element>
       </xs:sequence>
       <!-- End of 'coreferece' element in document -->
-
 
       <!-- A document may contain a semantic graph -->
       <xs:sequence>
@@ -286,7 +285,6 @@
               </xs:element>
               <!-- End of 'entity' element -->
 
-
               <!-- 'frame' elements in the graph -->
               <xs:element name="frame" maxOccurs="unbounded" minOccurs="0">
                 <xs:complexType>
@@ -342,7 +340,7 @@
 
                 </xs:complexType>
               </xs:element>
-  	      <!-- End of 'Frame' element in semantic graph -->
+              <!-- End of 'Frame' element in semantic graph -->
 
             </xs:sequence>
             <!-- End of list of frames and entities in semantic graph -->
