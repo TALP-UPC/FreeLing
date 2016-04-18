@@ -87,7 +87,7 @@ namespace freeling {
   const std::wstring RE_TIME2_CY=L"^(?:((?:[0-5])?(?:\\d))(?:munud|mun\\.?|m\\.?))$";
 
  // German:
-  const std::wstring RE_DATE_DE=L"^(?:(?:((?:[0-3])?(?:\\d))[/\\.] ?)(?:((?:(?:[0-1])?(?:\\d))|januar|februar|märz|april|mai|juni|juli|august|september|oktober|november|dezember|jan|feb|märz|apr|mai|jun|jul|aug|sep|okt|nov|dez)[/\\.] ?)(\\d{1,4}))$";
+  const std::wstring RE_DATE_DE=L"^(?:(?:((?:[0-3])?(?:\\d))[/\\.] ?)(?:((?:(?:[0-1])?(?:\\d))|[Jj]anuar|[Ff]ebruar|[Mm]ärz|[Aa]pril|[Mm]ai|[jJ]uni|[jJ]uli|[aA]ugust|[Ss]eptember|[oO]ktober|[nN]ovember|[Dd]ezember|jan|feb|märz|apr|mai|jun|jul|aug|sep|okt|nov|dez)[/\\.] ?)(\\d{1,4}))$";
   const std::wstring RE_TIME1_DE=L"^(?:((?:(?:[0-1])?(?:\\d))|(?:2(?:[0-4])))(?:h|:)(?:((?:[0-5])?(?:\\d))(?:minuten|min|m)?)?)$";
   const std::wstring RE_TIME2_DE=L"^(?:((?:[0-5])?(?:\\d))(?:minuten|min\\.?|m\\.?))$";
 

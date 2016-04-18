@@ -281,6 +281,7 @@ namespace freeling {
 	trans[ST_read_um][TK_time] = ST_read_time;
 
 	// state read_hour (2)
+	trans[ST_read_hour][TK_w_Monat] = ST_read_month;
 	trans[ST_read_hour][TK_w_Uhr] = ST_read_Uhr;
 	trans[ST_read_hour][TK_w_nach] = ST_read_nach;
 	trans[ST_read_hour][TK_w_point] = ST_read_OrdPoint; // this means we have read a day and not an hour
@@ -315,6 +316,7 @@ namespace freeling {
 	trans[ST_read_am][TK_day] = ST_read_ord;
 
 	// state read_ord (13)
+	trans[ST_read_ord][TK_w_Monat] = ST_read_month;
 	trans[ST_read_ord][TK_w_point] = ST_read_OrdPoint;
 
 	// state read_month (14)
@@ -442,9 +444,9 @@ namespace freeling {
 	    break;
 
 	case ST_read_am:
-	    TRACE(3,L"check Match DATE (h+m) regex." + form);
+	    TRACE(3,L"check Match DATE regex." + form);
 	    if (RE_Date.search(form,st->rem)) {		
-		TRACE(3,L"Match DATE (h+m) regex.");
+		TRACE(3,L"Match DATE regex.");
 		//for (unsigned int i = 0; i < st->rem.size(); ++i) {
 		//    //TRACE(3,L" RE " + i + L" " + st->rem[i]);
 		//    wcerr << L" RE " <<i << L" " << st->rem[i] << endl;
@@ -645,6 +647,12 @@ namespace freeling {
 	    if (token==TK_w_Monat) {
 		TRACE(3,L"Actions for state ST_read_month");
 		st->month = util::int2wstring(nMes.find(form)->second);
+		// eventually correct preceding token which was possibly mal-interpreted as hour
+		if (st->hour != L"" && st->hour != L"??") {
+		    //wcerr << st->hour << L" " << st->day << endl;
+		    st->day = st->hour;
+		    st->hour = L"";
+		}
 	    }
 	    break;
 	case ST_read_date:
@@ -664,6 +672,7 @@ namespace freeling {
 	    st->month = util::int2wstring(nMes.find(form)->second);
 	    break;
 	}
+	TRACE(3,L"Reach Actions finished");
     }
 
     ///////////////////////////////////////////////////////////////
