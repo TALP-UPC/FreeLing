@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Release|Win32">
@@ -68,9 +68,11 @@
     <ClCompile Include="..\..\..\src\libfreeling\database.cc" />
     <ClCompile Include="..\..\..\src\libfreeling\dates\dates.cc" />
     <ClCompile Include="..\..\..\src\libfreeling\dates\dates_ca.cc" />
+    <ClCompile Include="..\..\..\src\libfreeling\dates\dates_de.cc" />
     <ClCompile Include="..\..\..\src\libfreeling\dates\dates_default.cc" />
     <ClCompile Include="..\..\..\src\libfreeling\dates\dates_en.cc" />
     <ClCompile Include="..\..\..\src\libfreeling\dates\dates_es.cc" />
+    <ClCompile Include="..\..\..\src\libfreeling\dates\dates_fr.cc" />
     <ClCompile Include="..\..\..\src\libfreeling\dates\dates_gl.cc" />
     <ClCompile Include="..\..\..\src\libfreeling\dates\dates_pt.cc" />
     <ClCompile Include="..\..\..\src\libfreeling\dates\dates_ru.cc" />
