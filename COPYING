@@ -92,12 +92,12 @@
 
  5.- Data for Croatian WordNet in file data/hr/senses30.src is 
      extracted from croWN, developed by University of Zagreb,
-     available at Meta-Share (http://meta-share.ffzg.hr/).
+     available at Open Multilingual WN page 
+     (http://compling.hss.ntu.edu.sg/omw/).
      It is distributed under its original Creative Commons 
-     Attribution-Noncommercial-ShareAlike 3.0 License.  
-     You'll find the license in the file
-     LICENSES/CC-BY-NC-SA.license included in this package or at
-     http://creativecommons.org/licenses/by-nc-sa/3.0
+     Attribution 3.0 License.  You'll find the license in the 
+     file LICENSES/CC-BY.license included in this package or at
+     http://creativecommons.org/licenses/by/3.0
 
  6.- Data for French WordNet in file data/fr/senses30.src is 
      extracted from WOLF (WordNet Libre du Français)
