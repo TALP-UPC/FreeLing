@@ -3,12 +3,12 @@ This folder contains information about how to install FreeLing on MS-Windows.
 
 Here you'll find information about:
 
-OPTION (A). Install FreeLing from a binary package.
+OPTION (A). Install FreeLing on Windows from a binary package.
 
     Use this option if you only want to use FreeLing as an out-of-the-box analyzer 
     or as an external library.
 
-OPTION (B). Compile FreeLing with Visual Studio 2013.
+OPTION (B). Compile FreeLing on Windows with Visual Studio 2013.
       
      Use this option if you need to compile FreeLing (e.g. because you want to
      tune the code to alter its behaviour, or because your architecture or OS 
@@ -100,11 +100,11 @@ FINAL SYSTEM CONFIGURATION
  If you want to use it as an external library to compile your own programs calling 
  FreeLing, you will also need to adjust your %PATH% environment variable to include
  folders where freeling binaries and libraries are installed, i.e.:
-     mysrc\freeling_win\bin
-     mysrc\freeling_win\lib
-     mysrc\freeling_win_libraries\boost\lib
-     mysrc\freeling_win_libraries\icu\lib
-     mysrc\freeling_win_libraries\zlib\lib
+     freeling\bin
+     freeling\lib
+     freeling\dependencies\boost\lib
+     freeling\dependencies\icu\lib
+     freeling\dependencies\zlib\lib
  
  To add these folders to your %PATH%, do
       press WindowsKey+X 
@@ -113,4 +113,5 @@ FINAL SYSTEM CONFIGURATION
              -> click "environment variables"
                -> Edit "PATH" and add the required folders.
 
- (Note that this sequence of actions may slightly differ in your windows version)
+ (Note that this sequence of actions may slightly differ depending on in 
+  your windows version)

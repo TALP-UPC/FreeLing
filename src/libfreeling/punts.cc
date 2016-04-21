@@ -62,6 +62,9 @@ namespace freeling {
 
     for (i=se.begin(); i!=se.end(); ++i) {
 
+      // if the word is already analyzed (e.g. usermap), skip it.
+      if (i->is_locked()) continue;
+
       form=i->get_form();
       TRACE(3,L"checking "+form);
 
