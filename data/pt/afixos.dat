@@ -20,10 +20,10 @@
 
 <Prefixes>
 #Prefixos extraídos do Bosque completo (mantêm o - no token/lema para a avaliação).
-#contra-      *    ^N|A   *    0    0    1    R    1   contra-+$$:AQ0CN0+*
-#vice-        *    ^N|A   *    0    0    1    R    1   cive-+$$:AQ0CN0+*
+contra-       *    ^N|A   *    0    0    1    AL   0   -
+vice-         *    ^N|A   *    0    0    1    AL   0   -
+ex-           *    ^N|A   *    0    0    1    AL   0   -
 #mal-         *    ^N|A   *    0    0    1    R    1   mal-+$$:AQ0CN0+*
-#ex-          *    ^N|A   *    0    0    1    R    1   ex-+$$:AQ0CN0+*
 #anti-        *    ^N|A   *    0    0    1    R    1   anti-+$$:AQ0CN0+*
 #pós-         *    ^N|A   *    0    0    1    R    1   pós-+$$:AQ0CN0+*
 #auto-        *    ^N|A   *    0    0    1    R    1   auto-+$$:AQ0CN0+*
@@ -34,6 +34,7 @@
 #pré-         *    ^N|A   *    0    0    1    R    1   pré-+$$:AQ0CN0+*
 #intra-       *    ^N|A   *    0    0    1    R    1   intra-+$$:AQ0CN0+*
 #arqui-       *    ^N|A   *    0    0    1    R    1   arqui-+$$:AQ0CN0+*
+re	      *	   ^V	  *    0    0	 1    AL   1   -
 </Prefixes>
 
 <Suffixes>
