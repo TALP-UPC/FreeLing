@@ -1,0 +1,39 @@
+The German number detector detects (and sets the lemma to the corresponding number) numbers up to 999999
+(neunhundertneunundneunzigtausendneunhundertneunundneunzig).
+Since German writes numbers as composites, the tokenizer decomposes numbers before the number detector:
+neunhundert neun und neunzig tausend neunhundert neun und neunzig.
+(neunhundert is kept as a whole token in order to avoid interpreting "neun" as unit)
+
+The German date detector (based on the number detector)
+detects temporal expressions like
+
+um 10 Uhr.
+10 Uhr.
+um 11:12.
+14:59.
+um halb zwölf.
+es ist halb zwölf.
+um acht.
+um zehn nach vier.
+um zehn vor vier.
+um zehn vor vier Uhr.
+um 5 vor zwölf.
+um 5 nach zwölf.
+um 7 vor 11 .
+um 10 nach 9 .
+um halb drei.
+um Viertel vor elf.
+um Viertel nach fünf.
+am 1. Januar.
+15. August.
+am 24. Dezember 1999.
+am 29.2.2016.
+am 29.2.2016 um 14:55.
+29.2.2016 um 14:55.
+am Montag den 3. April 2016.
+Samstag den 4. Mai 1999.
+am 2. Februar um 16:17.
+am 2. Februar 1655 um 11:12.
+3. Oktober um 18:22.
+31.12.2015, 23:44.
+3. April 2011.
