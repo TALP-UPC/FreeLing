@@ -16,6 +16,7 @@ CXXFLAGS=" $CXXFLAGS -std=gnu++0x -Wall -fPIC"
 
 case "$host_os" in
  *darwin* | *tiger* | *leopard* | *lion* | *macosx*)
+   AC_DEFINE(DARWIN)
    system="macosx"
    ;;
  *)
@@ -349,6 +350,7 @@ AC_C_CONST
 AC_C_INLINE
 AC_TYPE_SIZE_T
 AC_HEADER_STDC
+
 
 AC_SUBST(CPPFLAGS)
 
