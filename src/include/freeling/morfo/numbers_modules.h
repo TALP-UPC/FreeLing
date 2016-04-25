@@ -250,6 +250,31 @@ namespace freeling {
     numbers_cs(const std::wstring &, const std::wstring &);
   };
 
+
+  ////////////////////////////////////////////////////////////////
+  ///   The derived class numbers_cs implements a German
+  ///   number recognizer.
+  ////////////////////////////////////////////////////////////////
+#define DEDEBUG
+  class numbers_de : public numbers_module 
+  {
+  private: 
+    int ComputeToken(int,sentence::iterator&, sentence &) const;
+    void StateActions(int, int, int, sentence::const_iterator, numbers_status *) const;
+    void SetMultiwordAnalysis(sentence::iterator, int, const numbers_status *) const;
+
+#ifdef DEDEBUG
+   std::map<int, std::wstring> stateNames;
+   std::map<int, std::wstring> tokenNames;
+   std::wstring tokenName(const int token) const;
+   std::wstring stateName(const int state) const;
+#endif
+
+   // mutable int lastValue;
+  public:
+    numbers_de(const std::wstring &, const std::wstring &);
+  };
+
 } // namespace
 
 #endif

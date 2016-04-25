@@ -62,6 +62,8 @@ namespace freeling {
     else if (Lang==L"en") who = new numbers_en(Decimal, Thousand);
     // Russian numbers handler 
     else if (Lang==L"ru") who = new numbers_ru(Decimal, Thousand);
+    // German numbers handler 
+    else if (Lang==L"de") who = new numbers_de(Decimal, Thousand);
 
     // Default numbers handler.
     else

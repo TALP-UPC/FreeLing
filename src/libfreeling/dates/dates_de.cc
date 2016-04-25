@@ -64,6 +64,7 @@ namespace freeling {
 #define ST_read_OrdPoint 17
 #define ST_read_date 18
 #define ST_read_comma 19
+#define ST_read_hour2 20
 #define ST_STOP 49
 
 #define TK_w_Monat 0
@@ -112,6 +113,7 @@ namespace freeling {
 	stateNames.insert(make_pair(ST_read_OrdPoint, L"ST_read_OrdPoint"));
 	stateNames.insert(make_pair(ST_read_date, L"ST_read_date"));
 	stateNames.insert(make_pair(ST_read_comma, L"ST_read_comma"));
+	stateNames.insert(make_pair(ST_read_hour2, L"ST_read_hour2"));
 	stateNames.insert(make_pair(ST_STOP, L"ST_STOP"));
 
 	tokenNames.insert(make_pair(TK_w_Monat, L"TK_w_Monat"));
@@ -270,7 +272,7 @@ namespace freeling {
 	trans[ST_Start][TK_w_um] = ST_read_um;
 	trans[ST_Start][TK_date] = ST_read_date;
 	trans[ST_Start][TK_day] = ST_read_ord;
-	trans[ST_Start][TK_hour] = ST_read_hour;
+	trans[ST_Start][TK_hour] = ST_read_hour2;
 	trans[ST_Start][TK_time] = ST_read_time;
 
 	// state read_um (1)
@@ -338,6 +340,10 @@ namespace freeling {
 
 	// state read_comma (19)
 	trans[ST_read_comma][TK_time] = ST_read_time;
+
+	// state read_hour2 (20)
+	trans[ST_read_hour2][TK_w_Monat] = ST_read_month;
+	trans[ST_read_hour2][TK_w_Uhr] = ST_read_Uhr;
 
 	TRACE(3,L"analyzer succesfully created");
     }
@@ -423,8 +429,9 @@ namespace freeling {
 	    else if (token == TK_number) {
 		if (value <= 24) {
 		    token = TK_hour;
-		} else 
+		} else if (value <= 31) {
 		    token = TK_day;
+		}
 	    }
 	    break;
 
@@ -483,6 +490,12 @@ namespace freeling {
 	    token = TK_w_Monat;
 	    break;
 
+	    //	case ST_read_hour:
+	    //if (token == TK_other) {
+	    //	st->hour = L"??";
+	    //	st->minute = L"??";
+	    //}
+	    //break;
 	default:
 	    break;
 	}
@@ -516,7 +529,10 @@ namespace freeling {
 	      +L" with token " + util::int2wstring(token)
 	      +L" for word ["+form+L"]");
 #endif
-	if (state==ST_STOP) return;
+	if (state==ST_STOP) {
+	    
+	    return;
+	}
 	// get token numerical value, if any
 	value=0;
 	if ((token==TK_number || token==TK_day || //token==TK_month ||
@@ -531,6 +547,7 @@ namespace freeling {
 	    break;
         case ST_read_um:
 	    break;
+        case ST_read_hour2:
         case ST_read_hour:
 	    if (token==TK_hour) {
 		TRACE(3,L"Actions for state ST_read_hour");
@@ -683,6 +700,12 @@ namespace freeling {
     void dates_de::SetMultiwordAnalysis(sentence::iterator i, int fstate, const dates_status *st) const {
 	list<analysis> la;
 	wstring lemma;
+#ifdef DEDEBUG
+	TRACE(3,L"Setting Analysis state " + stateName(fstate));
+
+#else
+	TRACE(3,L"Setting Analysis state " + util::int2wstring(fstate));
+#endif
 
 	// Setting the analysis for the date
 	lemma=L"["+st->weekday+L":"+st->day+L"/"+st->month+L"/"+st->year+L":"+st->hour+L"."+st->minute+L":"+st->meridian+L"]";
