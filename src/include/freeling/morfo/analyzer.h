@@ -33,7 +33,6 @@
 #include <iostream> 
 #include <list>
 
-/// headers to call freeling library
 #include "freeling.h"
 
 namespace freeling {

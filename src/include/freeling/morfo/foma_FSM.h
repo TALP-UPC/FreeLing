@@ -39,13 +39,14 @@ typedef bool _Bool;
 
 #include "foma/fomalib.h"
 
-////////////////////////////////////////////////////////
-///  Class foma_FSM is a wrapper for the FOMA library, 
-///  for the specific use of getting entries from a 
-///  dictionary with minimum edit distance to given key
-////////////////////////////////////////////////////////
 
 namespace freeling {
+
+  ////////////////////////////////////////////////////////
+  ///  Class foma_FSM is a wrapper for the FOMA library, 
+  ///  for the specific use of getting entries from a 
+  ///  dictionary with minimum edit distance to given key
+  ////////////////////////////////////////////////////////
 
   class WINDLL foma_FSM {
   private:

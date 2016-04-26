@@ -72,8 +72,8 @@
 
 #define SUMMARIZER_TRACE    0x80000000
 
-/// MOD_TRACECODE and MOD_TRACENAME are empty. The class 
-/// using the trace is expected to set them
+// MOD_TRACECODE and MOD_TRACENAME are empty. The class 
+// using the trace is expected to set them
 #undef MOD_TRACECODE
 #undef MOD_TRACENAME
 

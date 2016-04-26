@@ -31,13 +31,6 @@
 
 #include "freeling/windll.h"
 
-
-////////////////////////////////////////////////////////////////////////////    
-///
-///  STL-like container implementing a n-ary tree.
-///
-////////////////////////////////////////////////////////////////////////////    
-
 namespace freeling {
 
   // predeclaration
@@ -51,6 +44,10 @@ namespace freeling {
   template<class T> class tree_sibling_iterator;
   template<class T> class const_tree_sibling_iterator;
    
+  //////////////////////////////////////////////////////
+  ///  STL-like container implementing a n-ary tree.
+  //////////////////////////////////////////////////////
+
   template <class T> class tree  {
     /// iterators are friends of the tree, so they can access the structure
 

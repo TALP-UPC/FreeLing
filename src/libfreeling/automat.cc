@@ -29,8 +29,8 @@
 #include "freeling/morfo/automat.h"
 #include "freeling/morfo/locutions.h"
 
-/// explicit instantiations of class automat to satisfy compiler
-
 namespace freeling {
+
   template class automat<locutions_status>;
+  // explicit instantiations of class automat to satisfy compiler
 } 
