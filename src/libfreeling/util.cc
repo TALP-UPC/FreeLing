@@ -33,7 +33,7 @@
 
 #include "freeling/morfo/util.h"
 
-#if defined DARWIN
+#if defined MACOSX
 #include <codecvt>
 #endif
 
@@ -114,7 +114,7 @@ namespace freeling {
         // set locale as global, for all streams.
         locale::global(current_locale);
 
-#if defined DARWIN
+#if defined MACOSX
         current_locale = locale(current_locale, new std::codecvt_utf8<wchar_t>);
 
         wcin.imbue(current_locale);
@@ -165,7 +165,7 @@ namespace freeling {
       = std::locale(std::locale(), new std::codecvt_utf8<wchar_t>());
     fabr.imbue(utf8_locale);
 #endif
-#if defined DARWIN
+#if defined MACOSX
     fabr.imbue(current_locale);
 #endif        
   }
@@ -182,7 +182,7 @@ namespace freeling {
       = std::locale(std::locale(), new std::codecvt_utf8<wchar_t>());
     fabr.imbue(utf8_locale);
 #endif
-#if defined DARWIN
+#if defined MACOSX
     fabr.imbue(current_locale);
 #endif    
   }
@@ -193,7 +193,7 @@ namespace freeling {
 
   wstring util::lowercase(const wstring &s) {
     wstring ws=s;
-#if defined DARWIN
+#if defined MACOSX
     const std::ctype<wchar_t>& wchar_facet =std::use_facet<std::ctype<wchar_t> >( current_locale );
     for (int i = 0; i < ws.length(); i++) {
       ws.at(i) = wchar_facet.tolower(ws.at(i));
@@ -210,7 +210,7 @@ namespace freeling {
 
   wstring util::uppercase(const wstring &s) {
     wstring ws=s;
-#if defined DARWIN
+#if defined MACOSX
     const std::ctype<wchar_t>& wchar_facet =std::use_facet<std::ctype<wchar_t> >( current_locale );
     for (int i = 0; i < ws.length(); i++) {
       ws.at(i) = wchar_facet.toupper(ws.at(i));
