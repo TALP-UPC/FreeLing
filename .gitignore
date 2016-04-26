@@ -26,3 +26,8 @@
 *.exe
 *.out
 *.app
+
+# Created by libtool and the like
+.deps
+.dirstamp
+Makefile.in
