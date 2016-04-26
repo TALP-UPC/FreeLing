@@ -14,9 +14,12 @@ CXXFLAGS=" $CPPFLAGS -Wall -fPIC"
 CXXFLAGS=" $CXXFLAGS -std=gnu++0x -Wall -fPIC"
 ##LDFLAGS=" $LDFLAGS -L/usr/local/lib"
 
+## All macosx systems will put in host_os something like: 
+## darwin15.4.0 (this for El Capitan)
+
 case "$host_os" in
- *darwin* | *tiger* | *leopard* | *lion* | *macosx*)
-   AC_DEFINE(DARWIN)
+ *darwin*)
+   AC_DEFINE(MACOSX)
    system="macosx"
    ;;
  *)
@@ -25,7 +28,7 @@ case "$host_os" in
 esac
 
 using_xpressive="no"
-using_boost_locale="no"
+### using_boost_locale="no"
 
 ######## Begin checkings ##########
 
@@ -42,18 +45,18 @@ AC_ARG_ENABLE([xpressive_regex],
               ],
               [AM_CONDITIONAL([USE_XPRESSIVE_REGEX],[test 0 = 1])])
 
-AC_ARG_ENABLE([boost_locale],
-              [AS_HELP_STRING([--enable-boost-locale],[Use boost::locale instead of default std::locale. Default is: Not enabled in Linux, enabled in MacOSX. Incompatible with --enable-xpressive-regex. If you are in MacOSX, do not disable it.])],
-              [if test "$enableval" = yes; then
-                 # define symbol for CPP
-                 AC_DEFINE(USE_BOOST_LOCALE)
-		 # inform other checks below
-                 using_boost_locale="yes"
-               fi
-               # pass info to automake
-               AM_CONDITIONAL([USE_BOOST_LOCALE],[test "$enableval" = yes])
-              ],
-              [AM_CONDITIONAL([USE_BOOST_LOCALE],[test 0 = 1])])
+### AC_ARG_ENABLE([boost_locale],
+###               [AS_HELP_STRING([--enable-boost-locale],[Use boost::locale instead of default std::locale. Default is: Not enabled in Linux, enabled in MacOSX. Incompatible with --enable-xpressive-regex. If you are in MacOSX, do not disable it.])],
+###               [if test "$enableval" = yes; then
+###                  # define symbol for CPP
+###                  AC_DEFINE(USE_BOOST_LOCALE)
+### 		 # inform other checks below
+###                  using_boost_locale="yes"
+###                fi
+###                # pass info to automake
+###                AM_CONDITIONAL([USE_BOOST_LOCALE],[test "$enableval" = yes])
+###               ],
+###               [AM_CONDITIONAL([USE_BOOST_LOCALE],[test 0 = 1])])
 
 AC_ARG_ENABLE([debug],
               [AS_HELP_STRING([--enable-debug],[Compile with debug information. Default is: Not enabled.])],
@@ -143,30 +146,30 @@ AM_CONDITIONAL([BOOST_GCC],[test 1 = 0])
 
 # check headers
 
-if test $using_xpressive = "yes" -a $using_boost_locale = "yes"
-then
-  echo "" &&
-  echo " Options --enable-xpressive-regex and --enable-boost-locale are incompatible" &&
-  echo " because boost::xpressive does not support boost::locale." &&
-  echo "" && exit 1
-fi
-
-if test $system = "macosx" -a $using_xpressive = "yes"
-then
-  echo "" &&
-  echo " boost::xpressive can not be used because it requires" &&
-  echo " std::locale, not supported by MacOSX." &&
-  echo " " &&
-  echo "" && exit 1
-fi
-
-if test $system = "macosx" -a $using_boost_locale = "no"
-then
-  echo "" &&
-  echo " boost::locale (available in boost>=1.48) is required to run FreeLing" &&
-  echo " on MacOSX. Please run configure with option --enable-boost-locale." &&
-  echo "" && exit 1
-fi
+### if test $using_xpressive = "yes" -a $using_boost_locale = "yes"
+### then
+###   echo "" &&
+###   echo " Options --enable-xpressive-regex and --enable-boost-locale are incompatible" &&
+###   echo " because boost::xpressive does not support boost::locale." &&
+###   echo "" && exit 1
+### fi
+### 
+### if test $system = "macosx" -a $using_xpressive = "yes"
+### then
+###   echo "" &&
+###   echo " boost::xpressive can not be used because it requires" &&
+###   echo " std::locale, not supported by MacOSX." &&
+###   echo " " &&
+###   echo "" && exit 1
+### fi
+### 
+### if test $system = "macosx" -a $using_boost_locale = "no"
+### then
+###   echo "" &&
+###   echo " boost::locale (available in boost>=1.48) is required to run FreeLing" &&
+###   echo " on MacOSX. Please run configure with option --enable-boost-locale." &&
+###   echo "" && exit 1
+### fi
 
 if test $using_xpressive = "yes"
 then
@@ -189,15 +192,15 @@ AC_CHECK_HEADERS([boost/regex/icu.hpp],[],[echo "" && echo "   boost/regex/icu.h
                       echo "" && exit 1])
 fi
 
-if test $using_boost_locale = "yes"
-then
-AC_CHECK_HEADERS([boost/locale.hpp],[],[echo "" && echo "   boost/locale.hpp not found." &&
-                      echo "   Make sure libboost headers (package libboost-dev or the like)" &&
-                      echo "   are installed and can be found in a standard path." &&
-                      echo "   You may need to set CPPFLAGS to specify search path." &&
-                      echo "   Note that boost::locale is included only in boost versions >=1.48." &&
-                      echo "" && exit 1])
-fi
+### if test $using_boost_locale = "yes"
+### then
+### AC_CHECK_HEADERS([boost/locale.hpp],[],[echo "" && echo "   boost/locale.hpp not found." &&
+###                       echo "   Make sure libboost headers (package libboost-dev or the like)" &&
+###                       echo "   are installed and can be found in a standard path." &&
+###                       echo "   You may need to set CPPFLAGS to specify search path." &&
+###                       echo "   Note that boost::locale is included only in boost versions >=1.48." &&
+###                       echo "" && exit 1])
+### fi
 
 AC_CHECK_HEADERS([boost/program_options.hpp],[],[echo "" && echo "   boost/program_options not found." &&
                       echo "   Make sure libboost headers (package libboost-dev or the like)" &&
@@ -317,24 +320,24 @@ AC_CHECK_LIB([boost_thread],[main],
                                                    echo "" && exit 1])))
 LIBS=$LDF_BK
 
-if test $using_boost_locale = "yes"
-then
-LDF_BK=$LIBS
-LIBS=" $LDF_BK -lboost_thread$MTLIB"
-AC_CHECK_LIB([boost_locale],[main],
-                      [echo "OK">/dev/null;],
-                      AC_CHECK_LIB([boost_locale-mt],[main],
-                                   [echo "OK">/dev/null;AM_CONDITIONAL([BOOST_MT],[test 1 = 1])],
-                                   AC_CHECK_LIB([boost_locale-gcc-mt],[main],
-                                                [echo "OK">/dev/null;AM_CONDITIONAL([BOOST_GCC],[test 1 = 1])],
-                                                [echo "" &&
-                                                 echo "   boost_locale library not found." &&
-                                                 echo "   Make sure libboost_locale is" &&
-                                                 echo "   installed and can be found in a standard path." &&
-                                                 echo "   You may need to set LDFLAGS to specify search path." &&
-                                                 echo "" && exit 1])))
-LIBS=$LDF_BK
-fi
+### if test $using_boost_locale = "yes"
+### then
+### LDF_BK=$LIBS
+### LIBS=" $LDF_BK -lboost_thread$MTLIB"
+### AC_CHECK_LIB([boost_locale],[main],
+###                       [echo "OK">/dev/null;],
+###                       AC_CHECK_LIB([boost_locale-mt],[main],
+###                                    [echo "OK">/dev/null;AM_CONDITIONAL([BOOST_MT],[test 1 = 1])],
+###                                    AC_CHECK_LIB([boost_locale-gcc-mt],[main],
+###                                                 [echo "OK">/dev/null;AM_CONDITIONAL([BOOST_GCC],[test 1 = 1])],
+###                                                 [echo "" &&
+###                                                  echo "   boost_locale library not found." &&
+###                                                  echo "   Make sure libboost_locale is" &&
+###                                                  echo "   installed and can be found in a standard path." &&
+###                                                  echo "   You may need to set LDFLAGS to specify search path." &&
+###                                                  echo "" && exit 1])))
+### LIBS=$LDF_BK
+### fi
 
 AC_CHECK_LIB([z],[main],[echo "OK">/dev/null;], [echo "" &&
                                                  echo "   zlib library not found." &&
