@@ -33,8 +33,8 @@
 
 #include "freeling/morfo/util.h"
 
-#if defined USE_BOOST_LOCALE
-#include <boost/locale.hpp>
+#if defined MACOSX
+#include <codecvt>
 #endif
 
 /// locale-related stuff
@@ -86,6 +86,8 @@ namespace freeling {
 
   freeling::regexp util::RE_win_absolute_path(L"");
 
+  locale current_locale;
+  
 
   /////////////////////////////////////////////////////////////////////////////
   /// Init the locale of the program. If no parameter given, the default locale
@@ -106,17 +108,20 @@ namespace freeling {
 
     try
       {
-#if defined USE_BOOST_LOCALE
-        // create requested locale using boost::locale 
-        boost::locale::generator gen;
-        locale mylocale = gen(lname);
-#else
         // create requested locale using libstdc++.
         // modify a basic "C" locale to use alphabetic functions from chosen locale.
-        locale mylocale(locale::classic(), lname.c_str(), locale::ctype);
-#endif
+        current_locale = locale(locale::classic(), lname.c_str(), locale::ctype);
         // set locale as global, for all streams.
-        locale::global(mylocale);
+        locale::global(current_locale);
+
+#if defined MACOSX
+        current_locale = locale(current_locale, new std::codecvt_utf8<wchar_t>);
+
+        wcin.imbue(current_locale);
+        wcerr.imbue(current_locale);
+        wcout.imbue(current_locale);
+#endif        
+
       }
     catch (const std::runtime_error &e)
       {
@@ -125,9 +130,7 @@ namespace freeling {
                     + util::string2wstring(e.what()));
       }
 
-    //#if defined USE_BOOST_LOCALE
     std::ios_base::sync_with_stdio(false);
-    //#endif
 
 #if defined WIN32 || defined WIN64
     setUtf8Mode(stdin, "stdin");
@@ -162,6 +165,9 @@ namespace freeling {
       = std::locale(std::locale(), new std::codecvt_utf8<wchar_t>());
     fabr.imbue(utf8_locale);
 #endif
+#if defined MACOSX
+    fabr.imbue(current_locale);
+#endif        
   }
 
   /////////////////////////////////////////////////////////////////////////////
@@ -176,6 +182,9 @@ namespace freeling {
       = std::locale(std::locale(), new std::codecvt_utf8<wchar_t>());
     fabr.imbue(utf8_locale);
 #endif
+#if defined MACOSX
+    fabr.imbue(current_locale);
+#endif    
   }
 
   /////////////////////////////////////////////////////////////////////////////
@@ -183,13 +192,16 @@ namespace freeling {
   /////////////////////////////////////////////////////////////////////////////
 
   wstring util::lowercase(const wstring &s) {
-#if defined USE_BOOST_LOCALE
-    return boost::locale::to_lower(s);
-#else 
     wstring ws=s;
+#if defined MACOSX
+    const std::ctype<wchar_t>& wchar_facet =std::use_facet<std::ctype<wchar_t> >( current_locale );
+    for (int i = 0; i < ws.length(); i++) {
+      ws.at(i) = wchar_facet.tolower(ws.at(i));
+    }
+#else 
     transform( ws.begin(), ws.end(), ws.begin(), towlower); 
-    return ws;
 #endif
+    return ws;
   }
 
   /////////////////////////////////////////////////////////////////////////////
@@ -197,13 +209,16 @@ namespace freeling {
   /////////////////////////////////////////////////////////////////////////////
 
   wstring util::uppercase(const wstring &s) {
-#if defined USE_BOOST_LOCALE
-    return boost::locale::to_upper(s);
-#else 
     wstring ws=s;
+#if defined MACOSX
+    const std::ctype<wchar_t>& wchar_facet =std::use_facet<std::ctype<wchar_t> >( current_locale );
+    for (int i = 0; i < ws.length(); i++) {
+      ws.at(i) = wchar_facet.toupper(ws.at(i));
+    }
+#else 
     transform( ws.begin(), ws.end(), ws.begin(), towupper); 
-    return ws;
 #endif
+    return ws;
   }
 
   /////////////////////////////////////////////////////////////////////////////
