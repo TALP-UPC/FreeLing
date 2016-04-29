@@ -30,4 +30,6 @@
 # Created by libtool and the like
 .deps
 .dirstamp
+.libs
+Makefile
 Makefile.in

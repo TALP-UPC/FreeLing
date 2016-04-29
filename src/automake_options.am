@@ -28,4 +28,3 @@ else
 endif
 
 FREELING_DEPS=$(BOOST_REGEX_LIB) $(BOOST_LOCALE_LIB) $(ADD_FL_DEPS) -lboost_system$(MT) -lz
-
