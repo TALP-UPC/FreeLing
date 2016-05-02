@@ -6,6 +6,7 @@
  services (such as morfological analysis, date recognition, PoS
  tagging, etc.)
 
- For details on the included linguistic data, installation, requirements, 
+ For details about included linguistic data, installation, requirements, 
  licenses, etc. please visit http://nlp.lsi.upc.edu/freeling
- or see the manual in doc/userman
+
+

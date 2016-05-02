@@ -3,7 +3,9 @@
 # Alternatively, you can call 'make' overriding variable values, E.g.:
 #     make FREELINGDIR=/my/freeling/dir SWIGDIR=/my/swig/dir JAVADIR=/my/java/dir
 
+# freeling *installation* directory (not source!)
 FREELINGDIR = /usr/local
+# swig and java location in your system
 SWIGDIR = /usr/share/swig2.0
 JAVADIR = /usr/lib/jvm/default-java
 
@@ -31,4 +33,4 @@ freeling_javaAPI.cxx: freeling_javaAPI.i ../common/freeling.i
 	swig -java -c++ -package $(JPACKAGE) -outdir $(PACKAGE) -o freeling_javaAPI.cxx -I$(SWIGDIR)/java -I$(SWIGDIR)/std -I$(SWIGDIR) freeling_javaAPI.i
 
 clean:
-	rm -rf *.jar *.so *.cxx *.class edu
+	rm -rf *.jar *.so *.dylib *.cxx *.class edu
