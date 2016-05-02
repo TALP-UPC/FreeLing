@@ -1,7 +1,7 @@
 ## Type of NE recognizer (basic/BIO). Changing this value will require
 ## changing some sections in the rest of the file
 <Type>
-basic
+bio
 </Type>
 
 ## list of words that may be included in a Named Entity
