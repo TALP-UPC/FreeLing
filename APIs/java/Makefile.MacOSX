@@ -1,0 +1,40 @@
+
+# To execute make with this makefile, do
+#    make -f Makefile.MacOSX
+
+# Change paths below to match your installation
+# Alternatively, you can call 'make' overriding variable values, E.g.:
+#     make -f Makefile.MacOSX FREELINGDIR=/my/freeling/dir SWIGDIR=/my/swig/dir JAVADIR=/my/java/dir
+
+# freeling *installation* directory (not source!). 
+# It will be /usr/local unless you used `./configure --prefix=/some/other/place`
+FREELINGDIR = /usr/local
+# swig and java location in your system
+SWIGDIR = /opt/local/share/swig/3.0.7
+JAVADIR = /System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home
+
+# you may change the package name if you want
+PACKAGE = edu/upc/freeling
+JPACKAGE = edu.upc.freeling
+
+# Change your compiler, if necessary.
+GCC=g++
+
+all: freeling_javaAPI.cxx libfreeling_javaAPI.dylib
+
+.PHONY: all
+
+# Compile the C++ API
+libfreeling_javaAPI.dylib: freeling_javaAPI.cxx
+	$(GCC) -dynamiclib -o libfreeling_javaAPI.dylib freeling_javaAPI.cxx -lfreeling -L$(FREELINGDIR)/lib -I$(FREELINGDIR)/include -I$(FREELINGDIR)/include/treeler -I$(JAVADIR)/include -I$(JAVADIR)/include/linux -I(JAVADIR)/A/Headers -fPIC -std=c++0x -lboost_system-mt
+	$(JAVADIR)/bin/javac $(PACKAGE)/*.java
+	$(JAVADIR)/bin/jar -cf freeling.jar $(PACKAGE)
+
+# Build the Java JNI wrapper classes.
+freeling_javaAPI.cxx: freeling_javaAPI.i ../common/freeling.i
+	rm -rf $(PACKAGE)
+	mkdir -p $(PACKAGE)
+	swig -java -c++ -package $(JPACKAGE) -outdir $(PACKAGE) -o freeling_javaAPI.cxx -I$(SWIGDIR)/java -I$(SWIGDIR)/std -I$(SWIGDIR) freeling_javaAPI.i
+
+clean:
+	rm -rf *.jar *.dylib *.cxx *.class edu 
