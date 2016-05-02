@@ -12,6 +12,7 @@ FREELINGDIR = /usr/local
 # swig and java location in your system
 SWIGDIR = /opt/local/share/swig/3.0.8
 JAVADIR = /System/Library/Frameworks/JavaVM.framework
+JAVABIN = $(JAVADIR)/Versions/Current/Commands
 
 # you may change the package name if you want
 PACKAGE = edu/upc/freeling
@@ -27,8 +28,8 @@ all: freeling_javaAPI.cxx libfreeling_javaAPI.dylib
 # Compile the C++ API
 libfreeling_javaAPI.dylib: freeling_javaAPI.cxx
 	$(GCC) -dynamiclib -o libfreeling_javaAPI.dylib freeling_javaAPI.cxx -lfreeling -L$(FREELINGDIR)/lib -I$(FREELINGDIR)/include -I$(FREELINGDIR)/include/treeler -I$(JAVADIR)/Headers -I/opt/local/include -L/opt/local/lib -fPIC -std=c++0x -lboost_system-mt
-	$(JAVADIR)/Versions/Current/Commands/javac $(PACKAGE)/*.java
-	$(JAVADIR)/Versions/Current/Commands/jar -cf freeling.jar $(PACKAGE)
+	$(JAVABIN)/javac $(PACKAGE)/*.java
+	$(JAVABIN)/jar -cf freeling.jar $(PACKAGE)
 
 # Build the Java JNI wrapper classes.
 freeling_javaAPI.cxx: freeling_javaAPI.i ../common/freeling.i
