@@ -1,5 +1,6 @@
-## Type of NE recognizer (basic/BIO). Changing this value will require
-## changing some sections in the rest of the file
+## This is the configuration file for 'basic' NE recognizer.
+## Configuration files for B-I-O NE recognizer can be 
+## found (if available) in nerc/nerc/ner-ab-*.dat
 <Type>
 basic
 </Type>
