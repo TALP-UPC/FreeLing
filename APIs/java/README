@@ -17,7 +17,8 @@
                     (e.g. /usr/local/share/swig2.0)
           JAVADIR = directory where java is installed (e.g. /usr/lib/jvm/java-7-oracle)
 
-    4.- Run 'make' to build the java API
+    4.- Run 'make' to build the java API.
+        On MacOS, you need to use Makefile.MacOSX:  make -f Makefile.MacOSX
 
 
   HOW TO USE THE API FROM A JAVA PROGRAM IN Linux/MacOS
