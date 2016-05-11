@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_INIT([FreeLing],[4.0-beta2])
+AC_INIT([FreeLing],[4.0])
 AC_CONFIG_SRCDIR([src/libfreeling/version.cc])
 AC_CONFIG_AUX_DIR([.])
 AM_INIT_AUTOMAKE([foreign])
