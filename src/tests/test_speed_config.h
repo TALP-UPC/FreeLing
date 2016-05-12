@@ -32,54 +32,26 @@
 #include <exception>
 #include <fstream>
 #include <boost/program_options.hpp>
-namespace po = boost::program_options;
 
 #include "freeling/version.h"
 #include "freeling/morfo/traces.h"
 #include "freeling/morfo/util.h"
+#include "freeling/morfo/analyzer.h"
 
-#undef MOD_TRACENAME
-#undef MOD_TRACECODE
 #define MOD_TRACENAME L"CONFIG_OPTIONS"
-#define MOD_TRACECODE OPTIONS_TRACE
-
-#define DefaultConfigFile "analyzer.cfg" // default ConfigFile
 
 // Default server parameters
 #define DEFAULT_MAX_WORKERS 5   // maximum number of workers simultaneously active.
 #define DEFAULT_QUEUE_SIZE 32   // maximum number of waiting clients
 
-// codes for input-output formats
-#define PLAIN    0
-#define IDENT    1
-#define TOKEN    2
-#define SPLITTED 3
-#define MORFO    4
-#define TAGGED   5
-#define SENSES   6
-#define SHALLOW  7
-#define PARSED   8
-#define DEP      9
+// codes for InputMode
+typedef enum {MODE_CORPUS,MODE_DOC} InputModes;
+// codes for OutputFormat
+typedef enum {OUT_FREELING,OUT_TRAIN,OUT_CONLL,OUT_XML,OUT_JSON,OUT_NAF} OutputFormats;
+// codes for InputFormat
+typedef enum {INP_TEXT, INP_FREELING, INP_CONLL} InputFormats;
 
-// codes for tagging algorithms
-#define HMM   0
-#define RELAX 1
-
-// codes for dependency parsers
-#define TXALA	0
-#define TREELER	1
-
-// codes for sense annotation
-#define NONE  0
-#define ALL   1
-#define MFS   2
-#define UKB   3
-
-// codes for ForceSelect
-#define FORCE_NONE   0
-#define FORCE_TAGGER 1
-#define FORCE_RETOK  2
-
+namespace po = boost::program_options;
 using namespace freeling;
 
 ////////////////////////////////////////////////////////////////
@@ -102,94 +74,41 @@ class config {
   /// Size of socket queue (number of clients waiting to be atended without being rejected)
   int QueueSize;
 
-  /// Language of text to process
-  std::wstring Lang;
   /// Locale of text to process
   std::wstring Locale;
-  /// Level of analysis in input and output
-  int InputFormat, OutputFormat;
-  /// Flush splitter at each line
-  bool AlwaysFlush;
-  /// produce output in a format suitable to train the tagger.
-  bool TrainingOutput;
 
-  /// Tokenizer options
-  std::wstring TOK_TokenizerFile;
-
-  /// Splitter options
-  std::wstring SPLIT_SplitterFile;
-
-  /// Morphological analyzer options
-  bool MACO_UserMap, MACO_AffixAnalysis, MACO_MultiwordsDetection, 
-    MACO_NumbersDetection, MACO_PunctuationDetection, 
-    MACO_DatesDetection, MACO_QuantitiesDetection, 
-    MACO_DictionarySearch, MACO_ProbabilityAssignment, MACO_CompoundAnalysis,
-    MACO_NERecognition;
-
-  /// Morphological analyzer options
-  std::wstring MACO_Decimal, MACO_Thousand;
-
-  /// Language identifier options
+  /// Configuration file for language identifier
   std::wstring IDENT_identFile;
 
-  /// Tagset to use
+  /// Mode used to process input: 
+  ///   DOC: load a document, then process it. 
+  ///   CORPUS: infinite sentence-by-sentnce processing
+  InputModes InputMode;
+  /// Selected input and output format
+  OutputFormats OutputFormat;
+  InputFormats InputFormat;
+  /// whether splitter buffer must be flushed at each line
+  bool AlwaysFlush;
+
+  /// Tagset to use for shortening tags in output
   std::wstring TAGSET_TagsetFile;
 
-  /// Morphological analyzer options
-  std::wstring MACO_UserMapFile, MACO_LocutionsFile,   MACO_QuantitiesFile,
-    MACO_AffixFile,   MACO_ProbabilityFile, MACO_DictionaryFile, 
-    MACO_NPDataFile,  MACO_PunctuationFile, MACO_CompoundFile; 
-  	 
-  double MACO_ProbabilityThreshold;
-  bool MACO_RetokContractions;
-
-  // Phonetics options
-  bool PHON_Phonetics;
-  std::wstring PHON_PhoneticsFile;
-
-  // NEC options
-  bool NEC_NEClassification;
-  std::wstring NEC_NECFile;
-
-  // Sense annotator options
-  int SENSE_WSD_which;
-  std::wstring SENSE_ConfigFile;
-  std::wstring UKB_ConfigFile;
-
-  /// Tagger options
-  std::wstring TAGGER_HMMFile;
-  std::wstring TAGGER_RelaxFile;
-  int TAGGER_which;
-  int TAGGER_RelaxMaxIter;
-  double TAGGER_RelaxScaleFactor;
-  double TAGGER_RelaxEpsilon;
-  bool TAGGER_Retokenize;
-  int TAGGER_ForceSelect;
-
-  /// Parser options
-  std::wstring PARSER_GrammarFile;
-
-  /// Dependency options
-  std::wstring DEP_TxalaFile;   
-  std::wstring DEP_TreelerFile;   
-  int DEP_which;    
- 
-  bool COREF_CoreferenceResolution;
-  std::wstring COREF_CorefFile;
+  analyzer::config_options analyzer_config_options;
+  analyzer::invoke_options analyzer_invoke_options;
 
   /// constructor
   config(int ac, char **av) {
 
     // Auxiliary variables to store options read as strings before they are converted
     // to their final enumerate/integer values 
-    std::string InputF, OutputF, Tagger, SenseAnot, Force, Dep;
+    std::string InputLv, OutputLv, InputM, OutputF, InputF, Tagger, SenseAnot, Force, Dep;
     std::string tracemod;
     std::string language, locale, identFile, tagsetFile, tokFile, splitFile,
       macoDecimal, macoThousand, usermapFile, locutionsFile, quantitiesFile, 
       affixFile, probabilityFile, dictionaryFile, npDataFile, punctuationFile,
       compoundFile; 
     std::string phonFile, necFile, senseFile, ukbFile;
-    std::string hmmFile,relaxFile,grammarFile,txalaFile,treelerFile,corefFile;
+    std::string hmmFile,relaxFile,grammarFile,txalaFile,treelerFile,corefFile,semgraphFile;
 
     Port=0;
 
@@ -200,7 +119,7 @@ class config {
 #ifndef WIN32
       ("version,v", "Print installed FreeLing version.")
 #endif
-      ("fcfg,f", po::value<std::string>(&ConfigFile)->default_value(DefaultConfigFile), "Configuration file to use")
+      ("fcfg,f", po::value<std::string>(&ConfigFile)->default_value(""), "Configuration file to use")
       ("lang",po::value<std::string>(&language),"language of the input text")
       ("locale",po::value<std::string>(&locale),"locale encoding of input text (\"default\"=en_US.UTF-8, \"system\"=current system locale, [other]=any valid locale string installed in the system (e.g. ca_ES.UTF-8,it_IT.UTF-8,...)")
       ("server","Activate server mode (default: off)")
@@ -209,9 +128,11 @@ class config {
       ("queue,q",po::value<int>(&QueueSize)->default_value(DEFAULT_QUEUE_SIZE),"Maximum number of waiting clients.")
       ("flush","Consider each newline as a sentence end")
       ("noflush","Do not consider each newline as a sentence end")
-      ("inpf",po::value<std::string>(&InputF),"Input format (plain,token,splitted,morfo,sense,tagged)")
-      ("outf",po::value<std::string>(&OutputF),"Output format (ident,token,splitted,morfo,tagged,shallow,parsed,dep)")
-      ("train","Produce output format suitable for train scripts")
+      ("inplv",po::value<std::string>(&InputLv),"Input analysis level (text,token,splitted,morfo,sense,tagged)")
+      ("outlv",po::value<std::string>(&OutputLv),"Output analysis level (ident,token,splitted,morfo,tagged,shallow,parsed,dep)")
+      ("mode",po::value<std::string>(&InputM),"Input mode (doc,corpus)")
+      ("output",po::value<std::string>(&OutputF),"Output format (freeling,conll,train,xml,json,naf)")
+      ("input",po::value<std::string>(&InputF),"Input format (text,freeling,conll)")
       ("fidn,I",po::value<std::string>(&identFile),"Language identifier file")
       ("ftok",po::value<std::string>(&tokFile),"Tokenizer rules file")
       ("ftags",po::value<std::string>(&tagsetFile),"Tagset description file")
@@ -247,7 +168,7 @@ class config {
       ("fqty,Q",po::value<std::string>(&quantitiesFile),"Quantities file")
       ("fafx,S",po::value<std::string>(&affixFile),"Affix rules file")
       ("fprob,P",po::value<std::string>(&probabilityFile),"Probabilities file")
-      ("thres,e",po::value<double>(&MACO_ProbabilityThreshold),"Probability threshold for unknown word tags")
+      ("thres,e",po::value<double>(&analyzer_config_options.MACO_ProbabilityThreshold),"Probability threshold for unknown word tags")
       ("fdict,D",po::value<std::string>(&dictionaryFile),"Form dictionary")
       ("fnp,N",po::value<std::string>(&npDataFile),"NE recognizer data file")
       ("fcomp,K",po::value<std::string>(&compoundFile),"Compound detector configuration file")
@@ -264,9 +185,9 @@ class config {
       ("hmm,H",po::value<std::string>(&hmmFile),"Data file for HMM tagger")
       ("rlx,R",po::value<std::string>(&relaxFile),"Data file for RELAX tagger")
       ("tag,t",po::value<std::string>(&Tagger),"Tagging alogrithm to use (hmm, relax)")
-      ("iter,i",po::value<int>(&TAGGER_RelaxMaxIter),"Maximum number of iterations allowed for RELAX tagger")
-      ("sf,r",po::value<double>(&TAGGER_RelaxScaleFactor),"Support scale factor for RELAX tagger (affects step size)")
-      ("eps",po::value<double>(&TAGGER_RelaxEpsilon),"Convergence epsilon value for RELAX tagger")
+      ("iter,i",po::value<int>(&analyzer_config_options.TAGGER_RelaxMaxIter),"Maximum number of iterations allowed for RELAX tagger")
+      ("sf,r",po::value<double>(&analyzer_config_options.TAGGER_RelaxScaleFactor),"Support scale factor for RELAX tagger (affects step size)")
+      ("eps",po::value<double>(&analyzer_config_options.TAGGER_RelaxEpsilon),"Convergence epsilon value for RELAX tagger")
       ("rtk","Perform retokenization after PoS tagging")
       ("nortk","Do not perform retokenization after PoS tagging")
       ("force",po::value<std::string>(&Force),"When the tagger must be forced to select only one tag per word (no|none,tagger,retok)")
@@ -274,9 +195,8 @@ class config {
       ("dep,d",po::value<std::string>(&Dep),"Dependency parser to use (txala,treeler)")
       ("txala,T",po::value<std::string>(&txalaFile),"Rule file for Txala dependency parser")
       ("treeler,E",po::value<std::string>(&treelerFile),"Configuration file for Treeler dependency parser")
-      ("coref","Perform coreference resolution")
-      ("nocoref","Do not perform coreference resolution")
       ("fcorf,C",po::value<std::string>(&corefFile),"Coreference solver data file")
+      ("fsge,g",po::value<std::string>(&semgraphFile),"Semantic graph extractor config file")
       ;
  
     po::options_description vis_cf("Available configuration file options");
@@ -288,24 +208,27 @@ class config {
       ("ServerMaxWorkers",po::value<int>(&MaxWorkers)->default_value(DEFAULT_MAX_WORKERS),"Maximum number of workers to fork in server mode")
       ("ServerQueueSize",po::value<int>(&QueueSize)->default_value(DEFAULT_QUEUE_SIZE),"Maximum number of waiting requests in server mode")
       ("AlwaysFlush",po::value<bool>(&AlwaysFlush)->default_value(false),"Consider each newline as a sentence end")
-      ("InputFormat",po::value<std::string>(&InputF)->default_value("plain"),"Input format (plain,token,splitted,morfo,sense,tagged)")
-      ("OutputFormat",po::value<std::string>(&OutputF)->default_value("tagged"),"Output format (token,splitted,morfo,tagged,shallow,parsed,dep)")
+      ("InputLevel",po::value<std::string>(&InputLv)->default_value("text"),"Input analysis level (text,token,splitted,morfo,tagged,shallow,dep,coref)")
+      ("OutputLevel",po::value<std::string>(&OutputLv)->default_value("tagged"),"Output analysis level (token,splitted,morfo,tagged,shallow,parsed,dep,coref,semgraph)")
+      ("InputMode",po::value<std::string>(&InputM)->default_value("corpus"),"Input mode (corpus,doc)")
+      ("OutputFormat",po::value<std::string>(&OutputF)->default_value("freeling"),"Output format (freeling,conll,train,xml,json,naf)")
+      ("InputFormat",po::value<std::string>(&InputF)->default_value("text"),"Input format (text,freeling,conll)")
       ("LangIdentFile",po::value<std::string>(&identFile),"Language identifier file")
       ("TokenizerFile",po::value<std::string>(&tokFile),"Tokenizer rules file")
       ("TagsetFile",po::value<std::string>(&tagsetFile),"Tagset description file")
       ("SplitterFile",po::value<std::string>(&splitFile),"Splitter option file")
-      ("AffixAnalysis",po::value<bool>(&MACO_AffixAnalysis)->default_value(false),"Perform affix analysis")
-      ("UserMap",po::value<bool>(&MACO_UserMap)->default_value(false),"Apply user mapping file")
-      ("MultiwordsDetection",po::value<bool>(&MACO_MultiwordsDetection)->default_value(false),"Perform multiword detection")
-      ("NumbersDetection",po::value<bool>(&MACO_NumbersDetection)->default_value(false),"Perform number detection")
-      ("PunctuationDetection",po::value<bool>(&MACO_PunctuationDetection)->default_value(false),"Perform punctuation detection")
-      ("DatesDetection",po::value<bool>(&MACO_DatesDetection)->default_value(false),"Perform date/time expression detection")
-      ("QuantitiesDetection",po::value<bool>(&MACO_QuantitiesDetection)->default_value(false),"Perform magnitude/ratio detection")
-      ("DictionarySearch",po::value<bool>(&MACO_DictionarySearch)->default_value(false),"Perform dictionary search")
-      ("RetokContractions",po::value<bool>(&MACO_RetokContractions)->default_value(true),"Dictionary retokenizes contractions regardless of --nortk option")
-      ("ProbabilityAssignment",po::value<bool>(&MACO_ProbabilityAssignment)->default_value(false),"Perform probability assignment")
-      ("CompoundAnalysis",po::value<bool>(&MACO_CompoundAnalysis)->default_value(false),"Perform compound analysis")
-      ("NERecognition",po::value<bool>(&MACO_NERecognition)->default_value(false),"Perform NE recognition")
+      ("AffixAnalysis",po::value<bool>(&analyzer_invoke_options.MACO_AffixAnalysis)->default_value(false),"Perform affix analysis")
+      ("UserMap",po::value<bool>(&analyzer_invoke_options.MACO_UserMap)->default_value(false),"Apply user mapping file")
+      ("MultiwordsDetection",po::value<bool>(&analyzer_invoke_options.MACO_MultiwordsDetection)->default_value(false),"Perform multiword detection")
+      ("NumbersDetection",po::value<bool>(&analyzer_invoke_options.MACO_NumbersDetection)->default_value(false),"Perform number detection")
+      ("PunctuationDetection",po::value<bool>(&analyzer_invoke_options.MACO_PunctuationDetection)->default_value(false),"Perform punctuation detection")
+      ("DatesDetection",po::value<bool>(&analyzer_invoke_options.MACO_DatesDetection)->default_value(false),"Perform date/time expression detection")
+      ("QuantitiesDetection",po::value<bool>(&analyzer_invoke_options.MACO_QuantitiesDetection)->default_value(false),"Perform magnitude/ratio detection")
+      ("DictionarySearch",po::value<bool>(&analyzer_invoke_options.MACO_DictionarySearch)->default_value(false),"Perform dictionary search")
+      ("RetokContractions",po::value<bool>(&analyzer_invoke_options.MACO_RetokContractions)->default_value(true),"Dictionary retokenizes contractions regardless of --nortk option")
+      ("ProbabilityAssignment",po::value<bool>(&analyzer_invoke_options.MACO_ProbabilityAssignment)->default_value(false),"Perform probability assignment")
+      ("CompoundAnalysis",po::value<bool>(&analyzer_invoke_options.MACO_CompoundAnalysis)->default_value(false),"Perform compound analysis")
+      ("NERecognition",po::value<bool>(&analyzer_invoke_options.MACO_NERecognition)->default_value(false),"Perform NE recognition")
       ("DecimalPoint",po::value<std::string>(&macoDecimal),"Decimal point character")
       ("ThousandPoint",po::value<std::string>(&macoThousand),"Thousand point character")
       ("UserMapFile",po::value<std::string>(&usermapFile),"User mapping file")
@@ -314,14 +237,14 @@ class config {
       ("AffixFile",po::value<std::string>(&affixFile),"Affix rules file")
 
       ("ProbabilityFile",po::value<std::string>(&probabilityFile),"Probabilities file")
-      ("ProbabilityThreshold",po::value<double>(&MACO_ProbabilityThreshold),"Probability threshold for unknown word tags")
+      ("ProbabilityThreshold",po::value<double>(&analyzer_config_options.MACO_ProbabilityThreshold),"Probability threshold for unknown word tags")
       ("DictionaryFile",po::value<std::string>(&dictionaryFile),"Form dictionary")
       ("NPDataFile",po::value<std::string>(&npDataFile),"NP recognizer data file")
       ("CompoundFile",po::value<std::string>(&compoundFile),"Compound detector configuration file")
       ("PunctuationFile",po::value<std::string>(&punctuationFile),"Punctuation symbol file")
-      ("Phonetics",po::value<bool>(&PHON_Phonetics)->default_value(false),"Perform phonetic encoding of words")
+      ("Phonetics",po::value<bool>(&analyzer_invoke_options.PHON_Phonetics)->default_value(false),"Perform phonetic encoding of words")
       ("PhoneticsFile",po::value<std::string>(&phonFile),"Phonetic encoding configuration file")
-      ("NEClassification",po::value<bool>(&NEC_NEClassification)->default_value(false),"Perform NE classification")
+      ("NEClassification",po::value<bool>(&analyzer_invoke_options.NEC_NEClassification)->default_value(false),"Perform NE classification")
       ("NECFile",po::value<std::string>(&necFile),"NEC configuration file")
       ("SenseAnnotation",po::value<std::string>(&SenseAnot)->default_value("none"),"Type of sense annotation (no|none,all,mfs,ukb)")
       ("SenseConfigFile",po::value<std::string>(&senseFile),"Configuration file for sense annotation module")
@@ -329,17 +252,17 @@ class config {
       ("TaggerHMMFile",po::value<std::string>(&hmmFile),"Data file for HMM tagger")
       ("TaggerRelaxFile",po::value<std::string>(&relaxFile),"Data file for RELAX tagger")
       ("Tagger",po::value<std::string>(&Tagger)->default_value("hmm"),"Tagging alogrithm to use (hmm, relax)")
-      ("TaggerRelaxMaxIter",po::value<int>(&TAGGER_RelaxMaxIter),"Maximum number of iterations allowed for RELAX tagger")
-      ("TaggerRelaxScaleFactor",po::value<double>(&TAGGER_RelaxScaleFactor),"Support scale factor for RELAX tagger (affects step size)")
-      ("TaggerRelaxEpsilon",po::value<double>(&TAGGER_RelaxEpsilon),"Convergence epsilon value for RELAX tagger")
-      ("TaggerRetokenize",po::value<bool>(&TAGGER_Retokenize)->default_value(false),"Perform retokenization after PoS tagging")
+      ("TaggerRelaxMaxIter",po::value<int>(&analyzer_config_options.TAGGER_RelaxMaxIter),"Maximum number of iterations allowed for RELAX tagger")
+      ("TaggerRelaxScaleFactor",po::value<double>(&analyzer_config_options.TAGGER_RelaxScaleFactor),"Support scale factor for RELAX tagger (affects step size)")
+      ("TaggerRelaxEpsilon",po::value<double>(&analyzer_config_options.TAGGER_RelaxEpsilon),"Convergence epsilon value for RELAX tagger")
+      ("TaggerRetokenize",po::value<bool>(&analyzer_config_options.TAGGER_Retokenize)->default_value(false),"Perform retokenization after PoS tagging")
       ("TaggerForceSelect",po::value<std::string>(&Force)->default_value("retok"),"When the tagger must be forced to select only one tag per word (no|none,tagger,retok)")
       ("GrammarFile",po::value<std::string>(&grammarFile),"Grammar file for chart parser")
-      ("DependencyParser",po::value<std::string>(&Dep),"Dependency parser to use (txala,treeler)")
+      ("DependencyParser",po::value<std::string>(&Dep)->default_value("txala"),"Dependency parser to use (txala,treeler)")
       ("DepTxalaFile",po::value<std::string>(&txalaFile),"Rule file for Txala dependency parser")
       ("DepTreelerFile",po::value<std::string>(&treelerFile),"Configuration file for Treeler dependency parser")
-      ("CoreferenceResolution",po::value<bool>(&COREF_CoreferenceResolution)->default_value(false),"Perform coreference resolution")
       ("CorefFile",po::value<std::string>(&corefFile),"Coreference solver data file")
+      ("SemGraphExtractorFile",po::value<std::string>(&semgraphFile),"Semantic graph extractor config file")
       ;
 
     po::options_description hid_cl("Hidden CL options");
@@ -393,6 +316,11 @@ class config {
     }
 
     // Load config file.
+    if (ConfigFile.empty()) {
+      std::cerr<<"Configuration file not specified. Please use option -f to provide a configuration file."<<std::endl;
+      exit(1);
+    }
+      
     std::wifstream fcfg;
     util::open_utf8_file(fcfg,util::string2wstring(ConfigFile));
     if (fcfg.fail()) {
@@ -435,108 +363,138 @@ class config {
     txalaFile = util::expand_filename(txalaFile);
     treelerFile = util::expand_filename(treelerFile);
     corefFile = util::expand_filename(corefFile); 
+    semgraphFile = util::expand_filename(semgraphFile); 
 
     // translate string options (including expanded filenames) to wstrings
-    Lang = util::string2wstring(language);
     Locale = util::string2wstring(locale);
     IDENT_identFile = util::string2wstring(identFile);
-    TOK_TokenizerFile = util::string2wstring(tokFile);
     TAGSET_TagsetFile = util::string2wstring(tagsetFile);
-    SPLIT_SplitterFile = util::string2wstring(splitFile);
-    MACO_Decimal = util::string2wstring(macoDecimal);
-    MACO_Thousand = util::string2wstring(macoThousand);
-    MACO_UserMapFile = util::string2wstring(usermapFile);
-    MACO_LocutionsFile = util::string2wstring(locutionsFile);
-    MACO_QuantitiesFile = util::string2wstring(quantitiesFile);
-    MACO_AffixFile = util::string2wstring(affixFile);
-    MACO_ProbabilityFile = util::string2wstring(probabilityFile);
-    MACO_DictionaryFile = util::string2wstring(dictionaryFile);
-    MACO_NPDataFile = util::string2wstring(npDataFile);
-    MACO_PunctuationFile = util::string2wstring(punctuationFile);
-    MACO_CompoundFile = util::string2wstring(compoundFile);
-    PHON_PhoneticsFile = util::string2wstring(phonFile);
-    NEC_NECFile = util::string2wstring(necFile);
-    SENSE_ConfigFile = util::string2wstring(senseFile);
-    UKB_ConfigFile = util::string2wstring(ukbFile);
-    TAGGER_HMMFile = util::string2wstring(hmmFile);
-    TAGGER_RelaxFile = util::string2wstring(relaxFile);
-    PARSER_GrammarFile = util::string2wstring(grammarFile);
-    DEP_TxalaFile = util::string2wstring(txalaFile);
-    DEP_TreelerFile = util::string2wstring(treelerFile);
-    COREF_CorefFile = util::string2wstring(corefFile);
-    
+
+    analyzer_config_options.Lang = util::string2wstring(language);
+    analyzer_config_options.TOK_TokenizerFile = util::string2wstring(tokFile);
+    analyzer_config_options.SPLIT_SplitterFile = util::string2wstring(splitFile);
+    analyzer_config_options.MACO_Decimal = util::string2wstring(macoDecimal);
+    analyzer_config_options.MACO_Thousand = util::string2wstring(macoThousand);
+    analyzer_config_options.MACO_UserMapFile = util::string2wstring(usermapFile);
+    analyzer_config_options.MACO_LocutionsFile = util::string2wstring(locutionsFile);
+    analyzer_config_options.MACO_QuantitiesFile = util::string2wstring(quantitiesFile);
+    analyzer_config_options.MACO_AffixFile = util::string2wstring(affixFile);
+    analyzer_config_options.MACO_ProbabilityFile = util::string2wstring(probabilityFile);
+    analyzer_config_options.MACO_DictionaryFile = util::string2wstring(dictionaryFile);
+    analyzer_config_options.MACO_NPDataFile = util::string2wstring(npDataFile);
+    analyzer_config_options.MACO_PunctuationFile = util::string2wstring(punctuationFile);
+    analyzer_config_options.MACO_CompoundFile = util::string2wstring(compoundFile);
+    analyzer_config_options.PHON_PhoneticsFile = util::string2wstring(phonFile);
+    analyzer_config_options.NEC_NECFile = util::string2wstring(necFile);
+    analyzer_config_options.SENSE_ConfigFile = util::string2wstring(senseFile);
+    analyzer_config_options.UKB_ConfigFile = util::string2wstring(ukbFile);
+    analyzer_config_options.TAGGER_HMMFile = util::string2wstring(hmmFile);
+    analyzer_config_options.TAGGER_RelaxFile = util::string2wstring(relaxFile);
+    analyzer_config_options.PARSER_GrammarFile = util::string2wstring(grammarFile);
+    analyzer_config_options.DEP_TxalaFile = util::string2wstring(txalaFile);
+    analyzer_config_options.DEP_TreelerFile = util::string2wstring(treelerFile);
+    analyzer_config_options.COREF_CorefFile = util::string2wstring(corefFile);
+    analyzer_config_options.SEMGRAPH_SemGraphFile = util::string2wstring(semgraphFile);
+
     // Handle boolean options expressed with --myopt or --nomyopt in command line
     SetBooleanOptionCL(vm.count("server"),!vm.count("server"),Server,"server");
-    SetBooleanOptionCL(vm.count("train"),!vm.count("train"),TrainingOutput,"train");
     SetBooleanOptionCL(vm.count("flush"),vm.count("noflush"),AlwaysFlush,"flush");
-    SetBooleanOptionCL(vm.count("afx"),vm.count("noafx"),MACO_AffixAnalysis,"afx");
-    SetBooleanOptionCL(vm.count("usr"),vm.count("nousr"), MACO_UserMap,"usr");
-    SetBooleanOptionCL(vm.count("loc"),vm.count("noloc"), MACO_MultiwordsDetection,"loc");
-    SetBooleanOptionCL(vm.count("numb"),vm.count("nonumb"),MACO_NumbersDetection,"numb");
-    SetBooleanOptionCL(vm.count("punt"),vm.count("nopunt"),MACO_PunctuationDetection,"punt");
-    SetBooleanOptionCL(vm.count("date"),vm.count("nodate"),MACO_DatesDetection,"date");
-    SetBooleanOptionCL(vm.count("ner"),vm.count("noner"),MACO_NERecognition,"ner");
-    SetBooleanOptionCL(vm.count("quant"),vm.count("noquant"),MACO_QuantitiesDetection,"quant");
-    SetBooleanOptionCL(vm.count("dict"),vm.count("nodict"),MACO_DictionarySearch,"dict");
-    SetBooleanOptionCL(vm.count("rtkcon"),vm.count("nortkcon"),MACO_RetokContractions,"rtkcon");
-    SetBooleanOptionCL(vm.count("prob"),vm.count("noprob"),MACO_ProbabilityAssignment,"prob");
-    SetBooleanOptionCL(vm.count("comp"),vm.count("nocomp"),MACO_CompoundAnalysis,"comp");
-    SetBooleanOptionCL(vm.count("phon"),vm.count("nophon"),PHON_Phonetics,"phon");
-    SetBooleanOptionCL(vm.count("nec"),vm.count("nonec"),NEC_NEClassification,"nec");
-    SetBooleanOptionCL(vm.count("rtk"),vm.count("nortk"),TAGGER_Retokenize,"rtk");
-    SetBooleanOptionCL(vm.count("coref"),vm.count("nocoref"),COREF_CoreferenceResolution,"coref");
+
+    SetBooleanOptionCL(vm.count("rtk"),vm.count("nortk"),analyzer_config_options.TAGGER_Retokenize,"rtk");
+
+    SetBooleanOptionCL(vm.count("afx"),vm.count("noafx"),analyzer_invoke_options.MACO_AffixAnalysis,"afx");
+    SetBooleanOptionCL(vm.count("usr"),vm.count("nousr"),analyzer_invoke_options.MACO_UserMap,"usr");
+    SetBooleanOptionCL(vm.count("loc"),vm.count("noloc"),analyzer_invoke_options.MACO_MultiwordsDetection,"loc");
+    SetBooleanOptionCL(vm.count("numb"),vm.count("nonumb"),analyzer_invoke_options.MACO_NumbersDetection,"numb");
+    SetBooleanOptionCL(vm.count("punt"),vm.count("nopunt"),analyzer_invoke_options.MACO_PunctuationDetection,"punt");
+    SetBooleanOptionCL(vm.count("date"),vm.count("nodate"),analyzer_invoke_options.MACO_DatesDetection,"date");
+    SetBooleanOptionCL(vm.count("ner"),vm.count("noner"),analyzer_invoke_options.MACO_NERecognition,"ner");
+    SetBooleanOptionCL(vm.count("quant"),vm.count("noquant"),analyzer_invoke_options.MACO_QuantitiesDetection,"quant");
+    SetBooleanOptionCL(vm.count("dict"),vm.count("nodict"),analyzer_invoke_options.MACO_DictionarySearch,"dict");
+    SetBooleanOptionCL(vm.count("rtkcon"),vm.count("nortkcon"),analyzer_invoke_options.MACO_RetokContractions,"rtkcon");
+    SetBooleanOptionCL(vm.count("prob"),vm.count("noprob"),analyzer_invoke_options.MACO_ProbabilityAssignment,"prob");
+    SetBooleanOptionCL(vm.count("comp"),vm.count("nocomp"),analyzer_invoke_options.MACO_CompoundAnalysis,"comp");
+    SetBooleanOptionCL(vm.count("phon"),vm.count("nophon"),analyzer_invoke_options.PHON_Phonetics,"phon");
+    SetBooleanOptionCL(vm.count("nec"),vm.count("nonec"),analyzer_invoke_options.NEC_NEClassification,"nec");
     
-    // translate InputF and OutputF strings to more useful integer values.
-    if (InputF=="plain") InputFormat = PLAIN;
-    else if (InputF=="token") InputFormat = TOKEN;
-    else if (InputF=="splitted") InputFormat = SPLITTED;
-    else if (InputF=="morfo") InputFormat = MORFO;
-    else if (InputF=="tagged") InputFormat = TAGGED;
-    else if (InputF=="sense") InputFormat = SENSES;
-    else { ERROR_CRASH(L"Unknown or invalid input format: "+util::string2wstring(InputF));}
-    
-    if (OutputF=="ident") OutputFormat = IDENT;
-    else if (OutputF=="token") OutputFormat = TOKEN;
-    else if (OutputF=="splitted") OutputFormat = SPLITTED;
-    else if (OutputF=="morfo") OutputFormat = MORFO;
-    else if (OutputF=="tagged") OutputFormat = TAGGED;
-    else if (OutputF=="shallow") OutputFormat = SHALLOW;
-    else if (OutputF=="parsed") OutputFormat = PARSED;
-    else if (OutputF=="dep") OutputFormat = DEP;
+    // translate InputLv strings to appropriate enum values.
+    if (InputLv=="text") analyzer_invoke_options.InputLevel = TEXT;
+    else if (InputLv=="token") analyzer_invoke_options.InputLevel = TOKEN;
+    else if (InputLv=="splitted") analyzer_invoke_options.InputLevel = SPLITTED;
+    else if (InputLv=="morfo") analyzer_invoke_options.InputLevel = MORFO;
+    else if (InputLv=="tagged") analyzer_invoke_options.InputLevel = TAGGED;
+    else if (InputLv=="sense") analyzer_invoke_options.InputLevel = SENSES;
+    else if (InputLv=="shallow") analyzer_invoke_options.InputLevel = SHALLOW;
+    else if (InputLv=="parsed") analyzer_invoke_options.InputLevel = PARSED;
+    else if (InputLv=="dep") analyzer_invoke_options.InputLevel = DEP;
+    else if (InputLv=="coref") analyzer_invoke_options.InputLevel = COREF;
+    else { ERROR_CRASH(L"Unknown or invalid input analysis level: "+util::string2wstring(InputLv));}
+
+    // translate OutputLv strings appropriate enum values.
+    if (OutputLv=="ident") analyzer_invoke_options.OutputLevel = IDENT;
+    else if (OutputLv=="token") analyzer_invoke_options.OutputLevel = TOKEN;
+    else if (OutputLv=="splitted") analyzer_invoke_options.OutputLevel = SPLITTED;
+    else if (OutputLv=="morfo") analyzer_invoke_options.OutputLevel = MORFO;
+    else if (OutputLv=="tagged") analyzer_invoke_options.OutputLevel = TAGGED;
+    else if (OutputLv=="shallow") analyzer_invoke_options.OutputLevel = SHALLOW;
+    else if (OutputLv=="parsed") analyzer_invoke_options.OutputLevel = PARSED;
+    else if (OutputLv=="dep") analyzer_invoke_options.OutputLevel = DEP;
+    else if (OutputLv=="coref") analyzer_invoke_options.OutputLevel = COREF;
+    else if (OutputLv=="semgraph") analyzer_invoke_options.OutputLevel = SEMGRAPH;
+    else { ERROR_CRASH(L"Unknown or invalid output analysis level: "+util::string2wstring(OutputLv));}
+
+    // translate InputM strings to appropriate enum values.
+    if (InputM=="corpus") InputMode = MODE_CORPUS;
+    else if (InputM=="doc") InputMode = MODE_DOC;
+    else { ERROR_CRASH(L"Unknown or invalid input mode: "+util::string2wstring(InputM));}
+
+    // translate OutputF strings appropriate enum values.
+    if (OutputF=="freeling") OutputFormat = OUT_FREELING;
+    else if (OutputF=="conll") OutputFormat = OUT_CONLL;
+    else if (OutputF=="train") OutputFormat = OUT_TRAIN;
+    else if (OutputF=="xml") OutputFormat = OUT_XML;
+    else if (OutputF=="json") OutputFormat = OUT_JSON;
+    else if (OutputF=="naf") OutputFormat = OUT_NAF;
     else { ERROR_CRASH(L"Unknown or invalid output format: "+util::string2wstring(OutputF));}
-    
-    // translate Tagger string to more useful integer values.
-    if (Tagger=="hmm") TAGGER_which = HMM;
-    else if (Tagger=="relax") TAGGER_which = RELAX;
+
+    // translate InputF strings appropriate enum values.
+    if (InputF=="text") InputFormat = INP_TEXT;
+    else if (InputF=="freeling") InputFormat = INP_FREELING;
+    else if (InputF=="conll") InputFormat = INP_CONLL;
+    else { ERROR_CRASH(L"Unknown or invalid input format: "+util::string2wstring(InputF));}
+
+    // translate Tagger string to appropriate enum values.
+    if (Tagger=="hmm") analyzer_invoke_options.TAGGER_which = HMM;
+    else if (Tagger=="relax") analyzer_invoke_options.TAGGER_which = RELAX;
     else {
-      TAGGER_which = HMM;
+      analyzer_invoke_options.TAGGER_which = HMM;
       WARNING(L"Invalid tagger algorithm '"+util::string2wstring(Tagger)+L"'. Using default.");
     }
     
-    // Translate ForceSelect string to more useful integer values.
-    if (Force=="none" || Force=="no") TAGGER_ForceSelect = FORCE_NONE;
-    else if (Force=="tagger") TAGGER_ForceSelect = FORCE_TAGGER;
-    else if (Force=="retok") TAGGER_ForceSelect = FORCE_RETOK;
+    // Translate ForceSelect string to appropriate enum values.
+    if (Force=="none" || Force=="no") analyzer_config_options.TAGGER_ForceSelect = NO_FORCE;
+    else if (Force=="tagger") analyzer_config_options.TAGGER_ForceSelect = TAGGER;
+    else if (Force=="retok") analyzer_config_options.TAGGER_ForceSelect = RETOK;
     else {
-      TAGGER_ForceSelect = FORCE_RETOK;
+      analyzer_config_options.TAGGER_ForceSelect = RETOK;
       WARNING(L"Invalid ForceSelect value '"+util::string2wstring(Force)+L"'. Using default.");
     }    
     
     // translate SenseAnot string to more useful integer values.
-    if (SenseAnot=="none" || SenseAnot=="no") SENSE_WSD_which = NONE;
-    else if (SenseAnot=="all") SENSE_WSD_which = ALL;
-    else if (SenseAnot=="mfs") SENSE_WSD_which = MFS;
-    else if (SenseAnot=="ukb") SENSE_WSD_which = UKB;
+    if (SenseAnot=="none" || SenseAnot=="no") analyzer_invoke_options.SENSE_WSD_which = NO_WSD;
+    else if (SenseAnot=="all") analyzer_invoke_options.SENSE_WSD_which = ALL;
+    else if (SenseAnot=="mfs") analyzer_invoke_options.SENSE_WSD_which = MFS;
+    else if (SenseAnot=="ukb") analyzer_invoke_options.SENSE_WSD_which = UKB;
     else {
-      SENSE_WSD_which = NONE;
+      analyzer_invoke_options.SENSE_WSD_which = NO_WSD;
       WARNING(L"Invalid sense annotation option '"+util::string2wstring(SenseAnot)+L"'. Using default.");
     }
 
-    // translate Dep string to more useful integer values.
-    if (Dep=="txala") DEP_which = TXALA;
-    else if (Dep=="treeler") DEP_which = TREELER;
+    // translate Dep string to appropriate enum values.
+    if (Dep=="txala") analyzer_invoke_options.DEP_which = TXALA;
+    else if (Dep=="treeler") analyzer_invoke_options.DEP_which = TREELER;
     else {
-      DEP_which = TXALA;
+      analyzer_invoke_options.DEP_which = TXALA;
       WARNING(L"Invalid dependency parser '"+util::string2wstring(Dep)+L"'. Using default.");
     }
     

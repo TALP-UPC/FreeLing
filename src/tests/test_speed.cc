@@ -35,44 +35,44 @@ int main(int argc, char* argv[]) {
 
   b0=clock();
   freeling::util::init_locale(cfg->Locale);
-  freeling::tokenizer tk(cfg->TOK_TokenizerFile); 
+  freeling::tokenizer tk(cfg->analyzer_config_options.TOK_TokenizerFile); 
 
-  freeling::splitter sp(cfg->SPLIT_SplitterFile); 
+  freeling::splitter sp(cfg->analyzer_config_options.SPLIT_SplitterFile); 
   freeling::splitter::session_id sp_ses = sp.open_session();
 
-  freeling::maco_options opt(cfg->Lang);
-  opt.set_nummerical_points (cfg->MACO_Decimal, cfg->MACO_Thousand);
-  opt.set_threshold (cfg->MACO_ProbabilityThreshold);
+  freeling::maco_options opt(cfg->analyzer_config_options.Lang);
+  opt.set_nummerical_points (cfg->analyzer_config_options.MACO_Decimal, cfg->analyzer_config_options.MACO_Thousand);
+  opt.set_threshold (cfg->analyzer_config_options.MACO_ProbabilityThreshold);
   opt.set_inverse_dict(false);
-  opt.set_retok_contractions(cfg->MACO_RetokContractions);
-  opt.set_data_files (cfg->MACO_UserMapFile,
-                      cfg->MACO_PunctuationFile, cfg->MACO_DictionaryFile,
-                      cfg->MACO_AffixFile, cfg->MACO_CompoundFile,
-                      cfg->MACO_LocutionsFile, cfg->MACO_NPDataFile,
-                      cfg->MACO_QuantitiesFile, cfg->MACO_ProbabilityFile);
+  opt.set_retok_contractions(cfg->analyzer_invoke_options.MACO_RetokContractions);
+  opt.set_data_files (cfg->analyzer_config_options.MACO_UserMapFile,
+                      cfg->analyzer_config_options.MACO_PunctuationFile, cfg->analyzer_config_options.MACO_DictionaryFile,
+                      cfg->analyzer_config_options.MACO_AffixFile, cfg->analyzer_config_options.MACO_CompoundFile,
+                      cfg->analyzer_config_options.MACO_LocutionsFile, cfg->analyzer_config_options.MACO_NPDataFile,
+                      cfg->analyzer_config_options.MACO_QuantitiesFile, cfg->analyzer_config_options.MACO_ProbabilityFile);
   freeling::maco morfo(opt);
-  morfo.set_active_options (cfg->MACO_UserMap, cfg->MACO_NumbersDetection,
-                            cfg->MACO_PunctuationDetection, cfg->MACO_DatesDetection,
-                            cfg->MACO_DictionarySearch, cfg->MACO_AffixAnalysis,
-                            cfg->MACO_CompoundAnalysis, cfg->MACO_RetokContractions,
-                            cfg->MACO_MultiwordsDetection, cfg->MACO_NERecognition,
-                            cfg->MACO_QuantitiesDetection, cfg->MACO_ProbabilityAssignment);
+  morfo.set_active_options (cfg->analyzer_invoke_options.MACO_UserMap, cfg->analyzer_invoke_options.MACO_NumbersDetection,
+                            cfg->analyzer_invoke_options.MACO_PunctuationDetection, cfg->analyzer_invoke_options.MACO_DatesDetection,
+                            cfg->analyzer_invoke_options.MACO_DictionarySearch, cfg->analyzer_invoke_options.MACO_AffixAnalysis,
+                            cfg->analyzer_invoke_options.MACO_CompoundAnalysis, cfg->analyzer_invoke_options.MACO_RetokContractions,
+                            cfg->analyzer_invoke_options.MACO_MultiwordsDetection, cfg->analyzer_invoke_options.MACO_NERecognition,
+                            cfg->analyzer_invoke_options.MACO_QuantitiesDetection, cfg->analyzer_invoke_options.MACO_ProbabilityAssignment);
 
-  freeling::hmm_tagger tagger(cfg->TAGGER_HMMFile, cfg->TAGGER_Retokenize, cfg->TAGGER_ForceSelect);
+  freeling::hmm_tagger tagger(cfg->analyzer_config_options.TAGGER_HMMFile, cfg->analyzer_config_options.TAGGER_Retokenize, cfg->analyzer_config_options.TAGGER_ForceSelect);
 
   freeling::senses *sens=NULL;
   freeling::ukb *wsd=NULL;
-  if (cfg->SENSE_WSD_which == UKB) {
-    sens = new freeling::senses(cfg->SENSE_ConfigFile);
-    wsd = new freeling::ukb(cfg->UKB_ConfigFile);
+  if (cfg->analyzer_invoke_options.SENSE_WSD_which == UKB) {
+    sens = new freeling::senses(cfg->analyzer_config_options.SENSE_ConfigFile);
+    wsd = new freeling::ukb(cfg->analyzer_config_options.UKB_ConfigFile);
   }
 
-  freeling::chart_parser parser(cfg->PARSER_GrammarFile);
-  freeling::dep_txala dep1(cfg->DEP_TxalaFile, parser.get_start_symbol ());
+  freeling::chart_parser parser(cfg->analyzer_config_options.PARSER_GrammarFile);
+  freeling::dep_txala dep1(cfg->analyzer_config_options.DEP_TxalaFile, parser.get_start_symbol ());
 
   freeling::dep_treeler *dep2=NULL;
-  if (not cfg->DEP_TreelerFile.empty())
-    dep2 = new freeling::dep_treeler(cfg->DEP_TreelerFile);
+  if (not cfg->analyzer_config_options.DEP_TreelerFile.empty())
+    dep2 = new freeling::dep_treeler(cfg->analyzer_config_options.DEP_TreelerFile);
 
 
   double timeinit = clock()-b0;
@@ -99,7 +99,7 @@ int main(int argc, char* argv[]) {
     tagger.analyze(ls);
     timetag += clock()-b0;
 
-    if (cfg->SENSE_WSD_which == UKB) {
+    if (cfg->analyzer_invoke_options.SENSE_WSD_which == UKB) {
       b0=clock();
       sens->analyze(ls);
       timesenses += clock()-b0;
@@ -138,7 +138,7 @@ int main(int argc, char* argv[]) {
   wcerr<<L"  Splitting = "<<seconds(timesplit)<<" ("<<nw/seconds(timesplit)<<" w/s)"<<endl;
   wcerr<<L"  Morfing = "<<seconds(timemorfo)<<" ("<<nw/seconds(timemorfo)<<" w/s)"<<endl;
   wcerr<<L"  Tagging = "<<seconds(timetag)<<" ("<<nw/seconds(timetag)<<" w/s)"<<endl;
-  if (cfg->SENSE_WSD_which == UKB) {
+  if (cfg->analyzer_invoke_options.SENSE_WSD_which == UKB) {
     wcerr<<L"  Annotating senses = "<<seconds(timesenses)<<" ("<<nw/seconds(timesenses)<<" w/s)"<<endl;
     wcerr<<L"  Disambiguating senses = "<<seconds(timeukb)<<" ("<<nw/seconds(timeukb)<<" w/s)"<<endl;
   }
