@@ -60,6 +60,10 @@ int main(int argc, char* argv[]) {
 
   freeling::hmm_tagger tagger(cfg->analyzer_config_options.TAGGER_HMMFile, cfg->analyzer_config_options.TAGGER_Retokenize, cfg->analyzer_config_options.TAGGER_ForceSelect);
 
+  freeling::nec *neclas=NULL;
+  if (cfg->analyzer_invoke_options.NEC_NEClassification) 
+    neclas = new freeling::nec(cfg->analyzer_config_options.NEC_NECFile);
+
   freeling::senses *sens=NULL;
   freeling::ukb *wsd=NULL;
   if (cfg->analyzer_invoke_options.SENSE_WSD_which == UKB) {
@@ -79,7 +83,7 @@ int main(int argc, char* argv[]) {
 
   int nw=0,ns=0;
   wstring text;
-  double timetok=0, timesplit=0, timemorfo=0, timetag=0, timesenses=0, timeukb=0, timeparser=0, timedep1=0, timedep2=0;
+  double timetok=0, timesplit=0, timemorfo=0, timetag=0, timenec=0, timesenses=0, timeukb=0, timeparser=0, timedep1=0, timedep2=0;
   while (getline(wcin,text)) {
     b0=clock();
     list<freeling::word> lw;
@@ -98,6 +102,12 @@ int main(int argc, char* argv[]) {
     b0=clock();
     tagger.analyze(ls);
     timetag += clock()-b0;
+
+    if (cfg->analyzer_invoke_options.NEC_NEClassification) {
+      b0=clock();
+      neclas->analyze(ls);
+      timenec += clock()-b0;
+    }
 
     if (cfg->analyzer_invoke_options.SENSE_WSD_which == UKB) {
       b0=clock();
@@ -136,8 +146,11 @@ int main(int argc, char* argv[]) {
   wcerr<<L"  Creating modules: "<<seconds(timeinit)<<endl;
   wcerr<<L"  Tokenizing = "<<seconds(timetok)<<" ("<<nw/seconds(timetok)<<" w/s)"<<endl;
   wcerr<<L"  Splitting = "<<seconds(timesplit)<<" ("<<nw/seconds(timesplit)<<" w/s)"<<endl;
-  wcerr<<L"  Morfing = "<<seconds(timemorfo)<<" ("<<nw/seconds(timemorfo)<<" w/s)"<<endl;
+  wcerr<<L"  Morfing (including NER) = "<<seconds(timemorfo)<<" ("<<nw/seconds(timemorfo)<<" w/s)"<<endl;
   wcerr<<L"  Tagging = "<<seconds(timetag)<<" ("<<nw/seconds(timetag)<<" w/s)"<<endl;
+  if (cfg->analyzer_invoke_options.NEC_NEClassification) {
+    wcerr<<L"  NE Classification = "<<seconds(timenec)<<" ("<<nw/seconds(timenec)<<" w/s)"<<endl;
+  }
   if (cfg->analyzer_invoke_options.SENSE_WSD_which == UKB) {
     wcerr<<L"  Annotating senses = "<<seconds(timesenses)<<" ("<<nw/seconds(timesenses)<<" w/s)"<<endl;
     wcerr<<L"  Disambiguating senses = "<<seconds(timeukb)<<" ("<<nw/seconds(timeukb)<<" w/s)"<<endl;
@@ -147,10 +160,10 @@ int main(int argc, char* argv[]) {
   wcerr<<L"  Dep-parsing treeler = "<<seconds(timedep2)<<" ("<<nw/seconds(timedep2)<<" w/s)"<<endl;
 
   double fl_time;
-  fl_time=timetok+timesplit+timemorfo+timetag+timesenses+timeukb+timeparser+timedep1;
+  fl_time=timetok+timesplit+timemorfo+timetag+timenec+timesenses+timeukb+timeparser+timedep1;
   wcerr<<L"  TOTAL FreeLing services (with txala) = "<<seconds(fl_time)<<" ("<<nw/seconds(fl_time)<<" w/s)"<<endl;
   if (dep2!=NULL) {
-    fl_time=timetok+timesplit+timemorfo+timetag+timesenses+timeukb+timeparser+timedep2;
+    fl_time=timetok+timesplit+timemorfo+timetag+timenec+timesenses+timeukb+timeparser+timedep2;
     wcerr<<L"  TOTAL FreeLing services (with treeler) = "<<seconds(fl_time)<<" ("<<nw/seconds(fl_time)<<" w/s)"<<endl;
   }
 
