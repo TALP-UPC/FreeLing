@@ -1,0 +1,80 @@
+
+ This folder contains the needed files to run freeling under dockers.
+
+
+ 1.  Dowload and install dockers
+
+     Visit https://docs.docker.com and get docker engine for your OS.
+
+     Follow the instructions you'll find at the appropriate URL, depending 
+     on your OS:
+       https://docs.docker.com/linux
+       https://docs.docker.com/mac
+       https://docs.docker.com/windows
+
+     Once installed, make sure the docker engine is running (you may need 
+     to restart your computer)
+
+
+ 2.- Build freeling docker:
+ 
+     Move to the folder where this README and the file 'Dockerfile' are 
+     located, and run:
+
+       docker build -t freeling .
+
+     This will download many stuff, compile freeling, and create a docker image.
+     It may take some time, specially on slow network connections or slow CPUs.
+
+     This step needs to be execute only once.
+
+
+ 3.- Use freeling docker
+
+     Once the image is build, you can run freeling trough dockers (see FreeLing 
+     user manual for details on available options for analyze
+
+        docker run -i --rm  freeling analyze -f en.cfg <input.txt >output.txt
+
+     You can also launch freeling in server mode (see freeling user manual
+     for details)
+
+        docker run -it --rm -p 50005:50005 freeling analyze -f es.cfg --server -p 50005
+
+     Analyzer server is running and waiting for client requests.
+
+     To connect to analyzer server you'll need to find out the IP of 
+     the container: 
+
+        docker ps -a
+
+     You'll get somenthing like:
+
+       CONTAINER ID    IMAGE      COMMAND                  CREATED        ...    
+       6f6decd8a9ec    freeling   "analyze -f en.cfg.."    3 minutes ago  ...
+
+    Use the "Container ID" to query docker for its IP
+
+        docker inspect --format '{{ .NetworkSettings.IPAddress }}' 6f6decd8a9ec
+
+    This will give the IP of the container (e.g. 172.17.0.2), which you can 
+    use to connect your client, e.g.:
+
+      analyzer_client 172.17.0.2:50005 <input.txt >output.txt
+
+    "analyzer_client" is an example client distributed with FreeLing source. 
+    You can use it as a basis to write your own client.
+
+    DISCLAIMER 1:  FreeLing server mode is provided just as an example, 
+                  and may not be reliable enouhg to be used in a high-performance 
+                  client-server production environment.  Use it at your own risk.
+
+    DISCLAIMER 2:  FreeLing is a library intended to be used to develop your
+                  own language processing applications. FreeLing "analyze" 
+                  (either in standalone or in server mode) is just an *example* 
+                  program that offers access to many FreeLing functionalities, 
+                  but not all of them.
+                   If "analyzer" does not adjust to your needs, or if you want
+                  to better exploit FreeLing capabilities, consider writting 
+                  your own program to call the library (APIs are provided 
+                  for C++, Java, PHP, Python, Perl, and Ruby).
