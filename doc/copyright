@@ -1,0 +1,11 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: FreeLing
+Upstream-Contact: Lluís Padró <padro@cs.upc.edu>
+Source: https://github.com/TALP-UPC/FreeLing
+
+Files: *
+Copyright: Copyright 2016 TALP Research Center - Universitat Politècnica de Catalunya
+License: Affero GPL 3+
+ Files in data/* hve different origins, licenses, and copyright holders.
+ For a detailed list please refer to COPYING file in source package or to
+ https://github.com/TALP-UPC/FreeLing/blob/master/COPYING
