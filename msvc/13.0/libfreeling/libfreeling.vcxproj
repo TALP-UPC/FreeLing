@@ -100,6 +100,7 @@
     <ClCompile Include="..\..\..\src\libfreeling\numbers\numbers.cc" />
     <ClCompile Include="..\..\..\src\libfreeling\numbers\numbers_ca.cc" />
     <ClCompile Include="..\..\..\src\libfreeling\numbers\numbers_cs.cc" />
+    <ClCompile Include="..\..\..\src\libfreeling\numbers\numbers_de.cc" />
     <ClCompile Include="..\..\..\src\libfreeling\numbers\numbers_default.cc" />
     <ClCompile Include="..\..\..\src\libfreeling\numbers\numbers_en.cc" />
     <ClCompile Include="..\..\..\src\libfreeling\numbers\numbers_es.cc" />
