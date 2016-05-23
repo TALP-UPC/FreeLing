@@ -18,19 +18,23 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "analyzer", "analyzer\analyz
 		{1B21632D-54E8-4480-BDA2-9C3A4330B7A5} = {1B21632D-54E8-4480-BDA2-9C3A4330B7A5}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "analyzer_client", "analyzer_client\analyzer_client.vcxproj", "{39B8235B-094E-436D-BCD7-F68DF6C7B7FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1B21632D-54E8-4480-BDA2-9C3A4330B7A5}.Release|Win32.ActiveCfg = Release|Win32
+		{1B21632D-54E8-4480-BDA2-9C3A4330B7A5}.Release|Win32.Build.0 = Release|Win32
 		{46E3DD55-211A-4F4A-8CDD-ED8E34F9FC9B}.Release|Win32.ActiveCfg = Release|Win32
 		{46E3DD55-211A-4F4A-8CDD-ED8E34F9FC9B}.Release|Win32.Build.0 = Release|Win32
 		{83068C95-0CF1-4FB0-AFDC-D674B616F144}.Release|Win32.ActiveCfg = Release|Win32
 		{83068C95-0CF1-4FB0-AFDC-D674B616F144}.Release|Win32.Build.0 = Release|Win32
-		{1B21632D-54E8-4480-BDA2-9C3A4330B7A5}.Release|Win32.ActiveCfg = Release|Win32
-		{1B21632D-54E8-4480-BDA2-9C3A4330B7A5}.Release|Win32.Build.0 = Release|Win32
 		{AB86B1F4-045E-4ABE-B9C8-A83E941E7187}.Release|Win32.ActiveCfg = Release|Win32
 		{AB86B1F4-045E-4ABE-B9C8-A83E941E7187}.Release|Win32.Build.0 = Release|Win32
+		{39B8235B-094E-436D-BCD7-F68DF6C7B7FC}.Release|Win32.ActiveCfg = Release|Win32
+		{39B8235B-094E-436D-BCD7-F68DF6C7B7FC}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
