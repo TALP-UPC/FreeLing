@@ -12,15 +12,15 @@
        https://docs.docker.com/mac
        https://docs.docker.com/windows
 
-     Once installed, make sure the docker engine is running (you may need 
-     to restart your computer)
+     Once installed, make sure the docker engine is running and you have
+     permission to run it (you may need to restart your computer).
 
 
  2.- Build freeling docker:
 
      Note that you do not need to download FreeLing source previously.
      You only need docker and the Dockerfile, and it will download all 
-     required source code
+     required source code,
  
      Move to the folder where the file 'Dockerfile' is located, and run:
 
@@ -31,6 +31,30 @@
 
      This step needs to be execute only once.
 
+     The created docker image takes over 1.4GB, a large part of which is FreeLing 
+     language data.  
+     You can reduce the size of the image removing language data you don't need.
+     For this, you'll need to modify the Dockerfile (before building the image
+     of course) as follows.
+
+     Locate the lines (towards the end):
+
+       apt-get clean -y && \
+       rm -rf /var/lib/apt/lists/*
+
+     Add a line in beween that removes the installed data for unneeded languages.
+     For instance if you need neither Spanish or Russian, you'd add the line
+     between the two mentioned above:
+
+       apt-get clean -y && \
+       rm -rf /usr/local/share/freeling/es /usr/local/share/freeling/ru && \
+       rm -rf /var/lib/apt/lists/*
+
+     You can add as many lines as you need.  
+     Note that each line needs to end with "&& \" 
+
+     After modifying the Dockerfile, you can build the image, which will not
+     contain data for those languages, and thus, it will be smaller.
 
 
  3.- Use freeling docker
