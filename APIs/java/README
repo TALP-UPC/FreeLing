@@ -50,13 +50,20 @@
 
     2. Download and install swig (http://www.swig.org/)
 
-    3. Open msvc project named msvc/10.0/swig/java/freeling_javaAPI
-       Click right button over freeling_javaAPI.i, select
-         Properties -> Custom build tool -> Command line -> Edit
-       and change JAVA_HOME and SWIG_HOME to your local installations of Java and SWIG.
+    3. Run swig with freeling_javaAPI.i to generate the API
+       SWIG will generate a directory edu/upc/freeling with the Java API 
+       for all modules, and a file freeling_javaAPI.cxx with the JNI side 
+       of the API.
 
-    4. Build the project, and when it completes successfully you'll find freeling.jar 
-       and freeling_javaAPI.dll in freeling\APIs\java directory.
+    4. Compile java code in edu/upc/freeling and build a file freeling.jar 
+       with the results.
+
+    5. Compile freeling_javaAPI.cxx into a DLL (using MSVC or any other compiler).
+       You'll need to provide paths to freeling and treeler include directories, 
+       and to Java headers (jni.h etc)
+       
+       You will get a freeling_javaAPI.dll library to be loaded from 
+       your Java programs
 
 
   HOW TO USE THE API FROM A JAVA PROGRAM IN WINDOWS
