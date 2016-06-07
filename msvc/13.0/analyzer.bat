@@ -4,7 +4,7 @@
 set BASEDIR=%~dp0
 
 set OLDPATH=%PATH%
-set PATH=%PATH%;%BASEDIR%\..\dependencies\boost\lib;%BASEDIR%\..\dependencies\zlib\lib;%BASEDIR%\..\dependencies\zlib;%BASEDIR%\..\dependencies\icu\lib;%BASEDIR%\..\dependencies\icu\bin;%BASEDIR%\..\lib;%BASEDIR%\..\bin
+set PATH=%PATH%;%BASEDIR%\..\dependencies\boost\lib\x86;%BASEDIR%\..\dependencies\boost\lib\x64;%BASEDIR%\..\dependencies\zlib\lib\x86;%BASEDIR%\..\dependencies\zlib\lib\x64;%BASEDIR%\..\dependencies\icu\lib\x86;%BASEDIR%\..\dependencies\icu\lib\x64;%BASEDIR%\..\lib;%BASEDIR%\..\bin
 
 set FREELINGSHARE=%BASEDIR%..\data
 

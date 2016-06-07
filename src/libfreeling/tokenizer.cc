@@ -159,10 +159,12 @@ namespace freeling {
     wstring::const_iterator c=p.begin();
     while (c!=p.end()) {
       // find first non-white space and erase leading whitespaces
-      while (iswspace(*c)) {
+      while (c!=p.end() and iswspace(*c)) {
         ++c;
         ++offset;
       }
+      // there where whitespaces at the end of the line.
+      if (c==p.end()) break;
       
       TRACE(4,L"Tokenizing ["+wstring(c,p.end())+L"]");
       // find first matching rule
