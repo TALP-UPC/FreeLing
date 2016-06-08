@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -83,7 +83,7 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level1</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>..\..\..\src\include;..\..\..\src\libtreeler;..\..\..\src\libfoma;..\..\..\dependencies\boost\include;..\..\..\dependencies\icu\include;..\..\..\dependencies\zlib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\src\include;..\..\..\src\libtreeler;..\..\..\src\libfoma;..\..\..\..\dependencies\boost\include;..\..\..\..\dependencies\icu\include;..\..\..\..\dependencies\zlib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MinimalRebuild>true</MinimalRebuild>
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
@@ -93,7 +93,7 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>..\..\..\dependencies\boost\lib\x86;..\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\..\dependencies\boost\lib\x86;..\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libtreeler.lib;libfoma.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
@@ -107,7 +107,7 @@ xcopy  "$(TargetDir)$(TargetName).lib" "../lib\" /F /R /Y /I</Command>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level1</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>..\..\..\src\include;..\..\..\src\libtreeler;..\..\..\src\libfoma;..\..\..\dependencies\boost\include;..\..\..\dependencies\icu\include;..\..\..\dependencies\zlib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\src\include;..\..\..\src\libtreeler;..\..\..\src\libfoma;..\..\..\..\dependencies\boost\include;..\..\..\..\dependencies\icu\include;..\..\..\..\dependencies\zlib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild>true</MinimalRebuild>
       <CompileAs>CompileAsCpp</CompileAs>
@@ -118,7 +118,7 @@ xcopy  "$(TargetDir)$(TargetName).lib" "../lib\" /F /R /Y /I</Command>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>..\..\..\dependencies\boost\lib\x86;..\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\..\dependencies\boost\lib\x86;..\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libtreelerd.lib;libfomad.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
@@ -133,7 +133,7 @@ xcopy  "$(TargetDir)$(TargetName).lib" "../lib\" /F /R /Y /I</Command>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level1</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>..\..\..\src\include;..\..\..\src\libtreeler;..\..\..\src\libfoma;..\..\..\dependencies\boost\include;..\..\..\dependencies\icu\include;..\..\..\dependencies\zlib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\src\include;..\..\..\src\libtreeler;..\..\..\src\libfoma;..\..\..\..\dependencies\boost\include;..\..\..\..\dependencies\icu\include;..\..\..\..\dependencies\zlib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>
       </MultiProcessorCompilation>
       <MinimalRebuild>true</MinimalRebuild>
@@ -144,7 +144,7 @@ xcopy  "$(TargetDir)$(TargetName).lib" "../lib\" /F /R /Y /I</Command>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>..\..\..\dependencies\boost\lib\x64;..\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\..\dependencies\boost\lib\x64;..\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libtreeler.lib;libfoma.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
@@ -158,7 +158,7 @@ xcopy  "$(TargetDir)$(TargetName).lib" "../lib64\" /F /R /Y /I</Command>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level1</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>..\..\..\src\include;..\..\..\src\libtreeler;..\..\..\src\libfoma;..\..\..\dependencies\boost\include;..\..\..\dependencies\icu\include;..\..\..\dependencies\zlib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\src\include;..\..\..\src\libtreeler;..\..\..\src\libfoma;..\..\..\..\dependencies\boost\include;..\..\..\..\dependencies\icu\include;..\..\..\..\dependencies\zlib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <SDLCheck>
       </SDLCheck>
       <Optimization>Disabled</Optimization>
@@ -170,7 +170,7 @@ xcopy  "$(TargetDir)$(TargetName).lib" "../lib64\" /F /R /Y /I</Command>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>..\..\..\dependencies\boost\lib\x64;..\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\..\dependencies\boost\lib\x64;..\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libtreelerd.lib;libfomad.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
