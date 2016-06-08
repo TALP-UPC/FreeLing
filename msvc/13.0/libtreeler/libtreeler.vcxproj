@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -62,20 +62,28 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
+    <OutDir>$(SolutionDir)$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
     <TargetName>$(ProjectName)d</TargetName>
+    <OutDir>$(SolutionDir)$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
+    <OutDir>$(SolutionDir)$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
     <TargetName>$(ProjectName)d</TargetName>
+    <OutDir>$(SolutionDir)$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -95,10 +103,6 @@
       <AdditionalLibraryDirectories>..\..\..\..\dependencies\zlib\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <PostBuildEvent>
-      <Command>xcopy  "$(TargetDir)$(TargetName).dll" "../bin\" /F /R /Y /I
-xcopy  "$(TargetDir)$(TargetName).lib" "../lib\" /F /R /Y /I</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -119,11 +123,6 @@ xcopy  "$(TargetDir)$(TargetName).lib" "../lib\" /F /R /Y /I</Command>
       <AdditionalLibraryDirectories>..\..\..\..\dependencies\zlib\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>zlibd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <PostBuildEvent>
-      <Command>xcopy  "$(TargetDir)$(TargetName).dll" "../bin\" /F /R /Y /I
-xcopy  "$(TargetDir)$(TargetName).pdb" "../bin\" /F /R /Y /I
-xcopy  "$(TargetDir)$(TargetName).lib" "../lib\" /F /R /Y /I</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -142,10 +141,6 @@ xcopy  "$(TargetDir)$(TargetName).lib" "../lib\" /F /R /Y /I</Command>
       <AdditionalLibraryDirectories>..\..\..\..\dependencies\zlib\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <PostBuildEvent>
-      <Command>xcopy  "$(TargetDir)$(TargetName).dll" "../bin64\" /F /R /Y /I
-xcopy  "$(TargetDir)$(TargetName).lib" "../lib64\" /F /R /Y /I</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -165,11 +160,6 @@ xcopy  "$(TargetDir)$(TargetName).lib" "../lib64\" /F /R /Y /I</Command>
       <AdditionalLibraryDirectories>..\..\..\..\dependencies\zlib\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>zlibd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <PostBuildEvent>
-      <Command>xcopy  "$(TargetDir)$(TargetName).dll" "../bin64\" /F /R /Y /I
-xcopy  "$(TargetDir)$(TargetName).pdb" "../bin64\" /F /R /Y /I
-xcopy  "$(TargetDir)$(TargetName).lib" "../lib64\" /F /R /Y /I</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\libtreeler\treeler\base\dictionary.cc" />
