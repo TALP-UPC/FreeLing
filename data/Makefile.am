@@ -1,5 +1,5 @@
 languages = as ca cs cy de en es fr gl hr it nb pt ru sl
-variants = es/es-old es/es-ar ca/balear ca/valencia 
+variants = es/es-old es/es-ar es/es-cl ca/balear ca/valencia 
 
 EXTRA_DIST = $(languages) common config
 
