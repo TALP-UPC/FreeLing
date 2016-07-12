@@ -11,7 +11,7 @@ VSSI3S0 VSSI1S0
 VMIP2P0 VMIP2S0
 </PosPreferences>
 <TagsetFile>
-./tagset.dat
+../tagset.dat
 </TagsetFile>
 <UnknownTags>
 AQ00000 20
