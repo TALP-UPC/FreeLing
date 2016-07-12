@@ -25,7 +25,10 @@ install-data-hook:
 	        if (echo $$sublg | grep -q $$lg/); then \
 		   echo "  - Creating "$$sublg" variant dictionary..."; \
 		   mkdir -p $(DESTDIR)/$(pkgdatadir)/$$sublg; \
-		   $(top_builddir)/src/utilities/dicc-management/bin/build-dict.sh $(top_builddir)/data/$$sublg/dictionary/header $(top_builddir)/data/$$lg/dictionary/entries/* $(top_builddir)/data/$$sublg/dictionary/entries/* > $(DESTDIR)/$(pkgdatadir)/$$sublg/dicc.src; \
+		   cat $(top_builddir)/data/$$sublg/dictionary/remove/* >$(DESTDIR)/$(pkgdatadir)/$$sublg/remove.tmp 2>/dev/null; \
+		   cat $(top_builddir)/data/$$lg/dictionary/entries/* | grep -v -F -x -f $(DESTDIR)/$(pkgdatadir)/$$sublg/remove.tmp >$(DESTDIR)/$(pkgdatadir)/$$sublg/base.tmp; \
+		   $(top_builddir)/src/utilities/dicc-management/bin/build-dict.sh $(top_builddir)/data/$$sublg/dictionary/header $(DESTDIR)/$(pkgdatadir)/$$sublg/base.tmp $(top_builddir)/data/$$sublg/dictionary/entries/* > $(DESTDIR)/$(pkgdatadir)/$$sublg/dicc.src; \
+		   rm -f $(DESTDIR)/$(pkgdatadir)/$$sublg/remove.tmp $(DESTDIR)/$(pkgdatadir)/$$sublg/base.tmp; \
 	        fi; \
 	     done; \
 	   fi; \
