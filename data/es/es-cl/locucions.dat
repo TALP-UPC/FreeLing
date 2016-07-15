@@ -24,7 +24,7 @@ nica ni_cagando RN ni_cagando I I
 ni_chicha_ni_limonada ni_chicha_ni_limonada AQ0CN00 I
 ni_chicha_ni_limoná ni_chicha_ni_limonada AQ0CN00 I
 ni_fu_ni_fa ni_fu_ni_fa RG ni_fu_ni_fa AQ0CN00 I
-no_<estar>_ni_ahí no_estar_ni_ahí $1:VM I
+no_<estar>_ni_ahí no_estar_ni_ahí $2:VM I
 pa_la_cagá para_la_cagada AQ0CN00 I
 para_la_cagá para_la_cagada AQ0CN00 I
 por_la_chucha por_la_chucha I I
