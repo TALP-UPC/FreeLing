@@ -1,0 +1,33 @@
+<TagSetFile>
+../tagset.dat
+</TagSetFile>
+<Multiwords>
+<andar>_arriba_de_la_pelota andar_arriba_de_la_pelota $1:VM I
+a_todo_chancho a_todo_chancho RG I
+chesumadre concha_de_su_madre I I
+chesumare concha_de_su_madre I I
+concha_de_su_madre concha_de_su_madre I I
+conche_su_madre concha_de_su_madre I I
+conchesumadre concha_de_su_madre I I
+conchesumare concha_de_su_madre I I
+<dar>_bola dar_bola $1:VM I
+<dar>_lata dar_lata $1:VM I
+el_descueve el_descueve AQ0CN00 I
+en_achas en_achas RG I
+en_andas en_andas RG I
+en_base_a en_base_a SP A
+guata_de_callo guata_de_callo AQ0CN00 guata_de_callo NCCN000 I
+guata_e_callo guata_de_callo AQ0CN00 guata_de_callo NCCN000 I
+guatecallo guata_de_callo AQ0CN00 guata_de_callo NCCN000 I
+la_raja la_raja AQ0CN00 I
+nica ni_cagando RN ni_cagando I I
+ni_chicha_ni_limonada ni_chicha_ni_limonada AQ0CN00 I
+ni_chicha_ni_limoná ni_chicha_ni_limonada AQ0CN00 I
+ni_fu_ni_fa ni_fu_ni_fa RG ni_fu_ni_fa AQ0CN00 I
+no_<estar>_ni_ahí no_estar_ni_ahí $1:VM I
+pa_la_cagá para_la_cagada AQ0CN00 I
+para_la_cagá para_la_cagada AQ0CN00 I
+por_la_chucha por_la_chucha I I
+por_la_cresta por_la_cresta I I
+por_la_mierda por_la_mierda I I
+</Multiwords>

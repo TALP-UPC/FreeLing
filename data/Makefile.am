@@ -29,6 +29,11 @@ install-data-hook:
 		   cat $(top_builddir)/data/$$lg/dictionary/entries/* | grep -v -F -x -f $(DESTDIR)/$(pkgdatadir)/$$sublg/remove.tmp >$(DESTDIR)/$(pkgdatadir)/$$sublg/base.tmp; \
 		   $(top_builddir)/src/utilities/dicc-management/bin/build-dict.sh $(top_builddir)/data/$$sublg/dictionary/header $(DESTDIR)/$(pkgdatadir)/$$sublg/base.tmp $(top_builddir)/data/$$sublg/dictionary/entries/* > $(DESTDIR)/$(pkgdatadir)/$$sublg/dicc.src; \
 		   rm -f $(DESTDIR)/$(pkgdatadir)/$$sublg/remove.tmp $(DESTDIR)/$(pkgdatadir)/$$sublg/base.tmp; \
+		   if (test -f "$(top_builddir)/data/$$sublg/locucions.dat"); then \
+		      cat $(top_builddir)/data/$$lg/locucions.dat | tail -n +5 > $(DESTDIR)/$(pkgdatadir)/$$sublg/mws.tmp; \
+		      cat $(top_builddir)/data/$$sublg/locucions.dat | grep -v '</Multiwords>' | cat - $(DESTDIR)/$(pkgdatadir)/$$sublg/mws.tmp > $(DESTDIR)/$(pkgdatadir)/$$sublg/locucions.dat; \
+		      rm -f $(DESTDIR)/$(pkgdatadir)/$$sublg/mws.tmp; \
+		   fi; \
 	        fi; \
 	     done; \
 	   fi; \
