@@ -2,32 +2,67 @@
 ../tagset.dat
 </TagSetFile>
 <Multiwords>
-<andar>_arriba_de_la_pelota andar_arriba_de_la_pelota $1:VM I
+a_calzón_quitado a_calzón_quitado RG I
+a_ciegas a_ciegas RG I
+a_concho a_concho RG I
+a_dedo a_dedo RG I
+a_el_cuete al_cuete RG I
+a_el_lote al_lote RG I
+a_el_seco al_seco RG I
+a_el_tiro al_tiro RG I
+a_el_toque al_toque RG I
+a_el_tun_tun al_tun_tun RG I
+a_la_chuña a_la_chuña RG I
+a_la_pinta a_la_pinta AQ0CN00 I
+<andar>_a_la_chucha irse_a_la_chucha I I
+<andar>_pato andar_pato $1:VM I
+a_pata a_pata RG I
+a_pata_pelada a_pata_pelada RG I
+a_puro_pulso a_puro_pulso RG I
 a_todo_chancho a_todo_chancho RG I
-chesumadre concha_de_su_madre I I
-chesumare concha_de_su_madre I I
+a_todo_concho a_todo_concho RG I
+a_todo_reventar a_todo_reventar RG I
+a_todo_ritmo a_todo_ritmo RG I
+a_todo_trapo a_todo_trapo RG I
+bajo_cuerda bajo_cuerda RG I
+cara_de_palo cara_de_palo AQ0CN00 I
+care_palo cara_de_palo AQ0CN00 I
+chucha_madre chucha_madre I I
+como_las_huevadas como_las_huevas RG I
 concha_de_su_madre concha_de_su_madre I I
-conche_su_madre concha_de_su_madre I I
-conchesumadre concha_de_su_madre I I
-conchesumare concha_de_su_madre I I
 <dar>_bola dar_bola $1:VM I
+<dar>_jugo dar_jugo $1:VM I
 <dar>_lata dar_lata $1:VM I
-el_descueve el_descueve AQ0CN00 I
+de_ahí de_ahí I I
 en_achas en_achas RG I
 en_andas en_andas RG I
 en_base_a en_base_a SP A
-guata_de_callo guata_de_callo AQ0CN00 guata_de_callo NCCN000 I
-guata_e_callo guata_de_callo AQ0CN00 guata_de_callo NCCN000 I
-guatecallo guata_de_callo AQ0CN00 guata_de_callo NCCN000 I
-la_raja la_raja AQ0CN00 I
-nica ni_cagando RN ni_cagando I I
+guata_de_callo guata_de_callo AQ0CN00 I
+<lápiz>_mina lápiz_mina $1:NC I
+<lápiz>_pasta lápiz_pasta $1:NC I
+la_raja la_raja AQ0CN00 la_raja RG I
 ni_chicha_ni_limonada ni_chicha_ni_limonada AQ0CN00 I
-ni_chicha_ni_limoná ni_chicha_ni_limonada AQ0CN00 I
-ni_fu_ni_fa ni_fu_ni_fa RG ni_fu_ni_fa AQ0CN00 I
+ni_fu_ni_fa ni_fu_ni_fa AQ0CN00 I
 no_<estar>_ni_ahí no_estar_ni_ahí $2:VM I
-pa_la_cagá para_la_cagada AQ0CN00 I
-para_la_cagá para_la_cagada AQ0CN00 I
+<para>_callado para_callado RG I
+para_callado para callado RG I
+para_la_cagada para_la_cagada AQ0CN00 I
+pico_en_el_ojo pico_en_el_ojo I I
+por_el_estilo por_el_estilo RG I
 por_la_chucha por_la_chucha I I
 por_la_cresta por_la_cresta I I
 por_la_mierda por_la_mierda I I
+por_las_buenas por_las_buenas RG I
+por_las_malas por_las_malas RG I
+por_si_aca por_si_acaso RG I
+por_siaca por_si_acaso RG I
+por_si_acaso por_si_acaso RG I
+por_si_las_moscas por_si_las_moscas RG I
+puta_la_huevada puta_la_huevada I I
+puta_madre puta_madre I I
+qué_onda qué_onda I I
+sepa_moya sepa_moya I I
+toalla_nova toalla_nova NCFS000 I
+ya_<po> ya_po I I
+
 </Multiwords>
