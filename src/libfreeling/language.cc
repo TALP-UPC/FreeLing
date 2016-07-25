@@ -126,8 +126,9 @@ namespace freeling {
     form=L"";
     ph_form=L"";
     lc_form=L"";
-    in_dict=true;  // everything is a known word until dictionary fails to find it.
-    locked=false; 
+    analyzed_by=0x0;
+    locked_analysis=false; 
+    locked_multiwords=false; 
     ambiguous_mw=false;
     position=-1;
     start=-1;
@@ -139,8 +140,9 @@ namespace freeling {
     form=f;
     ph_form=L"";
     lc_form=util::lowercase(f);
-    in_dict=true;  // everything is a known word until dictionary fails to find it.
-    locked=false; 
+    analyzed_by=0x0;
+    locked_analysis=false; 
+    locked_multiwords=false; 
     ambiguous_mw=false;
     position=-1;
     start=-1;
@@ -154,8 +156,9 @@ namespace freeling {
     multiword=a;
     start=a.front().get_span_start();
     finish=a.back().get_span_finish();
-    in_dict=true;
-    locked=false;
+    analyzed_by=0x0;
+    locked_analysis=false; 
+    locked_multiwords=false; 
     ambiguous_mw=false;
     position=-1;
   }
@@ -173,8 +176,9 @@ namespace freeling {
     multiword=a;
     start=a.front().get_span_start();
     finish=a.back().get_span_finish();
-    in_dict=true;
-    locked=false;
+    analyzed_by=0x0;
+    locked_analysis=false; 
+    locked_multiwords=false; 
     ambiguous_mw=false;
     position=-1;
   }
@@ -185,8 +189,9 @@ namespace freeling {
     ph_form=w.ph_form;
     multiword=w.multiword;
     start=w.start; finish=w.finish;
-    in_dict=w.in_dict;
-    locked=w.locked;
+    analyzed_by=w.analyzed_by;
+    locked_analysis=w.locked_analysis;
+    locked_multiwords=w.locked_multiwords;
     user=w.user;
     alternatives=w.alternatives;
     copy_analysis(w);
@@ -239,10 +244,6 @@ namespace freeling {
   /// Set token span.
   void word::set_span(unsigned long s, unsigned long e) {start=s; finish=e;}
 
-  /// get in_dict
-  bool word::found_in_dict() const {return (in_dict);}
-  /// set in_dict
-  void word::set_found_in_dict(bool b) {in_dict=b;}
   /// check if there is any retokenizable analysis
   bool word::has_retokenizable() const {
     word::const_iterator i;
@@ -250,6 +251,11 @@ namespace freeling {
     for (i=this->begin(); i!=this->end() && !has; i++) has=i->is_retokenizable();
     return(has);
   }
+
+  /// control which maco modules added analysis to this word
+  void word::set_analyzed_by(unsigned module) { analyzed_by |= module; }
+  bool word::is_analyzed_by(unsigned module) const { return (analyzed_by & module) != 0; }
+  unsigned word::get_analyzed_by() const { return analyzed_by; }
 
   /// add an alternative to the alternatives list
   void word::add_alternative(const wstring &w, int d) { alternatives.push_back(make_pair(w,d)); }
@@ -273,9 +279,19 @@ namespace freeling {
   list<pair<wstring,int> >::const_iterator word::alternatives_end() const {return alternatives.end();}
 
   /// mark word as having definitive analysis
-  void word::lock_analysis() { locked=true; }
+  void word::lock_analysis() { locked_analysis=true; }
+  /// unmark word as having definitive analysis
+  void word::unlock_analysis() { locked_analysis=false; }
   /// check if word is marked as having definitive analysis
-  bool word::is_locked() const { return locked; }
+  bool word::is_locked_analysis() const { return locked_analysis; }
+
+  /// mark word as non-multiwordable
+  void word::lock_multiwords() { locked_multiwords=true; }
+  /// unmark word as non-multiwordable
+  void word::unlock_multiwords() { locked_multiwords=false; }
+  /// check if word is marked as non-multiwordable
+  bool word::is_locked_multiwords() const { return locked_multiwords; }
+
   /// Get length of analysis list.
   int word::get_n_analysis() const {return(this->size());}
   /// get list of analysis (only useful for perl API)

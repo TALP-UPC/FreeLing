@@ -663,6 +663,9 @@ namespace freeling {
       i->set_analysis(analysis(lemma,L"Z"));
       TRACE(3,L"Analysis set to: "+lemma+L" Z");
     }
+
+    // record this word was analyzed by this module
+    i->set_analyzed_by(word::NUMBERS);    
   }
 
 } // namespace

@@ -3,7 +3,7 @@
 # ===============================================
 
 # === Each line is a affixation rule, with the following fields:
-# 1 Affix to erase form word form (e.g: gatito - ito = gat)
+# 0 Affix to erase form word form (e.g: gatito - ito = gat)
 # 2 Affix (* for emtpy string) to add to the resulting root
 #   to rebuild the lemma that must be searched in dictionary 
 #   (e.g:  gat+o = gato)
@@ -15,67 +15,67 @@
 # 8 Lemma to assign: F=original form, R=root found in dict, L=lemma in matching dict entry, 
 #                    AF/AR/AL=affix followed by F/R/L, FA/RA/LA=F/R/L followed by affix
 # 9 Consider the suffix always, not only for unknown words.
-# 10 How to retokenize the word if necessary (see uer manual).
+# 00 How to retokenize the word if necessary (see uer manual).
 #==============================================================
 
 <Prefixes>
 
 # --- Prefixos patrimonials
 
-a	*	^(AQ|VM)		*	0	0	1	A+L	0	-
-an	*	^AQ		*	0	0	1	A+L	0	-
-ante	*	^(AQ|NC|VM)	*	0	0	1	A+L	0	-
-anti	*	^(AQ|NC)	*	0	0	1	A+L	0	-
-anti	*	^NC		AQ0CN00	0	0	1	A+L	0	-
-arxi	*	^(AQ|NC)	*	0	0	1	A+L	0	-
-avant	*	^(NC|VM)	*	0	0	1	A+L	0	-
-bes	*	^(NC|VM)	*	0	0	1	A+L	0	-
-bi	*	^AQ		*	0	0	1	A+L	0	-
-bis	*	^AQ		*	0	0	1	A+L	0	-
-circum	*	^AQ		*	0	0	1	A+L	0	-
-co	*	^(AQ|NC|VM)	*	0	0	1	A+L	0	-
-col	*	^(AQ|NC|VM)	*	0	0	1	A+L	0	-
-com	*	^(AQ|NC|VM)	*	0	0	1	A+L	0	-
-con	*	^(AQ|NC|VM)	*	0	0	1	A+L	0	-
-cor	*	^(AQ|NC|VM)	*	0	0	1	A+L	0	-
-contra	*	^(NC|VM)	*	0	0	1	A+L	0	-
-des	*	^(AQ|NC|VM)	*	0	0	1	A+L	0	-
-dis	*	^(AQ|NC|VM)	*	0	0	1	A+L	0	-
-entre	*	^(NC|VM)	*	0	0	1	A+L	0	-
-ex	*	^(AQ|NC) 	*	0	0	1	A+L	0	-
-extra	*	^(AQ|VM)	*	0	0	1	A+L	0	-
-hiper	*	^(AQ|NC)	*	0	0	1	A+L	0	-
-hipo	*	^(AQ|NC)	*	0	0	1	A+L	0	-
-il	*	^AQ		*	0	0	1	A+L	0	-
-im	*	^AQ		*	0	0	1	A+L	0	-
-in	*	^AQ		*	0	0	1	A+L	0	-
-ir	*	^AQ		*	0	0	1	A+L	0	-
-infra	*	^(AQ|NC|VM)	*	0	0	1	A+L	0	-
-inter	*	^(AQ|NC|VM)	*	0	0	1	A+L	0	-
-intra	*	^AQ		*	0	0	1	A+L	0	-
-juxta	*	^(AQ|VM)	*	0	0	1	A+L	0	-
-mini	*	^NC 		*	0	0	1	A+L	0	-
-no	*	^NC		*	0	0	1	A+L	0	-
-per	*	^VM		*	0	0	1	A+L	0	-
-post	*	^(AQ|NC|VM)	*	0	0	1	A+L	0	-
-pre	*	^(AQ|NC|VM)	*	0	0	1	A+L	0	-
-pro	*	^AQ		*	0	0	1	A+L	0	-
-quasi	*	^(AQ|NC)	*	0	0	1	A+L	0	-
-re	*	^(AQ|NC|RG|VM)	*	0	0	1	A+L	0	-
-res	*	^(AQ|NC|RG|VM)	*	0	0	1	re+L	0	-
-rere	*	^NC		*	0	0	1	A+L	0	-
-semi	*	^(AQ|NC)	*	0	0	1	A+L	0	-
-sobre	*	^(AQ|NC|VM)	*	0	0	1	A+L	0	-
-sota	*	^(NC|VM)	*	0	0	1	A+L	0	-
-sots	*	^NC		*	0	0	1	A+L	0	-
-sub	*	^(AQ|NC|VM)	*	0	0	1	A+L	0	-
-super	*	^(AQ|NC|VM)	*	0	0	1	A+L	0	-
-supra	*	^AQ		*	0	0	1	A+L	0	-
-tra	*	^(AQ|VM)	*	0	0	1	A+L	0	-
-trans	*	^(AQ|VM)	*	0	0	1	A+L	0	-
-tra	*	^(AQ|VM)	*	0	0	1	A+L	0	-
-ultra	*	^(AQ|NC|VM)	*	0	0	1	A+L	0	-
-vice	*	^NC		*	0	0	1	A+L	0	-
+a	*	^(AQ|VM)		*	0	0	0	A+L	0	-
+an	*	^AQ		*	0	0	0	A+L	0	-
+ante	*	^(AQ|NC|VM)	*	0	0	0	A+L	0	-
+anti	*	^(AQ|NC)	*	0	0	0	A+L	0	-
+anti	*	^NC		AQ0CN00	0	0	0	A+L	0	-
+arxi	*	^(AQ|NC)	*	0	0	0	A+L	0	-
+avant	*	^(NC|VM)	*	0	0	0	A+L	0	-
+bes	*	^(NC|VM)	*	0	0	0	A+L	0	-
+bi	*	^AQ		*	0	0	0	A+L	0	-
+bis	*	^AQ		*	0	0	0	A+L	0	-
+circum	*	^AQ		*	0	0	0	A+L	0	-
+co	*	^(AQ|NC|VM)	*	0	0	0	A+L	0	-
+col	*	^(AQ|NC|VM)	*	0	0	0	A+L	0	-
+com	*	^(AQ|NC|VM)	*	0	0	0	A+L	0	-
+con	*	^(AQ|NC|VM)	*	0	0	0	A+L	0	-
+cor	*	^(AQ|NC|VM)	*	0	0	0	A+L	0	-
+contra	*	^(NC|VM)	*	0	0	0	A+L	0	-
+des	*	^(AQ|NC|VM)	*	0	0	0	A+L	0	-
+dis	*	^(AQ|NC|VM)	*	0	0	0	A+L	0	-
+entre	*	^(NC|VM)	*	0	0	0	A+L	0	-
+ex	*	^(AQ|NC) 	*	0	0	0	A+L	0	-
+extra	*	^(AQ|VM)	*	0	0	0	A+L	0	-
+hiper	*	^(AQ|NC)	*	0	0	0	A+L	0	-
+hipo	*	^(AQ|NC)	*	0	0	0	A+L	0	-
+il	*	^AQ		*	0	0	0	A+L	0	-
+im	*	^AQ		*	0	0	0	A+L	0	-
+in	*	^AQ		*	0	0	0	A+L	0	-
+ir	*	^AQ		*	0	0	0	A+L	0	-
+infra	*	^(AQ|NC|VM)	*	0	0	0	A+L	0	-
+inter	*	^(AQ|NC|VM)	*	0	0	0	A+L	0	-
+intra	*	^AQ		*	0	0	0	A+L	0	-
+juxta	*	^(AQ|VM)	*	0	0	0	A+L	0	-
+mini	*	^NC 		*	0	0	0	A+L	0	-
+no	*	^NC		*	0	0	0	A+L	0	-
+per	*	^VM		*	0	0	0	A+L	0	-
+post	*	^(AQ|NC|VM)	*	0	0	0	A+L	0	-
+pre	*	^(AQ|NC|VM)	*	0	0	0	A+L	0	-
+pro	*	^AQ		*	0	0	0	A+L	0	-
+quasi	*	^(AQ|NC)	*	0	0	0	A+L	0	-
+re	*	^(AQ|NC|RG|VM)	*	0	0	0	A+L	0	-
+res	*	^(AQ|NC|RG|VM)	*	0	0	0	re+L	0	-
+rere	*	^NC		*	0	0	0	A+L	0	-
+semi	*	^(AQ|NC)	*	0	0	0	A+L	0	-
+sobre	*	^(AQ|NC|VM)	*	0	0	0	A+L	0	-
+sota	*	^(NC|VM)	*	0	0	0	A+L	0	-
+sots	*	^NC		*	0	0	0	A+L	0	-
+sub	*	^(AQ|NC|VM)	*	0	0	0	A+L	0	-
+super	*	^(AQ|NC|VM)	*	0	0	0	A+L	0	-
+supra	*	^AQ		*	0	0	0	A+L	0	-
+tra	*	^(AQ|VM)	*	0	0	0	A+L	0	-
+trans	*	^(AQ|VM)	*	0	0	0	A+L	0	-
+tra	*	^(AQ|VM)	*	0	0	0	A+L	0	-
+ultra	*	^(AQ|NC|VM)	*	0	0	0	A+L	0	-
+vice	*	^NC		*	0	0	0	A+L	0	-
 
 </Prefixes>
 

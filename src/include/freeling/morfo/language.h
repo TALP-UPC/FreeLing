@@ -142,14 +142,17 @@ namespace freeling {
     std::list<std::pair<std::wstring,int> > alternatives;
     /// token span
     unsigned long start, finish;
-    /// word form found in dictionary
-    bool in_dict;
     /// word morphological shouldn't be further modified
-    bool locked;
+    bool locked_analysis;
+    /// word shouldn't be considered to be part of a multiword
+    bool locked_multiwords;
     /// clone word (used by assignment/copy constructors)
     void clone(const word &);
     /// position of word in the sentence (count from 0)
     size_t position;
+
+    // mask storing which maco modules analyzed this word.
+    unsigned analyzed_by;
  
     /// Values for word::iterator types
     static const int SELECTED=0;
@@ -158,6 +161,11 @@ namespace freeling {
     static const std::wstring NOT_FOUND;
 
   public:
+    // morphological modules that may add analysis to the word
+    typedef enum  { USERMAP=0x0001,    NUMBERS=0x0002,    PUNCTUATION=0x0004,   DATES=0x0008, 
+                    DICTIONARY=0x0010, AFFIXES=0x0020,    COMPOUNDS=0x0040,     MULTIWORDS=0x0080, 
+                    NER=0x0100,        QUANTITIES=0x0200, PROBABILITIES=0x0400, GUESSER=0x0800 } Modules;
+
     // predeclarations
     class iterator; 
     class const_iterator; 
@@ -235,16 +243,25 @@ namespace freeling {
     unsigned long get_span_start() const;
     unsigned long get_span_finish() const;
 
-    /// get in_dict
-    bool found_in_dict() const;
-    /// set in_dict
-    void set_found_in_dict(bool);
     /// check if there is any retokenizable analysis
     bool has_retokenizable() const;
     /// mark word as having definitive analysis
     void lock_analysis();
+    /// unmark word as having definitive analysis
+    void unlock_analysis();
     /// check if word is marked as having definitive analysis
-    bool is_locked() const;
+    bool is_locked_analysis() const;
+    /// mark word as non-multiwordable
+    void lock_multiwords();
+    /// unmark word as non-multiwordable
+    void unlock_multiwords();
+    /// check if word is marked as not being multiwordable
+    bool is_locked_multiwords() const;
+
+    /// control which maco modules added analysis to this word
+    void set_analyzed_by(unsigned);
+    bool is_analyzed_by(unsigned) const;
+    unsigned get_analyzed_by() const;
 
     /// add an alternative to the alternatives list
     void add_alternative(const std::wstring &, int);

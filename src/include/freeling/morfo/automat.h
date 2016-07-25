@@ -244,10 +244,12 @@ namespace freeling {
 
       // check whether there is a match starting at each position i
       for (i=se.begin(); i!=se.end(); i++) {
-        if (not i->is_locked()) {
+        if (not i->is_locked_multiwords()) {
           if (matching(se, i)) found=true;
         }
-        else TRACE(3,L"Word '"+i->get_form()+L"' is locked. Skipped.");
+        else {
+          TRACE(3,L"Word '"+i->get_form()+L"' is locked. Skipped.");
+        }
       }
     
       if (found) se.rebuild_word_index();

@@ -63,7 +63,7 @@ namespace freeling {
     for (i=se.begin(); i!=se.end(); ++i) {
 
       // if the word is already analyzed (e.g. usermap), skip it.
-      if (i->is_locked()) continue;
+      if (i->is_locked_analysis()) continue;
 
       form=i->get_form();
       TRACE(3,L"checking "+form);
@@ -78,6 +78,9 @@ namespace freeling {
         wstring tag=data.substr(data.find(L" ")+1);            
         // punctuation sign found in the hash
         i->set_analysis(analysis(lemma,tag));
+
+        // record that we analyzed this word.
+        i->set_analyzed_by(word::PUNCTUATION);
         // prevent any other module from reinterpreting this.
         i->lock_analysis();
       }
@@ -87,6 +90,11 @@ namespace freeling {
         if (not util::RE_has_alphanum.search(form)) {
           TRACE(3,L"   .. no alphanumeric char found. tag as "+tagOthers);
           i->set_analysis(analysis(form,tagOthers));
+
+          // record that we analyzed this word.
+          i->set_analyzed_by(word::PUNCTUATION);
+          // prevent any other module from reinterpreting this.
+          i->lock_analysis();
         }
       }
     }

@@ -23,21 +23,21 @@
 
 <Prefixes>
 #Prefixos extraídos do Bosque completo (mantêm o - no token/lema para a avaliação).
-contra-       *    ^N|A   *    0    0    1    L    0   contra+$$:AQ+$$
-vice-         *    ^N|A   *    0    0    1    L    0   vice+$$:AQ+$$
-ex-           *    ^N|A   *    0    0    1    L    0   ex+$$:AQ+$$
-#mal-         *    ^N|A   *    0    0    1    R    1   mal-+$$:AQ0CN0+*
-#anti-        *    ^N|A   *    0    0    1    R    1   anti-+$$:AQ0CN0+*
-#pós-         *    ^N|A   *    0    0    1    R    1   pós-+$$:AQ0CN0+*
-#auto-        *    ^N|A   *    0    0    1    R    1   auto-+$$:AQ0CN0+*
-#sub-         *    ^N|A   *    0    0    1    R    1   sub-+$$:AQ0CN0+*
-#inter-       *    ^N|A   *    0    0    1    R    1   inter-+$$:AQ0CN0+*
-#neo-         *    ^N|A   *    0    0    1    R    1   neo-+$$:AQ0CN0+*
-#recém-       *    ^N|A   *    0    0    1    R    1   recém-+$$:AQ0CN0+*
-#pré-         *    ^N|A   *    0    0    1    R    1   pré-+$$:AQ0CN0+*
-#intra-       *    ^N|A   *    0    0    1    R    1   intra-+$$:AQ0CN0+*
-#arqui-       *    ^N|A   *    0    0    1    R    1   arqui-+$$:AQ0CN0+*
-re	      *	   ^V	  *    0    0	 1    A+L  1   -
+contra-       *    ^N|A   *    0    0    0    L    0   contra+$$:AQ+$$
+vice-         *    ^N|A   *    0    0    0    L    0   vice+$$:AQ+$$
+ex-           *    ^N|A   *    0    0    0    L    0   ex+$$:AQ+$$
+#mal-         *    ^N|A   *    0    0    0    R    1   mal-+$$:AQ0CN0+*
+#anti-        *    ^N|A   *    0    0    0    R    1   anti-+$$:AQ0CN0+*
+#pós-         *    ^N|A   *    0    0    0    R    1   pós-+$$:AQ0CN0+*
+#auto-        *    ^N|A   *    0    0    0    R    1   auto-+$$:AQ0CN0+*
+#sub-         *    ^N|A   *    0    0    0    R    1   sub-+$$:AQ0CN0+*
+#inter-       *    ^N|A   *    0    0    0    R    1   inter-+$$:AQ0CN0+*
+#neo-         *    ^N|A   *    0    0    0    R    1   neo-+$$:AQ0CN0+*
+#recém-       *    ^N|A   *    0    0    0    R    1   recém-+$$:AQ0CN0+*
+#pré-         *    ^N|A   *    0    0    0    R    1   pré-+$$:AQ0CN0+*
+#intra-       *    ^N|A   *    0    0    0    R    1   intra-+$$:AQ0CN0+*
+#arqui-       *    ^N|A   *    0    0    0    R    1   arqui-+$$:AQ0CN0+*
+re	      *	   ^V	  *    0    0	 0    A+L  1   -
 </Prefixes>
 
 <Suffixes>

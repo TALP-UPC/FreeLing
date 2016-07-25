@@ -230,41 +230,16 @@ namespace freeling {
 
   void probabilities::annotate_word(word &w) const {
   
-    double sum;
-    int na=w.get_n_analysis();
     TRACE(2,L"--Assigning probabilitites to: "+w.get_form());
-  
-    // word found in dictionary, punctuation mark, number, or with retokenizable analysis 
-    //  and with some analysis
-    if ( na>0 && (w.found_in_dict() || w.find_tag_match(RE_PunctNum) || w.has_retokenizable())) {
-      TRACE(2,L"Form with analysis. Found in dict ("+wstring(w.found_in_dict()?L"yes":L"no")+L") or punctuation ("+wstring(w.find_tag_match(RE_PunctNum)?L"yes":L"no")+L") or has_retok ("+wstring(w.has_retokenizable()?L"yes":L"no")+L")");
+    TRACE(2, L"  num_analysis=" << w.get_n_analysis() << L" analyzed_by=0x"<< std::hex << w.get_analyzed_by() << std::dec );
 
-      // smooth probabilities for original analysis
+    if (w.get_n_analysis()>0) {
+      // word has analysis. Smooth probabilities
       smoothing(w);
-      sum=1;
-    }
-    // word not found in dictionary, may (or may not) have
-    // tags set by other modules (NE, dates, suffixes...)
-    else  if (activate_guesser) {
-      // form is unknown in the dictionary
-      TRACE(2,L"Form with NO analysis. Guessing");
-    
-      // set uniform distribution for analysis from previous modules.
-      const double mass=1.0;
-      for (word::iterator li=w.begin(); li!=w.end(); li++)
-        li->set_prob(mass/w.get_n_analysis());
-    
-      // guess possible tags, keeping some mass for previously assigned tags.
-      // setting mass to higher values above, will give more weight to 
-      // existing tags.
-      sum=guesser(w,mass);
-    
-      // normalize probabilities of all accumulated tags
-      for (word::iterator li=w.begin();  li!=w.end(); li++)
-        li->set_prob(li->get_prob()/sum);
-    
-      // get number of analysis again, in case the guesser added some.
-      na=w.get_n_analysis();
+    }  
+    else if (activate_guesser) {      
+      // word without analysis, use guesser
+      guesser(w);
     }
   
     // sort analysis by decreasing probability, using lemma and pos
@@ -283,6 +258,9 @@ namespace freeling {
       for (list<word>::iterator k=rtk.begin(); k!=rtk.end(); k++) 
         annotate_word(*k);
     }
+
+    // record this word was analyzed by this module
+    w.set_analyzed_by(word::PROBABILITIES);    
   }
 
   /////////////////////////////////////////////////////////////////////////////
@@ -461,7 +439,12 @@ namespace freeling {
   /// Guess possible tags, keeping some mass for previously assigned tags    
   /////////////////////////////////////////////////////////////////////////////
 
-  double probabilities::guesser(word &w, double mass) const {
+  void probabilities::guesser(word &w, double mass) const {
+    
+    // guess possible tags, keeping some mass for previously assigned tags.
+    // Setting mass to higher values than 1.0 will give more weight to existing tags.
+
+    TRACE(2,L"Applying guesser");
 
     wstring form=w.get_lc_form();
   
@@ -516,9 +499,13 @@ namespace freeling {
       sum = sum2;
     }
 
-    return sum;
+    // normalize probabilities of all accumulated tags
+    for (word::iterator li=w.begin();  li!=w.end(); li++)
+      li->set_prob(li->get_prob()/sum);
+    
+    // record this word was analyzed by the guesser
+    w.set_analyzed_by(word::GUESSER);
   }
-
 
 
   /////////////////////////////////////////////////////////////////////////////

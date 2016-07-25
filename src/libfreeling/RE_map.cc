@@ -99,7 +99,9 @@ namespace freeling {
         // add analysis to the word
         w.add_analysis(analysis(lemma,tag));
       }
-      
+
+      // record that we analyzed this word.
+      w.set_analyzed_by(word::USERMAP);
       // prevent any other module from reinterpreting this.
       w.lock_analysis();
     }

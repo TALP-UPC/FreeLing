@@ -387,6 +387,9 @@ namespace freeling {
 
     i->set_analysis(analysis(lemma, tag));
     TRACE(3, L"Analysis set to: " + lemma + L" " + tag);
+
+    // record this word was analyzed by this module
+    i->set_analyzed_by(word::NUMBERS);    
   }
 
 } // namespace

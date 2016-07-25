@@ -713,6 +713,11 @@ namespace freeling {
 	la.push_back(analysis(lemma,L"W"));
 	i->set_analysis(la);
 	TRACE(3,L"Analysis set to: ("+lemma+L" W)");
+
+        // record this word was analyzed by this module
+        i->set_analyzed_by(word::DATES);    
+        // mark the word as analyzed
+        i->lock_analysis();    
     }
 
 } // namespace freeling 

@@ -206,6 +206,7 @@ namespace freeling {
   
     formU = j->get_form();
     form = j->get_lc_form();
+    TRACE(5,L">>> Computing token for "+form);
   
     token = TK_other;
   
@@ -218,7 +219,7 @@ namespace freeling {
       sentence::const_iterator ant=j; ant--; 
       // ...and check if it has any of the listed punctuation tags 
       sbegin=false;    
-      for (word::const_iterator a=ant->begin(); a!=ant->end() && !sbegin; a++)
+      for (word::const_iterator a=ant->begin(); a!=ant->end() and not sbegin; a++)
         sbegin = (punct.find(a->get_tag())!=punct.end());    
     }
   
@@ -233,7 +234,7 @@ namespace freeling {
     else {
       // check if any of word tags are ignorable
       bool found=false;
-      for (word::const_iterator an=j->begin(); an!=j->end() && !found; an++) {
+      for (word::const_iterator an=j->begin(); an!=j->end() and not found; an++) {
         it = ignore_tags.find(an->get_tag());
         found = (it!=ignore_tags.end());
       }    
@@ -266,9 +267,10 @@ namespace freeling {
         token = TK_sNounUpp; 
 
       // first word in sentence (or word preceded by special punctuation sign), and not locked
-      else if (!j->is_locked() && util::RE_is_capitalized.search(formU) &&
-               func.find(form)==func.end() &&
-               !j->is_multiword() && !j->find_tag_match(RE_DateNumPunct)) {
+      else if (not j->is_locked_multiwords() and util::RE_is_capitalized.search(formU) and
+               func.find(form)==func.end() and
+               not j->is_multiword() and
+               not j->find_tag_match(RE_DateNumPunct)) {
         // capitalized, not in function word list, no analysis except dictionary.
 
         // check for unknown/known word
@@ -276,17 +278,17 @@ namespace freeling {
           // not found in dictionary
           token = TK_sUnkUpp;
         }
-        else if ( !j->find_tag_match(RE_Closed) && (j->find_tag_match(RE_NounAdj) || names.find(form)!=names.end() ) ) {
+        else if ( not j->find_tag_match(RE_Closed) and (j->find_tag_match(RE_NounAdj) or names.find(form)!=names.end() ) ) {
           // found as noun with no closed category
           // (prep, determiner, conjunction...) readings
           token = TK_sNounUpp;
         }
       }
     }
-    else if (!j->is_locked()) {
+    else if (not j->is_locked_multiwords()) {
       TRACE(3,L"non-ignorable word, non-locked ("+form+L")");
       // non-ignorable, not at sentence beggining, non-locked word
-      if (util::RE_is_capitalized.search(formU) && !j->find_tag_match(RE_DateNumPunct))
+      if (util::RE_is_capitalized.search(formU) && not j->find_tag_match(RE_DateNumPunct))
         // Capitalized and not number/date
         token=TK_mUpper;
       else if (func.find(form)!=func.end())
@@ -296,6 +298,9 @@ namespace freeling {
         token=TK_mPref;
       else if (suffixes.find(form)!=suffixes.end())
         token=TK_mSuf;
+    }
+    else {
+      TRACE(3,L"non-ignorable word, locked ("+form+L")");
     }
  
     TRACE(3,L"Next word form is: ["+formU+L"] token="+util::int2wstring(token));
@@ -342,11 +347,13 @@ namespace freeling {
     // Setting the analysis for the Named Entity. 
     // The new MW is just created, so its list is empty.
   
-    // if the MW has only one word, and is an initial noun, 
-    // copy its possible analysis.
-    if (st->initialNoun && i->get_n_words_mw()==1) {
+    if (st->initialNoun and i->get_n_words_mw()==1) {
+      // if the MW has only one word, and is an initial noun, then:
+      // 1. copy its possible analysis.
       TRACE(3,L"copying first word analysis list");
       i->copy_analysis(i->get_words_mw().front());
+      // 1. copy the modules that analyzed the word.
+      i->set_analyzed_by(i->get_words_mw().front().get_analyzed_by());
     }
   
     // Add an NP analysis, with the compound form as lemma.

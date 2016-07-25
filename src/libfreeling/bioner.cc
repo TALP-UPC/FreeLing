@@ -185,7 +185,7 @@ namespace freeling {
     int i=0;
     for (sentence::iterator w=se.begin(); w!=se.end(); w++,i++) {
 
-      if (w->is_locked()) {
+      if (w->is_locked_multiwords()) {
         TRACE(3,L"Word is locked. BIO tag set to 'O'.");
         for (int j=0; j<classif->get_nlabels(); j++) all_pred[i][j] = 0.0;
         all_pred[i][classif->get_index(L"O")]=1.0;

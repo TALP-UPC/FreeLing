@@ -511,7 +511,9 @@ namespace freeling {
     TRACE(3,L"Searching in dictionary, word: "+w.get_form());
     list<analysis> la;
     search_form(w.get_form(), la);
-    w.set_found_in_dict( la.size()>0 );  // set "found_in_dict" accordingly to results
+
+    // record this word was found in the dictionary
+    if (la.size()>0) w.set_analyzed_by(word::DICTIONARY);
     TRACE(3,L"   Found "+util::int2wstring(la.size())+L" analysis.");
 
     for (list<analysis>::const_iterator a=la.begin(); a!=la.end(); a++) {
@@ -664,6 +666,8 @@ namespace freeling {
             i->set_span(st,f);
             i->user=pos->user;
           
+            i->set_analyzed_by(word::DICTIONARY);
+
             TRACE(2,L"  Inserting "+i->get_form()+L". span=("+util::int2wstring(i->get_span_start())+L","+util::int2wstring(i->get_span_finish())+L")");
             pos=se.insert(pos,*i); 
             pos++;

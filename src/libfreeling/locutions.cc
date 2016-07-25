@@ -457,6 +457,9 @@ namespace freeling {
     i->set_analysis(st->mw_analysis);
     i->set_ambiguous_mw(st->mw_ambiguous);
     TRACE(3,L"Analysis set to: ("+i->get_lemma()+L","+i->get_tag()+L") "+(st->mw_ambiguous?L"[A]":L"[I]"));
+
+    // record this word was analyzed by this module
+    i->set_analyzed_by(word::MULTIWORDS);    
   }
 
 } // namespace

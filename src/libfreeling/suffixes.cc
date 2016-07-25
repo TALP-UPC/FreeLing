@@ -81,7 +81,13 @@ namespace freeling {
           // create rule.
           sufrule suf(cond);
           suf.term=term; suf.output=output; suf.acc=acc; suf.enc=enc; 
-          suf.nomore=nomore; suf.lema=lema; suf.always=always; 
+
+          suf.nomore=nomore; 
+          //suf.nomore=0; // 'nomore' is deprecated and ignored.  
+                        // the guesser is applied depending on which  modules annotated the word.
+                        // Thus, affixes module does not lock_analysis anymore.
+
+          suf.lema=lema; suf.always=always; 
           suf.retok=retok;
           if (suf.retok==L"-") suf.retok.clear();
           // Insert rule in appropriate affix multimaps.
@@ -238,11 +244,12 @@ namespace freeling {
         TRACE(3,L"Found "+util::int2wstring(suff.count(form_suf))+L" rules for suffix "+form_suf+L" (size "+util::int2wstring(i)+L")");
         TRACE(3,L"Found "+util::int2wstring(pref.count(form_pref))+L" rules for prefix "+form_pref+L" (size "+util::int2wstring(j)+L")");
       
-        bool wfid=w.found_in_dict();
-
+        // backup of locked status
+        bool locked = w.is_locked_analysis();
+   
         for (sufit=rules_S.first; sufit!=rules_S.second; sufit++) {
           for (prefit=rules_P.first; prefit!=rules_P.second; prefit++) {
-          
+       
             candidates.clear();
             // cand1: all possible completions with suffix rule
             cand1 = GenerateRoots(SUF, sufit->second, form_root);
@@ -265,9 +272,12 @@ namespace freeling {
             for (set<wstring>::iterator s=candidates.begin(); s!=candidates.end(); s++) 
               ApplyRule(form_pref+(*s), waux, form_suf, sufit->second, w);
 
-            // unless both rules stated nomore, leave everything as it was
-            if (not (sufit->second.nomore and prefit->second.nomore))
-              w.set_found_in_dict(wfid);  
+            // ApplyRule may have locked the word. 
+            // Unless both rules agree on that, revert to original locking status.
+            if (not (sufit->second.nomore and prefit->second.nomore)) {
+              if (locked) w.lock_analysis(); 
+              else w.unlock_analysis();
+            }
           }
         }
       }
@@ -386,7 +396,10 @@ namespace freeling {
         TRACE(3,L" Tag "+pos->get_tag()+L" satisfies input conditon "+suf.expression);
         // We're applying the rule. If it says so, avoid assignation 
         // of more tags by later modules (e.g. probabilities).
-        if (suf.nomore) wd.set_found_in_dict(true); 
+        if (suf.nomore) wd.lock_analysis(); 
+
+        // record this word was analyzed by this module
+        wd.set_analyzed_by(word::AFFIXES);
         
         if (suf.output==L"*") {
           // we have to keep tag untouched
@@ -500,6 +513,7 @@ namespace freeling {
             }
 	  } 
         }
+        w.set_analyzed_by(word::AFFIXES);
         rtk.push_back(w);
         TRACE(3,L"    word "+w.get_form()+L"("+w.get_lemma()+L","+w.get_tag()+L") added to decomposition list");
         first=false;

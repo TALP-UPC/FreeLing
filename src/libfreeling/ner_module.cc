@@ -135,7 +135,7 @@ namespace freeling {
             // set a unique NP analysis
             j->set_analysis(analysis(j->get_lc_form(),NE_tag));
             // prevent guesser from changing that
-            j->set_found_in_dict(true);
+            j->lock_analysis();
           }
         }
       
@@ -203,6 +203,11 @@ namespace freeling {
     // Add an NP analysis, with the compound form as lemma.
     TRACE(3,L"   adding NP analysis");
     i->add_analysis(analysis(i->get_lc_form(),NE_tag));
+
+    // record this word was analyzed by this module
+    i->set_analyzed_by(word::NER);    
+    // prevent guesser from adding more tags.
+    i->lock_analysis();
   }
 
 } // namespace

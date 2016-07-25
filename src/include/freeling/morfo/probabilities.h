@@ -92,7 +92,7 @@ namespace freeling {
     /// Compute p(tag|suffix) using recursively shorter suffixes.
     double compute_probability(const std::wstring &, double, const std::wstring &) const;
     /// Guess possible tags, keeping some mass for previously assigned tags    
-    double guesser(word &, double) const;
+    void guesser(word &, double mass=1.0) const;
     /// compare two analysis to set the right order of preference
     bool less(const analysis &a1, const analysis &a2) const;
     /// sort given analysis list using lemma and pos preferences

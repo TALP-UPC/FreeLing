@@ -54,6 +54,7 @@ namespace freeling {
 
   class WINDLL maco : public processor {
   private:
+
     /// Morhpological analyzer active modules.
     bool MultiwordsDetection, NumbersDetection, PunctuationDetection, 
       DatesDetection, QuantitiesDetection, DictionarySearch,

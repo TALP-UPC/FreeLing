@@ -23,43 +23,43 @@
 
 <Prefixes>
 
-long-	*	^(VBN|VBG)	JJ	0	0	1	F	0	-
-well-	*	^(VBN|VBG)	JJ	0	0	1	F	0	-
-anti-	*	^(NN|JJ)	JJ	0	0	1	F	0	-
-inter-	*	^(NN|JJ)	JJ	0	0	1	F	0	-
-high-   *	^(NN|VBN|VBG)	JJ	0	0	1	F	0	-
-low-    *	^(NN|VBN|VBG)	JJ	0	0	1	F	0	-
-semi-	*	^(JJ|VBN)	JJ	0	0	1	F	0	-
-self-	*	^(JJ|VBN|VBG)	JJ	0	0	1	F	0	-
-un	*	^(JJ|VBN|VBG)   JJ	0	0	1	F	0	-
-un	*	^NN		*	0	0	1	A+L	0	-
-pre-    *	^(JJ|NN|VBN|VBG)  JJ	0	0	1	F	0	-
-pre     *	^(JJ|NN|VBN|VBG)  JJ	0	0	1	F	0	-
-post-	*	^(JJ|NN|VBN|VBG)  JJ	0	0	1	F	0	-
-post	*	^(JJ|NN|VBN|VBG)  JJ	0	0	1	F	0	-
-non-	*	^(JJ|VBN|VBG)	JJ	0	0	1	F	0	-
-non	*	^(JJ|VBN|VBG)	JJ	0	0	1	F	0	-
-multi-  *	^(JJ|NN|VBN)	JJ	0	0	1	F	0	-
-multi   *	^(JJ|NN|VBN)	JJ	0	0	1	F	0	-
-multi-  *	^NN		*	0	0	1	A+L	0	-
-multi   *	^NN		*	0	0	1	A+L	0	-
-non-	*	^NN		*	0	0	1	A+L	0	-
-non	*	^NN		*	0	0	1	A+L	0	-
-over-	*	^NN		*	0	0	1	A+L	0	-
-over	*	^NN		*	0	0	1	A+L	0	-
-under-	*	^NN		*	0	0	1	A+L	0	-
-under	*	^NN		*	0	0	1	A+L	0	-
-pre-	*	^NN		*	0	0	1	A+L	0	-
-pre	*	^NN		*	0	0	1	A+L	0	-
-half-	*	^NN		*	0	0	1	A+L	0	-
-half	*	^NN		*	0	0	1	A+L	0	-
-sub-	*	^NN		*	0	0	1	A+L	0	-
-sub	*	^NN		*	0	0	1	A+L	0	-
-super-	*	^NN		*	0	0	1	A+L	0	-
-super	*	^NN		*	0	0	1	A+L	0	-
+long-	*	^(VBN|VBG)	JJ	0	0	0	F	0	-
+well-	*	^(VBN|VBG)	JJ	0	0	0	F	0	-
+anti-	*	^(NN|JJ)	JJ	0	0	0	F	0	-
+inter-	*	^(NN|JJ)	JJ	0	0	0	F	0	-
+high-   *	^(NN|VBN|VBG)	JJ	0	0	0	F	0	-
+low-    *	^(NN|VBN|VBG)	JJ	0	0	0	F	0	-
+semi-	*	^(JJ|VBN)	JJ	0	0	0	F	0	-
+self-	*	^(JJ|VBN|VBG)	JJ	0	0	0	F	0	-
+un	*	^(JJ|VBN|VBG)   JJ	0	0	0	F	0	-
+un	*	^NN		*	0	0	0	A+L	0	-
+pre-    *	^(JJ|NN|VBN|VBG)  JJ	0	0	0	F	0	-
+pre     *	^(JJ|NN|VBN|VBG)  JJ	0	0	0	F	0	-
+post-	*	^(JJ|NN|VBN|VBG)  JJ	0	0	0	F	0	-
+post	*	^(JJ|NN|VBN|VBG)  JJ	0	0	0	F	0	-
+non-	*	^(JJ|VBN|VBG)	JJ	0	0	0	F	0	-
+non	*	^(JJ|VBN|VBG)	JJ	0	0	0	F	0	-
+multi-  *	^(JJ|NN|VBN)	JJ	0	0	0	F	0	-
+multi   *	^(JJ|NN|VBN)	JJ	0	0	0	F	0	-
+multi-  *	^NN		*	0	0	0	A+L	0	-
+multi   *	^NN		*	0	0	0	A+L	0	-
+non-	*	^NN		*	0	0	0	A+L	0	-
+non	*	^NN		*	0	0	0	A+L	0	-
+over-	*	^NN		*	0	0	0	A+L	0	-
+over	*	^NN		*	0	0	0	A+L	0	-
+under-	*	^NN		*	0	0	0	A+L	0	-
+under	*	^NN		*	0	0	0	A+L	0	-
+pre-	*	^NN		*	0	0	0	A+L	0	-
+pre	*	^NN		*	0	0	0	A+L	0	-
+half-	*	^NN		*	0	0	0	A+L	0	-
+half	*	^NN		*	0	0	0	A+L	0	-
+sub-	*	^NN		*	0	0	0	A+L	0	-
+sub	*	^NN		*	0	0	0	A+L	0	-
+super-	*	^NN		*	0	0	0	A+L	0	-
+super	*	^NN		*	0	0	0	A+L	0	-
 
 ## added 23/07/2015
-auto	*	^NN	*	0	0	1	F	0	-
+auto	*	^NN	*	0	0	0	F	0	-
 
 </Prefixes>
 

@@ -233,7 +233,8 @@ namespace freeling {
         TRACE(5,L"pattern "+p->patr+L" good="+util::int2wstring(int(good))+L"  tag="+tag);
         if (good and seen.find(lemma+L"#"+tag)==seen.end()) {
           w.add_analysis(analysis(lemma.substr(1),tag));
-          w.set_found_in_dict(true); 
+          // record this word was analyzed by this module
+          w.set_analyzed_by(word::COMPOUNDS);
           seen.insert(lemma+L"#"+tag);
           compound = true;
         }
