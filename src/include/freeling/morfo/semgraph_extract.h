@@ -51,7 +51,7 @@ namespace freeling {
   ////////////////////////////////////////////////////
   
 
-  class semgraph_extract {
+  class WINDLL semgraph_extract {
 
   private:
     /// entity extractor to use
