@@ -36,6 +36,8 @@
 #include <map>
 #include <set>
 
+#include "freeling/windll.h"
+
 namespace freeling {
 
 
@@ -45,12 +47,12 @@ namespace freeling {
     /// Auxiliary classes to contain a semantic graph
     ///////////////////////////////////////////////
 
-    class semantic_graph;
+    class WINDLL semantic_graph;
 
     //////////////////////////////////////
     /// Auxiliary class to store mentions to entities found in text
   
-    class SG_mention {
+    class WINDLL SG_mention {
     private:
       std::wstring id;
       std::wstring sentenceId;
@@ -69,7 +71,7 @@ namespace freeling {
 
     typedef enum {ENTITY,WORD} entityType;
     
-    class SG_entity {  
+    class WINDLL SG_entity {  
       friend class semantic_graph;
     private:
       /// node id
@@ -118,7 +120,7 @@ namespace freeling {
     //////////////////////////////////////
     /// Auxiliary class to store frame arguments
   
-    class SG_argument {
+    class WINDLL SG_argument {
     private:
       std::wstring role;
       std::wstring entity;
@@ -134,7 +136,7 @@ namespace freeling {
     //////////////////////////////////////
     /// Auxiliary class to store frames (relations between n entities)
   
-    class SG_frame {
+    class WINDLL SG_frame {
       friend class semantic_graph;
     private:
       /// relation id
@@ -181,7 +183,7 @@ namespace freeling {
     //////////////////////////////////////
     /// Auxiliary class to store a semantic graph
   
-    class semantic_graph {
+    class WINDLL semantic_graph {
     private:
       // list of entity nodes in the graph. indexed by id
       std::vector<SG_entity> entities;

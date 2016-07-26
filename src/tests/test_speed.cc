@@ -71,8 +71,13 @@ int main(int argc, char* argv[]) {
     wsd = new freeling::ukb(cfg->analyzer_config_options.UKB_ConfigFile);
   }
 
-  freeling::chart_parser parser(cfg->analyzer_config_options.PARSER_GrammarFile);
-  freeling::dep_txala dep1(cfg->analyzer_config_options.DEP_TxalaFile, parser.get_start_symbol ());
+  freeling::chart_parser *parser=NULL;
+  if (not cfg->analyzer_config_options.PARSER_GrammarFile.empty())
+    parser = new freeling::chart_parser(cfg->analyzer_config_options.PARSER_GrammarFile);
+  freeling::dep_txala *dep1=NULL;
+  if (not cfg->analyzer_config_options.PARSER_GrammarFile.empty() and 
+      not cfg->analyzer_config_options.DEP_TxalaFile.empty())
+    dep1 = new freeling::dep_txala(cfg->analyzer_config_options.DEP_TxalaFile, parser->get_start_symbol ());
 
   freeling::dep_treeler *dep2=NULL;
   if (not cfg->analyzer_config_options.DEP_TreelerFile.empty())
@@ -119,19 +124,23 @@ int main(int argc, char* argv[]) {
       timeukb += clock()-b0;
     }
 
-    b0=clock();
-    parser.analyze(ls);
-    timeparser += clock()-b0;
+    if (parser!=NULL) {
+      b0=clock();
+      parser->analyze(ls);
+      timeparser += clock()-b0;
+    }
+
+    if (dep1!=NULL) {
+      b0=clock();
+      dep1->analyze(ls);
+      timedep1 += clock()-b0;
+    }
 
     if (dep2!=NULL) {
       b0=clock();
       dep2->analyze(ls);
       timedep2 += clock()-b0;
     }
-
-    b0=clock();
-    dep1.analyze(ls);
-    timedep1 += clock()-b0;
 
     for (list<sentence>::iterator s=ls.begin(); s!=ls.end(); s++) {
       ns++;
