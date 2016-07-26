@@ -8,8 +8,8 @@ if BOOST_GCC
 endif
 
 if DEBUG
-  MY_CPPFLAGS=-g -O0
-  MY_CXXFLAGS=-g -O0
+  MY_CPPFLAGS=-pg -O0
+  MY_CXXFLAGS=-pg -O0
 else
   MY_CPPFLAGS=-O3
   MY_CXXFLAGS=-O3

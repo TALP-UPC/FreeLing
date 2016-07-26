@@ -10,8 +10,8 @@ AC_PREREQ(2.59)
 AC_CONFIG_MACRO_DIR([m4])
 AC_CANONICAL_HOST   
 
-CXXFLAGS=" $CPPFLAGS -Wall -fPIC"
-CXXFLAGS=" $CXXFLAGS -std=gnu++0x -Wall -fPIC"
+#CPPFLAGS=" $CPPFLAGS -Wall -fPIC"
+#CXXFLAGS=" $CXXFLAGS -std=gnu++0x -Wall -fPIC"
 ##LDFLAGS=" $LDFLAGS -L/usr/local/lib"
 
 ## All macosx systems will put in host_os something like: 
@@ -105,10 +105,12 @@ AC_ARG_ENABLE([build-tests],
 AC_PROG_CXX
 ## change default automake c++ flags.
 ## We set them in src/libfreeling/Makefile.am
-if test "$CXXFLAGS" = "-g -O2"; then
-  CXXFLAGS=""
-  CPPFLAGS=""
-fi
+#if test "$CXXFLAGS" = "-g -O2"; then
+#CXXFLAGS=""
+#CPPFLAGS=""
+#fi
+CPPFLAGS=" -Wall -fPIC"
+CXXFLAGS=" -std=gnu++0x -Wall -fPIC"
 
 AC_PROG_LIBTOOL
 AC_PROG_INSTALL
