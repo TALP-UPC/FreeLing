@@ -8,18 +8,25 @@
 
 # freeling *installation* directory (not source!). 
 # It will be /usr/local unless you used `./configure --prefix=/some/other/place`
-FREELINGDIR = /usr/local
+FREELINGDIR ?= /usr/local
+# Output directory for compiled library & JNI
+FREELINGOUT ?= .
 # swig and java location in your system
-SWIGDIR = /opt/local/share/swig/3.0.8
-JAVADIR = /System/Library/Frameworks/JavaVM.framework
-JAVABIN = $(JAVADIR)/Versions/Current/Commands
+SWIGDIR ?= /opt/local/share/swig/3.0.8
+JAVADIR ?= /System/Library/Frameworks/JavaVM.framework
+JAVABIN ?= $(JAVADIR)/Versions/Current/Commands
+JAVAHEADERS ?= -I$(JAVADIR)/Headers
+ICU4CDIR ?= /usr/local/opt/icu4c
+SYSTEMLIBS ?= "-L/opt/local/lib"
+SYSTEMHEADERS ?= "-I/opt/local/include"
+
 
 # you may change the package name if you want
 PACKAGE = edu/upc/freeling
 JPACKAGE = edu.upc.freeling
 
 # Change your compiler, if necessary.
-GCC=g++
+GCC ?= g++
 
 all: freeling_javaAPI.cxx libfreeling_javaAPI.dylib
 
@@ -27,15 +34,16 @@ all: freeling_javaAPI.cxx libfreeling_javaAPI.dylib
 
 # Compile the C++ API
 libfreeling_javaAPI.dylib: freeling_javaAPI.cxx
-	$(GCC) -dynamiclib -o libfreeling_javaAPI.dylib freeling_javaAPI.cxx -lfreeling -L$(FREELINGDIR)/lib -I$(FREELINGDIR)/include -I$(FREELINGDIR)/include/treeler -I$(JAVADIR)/Headers -I/opt/local/include -L/opt/local/lib -fPIC -std=c++0x -lboost_system-mt
+	$(GCC) -dynamiclib -o $(FREELINGOUT)/libfreeling_javaAPI.dylib freeling_javaAPI.cxx -lfreeling -I$(ICU4CDIR)/include -L$(FREELINGDIR)/lib -I$(FREELINGDIR)/include -I$(FREELINGDIR)/include/treeler $(JAVAHEADERS) $(SYSTEMHEADERS) $(SYSTEMLIBS) -fPIC -std=c++0x -lboost_system-mt
 	$(JAVABIN)/javac $(PACKAGE)/*.java
-	$(JAVABIN)/jar -cf freeling.jar $(PACKAGE)
+	$(JAVABIN)/jar -cf $(FREELINGOUT)/freeling.jar $(PACKAGE)
 
 # Build the Java JNI wrapper classes.
 freeling_javaAPI.cxx: freeling_javaAPI.i ../common/freeling.i
 	rm -rf $(PACKAGE)
 	mkdir -p $(PACKAGE)
+	mkdir -p $(FREELINGOUT)
 	swig -java -c++ -package $(JPACKAGE) -outdir $(PACKAGE) -o freeling_javaAPI.cxx -I$(SWIGDIR)/java -I$(SWIGDIR)/std -I$(SWIGDIR) freeling_javaAPI.i
 
 clean:
-	rm -rf *.jar *.dylib *.cxx *.class edu 
+	rm -rf $(FREELINGOUT)/*.jar $(FREELINGOUT)/*.dylib *.cxx *.class edu 
