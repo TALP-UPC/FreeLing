@@ -3,7 +3,7 @@ MAINTAINER Alexander Merkulov <sasha@merqlove.ru>
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get -qq update 
+RUN apt-get -qq update
 
 # Language setup
 RUN apt-get -qqy install language-pack-en-base && \
@@ -39,15 +39,21 @@ ENV SWIGDIR /usr/share/swig2.0
 ENV FREELINGDIR /usr
 ENV FREELINGOUT /usr/local/lib
 
-RUN cd /tmp && \
-    git clone -q https://github.com/cnsa/freeling-api.git && \
-    cd /tmp/freeling-api/APIs/java && \
+RUN mkdir /FreeLing && \
+    cd /FreeLing && \
+    git init && \
+    git remote add -f origin https://github.com/TALP-UPC/FreeLing.git && \
+    git config core.sparseCheckout true && \
+    echo "APIs/" >> .git/info/sparse-checkout && \
+    git pull --depth=1 origin master && \
+    rm -rf /FreeLing/.git/* && \
+    cd /FreeLing/APIs/java && \
     make all
 
 # Cleanup
 RUN sudo rm -f /tmp/freeling-4.0-trusty-amd64.deb && \
     sudo apt-get autoremove -y && \
-    sudo apt-get clean -y
+    sudo apt-get clean -y && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 WORKDIR /
-
