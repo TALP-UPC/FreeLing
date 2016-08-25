@@ -93,10 +93,11 @@ a_la_chucha_de_el_mundo a_la_chucha_del_mundo RG I
 a_la_chucha_de_la_loma a_la_chucha_de_la_loma RG I
 a_la_chuña a_la_chuña RG I
 a_la_concha_de_la_lora a_la_concha_de_la_lora RG I
-a_la_conchesumadre a_la_conchesumadre I I
-a_la_conchesumadre a_la_conchesumadre RG I
-a_la_cresta a_la_cresta I I
-a_la_cresta a_la_cresta RG I
+a_la_conchesumadre a_la_concha_de_su_madre I I
+a_la_conchesumaire a_la_concha_de_su_madre I I
+a_la_conchesumare a_la_concha_de_su_madre I I
+a_la_concha_de_su_madre a_la_concha_de_su_madre I I
+a_la_cresta a_la_cresta I a_la_cresta RG I
 a_la_cresta_de_el_mundo a_la_cresta_del_mundo RG I
 a_la_cresta_de_la_loma a_la_cresta_de_la_loma RG I
 a_la_cuadra a_la_cuadra RG I
@@ -214,7 +215,7 @@ asiento_de_picana asiento_de_picana NCMS000 I
 <asiento>_<minero> asiento_minero $1:NC I
 asistencia_pública asistencia_pública NCFS000 I
 a_tablero_vuelto a_tablero_vuelto AQ0CN00 a_tablero_vuelto RG I
-atado_de_huevas atado_de_huevas AQ0CN00 atado_de_huevas NCCN000 I
+atado_de_huevas atado_de_huevadas AQ0CN00 atado_de_huevadas NCCN000 I
 atento_a_el_lupo atento_a_el_lupo AQ0CN00 atento_a_el_lupo RG I
 a_toda_orquesta a_toda_orquesta AQ0CN00 a_toda_orquesta RG I
 a_toda_raja a_toda_raja AQ0CN00 a_toda_raja RG I
@@ -417,6 +418,7 @@ chancho_eléctrico chancho_eléctrico NCMS000 I
 chancho_en_bolsa chancho_en_bolsa NCMS000 I
 chancho_en_misa chancho_en_misa NCMS000 I
 chancho_en_piedra chancho_en_piedra NCMS000 I
+<chancho>_que_no_da_manteca chancho_que_no_da_manteca $1:NC I
 chantada_de_camión chantada_de_camión NCFS000 I
 chantada_de_moto chantada_de_moto NCFS000 I
 <chantar>_la_moto chantar_la_moto $1:VM I
@@ -512,8 +514,9 @@ como_la_gente como_la_gente AQ0CN00 como_la_gente RG I
 como_la_mona como_la_mona AQ0CN00 como_la_mona RG I
 como_las_berenjenas como_las_berenjenas AQ0CN00 como_las_berenjenas RG I
 como_las_güifas como_las_güifas AQ0CN00 como_las_güifas RG I
-como_las_huevadas como_las_huevas RG I
-como_las_huevas como_las_huevas AQ0CN00 como_las_huevas RG I
+como_las_huevadas como_las_huevadas RG I
+como_las_huevas como_las_huevadas AQ0CN00 como_las_huevadas RG I
+como_las_weas como_las_huevadas AQ0CN00 como_las_huevadas RG I
 como_las_huifas como_las_huifas AQ0CN00 como_las_huifas RG I
 como_las_pelotas como_las_pelotas AQ0CN00 como_las_pelotas RG I
 como_las_reverendas como_las_reverendas AQ0CN00 como_las_reverendas RG I
@@ -1102,7 +1105,7 @@ jazz_guachaca jazz_guachaca NCMS000 I
 Juana_tres_cocos Juana_tres_cocos NCFS000 I
 Juan_Pirulero Juan_Pirulero NCMS000 I
 <juez>_de_garantía juez_de_garantía $1:NC I
-jugador_número_doce jugador_número_doce NCMS000 I
+jugador_número_doce jugador_n��mero_doce NCMS000 I
 <jugar>_a_ganador jugar_a_ganador $1:VM I
 <jugar>_chueco jugar_chueco $1:VM I
 junta_de_gobierno junta_de_gobierno NCFS000 I
@@ -1459,6 +1462,8 @@ orejas_de_paila orejas_de_paila AQ0CN00 orejas_de_paila NCCN000 I
 oro_blanco oro_blanco NCMS000 I
 oro_y_cielo oro_y_cielo AQ0CN00 I
 oro_y_cielo oro_y_cielo NCMS000 I
+pa_callado para_callado RG I
+pa_callao para_callado RG I
 paco_ladrón paco_ladrón NCMS000 I
 paco_reo paco_reo NCMS000 I
 padrino_cacho padrino_cacho NCMS000 I
@@ -1500,9 +1505,8 @@ papel_volantín papel_volantín NCMS000 I
 paquito_librador paquito_librador NCMS000 I
 para_adentro para_adentro RG I
 para_baldear_yeguas para_baldear_yeguas RG I
-<para>_callado para_callado RG I
-para_callado para callado RG I
 para_callado para_callado RG I
+para_callao para_callado RG I
 parada_de_carros parada_de_carros NCFS000 I
 parada_de_chalas parada_de_chalas NCFS000 I
 parada_de_pelos parada_de_pelos NCFS000 I
@@ -1510,7 +1514,7 @@ parada_en_la_hilacha parado_en_la_hilacha AQ0FS00 I
 paradas_en_la_hilacha parado_en_la_hilacha AQ0FP00 I
 parado_en_la_hilacha parado_en_la_hilacha AQ0MS00 I
 parados_en_la_hilacha parado_en_la_hilacha AQ0MP00 I
-para_el_copi para_el_copi RG I
+para_el_copi para_el_pico RG I
 para_el_gato para_el_gato RG I
 para_el_loly para_el_loly RG I
 para_el_mármol para_el_mármol AQ0CN00 I
@@ -1698,8 +1702,11 @@ por_el_estilo por_el_estilo RG I
 <porfiado>_de_cara <porfiado>_de_cara $1:AQ <porfiado>_de_cara $1:NC I
 por_la_chuata por_la_chuata I I
 por_la_chucha por_la_chucha I I
+por_la_concha_de_su_madre por_la_concha_de_su_madre I I
 por_la_conchelalora por_la_conchelalora I I
-por_la_conchesumadre por_la_conchesumadre I I
+por_la_conchesumadre por_la_concha_de_su_madre I I
+por_la_conchesumaire por_la_concha_de_su_madre I I
+por_la_conchesumare por_la_concha_de_su_madre I I
 por_la_cresta por_la_cresta I I
 por_la_flauta por_la_flauta I I
 por_la_máquina por_la_máquina I I
@@ -1753,7 +1760,6 @@ punta_de_lanza punta_de_lanza NCFS000 I
 punto_fijo punto_fijo NCMS000 I
 punto_negro punto_negro NCMS000 I
 puta_la_<huevada> puta_la_huevada I I
-puta_la_huevada puta_la_huevada I I
 puta_madre puta_madre I I
 <quedado>_en_las_huinchas <quedado>_en_las_huinchas $1:AQ <quedado>_en_las_huinchas $1:NC I
 <quedar>_a_un_hombre_la_patita_atrás quedar_a_un_hombre_la_patita_atrás $1:VM I
@@ -1819,7 +1825,7 @@ rin_rin_raja rin_rin_raja NCMS000 I
 romántico_viajero romántico_viajero NCMS000 I
 ropa_americana ropa_americana NCFS000 I
 ropa_usada ropa_usada NCFS000 I
-rueda_de_Chicago rueda_de_Chicago NCFS000 I
+rueda_de_chicago rueda_de_Chicago NCFS000 I
 <saber>_para_dónde_va_el_buque saber_para_dónde_va_el_buque $1:VM I
 <saber>_para_dónde_va_la_micro saber_para_dónde_va_la_micro $1:VM I
 <saber>_por_libro saber_por_libro $1:VM I
@@ -1880,7 +1886,6 @@ sau_sau sau_sau NCMS000 I
 <sentar>_en_el_cajón_con_<vidrio> sentar_en_el_cajón_con_vidrio $1:VM I
 <sentar>_en_el_piano sentar_en_el_piano $1:VM I
 sepa_moya sepa_moya I I
-<ser>_chancho_que_no_da_manteca ser_chancho_que_no_da_manteca $1:VM I
 <ser>_culo ser_culo $1:VM I
 <ser>_el_jamón_de_el_sándwich ser_el_jamón_del_sándwich $1:VM I
 <ser>_el_jamón_de_el_sánguche ser_el_jamón_del_sánguche $1:VM I
@@ -1926,7 +1931,7 @@ tal_por_cual tal_por_cual AQ0CN00 tal_por_cual NCCN000 I
 tamboreando_en_un_cacho tamboreando_en_un_cacho RG I
 tamboreo_y_huifa tamboreo_y_huifa NCMS000 I
 tarro_duraznero tarro_duraznero NCMS000 I
-T_de_cobre T_de_cobre NCMS000 I
+t_de_cobre t_de_cobre NCMS000 I
 tec_abierto tec_abierto NCMS000 I
 tec_cerrado tec_cerrado NCMS000 I
 te_conozco_,_mosco te_conozco,_mosco I I
@@ -1981,7 +1986,7 @@ tirados_de_las_mechas tirado_de_las_mechas AQ0MP00 I
 <tirar>_a_partir tirar_a_partir $1:VM I
 <tirar>_a_rajar tirar_a_rajar $1:VM I
 <tirar>_de_chincol_a_jote tirar_de_chincol_a_jote $1:VM I
-tirar_el_chirolazo tirar_el_chirolazo NCMS000 I
+<tirar>_el_chirolazo tirar_el_chirolazo $1:VM I
 <tirar>_el_mantel tirar_el_mantel $1:VM I
 <tirar>_la_cadena tirar_la_cadena $1:VM I
 <tirar>_la_manga tirar_la_manga $1:VM I
@@ -2070,9 +2075,9 @@ verde_palta verde_palta NCMS000 I
 <ver>_la_ojota ver_la_ojota $1:VM I
 <ver>_las_canillas ver_las_canillas $1:VM I
 <ver>_las_pelotas ver_las_pelotas $1:VM I
-<verlas>_peludas verlas_peludas $1:VM I
 <ver>_la_suerte_entre_gitanos ver_la_suerte_entre_gitanos $1:VM I
-<verlas>_verdes verlas_verdes $1:VM I
+<ver>_peludas verlas_peludas $1:VM I
+<ver>_verdes verlas_verdes $1:VM I
 vida_de_el_oso vida_del_oso NCFS000 I
 viejo_de_el_saco viejo_del_saco NCMS000 I
 viejo_pascuero viejo_pascuero NCMS000 I
@@ -2087,12 +2092,13 @@ volando_bajo volando_bajo
 vuelo_de_el_cóndor vuelo_del_cóndor NCMS000 I
 vuelta_de_chaqueta vuelta_de_chaqueta NCFS000 I
 vuelta_y_vuelta vuelta_y_vuelta NCFS000 I
-walking_closet walking_closet NCMS000 I
+walking_closet walk_in_closet NCMS000 I
+walk_in_closet walk_in_closet NCMS000 I
 willy_waw willy_waw NCMS000 I
 winter_ya winter_ya NCMS000 I
 ya_<po> ya_po I I
-y_Bosnia y_Bosnia I I
-y_Boston y_Boston I I
+y_bosnia y_Bosnia I I
+y_boston y_Boston I I
 y_no_es_chiste y_no_es_chiste I I
 zamba_canuta zamba_canuta NCFS000 I
 <zapallo>_<italiano> zapallo_italiano $1:NC I
