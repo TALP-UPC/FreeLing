@@ -1105,7 +1105,7 @@ jazz_guachaca jazz_guachaca NCMS000 I
 Juana_tres_cocos Juana_tres_cocos NCFS000 I
 Juan_Pirulero Juan_Pirulero NCMS000 I
 <juez>_de_garantía juez_de_garantía $1:NC I
-jugador_número_doce jugador_n��mero_doce NCMS000 I
+jugador_número_doce jugador_número_doce NCMS000 I
 <jugar>_a_ganador jugar_a_ganador $1:VM I
 <jugar>_chueco jugar_chueco $1:VM I
 junta_de_gobierno junta_de_gobierno NCFS000 I
