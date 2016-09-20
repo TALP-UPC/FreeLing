@@ -7,21 +7,21 @@ yes
 ## list of chars that may join compound elements (one char per line)
 -
 e
-e-
 n
-n-
-en
-en-
-ens
-ens-
-ns
-ns-
-er
-er-
 s
-s-
-es
-es-
+##e-
+##n-
+##en
+##en-
+##ens
+##ens-
+##ns
+##ns-
+##er
+##er-
+##s-
+##es
+##es-
 </JoinChars>
 
 

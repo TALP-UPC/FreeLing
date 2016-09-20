@@ -1,10 +1,10 @@
-dict-words = ../maps/srl/words.map
-dict-lemmas = ../maps/srl/lemmas.map
-dict-cpos = ../maps/srl/cpos.map
-dict-fpos = ../maps/srl/fpos.map
-dict-morphos = ../maps/srl/morphos.map
-dict-dependencies = ../maps/srl/dependencies.map
-dict-roles = ../maps/srl/roles.map
+dict-words = ../maps/words.map
+dict-lemmas = ../maps/lemmas.map
+dict-cpos = ../maps/cpos.map
+dict-fpos = ../maps/fpos.map
+dict-morphos = ../maps/morphos.map
+dict-dependencies = ../maps/dependencies.map
+dict-roles = ../maps/roles.map
 wdir = .
 wt = 020
 wavg = 1

@@ -1,9 +1,9 @@
-dict-words = ../maps/dep/words.map
-dict-lemmas = ../maps/dep/lemmas.map
-dict-cpos = ../maps/dep/cpos.map
-dict-fpos = ../maps/dep/fpos.map
-dict-morphos = ../maps/dep/morphos.map
-dict-dependencies = ../maps/dep/dependencies.map
+dict-words = ../maps/words.map
+dict-lemmas = ../maps/lemmas.map
+dict-cpos = ../maps/cpos.map
+dict-fpos = ../maps/fpos.map
+dict-morphos = ../maps/morphos.map
+dict-dependencies = ../maps/dependencies.map
 wdir = .
 wt = 001
 wavg = 1
