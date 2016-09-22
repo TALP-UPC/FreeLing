@@ -6,7 +6,7 @@ N 2 noun type/C:common;P:proper gen/F:feminine;M:masculine;C:common;N:neuter num
 P 2 pronoun type/D:demonstrative;E:exclamative;I:indefinite;T:interrogative;N:numeral;P:personal;R:relative person/1:1;2:2;3:3 gen/F:feminine;M:masculine;C:common;N:neuter num/S:singular;P:plural;N:invariable case/N:nominative;A:accusative;D:dative;O:oblique polite/P:yes
 R 2 adverb type/N:negative;G:general
 S 2 adposition type/P:preposition
-V 3 verb type/M:main;A:auxiliary;S:semiauxiliary mood/I:indicative;S:subjunctive;M:imperative;P:pastparticiple;G:gerund;N:infinitive tense/P:present;I:imperfect;F:future;S:past;C:conditional person/1:1;2:2;3:3 num/S:singular;P:plural gen/F:feminine;M:masculine;C:common;N:neuter
+V 3 verb type/M:main;A:auxiliary;S:semiauxiliary mood/I:indicative;S:subjunctive;M:imperative;P:pastparticiple;G:gerund;N:infinitive tense/P:present;I:imperfect;F:future;S:past;C:conditional;M:plusquamperfect person/1:1;2:2;3:3 num/S:singular;P:plural gen/F:feminine;M:masculine;C:common;N:neuter
 Z 2 number type/d:partitive;m:currency;p:ratio;u:unit
 W 0 date
 I 0 interjection
