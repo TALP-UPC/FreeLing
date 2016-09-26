@@ -283,8 +283,12 @@ io::output_handler* create_output_handler(config *cfg) {
     out = new io::output_train();
   }
   else if (cfg->OutputFormat==OUT_CONLL) {
-    out = new io::output_conll();
-    out->load_tagset(cfg->TAGSET_TagsetFile);
+    if (not cfg->OutputConllFile.empty()) 
+      out = new io::output_conll(cfg->OutputConllFile);
+    else {
+       out = new io::output_conll();
+       out->load_tagset(cfg->TAGSET_TagsetFile);
+    }
   }
   else if (cfg->OutputFormat==OUT_XML) {
     out = new io::output_xml();
@@ -329,18 +333,21 @@ io::output_handler* create_output_handler(config *cfg) {
 io::input_handler* create_input_handler(config *cfg) {
 
   io::input_handler *inp;
-  if (cfg->InputFormat==INP_CONLL)  inp = new io::input_conll();
+  if (cfg->InputFormat==INP_CONLL) {
+    if (not cfg->InputConllFile.empty()) inp = new io::input_conll(cfg->InputConllFile);
+    else inp = new io::input_conll();
+  }
   else if (cfg->InputFormat==INP_FREELING)  inp = new io::input_freeling();
   else inp = NULL;
-
+  
   return inp;
 }
 
 //---- Load options from config file and command line
 config* load_config(int argc, char *argv[]) {
-
+  
   config* cfg = new config(argc,argv);
-
+  
   ServerMode = cfg->Server;
   
   // If server activated, make sure port was specified, and viceversa.
@@ -361,7 +368,7 @@ config* load_config(int argc, char *argv[]) {
     wcerr <<L"Error - No configuration file provided for language identifier."<<endl;
     exit (1);        
   }
-
+  
   if (cfg->analyzer_invoke_options.OutputLevel>=COREF and not cfg->analyzer_invoke_options.NEC_NEClassification) {
     cfg->analyzer_invoke_options.NEC_NEClassification = true;
     wcerr << L"NEC activated since coreference or semantic graph was requested."<<endl;
@@ -458,7 +465,7 @@ config* load_config(int argc, char *argv[]) {
 //---------------------------------------------
 
 void load_document(wstring &text, ServerStats &stats) {
-
+  
   // read whole document text
   wstring line;
   while (ReadLine(line) and not (ServerMode and line==L"FLUSH_BUFFER")) {

@@ -87,6 +87,9 @@ class config {
   /// Selected input and output format
   OutputFormats OutputFormat;
   InputFormats InputFormat;
+  std::wstring InputConllFile;
+  std::wstring OutputConllFile;
+
   /// whether splitter buffer must be flushed at each line
   bool AlwaysFlush;
 
@@ -109,6 +112,7 @@ class config {
       compoundFile; 
     std::string phonFile, necFile, senseFile, ukbFile;
     std::string hmmFile,relaxFile,grammarFile,txalaFile,treelerFile,corefFile,semgraphFile;
+    std::string inputConllF, outputConllF;
 
     Port=0;
 
@@ -132,6 +136,8 @@ class config {
       ("outlv",po::value<std::string>(&OutputLv),"Output analysis level (ident,token,splitted,morfo,tagged,shallow,parsed,dep)")
       ("mode",po::value<std::string>(&InputM),"Input mode (doc,corpus)")
       ("output",po::value<std::string>(&OutputF),"Output format (freeling,conll,train,xml,json,naf)")
+      ("iconll",po::value<std::string>(&inputConllF),"CoNLL input definition file")
+      ("oconll",po::value<std::string>(&outputConllF),"CoNLL output definition file")
       ("input",po::value<std::string>(&InputF),"Input format (text,freeling,conll)")
       ("fidn,I",po::value<std::string>(&identFile),"Language identifier file")
       ("ftok",po::value<std::string>(&tokFile),"Tokenizer rules file")
@@ -213,6 +219,8 @@ class config {
       ("InputMode",po::value<std::string>(&InputM)->default_value("corpus"),"Input mode (corpus,doc)")
       ("OutputFormat",po::value<std::string>(&OutputF)->default_value("freeling"),"Output format (freeling,conll,train,xml,json,naf)")
       ("InputFormat",po::value<std::string>(&InputF)->default_value("text"),"Input format (text,freeling,conll)")
+      ("InputConllConfig",po::value<std::string>(&inputConllF),"CoNLL input definition file")
+      ("OutputConllConfig",po::value<std::string>(&outputConllF),"CoNLL output definition file")
       ("LangIdentFile",po::value<std::string>(&identFile),"Language identifier file")
       ("TokenizerFile",po::value<std::string>(&tokFile),"Tokenizer rules file")
       ("TagsetFile",po::value<std::string>(&tagsetFile),"Tagset description file")
@@ -364,6 +372,8 @@ class config {
     treelerFile = util::expand_filename(treelerFile);
     corefFile = util::expand_filename(corefFile); 
     semgraphFile = util::expand_filename(semgraphFile); 
+    inputConllF = util::expand_filename(inputConllF); 
+    outputConllF = util::expand_filename(outputConllF); 
 
     // translate string options (including expanded filenames) to wstrings
     Locale = util::string2wstring(locale);
@@ -457,6 +467,15 @@ class config {
     else if (OutputF=="naf") OutputFormat = OUT_NAF;
     else { ERROR_CRASH(L"Unknown or invalid output format: "+util::string2wstring(OutputF));}
 
+    // conll format configuration files
+    if (outputConllF!="") {
+      if (OutputF=="conll") 
+        OutputConllFile = util::string2wstring(outputConllF);
+      else {
+        WARNING(L"Output CoNLL format configuration ignored, since selected output format is not 'conll'.");
+      }
+    }
+
     // translate InputF strings appropriate enum values.
     if (InputF=="text") InputFormat = INP_TEXT;
     else if (InputF=="freeling") InputFormat = INP_FREELING;
@@ -471,6 +490,15 @@ class config {
       WARNING(L"Invalid tagger algorithm '"+util::string2wstring(Tagger)+L"'. Using default.");
     }
     
+    // conll format configuration files
+    if (inputConllF!="") {
+      if (InputF=="conll") 
+        InputConllFile = util::string2wstring(inputConllF);
+      else {
+        WARNING(L"Input CoNLL format configuration ignored, since selected input format is not 'conll'.");
+      }
+    }
+
     // Translate ForceSelect string to appropriate enum values.
     if (Force=="none" || Force=="no") analyzer_config_options.TAGGER_ForceSelect = NO_FORCE;
     else if (Force=="tagger") analyzer_config_options.TAGGER_ForceSelect = TAGGER;
