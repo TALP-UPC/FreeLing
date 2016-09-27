@@ -84,7 +84,7 @@ int main(int argc, char **argv) {
 	w.add_analysis(a);
       }
       
-      w.set_found_in_dict(w.get_n_analysis()>0);
+      //w.set_found_in_dict(w.get_n_analysis()>0);
       s.push_back(w);
     }
   }
