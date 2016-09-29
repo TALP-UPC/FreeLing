@@ -517,9 +517,12 @@ namespace freeling {
       return (token);
     } 
 
-    // check to see if it is a number
+    // check to see if it is an number .
+    // exclude real values, which are not valid hour/day/min, and "a"/"an"
     value=0;
-    if (j->get_n_analysis() && j->get_tag()==L"Z") {
+    if (j->get_n_analysis() && j->get_tag()==L"Z" && 
+        j->get_lemma().find(L'.')==wstring::npos && 
+        j->get_form()!=L"a" && j->get_form()!=L"an") {
       token = TK_number;
       value = util::wstring2int(j->get_lemma());
       TRACE(3,L"Numerical value of form: "+util::int2wstring(value));
@@ -620,7 +623,7 @@ namespace freeling {
       TRACE(3,L"In state Gb/Gbb/K/J/I");     
       if (token==TK_number && (value>=10 && value<=99))  // years til 9999
         token = TK_centnum;       
-      else if (token==TK_number && value>=100)
+      else if (token==TK_number && value>=100 && value<10000)
         token = TK_kyearnum;
       break;      
 
