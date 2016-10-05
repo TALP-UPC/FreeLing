@@ -154,7 +154,6 @@ wstring output_handler::escapeJSON(const wstring &s) {
  wstring r;
  for (wstring::const_iterator c=s.begin(); c!=s.end(); c++) {
    if (*c==L'"') r += L"\\\"";
-   else if (*c==L'\'') r += L"\\'";
    else if (*c==L'\\') r += L"\\\\";
    else r += *c;
  }
