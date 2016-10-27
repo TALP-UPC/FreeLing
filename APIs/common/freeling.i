@@ -382,6 +382,12 @@ class analysis {
 
 class word : public std::list<freeling::analysis> {
    public:
+     // morphological modules that may add analysis to the word
+     typedef enum  { USERMAP=0x0001,    NUMBERS=0x0002,       PUNCTUATION=0x0004,
+                     DATES=0x0008,      DICTIONARY=0x0010,    AFFIXES=0x0020,
+                     COMPOUNDS=0x0040,  MULTIWORDS=0x0080,    NER=0x0100, 
+                     QUANTITIES=0x0200, PROBABILITIES=0x0400, GUESSER=0x0800 } Modules;
+
       /// user-managed data, we just store it.
       std::vector<std::wstring> user;
 
@@ -460,17 +466,26 @@ class word : public std::list<freeling::analysis> {
       unsigned long get_span_start() const;
       unsigned long get_span_finish() const;
 
-      /// get in_dict
-      bool found_in_dict() const;
-      /// set in_dict
-      void set_found_in_dict(bool);
       /// check if there is any retokenizable analysis
       bool has_retokenizable() const;
       /// mark word as having definitive analysis
       void lock_analysis();
+      /// unmark word as having definitive analysis
+      void unlock_analysis();
       /// check if word is marked as having definitive analysis
-      bool is_locked() const;
+      bool is_locked_analysis() const;
+      /// mark word as non-multiwordable
+      void lock_multiwords();
+      /// unmark word as non-multiwordable
+      void unlock_multiwords();
+      /// check if word is marked as not being multiwordable
+      bool is_locked_multiwords() const;
 
+      /// control which maco modules added analysis to this word
+      void set_analyzed_by(unsigned);
+      bool is_analyzed_by(unsigned) const;
+      unsigned get_analyzed_by() const;
+      
       /// add an alternative to the alternatives list
       void add_alternative(const std::wstring &, int);
       /// replace alternatives list with list given
