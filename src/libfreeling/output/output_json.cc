@@ -139,6 +139,8 @@ void output_json::PrintResults (wostream &sout, const list<sentence> &ls) const 
 
       // basic token stuff
       sout << L"           { \"id\" : \"" << get_token_id(s->get_sentence_id(),w->get_position()+1) << L"\"";
+      sout << L", \"begin\" : \"" << w->get_span_start() << L"\"";
+      sout << L", \"end\" : \"" << w->get_span_finish() << L"\"";
       sout << L", \"form\" : \"" << escapeJSON(w->get_form()) << L"\"";
 
       // no analysis, nothing else to print

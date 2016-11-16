@@ -166,6 +166,8 @@ void output_xml::PrintResults (wostream &sout, const list<sentence> &ls) const {
     for (sentence::const_iterator w=s->begin(); w!=s->end(); w++) {
       // basic token stuff
       sout << L"  <token id=\"" << get_token_id(sid,w->get_position()+1) << L"\"";
+      sout << L" begin=\"" << w->get_span_start() << L"\"";
+      sout << L" end=\"" << w->get_span_finish() << L"\"";
       sout << L" form=\"" << escapeXML(w->get_form()) << L"\"";
       if (not w->get_ph_form().empty())
         sout << L" phon=\"" << escapeXML(w->get_ph_form()) << L"\"";
