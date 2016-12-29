@@ -100,6 +100,23 @@ AC_ARG_ENABLE([build-tests],
               ],
               [AM_CONDITIONAL([BUILD_TESTS],[test 0 = 1])])
 
+AC_ARG_WITH([kaldi],
+              [AS_HELP_STRING([--with-kaldi-asr],[Compile with kaldi. Use this option together with KALDI_ROOT variable. Default: Not compiled.])],
+              [if test "$withval" = yes; then
+                 # define symbol for CPP
+                 AC_DEFINE(KALDI)
+                 with_kaldi="yes"
+               fi
+               # pass info to automake
+               AM_CONDITIONAL([KALDI],[test "$withval" = yes])
+              ],
+              [
+                KALDI_ROOT="no"
+                AM_CONDITIONAL([KALDI],[test 0 = 1])
+              ])
+
+AC_ARG_VAR([KALDI_ROOT], [Specifies kaldi's installation dir. Only checked if the --with-kaldi option is used])
+
 
 # Checks for programs.
 AC_PROG_CXX
@@ -281,6 +298,31 @@ AC_CHECK_LIB([z],[main],[echo "OK">/dev/null;], [echo "" &&
                                                  echo "   You may need to set LDFLAGS to specify search path." &&
                                                  echo "" && exit 1])
 
+if test $with_kaldi = "yes"
+then
+LDFLAGS="$LDFLAGS -L$KALDI_ROOT/tools/openfst/lib -L$KALDI_ROOT/src/lib"
+CPPFLAGS="$CPPFLAGS -I$KALDI_ROOT/src/ -I$KALDI_ROOT/tools/openfst/include"
+CXXFLAGS="$CXXFLAGS -I$KALDI_ROOT/src/ -I$KALDI_ROOT/tools/openfst/include"
+AC_CHECK_HEADERS([$KALDI_ROOT/src/base/kaldi-common.h],[
+  AC_CHECK_LIB([kaldi-base],[main],[
+    AC_CHECK_LIB([fst],[main],[echo "OK">/dev/null;], [echo "" &&
+                                                   echo "   OpenFst not found in the specified directory." &&
+                                                   echo "   Make sure that you executed the install " &&
+                                                   echo "instructions in the tools directory of your kaldi installation. " &&
+                                                   echo "" && exit 1])
+
+  ], [echo "" &&
+                                     echo "   Kaldi shared library not found in the specified directory." &&
+                                     echo "   Make sure the specified directory with the KALDI_ROOT option " &&
+                                     echo "contains a compiled kaldi installation, with the option " &&
+                                     echo "--shared used in the configure step." &&
+                                     echo "" && exit 1])
+  ],[                 echo "" && 
+                      echo "   Kaldi installation not found in the specified directory." &&
+                      echo "   Make sure the specified directory with the KALDI_ROOT " &&
+                      echo "   option contains a correct kaldi installation." &&
+                      echo "" && exit 1])
+fi
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_HEADER_STDBOOL

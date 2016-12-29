@@ -72,6 +72,12 @@
 
 #define SUMMARIZER_TRACE    0x80000000
 
+/**
+ * Repeated trace code with PHONETICS module, because there are no more codes available
+ * TODO: rebuild log system
+*/
+#define ASR_TRACE     0x08000000
+
 // MOD_TRACECODE and MOD_TRACENAME are empty. The class 
 // using the trace is expected to set them
 #undef MOD_TRACECODE
