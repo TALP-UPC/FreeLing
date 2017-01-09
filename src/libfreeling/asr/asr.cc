@@ -40,11 +40,11 @@ namespace freeling {
   asr::asr(const std::wstring &configFile) {
 
     // Extract configuration data from config file
-    enum sections {LANGUAGEMODELFILE, WORDSFILE, GRAMMARFILE, MFCCCONFIGFILE, IVECTORCONFIGFILE, FREQUENCY, FEATURETYPE, FRAMESUBSAMPLINGFACTOR, MAXACTIVE, BEAM, LATTICEBEAM, ACOUSTICSCALE, LMSCALE, POSTDECODEACWT, CHUNKLENGTHSECS, MAXRECORDSIZESECS, MAXLATTICEUNCHANGEDINTERVALSECS, DECODINGTIMEOUTSECS};
+    enum sections {DNNHMMFILE, WORDSFILE, LANGUAGEMODELFILE, MFCCCONFIGFILE, IVECTORCONFIGFILE, FREQUENCY, FEATURETYPE, FRAMESUBSAMPLINGFACTOR, MAXACTIVE, BEAM, LATTICEBEAM, ACOUSTICSCALE, LMSCALE, POSTDECODEACWT, CHUNKLENGTHSECS, MAXRECORDSIZESECS, MAXLATTICEUNCHANGEDINTERVALSECS, DECODINGTIMEOUTSECS};
     config_file cfg;
-    cfg.add_section(L"LanguageModel", LANGUAGEMODELFILE);
+    cfg.add_section(L"DnnHmm", DNNHMMFILE);
     cfg.add_section(L"WordsFile", WORDSFILE);
-    cfg.add_section(L"GrammarFile", GRAMMARFILE);
+    cfg.add_section(L"LanguageModel", LANGUAGEMODELFILE);
     cfg.add_section(L"MfccConfig", MFCCCONFIGFILE);
     cfg.add_section(L"IvectorExtractorConfig", IVECTORCONFIGFILE);
     cfg.add_section(L"Frequency", FREQUENCY);
@@ -83,7 +83,7 @@ namespace freeling {
       sin.str(util::wstring2string(line));
 
       switch (cfg.get_section()) {
-        case LANGUAGEMODELFILE: {
+        case DNNHMMFILE: {
           sin >> nnet3_model_filename;
           nnet3_model_filename = util::absolute(nnet3_model_filename,pathToData);
           break;
@@ -93,7 +93,7 @@ namespace freeling {
           words_filename = util::absolute(words_filename,pathToData);
           break;
         }
-        case GRAMMARFILE: {
+        case LANGUAGEMODELFILE: {
           sin >> fst_filename;
           fst_filename = util::absolute(fst_filename,pathToData);
           break;

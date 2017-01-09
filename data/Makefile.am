@@ -1,5 +1,5 @@
 languages = as ca cs cy de en es fr gl hr it nb pt ru sl
-variants = es/es-old es/es-ar es/es-cl ca/balear ca/valencia 
+variants = es/es-old es/es-ar es/es-cl ca/balear ca/valencia
 
 EXTRA_DIST = $(languages) common config
 
@@ -8,7 +8,7 @@ pkgdata_DATA =
 if KALDI
   LD_LIBRARY_PATH := $(KALDI_ROOT)/src/lib
   ASR=yes
-else 
+else
   ASR=
 endif
 
@@ -63,7 +63,7 @@ install-data-hook:
 	     cat $(DESTDIR)/$(pkgdatadir)/$$lg/dep_treeler/dep/parameters.*.gz.* > $(DESTDIR)/$(pkgdatadir)/$$lg/dep_treeler/dep/$$pfname; \
 	     rm -f $(DESTDIR)/$(pkgdatadir)/$$lg/dep_treeler/dep/parameters.*.gz.*; \
 	   fi; \
-	done; 
+	done;
 	@for d in common config; do \
 	   echo "Installing "$$d" files."; \
 	   pushd $(top_builddir)/data/$$d >/dev/null; \
@@ -74,7 +74,7 @@ install-data-hook:
 	@if !(test -z '$(ASR)'); then \
 	   echo "Installing asr data. Please wait."; \
 	   echo "  - Downloading data from 'http://freeling.com'."; \
-	   cp /media/guillem/Dades/TFG/Project/freeling_asr_data.tar.gz $(top_builddir)/freeling_asr_data.tar.gz; \
+	   cp /media/guillem/Dades/TFG/Project/data/freeling_asr_data.tar.gz $(top_builddir)/freeling_asr_data.tar.gz; \
 	   echo "  - Untaring the asr data."; \
 	   tar -xvzf $(top_builddir)/freeling_asr_data.tar.gz; \
 	   rm $(top_builddir)/freeling_asr_data.tar.gz; \

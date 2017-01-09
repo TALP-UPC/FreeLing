@@ -8,13 +8,13 @@ AM_INIT_AUTOMAKE([foreign])
 
 AC_PREREQ(2.59)
 AC_CONFIG_MACRO_DIR([m4])
-AC_CANONICAL_HOST   
+AC_CANONICAL_HOST
 
 #CPPFLAGS=" $CPPFLAGS -Wall -fPIC"
 #CXXFLAGS=" $CXXFLAGS -std=gnu++0x -Wall -fPIC"
 ##LDFLAGS=" $LDFLAGS -L/usr/local/lib"
 
-## All macosx systems will put in host_os something like: 
+## All macosx systems will put in host_os something like:
 ## darwin15.4.0 (this for El Capitan)
 
 case "$host_os" in
@@ -100,7 +100,7 @@ AC_ARG_ENABLE([build-tests],
               ],
               [AM_CONDITIONAL([BUILD_TESTS],[test 0 = 1])])
 
-AC_ARG_WITH([kaldi],
+AC_ARG_WITH([kaldi-asr],
               [AS_HELP_STRING([--with-kaldi-asr],[Compile with kaldi. Use this option together with KALDI_ROOT variable. Default: Not compiled.])],
               [if test "$withval" = yes; then
                  # define symbol for CPP
@@ -138,8 +138,8 @@ AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <list>
                                      using namespace std;]],
                                    [[list<int> lst; int s;
                                      for (auto &i : lst) s+=i;]]
-                                   )], 
-                  [echo "checking for required compiler C++11 support... yes"], 
+                                   )],
+                  [echo "checking for required compiler C++11 support... yes"],
                   [echo "checking for required compiler C++11 support... no" &&
                    echo ""
                    echo "  Your compiler does not suppport some C++11 features required to compile FreeLing." &&
@@ -147,7 +147,7 @@ AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <list>
                    echo "" && exit 1])
 
 # init variables
-AM_CONDITIONAL([BOOST_MT],[test 1 = 0]) 
+AM_CONDITIONAL([BOOST_MT],[test 1 = 0])
 AM_CONDITIONAL([BOOST_GCC],[test 1 = 0])
 
 # check headers
@@ -201,8 +201,8 @@ AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <boost/version.hpp>
                                   #if BOOST_VERSION < 104200
                                   #error Version older than 1.42
                                   #endif]],
-                                [[]])], 
-                [echo "checking for boost version... >= 1.42";AM_CONDITIONAL([BOOST_OLD],[test 0 = 1])], 
+                                [[]])],
+                [echo "checking for boost version... >= 1.42";AM_CONDITIONAL([BOOST_OLD],[test 0 = 1])],
                 [echo "checking for boost version... < 1.42";AM_CONDITIONAL([BOOST_OLD],[test 1 = 1])])
 
 if test $using_xpressive != "yes"
@@ -232,16 +232,16 @@ AC_CHECK_LIB([boost_regex],[main],
 LDF_BK=$LIBS
 LIBS=" $LDF_BK -lboost_regex$MTLIB"
 AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <boost/regex/icu.hpp>]],
-                               [[boost::u32regex re=boost::make_u32regex(L"");]])], 
-                [echo "OK">/dev/null;], 
+                               [[boost::u32regex re=boost::make_u32regex(L"");]])],
+                [echo "OK">/dev/null;],
                 [LIBS=" $LDF_BK -lboost_regex-mt" &&
                  AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <boost/regex/icu.hpp>]],
-                                               [[boost::u32regex re=boost::make_u32regex(L"");]])], 
-                                [echo "OK">/dev/null;], 
+                                               [[boost::u32regex re=boost::make_u32regex(L"");]])],
+                                [echo "OK">/dev/null;],
                                 [LIBS=" $LDF_BK -lboost_regex-gcc-mt" &&
                                  AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <boost/regex/icu.hpp>]],
-                                                            [[boost::u32regex re=boost::make_u32regex(L"");]])], 
-                                               [echo "OK">/dev/null;], 
+                                                            [[boost::u32regex re=boost::make_u32regex(L"");]])],
+                                               [echo "OK">/dev/null;],
                                                [echo "" &&
                                                 echo "   libboost_regex does not include Unicode ICU support." &&
                                                 echo "   Make sure that the installed libboost_regex was built" &&
@@ -317,7 +317,7 @@ AC_CHECK_HEADERS([$KALDI_ROOT/src/base/kaldi-common.h],[
                                      echo "contains a compiled kaldi installation, with the option " &&
                                      echo "--shared used in the configure step." &&
                                      echo "" && exit 1])
-  ],[                 echo "" && 
+  ],[                 echo "" &&
                       echo "   Kaldi installation not found in the specified directory." &&
                       echo "   Make sure the specified directory with the KALDI_ROOT " &&
                       echo "   option contains a correct kaldi installation." &&

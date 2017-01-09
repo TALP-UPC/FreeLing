@@ -235,7 +235,6 @@ namespace freeling {
     feature_pipeline_->InputFinished();
     decoder_->AdvanceDecoding();
     decoder_->FinalizeDecoding();
-
   }
 
 

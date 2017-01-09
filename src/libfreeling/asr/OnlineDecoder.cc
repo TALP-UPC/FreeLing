@@ -43,7 +43,7 @@ namespace freeling {
   }
 
   ////////////////////////////////////////////////////////////////
-  /// Constructor, initialize audio properties
+  /// Extracts weights information from the lattice
   ////////////////////////////////////////////////////////////////
 
   bool getWeightMeasures(const kaldi::Lattice &fst,
