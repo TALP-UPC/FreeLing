@@ -73,11 +73,11 @@ install-data-hook:
 	done;
 	@if !(test -z '$(ASR)'); then \
 	   echo "Installing asr data. Please wait."; \
-	   echo "  - Downloading data from 'http://freeling.com'."; \
-	   cp /media/guillem/Dades/TFG/Project/data/freeling_asr_data.tar.gz $(top_builddir)/freeling_asr_data.tar.gz; \
+	   echo "  - Downloading data from 'nlp.cs.upc.edu/freeling/extradata'."; \
+     wget -P $(top_builddir)/data nlp.cs.upc.edu/freeling/extradata/freeling_asr_data.tar.gz; \
 	   echo "  - Untaring the asr data."; \
-	   tar -xvzf $(top_builddir)/freeling_asr_data.tar.gz; \
-	   rm $(top_builddir)/freeling_asr_data.tar.gz; \
+	   tar -xvzf $(top_builddir)/data/freeling_asr_data.tar.gz; \
+	   rm $(top_builddir)/data/freeling_asr_data.tar.gz; \
 	fi;
 
 uninstall-hook:
