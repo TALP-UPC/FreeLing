@@ -100,8 +100,8 @@ AC_ARG_ENABLE([build-tests],
               ],
               [AM_CONDITIONAL([BUILD_TESTS],[test 0 = 1])])
 
-AC_ARG_WITH([kaldi-dir],
-              [AS_HELP_STRING([--with-kaldi-dir],[Compile with kaldi, specifying kaldi's installation root folder as an argument. Default: Not compiled.])],
+AC_ARG_WITH([kaldi-asr],
+              [AS_HELP_STRING([--with-kaldi-asr],[Compile with kaldi, specifying kaldi's installation root folder as an argument. Default: Not compiled.])],
               [
                  # define symbol for CPP
                  AC_DEFINE(KALDI)
