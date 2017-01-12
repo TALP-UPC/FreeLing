@@ -100,13 +100,13 @@ AC_ARG_ENABLE([build-tests],
               ],
               [AM_CONDITIONAL([BUILD_TESTS],[test 0 = 1])])
 
-AC_ARG_WITH([kaldi-asr],
-              [AS_HELP_STRING([--with-kaldi-asr],[Compile with kaldi. Use this option together with KALDI_ROOT variable. Default: Not compiled.])],
-              [if test "$withval" = yes; then
+AC_ARG_WITH([kaldi-dir],
+              [AS_HELP_STRING([--with-kaldi-dir],[Compile with kaldi, specifying kaldi's installation root folder as an argument. Default: Not compiled.])],
+              [
                  # define symbol for CPP
                  AC_DEFINE(KALDI)
                  with_kaldi="yes"
-               fi
+                 AC_SUBST([KALDI_ROOT],["$withval"])
                # pass info to automake
                AM_CONDITIONAL([KALDI],[test "$withval" = yes])
               ],
@@ -114,8 +114,6 @@ AC_ARG_WITH([kaldi-asr],
                 KALDI_ROOT="no"
                 AM_CONDITIONAL([KALDI],[test 0 = 1])
               ])
-
-AC_ARG_VAR([KALDI_ROOT], [Specifies kaldi's installation dir. Only checked if the --with-kaldi option is used])
 
 
 # Checks for programs.
