@@ -81,10 +81,10 @@ To install the ASR module, follow this steps:
 
 3. Install FreeLing with this commands:
   autoreconf --install
-  ./configure --with-kaldi-asr KALDI_ROOT=/KALDI/INSTALLATION/DIR
+  ./configure --with-kaldi-asr=/KALDI/INSTALLATION/DIR
   make
   make install
 
 
 * Make sure you have an active internet connection, since the make install
-command will download the ASR system data from the FreeLing webpage.
+command will download and install the ASR system data from the FreeLing webpage.
