@@ -1,0 +1,60 @@
+# Files necessary for the asr process
+# Paths to configuration files are relative to the location of this file.
+# They are not provided with FreeLing. See how to install ASR data in INSTALL
+# file at the root of the source code
+<DnnHmm>
+./16000/bank/final.mdl
+</DnnHmm>
+<WordsFile>
+./16000/bank/words.txt
+</WordsFile>
+<LanguageModel>
+./16000/bank/HCLG.fst
+</LanguageModel>
+<MfccConfig>
+./16000/bank/mfcc.conf
+</MfccConfig>
+<IvectorExtractorConfig>
+-
+</IvectorExtractorConfig>
+##Parametres for the asr system
+<Frequency>
+16000
+</Frequency>
+<FeatureType>
+mfcc
+</FeatureType>
+<FrameSubsamplingFactor>
+3
+</FrameSubsamplingFactor>
+<MaxActive>
+2000
+</MaxActive>
+<Beam>
+15.0
+</Beam>
+<LatticeBeam>
+6.0
+</LatticeBeam>
+<AcousticScale>
+1.0
+</AcousticScale>
+<LmScale>
+10
+</LmScale>
+<PostDecodeAcwt>
+10
+</PostDecodeAcwt>
+##These parametres are not needed at the moment, only for online decoding
+<ChunkLengthSecs>
+0.18
+</ChunkLengthSecs>
+<MaxRecordSizeSecs>
+0
+</MaxRecordSizeSecs>
+<MaxLatticeUnchangedIntervalSecs>
+0
+</MaxLatticeUnchangedIntervalSecs>
+<DecodingTimeoutSecs>
+0
+</DecodingTimeoutSecs>
