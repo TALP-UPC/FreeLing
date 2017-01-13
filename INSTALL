@@ -78,6 +78,8 @@ To install the ASR module, follow this steps:
 
 2. Compile Kaldi as a shared library, following the instructions in
   the INSTALL file in the root directory of Kaldi.
+   You'll need to follow the instructions there that desribe how to
+  use OpenFST-1.4 
 
 3. Install FreeLing with this commands:
   autoreconf --install

@@ -9,18 +9,18 @@ endif
 
 if KALDI
   ASR_MODULES= asr/OnlineDecoder.cc asr/Request.cc asr/Response.cc asr/asr.cc asr/base64.cc asr/Nnet3LatgenFasterDecoder.cc
-  KALDI_FLAGS=-DKALDI_DOUBLEPRECISION=0 -DHAVE_OPENFST_GE_10400 -DHAVE_ATLAS -DHAVE_CXXABI_H
+  KALDI_CPPFLAGS=-DKALDI_DOUBLEPRECISION=0 -DHAVE_OPENFST_GE_10400 -DHAVE_ATLAS -DHAVE_CXXABI_H
 else 
   ASR_MODULES=
-  KALDI_FLAGS=
+  KALDI_CPPFLAGS=
 endif
 
 AUTOMAKE_OPTIONS = subdir-objects
 
 include $(top_srcdir)/src/automake_options.am
 
-AM_CPPFLAGS = -I$(top_srcdir)/src/include -I$(top_srcdir)/src/libfoma -I$(top_srcdir)/src/libtreeler $(KALDI_INCLUDES) $(KALDI_FLAGS) $(MY_CPPFLAGS)
-AM_CXXFLAGS = -I$(top_srcdir)/src/include -I$(top_srcdir)/src/libfoma -I$(top_srcdir)/src/libtreeler $(KALDI_INCLUDES) $(KALDI_FLAGS) $(MY_CXXFLAGS)
+AM_CPPFLAGS = -I$(top_srcdir)/src/include -I$(top_srcdir)/src/libfoma -I$(top_srcdir)/src/libtreeler $(KALDI_INCLUDES) $(KALDI_CPPFLAGS) $(MY_CPPFLAGS)
+AM_CXXFLAGS = $(MY_CXXFLAGS)
 
 lib_LTLIBRARIES = libfreeling.la
 

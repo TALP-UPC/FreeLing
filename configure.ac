@@ -10,10 +10,6 @@ AC_PREREQ(2.59)
 AC_CONFIG_MACRO_DIR([m4])
 AC_CANONICAL_HOST
 
-#CPPFLAGS=" $CPPFLAGS -Wall -fPIC"
-#CXXFLAGS=" $CXXFLAGS -std=gnu++0x -Wall -fPIC"
-##LDFLAGS=" $LDFLAGS -L/usr/local/lib"
-
 ## All macosx systems will put in host_os something like:
 ## darwin15.4.0 (this for El Capitan)
 
@@ -105,27 +101,21 @@ AC_ARG_WITH([kaldi-asr],
               [
                  # define symbol for CPP
                  AC_DEFINE(KALDI)
-                 with_kaldi="yes"
+                 #with_kaldi="yes"
                  AC_SUBST([KALDI_ROOT],["$withval"])
-               # pass info to automake
-               AM_CONDITIONAL([KALDI],[test "$withval" = yes])
+                 # pass info to automake
+                 AM_CONDITIONAL([KALDI],[test 1 = 1])
               ],
               [
-                KALDI_ROOT="no"
                 AM_CONDITIONAL([KALDI],[test 0 = 1])
               ])
 
 
 # Checks for programs.
 AC_PROG_CXX
-## change default automake c++ flags.
-## We set them in src/libfreeling/Makefile.am
-#if test "$CXXFLAGS" = "-g -O2"; then
-#CXXFLAGS=""
-#CPPFLAGS=""
-#fi
-CPPFLAGS=" -Wall -fPIC"
-CXXFLAGS=" -std=gnu++0x -Wall -fPIC"
+# preprocessor and compiler flags
+CPPFLAGS=""
+CXXFLAGS=" -std=gnu++0x -Wall -Wno-sign-compare -fPIC"
 
 AC_PROG_LIBTOOL
 AC_PROG_INSTALL
@@ -303,23 +293,25 @@ CPPFLAGS="$CPPFLAGS -I$KALDI_ROOT/src/ -I$KALDI_ROOT/tools/openfst/include"
 CXXFLAGS="$CXXFLAGS -I$KALDI_ROOT/src/ -I$KALDI_ROOT/tools/openfst/include"
 AC_CHECK_HEADERS([$KALDI_ROOT/src/base/kaldi-common.h],[
   AC_CHECK_LIB([kaldi-base],[main],[
-    AC_CHECK_LIB([fst],[main],[echo "OK">/dev/null;], [echo "" &&
-                                                   echo "   OpenFst not found in the specified directory." &&
-                                                   echo "   Make sure that you executed the install " &&
-                                                   echo "instructions in the tools directory of your kaldi installation. " &&
-                                                   echo "" && exit 1])
-
-  ], [echo "" &&
-                                     echo "   Kaldi shared library not found in the specified directory." &&
-                                     echo "   Make sure the specified directory with the KALDI_ROOT option " &&
-                                     echo "contains a compiled kaldi installation, with the option " &&
-                                     echo "--shared used in the configure step." &&
-                                     echo "" && exit 1])
-  ],[                 echo "" &&
-                      echo "   Kaldi installation not found in the specified directory." &&
-                      echo "   Make sure the specified directory with the KALDI_ROOT " &&
-                      echo "   option contains a correct kaldi installation." &&
-                      echo "" && exit 1])
+    AC_CHECK_LIB([fst],[main],[echo "OK">/dev/null;], 
+                              [echo "" &&
+                               echo "   OpenFst not found in the specified directory." &&
+                               echo "   Make sure that you executed the install instruction" &&
+                               echo "   in the tools directory of your kaldi installation. " &&
+                               echo "" && exit 1]) 
+                 ],
+                 [echo "" &&
+                  echo "   Kaldi shared library not found in the specified directory." &&
+                  echo "   Make sure the directory specified with option '--with-kaldi-asr'" &&
+                  echo "   contains a compiled kaldi installation, with the option " &&
+                  echo "   --shared used in the configure step." &&
+                  echo "" && exit 1])
+        ],
+        [echo "" &&
+         echo "   Kaldi installation not found in the specified directory." &&
+         echo "   Make sure the directory specified with option '--with-kaldi-asr'" &&
+         echo "   contains a correct kaldi installation." &&
+         echo "" && exit 1])
 fi
 
 # Checks for typedefs, structures, and compiler characteristics.
