@@ -1,13 +1,20 @@
 languages = as ca cs cy de en es fr gl hr it nb pt ru sl
-variants = es/es-old es/es-ar es/es-cl ca/balear ca/valencia 
+variants = es/es-old es/es-ar es/es-cl ca/balear ca/valencia
 
 EXTRA_DIST = $(languages) common config
 
 pkgdata_DATA =
 
+if KALDI
+  LD_LIBRARY_PATH := $(KALDI_ROOT)/src/lib
+  ASR=yes
+else
+  ASR=
+endif
+
 ## configuration files
 configdatadir = $(pkgdatadir)/config
-configdata_DATA = config/*
+configdata_DATA = config/*.cfg
 
 install-data-hook:
 	-@ldconfig &> /dev/null || echo "Could not run 'ldconfig'. If you get installation errors below, execute 'ldconfig' as root and try 'make install' again.";
@@ -41,6 +48,7 @@ install-data-hook:
 	      echo "  - Creating "$$lg" phonetic dictionary..."; \
               phRul=`cat $(DESTDIR)/$(pkgdatadir)/$$lg/alternatives-phon.dat | grep PhoneticRules | cut -d' ' -f2`; \
               phDic=`cat $(DESTDIR)/$(pkgdatadir)/$$lg/alternatives-phon.dat | grep PhoneticDictionary | cut -d' ' -f2`; \
+              echo $LD_LIBRAY_PATH \
 	      cat $(DESTDIR)/$(pkgdatadir)/$$lg/dicc.src | LD_LIBRARY_PATH=$(LD_LIBRARY_PATH):$(DESTDIR)/$(libdir) $(DESTDIR)/$(bindir)/dicc2phon $(DESTDIR)/$(pkgdatadir)/$$lg/$$phRul > $(DESTDIR)/$(pkgdatadir)/$$lg/$$phDic; \
            fi; \
 	   nfil=`ls -1 $(DESTDIR)/$(pkgdatadir)/$$lg/dep_treeler/srl/parameters.*.gz.aa 2>/dev/null | wc -l`; \
@@ -55,14 +63,27 @@ install-data-hook:
 	     cat $(DESTDIR)/$(pkgdatadir)/$$lg/dep_treeler/dep/parameters.*.gz.* > $(DESTDIR)/$(pkgdatadir)/$$lg/dep_treeler/dep/$$pfname; \
 	     rm -f $(DESTDIR)/$(pkgdatadir)/$$lg/dep_treeler/dep/parameters.*.gz.*; \
 	   fi; \
-	done; 
+	done;
 	@for d in common config; do \
 	   echo "Installing "$$d" files."; \
 	   pushd $(top_builddir)/data/$$d >/dev/null; \
 	   find . -name '.svn' -prune -o -name '*~' -prune -o -type d -exec install -d {} $(DESTDIR)/$(pkgdatadir)/$$d/{} \; ; \
 	   find . -name '.svn' -prune -o -name '*~' -prune -o -type f -exec install {} $(DESTDIR)/$(pkgdatadir)/$$d/{} \; ; \
 	   popd >/dev/null; \
-	done
+	done;
+	@if !(test -z '$(ASR)'); then \
+	   echo "Installing asr data. Please wait."; \
+	   echo "  - Downloading data from 'nlp.cs.upc.edu/freeling/extradata'."; \
+     wget -P $(top_builddir)/data nlp.cs.upc.edu/freeling/extradata/freeling_asr_data.tar.gz; \
+	   echo "  - Untaring the asr data."; \
+	   tar -xvzf $(top_builddir)/data/freeling_asr_data.tar.gz; \
+	   rm $(top_builddir)/data/freeling_asr_data.tar.gz; \
+	fi;
 
 uninstall-hook:
 	@rm -rf $(DESTDIR)/$(pkgdatadir)
+	@if !(test -z '$(ASR)'); then \
+	   rm -rf $(top_builddir)/data/config/asr; \
+	   rm -rf $(top_builddir)/data/en/asr; \
+	   rm -rf $(top_builddir)/data/es/asr; \
+	fi;

@@ -27,4 +27,14 @@ else
   ADD_FL_DEPS=
 endif
 
-FREELING_DEPS=$(BOOST_REGEX_LIB) $(BOOST_LOCALE_LIB) $(ADD_FL_DEPS) -lboost_system$(MT) -lz
+if KALDI
+  KALDI_DEPS=-lfst -lkaldi-base -lkaldi-online2 -lkaldi-chain -lkaldi-kws -lkaldi-sgmm2 -lkaldi-cudamatrix -lkaldi-lat -lkaldi-sgmm -lkaldi-decoder -lkaldi-lm -lkaldi-thread -lkaldi-feat -lkaldi-matrix -lkaldi-transform -lkaldi-fstext -lkaldi-nnet2 -lkaldi-tree -lkaldi-gmm -lkaldi-nnet3 -lkaldi-util -lkaldi-hmm -lkaldi-nnet 
+  KALDI_INCLUDES=-I$(KALDI_ROOT)/tools/ATLAS/include -I$(KALDI_ROOT)/src -I$(KALDI_ROOT)/tools/openfst/includes
+  KALDI_LIBS=-L$(KALDI_ROOT)/tools/openfst/lib -L$(KALDI_ROOT)/src/lib
+else 
+  KALDI_DEPS=
+  KALDI_INCLUDES=
+  KALDI_LIBS=
+endif
+
+FREELING_DEPS=$(BOOST_REGEX_LIB) $(BOOST_LOCALE_LIB) $(ADD_FL_DEPS) -lboost_system$(MT) -lz $(KALDI_DEPS)
