@@ -33,7 +33,7 @@ int main (int argc, char **argv) {
   wstring path=ipath+L"/share/freeling/";
 
   // set the language to your desired target
-  const wstring lang=L"ca";
+  const wstring lang=L"es";
 
 
   // if FreeLing was compiled with --enable-traces, you can activate
@@ -49,7 +49,7 @@ int main (int argc, char **argv) {
 
   // morphological analysis has a lot of options, and for simplicity they are packed up
   // in a maco_options object. First, create the maco_options object with default values.
-  maco_options opt(L"ca");  
+  maco_options opt(L"es");  
   // alternatively, you can set active modules in a single call:
   //     opt.set_active_modules(false, true, true, true, true, true, false, true, true, 0);
 
