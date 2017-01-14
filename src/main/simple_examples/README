@@ -176,4 +176,15 @@
   If FL-install-path is ommited, the program will looks for data 
   files under default installation directory /usr/local
 
+  ** WORD_VEC.cc ****
 
+  This program illustrates the use of word_vector.cc module to perform
+  different operations based on a word embedding model. Models must be
+  downloaded separately from freeling, since they may be quite big in
+  size. Models in spanish can be found searching for "esp-w2v-models"
+  on github.
+ 
+     ./word_vec model-file
+
+  Path to FreeLing files must be changed on the source code if different
+  from default path (/usr/local).
