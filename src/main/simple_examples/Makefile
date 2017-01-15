@@ -14,7 +14,7 @@ BOOSTLIBDIR=/usr/local/lib
 PATHS=-L$(FREELINGDIR)/lib -I$(FREELINGDIR)/include -I$(FREELINGDIR)/include/foma -L$(BOOSTLIBDIR) -I$(BOOSTINCLUDEDIR)
 LIBS=-lfreeling -lboost_system
 
-all:	fl1_morph fl2_tagger fl3_chunker fl4_dependences ident coreferences sample kbest_tagger alts analyzer summary
+all:	fl1_morph fl2_tagger fl3_chunker fl4_dependences ident coreferences sample kbest_tagger alts analyzer summary word_vec
 
 fl1_morph: fl1_morph.cc
 	g++ -std=c++0x -o fl1_morph fl1_morph.cc $(PATHS) $(LIBS)
@@ -49,6 +49,8 @@ alts: alts.cc
 summary: summary.cc
 	g++ -std=gnu++0x  -o summary summary.cc $(PATHS) $(LIBS)
 
+word_vec: word_vec.cc
+	g++ -std=gnu++0x  -o word_vec word_vec.cc $(PATHS) $(LIBS)
 
 clean:
-	rm -f fl1_morph fl2_tagger fl3_chunker fl4_dependences ident coreferences sample kbest_tagger alts analyzer
+	rm -f fl1_morph fl2_tagger fl3_chunker fl4_dependences ident coreferences sample kbest_tagger alts analyzer word_vec

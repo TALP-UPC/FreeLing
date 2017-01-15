@@ -269,8 +269,8 @@ namespace freeling {
 
     // start with existing alternatives (if any)
     map<wstring,int> filtered;
-    for (list<pair<wstring,int> >::const_iterator a=w.alternatives_begin(); a!=w.alternatives_end(); a++) 
-      filtered.insert(*a);
+    for (list<freeling::alternative>::const_iterator a=w.alternatives_begin(); a!=w.alternatives_end(); a++) 
+      filtered.insert(make_pair(a->get_form(), a->get_distance()));
 
     // if we are doing phonetic match, and there is an exact phonetic match,
     // lower the threshold for filtering (i.e. be pickier for non-exact matches)
@@ -294,7 +294,7 @@ namespace freeling {
     w.clear_alternatives();
     for (list<pair<wstring,pair<int,int> > >::const_iterator f=aux.begin(); f!=aux.end(); f++) 
       // add new pair form-distance to final alternatives list.
-           w.get_alternatives().push_back(make_pair(f->first,f->second.first));
+           w.get_alternatives().push_back(freeling::alternative(f->first,f->second.first));
   }
 
 

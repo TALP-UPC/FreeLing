@@ -120,7 +120,60 @@ namespace freeling {
     bool operator==(const analysis &) const;
   };
 
+  
+  
+  ////////////////////////////////////////////////////////////////
+  ///   Class alternative stores all info related to a word
+  ///  alternative: form, edit distance
+  ////////////////////////////////////////////////////////////////
 
+  class WINDLL alternative {
+  private:
+    // lexical form
+    std::wstring form;
+    // edition distance
+    int distance;
+    // probability based on edition distance
+    float probability;
+    // store which sequences --among the kbest proposed by 
+    // the corrector module-- contain this alternative
+    std::set<int> kbest;
+  
+  public:
+    /// constructor
+    alternative();
+    /// constructor
+    alternative(const std::wstring &);
+    /// constructor
+    alternative(const std::wstring &, const int);
+    /// Copy constructor
+    alternative(const alternative &);
+    /// assignment
+    alternative& operator=(const alternative&);
+    /// comparison
+    bool operator==(const alternative&) const;
+
+    /// Get form of the alternative
+    std::wstring get_form() const;
+    /// Get edit distance
+    int get_distance() const;
+    /// Get edit distance probability
+    float get_probability() const;
+    /// Whether the alternative is selected in the kbest path or not
+    bool is_selected(int k = 1) const;
+    /// Clear the kbest selections
+    void clear_selections();
+    /// Add a kbest selection
+    void add_selection(int);
+    
+    /// Set alternative form
+    void set_form(const std::wstring &);
+    /// Set alternative distance
+    void set_distance(int);
+    /// Set alternative probability
+    void set_probability(float);
+  };
+  
   ////////////////////////////////////////////////////////////////
   ///   Class word stores all info related to a word:
   ///  form, list of analysis, list of tokens (if multiword).
@@ -139,7 +192,7 @@ namespace freeling {
     /// whether the multiword presents segmentantion ambiguity (i.e. could not be a mw)
     bool ambiguous_mw;
     /// alternative forms provided by orthographic or phonetic SED
-    std::list<std::pair<std::wstring,int> > alternatives;
+    std::list<alternative> alternatives;
     /// token span
     unsigned long start, finish;
     /// word morphological shouldn't be further modified
@@ -264,6 +317,8 @@ namespace freeling {
     unsigned get_analyzed_by() const;
 
     /// add an alternative to the alternatives list
+    void add_alternative(const alternative &);
+    /// add an alternative to the alternatives list (wstring, int)
     void add_alternative(const std::wstring &, int);
     /// replace alternatives list with list given
     void set_alternatives(const std::list<std::pair<std::wstring,int> > &);
@@ -272,17 +327,17 @@ namespace freeling {
     /// find out if the speller checked alternatives
     bool has_alternatives() const;
     /// get alternatives list const &
-    const std::list<std::pair<std::wstring,int> >& get_alternatives() const;
+    const std::list<alternative>& get_alternatives() const;
     /// get alternatives list &
-    std::list<std::pair<std::wstring,int> >& get_alternatives();
+    std::list<alternative>& get_alternatives();
     /// get alternatives begin iterator
-    std::list<std::pair<std::wstring,int> >::iterator alternatives_begin();
+    std::list<alternative>::iterator alternatives_begin();
     /// get alternatives end iterator
-    std::list<std::pair<std::wstring,int> >::iterator alternatives_end();
+    std::list<alternative>::iterator alternatives_end();
     /// get alternatives begin iterator
-    std::list<std::pair<std::wstring,int> >::const_iterator alternatives_begin() const;
+    std::list<alternative>::const_iterator alternatives_begin() const;
     /// get alternatives end iterator
-    std::list<std::pair<std::wstring,int> >::const_iterator alternatives_end() const;
+    std::list<alternative>::const_iterator alternatives_end() const;
 
     /// add one analysis to current analysis list  (no duplicate check!)
     void add_analysis(const analysis &);

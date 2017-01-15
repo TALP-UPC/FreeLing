@@ -84,7 +84,8 @@ int main (int argc, char **argv) {
   freeling::alternatives alts_ort(path+lang+L"/alternatives-ort.dat");
 
   // IMPORTANT: comment this out if there is no phonetic encoder for target language
-  freeling::alternatives alts_phon(path+lang+L"/alternatives-phon.dat");
+  //freeling::alternatives alts_phon(path+lang+L"/alternatives-phon.dat");
+  //freeling::alternatives alts_key(path+lang+L"/alternatives-key.dat");
 
   // get plain text input lines while not EOF.
   wstring text;
@@ -103,7 +104,7 @@ int main (int argc, char **argv) {
     alts_ort.analyze(ls);
 
     // IMPORTANT: comment this out if there is no phonetic encoder for your language    
-    alts_phon.analyze(ls);
+    //alts_phon.analyze(ls);
 
     // print results.
     for (list<freeling::sentence>::iterator s=ls.begin(); s!=ls.end(); s++) {
@@ -114,8 +115,8 @@ int main (int argc, char **argv) {
           wcout<<L" ["<<a->get_lemma()<<L","<<a->get_tag()<<L"]";
         wcout<<endl;
         wcout<<L"   ALTERNATIVE FORMS:";
-        for (list<pair<wstring,int> >::iterator a=w->alternatives_begin(); a!=w->alternatives_end(); a++) 
-           wcout<<L" ["<<a->first<<L","<<a->second<<L"]";
+        for (list<freeling::alternative>::iterator a=w->alternatives_begin(); a!=w->alternatives_end(); a++) 
+           wcout<<L" ["<< a->get_form() <<L","<< a->get_distance() <<L"]";
         wcout<<endl; 
       }
       wcout<<endl;

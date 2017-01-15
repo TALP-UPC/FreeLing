@@ -117,6 +117,68 @@ namespace freeling {
 
 
   ////////////////////////////////////////////////////////////////
+  ///   Class alternative stores all info related to a word
+  ///  alternative: form, edit distance
+  ////////////////////////////////////////////////////////////////
+  
+  /// Create an empty alternative
+  alternative::alternative() {
+    form = L"";
+    distance = 0;
+    probability = 0.0f;
+  }
+  /// Create an alternative with form
+  alternative::alternative(const std::wstring &f) {
+    form = f;
+    distance = 0;
+    probability = 0.0f;
+  }
+  /// Create an alternative with form and edit distance
+  alternative::alternative(const std::wstring &f, const int d) {
+    form = f;
+    distance = d;
+    probability = 0.0f;
+  }
+  /// Copy constructor
+  alternative::alternative(const alternative &alt) {
+    form = alt.form;
+    distance = alt.distance;
+    probability = alt.probability;
+    kbest = std::set<int>(alt.kbest);
+  }
+  /// assignment
+  alternative& alternative::operator=(const alternative& alt) {
+    if (this != &alt) {
+      form = alt.form;
+      distance = alt.distance;
+      probability = alt.probability;
+      kbest = std::set<int>(alt.kbest);
+    }
+    return *this;
+  }
+
+  /// Get form of the alternative
+  std::wstring alternative::get_form() const {return form;}
+  /// Get edit distance
+  int alternative::get_distance() const {return distance;}
+  /// Get edit distance probability
+  float alternative::get_probability() const {return probability;}
+  /// Whether the alternative is selected in the kbest path or not
+  bool alternative::is_selected(int k) const {return (kbest.count(k) == 1);}
+  /// Clear the kbest selections
+  void alternative::clear_selections() {kbest.clear();}
+  /// Add a kbest selection
+  void alternative::add_selection(int k) {kbest.insert(k);}
+  /// Set alternative form
+  void alternative::set_form(const std::wstring &f) {form = f;}
+  /// Set alternative distance
+  void alternative::set_distance(int d) {distance = d;}
+  /// Set alternative probability
+  void alternative::set_probability(float p) {probability = p;}
+  /// Comparison operator
+  bool alternative::operator==(const alternative &alt) const {return (alt.form == form);}
+  
+  ////////////////////////////////////////////////////////////////
   ///   Class word stores all info related to a word:
   ///  form, list of analysis, list of tokens (if multiword).
   ////////////////////////////////////////////////////////////////
@@ -258,25 +320,32 @@ namespace freeling {
   unsigned word::get_analyzed_by() const { return analyzed_by; }
 
   /// add an alternative to the alternatives list
-  void word::add_alternative(const wstring &w, int d) { alternatives.push_back(make_pair(w,d)); }
+  void word::add_alternative(const alternative &alt) { alternatives.push_back(alt); }
+  /// add an alternative to the alternatives list (wstring, int)
+  void word::add_alternative(const wstring &w, int d) { alternatives.push_back(alternative(w, d)); }
   /// replace alternatives list with list given
-  void word::set_alternatives(const list<pair<wstring,int> > &lw) { alternatives=lw; }
+  void word::set_alternatives(const list<pair<wstring,int> > &lw) {
+    clear_alternatives();
+    for (auto it = lw.begin(); it != lw.end(); it++) {
+      alternatives.push_back(alternative(it->first, it->second));
+    }
+  }
   /// clear alternatives list
   void word::clear_alternatives() { alternatives.clear(); }
   /// find out if the speller checked alternatives
   bool word::has_alternatives() const {return (alternatives.size()>0);}
   /// get alternatives list const &
-  const list<pair<wstring,int> >& word::get_alternatives() const {return(alternatives);}
+  const list<alternative>& word::get_alternatives() const {return(alternatives);}
   /// get alternatives list &
-  list<pair<wstring,int> >& word::get_alternatives() {return(alternatives);}
+  list<alternative>& word::get_alternatives() {return(alternatives);}
   /// get alternatives begin iterator
-  list<pair<wstring,int> >::iterator word::alternatives_begin() {return alternatives.begin();}
+  list<alternative>::iterator word::alternatives_begin() {return alternatives.begin();}
   /// get alternatives end iterator
-  list<pair<wstring,int> >::iterator word::alternatives_end() {return alternatives.end();}
+  list<alternative>::iterator word::alternatives_end() {return alternatives.end();}
   /// get alternatives begin const iterator
-  list<pair<wstring,int> >::const_iterator word::alternatives_begin() const {return alternatives.begin();}
+  list<alternative>::const_iterator word::alternatives_begin() const {return alternatives.begin();}
   /// get alternatives end const iterator
-  list<pair<wstring,int> >::const_iterator word::alternatives_end() const {return alternatives.end();}
+  list<alternative>::const_iterator word::alternatives_end() const {return alternatives.end();}
 
   /// mark word as having definitive analysis
   void word::lock_analysis() { locked_analysis=true; }
