@@ -112,6 +112,9 @@ class tree {
       tree_preorder_iterator<T>& operator++();
       tree_preorder_iterator<T> operator--(int);
       tree_preorder_iterator<T>& operator--();
+      // for python and other APIs
+      void incr();
+      void decr();
 
       bool operator==(const tree_preorder_iterator<T> &t) const;
       bool operator!=(const tree_preorder_iterator<T> &t) const;      
@@ -168,6 +171,9 @@ class tree {
       tree_sibling_iterator<T>& operator++();
       tree_sibling_iterator<T> operator--(int);
       tree_sibling_iterator<T>& operator--();
+      // for python and other APIs
+      void incr();
+      void decr();
 
       /// ---------------------- Non const operations
       T& operator*() const;
@@ -230,6 +236,9 @@ class tree {
       const_tree_preorder_iterator<T>& operator++();
       const_tree_preorder_iterator<T> operator--(int);
       const_tree_preorder_iterator<T>& operator--();
+      // for python and other APIs
+      void incr();
+      void decr();
 
       bool operator==(const const_tree_preorder_iterator<T> &t) const;
       bool operator!=(const const_tree_preorder_iterator<T> &t) const;      
@@ -280,6 +289,9 @@ class tree {
       const_tree_sibling_iterator<T>& operator++();
       const_tree_sibling_iterator<T> operator--(int);
       const_tree_sibling_iterator<T>& operator--();
+      // for python and other APIs
+      void incr();
+      void decr();
 
       bool operator==(const const_tree_sibling_iterator<T> &t) const;
       bool operator!=(const const_tree_sibling_iterator<T> &t) const;
@@ -372,6 +384,49 @@ class analysis {
       void mark_selected(int k=0);
       // unmark this analysis as selected in k-th best sequence
       void unmark_selected(int k=0);
+};
+
+
+////////////////////////////////////////////////////////////////
+///   Class alternative stores all info related to a word
+///  alternative spelling: form, edit distance
+////////////////////////////////////////////////////////////////
+ 
+class alternative {
+  
+  public:
+    /// constructor
+    alternative();
+    /// constructor
+    alternative(const std::wstring &);
+    /// constructor
+    alternative(const std::wstring &, const int);
+    /// Copy constructor
+    alternative(const alternative &);
+    /// assignment
+    alternative& operator=(const alternative&);
+    /// comparison
+    bool operator==(const alternative&) const;
+
+    /// Get form of the alternative
+    std::wstring get_form() const;
+    /// Get edit distance
+    int get_distance() const;
+    /// Get edit distance probability
+    float get_probability() const;
+    /// Whether the alternative is selected in the kbest path or not
+    bool is_selected(int k = 1) const;
+    /// Clear the kbest selections
+    void clear_selections();
+    /// Add a kbest selection
+    void add_selection(int);
+    
+    /// Set alternative form
+    void set_form(const std::wstring &);
+    /// Set alternative distance
+    void set_distance(int);
+    /// Set alternative probability
+    void set_probability(float);
 };
 
 
@@ -487,6 +542,8 @@ class word : public std::list<freeling::analysis> {
       unsigned get_analyzed_by() const;
       
       /// add an alternative to the alternatives list
+      void add_alternative(const freeling::alternative &);
+      /// add an alternative to the alternatives list
       void add_alternative(const std::wstring &, int);
       /// replace alternatives list with list given
       void set_alternatives(const std::list<std::pair<std::wstring,int> > &);
@@ -494,19 +551,21 @@ class word : public std::list<freeling::analysis> {
       void clear_alternatives();
       /// find out if the speller checked alternatives
       bool has_alternatives() const;
+
       /// get alternatives list &
-      std::list<std::pair<std::wstring,int> >& get_alternatives();
+      std::list<freeling::alternative>& get_alternatives();
       /// get alternatives begin iterator
-      std::list<std::pair<std::wstring,int> >::iterator alternatives_begin();
+      std::list<freeling::alternative>::iterator alternatives_begin();
       /// get alternatives end iterator
-      std::list<std::pair<std::wstring,int> >::iterator alternatives_end();
+      std::list<freeling::alternative>::iterator alternatives_end();
+      
       #ifndef FL_API_JAVA
       /// get alternatives list const &
-      const std::list<std::pair<std::wstring,int> >& get_alternatives() const;
+      const std::list<freeling::alternative>& get_alternatives() const;
       /// get alternatives begin iterator
-      std::list<std::pair<std::wstring,int> >::const_iterator alternatives_begin() const;
+      std::list<freeling::alternative>::const_iterator alternatives_begin() const;
       /// get alternatives end iterator
-      std::list<std::pair<std::wstring,int> >::const_iterator alternatives_end() const;
+      std::list<freeling::alternative>::const_iterator alternatives_end() const;
       #endif
 
       /// add one analysis to current analysis list  (no duplicate check!)
@@ -1802,8 +1861,6 @@ class semanticDB {
   /// get sense info for a sense
   sense_info get_sense_info(const std::wstring &) const;
 };
-
-
 
 
 ////////////////////////////////////////////////////////////////

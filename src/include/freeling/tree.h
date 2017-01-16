@@ -618,6 +618,10 @@ namespace freeling {
       basic_preorder_iterator<T,X>& operator++();
       basic_preorder_iterator<T,X> operator--(int);
       basic_preorder_iterator<T,X>& operator--();
+
+      // for python and other APIs
+      void incr();
+      void decr();
   };
 
 
@@ -636,6 +640,10 @@ namespace freeling {
       basic_sibling_iterator<T,X>& operator++();
       basic_sibling_iterator<T,X> operator--(int);
       basic_sibling_iterator<T,X>& operator--();
+
+      // for python and other APIs
+      void incr();
+      void decr();
   };
 
 
@@ -793,6 +801,7 @@ namespace freeling {
     }
     return *this;
   }
+
   /// postdecrement
   template<class T, class X> basic_preorder_iterator<T,X> basic_preorder_iterator<T,X>::operator--(int) {
     basic_preorder_iterator<T,X> b = (*this);
@@ -810,6 +819,10 @@ namespace freeling {
     }
     return *this;
   }
+
+  // increment/decrement in APIs for  python et al.
+  template<class T, class X> void basic_preorder_iterator<T,X>::incr() { ++(*this); }
+  template<class T, class X> void basic_preorder_iterator<T,X>::decr() { --(*this); }
 
 
   ///   ----------------------------------------------------------------------------------
@@ -840,6 +853,9 @@ namespace freeling {
     if (this->tr!=NULL) this->tr = this->tr->prev;
     return *this;
   }
+  // increment/decrement in APIs for  python et al.
+  template<class T, class X> void basic_sibling_iterator<T,X>::incr() { ++(*this); }
+  template<class T, class X> void basic_sibling_iterator<T,X>::decr() { --(*this); }
 
 
   ///   ----------------------------------------------------------------------------------

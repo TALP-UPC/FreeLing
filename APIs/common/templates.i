@@ -13,6 +13,7 @@
 %template(VectorWord) std::vector<freeling::word>;
 %template(ListWord) std::list<freeling::word>;
 %template(ListAnalysis) std::list<freeling::analysis>;
+%template(ListAlternative) std::list<freeling::alternative>;
 %template(ListSentence) std::list<freeling::sentence>;
 %template(ListParagraph) std::list<freeling::paragraph>;
 
