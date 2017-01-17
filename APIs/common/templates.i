@@ -38,6 +38,9 @@
 %template(VectorListString) std::vector<std::list<std::wstring> >;
 %template(VectorString) std::vector<std::wstring>;
 
+%template(VectorSetString) std::vector<std::set<std::wstring> >;
+%template(VectorSetInt) std::vector<std::set<int> >;
+
 %template(PairDoubleString) std::pair<double,std::wstring>;
 %template(VectorPairDoubleString) std::vector<std::pair<double,std::wstring> >;
 %template(SetString) std::set<std::wstring>;

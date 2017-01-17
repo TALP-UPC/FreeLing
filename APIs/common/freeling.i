@@ -2068,6 +2068,66 @@ class foma_FSM {
 };
 
 
+  ////////////////////////////////////////////////////////////////
+  ///  Class fex implements a feature extractor.
+  ////////////////////////////////////////////////////////////////
+
+  class fex {
+  public:
+    /// constructor, given rule file, lexicon file (may be empty), and custom functions
+    fex(const std::wstring&, 
+        const std::wstring&, 
+        const std::map<std::wstring,const freeling::feature_function *> &custom=std::map<std::wstring,const freeling::feature_function *>() );
+    /// destructor
+    ~fex();
+
+    /// encode given sentence in features as feature names. 
+    void encode_name(sentence &, std::vector<std::set<std::wstring> > &) const;
+    /// encode given sentence in features as integer feature codes
+    void encode_int(sentence &, std::vector<std::set<int> > &) const;
+    /// encode given sentence in features as integer feature codes and as features names
+    void encode_all(sentence &, std::vector<std::set<std::wstring> > &, std::vector<std::set<int> > &) const;
+
+    /// encode given sentence in features as feature names. Return result suitable for Java/perl APIs
+    std::vector<std::set<std::wstring> > encode_name(sentence &) const;
+    /// encode given sentence in features as integer feature codes. Return result apt for Java/perl APIs
+    std::vector<std::set<int> > encode_int(sentence &) const;
+
+    /// clear lexicon
+    void clear_lexicon(); 
+    /// encode sentence and add features to current lexicon
+    void encode_to_lexicon(sentence &);
+    /// save lexicon to a file, filtering features with low occurrence rate
+    void save_lexicon(const std::wstring &, double) const;
+  };
+
+  ////////////////////////////////////////////////////////////////
+  ///  Class fex implements a feature lexicon
+  ////////////////////////////////////////////////////////////////
+
+  class fex_lexicon  {
+    
+  public:
+    /// constructor: empty lexicon
+    fex_lexicon();
+    /// constructor: load file
+    fex_lexicon(const std::wstring &);
+    /// empty lexicon
+    void clear_lexicon(); 
+    /// add feature occurrence to lexicon
+    void add_occurrence(const std::wstring &);
+    /// save lexicon to a file, filtering features with low occurrence rate
+    void save_lexicon(const std::wstring &, double) const;
+    /// consult: get feature code
+    unsigned int get_code(const std::wstring &) const;
+    /// consult: get feature frequency
+    unsigned int get_freq(const std::wstring &) const;
+    /// Find out whether the lexicon contains the given feature code
+    bool contains_code(unsigned int) const; 
+    /// Find out whether the lexicon is loaded and full
+    bool is_empty() const; 
+  };
+
 
 ////////////////////////////////////////////////////////////////
 /// Utilities

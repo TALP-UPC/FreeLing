@@ -73,7 +73,9 @@ namespace freeling {
 
   public:
     /// constructor, given rule file, lexicon file (may be empty), and custom functions
-    fex(const std::wstring&, const std::wstring&, const std::map<std::wstring,const feature_function *> &);
+    fex(const std::wstring&, 
+        const std::wstring&, 
+        const std::map<std::wstring, const feature_function *> &custom=std::map<std::wstring,const feature_function *>());
     /// destructor
     ~fex();
 
