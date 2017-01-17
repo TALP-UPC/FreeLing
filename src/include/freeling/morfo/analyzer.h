@@ -1,4 +1,3 @@
-
 //////////////////////////////////////////////////////////////////
 //
 //    FreeLing - Open Source Language Analyzers
@@ -203,13 +202,18 @@ class WINDLL analyzer {
    /// analyze further levels on partially analyzed sentences
    void analyze(std::list<sentence> &ls) const;
    /// analyze text as a whole document
-   void analyze(const wstring &text, document &doc, bool parag=false) const;
+   void analyze(const std::wstring &text, document &doc, bool parag=false) const;
   /// Analyze text as a partial document. Retain incomplete sentences in buffer   
    /// in case next call completes them (except if flush==true)
-   void analyze(const wstring &text, std::list<sentence> &ls, bool flush=false);
+   void analyze(const std::wstring &text, std::list<sentence> &ls, bool flush=false);
+
+   // for python API
+   std::list<sentence> analyze(const std::wstring &text, bool flush=false) ;
+   document analyze_as_document(const std::wstring &text, bool parag=false) const;
+
    // flush splitter buffer and analyze any pending text. 
    void flush_buffer(std::list<sentence> &ls);
- 
+   // reset tokenizer offset counter
    void reset_offset();
 };
 

@@ -8,6 +8,7 @@
 %include std_list.i
 %include std_vector.i
 %include std_map.i
+%include std_set.i
 %include std_pair.i
 
 %template(VectorWord) std::vector<freeling::word>;
@@ -37,8 +38,9 @@
 %template(VectorListString) std::vector<std::list<std::wstring> >;
 %template(VectorString) std::vector<std::wstring>;
 
-%template(PairDoubleString) std::pair<double,std::wstring >;
+%template(PairDoubleString) std::pair<double,std::wstring>;
 %template(VectorPairDoubleString) std::vector<std::pair<double,std::wstring> >;
+%template(SetString) std::set<std::wstring>;
 
 %template(PairStringString) std::pair<std::wstring,std::wstring >;
 %template(VectorPairStringString) std::vector<std::pair<std::wstring,std::wstring> >;

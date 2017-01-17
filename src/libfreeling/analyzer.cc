@@ -338,6 +338,17 @@ void analyzer::analyze(const wstring &text, document &doc, bool parag) const {
   analyze(doc);
 }
 
+
+//---------------------------------------------
+// same than above, but for python API
+//---------------------------------------------
+
+document analyzer::analyze_as_document(const wstring &text, bool parag) const {
+  document doc;
+  analyze(text, doc, parag);
+  return doc;
+}
+
 //---------------------------------------------
 // Apply analyzer cascade to sentences in 'text',
 // return results as list of sentences
@@ -352,6 +363,17 @@ void analyzer::analyze(const wstring &text, list<sentence> &ls, bool flush) {
   tokenize_split(text, ls, offs, tokens, nsentence, flush, sp_id);
   // perform rest of required analysis levels, if any.
   analyze(ls);
+}
+
+
+//---------------------------------------------
+// same than above, but for python API
+//---------------------------------------------
+
+list<sentence> analyzer::analyze(const wstring &text, bool flush) {
+  list<sentence> ls;
+  analyze(text, ls, flush);
+  return ls;
 }
 
 

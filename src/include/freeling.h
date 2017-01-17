@@ -51,6 +51,8 @@
 #include "freeling/morfo/relaxcor.h"
 #include "freeling/morfo/semgraph_extract.h"
 
+#include "freeling/morfo/analyzer.h"
+
 //#include "freeling/morfo/coref.h"
 //#include "freeling/morfo/fex.h"
 /*

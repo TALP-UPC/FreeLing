@@ -151,6 +151,18 @@ namespace freeling {
   }
 
   /////////////////////////////////////////////////////////////////////////
+  /// Identify language of given text, considering only languages in
+  /// given list (empty list--> all languages). Return copy, for python API
+  ////////////////////////////////////////////////////////////////////////
+
+  vector<pair<double,wstring> > lang_ident::rank_languages (const wstring &text,
+                                                            const set<wstring> &ls) const {
+    vector<pair<double,wstring> > result;
+    rank_languages(result, text, ls);
+    return result;
+  }
+
+  /////////////////////////////////////////////////////////////////////////
   /// Get probabilities for each language, considering only languages in
   /// given list (empty list--> all languages)
   ////////////////////////////////////////////////////////////////////////

@@ -86,7 +86,9 @@ namespace freeling {
     void rank_languages (std::vector<std::pair<double,std::wstring> > &result, 
                          const std::wstring &text,
                          const std::set<std::wstring> &ls=std::set<std::wstring>()) const;
-
+    /// for Python API
+    std::vector<std::pair<double,std::wstring> > rank_languages (const std::wstring &text,
+                                                                 const std::set<std::wstring> &ls=std::set<std::wstring>()) const;
   };
 
 } // namespace
