@@ -253,7 +253,7 @@ namespace freeling {
                                 list<related_words> &relations,
                                 unordered_map<wstring, pair<int, word_pos*> > &unique_words) const {
 
-    bool inserted = FALSE;
+    bool inserted = false;
     if (is_compatible(w)) {
       word_pos * wp = NULL;
 
@@ -263,14 +263,14 @@ namespace freeling {
         if ((n_sentence - it_w->n_sentence) <= max_distance) {
           const list<pair<wstring, double>> & ss1 = w.get_senses();
           const list<pair<wstring, double>> & ss2 = w2.get_senses();
-          if (ss1.empty() || ss2.empty()) return FALSE;
+          if (ss1.empty() || ss2.empty()) return false;
           wstring s1 = ss1.begin()->first;
           wstring s2 = ss2.begin()->first;
           int lvl = hypernymyAux(s1, s2, 0);
           if (lvl < 0) lvl = hypernymyAux(s2, s1, 0);
           if (lvl >= 0) {
             if (!inserted) {
-              inserted = TRUE;
+              inserted = true;
               wp = new word_pos(w, s, n_paragraph, n_sentence, position);
             }
             related_words rel_w(*wp, *it_w, lvl);
@@ -353,15 +353,15 @@ namespace freeling {
       const list<int> &grps = doc.get_groups();
       for (list<int>::const_iterator it = grps.begin(); it != grps.end(); it++) {
         list<int> coref_id_mentions = doc.get_coref_id_mentions(*it);
-        bool ffound = FALSE;
-        bool sfound = FALSE;
+        bool ffound = false;
+        bool sfound = false;
         for (list<int>::const_iterator it_cid = coref_id_mentions.begin();
              it_cid != coref_id_mentions.end(); it_cid++) {
           const mention &m = doc.get_mention(*it_cid);
           int s_mention = m.get_n_sentence();
           int pos_mention = m.get_head().get_position();
-          if (s_mention == n_sentence && pos_mention == position) ffound = TRUE;
-          if (s_mention == wp2.n_sentence && pos_mention == wp2.position) sfound = TRUE;
+          if (s_mention == n_sentence && pos_mention == position) ffound = true;
+          if (s_mention == wp2.n_sentence && pos_mention == wp2.position) sfound = true;
           if (ffound && sfound) {
             word_pos * wp;
             wp = new word_pos(w, s, n_paragraph, n_sentence, position);
@@ -375,12 +375,12 @@ namespace freeling {
             if (it_uw == unique_words.end()) unique_words[form] = pair<int, word_pos*>(1, wp);
             else (it_uw->second).first++;
 
-            return TRUE;
+            return true;
           }
         }
       }
     }
-    return FALSE;
+    return false;
   }
 
 
