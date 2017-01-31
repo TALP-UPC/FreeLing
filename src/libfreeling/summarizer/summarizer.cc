@@ -49,8 +49,8 @@ namespace freeling {
     // Default configuration
     hypernymy_depth = 2;
     alpha = 0.9;
-    remove_used_lexical_chains = FALSE;
-    only_strong = FALSE;
+    remove_used_lexical_chains = false;
+    only_strong = false;
     this->semdb_path = L"";
     heuristic = FIRST_WORD;
     relation::max_distance = 50;
