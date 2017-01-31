@@ -124,9 +124,11 @@ namespace freeling {
       }
     catch (const std::runtime_error &e)
       {
-        //ERROR_CRASH(L"Error initializing locale. Locale name '"
-        //            + util::string2wstring(lname) + L"' is unknown or not installed.\n"
-        //            + util::string2wstring(e.what()));
+        // If locale can not be initialized, UTF8 characters will not work.
+        // Stop and inform the user.
+        ERROR_CRASH(L"Error initializing locale. Locale name '"
+                    + util::string2wstring(lname) + L"' is unknown or not installed.\n"
+                    + util::string2wstring(e.what()));
       }
 
     std::ios_base::sync_with_stdio(false);
