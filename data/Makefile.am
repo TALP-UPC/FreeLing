@@ -6,7 +6,6 @@ EXTRA_DIST = $(languages) common config
 pkgdata_DATA =
 
 if KALDI
-  LD_LIBRARY_PATH := $(KALDI_ROOT)/src/lib
   ASR=yes
 else
   ASR=
@@ -74,16 +73,11 @@ install-data-hook:
 	   echo "Installing ASR data. Please wait."; \
 	   echo "Downloading ASR data from 'nlp.cs.upc.edu/freeling/extradata'."; \
 	   tmpdir=`mktemp -d`; \
-	   wget -P $$tmpdir nlp.cs.upc.edu/freeling/extradata/freeling_asr_data.tar.gz; \
+	   wget -P $$tmpdir nlp.cs.upc.edu/freeling/extradata/freeling_asr_data.tar.bz2; \
 	   echo "Uncompressing and installing ASR data in $(DESTDIR)/$(pkgdatadir)."; \
-	   tar -xvzf $$tmpdir/freeling_asr_data.tar.gz --directory $(DESTDIR)/$(pkgdatadir); \
+	   tar -xvjf $$tmpdir/freeling_asr_data.tar.bz2 --directory $(DESTDIR)/$(pkgdatadir); \
 	   rm -rf $$tmpdir; \
 	fi;
 
 uninstall-hook:
 	@rm -rf $(DESTDIR)/$(pkgdatadir)
-	@if !(test -z '$(ASR)'); then \
-	   rm -rf $(top_builddir)/data/config/asr; \
-	   rm -rf $(top_builddir)/data/en/asr; \
-	   rm -rf $(top_builddir)/data/es/asr; \
-	fi;

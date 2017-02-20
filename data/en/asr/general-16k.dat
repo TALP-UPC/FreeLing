@@ -1,7 +1,7 @@
-# Files necessary for the asr process
-# Paths to configuration files are relative to the location of this file.
-# They are not provided with FreeLing. See how to install ASR data in INSTALL
-# file at the root of the source code
+## Files necessary for the asr process
+## Paths to configuration files are relative to the location of this file.
+## They are not provided with FreeLing. See how to install ASR data in INSTALL
+## file at the root of the source code
 <DnnHmm>
 ./16000/general/final.mdl
 </DnnHmm>
@@ -17,7 +17,7 @@
 <IvectorExtractorConfig>
 -
 </IvectorExtractorConfig>
-##Parametres for the asr system
+## Parametres for the asr system
 <Frequency>
 16000
 </Frequency>
@@ -45,7 +45,7 @@ mfcc
 <PostDecodeAcwt>
 10
 </PostDecodeAcwt>
-##These parametres are not needed at the moment, only for online decoding
+## These parametres are not needed at the moment, only for online decoding
 <ChunkLengthSecs>
 0.18
 </ChunkLengthSecs>

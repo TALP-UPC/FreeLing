@@ -24,6 +24,7 @@ case "$host_os" in
 esac
 
 using_xpressive="no"
+using_kaldi="no"
 ### using_boost_locale="no"
 
 ######## Begin checkings ##########
@@ -74,17 +75,6 @@ AC_ARG_ENABLE([warnings],
               ],
               [AM_CONDITIONAL([NO_WARNINGS],[test 1 = 0])])
 
-AC_ARG_ENABLE([libfoma],
-              [AS_HELP_STRING([--disable-libfoma],[Compile without libfoma dependent modules. Useful for building libfreeling versions to be used under non-GPL dual license. Default is: Enabled.])],
-              [if test "$enableval" = no; then
-                 # define symbol for CPP
-                 AC_DEFINE(NO_LIBFOMA)
-               fi
-               # pass info to automake
-               AM_CONDITIONAL([NO_LIBFOMA],[test "$enableval" = no])
-              ],
-              [AM_CONDITIONAL([NO_LIBFOMA],[test 1 = 0])])
-
 AC_ARG_ENABLE([build-tests],
               [AS_HELP_STRING([--enable-build-tests],[Compile unittest programs. Default: Not compiled.])],
               [if test "$enableval" = yes; then
@@ -101,10 +91,11 @@ AC_ARG_WITH([kaldi-asr],
               [
                  # define symbol for CPP
                  AC_DEFINE(KALDI)
-                 #with_kaldi="yes"
+                 # with-kaldi-asr = /path/to/kaldi
                  AC_SUBST([KALDI_ROOT],["$withval"])
                  # pass info to automake
                  AM_CONDITIONAL([KALDI],[test 1 = 1])
+                 using_kaldi="yes"
               ],
               [
                 AM_CONDITIONAL([KALDI],[test 0 = 1])
@@ -286,7 +277,7 @@ AC_CHECK_LIB([z],[main],[echo "OK">/dev/null;], [echo "" &&
                                                  echo "   You may need to set LDFLAGS to specify search path." &&
                                                  echo "" && exit 1])
 
-if test $with_kaldi = "yes"
+if test $using_kaldi = "yes"
 then
 LDFLAGS="$LDFLAGS -L$KALDI_ROOT/tools/openfst/lib -L$KALDI_ROOT/src/lib"
 CPPFLAGS="$CPPFLAGS -I$KALDI_ROOT/src/ -I$KALDI_ROOT/tools/openfst/include"
