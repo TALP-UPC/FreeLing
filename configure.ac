@@ -86,6 +86,11 @@ AC_ARG_ENABLE([build-tests],
               ],
               [AM_CONDITIONAL([BUILD_TESTS],[test 0 = 1])])
 
+AC_ARG_ENABLE([download-embeddings],
+              [AS_HELP_STRING([--enable-download-embeddings],[Download and install word embedding data files. Default: Not installed.])],
+              [AM_CONDITIONAL([GET_EMBEDDINGS],[test "$enableval" = yes])],
+              [AM_CONDITIONAL([GET_EMBEDDINGS],[test 0 = 1])])
+
 AC_ARG_WITH([kaldi-asr],
               [AS_HELP_STRING([--with-kaldi-asr],[Compile with kaldi, specifying kaldi's installation root folder as an argument. Default: Not compiled.])],
               [

@@ -11,6 +11,12 @@ else
   ASR=
 endif
 
+if GET_EMBEDDINGS
+  WORD_EMB=yes
+else
+  WORD_EMB=yes
+endif
+
 ## configuration files
 configdatadir = $(pkgdatadir)/config
 configdata_DATA = config/*.cfg
@@ -47,7 +53,7 @@ install-data-hook:
 	      echo "  - Creating "$$lg" phonetic dictionary..."; \
               phRul=`cat $(DESTDIR)/$(pkgdatadir)/$$lg/alternatives-phon.dat | grep PhoneticRules | cut -d' ' -f2`; \
               phDic=`cat $(DESTDIR)/$(pkgdatadir)/$$lg/alternatives-phon.dat | grep PhoneticDictionary | cut -d' ' -f2`; \
-	      cat $(DESTDIR)/$(pkgdatadir)/$$lg/dicc.src | LD_LIBRARY_PATH=$(LD_LIBRARY_PATH):$(DESTDIR)/$(libdir) $(DESTDIR)/$(bindir)/dicc2phon $(DESTDIR)/$(pkgdatadir)/$$lg/$$phRul > $(DESTDIR)/$(pkgdatadir)/$$lg/$$phDic; \
+	      cat $(DESTDIR)/$(pkgdatadir)/$$lg/dicc.src | LD_LIBRARY_PATH=$(LD_LIBRARY_PATH):$(DESTDIR)/$(libdir):$(KALDI_ROOT)/src/lib $(DESTDIR)/$(bindir)/dicc2phon $(DESTDIR)/$(pkgdatadir)/$$lg/$$phRul > $(DESTDIR)/$(pkgdatadir)/$$lg/$$phDic; \
            fi; \
 	   nfil=`ls -1 $(DESTDIR)/$(pkgdatadir)/$$lg/dep_treeler/srl/parameters.*.gz.aa 2>/dev/null | wc -l`; \
 	   if (test $$nfil -gt 0 ); then \
@@ -70,13 +76,30 @@ install-data-hook:
 	   popd >/dev/null; \
 	done;
 	@if !(test -z '$(ASR)'); then \
-	   echo "Installing ASR data. Please wait."; \
-	   echo "Downloading ASR data from 'nlp.cs.upc.edu/freeling/extradata'."; \
-	   tmpdir=`mktemp -d`; \
-	   wget -P $$tmpdir nlp.cs.upc.edu/freeling/extradata/freeling_asr_data.tar.bz2; \
-	   echo "Uncompressing and installing ASR data in $(DESTDIR)/$(pkgdatadir)."; \
-	   tar -xvjf $$tmpdir/freeling_asr_data.tar.bz2 --directory $(DESTDIR)/$(pkgdatadir); \
-	   rm -rf $$tmpdir; \
+	   if (test -d $(DESTDIR)/$(pkgdatadir)/en/asr/8000); then \
+	     echo "ASR data already installed. To force reinstallation, remove folder $(DESTDIR)/$(pkgdatadir)/en/asr/8000"; \
+	   else \
+	     echo "Installing ASR data. Please wait."; \
+	     echo "Downloading ASR data from 'nlp.cs.upc.edu/freeling/extradata'."; \
+	     tmpdir=`mktemp -d`; \
+	     wget -P $$tmpdir nlp.cs.upc.edu/freeling/extradata/freeling_asr_data.tar.bz2; \
+	     echo "Uncompressing and installing ASR data in $(DESTDIR)/$(pkgdatadir)."; \
+	     tar -xvjf $$tmpdir/freeling_asr_data.tar.bz2 --directory $(DESTDIR)/$(pkgdatadir); \
+	     rm -rf $$tmpdir; \
+	   fi; \
+	fi;
+	@if !(test -z '$(WORD_EMB)'); then \
+	   if (test -d $(DESTDIR)/$(pkgdatadir)/en/embeddings); then \
+	     echo "Word embedding data already installed. To force reinstallation, remove folder $(DESTDIR)/$(pkgdatadir)/en/embeddings"; \
+	   else \
+	     echo "Installing word embedding data. Please wait."; \
+	     echo "Downloading word embedding data from 'nlp.cs.upc.edu/freeling/extradata'."; \
+	     tmpdir=`mktemp -d`; \
+	     wget -P $$tmpdir nlp.cs.upc.edu/freeling/extradata/freeling_embeddings.tar.bz2; \
+	     echo "Uncompressing and installing word embedding data in $(DESTDIR)/$(pkgdatadir)."; \
+	     tar -xvjf $$tmpdir/freeling_embeddings.tar.bz2 --directory $(DESTDIR)/$(pkgdatadir); \
+	     rm -rf $$tmpdir; \
+	   fi; \
 	fi;
 
 uninstall-hook:
