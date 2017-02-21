@@ -13,7 +13,7 @@ AUTOMAKE_OPTIONS = subdir-objects
 
 include $(top_srcdir)/src/automake_options.am
 
-AM_CPPFLAGS = -I$(top_srcdir)/src/include -I$(top_srcdir)/src/libfoma -I$(top_srcdir)/src/libtreeler $(KALDI_INCLUDES) $(KALDI_CPPFLAGS) $(MY_CPPFLAGS)
+AM_CPPFLAGS = -I$(top_srcdir)/src/include -I$(top_srcdir)/src/libfoma -I$(top_srcdir)/src/libtreeler $(KALDI_CPPFLAGS) $(MY_CPPFLAGS)
 AM_CXXFLAGS = $(MY_CXXFLAGS)
 
 lib_LTLIBRARIES = libfreeling.la

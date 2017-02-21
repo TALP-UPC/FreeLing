@@ -285,8 +285,8 @@ AC_CHECK_LIB([z],[main],[echo "OK">/dev/null;], [echo "" &&
 if test $using_kaldi = "yes"
 then
 LDFLAGS="$LDFLAGS -L$KALDI_ROOT/tools/openfst/lib -L$KALDI_ROOT/src/lib"
-CPPFLAGS="$CPPFLAGS -I$KALDI_ROOT/src/ -I$KALDI_ROOT/tools/openfst/include"
-CXXFLAGS="$CXXFLAGS -I$KALDI_ROOT/src/ -I$KALDI_ROOT/tools/openfst/include"
+CPPFLAGS="$CPPFLAGS -I$KALDI_ROOT/tools/ATLAS/include -I$KALDI_ROOT/src/ -I$KALDI_ROOT/tools/openfst/include"
+CXXFLAGS="$CXXFLAGS -Wno-unused-local-typedefs"
 AC_CHECK_HEADERS([$KALDI_ROOT/src/base/kaldi-common.h],[
   AC_CHECK_LIB([kaldi-base],[main],[
     AC_CHECK_LIB([fst],[main],[echo "OK">/dev/null;], 
