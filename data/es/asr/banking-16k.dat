@@ -14,9 +14,7 @@
 <MfccConfig>
 ./16000/bank/mfcc.conf
 </MfccConfig>
-<IvectorExtractorConfig>
--
-</IvectorExtractorConfig>
+
 ##Parametres for the asr system
 <Frequency>
 16000
@@ -45,6 +43,7 @@ mfcc
 <PostDecodeAcwt>
 10
 </PostDecodeAcwt>
+
 ##These parametres are not needed at the moment, only for online decoding
 <ChunkLengthSecs>
 0.18

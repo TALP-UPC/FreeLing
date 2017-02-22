@@ -69,14 +69,11 @@
 #define MENTIONS_TRACE      0x10000000
 #define OUTPUT_TRACE        0x20000000
 #define SEMGRAPH_TRACE      0x40000000
-
 #define SUMMARIZER_TRACE    0x80000000
 
-/**
- * Repeated trace code with PHONETICS module, because there are no more codes available
- * TODO: rebuild log system
-*/
-#define ASR_TRACE     0x08000000
+/** Traces beyond 32 bits **/
+#define ASR_TRACE           0x100000000
+#define WORD_VECTOR_TRACE   0x200000000
 
 // MOD_TRACECODE and MOD_TRACENAME are empty. The class 
 // using the trace is expected to set them
@@ -94,7 +91,7 @@ namespace freeling {
     // current trace level
     static int TraceLevel;
     // modules to trace
-    static unsigned long TraceModule;
+    static unsigned long long TraceModule;
   };
 
 } // namespace

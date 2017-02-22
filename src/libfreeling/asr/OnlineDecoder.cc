@@ -183,19 +183,35 @@ namespace freeling {
   ////////////////////////////////////////////////////////////////
 
   void OnlineDecoder::Decode(Request &request, Response &response) {
+
     // Check if the audio request frequency matches the decoder frequency
     if (request.Frequency() != decoder_frequency_)
       ERROR_CRASH(L"Audio frequency doesn't match decoder frequency. Audio frequency: " + util::string2wstring(std::to_string(request.Frequency())) + L", decoder frequency: " + util::string2wstring(std::to_string(decoder_frequency_)));
+
+    TRACE(4,"Decoding - Starting input")
     
     // Prepare the decoder for the decoding call
     InputStarted();
 
+    TRACE(4,"Decoding - input started");
+
     kaldi::BaseFloat seconds_to_decode = request.SecondsToDecode();
 
+    TRACE(4,"Decoding seconds="<<seconds_to_decode);
+
     if (seconds_to_decode == 0.0) {   // Decode all the audio chunk at once
+      TRACE(4,"Get audio");
       kaldi::SubVector<kaldi::BaseFloat>* wave_part = request.GetAudioChunk();
+
+      TRACE(4,"Audio. Size="<<wave_part->Dim());
+      kaldi::BaseFloat *vec = (kaldi::BaseFloat *) wave_part->Data();
+      for (int x=0; x<wave_part->Dim(); x+=500)
+        std::wcerr<<" "<<vec[x];
+      std::wcerr<<endl;
+
       AcceptWaveform(request.Frequency(), *wave_part, false);
-    } else {                          // Decode the audio chunk in parts
+    } 
+    else {                          // Decode the audio chunk in parts
       int samp_counter = 0;
       int samples_per_chunk = int(seconds_to_decode * request.Frequency());
       
@@ -212,6 +228,7 @@ namespace freeling {
 
     // Prepare the decoder to get results
     InputFinished();
+    TRACE(4,"input finished");
     
     // Get decoding results
     vector<DecodedData> result;

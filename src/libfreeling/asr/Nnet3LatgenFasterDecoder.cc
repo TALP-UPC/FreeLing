@@ -20,6 +20,8 @@
 #include "freeling/morfo/asr/Nnet3LatgenFasterDecoder.h"
 #include <iostream>
 
+using namespace std;
+
 namespace freeling {
 
   #define MOD_TRACECODE ASR_TRACE
@@ -29,7 +31,13 @@ namespace freeling {
   /// Constructor, configures the decoder
   ////////////////////////////////////////////////////////////////
 
-  Nnet3LatgenFasterDecoder::Nnet3LatgenFasterDecoder(int frequency, const std::string &words_filename, const std::string &fst_filename, const std::string &nnet3_model_filename, const std::string &mfcc_config_filename, const std::string &ivector_config_filename, const DecoderOptions &options) {
+  Nnet3LatgenFasterDecoder::Nnet3LatgenFasterDecoder(int frequency, 
+                                                     const wstring &words_filename, 
+                                                     const wstring &fst_filename, 
+                                                     const wstring &nnet3_model_filename, 
+                                                     const wstring &mfcc_config_filename, 
+                                                     const wstring &ivector_config_filename, 
+                                                     const DecoderOptions &options) {
     online_ = false;
     decode_fst_ = NULL;
     trans_model_ = NULL;
@@ -37,14 +45,13 @@ namespace freeling {
     feature_info_ = NULL;
 
     decoder_frequency_ = frequency;
-    nnet3_rxfilename_ = nnet3_model_filename;
-    fst_rxfilename_ = fst_filename;
-    word_syms_rxfilename_ = words_filename;
+    nnet3_rxfilename_ = util::wstring2string(nnet3_model_filename);
+    fst_rxfilename_ = util::wstring2string(fst_filename);
+    word_syms_rxfilename_ = util::wstring2string(words_filename);
 
-    if (ivector_config_filename != "-")
-      feature_config_.ivector_extraction_config = ivector_config_filename;
-    feature_config_.mfcc_config = mfcc_config_filename;
-    feature_config_.feature_type = options.featuretype;
+    feature_config_.ivector_extraction_config = util::wstring2string(ivector_config_filename);
+    feature_config_.mfcc_config = util::wstring2string(mfcc_config_filename);
+    feature_config_.feature_type = util::wstring2string(options.featuretype);
 
     // DecodableNnet3OnlineOptions configuration
     nnet3_decoding_config_.decodable_opts.acoustic_scale = options.acousticscale;
@@ -121,18 +128,11 @@ namespace freeling {
   ////////////////////////////////////////////////////////////////
 
   bool Nnet3LatgenFasterDecoder::Initialize(kaldi::OptionsItf &so) {
+
     // Initialize parent class and check all files exist
-    if (!OnlineDecoder::Initialize(so)) {
-      return false;
-    }
-
-    if (fst_rxfilename_ == "") {
-      return false;
-    }
-
-    if (nnet3_rxfilename_ == "") {
-      return false;
-    }
+    if (!OnlineDecoder::Initialize(so)) return false;
+    if (fst_rxfilename_ == "") return false;
+    if (nnet3_rxfilename_ == "") return false;
 
     // Initialize the feature pipeline with its configuration
     feature_info_ = new kaldi::OnlineNnet2FeaturePipelineInfo(feature_config_);
@@ -183,10 +183,10 @@ namespace freeling {
 
     // Initialization of the decoder, passing in the language model and the neural net
     decoder_ = new kaldi::SingleUtteranceNnet3Decoder(nnet3_decoding_config_,
-                      *trans_model_,
-                      *nnet_,
-                      *decode_fst_,
-                      feature_pipeline_);
+                                                      *trans_model_,
+                                                      *nnet_,
+                                                      *decode_fst_,
+                                                      feature_pipeline_);
 
   }
 
@@ -215,13 +215,17 @@ namespace freeling {
       const kaldi::VectorBase<kaldi::BaseFloat> &waveform,
       const bool do_endpointing) {
 
+    TRACE(4,"Waveform ?");
     feature_pipeline_->AcceptWaveform(sampling_rate, waveform);
+    TRACE(4,"Waveform accepted");
 
     if (do_endpointing && decoder_->EndpointDetected(endpoint_config_)) {
       return false;
     }
 
+    TRACE(4,"decoding");
     decoder_->AdvanceDecoding();
+    TRACE(4,"decoded");
     
     return true;
   }

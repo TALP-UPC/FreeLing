@@ -32,6 +32,6 @@ namespace freeling {
   /// Static data members. They are global variables, declared here 
   /// in a separate module so it is linked only once.
   int traces::TraceLevel=0;
-  unsigned long traces::TraceModule=0x0000000;
+  unsigned long long traces::TraceModule=0;
 }
 

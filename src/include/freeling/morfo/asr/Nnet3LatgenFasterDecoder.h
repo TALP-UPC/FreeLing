@@ -28,7 +28,7 @@ namespace freeling {
 
 /// DecoderOptions struct holds all the custom options of the decoder
 struct DecoderOptions {
-    string featuretype;
+    std::wstring featuretype;
     int framesubsamplingfactor;
     int maxactive;     
     float beam;
@@ -53,7 +53,13 @@ class Nnet3LatgenFasterDecoder : public OnlineDecoder {
 public:
 
   /// Constructor, configures the decoder
-  Nnet3LatgenFasterDecoder(int frequency, const std::string &words_filename, const std::string &fst_filename, const std::string &nnet3_model_filename, const std::string &mfcc_config_filename, const std::string &ivector_config_filename, const DecoderOptions &options);
+  Nnet3LatgenFasterDecoder(int frequency, 
+                           const std::wstring &words_filename, 
+                           const std::wstring &fst_filename, 
+                           const std::wstring &nnet3_model_filename, 
+                           const std::wstring &mfcc_config_filename, 
+                           const std::wstring &ivector_config_filename,
+                           const DecoderOptions &options);
   
   /// Destructor
   virtual ~Nnet3LatgenFasterDecoder();
