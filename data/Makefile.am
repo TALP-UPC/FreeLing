@@ -14,7 +14,7 @@ endif
 if GET_EMBEDDINGS
   WORD_EMB=yes
 else
-  WORD_EMB=yes
+  WORD_EMB=
 endif
 
 ## configuration files
