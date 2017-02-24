@@ -2,10 +2,8 @@
 #include <fstream>
 
 #include "freeling.h"
-#include "freeling/morfo/traces.h"
 #include "freeling/morfo/util.h"
 #include "freeling/morfo/corrector.h"
-#include "include/remove_repeated.h"
 
 using namespace std;
 
@@ -13,10 +11,10 @@ using namespace std;
 void ProcessResults(const list<freeling::sentence> &ls) {
   // print normalized text
   wcout << L"Normalized text: " << endl;
-  for (list<freeling::sentence>::iterator s = ls.begin(); s != ls.end(); s++) {
-    for (freeling::sentence::iterator w = s->begin(); w != s->end(); w++) {
+  for (list<freeling::sentence>::const_iterator s = ls.begin(); s != ls.end(); s++) {
+    for (freeling::sentence::const_iterator w = s->begin(); w != s->end(); w++) {
       if (w->has_alternatives()) {
-        for (list<alternative>::iterator a = w->alternatives_begin(); a != w->alternatives_end(); a++) {
+        for (list<freeling::alternative>::const_iterator a = w->alternatives_begin(); a != w->alternatives_end(); a++) {
           if (a->is_selected()) { // you can also use a->is_selected(i) to get the i-nth best selection (starting from 1)
             wcout << a->get_form() << " "; 
           }
@@ -39,18 +37,16 @@ int main(int argc, char* argv[]){
   freeling::util::init_locale(L"default");
 
   // print usage if config-file missing
-  if (argc > 3) {
+  if (argc != 3) {
     wcerr << L"Usage:  corrector lang freelingdir" << endl; 
     exit(1);
   }
 
   // language
-  wstring lang = L"en";
-  if (argc>=2) lang = freeling::util::string2wstring(argv[1]);
+  wstring lang = freeling::util::string2wstring(argv[1]);
   /// path to data files
-  wstring path = L"/usr/local/share/freeling";
-  if (argc>=3) path = freeling::util::string2wstring(argv[2])
-  path = path + L"/";                 
+  wstring path = freeling::util::string2wstring(argv[2]);
+  path = path + L"/";
   
   // create a noisy text normalization module with the given config file
   wstring cfgFile = freeling::util::string2wstring(argv[1]);
@@ -77,12 +73,12 @@ int main(int argc, char* argv[]){
   freeling::splitter::session_id sid = sp.open_session();
   
   // morphological analysis module and options
-  maco_options opt(lang);
+  freeling::maco_options opt(lang);
   opt.UserMapFile=mapfile;
   opt.LocutionsFile=path+lang+L"/locucions.dat"; opt.AffixFile=path+lang+L"/afixos.dat";
   opt.ProbabilityFile=path+lang+L"/probabilitats.dat"; opt.DictionaryFile=path+lang+L"/dicc.src";
   opt.NPdataFile=path+lang+L"/np.dat"; opt.PunctuationFile=path+L"/common/punct.dat"; 
-  maco morfo(opt);
+  freeling::maco morfo(opt);
   morfo.set_active_options (is_twitter, // UserMap
                             true,    // NumbersDetection,
                             true,    //  PunctuationDetection,

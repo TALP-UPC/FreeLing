@@ -1,15 +1,15 @@
-<Lang>
-en
-</Lang>
-<Search Algorithm>
+<SearchAlgorithm>
 ## Search algorithms available: Exhaustive, Genetic
 ## (for short sentences Exhaustive will always be used anyway)
 Genetic
-</Search Algorithm>
-<Evaluation Method>
+</SearchAlgorithm>
+
+<EvaluationMethod>
 ## Evaluation methods available: SimilarityNext, SimilarityAll, ContextAverage, Probabilistic, EditDistance
 Probabilistic
-</Evaluation Method>
+</EvaluationMethod>
+
 <ModelFile>
 ## add here path to model file
+embeddings/glove.6B.200d.bin
 </ModelFile>

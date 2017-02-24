@@ -74,7 +74,7 @@
 /** Traces beyond 32 bits **/
 #define ASR_TRACE            0x100000000
 #define WORD_VECTOR_TRACE    0x200000000
-#define WORD_CORRECTOR_TRACE 0x400000000
+#define CORRECTOR_TRACE      0x400000000
 
 // MOD_TRACECODE and MOD_TRACENAME are empty. The class 
 // using the trace is expected to set them

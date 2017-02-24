@@ -29,18 +29,27 @@ namespace freeling {
     // default init settings
     search_algorithm  = GENETIC; 
     evaluation_method = PROBABILISTIC;
+
+    // init GENETIC PARAMS
+    mutation_rate   = 0.05;
+    crossover_rate  = 0.70;
+    GEN_POPULATION  = 200U;
+    GEN_ITERATIONS  = 500U;
+
+    ChatDistance = 75;
     
     // configuration file settings
     wstring path = cfgFile.substr(0, cfgFile.find_last_of(L"/\\")+1);
     wstring stopWordsFile;
     wstring modelFile; //language model (Word Embeddings) file
     
-    enum sections {LANG, ALGORITHM, EVALUATION, WINDOW, MODEL_FILE};
+    enum sections {ALGORITHM, EVALUATION, GENETIC_PARAMS, MODEL_FILE, CHAT_LANG};
     config_file cfg;
-    cfg.add_section(L"Lang", LANG);
-    cfg.add_section(L"Search Algorithm", ALGORITHM);
-    cfg.add_section(L"Evaluation Method", EVALUATION);
-    cfg.add_section(L"ModelFile", MODEL_FILE);
+    cfg.add_section(L"SearchAlgorithm", ALGORITHM);
+    cfg.add_section(L"GeneticParameters", GENETIC_PARAMS);
+    cfg.add_section(L"EvaluationMethod", EVALUATION);
+    cfg.add_section(L"ModelFile", MODEL_FILE, true);
+    cfg.add_section(L"ChatLanguage", CHAT_LANG);
     
     if (not cfg.open(cfgFile))
       ERROR_CRASH(L"Error opening file " + cfgFile);
@@ -52,45 +61,42 @@ namespace freeling {
       sin.str(line);
     
       switch (cfg.get_section()) {
-      case LANG: {
-        sin >> lang;
-        break;
-      }
 
       case ALGORITHM: {
         std::wstring aux_wstr;
         sin >> aux_wstr;
-        if (aux_wstr == L"Exhaustive") {
-          search_algorithm = EXHAUSTIVE;
-        } else if (aux_wstr == L"Genetic") {
-          search_algorithm = GENETIC;
-        } else {
-          std::wcout << L"In corrector config file, found \"" << aux_wstr << L"\" but search algorithm " 
-            << L"can only be [Exhaustive, Genetic]. Setting search_algorithm = GENETIC." << std::endl;
+        if (aux_wstr == L"Exhaustive") search_algorithm = EXHAUSTIVE;
+        else if (aux_wstr == L"Genetic") search_algorithm = GENETIC;
+        else {
+          WARNING(L"Invalid SearchAlgorithm \"" << aux_wstr << L"\" in file "<<cfgFile<<". Using default.");
         }
-        
+        break;
+      }
+
+      case GENETIC_PARAMS : {
+        std::wstring key, value;
+        sin >> key >> value;
+        if (key==L"MutationRate") mutation_rate = util::wstring2double(value);
+        else if (key==L"CrossoverRate") crossover_rate = util::wstring2double(value);
+        else if (key==L"PopulationSize") GEN_POPULATION = util::wstring2int(value);
+        else if (key==L"Generations") GEN_ITERATIONS = util::wstring2int(value);
+        else {
+          WARNING(L"Ignoring unexpected line \"" << line << L"\" in file "<<cfgFile<<". Using default.");
+        }
         break;
       }
       
       case EVALUATION: {
         std::wstring aux_wstr;
         sin >> aux_wstr;
-        if (aux_wstr == L"SimilarityNext") {
-          evaluation_method = SIMILARITY_NEXT;
-        } else if (aux_wstr == L"SimilarityAll") {
-          evaluation_method = SIMILARITY_ALL;
-        } else if (aux_wstr == L"ContextAverage") {
-          evaluation_method = CONTEXT_AVERAGE;
-        } else if (aux_wstr == L"Probabilistic") {
-          evaluation_method = PROBABILISTIC;
-        } else if (aux_wstr == L"ProbContext"){
-          evaluation_method = PROBABILISTIC_CONTEXT;
-        } else if (aux_wstr == L"EditDistance") {
-          evaluation_method = EDIT_DISTANCE;
-        } else {
-          std::wcout << L"In corrector config file, found \"" << aux_wstr 
-            << L"\" but evaluation method can only be [SimilarityNext, SimilarityAll, ContextAverage, " 
-            << L"Probabilistic, ProbContext, EditDistance]. Setting evaluation_method = PROBABILISTIC." << std::endl;
+        if (aux_wstr == L"SimilarityNext") evaluation_method = SIMILARITY_NEXT;
+        else if (aux_wstr == L"SimilarityAll") evaluation_method = SIMILARITY_ALL;
+        else if (aux_wstr == L"ContextAverage") evaluation_method = CONTEXT_AVERAGE;
+        else if (aux_wstr == L"Probabilistic") evaluation_method = PROBABILISTIC;
+        else if (aux_wstr == L"ProbContext") evaluation_method = PROBABILISTIC_CONTEXT;
+        else if (aux_wstr == L"EditDistance") evaluation_method = EDIT_DISTANCE;
+        else {
+          WARNING(L"Invalid EvaluationMethod \"" << aux_wstr << L"\" in file "<<cfgFile<<". Using default.");
         }
         break;
       }
@@ -98,6 +104,16 @@ namespace freeling {
       case MODEL_FILE: {
         sin >> modelFile;
         modelFile = util::absolute(modelFile, path);
+        break;
+      }
+
+      case CHAT_LANG: {
+        std::wstring key, value;
+        sin >> key >> value;
+        if (key == L"DistanceValue") 
+          ChatDistance = util::wstring2int(value);
+        else 
+          chat_lang.insert(make_pair(key,value));
         break;
       }
 
@@ -115,58 +131,37 @@ namespace freeling {
   /////////////////////////////////////////////////////////////////////////////
   /// Destructor
   /////////////////////////////////////////////////////////////////////////////
+
   corrector::~corrector() {
     delete wordVec;
   }
   
-  /////////////////////////////////////////////////////////////////////////////
-  /// General functions
-  /////////////////////////////////////////////////////////////////////////////
-  std::wstring corrector::get_language() {return lang;}
   
-  // preprocess text after word embeddings have been created
+  /////////////////////////////////////////////////////////////////////////////
+  /// preprocess text after word embeddings have been created
+  /////////////////////////////////////////////////////////////////////////////
+
   void corrector::preprocess(std::list<freeling::sentence> &ls) {
-    // chat language abreviations
-    std::map<std::wstring, std::wstring> chat_lang;
-    if (lang == L"es") {
-      chat_lang[L"q"]    = L"que";
-      chat_lang[L"xq"]   = L"porque";
-      chat_lang[L"tq"]   = L"te_quiero";
-      chat_lang[L"tk"]   = L"te_quiero";
-      chat_lang[L"tkm"]  = L"te_quiero_mucho";
-      chat_lang[L"tqm"]  = L"te_quiero_mucho";
-      chat_lang[L"bss"]  = L"besos";
-      chat_lang[L"tb"]   = L"también";
-      chat_lang[L"bye"]  = L"adiós";
-      chat_lang[L"k"]    = L"de_acuerdo";
-      chat_lang[L"xo"]   = L"pero";
-      chat_lang[L"x"]    = L"por";
-      chat_lang[L"bn"]   = L"bien";
-      chat_lang[L"xa"]   = L"para";
-      chat_lang[L"pq"]   = L"porque";
-      chat_lang[L"d"]    = L"de";
-      chat_lang[L"dnd"]  = L"donde";
-      chat_lang[L"xfa"]  = L"por_favor";
-      chat_lang[L"plis"] = L"por_favor";
-      chat_lang[L"pls"]  = L"por_favor";
-      chat_lang[L"sbs"]  = L"sabes";
-      chat_lang[L"esk"]  = L"es_que";
-    }
-    
+
+    if (chat_lang.empty()) return;
+    // if we have a chat abbreviations dicctionary, apply it.
     for (list<freeling::sentence>::iterator s = ls.begin(); s != ls.end(); s++) {
       for (freeling::sentence::iterator w = s->begin(); w != s->end(); w++) {
-        if (chat_lang.count(w->get_lc_form()) == 1) { // if form matches
+        if (chat_lang.find(w->get_lc_form()) != chat_lang.end()) { // if form matches
           w->clear_alternatives();
-          w->add_alternative(freeling::alternative(chat_lang[w->get_lc_form()], 75));
+          w->add_alternative(freeling::alternative(chat_lang[w->get_lc_form()], ChatDistance));
         }
       }
     }
   }
 
-  // Move data from sentences to alternatives data structure
+  /////////////////////////////////////////////////////////////////////////////
+  /// Move data from sentences to alternatives data structure
+  /////////////////////////////////////////////////////////////////////////////
+
   unsigned int corrector::set_alternatives(std::list<freeling::sentence> &ls, alt_t &alternatives) {
-    if (DISPLAY_STATS)
-      std::wcout << std::endl << L"### CORRECTOR STATS" << std::endl;
+
+    TRACE(6,L"\n### CORRECTOR STATS");
     
     // get only X best alternatives
     unsigned int alts_limit        = 30;
@@ -232,17 +227,11 @@ namespace freeling {
                           const freeling::alternative &right){
                          return left.get_probability() > right.get_probability();});
         
-        if (DISPLAY_STATS) {
-          if (alts.size() > 0)
-            std::wcout << L"Alternatives (" << w->get_form() << L") (" << alts.size() << L"): ";
+        if (alts.size() > 0) {
+          TRACE(4, L"==> Alternatives (" << w->get_form() << L") (" << alts.size() << L"): ");
           for (unsigned int i = 0; i < alts.size(); i++) {
-            std::wcout << alts[i].get_form() << L"(" << alts[i].get_distance() << L")(" << alts[i].get_probability() << L")";
-            if (i < alts.size() - 1) {
-              std::wcout << L", ";
-            }
+            TRACE(5, L"     "<<alts[i].get_form() << L" (" << alts[i].get_distance() << L"," << alts[i].get_probability() << L")");
           }
-          if (alts.size() > 0)
-            std::wcout << std::endl;
         }
         
         // keep the word if no alternatives found or needed
@@ -250,7 +239,8 @@ namespace freeling {
           freeling::alternative aux_alt(std::wstring(w->get_lc_form()), 1);
           aux_alt.set_probability(1.0f);
           alts.push_back(aux_alt);
-        } else if (alts.size() > 1) {
+        }
+        else if (alts.size() > 1) {
           num_incorrect_words += 1;
         }
         
@@ -302,23 +292,7 @@ namespace freeling {
     // set algorithm to EXHAUSTIVE if the number of states to search is low
     search_algorithms selected_algorithm = search_algorithm;
     if (total_states <= 100000) selected_algorithm = EXHAUSTIVE;
-    
-    if (DISPLAY_STATS) {
-      std::wstring aux_wstr = L"???";
-      if (selected_algorithm == EXHAUSTIVE) aux_wstr = L"Exhaustive";
-      else if (selected_algorithm == GENETIC) aux_wstr = L"Genetic";
-      std::wcout << L"Search algorithm:       " << aux_wstr << std::endl;
-      
-      aux_wstr = L"???";
-      if (evaluation_method == SIMILARITY_NEXT) aux_wstr = L"SimilarityNext";
-      else if (evaluation_method == SIMILARITY_ALL) aux_wstr = L"SimilarityAll";
-      else if (evaluation_method == CONTEXT_AVERAGE) aux_wstr = L"ContextAverage";
-      else if (evaluation_method == PROBABILISTIC) aux_wstr = L"Probabilistic";
-      else if (evaluation_method == PROBABILISTIC_CONTEXT) aux_wstr = L"ProbContext";
-      else if (evaluation_method == EDIT_DISTANCE) aux_wstr = L"EditDistance";
-      std::wcout << L"Evaluation algorithm:   " << aux_wstr << std::endl;
-    }
-    
+        
     switch (selected_algorithm) {
     case EXHAUSTIVE: { //========== EXHAUSTIVE SEARCH ============  
       unsigned int num_states_evaluated = 0;
@@ -356,15 +330,13 @@ namespace freeling {
             --index;
           }
         }
-        
+
         //go to next state
         state_found = next_state(alternatives, current_state);
       }
-      
-      if (DISPLAY_STATS) {
-        std::wcout << L"Search space size:      " << total_states << L" states" << std::endl;
-        std::wcout << L"States evaluated:       " << num_states_evaluated << std::endl;
-      }
+
+      TRACE(4, L"Search space size:      " << total_states << L" states");
+      TRACE(4, L"States evaluated:       " << num_states_evaluated);      
       break;
     }
     case GENETIC: { //========== GENETIC ALGORITHM ============
@@ -637,18 +609,7 @@ namespace freeling {
     std::fill_n(best_results, STORED_SOLUTIONS, -1.0);
     unsigned int num_states_evaluated = 0;
     
-    // GENETIC PARAMS
-    float mutation_rate   = 0.05;
-    float crossover_rate  = 0.70;
-    
     unsigned int total_mutations = 0;
-    if (DISPLAY_STATS) {
-      std::wcout << std::endl << L"Genetic params: " << std::endl;
-      std::wcout << L"crossover rate: " << crossover_rate << std::endl;
-      std::wcout << L"mutation rate: " << mutation_rate << std::endl;
-      std::wcout << L"population: " << GEN_POPULATION << std::endl;
-      std::wcout << L"iterations: " << GEN_ITERATIONS << std::endl;
-    }
     
     // random generator
     std::srand((unsigned int) time(0));
@@ -671,24 +632,9 @@ namespace freeling {
     // calculate constants from genetic params:
     unsigned int mutation_rate100 = (unsigned int) (mutation_rate*100.0);
     
-    // genetic debug display
-    bool GENETIC_DEBUG_DISPLAY = false;
     
     // for every iteration, evaluate and apply operators
     for (unsigned int iter = 0; iter < GEN_ITERATIONS; iter++) {
-      
-      if (DISPLAY_STATS and GENETIC_DEBUG_DISPLAY) {
-        if (iter < 100 and iter % 20 == 0) {
-          std::wcout << std::endl << L"GENETIC ITER " << iter << std::endl;
-          for (auto element : gen_states[current_generation]) {
-            std::wcout << L"[";
-            for (unsigned int i = 0; i < num_incorrect_words - 1; i++) {
-              std::wcout << element.second[i] << ", ";
-            }
-            std::wcout << element.second[num_incorrect_words - 1] << L"]" << std::endl;
-          }
-        }
-      }
       
       // EVALUATE SOLUTIONS AND UPDATE BEST RESULTS
       for (unsigned int individual = 0; individual < GEN_POPULATION; individual++) {
@@ -772,10 +718,8 @@ namespace freeling {
       }
     }
     
-    if (DISPLAY_STATS) {
-      std::wcout << L"Total mutations:      " << total_mutations << std::endl;
-      std::wcout << L"Num states evaluated: " << num_states_evaluated << std::endl;
-    }
+    TRACE(4, L"Total mutations:      " << total_mutations);
+    TRACE(4, L"Num states evaluated: " << num_states_evaluated);
     
     // free memory
     for (unsigned int individual = 0; individual < GEN_POPULATION; individual++) {

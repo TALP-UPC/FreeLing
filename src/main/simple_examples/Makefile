@@ -4,7 +4,6 @@
 #
 # make FREELINGDIR=/my/freeling/dir BOOSTINCLUDEDIR=/my/boost/include BOOSTLIBDIR=/my/boost/lib
 
-
 # directories where freeling and boost are installed
 FREELINGDIR=/usr/local
 BOOSTINCLUDEDIR=/usr/local/include
@@ -14,7 +13,7 @@ BOOSTLIBDIR=/usr/local/lib
 PATHS=-L$(FREELINGDIR)/lib -I$(FREELINGDIR)/include -I$(FREELINGDIR)/include/foma -L$(BOOSTLIBDIR) -I$(BOOSTINCLUDEDIR)
 LIBS=-lfreeling -lboost_system
 
-all:	fl1_morph fl2_tagger fl3_chunker fl4_dependences ident coreferences sample kbest_tagger alts analyzer summary word_vec
+all:	fl1_morph fl2_tagger fl3_chunker fl4_dependences ident coreferences sample kbest_tagger alts analyzer summary word_vec corrector
 
 fl1_morph: fl1_morph.cc
 	g++ -std=c++0x -o fl1_morph fl1_morph.cc $(PATHS) $(LIBS)
@@ -52,8 +51,8 @@ summary: summary.cc
 word_vec: word_vec.cc
 	g++ -std=gnu++0x  -o word_vec word_vec.cc $(PATHS) $(LIBS)
 
-word_vec: corrector.cc
+corrector: corrector.cc
 	g++ -std=gnu++0x  -o corrector corrector.cc $(PATHS) $(LIBS)
 
 clean:
-	rm -f fl1_morph fl2_tagger fl3_chunker fl4_dependences ident coreferences sample kbest_tagger alts analyzer word_vec
+	rm -f fl1_morph fl2_tagger fl3_chunker fl4_dependences ident coreferences sample kbest_tagger alts analyzer summary word_vec corrector

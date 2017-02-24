@@ -1,15 +1,41 @@
-<Lang>
-es
-</Lang>
-<Search Algorithm>
+<SearchAlgorithm>
 ## Search algorithms available: Exhaustive, Genetic
 ## (for short sentences Exhaustive will always be used anyway)
 Genetic
-</Search Algorithm>
-<Evaluation Method>
+</SearchAlgorithm>
+
+<EvaluationMethod>
 ## Evaluation methods available: SimilarityNext, SimilarityAll, ContextAverage, Probabilistic, EditDistance
 Probabilistic
-</Evaluation Method>
+</EvaluationMethod>
+
 <ModelFile>
 ## add here path to model file
+embeddings/wiki_es_skip5.bin
 </ModelFile>
+
+<ChatLanguage>
+DistanceValue 75
+q    que
+xq   porque
+tq   te_quiero
+tk   te_quiero
+tkm  te_quiero_mucho
+tqm  te_quiero_mucho
+bss  besos
+tb   también
+bye  adiós
+k    de_acuerdo
+xo   pero
+x    por
+bn   bien
+xa   para
+pq   porque
+d    de
+dnd  donde
+xfa  por_favor
+plis por_favor
+pls  por_favor
+sbs  sabes
+esk  es_que
+</ChatLanguage>

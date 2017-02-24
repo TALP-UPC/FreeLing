@@ -45,7 +45,7 @@ int main(int argc, char* argv[]){
   wcout << L" DONE" << endl;
   
   // warn the user if he's not using a binary model
-  if (model_path.substr(model_file.length() - 4) != L".bin") {
+  if (model_file.substr(model_file.length() - 4) != L".bin") {
     wcout << L"It seems you are not using a binary model file (.bin), do you want to dump a copy of the model in binary format? (y/n) " << flush;
     wstring user_input;
     wcin >> user_input;

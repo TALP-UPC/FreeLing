@@ -24,29 +24,25 @@ namespace freeling {
 
   class corrector {
   private: 
-    // language of the text to analyze and the word embeddings
-    std::wstring lang;
     
     // word embeddings
-    word_vector *wordVec;
-    
+    word_vector *wordVec;    
     // number of best solutions stored on the alternatives kbest
     const unsigned int STORED_SOLUTIONS = 10U;
     
     // original incorrect => correct (actual correction)
     std::list<std::tuple<std::wstring, std::wstring, std::wstring>> missed_corrections;
-    
-    //-------------------------------
-    // Display corrector stats
-    //-------------------------------
-    const bool DISPLAY_STATS = true;
-    
+
     //-------------------------------
     // Evaluation weights
     //-------------------------------
     const float WORD_EMBEDDINGS_WEIGHT = 0.3;
     const float WORD_DISTANCE_WEIGHT   = 0.7;
-    
+
+    // chat language abreviations
+    std::map<std::wstring, std::wstring> chat_lang;
+    int ChatDistance;
+
     //-------------------------------
     // Algorithms
     //-------------------------------
@@ -79,8 +75,10 @@ namespace freeling {
     //-------------------------------
     // Genetic algorithm params
     //-------------------------------
-    static const unsigned int GEN_POPULATION  = 200U;
-    static const unsigned int GEN_ITERATIONS  = 500U;
+    double mutation_rate;
+    double crossover_rate;
+    unsigned int GEN_POPULATION;
+    unsigned int GEN_ITERATIONS;
     std::vector<std::vector<std::pair<float, unsigned int*>>> gen_states;
     unsigned int current_generation;
     
@@ -119,9 +117,6 @@ namespace freeling {
     
     // takes a vector of corrections and prints the results in a readable format
     void print_evaluation_results(std::vector<corrector_evaluation_t> corrections);
-    
-    // get corrector language
-    std::wstring get_language();
     
   };
 } // namespace
