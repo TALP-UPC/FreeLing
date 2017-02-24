@@ -52,5 +52,8 @@ summary: summary.cc
 word_vec: word_vec.cc
 	g++ -std=gnu++0x  -o word_vec word_vec.cc $(PATHS) $(LIBS)
 
+word_vec: corrector.cc
+	g++ -std=gnu++0x  -o corrector corrector.cc $(PATHS) $(LIBS)
+
 clean:
 	rm -f fl1_morph fl2_tagger fl3_chunker fl4_dependences ident coreferences sample kbest_tagger alts analyzer word_vec

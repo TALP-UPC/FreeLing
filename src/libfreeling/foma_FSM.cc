@@ -197,7 +197,7 @@ wstring print_sigma(struct sigma *sigma) {
   /// adding them (and the distance) to given list.
   ////////////////////////////////////////////////////////////////////////
 
-  void foma_FSM::get_similar_words(const wstring &form, list<pair<wstring,int> > &alts) const {
+  void foma_FSM::get_similar_words(const wstring &form, list<freeling::alternative> &alts) const {
 
     TRACE(3,L"Copying to char buffer");
     // convert input const wstring to non-const char* to satisfy foma API
@@ -218,7 +218,7 @@ wstring print_sigma(struct sigma *sigma) {
         // get distance
         int c = apply_med_get_cost(h_fsa);
         // store alternative in list
-        alts.push_back(make_pair(alt,c));
+        alts.push_back(alternative(alt,c));
       }
     
       // Call with NULL on subsequent calls to get next alternatives

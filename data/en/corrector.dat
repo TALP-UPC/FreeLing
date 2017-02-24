@@ -1,0 +1,15 @@
+<Lang>
+en
+</Lang>
+<Search Algorithm>
+## Search algorithms available: Exhaustive, Genetic
+## (for short sentences Exhaustive will always be used anyway)
+Genetic
+</Search Algorithm>
+<Evaluation Method>
+## Evaluation methods available: SimilarityNext, SimilarityAll, ContextAverage, Probabilistic, EditDistance
+Probabilistic
+</Evaluation Method>
+<ModelFile>
+## add here path to model file
+</ModelFile>

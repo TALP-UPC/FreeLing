@@ -56,6 +56,7 @@ namespace freeling {
     DistanceThreshold=2;
     MaxSizeDiff=3;
     CheckUnknown=true;
+    RemoveRepeated=0;
     sed=NULL;
     comp=NULL;
 
@@ -131,6 +132,8 @@ namespace freeling {
         else if (key==L"KnownWords") {
           if (value!=L"none" and value!=L"no") CheckKnownTags = freeling::regexp(value);
         }
+        else if (key==L"RemoveRepeated") 
+          RemoveRepeated = freeling::util::wstring2int(value);
         else 
           WARNING(L"Ignoring unexpected line '"+line+L"' in file "+altsFile);
         break;
@@ -254,6 +257,10 @@ namespace freeling {
   }
 
 
+  ////////////////////////////////////////////////////////////////////////
+  /// sort criteria: shortests edit distance, if equal smaller length difference
+  ////////////////////////////////////////////////////////////////////////
+
   inline bool compare_alternatives(const pair<wstring,pair<int,int> > &p1,
                                    const pair<wstring,pair<int,int> > &p2) {
     return p1.second.first<p2.second.first or 
@@ -265,8 +272,45 @@ namespace freeling {
   /// adds the new words that are valid alternatives.
   ////////////////////////////////////////////////////////////////////////
 
-  void alternatives::filter_alternatives(const list<pair<wstring,int> > &alts, word &w) const {
+  void alternatives::filter_alternatives(const list<alternative> &alts, word &w) const {
 
+    // if we are doing phonetic match, and there is an exact phonetic match,
+    // lower the threshold for filtering (i.e. be pickier for non-exact matches)
+    int max = DistanceThreshold;
+    if (DistanceType==PHONETIC and not alts.empty() and alts.begin()->get_distance()==0) 
+      max = max/2;
+
+    // put toghether existing alternatives (if any) plus new ones
+    w.get_alternatives().insert(w.get_alternatives().end(), alts.begin(), alts.end());
+
+    // sort alphabetically, then by distance
+    w.get_alternatives().sort([](const freeling::alternative &left,
+                                 const freeling::alternative &right) {
+                                   if (left.get_form() == right.get_form()) 
+                                     return left.get_distance() < right.get_distance();
+                                   else 
+                                     return left.get_form()<right.get_form();}
+                              );
+    // remove duplicates
+    w.get_alternatives().unique([](const freeling::alternative &left,
+                                   const freeling::alternative &right) {
+                                  return left.get_form() == right.get_form();}
+                                );
+    // sort by distance, then by length difference 
+    w.get_alternatives().sort([&](const freeling::alternative &left,
+                                 const freeling::alternative &right) {
+                                if (left.get_distance() == right.get_distance() ) {
+                                  int dL = labs(left.get_form().length()-w.get_form().length());
+                                  int dR = labs(right.get_form().length()-w.get_form().length());
+                                  return dL<dR;
+                                }
+                                else 
+                                  return left.get_distance() < right.get_distance(); }
+                              );
+
+    w.get_alternatives().remove_if([&](const freeling::alternative &alt) {return alt.get_distance()>max;} );
+
+      /*    
     // start with existing alternatives (if any)
     map<wstring,int> filtered;
     for (list<freeling::alternative>::const_iterator a=w.alternatives_begin(); a!=w.alternatives_end(); a++) 
@@ -294,8 +338,12 @@ namespace freeling {
     w.clear_alternatives();
     for (list<pair<wstring,pair<int,int> > >::const_iterator f=aux.begin(); f!=aux.end(); f++) 
       // add new pair form-distance to final alternatives list.
-           w.get_alternatives().push_back(freeling::alternative(f->first,f->second.first));
+      w.get_alternatives().push_back(freeling::alternative(f->first,f->second.first));
+      */
   }
+
+
+
 
 
   ////////////////////////////////////////////////////////////////////////
@@ -318,12 +366,33 @@ namespace freeling {
 
       if (check) {
 
-        list<pair<wstring,int> > alts;
+        // if removeRepeated is active, remove repeated characters
+        wstring form = pos->get_lc_form();
+        wstring no_repeated = pos->get_lc_form();
+        if (RemoveRepeated>0) {
+          // if the number of removed chars is larger than threshold, 
+          // use only shortened version of the word
+          no_repeated = remove_repeated(form);
+          if (form.length() - no_repeated.length() > RemoveRepeated ) 
+            form = no_repeated;
+        }
 
-        TRACE(3,L"get alternatives for "+pos->get_lc_form());
-        get_similar_words(pos->get_lc_form(), alts);
+        // look for alternatives
+        TRACE(3,L"get alternatives for "+form);
+        list<alternative> alts;
+        get_similar_words(form, alts);
         TRACE(4,L" found "+util::int2wstring(alts.size())+L" alternatives");
 
+        // if number of removed chars is  under the threshold
+        // we have looked for the original word.  If corrections were found,
+        // (and num of removed chars is not zero, i.e. words differ) add 
+        // corrections for reduced word.
+        if (not alts.empty() and form.length()!=no_repeated.length()) {
+          TRACE(3,L"get alternatives for "+no_repeated);
+          get_similar_words(no_repeated, alts);
+          TRACE(4,L" found total of "+util::int2wstring(alts.size())+L" alternatives");
+        }
+        
         // filter and add the obtained words as new analysis
         if (not alts.empty()) filter_alternatives(alts,*pos);
       }
@@ -368,7 +437,7 @@ namespace freeling {
   /// caller only want the list of strings
   ////////////////////////////////////////////////////////////////////////
 
-  void alternatives::get_similar_words(const wstring &form, list<pair<wstring,int> > & results) const {
+  void alternatives::get_similar_words(const wstring &form, list<alternative> & results) const {
 
     if (DistanceType==ORTHOGRAPHIC) {
       TRACE(4,L"Using ORTHO ");
@@ -381,23 +450,23 @@ namespace freeling {
       // encode given word
       wstring phon = ph->get_sound(form);
       TRACE(4,L" Get words similar to "+form+L".  Looking for entries sounding like "+phon);
-      list<pair<wstring,int> > aux;
+      list<alternative> aux;
 
       // get similar sounds
       sed->get_similar_words(phon, aux);
       if (comp!=NULL) comp->get_similar_words(phon, aux);
 
       set<wstring> seen;
-      for (list<pair<wstring,int> >::const_iterator a=aux.begin(); a!=aux.end(); a++) {
-        TRACE(5,L"   Found similar sound "+a->first);
+      for (list<alternative>::const_iterator a=aux.begin(); a!=aux.end(); a++) {
+        TRACE(5,L"   Found similar sound "+a->get_form());
 
-        list<wstring> wds = util::wstring2list(a->first,L"_");
+        list<wstring> wds = util::wstring2list(a->get_form(),L"_");
         list<wstring> orts = recover_words(wds);        
         for (list<wstring>::iterator w=orts.begin(); w!=orts.end(); w++) {
           TRACE(5,L"      corresponding words "+*w);
           if (labs(form.size()-w->size())<=MaxSizeDiff && seen.find(*w)==seen.end()) {
             TRACE(5,L"         added ");
-            results.push_back(make_pair(*w,a->second));
+            results.push_back(alternative(*w,a->get_distance()));
             seen.insert(*w);
           }
         }
@@ -405,5 +474,20 @@ namespace freeling {
     }
   }
 
+  ////////////////////////////////////////////////////////////////////////
+  /// Removes repeated consuecutive characters of a string
+  /// Examples:  hoolaaaa => hola, VAMOOOOS => VAMOS,
+  ///            aaa => a,  COMOooOo? => COMOoOo?
+  ////////////////////////////////////////////////////////////////////////
+
+  wstring alternatives::remove_repeated(const wstring &str) const {
+    wstring res = str;
+    unsigned int i = res.length() - 1;
+    while (i > 0) {
+      if (res[i] == res[i-1]) res.erase(i-1, 1);
+      --i;
+    }
+    return res;
+  }
 
 } // namespace

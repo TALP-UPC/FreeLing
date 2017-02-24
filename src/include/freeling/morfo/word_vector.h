@@ -16,9 +16,6 @@ namespace freeling {
     // constants
     static const unsigned int MAX_STR_SIZE = 2000;
     
-    // language of the model
-    std::wstring lang;
-    
     // size of the model vocabulary
     unsigned long long int vocabSize;
     
@@ -37,7 +34,7 @@ namespace freeling {
     
   public:
     /// Constructor
-    word_vector(const std::wstring &modelPath, std::wstring language = L"??");
+    word_vector(const std::wstring &modelPath);
     /// Destructor
     ~word_vector();
     
@@ -63,9 +60,6 @@ namespace freeling {
     
     /// Get vectors dimensionality
     unsigned int get_dimensionality();
-    
-    /// Get model language
-    std::wstring get_model_language();
     
     //-------------------------------
     // Word functions

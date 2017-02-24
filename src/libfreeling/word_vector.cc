@@ -21,10 +21,7 @@ namespace freeling {
   ///////////////////////////////////////////////////////////////
   /// Constructor
   ///////////////////////////////////////////////////////////////
-  word_vector::word_vector(const std::wstring &modelPath, std::wstring language) {
-    // set language
-    lang = language;
-    
+  word_vector::word_vector(const std::wstring &modelPath) {
     // read model
     read_model(modelPath);
     
@@ -59,9 +56,6 @@ namespace freeling {
   
   /// Get vectors dimensionality
   unsigned int word_vector::get_dimensionality() {return dimensionality;}
-  
-  /// Get model language
-  std::wstring word_vector::get_model_language() {return lang;}
   
   
   /////////////////////////////////////////////////////////////////////////////

@@ -1,3 +1,21 @@
+
+
+///////////////////////////////////////////
+//  This program can be used to test a word embeddings model.
+//   
+//   Usage:
+//     ./word_vec model-file
+//     
+//   Where "model_file" is a word embedding dictionary.
+//
+//   Dictionaries may be obtained:
+//      1.- building them with word2vec or other software.
+//      2.- installing freeling with "./configure --enable-download-embeddings"
+//      3.- Dowloading them from 
+//             nlp.cs.upc.edu/freeling/extradata/freeling_embeddings.tar.bz2
+//
+///////////////////////////////////////////
+
 #include <iostream>
 #include <fstream>
 #include <algorithm>
@@ -8,7 +26,6 @@
 #include "freeling/morfo/word_vector.h"
 
 using namespace std;
-using namespace freeling;
 
 int main(int argc, char* argv[]){
 
@@ -21,38 +38,32 @@ int main(int argc, char* argv[]){
     exit(1);
   }
   
-  /// path to data files
-  wstring path = L"/usr/local/share/freeling/";
-  
-  // set the language to your desired target (not really used in this program, you can ignore it)
-  const wstring lang = L"??";
-  
   // create a word_vector module with the given model
-  std::wcout << L"Initializing word_vector module..." << std::flush;
-  wstring model_path = freeling::util::string2wstring(argv[1]);
-  freeling::word_vector wordVec(model_path, lang);
-  std::wcout << L" DONE" << std::endl;
+  wcout << L"Initializing word_vector module..." << flush;
+  wstring model_file = freeling::util::string2wstring(argv[1]);
+  freeling::word_vector wordVec(model_file);
+  wcout << L" DONE" << endl;
   
   // warn the user if he's not using a binary model
-  if (model_path.substr(model_path.length() - 4) != L".bin") {
-    std::wcout << L"It seems you are not using a binary model file (.bin), do you want to dump a copy of the model in binary format? (y/n) " << std::flush;
+  if (model_path.substr(model_file.length() - 4) != L".bin") {
+    wcout << L"It seems you are not using a binary model file (.bin), do you want to dump a copy of the model in binary format? (y/n) " << flush;
     wstring user_input;
     wcin >> user_input;
-    std::transform(user_input.begin(), user_input.end(), user_input.begin(), ::tolower);
+    transform(user_input.begin(), user_input.end(), user_input.begin(), ::tolower);
     if (user_input == L"y" || user_input == L"yes") {
-      std::wcout << L"Writing model file as binary file..." << std::flush;
-      std::string::size_type found = model_path.find_last_of(L".");
-      wordVec.dump_model(model_path.substr(0, found) + L".bin");
-      std::wcout << L" DONE" << std::endl;
+      wcout << L"Writing model file as binary file..." << flush;
+      string::size_type found = model_file.find_last_of(L".");
+      wordVec.dump_model(model_file.substr(0, found) + L".bin");
+      wcout << L" DONE" << endl;
     }
   }
   
   // process input
   wstring line;
-  std::wcout << std::endl << L"How To Use:" << std::endl;
-  std::wcout << L"  Write one word to get similar words" << std::endl;
-  std::wcout << L"  Write two words to get their cos similarity" << std::endl;
-  std::wcout << L"  Write word_A : word_B :: word_C : ? to find the analogy" << std::endl << std::endl;
+  wcout << endl << L"How To Use:" << endl;
+  wcout << L"  Write one word to get similar words" << endl;
+  wcout << L"  Write two words to get their cos similarity" << endl;
+  wcout << L"  Write word_A : word_B :: word_C : ? to find the analogy" << endl << endl;
   while (getline(wcin, line)) {
     // read two words from line
     wstring wordA, wordB, wordC, wordD, wordE;

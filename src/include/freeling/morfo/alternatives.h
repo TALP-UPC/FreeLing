@@ -71,6 +71,11 @@ namespace freeling {
     freeling::regexp CheckKnownTags;
     ///  whether unknown words should be checked
     bool CheckUnknown;
+    /// remove repeated characters in words (e.g. "holaaaa")
+    /// The value marks the threshold under which word will be considered
+    /// in both forms (with and without repetitions).
+    /// zero deactivates this feature
+    int RemoveRepeated;
 
     /// type of distance used 
     static const int ORTHOGRAPHIC = 1;
@@ -80,10 +85,13 @@ namespace freeling {
     /// filter given candidate and decide if it is a valid alternative.
     void filter_candidate(const std::wstring &, const std::wstring &, int distance, std::map<std::wstring,int> &) const;
     /// adds the new words that are posible correct spellings from original word to the word analysys data
-    void filter_alternatives(const std::list<std::pair<std::wstring,int> >&, word &) const;
+    void filter_alternatives(const std::list<freeling::alternative>&, word &) const;
 
     /// retrieve all possible word sequence that match (one-to-one) given sound sequence
     std::list<std::wstring> recover_words(std::list<std::wstring> wds) const;
+
+    /// Removes repeated consuecutive characters of a string
+    std::wstring remove_repeated(const std::wstring &str) const;
     
   public:
     /// Constructor
@@ -92,7 +100,7 @@ namespace freeling {
     ~alternatives();
 
     /// direct access to results of underlying automata
-    void get_similar_words(const std::wstring &, std::list<std::pair<std::wstring,int> > &) const;
+    void get_similar_words(const std::wstring &, std::list<freeling::alternative> &) const;
     
     /// spell check each word in sentence
     void analyze(sentence &) const;
