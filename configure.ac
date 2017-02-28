@@ -110,8 +110,7 @@ AC_ARG_WITH([kaldi-asr],
 # Checks for programs.
 AC_PROG_CXX
 # preprocessor and compiler flags
-CPPFLAGS=""
-CXXFLAGS=" -std=gnu++0x -Wall -Wno-sign-compare -fPIC"
+CXXFLAGS="$CXXFLAGS -std=gnu++0x -Wall -Wno-sign-compare -fPIC"
 
 AC_PROG_LIBTOOL
 AC_PROG_INSTALL

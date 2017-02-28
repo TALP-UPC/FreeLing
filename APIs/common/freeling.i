@@ -1723,7 +1723,7 @@ class relax_tagger {
     ~alternatives();
 
     /// direct access to results of underlying automata
-    void get_similar_words(const std::wstring &, std::list<std::pair<std::wstring,int> > &) const;
+    void get_similar_words(const std::wstring &, std::list<freeling::alternative> &) const;
 
     #ifndef FL_API_JAVA
     /// analyze sentence
@@ -2054,7 +2054,7 @@ class foma_FSM {
     ~foma_FSM();
 
     /// Use automata to obtain closest matches to given form, and add them to given list.
-    void get_similar_words(const std::wstring &, std::list<std::pair<std::wstring,int> > &) const;    
+    void get_similar_words(const std::wstring &, std::list<freeling::alternative> &) const;    
     /// set maximum edit distance of desired results
     void set_cutoff_threshold(int);
     /// set maximum number of desired results
