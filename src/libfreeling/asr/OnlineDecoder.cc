@@ -184,9 +184,12 @@ namespace freeling {
 
   void OnlineDecoder::Decode(Request &request, Response &response) {
 
+    TRACE(4,"Decoding - HERE");
+      
     // Check if the audio request frequency matches the decoder frequency
-    if (request.Frequency() != decoder_frequency_)
-      ERROR_CRASH(L"Audio frequency doesn't match decoder frequency. Audio frequency: " + util::string2wstring(std::to_string(request.Frequency())) + L", decoder frequency: " + util::string2wstring(std::to_string(decoder_frequency_)));
+    if (request.Frequency() != decoder_frequency_) {
+      ERROR_CRASH(L"Audio frequency doesn't match decoder frequency. Audio frequency: " << request.Frequency() << L", decoder frequency: " << decoder_frequency_ );
+    }
 
     TRACE(4,"Decoding - Starting input")
     
@@ -204,11 +207,6 @@ namespace freeling {
       kaldi::SubVector<kaldi::BaseFloat>* wave_part = request.GetAudioChunk();
 
       TRACE(4,"Audio. Size="<<wave_part->Dim());
-      kaldi::BaseFloat *vec = (kaldi::BaseFloat *) wave_part->Data();
-      for (int x=0; x<wave_part->Dim(); x+=500)
-        std::wcerr<<" "<<vec[x];
-      std::wcerr<<endl;
-
       AcceptWaveform(request.Frequency(), *wave_part, false);
     } 
     else {                          // Decode the audio chunk in parts

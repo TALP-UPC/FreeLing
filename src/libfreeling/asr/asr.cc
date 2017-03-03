@@ -202,10 +202,10 @@ namespace freeling {
     // Initialize asr decoder class
     if (not decoder->Initialize(so)) {
       ERROR_CRASH(L"There was an error initializing the decoder class.")
-    }
+   }
 
     // remove ivector config temporal copy if it had been created
-    if (not tmp_ivector.empty()) remove(util::wstring2string(tmp_ivector).c_str());
+    // if (not tmp_ivector.empty()) remove(util::wstring2string(tmp_ivector).c_str());
 
     response = NULL;
     request = NULL;
@@ -260,7 +260,7 @@ namespace freeling {
     // Call decode routine, store results in response class
     response = new Response();
 
-    TRACE(2,"decoding");
+    TRACE(2,"decoding " << decoder);
     decoder->Decode(*request, *response);
     TRACE(2,"done");
 

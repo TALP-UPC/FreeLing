@@ -187,7 +187,7 @@ namespace freeling {
                                                       *nnet_,
                                                       *decode_fst_,
                                                       feature_pipeline_);
-
+    TRACE(4,L"Created decoder_ "<<decoder_);
   }
 
 
@@ -215,7 +215,6 @@ namespace freeling {
       const kaldi::VectorBase<kaldi::BaseFloat> &waveform,
       const bool do_endpointing) {
 
-    TRACE(4,"Waveform ?");
     feature_pipeline_->AcceptWaveform(sampling_rate, waveform);
     TRACE(4,"Waveform accepted");
 
@@ -223,7 +222,7 @@ namespace freeling {
       return false;
     }
 
-    TRACE(4,"decoding");
+    TRACE(4,"decoding with "<<decoder_);
     decoder_->AdvanceDecoding();
     TRACE(4,"decoded");
     
