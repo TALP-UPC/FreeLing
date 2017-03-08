@@ -26,7 +26,11 @@
 //
 ////////////////////////////////////////////////////////////////
 
+#include "freeling/morfo/configfile.h"
+#include "freeling/morfo/util.h"
 #include "freeling/morfo/asr/asr.h"
+
+using namespace std;
 
 namespace freeling {
 
@@ -64,23 +68,23 @@ namespace freeling {
     if (not cfg.open(configFile))
       ERROR_CRASH(L"Error opening file " + configFile);
 
-    wstring pathToData = configFile.substr(0,configFile.find_last_of(L"/\\")+1);
+    string pathToData = util::wstring2string(configFile.substr(0, configFile.rfind(L"config/")));
 
     // Variables to be set by the config file
-    wstring fst_filename;
-    wstring nnet3_model_filename;
-    wstring words_filename;
-    wstring mfcc_config_filename;
-    wstring ivector_config_filename;
-    wstring frequency;
+    string fst_filename;
+    string nnet3_model_filename;
+    string words_filename;
+    string mfcc_config_filename;
+    string ivector_config_filename;
+    string frequency;
     DecoderOptions options;
 
     string aux;
     wstring line;
     // Read config file
     while (cfg.get_content_line(line)) {
-      wistringstream sin;
-      sin.str(line);
+      istringstream sin;
+      sin.str(util::wstring2string(line));
 
       switch (cfg.get_section()) {
         case DNNHMMFILE: {
@@ -105,10 +109,31 @@ namespace freeling {
         }
         case IVECTORCONFIGFILE: {
           sin >> ivector_config_filename;
+          if (ivector_config_filename != "-"){ 
+            ivector_config_filename = util::absolute(ivector_config_filename,pathToData);
+
+            // Transform relative paths in the file into absolute paths
+            string newfile = "";
+            string line;
+            std::ifstream fs;
+            fs.open(ivector_config_filename, std::ifstream::in);
+            
+            while (std::getline(fs, line)) {
+              if (line.find("/") != std::string::npos && line.find("=/") == std::string::npos) { // change path of file
+                line = line.insert(line.find("=")+1, pathToData);
+              }
+              newfile += line + "\n";
+            }
+            fs.close();
+
+            std::ofstream ofs(ivector_config_filename, std::fstream::out | std::fstream::trunc );
+            ofs << newfile;
+            ofs.close();
+          }
           break;
         }
         case FREQUENCY: {
-          sin >> frequency_;
+          sin >> frequency;
           break;
         } 
         case FEATURETYPE: {
@@ -116,96 +141,81 @@ namespace freeling {
           break;
         }
         case FRAMESUBSAMPLINGFACTOR: {
-          sin >> options.framesubsamplingfactor;
+          sin >> aux;
+          options.framesubsamplingfactor = std::atoi(aux.c_str());
           break;
         }
         case MAXACTIVE: {
-          sin >> options.maxactive;
+          sin >> aux;
+          options.maxactive = std::atoi(aux.c_str());
           break;
         }
         case BEAM: {
-          sin >> options.beam;
+          sin >> aux;
+          options.beam = std::stof(aux.c_str());
           break;
         }
         case LATTICEBEAM: {
-          sin >> options.latticebeam;
+          sin >> aux;
+          options.latticebeam = std::stof(aux.c_str());
           break;
         }
         case ACOUSTICSCALE: {
-          sin >> options.acousticscale;
+          sin >> aux;
+          options.acousticscale = std::atoi(aux.c_str());
           break;
         }
         case LMSCALE: {
-          sin >> options.lmscale;
+          sin >> aux;
+          options.lmscale = std::atoi(aux.c_str());
           break;
         }
         case POSTDECODEACWT: {
-          sin >> options.postdecodeacwt;
+          sin >> aux;
+          options.postdecodeacwt = std::atoi(aux.c_str());
           break;
         }
         case CHUNKLENGTHSECS: {
-          sin >> options.chunklengthsecs;
+          sin >> aux;
+          options.chunklengthsecs = std::atoi(aux.c_str());
           break;
         }
         case MAXRECORDSIZESECS: {
-          sin >> options.maxrecordsizesecs;
+          sin >> aux;
+          options.maxrecordsizesecs = std::atoi(aux.c_str());
           break;
         }
         case MAXLATTICEUNCHANGEDINTERVALSECS: {
-          sin >> options.maxlatticeunchangedintervalsecs;
+          sin >> aux;
+          options.maxlatticeunchangedintervalsecs = std::atoi(aux.c_str());
           break;
         }
         case DECODINGTIMEOUTSECS: {
-          sin >> options.decodingtimeoutsecs;
+          sin >> aux;
+          options.decodingtimeoutsecs = std::atoi(aux.c_str());
           break;
         }
         default: 
           break;
       }
     }
+
     cfg.close();
 
 
-    // if Ivector was given, make sure paths are absolute, making a temp copy of the original file
-    wstring tmp_ivector;
-    if (not ivector_config_filename.empty()) { 
-      ivector_config_filename = util::absolute(ivector_config_filename,pathToData);
-      
-      // Transform relative paths in the file into absolute paths
-      wifstream fs;
-      util::open_utf8_file(fs, ivector_config_filename);
-
-      tmp_ivector = util::new_tempfile_name();
-      wofstream ofs;
-      util::open_utf8_file(ofs, tmp_ivector);
-      
-      wstring line;      
-      while (getline(fs, line)) {
-        util::find_and_replace(line, L"${INSTALLPATH}", pathToData);
-        ofs << line << endl;
-      }
-      fs.close();
-      ofs.close();
-
-      TRACE(4,L"Created TMP copy of ivector config at "<<tmp_ivector);
-    }
-    
-    TRACE(3,L"Creating decoder with params:"<<frequency_<<L"\n"<<words_filename<<L"\n"<<fst_filename<<L"\n"<<nnet3_model_filename<<L"\n"<<mfcc_config_filename<<L"\n"<<tmp_ivector);
+    frequency_ = atoi(frequency.c_str());
 
     // Initialize and store decoder
-    decoder = new Nnet3LatgenFasterDecoder(frequency_, words_filename, fst_filename, nnet3_model_filename, mfcc_config_filename, tmp_ivector, options);
+    decoder = new Nnet3LatgenFasterDecoder(frequency_, words_filename, fst_filename, nnet3_model_filename, mfcc_config_filename, ivector_config_filename, options);
 
     // SimpleOptions kaldi class stores the decoder's configuration properties
     kaldi::SimpleOptions so;
     decoder->RegisterOptions(so);
 
     // Initialize asr decoder class
-    if (not decoder->Initialize(so)) {
+    if (!decoder->Initialize(so)) {
       ERROR_CRASH(L"There was an error initializing the decoder class.")
-   }
-
-    // remove ivector config temporal copy if it had been created
-    // if (not tmp_ivector.empty()) remove(util::wstring2string(tmp_ivector).c_str());
+    }
 
     response = NULL;
     request = NULL;
@@ -252,17 +262,12 @@ namespace freeling {
       ERROR_CRASH(L"The seconds to decode parametre can't be negative.");
     }
 
-    TRACE(2,"Creating request");
     // Create and initialize request class
     request = new Request(in_stream, decode_channel, nbest, seconds_to_decode);
 
-    TRACE(2,"Creating response");
     // Call decode routine, store results in response class
     response = new Response();
-
-    TRACE(2,"decoding " << decoder);
     decoder->Decode(*request, *response);
-    TRACE(2,"done");
 
     // Check whether the decode process ended with an error
     if (response->HasError()) {
@@ -270,7 +275,6 @@ namespace freeling {
     }
 
     // Return all the results obtained
-    TRACE(2,"getting results");
     return response->GetAllResults();
   }
 

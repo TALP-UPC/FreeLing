@@ -1,22 +1,3 @@
-// Request.h
-
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//  http://www.apache.org/licenses/LICENSE-2.0
-//
-// THIS CODE IS PROVIDED *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-// KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-// WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-// MERCHANTABLITY OR NON-INFRINGEMENT.
-// See the Apache 2 License for the specific language governing permissions and
-// limitations under the License.
-//
-// This file was modified from the originial project from Api.Ai hosted at 
-// "https://github.com/api-ai/asr-server" for the ASR system for 
-// Freeling, hosted at "https://github.com/TALP-UPC/FreeLing"
-
 #ifndef _REQUEST_H
 #define _REQUEST_H
 
@@ -28,13 +9,6 @@
 
 namespace freeling {
 
-/////////////////////////////////////////////////////////
-///
-///  Receives the audio file in wave file form,
-///  transforms it into useful audio data and holds that data 
-///    
-/////////////////////////////////////////////////////////
-
 class Request {
   public:
 
@@ -44,50 +18,64 @@ class Request {
     /// Destructor, free space
     ~Request();
 
-    /// Get number of samples per second of audio data 
+    /** Get number of samples per second of audio data */
     kaldi::int32 Frequency() const;
 
-    /// Get max number of expected result variants 
+    /** Get max number of expected result variants */
     int BestCount() const; 
 
-    /// Returns the seconds to decode in each part of the decoding. If it's 0.0, 
-    /// get all the audio chunk at one time 
+    /** Returns the seconds to decode in each part of the decoding. If it's 0.0, */
+    /** get all the audio chunk at one time */
     kaldi::BaseFloat SecondsToDecode() const;
 
-    /// Get the next chunk of audio data samples. When the audio processing is finished, will return NULL
+    /** Get milliseconds interval between intermediate results.
+     *  If non-positive given then no intermediate results would be calculated */
+    //virtual kaldi::int32 IntermediateIntervalMillisec(void) const = 0;
+
+    /** Get end-of-speech points detection flag. */
+    //virtual bool DoEndpointing(void) const = 0;
+
+    /**
+     * Get the next chunk of audio data samples.
+     */
     kaldi::SubVector<kaldi::BaseFloat> *NextChunk(kaldi::int32 samples_count);
    
-    /// Get the complete chunk of audio data samples, at once
+    /**
+     * Get the chunk of audio data samples.
+     */
     kaldi::SubVector<kaldi::BaseFloat> *GetAudioChunk();
 
+    /**
+     * Set the chunk of audio data samples.
+     */
+    void SetAudioChunk(kaldi::SubVector<kaldi::BaseFloat>* audioChunk);
+
+
+    /**
+     * Get next chunk of audio data samples.
+     * Max number of samples specified by samples_count value.
+     * Read timeout specified by timeout_ms.
+     */
+    //virtual kaldi::SubVector<kaldi::BaseFloat> *NextChunk(kaldi::int32 samples_count, kaldi::int32 timeout_ms) = 0;
+
   private:
-    
-    /// Frequency of the request audio
     kaldi::int32 frequency_;
-
-    /// Number of channels the request audio has
     kaldi::int32 channels_;
-
-    /// Index of the channel to decode
     kaldi::int32 channel_index_;
-    
-    /// Length of each part to decode at one time
+    kaldi::int32 bytes_per_sample_;
     kaldi::BaseFloat seconds_to_decode_;
 
-    /// Number of decoding alternatives the user requested
     int nbest_;
 
-    /// Kaldi's wave holder class. This instance holds the audio data
+    std::istream *is;
     kaldi::WaveHolder *wh;
-
-    /// Holds the sample index of the audio data vector for the NextChunk 
-    /// function, otherwise we wouldn't know which chunk of audio to return next
     int current_index;
+    std::vector<kaldi::BaseFloat> buffer;
 
-    /// Auxiliar variable, needed for the return of the NextChunk function
-    kaldi::SubVector<kaldi::BaseFloat> *chunk; 
+    kaldi::SubVector<kaldi::BaseFloat> *AudioChunk; //new kaldi::SubVector<kaldi::BaseFloat>(buffer.data(), buffer.size());
+    kaldi::SubVector<kaldi::BaseFloat> *chunk; //new kaldi::SubVector<kaldi::BaseFloat>(buffer.data(), buffer.size());
 };
 
-} // namespace
+} 
 
-#endif 
+#endif /* _REQUEST_H */

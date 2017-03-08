@@ -1,21 +1,3 @@
-// OnlineDecoder.cc
-
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//  http://www.apache.org/licenses/LICENSE-2.0
-//
-// THIS CODE IS PROVIDED *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-// KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-// WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-// MERCHANTABLITY OR NON-INFRINGEMENT.
-// See the Apache 2 License for the specific language governing permissions and
-// limitations under the License.
-//
-// This file was modified from the originial project from Api.Ai hosted at 
-// "https://github.com/api-ai/asr-server" for the ASR system for 
-// Freeling, hosted at "https://github.com/TALP-UPC/FreeLing"
 
 #include "freeling/morfo/asr/OnlineDecoder.h"
 #include "freeling/morfo/traces.h"
@@ -25,8 +7,9 @@ namespace freeling {
   #define MOD_TRACECODE ASR_TRACE
   #define MOD_TRACENAME L"ASR"
 
-  /// DecodedData struct holds the results of the decoding process 
-  /// extracted from kaldi's structure
+  #define PAD_SIZE 400
+  kaldi::BaseFloat padVector[PAD_SIZE];
+
   struct OnlineDecoder::DecodedData {
     kaldi::LatticeWeight weight;
     std::vector<int32> words;
@@ -34,17 +17,9 @@ namespace freeling {
     std::vector<kaldi::LatticeWeight> weights;
   };
 
-  ////////////////////////////////////////////////////////////////
-  /// Constructor, initialize audio properties
-  ////////////////////////////////////////////////////////////////
-
   bool wordsEquals(std::vector<int32> &a, std::vector<int32> &b) {
     return (a.size() == b.size()) && (std::equal(a.begin(), a.end(), b.begin()));
   }
-
-  ////////////////////////////////////////////////////////////////
-  /// Extracts weights information from the lattice
-  ////////////////////////////////////////////////////////////////
 
   bool getWeightMeasures(const kaldi::Lattice &fst,
                             std::vector<kaldi::LatticeArc::Weight> *weights_out) {
@@ -82,20 +57,24 @@ namespace freeling {
     }
   }
 
+  // TODO: change initial parametres
+  OnlineDecoder::OnlineDecoder() {
+    /*lm_scale_ = 10;
+    post_decode_acwt_ = 10;
 
-  ////////////////////////////////////////////////////////////////
-  /// Destructor
-  ////////////////////////////////////////////////////////////////
+    // MIRAR SI SON NECESSARIS
+    chunk_length_secs_ = 0.18;
+    max_record_size_seconds_ = 0;
+    max_lattice_unchanged_interval_seconds_ = 0;
+    decoding_timeout_seconds_ = 0;*/
+  }
 
   OnlineDecoder::~OnlineDecoder() {
   }
 
-  ////////////////////////////////////////////////////////////////
-  /// Register custom options of the decoder
-  ////////////////////////////////////////////////////////////////
-
   void OnlineDecoder::RegisterOptions(kaldi::OptionsItf &so) {
-
+    //so.Register("chunk-length", &chunk_length_secs_,
+    //            "Length of chunk size in seconds, that we process.");
     so.Register("word-symbol-table", &word_syms_rxfilename_,
                 "Symbol table for words [for debug output]");
     so.Register("fst-in", &fst_rxfilename_, "Path to FST model file");
@@ -103,26 +82,18 @@ namespace freeling {
                "Note: the ratio post-decode-acwt/lm-scale is all that matters.");
     so.Register("post-decode-acwt", &post_decode_acwt_, "Scaling factor for the acoustic probabilities. "
                "Note: the ratio post-decode-acwt/lm-scale is all that matters.");
-    
-    /** Properties of the decoder for the online funcionality
-     ** Uncomment if online funcionality is to be implemented
 
-    so.Register("chunk-length", &chunk_length_secs_,
-                "Length of chunk size in seconds, that we process.");
     so.Register("max-record-length", &max_record_size_seconds_,
         "Max length of record in seconds to be recognised. "
       "All records longer than given value will be truncated. Note: Non-positive value to deactivate.");
+
     so.Register("max-lattice-unchanged-interval", &max_lattice_unchanged_interval_seconds_,
       "Max interval length in seconds of lattice recognised unchanged. Note: Non-positive value to deactivate.");
+
     so.Register("decoding-timeout", &decoding_timeout_seconds_,
         "Decoding process timeout given in seconds. Timeout disabled if value is non-positive.");
-
-    **/
 }
 
-  ////////////////////////////////////////////////////////////////
-  /// Initialize the decoder: loads all necessary files
-  ////////////////////////////////////////////////////////////////
 
   bool OnlineDecoder::Initialize(kaldi::OptionsItf &so) {
     word_syms_ = NULL;
@@ -136,9 +107,6 @@ namespace freeling {
   }
 
   
-  ////////////////////////////////////////////////////////////////
-  /// Converts a result from the decoding process into readable text
-  ////////////////////////////////////////////////////////////////
 
   void OnlineDecoder::GetRecognitionResult(DecodedData &input, RecognitionResult *output) {
       // TODO move parameters to external file
@@ -158,15 +126,9 @@ namespace freeling {
           outss << ws;
         }
       }
-      
       output->text = outss.str();
 
   }
-
-
-  ////////////////////////////////////////////////////////////////
-  /// Converts a set of results from the decoding process into readable text
-  ////////////////////////////////////////////////////////////////
 
   void OnlineDecoder::GetRecognitionResult(vector<DecodedData> &input, vector<RecognitionResult> *output) {
     for (int i = 0; i < input.size(); i++) {
@@ -177,39 +139,19 @@ namespace freeling {
     }
   }
 
-
-  ////////////////////////////////////////////////////////////////
-  /// Decode main routine
-  ////////////////////////////////////////////////////////////////
-
   void OnlineDecoder::Decode(Request &request, Response &response) {
-
-    TRACE(4,"Decoding - HERE");
-      
-    // Check if the audio request frequency matches the decoder frequency
-    if (request.Frequency() != decoder_frequency_) {
-      ERROR_CRASH(L"Audio frequency doesn't match decoder frequency. Audio frequency: " << request.Frequency() << L", decoder frequency: " << decoder_frequency_ );
-    }
-
-    TRACE(4,"Decoding - Starting input")
+    if (request.Frequency() != decoder_frequency_)
+      ERROR_CRASH(L"Audio frequency doesn't match decoder frequency. Audio frequency: " + util::string2wstring(std::to_string(request.Frequency())) + L", decoder frequency: " + util::string2wstring(std::to_string(decoder_frequency_)));
     
-    // Prepare the decoder for the decoding call
+    /// INITIALIZE THE DECODER
     InputStarted();
-
-    TRACE(4,"Decoding - input started");
 
     kaldi::BaseFloat seconds_to_decode = request.SecondsToDecode();
 
-    TRACE(4,"Decoding seconds="<<seconds_to_decode);
-
-    if (seconds_to_decode == 0.0) {   // Decode all the audio chunk at once
-      TRACE(4,"Get audio");
+    if (seconds_to_decode == 0.0) {
       kaldi::SubVector<kaldi::BaseFloat>* wave_part = request.GetAudioChunk();
-
-      TRACE(4,"Audio. Size="<<wave_part->Dim());
       AcceptWaveform(request.Frequency(), *wave_part, false);
-    } 
-    else {                          // Decode the audio chunk in parts
+    } else {
       int samp_counter = 0;
       int samples_per_chunk = int(seconds_to_decode * request.Frequency());
       
@@ -224,19 +166,16 @@ namespace freeling {
       }
     }
 
-    // Prepare the decoder to get results
     InputFinished();
-    TRACE(4,"input finished");
     
-    // Get decoding results
     vector<DecodedData> result;
+
     int32 decoded = GetDecodingResults(request.BestCount(), &result);
 
     if (decoded == 0) {
       response.SetError(L"Decoding failed");
       WARNING(L"Decoding failed");
     } else {
-      // Store result in response wrapper class
       vector<RecognitionResult> recognitionResults;
       GetRecognitionResult(result, &recognitionResults);
       response.SetResult(recognitionResults);
@@ -246,13 +185,7 @@ namespace freeling {
 
   }
 
-
-  ////////////////////////////////////////////////////////////////
-  /// Extracts and converts results from kaldi's decoding process
-  ////////////////////////////////////////////////////////////////
-
   int32 OnlineDecoder::GetDecodingResults(int bestCount, vector<DecodedData> *result) {
-    // Extract lattice
     kaldi::CompactLattice clat;
     GetLattice(&clat, true);
 
@@ -266,7 +199,6 @@ namespace freeling {
 
     int32 resultsNumber = 0;
 
-    // Convert lattice into DecodedData struct
     if (bestCount > 1) {
       kaldi::Lattice _lat;
       fst::ConvertLattice(clat, &_lat);
@@ -301,4 +233,5 @@ namespace freeling {
     return resultsNumber;
   }
 
-} // namespace
+}
+
