@@ -1,5 +1,5 @@
 
-#include "freeling/morfo/asr/base64.h"
+#include "asr/base64.h"
 #include <iostream>
 
 static const std::wstring base64_chars = 

@@ -1,4 +1,4 @@
-#include "freeling/morfo/asr/Response.h"
+#include "asr/Response.h"
 
 namespace freeling {
 

@@ -2,9 +2,9 @@
 #ifndef _ASR_DECODER
 #define _ASR_DECODER
 
-#include "freeling/morfo/asr/Request.h"
-#include "freeling/morfo/asr/Response.h"
-#include "freeling/morfo/asr/Nnet3LatgenFasterDecoder.h"
+#include "asr/Request.h"
+#include "asr/Response.h"
+#include "asr/Nnet3LatgenFasterDecoder.h"
 
 #include "util/simple-options.h"
 #include "base/kaldi-types.h"

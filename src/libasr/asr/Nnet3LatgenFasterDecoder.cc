@@ -14,7 +14,7 @@
 // limitations under the License.
 
 #include <iostream>
-#include "freeling/morfo/asr/Nnet3LatgenFasterDecoder.h"
+#include "asr/Nnet3LatgenFasterDecoder.h"
 
 namespace freeling {
 

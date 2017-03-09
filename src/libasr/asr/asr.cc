@@ -28,7 +28,7 @@
 
 #include "freeling/morfo/configfile.h"
 #include "freeling/morfo/util.h"
-#include "freeling/morfo/asr/asr.h"
+#include "asr/asr.h"
 
 using namespace std;
 

@@ -7,7 +7,7 @@
 #include <list>
 
 #include "freeling/morfo/util.h"
-#include "freeling/morfo/asr/Decoder.h"
+#include "asr/Decoder.h"
 
 #include "online2/online-feature-pipeline.h"
 #include "online2/onlinebin-util.h"

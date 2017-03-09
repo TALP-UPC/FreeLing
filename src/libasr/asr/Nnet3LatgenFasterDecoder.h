@@ -2,7 +2,7 @@
 #ifndef FASTER_DECODER
 #define FASTER_DECODER
 
-#include "freeling/morfo/asr/OnlineDecoder.h"
+#include "asr/OnlineDecoder.h"
 
 #include "online2/online-nnet3-decoding.h"
 #include "online2/online-nnet2-feature-pipeline.h"

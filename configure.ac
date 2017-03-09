@@ -324,6 +324,7 @@ AC_CONFIG_FILES([Makefile
                  src/Makefile
                  src/include/Makefile
                  src/libfreeling/Makefile
+                 src/libasr/Makefile
                  src/libfoma/Makefile
                  src/libtreeler/Makefile
                  src/libtreeler/main/Makefile

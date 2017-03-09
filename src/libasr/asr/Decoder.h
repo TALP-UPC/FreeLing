@@ -2,8 +2,8 @@
 #ifndef DECODER
 #define DECODER
 
-#include "freeling/morfo/asr/Request.h"
-#include "freeling/morfo/asr/Response.h"
+#include "asr/Request.h"
+#include "asr/Response.h"
 
 #include "util/parse-options.h"
 

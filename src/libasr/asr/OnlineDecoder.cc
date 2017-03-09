@@ -1,5 +1,5 @@
 
-#include "freeling/morfo/asr/OnlineDecoder.h"
+#include "asr/OnlineDecoder.h"
 #include "freeling/morfo/traces.h"
 
 namespace freeling {
