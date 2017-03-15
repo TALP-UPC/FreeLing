@@ -2,7 +2,7 @@
 #define _CORRECTOR
 
 #include "freeling/morfo/language.h"
-#include "freeling/morfo/word_vector.h"
+#include "freeling/morfo/embeddings.h"
 
 typedef std::vector<std::pair<std::wstring, std::vector<freeling::alternative>>> alt_t;
 
@@ -26,7 +26,7 @@ namespace freeling {
   private: 
     
     // word embeddings
-    word_vector *wordVec;    
+    freeling::embeddings *wordVec;    
     // number of best solutions stored on the alternatives kbest
     const unsigned int STORED_SOLUTIONS = 10U;
     

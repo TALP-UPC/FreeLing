@@ -24,7 +24,7 @@ namespace freeling {
   /// appropriate files.
   ///////////////////////////////////////////////////////////////
 
-  corrector::corrector(const std::wstring &cfgFile) {
+  corrector::corrector(const wstring &cfgFile) {
     
     // default init settings
     search_algorithm  = GENETIC; 
@@ -63,7 +63,7 @@ namespace freeling {
       switch (cfg.get_section()) {
 
       case ALGORITHM: {
-        std::wstring aux_wstr;
+        wstring aux_wstr;
         sin >> aux_wstr;
         if (aux_wstr == L"Exhaustive") search_algorithm = EXHAUSTIVE;
         else if (aux_wstr == L"Genetic") search_algorithm = GENETIC;
@@ -74,7 +74,7 @@ namespace freeling {
       }
 
       case GENETIC_PARAMS : {
-        std::wstring key, value;
+        wstring key, value;
         sin >> key >> value;
         if (key==L"MutationRate") mutation_rate = util::wstring2double(value);
         else if (key==L"CrossoverRate") crossover_rate = util::wstring2double(value);
@@ -87,7 +87,7 @@ namespace freeling {
       }
       
       case EVALUATION: {
-        std::wstring aux_wstr;
+        wstring aux_wstr;
         sin >> aux_wstr;
         if (aux_wstr == L"SimilarityNext") evaluation_method = SIMILARITY_NEXT;
         else if (aux_wstr == L"SimilarityAll") evaluation_method = SIMILARITY_ALL;
@@ -108,7 +108,7 @@ namespace freeling {
       }
 
       case CHAT_LANG: {
-        std::wstring key, value;
+        wstring key, value;
         sin >> key >> value;
         if (key == L"DistanceValue") 
           ChatDistance = util::wstring2int(value);
@@ -123,7 +123,7 @@ namespace freeling {
     cfg.close();
     
     // create and read wordVec model
-    wordVec = new freeling::word_vector(modelFile);
+    wordVec = new freeling::embeddings(modelFile);
     
     TRACE(2, L"noisy text normalization module succesfully created");
   }
@@ -141,7 +141,7 @@ namespace freeling {
   /// preprocess text after word embeddings have been created
   /////////////////////////////////////////////////////////////////////////////
 
-  void corrector::preprocess(std::list<freeling::sentence> &ls) {
+  void corrector::preprocess(list<freeling::sentence> &ls) {
 
     if (chat_lang.empty()) return;
     // if we have a chat abbreviations dicctionary, apply it.
@@ -159,7 +159,7 @@ namespace freeling {
   /// Move data from sentences to alternatives data structure
   /////////////////////////////////////////////////////////////////////////////
 
-  unsigned int corrector::set_alternatives(std::list<freeling::sentence> &ls, alt_t &alternatives) {
+  unsigned int corrector::set_alternatives(list<freeling::sentence> &ls, alt_t &alternatives) {
 
     TRACE(6,L"\n### CORRECTOR STATS");
     
@@ -174,23 +174,23 @@ namespace freeling {
     for (list<freeling::sentence>::iterator s = ls.begin(); s != ls.end(); s++) {
       for (freeling::sentence::iterator w = s->begin(); w != s->end(); w++) {
         // init next word
-        std::pair<std::wstring, std::vector<freeling::alternative>> next_word;
+        pair<wstring, vector<freeling::alternative>> next_word;
         
         // get form
-        next_word.first = std::wstring(w->get_lc_form());
+        next_word.first = wstring(w->get_lc_form());
         
         // get valid alternatives
-        std::vector<freeling::alternative> alts;
+        vector<freeling::alternative> alts;
         if (w->has_alternatives()) {
           if (wordVec->word_in_model(w->get_lc_form())) { // add word if not in normal dictionary but in model vocab
-            alts.push_back(freeling::alternative(std::wstring(w->get_lc_form()), 100));
+            alts.push_back(freeling::alternative(wstring(w->get_lc_form()), 100));
           }
           for (list<freeling::alternative>::iterator a = w->alternatives_begin(); a != w->alternatives_end(); a++) {
             if (wordVec->word_in_model(a->get_form())) {
               if (alts.size() >= alts_limit) {
                 //try to substitute for a worse alternative
                 int dl_dist = (int) DL_distance_recursive(w->get_form(), a->get_form());
-                int dist    = std::max(min_edit_distance, std::min(a->get_distance(), dl_dist));
+                int dist    = max(min_edit_distance, min(a->get_distance(), dl_dist));
                 
                 int min = alts[0].get_distance();
                 unsigned int min_ind = 0;
@@ -201,11 +201,11 @@ namespace freeling {
                   }
                 }
                 if (min > dist) { //add element in min position
-                  alts[min_ind] = freeling::alternative(std::wstring(a->get_form()), dist);
+                  alts[min_ind] = freeling::alternative(wstring(a->get_form()), dist);
                 }
               } else {
                 int dl_dist = (int) DL_distance_recursive(w->get_lc_form(), a->get_form());
-                alts.push_back(freeling::alternative(std::wstring(a->get_form()), std::max(min_edit_distance, std::min(a->get_distance(), dl_dist))));
+                alts.push_back(freeling::alternative(wstring(a->get_form()), max(min_edit_distance, min(a->get_distance(), dl_dist))));
               }
             }
           }
@@ -222,7 +222,7 @@ namespace freeling {
         }
         
         // sort alternatives by descending probability
-        std::sort(alts.begin(), alts.end(), 
+        sort(alts.begin(), alts.end(), 
                        [](const freeling::alternative &left,
                           const freeling::alternative &right){
                          return left.get_probability() > right.get_probability();});
@@ -236,7 +236,7 @@ namespace freeling {
         
         // keep the word if no alternatives found or needed
         if (alts.size() == 0) {
-          freeling::alternative aux_alt(std::wstring(w->get_lc_form()), 1);
+          freeling::alternative aux_alt(wstring(w->get_lc_form()), 1);
           aux_alt.set_probability(1.0f);
           alts.push_back(aux_alt);
         }
@@ -245,7 +245,7 @@ namespace freeling {
         }
         
         // add alternatives to next_word
-        next_word.second = std::vector<freeling::alternative>(alts);
+        next_word.second = vector<freeling::alternative>(alts);
         
         // add next_word (with alternatives included) to "alternatives"
         alternatives.push_back(next_word); 
@@ -259,7 +259,7 @@ namespace freeling {
   /// Normalize sentence
   /////////////////////////////////////////////////////////////////////////////
   
-  void corrector::normalize(std::list<freeling::sentence> &ls) {
+  void corrector::normalize(list<freeling::sentence> &ls) {
     // create words list
     alt_t alternatives;
     
@@ -287,7 +287,7 @@ namespace freeling {
     // create aux algorithm variables
     unsigned int best_solutions[STORED_SOLUTIONS][alternatives.size()];
     for (unsigned int i = 0; i < STORED_SOLUTIONS; i++)
-      std::fill_n(best_solutions[i], alternatives.size(), 0);
+      fill_n(best_solutions[i], alternatives.size(), 0);
     
     // set algorithm to EXHAUSTIVE if the number of states to search is low
     search_algorithms selected_algorithm = search_algorithm;
@@ -297,10 +297,10 @@ namespace freeling {
     case EXHAUSTIVE: { //========== EXHAUSTIVE SEARCH ============  
       unsigned int num_states_evaluated = 0;
       float best_results[STORED_SOLUTIONS];
-      std::fill_n(best_results, STORED_SOLUTIONS, -1.0);
+      fill_n(best_results, STORED_SOLUTIONS, -1.0);
       unsigned int current_state[alternatives.size()];
       bool state_found = true;
-      std::fill_n(current_state, alternatives.size(), 0);
+      fill_n(current_state, alternatives.size(), 0);
       
       // exhaustive search, classic binary table generation algorithm
       while (state_found) {
@@ -313,7 +313,7 @@ namespace freeling {
         if (result > best_results[index]) {
           // copy to last position
           best_results[index] = result;
-          std::copy(current_state, current_state + alternatives.size(), best_solutions[index]);
+          copy(current_state, current_state + alternatives.size(), best_solutions[index]);
           
           // swap
           while (index > 0 && result > best_results[index - 1]) {
@@ -355,7 +355,7 @@ namespace freeling {
           // if the word doesn't have an analysis (had to be corrected)
           if (w->has_alternatives()) {
             // search its best (i + 1)nth alternative
-            std::wstring form = alternatives[index].second[best_solutions[i][index]].get_form();
+            wstring form = alternatives[index].second[best_solutions[i][index]].get_form();
             
             bool not_found = true;
             auto alt_it = w->alternatives_begin();
@@ -410,8 +410,8 @@ namespace freeling {
       for (unsigned int i = 0; i < alternatives.size(); i++) {
         // for each word, get similarity value with next word
         if (i > 0) {
-          std::wstring first_word  = alternatives[i].second[current_state[i]].get_form();
-          std::wstring second_word = alternatives[i - 1].second[current_state[i - 1]].get_form();
+          wstring first_word  = alternatives[i].second[current_state[i]].get_form();
+          wstring second_word = alternatives[i - 1].second[current_state[i - 1]].get_form();
           embeddings_result += wordVec->cos_similarity(first_word, second_word);
         }
       }
@@ -422,9 +422,9 @@ namespace freeling {
     case SIMILARITY_ALL: {  
       for (unsigned int i = 0; i < alternatives.size(); i++) {
         // for each word, get similarity value with all other words
-        std::wstring first_word  = alternatives[i].second[current_state[i]].get_form();
+        wstring first_word  = alternatives[i].second[current_state[i]].get_form();
         for (unsigned int j = i + 1; j < alternatives.size(); j++) {
-          std::wstring second_word = alternatives[j].second[current_state[j]].get_form();
+          wstring second_word = alternatives[j].second[current_state[j]].get_form();
           embeddings_result += wordVec->cos_similarity(first_word, second_word);
         }
       }
@@ -439,10 +439,10 @@ namespace freeling {
     case PROBABILISTIC: {
       for (unsigned int i = 0; i < alternatives.size(); i++) {        
         // for each word, get probability (similarity with other words*edit distance probability)
-        std::wstring first_word  = alternatives[i].second[current_state[i]].get_form();
+        wstring first_word  = alternatives[i].second[current_state[i]].get_form();
         float first_prob = alternatives[i].second[current_state[i]].get_probability();
         for (unsigned int j = i + 1; j < alternatives.size(); j++) {
-          std::wstring second_word = alternatives[j].second[current_state[j]].get_form();
+          wstring second_word = alternatives[j].second[current_state[j]].get_form();
           float edit_probability   = alternatives[j].second[current_state[j]].get_probability()*first_prob;
           embeddings_result += ((1.0 + wordVec->cos_similarity(first_word, second_word))/2.0)*edit_probability;
         }
@@ -460,27 +460,26 @@ namespace freeling {
     case CONTEXT_AVERAGE: {
       for (unsigned int i = 0; i < alternatives.size(); i++) {
         // get vector value of every other word, compare
-        std::wstring first_word = alternatives[i].second[current_state[i]].get_form();
-        float* first_vec = wordVec->get_vector(first_word);
-        if (first_vec == NULL) {
+        wstring first_word = alternatives[i].second[current_state[i]].get_form();
+        freeling::norm_vector first_vec = wordVec->get_vector(first_word);
+        if (first_vec.empty()) 
           embeddings_result += -1;
-        } else {
+
+        else {
           // add vectors in context
-          float* sum_vector = new float[wordVec->get_dimensionality()];
+          freeling::norm_vector sum_vector(wordVec->get_dimensionality());
           int sum_counter = 0;
           for (unsigned int j = 0; j < alternatives.size(); j++) {
             if (j != i) {
-              float* next_word_vec = wordVec->get_vector(alternatives[j].second[current_state[j]].get_form());
-              if (next_word_vec != NULL) {
+              freeling::norm_vector next_word_vec = wordVec->get_vector(alternatives[j].second[current_state[j]].get_form());
+              if (not next_word_vec.empty()) {
                 ++sum_counter;
-                wordVec->add_vector(sum_vector, next_word_vec);
+                sum_vector = sum_vector + next_word_vec;
               }
             }
-          }
-          
-          wordVec->div_vector(sum_vector, (float) sum_counter);
-          embeddings_result += wordVec->cos_similarity(first_vec, sum_vector);
-          delete[] sum_vector;
+          }          
+          sum_vector = sum_vector * (1.0/sum_counter);
+          embeddings_result += norm_vector::cos_similarity(first_vec, sum_vector);
         }
       }
       embeddings_result = (float) embeddings_result / (float) alternatives.size();
@@ -490,28 +489,28 @@ namespace freeling {
     case PROBABILISTIC_CONTEXT: {
       for (unsigned int i = 0; i < alternatives.size(); i++) {
         // get vector value of every other word, compare
-        std::wstring first_word = alternatives[i].second[current_state[i]].get_form();
+        wstring first_word = alternatives[i].second[current_state[i]].get_form();
         double edit_probability  = alternatives[i].second[current_state[i]].get_probability();
-        float* first_vec = wordVec->get_vector(first_word);
-        if (first_vec == NULL) {
+        freeling::norm_vector first_vec = wordVec->get_vector(first_word);
+        if (first_vec.empty()) 
           embeddings_result += -1;
-        } else {
+
+        else {
           // add vectors in context
-          float* sum_vector = new float[wordVec->get_dimensionality()];
+          freeling::norm_vector sum_vector(wordVec->get_dimensionality());
           int sum_counter = 0;
           for (unsigned int j = 0; j < alternatives.size(); j++) {
             if (j != i) {
-              float* next_word_vec = wordVec->get_vector(alternatives[j].second[current_state[j]].get_form());
+              freeling::norm_vector next_word_vec = wordVec->get_vector(alternatives[j].second[current_state[j]].get_form());
               edit_probability *= alternatives[j].second[current_state[j]].get_probability();
-              if (next_word_vec != NULL) {
+              if (not next_word_vec.empty()) {
                 ++sum_counter;
-                wordVec->add_vector(sum_vector, next_word_vec);
+                sum_vector = sum_vector + next_word_vec;
               }
             }
           }
           
-          embeddings_result += (wordVec->cos_similarity(first_vec, sum_vector))*edit_probability;
-          delete[] sum_vector;
+          embeddings_result += norm_vector::cos_similarity(first_vec, sum_vector) * edit_probability;
         }
       }
       embeddings_result = (float) embeddings_result / (float) alternatives.size();
@@ -556,7 +555,7 @@ namespace freeling {
       // for every relevant position, set random alternative
       for (unsigned int j = 0; j < num_incorrect_words; j++) {
         unsigned int alt_position = relevant_positions[j];
-        unsigned int selection = std::rand() % alternatives[alt_position].second.size();
+        unsigned int selection = rand() % alternatives[alt_position].second.size();
         gen_states[current_generation][i].second[j] = selection;
       }
     }
@@ -567,7 +566,7 @@ namespace freeling {
         //select individual
         unsigned int selected = alternatives[relevant_positions[j]].second.size() - 1;
         bool cont_selection = true;
-        float value = (float)std::rand() / (float)RAND_MAX;
+        float value = (float)rand() / (float)RAND_MAX;
         for (unsigned int k = 0; k < alternatives[relevant_positions[j]].second.size() && cont_selection; k++) {
           value -= alternatives[relevant_positions[j]].second[k].get_probability();
           if (value <= 0) {
@@ -582,7 +581,7 @@ namespace freeling {
   
   unsigned int corrector::roulette_selection(float sum_weights) {
     //select individual
-    float value = (float)std::rand() / (float)RAND_MAX;
+    float value = (float)rand() / (float)RAND_MAX;
     value *= sum_weights;
     
     for (unsigned int i = 0; i < GEN_POPULATION; i++) {
@@ -596,23 +595,23 @@ namespace freeling {
   void corrector::genetic_algorithm(const alt_t &alternatives, unsigned int num_incorrect_words, unsigned int *best_solutions) {
     // genetic algorithm basic variables
     // 2 may be changed to keep track of more generations. 2 is the minimum required, the max would be GEN_ITERATIONS
-    gen_states = std::vector<std::vector<std::pair<float, unsigned int*>>>(2);
+    gen_states = vector<vector<pair<float, unsigned int*>>>(2);
     for (unsigned int i = 0; i < gen_states.size(); i++) {
-      gen_states[i] = std::vector<std::pair<float, unsigned int*>>(GEN_POPULATION);
+      gen_states[i] = vector<pair<float, unsigned int*>>(GEN_POPULATION);
       for (unsigned int j = 0; j < gen_states[i].size(); j++) {
-        gen_states[i][j] = std::make_pair(-1.0, new unsigned int[num_incorrect_words]);
+        gen_states[i][j] = make_pair(-1.0, new unsigned int[num_incorrect_words]);
       }
     }
     
     current_generation = 0;
     float best_results[STORED_SOLUTIONS];
-    std::fill_n(best_results, STORED_SOLUTIONS, -1.0);
+    fill_n(best_results, STORED_SOLUTIONS, -1.0);
     unsigned int num_states_evaluated = 0;
     
     unsigned int total_mutations = 0;
     
     // random generator
-    std::srand((unsigned int) time(0));
+    srand((unsigned int) time(0));
     
     // modify only words with alternatives
     unsigned int relevant_positions[num_incorrect_words];
@@ -626,9 +625,9 @@ namespace freeling {
     
     // generate initial pool of solutions
     genetic_initialize_pool(relevant_positions, num_incorrect_words, alternatives);
-    std::vector<float> probabilities(GEN_POPULATION, 0.0);
+    vector<float> probabilities(GEN_POPULATION, 0.0);
     unsigned int evaluation_state[alternatives.size()]; // dummy state for evaluation
-    std::fill_n(evaluation_state, alternatives.size(), 0);
+    fill_n(evaluation_state, alternatives.size(), 0);
     // calculate constants from genetic params:
     unsigned int mutation_rate100 = (unsigned int) (mutation_rate*100.0);
     
@@ -651,7 +650,7 @@ namespace freeling {
         if (result > best_results[index]) {
           // copy to last position
           best_results[index] = result;
-          // std::copy(evaluation_state, evaluation_state + alternatives.size(), best_solutions[index]);
+          // copy(evaluation_state, evaluation_state + alternatives.size(), best_solutions[index]);
           memcpy(&best_solutions[index], evaluation_state, sizeof(unsigned int)*alternatives.size());
           
           // swap
@@ -685,12 +684,12 @@ namespace freeling {
       for (unsigned int i = 0; i < GEN_POPULATION; i++) {
         // select individual
         unsigned int selected = roulette_selection(sum_weights);
-        if ((float)std::rand() / (float)RAND_MAX < crossover_rate) {
+        if ((float)rand() / (float)RAND_MAX < crossover_rate) {
           // select second individual for crossover
           unsigned int selected_cross = roulette_selection(sum_weights);
           
           // get crossover point
-          unsigned int crossover_point = (std::rand() % (num_incorrect_words - 1)) + 1;
+          unsigned int crossover_point = (rand() % (num_incorrect_words - 1)) + 1;
           
           // generate new individual
           memcpy(&gen_states[next_generation][i].second[0], &gen_states[current_generation][selected].second[0], sizeof(unsigned int)*(crossover_point + 1));
@@ -707,11 +706,11 @@ namespace freeling {
       // APPLY MUTATION OPERATORS
       current_generation = next_generation;
       for (unsigned int individual = 0; individual < GEN_POPULATION; individual++) {
-        if (((unsigned int) (std::rand() % 100)) < mutation_rate100) { // generate mutation
+        if (((unsigned int) (rand() % 100)) < mutation_rate100) { // generate mutation
           // set random alternative for one position
-          unsigned int position = std::rand() % num_incorrect_words;
+          unsigned int position = rand() % num_incorrect_words;
           unsigned int alt_position = relevant_positions[position];
-          unsigned int random_alt = std::rand() % alternatives[alt_position].second.size();
+          unsigned int random_alt = rand() % alternatives[alt_position].second.size();
           gen_states[current_generation][individual].second[position] = random_alt;
           ++total_mutations;
         }
@@ -735,9 +734,9 @@ namespace freeling {
   /// Damerau-Levenshtein edit distance
   /////////////////////////////////////////////////////////////////////////////
   
-  unsigned int corrector::DL_distance_rec(const std::wstring &str_A, const std::wstring &str_B, int i, int j) {
-    if (std::min(i, j) == -1) {
-      return std::max(i + 1, j + 1)*INSERTION_COST;
+  unsigned int corrector::DL_distance_rec(const wstring &str_A, const wstring &str_B, int i, int j) {
+    if (min(i, j) == -1) {
+      return max(i + 1, j + 1)*INSERTION_COST;
     } else {
       unsigned int r1, r2, r3;
       r1 = DL_distance_rec(str_A, str_B, i - 1, j) + DELETION_COST;
@@ -749,23 +748,23 @@ namespace freeling {
       
       if (i > 0 and j > 0 and str_A[i] == str_B[j - 1] and str_A[i - 1] == str_B[j]) { // transposition
         unsigned int r4 = DL_distance_rec(str_A, str_B, i - 2, j - 2) + TRANSPOSITION_COST;
-        return std::min(std::min(r1, r2), std::min(r3, r4));
+        return min(min(r1, r2), min(r3, r4));
       } else {
-        return std::min(std::min(r1, r2), r3);
+        return min(min(r1, r2), r3);
       }
     }
   }
 
-  unsigned int corrector::DL_distance_recursive(const std::wstring &str_A, const std::wstring &str_B) {
+  unsigned int corrector::DL_distance_recursive(const wstring &str_A, const wstring &str_B) {
     //remove common prefixes/suffixes
-    unsigned int min_length = std::min(str_A.length(), str_B.length());
+    unsigned int min_length = min(str_A.length(), str_B.length());
     unsigned int pre, suf;
     pre = suf = 0;
     while (pre < min_length and str_A[pre] == str_B[pre]) pre++;
     while (suf < (min_length - pre) and str_A[str_A.length() - 1 - suf] == str_B[str_B.length() - 1 - suf]) suf++;
     
-    std::wstring A = str_A.substr(pre, str_A.length() - suf - pre);
-    std::wstring B = str_B.substr(pre, str_B.length() - suf - pre);
+    wstring A = str_A.substr(pre, str_A.length() - suf - pre);
+    wstring B = str_B.substr(pre, str_B.length() - suf - pre);
     
     //run DL recursively
     return DL_distance_rec(A, B, A.length() - 1, B.length() - 1);
@@ -775,9 +774,9 @@ namespace freeling {
   /// Damerau-Levenshtein edit distance
   /////////////////////////////////////////////////////////////////////////////
   
-  corrector_evaluation_t corrector::evaluate(std::list<freeling::sentence> &to_correct, std::list<std::pair<std::wstring, std::wstring>> &corrections) {
+  corrector_evaluation_t corrector::evaluate(list<freeling::sentence> &to_correct, list<pair<wstring, wstring>> &corrections) {
     // original sentence
-    std::list<freeling::sentence> original = std::list<freeling::sentence>(to_correct);
+    list<freeling::sentence> original = list<freeling::sentence>(to_correct);
     
     // correct sentence
     normalize(to_correct);
@@ -804,9 +803,9 @@ namespace freeling {
     evaluation.words_well_corrected  = 0;
 
     // compare sentences and corrections
-    std::list<std::pair<std::wstring, std::wstring>>::iterator corrections_it = corrections.begin();
-    std::list<freeling::sentence>::iterator original_it = original.begin();
-    for (std::list<freeling::sentence>::iterator s = to_correct.begin(); s != to_correct.end(); s++) {
+    list<pair<wstring, wstring>>::iterator corrections_it = corrections.begin();
+    list<freeling::sentence>::iterator original_it = original.begin();
+    for (list<freeling::sentence>::iterator s = to_correct.begin(); s != to_correct.end(); s++) {
       freeling::sentence::iterator w_original = original_it->begin();
       for (freeling::sentence::iterator w = s->begin(); w != s->end(); w++) {
         evaluation.sentence_length += 1;
@@ -833,11 +832,11 @@ namespace freeling {
           if (recalled and corrected and w->get_form() == corrections_it->second) {
             evaluation.words_well_corrected += 1;
           } else {
-            std::wstring a, b, c;
-            a = std::wstring(w_original->get_form());
-            b = std::wstring(corrections_it->second);
-            c = std::wstring(w->get_form());
-            missed_corrections.push_back(std::make_tuple(a, b, c));
+            wstring a, b, c;
+            a = wstring(w_original->get_form());
+            b = wstring(corrections_it->second);
+            c = wstring(w->get_form());
+            missed_corrections.push_back(make_tuple(a, b, c));
           }
           
           if (corrections_it != corrections.end()) ++corrections_it;
@@ -852,7 +851,7 @@ namespace freeling {
     return evaluation;
   }
   
-  void corrector::print_evaluation_results(std::vector<corrector_evaluation_t> corrections) {  
+  void corrector::print_evaluation_results(vector<corrector_evaluation_t> corrections) {  
     unsigned int num_corrections  = corrections.size();
     unsigned int words_to_correct = 0;
     unsigned int words_corrected  = 0;
@@ -866,32 +865,32 @@ namespace freeling {
       words_well_corrected += corrections[i].words_well_corrected;
     }
     
-    std::wcout << L"### EVALUATION RESULTS #################################" << std::endl;
-    std::wcout << L"# Number of sentences evaluated: " << num_corrections << std::endl;
-    std::wcout << L" " << std::endl;
-    std::wcout << L"### Absolute results: " << std::endl;
-    std::wcout << L"# Words corrected:          " << words_corrected << L"/" << words_to_correct << std::endl;
-    std::wcout << L"# Precision ceiling:        " << words_recalled << L"/" << words_to_correct << std::endl;
-    std::wcout << L"# Precision:                " << words_well_corrected << L"/" << words_to_correct << std::endl;
-    std::wcout << L" " << std::endl;
-    std::wcout << L"### Percentages: " << std::endl;
-    std::wcout << L"# Words corrected:          " << 100.0*((float) words_corrected/(float) words_to_correct) << L"%" << std::endl;
-    std::wcout << L"# Words recalled:           " << 100.0*((float) words_recalled/(float) words_to_correct) << L"%" << std::endl;
-    std::wcout << L"# Precision:                " << 100.0*((float) words_well_corrected/(float) words_to_correct) << L"%" << std::endl;
-    std::wcout << L"# Precision (over ceiling): " << 100.0*((float) words_well_corrected/(float) words_recalled) << L"%" << std::endl;
-    std::wcout << L" " << std::endl;
-    std::wcout << L"### Missed corrections: " << std::endl;
+    wcout << L"### EVALUATION RESULTS #################################" << endl;
+    wcout << L"# Number of sentences evaluated: " << num_corrections << endl;
+    wcout << L" " << endl;
+    wcout << L"### Absolute results: " << endl;
+    wcout << L"# Words corrected:          " << words_corrected << L"/" << words_to_correct << endl;
+    wcout << L"# Precision ceiling:        " << words_recalled << L"/" << words_to_correct << endl;
+    wcout << L"# Precision:                " << words_well_corrected << L"/" << words_to_correct << endl;
+    wcout << L" " << endl;
+    wcout << L"### Percentages: " << endl;
+    wcout << L"# Words corrected:          " << 100.0*((float) words_corrected/(float) words_to_correct) << L"%" << endl;
+    wcout << L"# Words recalled:           " << 100.0*((float) words_recalled/(float) words_to_correct) << L"%" << endl;
+    wcout << L"# Precision:                " << 100.0*((float) words_well_corrected/(float) words_to_correct) << L"%" << endl;
+    wcout << L"# Precision (over ceiling): " << 100.0*((float) words_well_corrected/(float) words_recalled) << L"%" << endl;
+    wcout << L" " << endl;
+    wcout << L"### Missed corrections: " << endl;
     int corrections_size = missed_corrections.size();
     for (auto missed : missed_corrections) {
-      std::wcout << L"  " << std::get<0>(missed) << L" => " << std::get<1>(missed) << L" (" << std::get<2>(missed) << L")";
+      wcout << L"  " << get<0>(missed) << L" => " << get<1>(missed) << L" (" << get<2>(missed) << L")";
       --corrections_size;
       if (corrections_size > 0) {
-        std::wcout << ", ";
+        wcout << ", ";
       } else {
-        std::wcout << std::endl;
+        wcout << endl;
       }
     }
     missed_corrections.clear();
-    std::wcout << L"#########################################################" << std::endl;
+    wcout << L"#########################################################" << endl;
   }
 } // namespace

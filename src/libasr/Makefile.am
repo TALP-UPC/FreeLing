@@ -17,5 +17,5 @@ nobase_library_HEADERS = asr/asr.h asr/base64.h asr/Decoder.h asr/Nnet3LatgenFas
 #libasr_la_LIBADD = $(KALDI_DEPS)
 libasr_la_LIBADD = -lkaldi-base -lkaldi-feat -lkaldi-util -lfst -lkaldi-lat -lkaldi-hmm -lkaldi-online2 -lkaldi-ivector -lkaldi-nnet3 -lkaldi-cudamatrix -lkaldi-matrix -lkaldi-decoder -lkaldi-fstext
 
-libasr_la_LDFLAGS = -release 0.1 
-
+#libasr_la_LDFLAGS = -release 0.1 
+libasr_la_LDFLAGS=-module -avoid-version -shared

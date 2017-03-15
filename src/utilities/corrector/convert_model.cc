@@ -4,10 +4,9 @@
 
 #include "freeling/morfo/traces.h"
 #include "freeling/morfo/util.h"
-#include "freeling/morfo/word_vector.h"
+#include "freeling/morfo/embeddings.h"
 
 using namespace std;
-using namespace freeling;
 
 int main(int argc, char* argv[]){
 
@@ -21,21 +20,24 @@ int main(int argc, char* argv[]){
   }
   
   // create a word_vector module with the given model
-  std::wcout << L"Initializing word_vector module..." << std::flush;
+  wcout << L"Initializing word_vector module..." << flush;
   wstring model_file = freeling::util::string2wstring(argv[1]);
-  freeling::word_vector wordVec(model_file);
-  std::wcout << L" DONE" << std::endl;
+  freeling::embeddings wordVec(model_file);
+  wcout << L" DONE" << endl;
+
+  wstring basename = freeling::util::string2wstring(model_file.substr(0, model_file.find_last_of(L".")));
   
-  // warn the user if he's not using a binary model
-  if (model_file.substr(model_file.length() - 4) != L".bin") {
-    std::wcout << L"Converting model to binary format..." << std::flush;
-    std::string::size_type found = model_file.find_last_of(L".");
-    wordVec.dump_model(model_file.substr(0, found) + L".bin");
-    std::wcout << L" DONE" << std::endl;
-  } else {
-    std::wcout << L"Converting model to words format..." << std::flush;
-    std::string::size_type found = model_file.find_last_of(L".");
-    wordVec.dump_model(model_file.substr(0, found) + L".words");
-    std::wcout << L" DONE" << std::endl;
+  // Text model, convert to binary
+  if (model_file.substr(model_file.length()-4) != L".bin") {
+    wcout << L"Converting model to binary format..." << flush;
+    wordVec.dump_binary_model(basename + L".bin");
+    wcout << L" DONE" << endl;
+  } 
+
+  // Binary model, convert to text.
+  else {
+    wcout << L"Converting model to words format..." << flush;
+    wordVec.dump_text_model(basename + L".txt");
+    wcout << L" DONE" << endl;
   }
 }
