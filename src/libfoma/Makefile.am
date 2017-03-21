@@ -3,8 +3,8 @@ AUTOMAKE_OPTIONS = subdir-objects
 
 include $(top_srcdir)/src/automake_options.am
 
-AM_CPPFLAGS = -I$(top_srcdir)/src/libfoma $(MY_CPPFLAGS)
-AM_CXXFLAGS = -I$(top_srcdir)/src/libfoma $(MY_CXXFLAGS)
+AM_CPPFLAGS = -I$(top_srcdir)/src/libfoma
+AM_CFLAGS = $(DBG_FLAGS)
 
 lib_LTLIBRARIES = libfoma.la
 

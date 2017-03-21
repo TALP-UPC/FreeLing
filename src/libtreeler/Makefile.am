@@ -5,8 +5,8 @@ AUTOMAKE_OPTIONS = subdir-objects
 
 include $(top_srcdir)/src/automake_options.am
 
-AM_CPPFLAGS = -I$(top_srcdir)/src/libtreeler $(MY_CPPFLAGS)
-AM_CXXFLAGS = -I$(top_srcdir)/src/libtreeler $(MY_CXXFLAGS)
+AM_CPPFLAGS = -I$(top_srcdir)/src/libtreeler
+AM_CXXFLAGS = $(DBG_FLAGS)
 
 #-----------------------------------------------------------------
 #--  library libtreeler

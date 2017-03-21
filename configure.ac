@@ -6,7 +6,7 @@ AC_CONFIG_SRCDIR([src/libfreeling/version.cc])
 AC_CONFIG_AUX_DIR([.])
 AM_INIT_AUTOMAKE([foreign])
 
-AC_PREREQ(2.59)
+AC_PREREQ([2.68])
 AC_CONFIG_MACRO_DIR([m4])
 AC_CANONICAL_HOST
 
@@ -107,12 +107,13 @@ AC_ARG_WITH([kaldi-asr],
               ])
 
 
+# preprocessor and compiler flags
+CXXFLAGS="-std=gnu++0x -Wall -Wno-sign-compare -fPIC"
+CFLAGS="-Wall -Wno-sign-compare"
 # Checks for programs.
 AC_PROG_CXX
-# preprocessor and compiler flags
-CXXFLAGS="$CXXFLAGS -std=gnu++0x -Wall -Wno-sign-compare -fPIC"
 
-AC_PROG_LIBTOOL
+LT_INIT
 AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
@@ -283,6 +284,9 @@ AC_CHECK_LIB([z],[main],[echo "OK">/dev/null;], [echo "" &&
 
 if test $using_kaldi = "yes"
 then
+LDF=$LDFLAGS
+CPF=$CPPFLAGS
+CXF=$CXXFLAGS
 LDFLAGS="$LDFLAGS -L$KALDI_ROOT/tools/openfst/lib -L$KALDI_ROOT/src/lib"
 CPPFLAGS="$CPPFLAGS -I$KALDI_ROOT/tools/ATLAS/include -I$KALDI_ROOT/src/ -I$KALDI_ROOT/tools/openfst/include"
 CXXFLAGS="$CXXFLAGS -Wno-unused-local-typedefs"
@@ -307,6 +311,9 @@ AC_CHECK_HEADERS([$KALDI_ROOT/src/base/kaldi-common.h],[
          echo "   Make sure the directory specified with option '--with-kaldi-asr'" &&
          echo "   contains a correct kaldi installation." &&
          echo "" && exit 1])
+LDFLAGS=$LDF
+CPPFLAGS=$CPF
+CXXFLAGS=$CXF
 fi
 
 # Checks for typedefs, structures, and compiler characteristics.

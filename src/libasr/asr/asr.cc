@@ -68,7 +68,7 @@ namespace freeling {
     if (not cfg.open(configFile))
       ERROR_CRASH(L"Error opening file " + configFile);
 
-    string pathToData = util::wstring2string(configFile.substr(0, configFile.rfind(L"config/")));
+    string pathToData = util::wstring2string(configFile.substr(0, configFile.rfind(L"/")+1));
 
     // Variables to be set by the config file
     string fst_filename;
