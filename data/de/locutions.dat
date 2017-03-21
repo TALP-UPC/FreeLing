@@ -1,6 +1,55 @@
 <Multiwords>
-auf_seiten auf_seiten SP000 I
-wie_<viele> wie_viele PT00000 wie_viele DT000 I
+auf_seiten auf_seiter SP000 I
+ein_jeder ein_jeder PINMS00 I
+ein_jedes ein_jeder PIANS00 I
+ein_jedes ein_jeder PINNS00 I
+ein_jedweder ein_jeglicher PINMS00 I
+ein_jedwedes ein_jeglicher PIANS00 I
+ein_jedwedes ein_jeglicher PINNS00 I
+ein_jeglicher ein_jeglicher PINMS00 I
+ein_jegliches ein_jeglicher PIANS00 I
+ein_jegliches ein_jeglicher PINNS00 I
+eine_jede ein_jeder PIAFS00 I
+eine_jede ein_jeder PINFS00 I
+eine_jedwede ein_jeglicher PIAFS00 I
+eine_jedwede ein_jeglicher PINFS00 I
+eine_jegliche ein_jeglicher PIAFS00 I
+eine_jegliche ein_jeglicher PINFS00 I
+einem_jeden ein_jeder PIDMS00 I
+einem_jeden ein_jeder PIDNS00 I
+einem_jedweden ein_jeglicher PIDMS00 I
+einem_jedweden ein_jeglicher PIDNS00 I
+einem_jeglichen ein_jeglicher PIDMS00 I
+einem_jeglichen ein_jeglicher PIDNS00 I
+einen_jeden ein_jeder PIAMS00 I
+einen_jedweden ein_jeglicher PIAMS00 I
+einen_jeglichen ein_jeglicher PIAMS00 I
+einer_jeden ein_jeder PIDFS00 I
+einer_jeden ein_jeder PIGFS00 I
+einer_jedweden ein_jeglicher PIDFS00 I
+einer_jedweden ein_jeglicher PIGFS00 I
+einer_jeglichen ein_jeglicher PIDFS00 I
+einer_jeglichen ein_jeglicher PIGFS00 I
+eines_derartigen ein_derartiges PIGNS00 I
+eines_einzelnen ein_einzelnes PIGNS00 I
+eines_jeden ein_jeder PIGMS00 I
+eines_jeden ein_jeder PIGNS00 I
+eines_jedweden ein_jeglicher PIGMS00 I
+eines_jedweden ein_jeglicher PIGNS00 I
+eines_jeglichen ein_jeglicher PIGMS00 I
+eines_jeglichen ein_jeglicher PIGNS00 I
+eines_sonstigen ein_sonstiges PIGNS00
+eines_weiteren ein_weiteres PIGNS00 I
+solch_eine solch_einer PDAFS00 I
+solch_eine solch_einer PDNFS00 I
+solch_einem solch_einer PDDMS00 I
+solch_einem solch_einer PDDNS00 I
+solch_einen solch_einer PDAMS00 I
+solch_einer solch_einer PDDFS00 I
+solch_einer solch_einer PDNMS00 I
+solch_eins solch_einer PDANS00 I
+solch_eins solch_einer PDNNS00 I
 wie_<viel> wie_viel PT00000 wie_viel DT000 I
+wieviele> wie_viele PT00000 wie_viele DT000 I
 zum_beispiel zum_beispiel RG I
 </Multiwords>

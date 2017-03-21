@@ -7,21 +7,21 @@ yes
 ## list of chars that may join compound elements (one char per line)
 -
 e
-n
-s
 ##e-
-##n-
+##er
+##er-
 ##en
 ##en-
+n
+##n-
 ##ens
 ##ens-
 ##ns
 ##ns-
-##er
-##er-
-##s-
 ##es
 ##es-
+s
+##s-
 </JoinChars>
 
 
@@ -35,13 +35,13 @@ s
 ## Arbeitgeber (employer)
 NC_+NC
 
-## Glasflächenreinigung (glass surface cleaning); Feuerwehrzufahrt (fire department access)
+## Glasflächenreinigung (glass surface cleaning); Feuerwehrzufahrt (fire department access); Kinder-krankenhaus (child hospital)
 NC_NC_+NC
 
-##
+## 
 NC_NC_NC_+NC
 
-## Fernfahrer (long-distance trucker)
+## Fernfahrer (long-distance trucker); Tiefgarage 
 A_+NC
 
 ##
@@ -50,8 +50,13 @@ RG_+NC
 ##  Vorort (suburb)
 SP_+NC
 
-## The first word can also be a verb, which is represented by the stem
+## The first word can also be a verb, which is represented by the stem or the pastpart
 ## Esszimmer (dining room)
+VV_+NC
+
+## Gebrauchtwagen (used car)
+VVP_+NC
+
 
 ## The final word can also be an adjective or adverb, so that the compound
 ## itself becomes that part of speech
@@ -61,5 +66,9 @@ A_+A
 
 ## vollautomatisch" (fully automatic)
 RG_+A
+
+## sustantivos compuestos, lexicalizando frases iminales o frases hechas, sustantivadas a partir de otras categorías
+## Vergissmeinnichti (VV_P_+RG=N), Taugenichts (V_RG=N), Tunichgut, Gottseibeiuns, Stelldichein, Einmaleins, Gernegross
+
 
 </CompoundPatterns>
