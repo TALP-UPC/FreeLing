@@ -121,11 +121,22 @@ output_json::~output_json() {}
 
 
 //---------------------------------------------
-// print obtained analysis in XML
+// print obtained analysis in json
 //---------------------------------------------
 
 void output_json::PrintResults (wostream &sout, const list<sentence> &ls) const {
+   PrintSentences(sout,ls);
+}
 
+//---------------------------------------------
+// print sentences in list
+//---------------------------------------------
+
+void output_json::PrintSentences (wostream &sout, const list<sentence> &ls) const {
+
+  if (ls.empty()) return;
+
+  sout<<L"   { \"sentences\" : [" << endl;
   for (list<sentence>::const_iterator s=ls.begin(); s!=ls.end(); s++) {
 
     if (s->empty()) continue;
@@ -254,6 +265,8 @@ void output_json::PrintResults (wostream &sout, const list<sentence> &ls) const 
 
     sout << L"}";  // end sentence
   }
+
+  sout<<L"]}" << endl;  // end list of sentences
 }
 
 
@@ -556,13 +569,10 @@ void output_json::PrintSemgraph(wostream &sout, const document &doc) const {
 
 void output_json::PrintResults(wostream &sout, const document &doc) const {
 
-
   sout << L"{ \"paragraphs\" : [" << endl;
   for (document::const_iterator p=doc.begin(); p!=doc.end(); p++) {
     if (p!=doc.begin()) sout << L"," << endl;
-    sout<<L"   { \"sentences\" : [" << endl;
-    PrintResults(sout,*p);
-    sout<<L"] }";
+    PrintSentences(sout,*p);
   }
   sout << L"]" ;
 

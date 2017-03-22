@@ -15,4 +15,4 @@ nobase_library_HEADERS = asr/asr.h asr/base64.h asr/Decoder.h asr/Nnet3LatgenFas
 
 libasr_la_LIBADD = $(KALDI_DEPS) -lfreeling
 
-libasr_la_LDFLAGS=-module -avoid-version -shared $(KALDI_LIBS)
+libasr_la_LDFLAGS=-module -avoid-version -shared -L$(top_srcdir)/src/libfreeling $(KALDI_LIBS)

@@ -85,6 +85,7 @@ install-data-hook:
 	     wget -P $$tmpdir nlp.cs.upc.edu/freeling/extradata/freeling_asr_data.tar.bz2; \
 	     echo "Uncompressing and installing ASR data in $(DESTDIR)/$(pkgdatadir)."; \
 	     tar -xvjf $$tmpdir/freeling_asr_data.tar.bz2 --directory $(DESTDIR)/$(pkgdatadir); \
+	     echo "ASR data installed. Removing temporary folder $$tmpdir."; \
 	     rm -rf $$tmpdir; \
 	   fi; \
 	fi;
@@ -98,6 +99,7 @@ install-data-hook:
 	     wget -P $$tmpdir nlp.cs.upc.edu/freeling/extradata/freeling_embeddings.tar.bz2; \
 	     echo "Uncompressing and installing word embedding data in $(DESTDIR)/$(pkgdatadir)."; \
 	     tar -xvjf $$tmpdir/freeling_embeddings.tar.bz2 --directory $(DESTDIR)/$(pkgdatadir); \
+	     echo "Word embeddings data installed. Removing temporary folder $$tmpdir."; \
 	     rm -rf $$tmpdir; \
 	   fi; \
 	fi;

@@ -7,4 +7,4 @@ if KALDI
   DO_ASR = libasr
 endif
 
-SUBDIRS = include libtreeler libfoma $(DO_ASR) libfreeling main utilities $(DO_TESTS)
+SUBDIRS = include libtreeler libfoma libfreeling $(DO_ASR) main utilities $(DO_TESTS)
