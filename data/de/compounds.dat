@@ -32,6 +32,8 @@ s
 ## element an be an adjective, an adverb, a verb or verb stem, or a
 ## preposition.
 
+## COMPOUND NOUS:
+
 ## Arbeitgeber (employer)
 NC_+NC
 
@@ -57,18 +59,24 @@ VV_+NC
 ## Gebrauchtwagen (used car)
 VVP_+NC
 
+## sustantivos compuestos, lexicalizando frases iminales o frases hechas, sustantivadas a partir de otras categorías
+## Vergissmeinnichti (VV_P_+RG=N), Taugenichts (V_RG=N), Tunichgut, Gottseibeiuns, Stelldichein, Einmaleins, Gernegross
 
+## COMPOUND ADJECTIVES
 ## The final word can also be an adjective or adverb, so that the compound
 ## itself becomes that part of speech
 
 ## hellblau (light blue)
 A_+A
 
+## butterweich
+NC_+A
+
+## treffsicher
+V_+A
+
 ## vollautomatisch" (fully automatic)
 RG_+A
-
-## sustantivos compuestos, lexicalizando frases iminales o frases hechas, sustantivadas a partir de otras categorías
-## Vergissmeinnichti (VV_P_+RG=N), Taugenichts (V_RG=N), Tunichgut, Gottseibeiuns, Stelldichein, Einmaleins, Gernegross
 
 
 </CompoundPatterns>

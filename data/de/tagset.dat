@@ -4,7 +4,7 @@ A 3 adjective type/Q:qualificative;P:predicative case/N:nominative;A:accusative;
 D 3 determiner type/A:definite;I:indefinite;X:possessive;D:demostrative;R:relative;T:interrogative case/N:nominative;A:accusative;D:dative;G:genitive gen/F:feminine;M:masculine;N:neuter num/S:singular;P:plural
 V 3 verb type/V:full;A:auxiliary;M:modal mood/N:infinitive;P:participle;Z:zuinf;M:imperative;S:subjunctive;I:indicative tense/P:present;S:past person/1:1;2:2;3:3 num/S:singular;P:plural
 P 3 pronoun type/D:demonstrative;R:relative;T:interrogative;P:personal;F:reflexive;X:possessive;I:indefinite case/N:nominative;A:accusative;D:dative;G:genitive gen/F:feminine;M:masculine;N:neuter num/S:singular;P:plural person/1:1;2:2;3:3 politeness/P:polite;F:familiar
-R 2 adverb type/G:general;N:negative;V:particle;P:pronominal
+R 2 adverb type/G:general;N:negative;V:particle
 S 2 adposition type/P:preposition;S:postposition;C:circumposition;Z:particle
 C 2 conjunction type/S:subordinating;C:coordinating;M:comparative
 Z 2 number type/d:partitive;m:currency;p:percentage;u:unit

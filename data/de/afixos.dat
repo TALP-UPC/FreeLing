@@ -23,33 +23,423 @@
 
 
 <Prefixes>
+## Prefijos derivativos de adverbios: 'zu-', sirve sobre todo para formar superlativos. 
+## Se adjunta a otras categorías
+# zu            *       ^(A|N|V)        RG      0       0       0       A+L     0       -
+
+# prefixes for verbs
+ab		*	^V		*	0	0	1	A+L	0	-
+an		*	^V		*	0	0	1	A+L	0	-
+auf		*	^V		*	0	0	1	A+L	0	-
+aus		*	^V		*	0	0	1	A+L	0	-
+bei		*	^V		*	0	0	1	A+L	0	-
+mit		*	^V		*	0	0	1	A+L	0	-
+nach		*	^V		*	0	0	1	A+L	0	-
+vor		*	^V		*	0	0	1	A+L	0	-
+zu		*	^V		*	0	0	1	A+L	0	-
+dar		*	^V		*	0	0	1	A+L	0	-
+dabeia		*	^V		*	0	0	1	A+L	0	-
+daher		*	^V		*	0	0	1	A+L	0	-
+dahin		*	^V		*	0	0	1	A+L	0	-
+daneben		*	^V		*	0	0	1	A+L	0	-
+daran		*	^V		*	0	0	1	A+L	0	-
+darauf		*	^V		*	0	0	1	A+L	0	-
+darunter	*	^V		*	0	0	1	A+L	0	-
+davon		*	^V		*	0	0	1	A+L	0	-
+davor		*	^V		*	0	0	1	A+L	0	-
+dazu		*	^V		*	0	0	1	A+L	0	-
+ein		*	^V		*	0	0	1	A+L	0	-
+empor		*	^V		*	0	0	1	A+L	0	-
+entgegen	*	^V		*	0	0	1	A+L	0	-
+fehl		*	^V		*	0	0	1	A+L	0	-
+fort		*	^V		*	0	0	1	A+L	0	-
+her		*	^V		*	0	0	1	A+L	0	-
+herum		*	^V		*	0	0	1	A+L	0	-
+herunter	*	^V		*	0	0	1	A+L	0	-
+hin		*	^V		*	0	0	1	A+L	0	-
+hunüber		*	^V		*	0	0	1	A+L	0	-
+inne		*	^V		*	0	0	1	A+L	0	-
+los		*	^V		*	0	0	1	A+L	0	-
+nieder		*	^V		*	0	0	1	A+L	0	-
+überein		*	^V		*	0	0	1	A+L	0	-
+umher		*	^V		*	0	0	1	A+L	0	-
+voraus		*	^V		*	0	0	1	A+L	0	-
+vorbei		*	^V		*	0	0	1	A+L	0	-
+vorüber		*	^V		*	0	0	1	A+L	0	-
+vorweg		*	^V		*	0	0	1	A+L	0	-
+weg		*	^V		*	0	0	1	A+L	0	-
+weiter		*	^V		*	0	0	1	A+L	0	-
+wieder		*	^V		*	0	0	1	A+L	0	-
+zurück		*	^V		*	0	0	1	A+L	0	-
+zusammen	*	^V		*	0	0	1	A+L	0	-
+durch		*	^V		*	0	0	1	A+L	0	-
+hinter		*	^V		*	0	0	1	A+L	0	-
+über		*	^V		*	0	0	1	A+L	0	-
+unter		*	^V		*	0	0	1	A+L	0	-
+wider		*	^V		*	0	0	1	A+L	0	-
+be		*	^V		*	0	0	1	A+L	0	-
+ent		*	^V		*	0	0	1	A+L	0	-
+emp		*	^V		*	0	0	1	A+L	0	-
+er		*	^V		*	0	0	1	A+L	0	-
+ge		*	^V		*	0	0	1	A+L	0	-
+ver		*	^V		*	0	0	1	A+L	0	-
+zer		*	^V		*	0	0	1	A+L	0	-
+de		*	^V		*	0	0	1	A+L	0	-
+des		*	^V		*	0	0	1	A+L	0	-
+dis		*	^V		*	0	0	1	A+L	0	-
+in		*	^V		*	0	0	1	A+L	0	-
+re		*	^V		*	0	0	1	A+L	0	-
+
+
+## negative prefixes for adjectives
+a		*	^A		*	0	0	1	A+L	0	-
+an		*	^A		*	0	0	1	A+L	0	-
+de		*	^A		*	0	0	1	A+L	0	-
+des		*	^A		*	0	0	1	A+L	0	-
+di		*	^A		*	0	0	1	A+L	0	-
+dis		*	^A		*	0	0	1	A+L	0	-
+il		*	^A		*	0	0	1	A+L	0	-
+im		*	^A		*	0	0	1	A+L	0	-
+in		*	^A		*	0	0	1	A+L	0	-
+ir		*	^A		*	0	0	1	A+L	0	-
+non		*	^A		*	0	0	1	A+L	0	-
+ge		*	^A		*	0	0	1	A+L	0	-
+ab		*	^A		*	0	0	1	A+L	0	-
+un		*	^A		*	0	0	1	A+L	0	-
+
+
+## prefixes for nouns
+erz		*	^N		*	0	0	1	A+L	0	-
+über		*	^N		*	0	0	1	A+L	0	-
+affen		*	^N		*	0	0	1	A+L	0	-
+bullen		*	^N		*	0	0	1	A+L	0	-
+heiden		*	^N		*	0	0	1	A+L	0	-
+mords		*	^N		*	0	0	1	A+L	0	-
+in		*	^N		*	0	0	1	A+L	0	-
+nicht		*	^N		*	0	0	1	A+L	0	-
+fehl		*	^N		*	0	0	1	A+L	0	-
+lause		*	^N		*	0	0	1	A+L	0	-
+miss		*	^N		*	0	0	1	A+L	0	-
+ko		*	^N		*	0	0	1	A+L	0	-
+mit		*	^N		*	0	0	1	A+L	0	-
+un		*	^N		*	0	0	1	A+L	0	-
+#ge		*	^N		*	0	0	1	A+L	0	-
+
 
 ## augmentative prefixes
-aber	*	^(A|N|V)	*	0	0	1	A+L	0	-
-affen	*	^(A|N)		*	0	0	1	A+L	0	-
-bären	*	^(A|N)		*	0	0	1	A+L	0	-
-bomben	*	^(A|N)		*	0	0	1	bombe+L	0	-
-# dreck
-erz	*	^(A|N|V)	*	0	0	1	A+L	0	-
-extra	*	^(A|N)		*	0	0	1	A+L	0	-
-extra-	*	^(A|N)		*	0	0	1	A+L	0	-
-# grotten
-# hölle
-# hund
-hyper	*	^(A|N)		*	0	0	1	A+L	0	-
-# knall
-# mega
-# mord
-# mutterseelen
-# ober
-# piek
-# quietsch
-# sau
-# sheiße
-# schwein
-stink	*	^(A|N)		*	0	0	1	A+L	0	-
-stock	*	^A		*	0	0	1	A+L	0	-
-tot	*	^(A|N|V)	*	0	0	1	A+L	0	-
-ur	*	^(A|N)		*	0	0	1	A+L	0	-
-
+## Añado un '#' pq no los he encontrado
+#aber		*	^(A|N|V)	*	0	0	1	A+L	0	-
+#affen		*	^(A|N)		*	0	0	1	A+L	0	-
+#bären		*	^(A|N)		*	0	0	1	A+L	0	-
+#bomben		*	^(A|N)		*	0	0	1	bombe+L	0	-
+## dreck
+#erz		*	^(A|N|V)	*	0	0	1	A+L	0	-
+#extra		*	^(A|N)		*	0	0	1	A+L	0	-
+#extra-		*	^(A|N)		*	0	0	1	A+L	0	-
+## grotten
+## hölle
+## hund
+#hyper		*	^(A|N)		*	0	0	1	A+L	0	-
+## knall
+## mega
+## mord
+## mutterseelen
+## ober
+## piek
+## quietsch
+## sau
+## sheiße
+## schwein
+#stink		*	^(A|N)		*	0	0	1	A+L	0	-
+#stock		*	^A		*	0	0	1	A+L	0	-
+#tot		*	^(A|N|V)	*	0	0	1	A+L	0	-
+#ur		*	^(A|N)		*	0	0	1	A+L	0	-
 </Prefixes>
+
+
+
+<Suffixes>
+# Sufijación de adjectivos a partir de verbos y/o sustantivos: trinkbar, verlässlich, traurig, ratsam, arbeitslos
+ig		en|*	^(N|V)		AP0000	0	0	0	L	0	-
+ige             en|*    ^(N|V)          AQAFS0  0       0       0       L       0       -
+ige             en|*    ^(N|V)          AQA0P0  0       0       0       L       0       -
+ige             en|*    ^(N|V)          AQANS0  0       0       0       L       0       -
+ige             en|*    ^(N|V)          AQN00C  0       0       0       L       0       -
+igem            en|*    ^(N|V)          AQDMS0  0       0       0       L       0       -
+igem            en|*    ^(N|V)          AQDNS0  0       0       0       L       0       -
+igen            en|*    ^(N|V)          AQA0P0  0       0       0       L       0       -
+igen            en|*    ^(N|V)          AQAMS0  0       0       0       L       0       -
+igen            en|*    ^(N|V)          AQD000  0       0       0       L       0       -
+igen            en|*    ^(N|V)          AQG000  0       0       0       L       0       -
+igen            en|*    ^(N|V)          AQN0P0  0       0       0       L       0       -
+iger            en|*    ^(N|V)          AQDFS0  0       0       0       L       0       -
+iger            en|*    ^(N|V)          AQGFS0  0       0       0       L       0       -
+iger            en|*    ^(N|V)          AQG0P0  0       0       0       L       0       -
+iger            en|*    ^(N|V)          AQNMS0  0       0       0       L       0       -
+iges            en|*    ^(N|V)          AQANS0  0       0       0       L       0       -
+iges            en|*    ^(N|V)          AQNNS0  0       0       0       L       0       -
+lich		en|*	^(N|V)		AP0000	0	0	0	L	0	-
+liche           en|*    ^(N|V)		AQAFS0  0       0       0       L       0       -
+liche           en|*    ^(N|V)		AQA0P0  0       0       0       L       0       -
+liche           en|*    ^(N|V)		AQANS0  0       0       0       L       0       -
+liche           en|*    ^(N|V)		AQN00C  0       0       0       L       0       -
+lichem          en|*    ^(N|V)		AQDMS0  0       0       0       L       0       -
+lichem          en|*    ^(N|V)		AQDNS0  0       0       0       L       0       -
+lichen          en|*    ^(N|V)		AQA0P0  0       0       0       L       0       -
+lichen          en|*    ^(N|V)		AQAMS0  0       0       0       L       0       -
+lichen          en|*    ^(N|V)		AQD000  0       0       0       L       0       -
+lichen          en|*    ^(N|V)		AQG000  0       0       0       L       0       -
+lichen          en|*    ^(N|V)		AQN0P0  0       0       0       L       0       -
+licher          en|*    ^(N|V)		AQDFS0  0       0       0       L       0       -
+licher          en|*    ^(N|V)		AQGFS0  0       0       0       L       0       -
+licher          en|*    ^(N|V)		AQG0P0  0       0       0       L       0       -
+licher          en|*    ^(N|V)		AQNMS0  0       0       0       L       0       -
+liches          en|*    ^(N|V)		AQANS0  0       0       0       L       0       -
+liches          en|*    ^(N|V)		AQNNS0  0       0       0       L       0       -
+bar		en	^V		AP0000	0	0	0	L	0	-
+bare            en      ^V              AQAFS0  0       0       0       L       0       -
+bare            en	^V              AQA0P0  0       0       0       L       0       -
+bare            en	^V		AQANS0  0       0       0       L       0       -
+bare            en	^V		AQN00C  0       0       0       L       0       -
+barem           en	^V		AQDMS0  0       0       0       L       0       -
+barem           en	^V		AQDNS0  0       0       0       L       0       -
+baren           en	^V		AQA0P0  0       0       0       L       0       -
+baren           en	^V		AQAMS0  0       0       0       L       0       -
+baren           en	^V		AQD000  0       0       0       L       0       -
+baren           en	^V		AQG000  0       0       0       L       0       -
+baren           en	^V		AQN0P0  0       0       0       L       0       -
+barer           en	^V		AQDFS0  0       0       0       L       0       -
+barer           en	^V		AQGFS0  0       0       0       L       0       -
+barer           en	^V		AQG0P0  0       0       0       L       0       -
+barer           en	^V		AQNMS0  0       0       0       L       0       -
+bares           en	^V		AQANS0  0       0       0       L       0       -
+bares           en	^V		AQNNS0  0       0       0       L       0       -
+sam		en	^V		AP0000	0	0	0	L	0	-
+same            en	^V		AQAFS0  0       0       0       L       0       -
+same            en	^V		AQA0P0  0       0       0       L       0       -
+same            en	^V		AQANS0  0       0       0       L       0       -
+same            en	^V		AQN00C  0       0       0       L       0       -
+samem           en	^V		AQDMS0  0       0       0       L       0       -
+samem           en	^V		AQDNS0  0       0       0       L       0       -
+samen           en	^V		AQA0P0  0       0       0       L       0       -
+samen           en	^V		AQAMS0  0       0       0       L       0       -
+samen           en	^V		AQD000  0       0       0       L       0       -
+samen           en	^V		AQG000  0       0       0       L       0       -
+samen           en	^V		AQN0P0  0       0       0       L       0       -
+samer           en	^V		AQDFS0  0       0       0       L       0       -
+samer           en	^V		AQGFS0  0       0       0       L       0       -
+samer           en	^V		AQG0P0  0       0       0       L       0       -
+samer           en	^V		AQNMS0  0       0       0       L       0       -
+sames           en	^V		AQANS0  0       0       0       L       0       -
+sames           en	^V		AQNNS0  0       0       0       L       0       -
+isch		*	^N		AP0000	0	0	0	L	0	-
+ische           *       ^N              AQAFS0  0       0       0       L       0       -
+ische           *       ^N              AQA0P0  0       0       0       L       0       -
+ische           *       ^N              AQANS0  0       0       0       L       0       -
+ische           *       ^N              AQN00C  0       0       0       L       0       -
+ischem          *       ^N              AQDMS0  0       0       0       L       0       -
+ischem          *       ^N              AQDNS0  0       0       0       L       0       -
+ischen          *       ^N              AQA0P0  0       0       0       L       0       -
+ischen          *       ^N              AQAMS0  0       0       0       L       0       -
+ischen          *       ^N              AQD000  0       0       0       L       0       -
+ischen          *       ^N              AQG000  0       0       0       L       0       -
+ischen          *       ^N              AQN0P0  0       0       0       L       0       -
+ischer          *       ^N              AQDFS0  0       0       0       L       0       -
+ischer          *       ^N              AQGFS0  0       0       0       L       0       -
+ischer          *       ^N              AQG0P0  0       0       0       L       0       -
+ischer          *       ^N              AQNMS0  0       0       0       L       0       -
+isches          *       ^N              AQANS0  0       0       0       L       0       -
+isches          *       ^N              AQNNS0  0       0       0       L       0       -
+los		*	^N		AP0000	0	0	0	L	0	-
+lose            *       ^N              AQAFS0  0       0       0       L       0       -
+lose            *       ^N              AQA0P0  0       0       0       L       0       -
+lose            *       ^N              AQANS0  0       0       0       L       0       -
+lose            *       ^N              AQN00C  0       0       0       L       0       -
+losem           *       ^N              AQDMS0  0       0       0       L       0       -
+losem           *       ^N              AQDNS0  0       0       0       L       0       -
+losen           *       ^N              AQA0P0  0       0       0       L       0       -
+losen           *       ^N              AQAMS0  0       0       0       L       0       -
+losen           *       ^N              AQD000  0       0       0       L       0       -
+losen           *       ^N              AQG000  0       0       0       L       0       -
+losen           *       ^N              AQN0P0  0       0       0       L       0       -
+loser           *       ^N              AQDFS0  0       0       0       L       0       -
+loser           *       ^N              AQGFS0  0       0       0       L       0       -
+loser           *       ^N              AQG0P0  0       0       0       L       0       -
+loser           *       ^N              AQNMS0  0       0       0       L       0       -
+loses           *       ^N              AQANS0  0       0       0       L       0       -
+loses           *       ^N              AQNNS0  0       0       0       L       0       -
+erlos		*	^N		AP0000	0	0	0	L	0	-
+erlose          *       ^N              AQAFS0  0       0       0       L       0       -
+erlose          *       ^N              AQA0P0  0       0       0       L       0       -
+erlose          *       ^N              AQANS0  0       0       0       L       0       -
+erlose          *       ^N              AQN00C  0       0       0       L       0       -
+erlosem         *       ^N              AQDMS0  0       0       0       L       0       -
+erlosem         *       ^N              AQDNS0  0       0       0       L       0       -
+erlosen         *       ^N              AQA0P0  0       0       0       L       0       -
+erlosen         *       ^N              AQAMS0  0       0       0       L       0       -
+erlosen         *       ^N              AQD000  0       0       0       L       0       -
+erlosen         *       ^N              AQG000  0       0       0       L       0       -
+erlosen         *       ^N              AQN0P0  0       0       0       L       0       -
+erloser         *       ^N              AQDFS0  0       0       0       L       0       -
+erloser         *       ^N              AQGFS0  0       0       0       L       0       -
+erloser         *       ^N              AQG0P0  0       0       0       L       0       -
+erloser         *       ^N              AQNMS0  0       0       0       L       0       -
+erloses         *       ^N              AQANS0  0       0       0       L       0       -
+erloses         *       ^N              AQNNS0  0       0       0       L       0       -
+slos	 	*	^N		AP0000  0	0	0	L	0	-
+slose           *       ^N              AQAFS0  0       0       0       L       0       -
+slose           *       ^N              AQA0P0  0       0       0       L       0       -
+slose           *       ^N              AQANS0  0       0       0       L       0       -
+slose           *       ^N              AQN00C  0       0       0       L       0       -
+slosem          *       ^N              AQDMS0  0       0       0       L       0       -
+slosem          *       ^N              AQDNS0  0       0       0       L       0       -
+slosen          *       ^N              AQA0P0  0       0       0       L       0       -
+slosen          *       ^N              AQAMS0  0       0       0       L       0       -
+slosen          *       ^N              AQD000  0       0       0       L       0       -
+slosen          *       ^N              AQG000  0       0       0       L       0       -
+slosen          *       ^N              AQN0P0  0       0       0       L       0       -
+sloser          *       ^N              AQDFS0  0       0       0       L       0       -
+sloser          *       ^N              AQGFS0  0       0       0       L       0       -
+sloser          *       ^N              AQG0P0  0       0       0       L       0       -
+sloser          *       ^N              AQNMS0  0       0       0       L       0       -
+sloses          *       ^N              AQANS0  0       0       0       L       0       -
+sloses          *       ^N              AQNNS0  0       0       0       L       0       -
+haft 		*	^N		AP0000  0	0	0	L	0	  -
+halte           *       ^N              AQAFS0  0       0       0       L       0       -
+halte           *       ^N              AQA0P0  0       0       0       L       0       -
+halte           *       ^N              AQANS0  0       0       0       L       0       -
+halte           *       ^N              AQN00C  0       0       0       L       0       -
+haltem          *       ^N              AQDMS0  0       0       0       L       0       -
+haltem          *       ^N              AQDNS0  0       0       0       L       0       -
+halten          *       ^N              AQA0P0  0       0       0       L       0       -
+halten          *       ^N              AQAMS0  0       0       0       L       0       -
+halten          *       ^N              AQD000  0       0       0       L       0       -
+halten          *       ^N              AQG000  0       0       0       L       0       -
+halten          *       ^N              AQN0P0  0       0       0       L       0       -
+halter          *       ^N              AQDFS0  0       0       0       L       0       -
+halter          *       ^N              AQGFS0  0       0       0       L       0       -
+halter          *       ^N              AQG0P0  0       0       0       L       0       -
+halter          *       ^N              AQNMS0  0       0       0       L       0       -
+haltes          *       ^N              AQANS0  0       0       0       L       0       -
+haltes          *       ^N              AQNNS0  0       0       0       L       0       -
+# comentados pq sobregenerarían 
+#en		*	^N		AP0000	0	0	0	L	0	-
+#ern		*	^N		AP0000	0	0	0	L	0	-
+
+# COMPARATIVE AND SUPERLATIVE ADJECTIVES (nett/netter/netteste)
+# Some of them get Umlaut: jung/jünger/jüngste) !!!!
+er		*	^A		AP000C	0	0	0	L	0	-
+ere		*	^A		AQAFSC  0       0       0       L       0       -
+ere		*	^A		AQA0PC  0       0       0       L       0       -
+ere		*	^A		AQANSC  0       0       0       L       0       -
+ere		*	^A		AQN00C  0       0       0       L       0       -
+erem		*	^A		AQDMSC  0       0       0       L       0       -
+erem		*	^A		AQDNSC  0       0       0       L       0       -
+eren		*	^A		AQA0PC  0       0       0       L       0       -
+eren		*	^A		AQAMSC  0       0       0       L       0       -
+eren		*	^A		AQD00C  0       0       0       L       0       -
+eren		*	^A		AQG00C  0       0       0       L       0       -
+eren		*	^A		AQN0PC  0       0       0       L       0       -
+erer		*	^A		AQDFSC  0       0       0       L       0       -
+erer		*	^A		AQGFSC  0       0       0       L       0       -
+erer		*	^A		AQG0PC  0       0       0       L       0       -
+erer		*	^A		AQNMSC  0       0       0       L       0       -
+eres		*	^A		AQANSC  0       0       0       L       0       -
+eres		*	^A		AQNNSC  0       0       0       L       0       -
+este            *       ^A              AQAFSS  0       0       0       L       0       -
+este            *       ^A              AQA0PS  0       0       0       L       0       -
+este            *       ^A              AQANSS  0       0       0       L       0       -
+este            *       ^A              AQN00S  0       0       0       L       0       -
+estem           *       ^A              AQDMSS  0       0       0       L       0       -
+estem           *       ^A              AQDNSS  0       0       0       L       0       -
+esten           *       ^A              AP000S  0       0       0       L       0       -
+esten           *       ^A              AQA0PS  0       0       0       L       0       -
+esten           *       ^A              AQAMSS  0       0       0       L       0       -
+esten           *       ^A              AQD00S  0       0       0       L       0       -
+esten           *       ^A              AQG00S  0       0       0       L       0       -
+esten           *       ^A              AQN0PS  0       0       0       L       0       -
+ester           *       ^A              AQDFSS  0       0       0       L       0       -
+ester           *       ^A              AQGFSS  0       0       0       L       0       -
+ester           *       ^A              AQG0PS  0       0       0       L       0       -
+ester           *       ^A              AQNMSS  0       0       0       L       0       -
+estes           *       ^A              AQANSS  0       0       0       L       0       -
+ste		*	^A		AQAFSS  0       0       0       L       0       -
+ste		*	^A		AQA0PS  0       0       0       L       0       -
+ste		*	^A		AQANSS  0       0       0       L       0       -
+ste		*	^A		AQN00S  0       0       0       L       0       -
+stem		*	^A		AQDMSS  0       0       0       L       0       -
+stem		*	^A		AQDNSS  0       0       0       L       0       -
+sten		*	^A		AP000S  0       0       0       L       0       -
+sten		*	^A		AQA0PS  0       0       0       L       0       -
+sten		*	^A		AQAMSS  0       0       0       L       0       -
+sten		*	^A		AQD00S  0       0       0       L       0       -
+sten		*	^A		AQG00S  0       0       0       L       0       -
+sten		*	^A		AQN0PS  0       0       0       L       0       -
+ster		*	^A		AQDFSS  0       0       0       L       0       -
+ster		*	^A		AQGFSS  0       0       0       L       0       -
+ster		*	^A		AQG0PS  0       0       0       L       0       -
+ster		*	^A		AQNMSS  0       0       0       L       0       -
+stes		*	^A		AQANSS  0       0       0       L       0       -
+
+
+# ADVERBIOS GRADUABLES (er arbeits schnell/schneller/am schnellsten)
+er		*	^RG		RG	0	0	0	L	0	-
+sten		*	^RG		RG	0	0	0	L	0	-
+ste		*	^RG		RG	0	0	0	L	0	-
+stens		*	^RG		RG	0	0	0	L	0	-
+
+# ADVERBIOS DERIVADOS
+# many of them are also attached to cardinals!!!
+
+# allerart, derart, solcherart
+art		*	^D		RG	0	0	0	F	0	-
+
+# solcherlei, mancherlei, zweierlei 
+erlei		er|*	^D		RG	0	0	0	F	0	-
+
+# vielfach, zweifach
+fach		*	^D		RG	0	0	0	F	0	-
+
+# dieserhalb, innerhalb, unterhalb
+halb		*	^(D|S)		RG	0	0	0	F	0	-
+
+# allenthalben, meinethalben, spasseeshalber
+halben		*	^(D|N)		RG	0	0	0	F	0	-
+halber		*	^(D|N)		RG	0	0	0	F	0	-
+nethalben	*	^(D|N)		RG	0	0	0	F	0	-
+nethalben	*	^(D|N)		RG	0	0	0	F	0	-
+nthalber	*	^(D|N)		RG	0	0	0	F	0	-
+enhalben	*	^(D|N)		RG	0	0	0	F	0	-
+enhalber	*	^(D|N)		RG	0	0	0	F	0	-
+eshalben	*	^(D|N)		RG	0	0	0	F	0	-
+eshalber	*	^(D|N)		RG	0	0	0	F	0	-
+
+# allerhand, kurzerhand
+hand		*	^(A|D)		RG	0	0	0	F	0	-
+
+# freilich, hoffentlich, 
+lich		*	^(A|N)		RG	0	0	0	F	0	-
+tlich		*	^(A|N)		RG	0	0	0	F	0	-
+
+# jählings
+lings		*	A		RG	0	0	0	F	0	-
+
+# einman, manchmal, damals, ofmals
+mal		er|*	^(D|R)		RG	0	0	0	F	0	-
+mals		er|*	^(D|R)		RG	0	0	0	F	0	-
+
+# dermaßeni, einigermaßen
+maßen		*	^D 		RG	0	0	0	F	0	-
+
+# gleichermaßen
+ermaßen		*	^A 		RG	0	0	0	F	0	-
+
+# abwärts, seitwärts, wälderwärds,... Se une a nombres, adverbios y preposiciones, y tienen significado direccional
+wärts		*	^(N|R|S)	RG	0	0	0	F	0	-
+
+# abends, nachts, meistens, freitags,... ya están en el diccionario
+# s		*	RG		RG	0	0	0	F	0	-
+# erstens, zweitens,... Se une a los ordinales
+# ens		*	Z		RG	0	0	0	F	0	-
+
+</Suffixes>

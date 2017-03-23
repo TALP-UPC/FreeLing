@@ -459,9 +459,9 @@ namespace freeling {
 		//    wcerr << L" RE " <<i << L" " << st->rem[i] << endl;
 		//}
 		token = TK_date;
-	    } else 
+	    } 
+            else if (token == TK_number && value <= 31) 
 		token = TK_day;
-
 	    break;
 
 	case ST_read_vor:

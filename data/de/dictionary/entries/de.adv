@@ -33,7 +33,6 @@ allzusehr allzusehr RG
 alsbald alsbald RG
 also also RG
 alters alters RG
-am am RG
 amtlicherseits amtlicherseits RG
 an an RV
 andererseits andererseits RG
@@ -69,9 +68,7 @@ ausgerechnet ausrechnen RG
 ausnahmsweise ausnahmsweise RG
 ausschließlich ausschließlich RG
 ausserdem ausserdem RG
-ausserdem ausserdem RP
 ausserdem außerdem RG
-ausserdem außerdem RP
 außen außen RG
 außer außer RG
 außerdem außerdem RG
@@ -157,10 +154,10 @@ darauf darauf RG
 darauf darauf RV
 daraufhin daraufhin RG
 daraus daraus RG
-darein darein RP
+darein darein RG
 darin darin RG
 darin darin RV
-darob darob RP
+darob darob RG
 darum darum RG
 darunter darunter RG
 darunter darunter RV
@@ -197,7 +194,7 @@ deswegen deswegen RG
 deutlich deutlich RG
 dicht dicht RV
 dienstags dienstags RG
-diesbezüglich diesbezüglich RP
+diesbezüglich diesbezüglich RG
 diesmal diesmal RG
 doch doch RG
 donnerstags donnerstags RG
@@ -208,7 +205,7 @@ dran dran RG
 dran dran RV
 drauf drauf RG
 drauf drauf RV
-draus draus RP
+draus draus RG
 draußen draußen RG
 dreimal dreimal RG
 drin drin RG
@@ -218,7 +215,7 @@ drittenmal drittenmal RG
 drittens drittens RG
 droben droben RG
 drunten drunten RG
-drunter drunter RP
+drunter drunter RG
 drüben drüben RG
 drüber drüber RG
 duchaus duchaus RG
@@ -410,10 +407,10 @@ hierin hierin RG
 hiermit hiermit RG
 hiernach hiernach RG
 hiervon hiervon RG
-hiervor hiervor RP
+hiervor hiervor RG
 hierzu hierzu RG
 hierzulande hierzulande RG
-hierüber hierüber RP
+hierüber hierüber RG
 hin hin RG
 hin hin RV
 hinab hinab RG
@@ -422,7 +419,7 @@ hinauf hinauf RG
 hinauf hinauf RV
 hinaus hinaus RG
 hinaus hinaus RV
-hindurch hindurch RP
+hindurch hindurch RG
 hinein hinein RG
 hinein hinein RV
 hinfort hinfort RG
@@ -447,7 +444,7 @@ höchst höchst RG
 höchstens höchstens RG
 höchstpersönlich höchstpersönlich RG
 ihrerseits ihrerseits RG
-ihretwegen ihretwegen RP
+ihretwegen ihretwegen RG
 immens immens RG
 immer immer RG
 immerhin immerhin RG
@@ -584,7 +581,7 @@ morgens morgens RG
 möglicherweise möglicherweise RG
 möglichst möglichst RG
 nach nach RV
-nachdem nachdem RP
+nachdem nachdem RG
 nacheinander nacheinander RG
 nachgewiesenerweise nachgewiesenerweise RG
 nachher nachher RG
@@ -610,7 +607,7 @@ neu neu RV
 neuerdings neuerdings RG
 neulich neulich RG
 nicht nicht RN
-nichtsdestotrotz nichtsdestotrotz RP
+nichtsdestotrotz nichtsdestotrotz RG
 nichtsdestoweniger nichtsdestoweniger RG
 nie nie RN
 nieder nieder RV
@@ -697,7 +694,7 @@ rundum rundum RG
 rundweg rundweg RG
 runter runter RG
 runter runter RV
-rüber rüber RP
+rüber rüber RG
 rückwärts rückwärts RG
 rückwärts rückwärts RV
 samstags samstags RG
@@ -727,7 +724,6 @@ seinerseits seinerseits RG
 seinerzeit seinerzeit RG
 seinetwegen seinetwegen RG
 seitdem seitdem RG
-seitdem seitdem RP
 seither seither RG
 seitwärts seitwärts RG
 selber selber RG
@@ -768,7 +764,7 @@ spätestens spätestens RG
 stand stand RV
 stark stark RV
 statt statt RV
-stattdessen stattdessen RP
+stattdessen stattdessen RG
 staub staub RV
 stehen stehen RV
 stellenweise stellenweise RG
@@ -790,7 +786,7 @@ testweise testweise RG
 toi toi RG
 tonnenweise tonnenweise RG
 tot tot RV
-triotzdem trotzdem RP
+triotzdem trotzdem RG
 trotzdem trotzdem RG
 tunlichst tunlichst RG
 typischerweise typischerweise RG
@@ -854,7 +850,6 @@ voraussichtlich voraussichtlich RG
 vorbei vorbei RG
 vorbei vorbei RV
 vordem vordem RG
-vordem vordem RP
 vorerst vorerst RG
 vorgestern vorgestern RG
 vorher vorher RG
@@ -936,7 +931,7 @@ wonach wonach RG
 woneben woneben RG
 woran woran RG
 worauf worauf RG
-woraufhin woraufhin RP
+woraufhin woraufhin RG
 woraus woraus RG
 worin worin RG
 wortgenauestens wortgenauestens RG
@@ -977,7 +972,6 @@ zumute zumute RG
 zunichte zunichte RG
 zunichte zunichte RV
 zunächst zunächst RG
-zur zur RG
 zurecht zurecht RV
 zurück zurück RG
 zurück zurück RV
@@ -1022,7 +1016,6 @@ zwischendurch zwischendurch RG
 überdies überdies RG
 überein überein RV
 übereinander übereinander RG
-übereinander übereinander RP
 überhand überhand RG
 überhand überhand RV
 überhaupt überhaupt RG
