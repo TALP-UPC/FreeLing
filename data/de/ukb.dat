@@ -1,0 +1,11 @@
+<RelationFile>
+../common/xwn.dat
+</RelationFile>
+<RE_Wordnet_PoS>
+^[NAVR]
+</RE_Wordnet_PoS>
+<PageRankParameters>
+Threshold 0.03
+MaxIterations 10
+Damping 0.85
+</PageRankParameters>
