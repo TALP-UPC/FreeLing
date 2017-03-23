@@ -116,14 +116,22 @@
      LICENSES/CC-BY-NC-SA.license included in this package or at
      http://creativecommons.org/licenses/by-nc-sa/3.0
 
- 8.- Links from WordNet synsets to Cyc concepts (http://www.cyc.com)
+ 8.- Data for Russian WordNet in file data/de/senses30.src is 
+     extracted from Universal WordNet (https://www.mpi-inf.mpg.de/departments/databases-and-information-systems/research/yago-naga/uwn/)
+     created by Gerard de Melo at Max Planck Institut.
+     It is distributed under its original CC-BY-NC-SA 3.0
+     license. You'll find the license in the file
+     LICENSES/CC-BY-NC-SA.license included in this package or at
+     http://creativecommons.org/licenses/by-nc-sa/3.0
+
+ 9.- Links from WordNet synsets to Cyc concepts (http://www.cyc.com)
      have been obtained from OpenCyc OWL files, and are distributed
      under their original "Attribution Unported" Creative Commons
      license. You'll find the license in the file
      LICENSES/CC-BY.license included in this package or at
      http://creativecommons.org/licenses/by/3.0
  
- 9.- Italian dictionary contained in the files in data/it/dictionary
+10.- Italian dictionary contained in the files in data/it/dictionary
      (this package) and share/it/dicc.src (after installation) is
      straightforwardly extracted from Morph-it! lexicon developed at
      the University of bologna (see
@@ -133,7 +141,7 @@
      LICENSES/CC-BY-SA.license included in this package or at
      http://creativecommons.org/licenses/by-sa/3.0/
 
-10.- Galician dictionary contained in the files in data/gl/dictionary
+11.- Galician dictionary contained in the files in data/gl/dictionary
      (this package) and share/gl/dicc.src (after installation) is
      straightforwardly extracted from the OpenTrad project
      (http://www.opentrad.org) and has been developed by the Seminario
@@ -144,7 +152,7 @@
      the license in the file LICENSES/CC-BY-SA.license included in
      this package or at http://creativecommons.org/licenses/by-sa/3.0/
 
-11.- Spanish dictionary contained in the files in data/es/dictionary
+12.- Spanish dictionary contained in the files in data/es/dictionary
      (this package) and share/es/dicc.src (after installation) is
      extracted from the Spanish Resource Grammar projects
      (http://www.upf.edu/pdi/iula/montserrat.marimon/srg.html) and was
@@ -155,7 +163,7 @@
      LICENSES/LGPLLR.license included in this package or at
      http://sanskrit.inria.fr/DATA/LGPLLR.html
 
-12.- Ancient Spanish dictionary was developed at the Universitat
+13.- Ancient Spanish dictionary was developed at the Universitat
      Pompeu Fabra in Barcelona by Cristina Sánchez Marco. This
      dictionary is a largely adapted and extended version of the
      Spanish Resource Grammar dictionary described above. The ancient
@@ -164,20 +172,20 @@
      file LICENSES/LGPLLR.license included in this package or at
      http://sanskrit.inria.fr/DATA/LGPLLR.html
 
-13.- Argentine Spanish dictionary was developed by Agustin Gravano at
+14.- Argentine Spanish dictionary was developed by Agustin Gravano at
      Universidad de Buenos Aires. Ddetails can be found in 
      http://habla.dc.uba.ar/gravano/freeling-ar-es.php
      It is distributed under Apache License 2.0.
      You'll find the license in the file LICENSES/Apache.license included 
      in this package or at http://www.apache.org/licenses/LICENSE-2.0
 
-14.- Chilean Spanish dictionary was developed by Scott Sadowsky at
+15.- Chilean Spanish dictionary was developed by Scott Sadowsky at
      Pontificia Universidad Católica de Chile. It is distributed 
      under Affero General Public License 3.0.
      You'll find the license in the file LICENSES/AGPL.license included 
      in this package or at http://www.gnu.org/licenses/agpl
 
-15.- Dictionaries for Valencian and Balearic variants of Catalan
+16.- Dictionaries for Valencian and Balearic variants of Catalan
      contained in the files under data/ca/dictionary/balear
      and data/ca/dictionary/valencia (in the tarball package)
      or in share/ca/balear/dicc.src and share/ca/valencia/dicc.src 
@@ -187,7 +195,7 @@
      Fundacio Barcelona Media (http://www.barcelonamedia.org/), 
      and released under GPL.
 
-16.- Portuguese dictionary contained in the files in
+17.- Portuguese dictionary contained in the files in
      data/pt/dictionary (this package) and share/pt/dicc.src (after
      installation) was extracted from the LABEL-LEX project
      (http://label.ist.utl.pt/pt/labellex_pt.php) developed by
@@ -197,25 +205,25 @@
      Universidade de Santiago de Compostela.  It is distributed under
      its original GPLv3 license.
 
-17.- Welsh dictionary contained in the files in data/cy/dictionary
+18.- Welsh dictionary contained in the files in data/cy/dictionary
      (this package) and share/cy/dicc.src (after installation) was
      extracted from Eurfa project (http://kevindonnelly.org.uk/eurfa/)
      developed by Kevin Donelly. It is distributed under its original
      GPL license.
 
-18.- Asturian dictionary contained in the files in data/as/dictionary
+19.- Asturian dictionary contained in the files in data/as/dictionary
      (this package) and share/as/dicc.src (after installation) was
      developed at the Universidad the Oviedo in the framework of the
      Eslema project (http://www.uniovi.es/eslema/). It is distributed
      under its original GPL license.
 
-19.- French dictionary is extracted from LEFFF (Lexique des Formes
+20.- French dictionary is extracted from LEFFF (Lexique des Formes
      Fléchies du Français), developed by Benoît Sagot at INRIA /
      Université de Paris 7 See
      http://alpage.inria.fr/~sagot/lefff.html for details.  
      These data are distributed under their original LGPL-LR license
 
-20.- Slovenian dictionary is extracted from Sloleks 
+21.- Slovenian dictionary is extracted from Sloleks 
      (http://eng.slovenscina.eu/sloleks/prenos), copyrighted by
      the Slovenian Government, and distributed under its original
      Creative Commons Attribution-Noncommercial-ShareAlike 3.0 License.  
@@ -223,12 +231,12 @@
      LICENSES/CC-BY-NC-SA.license included in this package or at
      http://creativecommons.org/licenses/by-nc-sa/3.0
 
-21.- Norwegian dictionary is extracted from Norsk Ordbank,
+22.- Norwegian dictionary is extracted from Norsk Ordbank,
      developed at University of Oslo.
      See http://www.edd.uio.no/prosjekt/ordbanken for details.
      It is distributed under its original GPL license.
 
-22.- German dictionary is extracted from Morphy 
+23.- German dictionary is extracted from Morphy 
      (http://www.wolfganglezius.de/doku.php?id=cl:morphy) by 
      Daniel Naber (http://www.danielnaber.de/morphologie). 
      It is distributed under its original
