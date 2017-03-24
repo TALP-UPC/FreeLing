@@ -149,7 +149,7 @@ analyzer::config_options fill_config(const wstring &path) {
   cfg.PARSER_GrammarFile = lpath + L"chunker/grammar-chunk.dat";
   /// Dependency parsers config files
   cfg.DEP_TxalaFile = lpath + L"dep_txala/dependences.dat";   
-  cfg.DEP_TreelerFile = lpath + L"dep_treeler/labeled/dependences.dat";   
+  cfg.DEP_TreelerFile = lpath + L"dep_treeler/dependences.dat";   
   /// Coreference resolution config file
   cfg.COREF_CorefFile = lpath + L"coref/relaxcor/relaxcor.dat";
 
@@ -183,6 +183,7 @@ analyzer::invoke_options fill_invoke() {
   ivk.MACO_RetokContractions = false;
   
   ivk.NEC_NEClassification = true;
+  ivk.PHON_Phonetics = false;
   
   ivk.SENSE_WSD_which = UKB;
   ivk.TAGGER_which = HMM;

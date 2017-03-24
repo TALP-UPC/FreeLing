@@ -39,6 +39,50 @@ namespace freeling {
 #undef MOD_TRACENAME
 #define MOD_TRACENAME L"ANALYZER"
 
+
+//---------------------------------------------
+//  Classes to hold configuration options
+//---------------------------------------------
+
+/// config options constructor, default values (except file names, initialized to "")
+analyzer::analyzer_config_options::analyzer_config_options() {
+  MACO_ProbabilityThreshold = 0.001;
+  TAGGER_RelaxMaxIter = 500;
+  TAGGER_RelaxScaleFactor = 67;
+  TAGGER_RelaxEpsilon = 0.001;
+  TAGGER_Retokenize = true;
+  TAGGER_kbest = 1;
+  TAGGER_ForceSelect=TAGGER;
+};
+  
+/// destructor
+analyzer::analyzer_config_options::~analyzer_config_options() {};
+
+/// invoke options constructor, default values 
+analyzer::analyzer_invoke_options::analyzer_invoke_options() {
+  InputLevel = TEXT;  OutputLevel = TAGGED;
+  
+  MACO_UserMap=false;            MACO_AffixAnalysis=true;        MACO_MultiwordsDetection=true;
+  MACO_NumbersDetection=true;    MACO_PunctuationDetection=true; MACO_DatesDetection=true;
+  MACO_QuantitiesDetection=true; MACO_DictionarySearch=true;     MACO_ProbabilityAssignment=true;
+  MACO_CompoundAnalysis=true;    MACO_NERecognition=true;        MACO_RetokContractions=true;
+  
+  PHON_Phonetics=false;
+  NEC_NEClassification=false;
+  
+  SENSE_WSD_which=NO_WSD;
+  TAGGER_which=HMM;
+  DEP_which=NO_DEP;    
+};
+
+/// destructor
+analyzer::analyzer_invoke_options::~analyzer_invoke_options() {};
+
+
+//---------------------------------------------
+//  analyzer class
+//---------------------------------------------
+
 ///---------------------------------------------
 /// Create analyzers defined by config_options.
 ///---------------------------------------------
@@ -103,7 +147,8 @@ analyzer::analyzer(const config_options &cfg) {
   if (not cfg.TAGGER_HMMFile.empty())
     hmm = new hmm_tagger(cfg.TAGGER_HMMFile, 
                          cfg.TAGGER_Retokenize,
-                         cfg.TAGGER_ForceSelect);
+                         cfg.TAGGER_ForceSelect,
+                         cfg.TAGGER_kbest);
 
   if (not cfg.TAGGER_RelaxFile.empty())
     relax = new relax_tagger(cfg.TAGGER_RelaxFile, 

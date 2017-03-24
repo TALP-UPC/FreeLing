@@ -101,6 +101,7 @@ class WINDLL analyzer {
        double TAGGER_RelaxScaleFactor;
        double TAGGER_RelaxEpsilon;
        bool TAGGER_Retokenize;
+       int TAGGER_kbest=1;
        ForceSelectStrategy TAGGER_ForceSelect;
        /// Chart parser config file
        std::wstring PARSER_GrammarFile;
@@ -111,6 +112,11 @@ class WINDLL analyzer {
        std::wstring COREF_CorefFile;
        /// semantic graph extractor config file
        std::wstring SEMGRAPH_SemGraphFile;
+
+       /// constructor
+       analyzer_config_options();
+       /// destructor
+       ~analyzer_config_options();
    };
 
    ////////////////////////////////////////////////////////////////
@@ -143,6 +149,11 @@ class WINDLL analyzer {
        WSDAlgorithm SENSE_WSD_which;
        TaggerAlgorithm TAGGER_which;
        DependencyParser DEP_which;    
+
+       /// constructor
+       analyzer_invoke_options();
+       /// destructor
+       ~analyzer_invoke_options();
    };
    
 
