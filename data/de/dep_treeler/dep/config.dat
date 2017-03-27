@@ -5,6 +5,6 @@ dict-fpos = ../maps/fpos.map
 dict-morphos = ../maps/morphos.map
 dict-dependencies = ../maps/dependencies.map
 wdir = .
-wt = 001
+wt = 002
 wavg = 1
 multiroot = 1
