@@ -128,6 +128,7 @@ circa circa RG
 da da RG
 da da RV
 dabei dabei RG
+dabei dabei RV
 dadurch dadurch RG
 dafür dafür RG
 dafür dafür RV
@@ -219,6 +220,7 @@ drunter drunter RG
 drüben drüben RG
 drüber drüber RG
 duchaus duchaus RG
+durch durch RG
 durch durch RV
 durchaus durchaus RG
 durcheinander durcheinander RG
@@ -236,6 +238,7 @@ ehrlicherweise ehrlicherweise RG
 eigens eigens RG
 eigentlich eigentlich RG
 eilends eilends RG
+ein ein RG
 ein ein RV
 einander einander RG
 einander sich RG
@@ -281,8 +284,10 @@ feil feil RV
 fein fein RV
 fern fern RV
 ferne ferne RG
+ferner fern RG
 ferner ferner RG
 fertig fertig RV
+fest fest RG
 fest fest RV
 flach flach RV
 flott flott RV
@@ -302,6 +307,7 @@ freiheraus freiheraus RG
 freilich freilich RG
 freitags freitags RG
 fremd fremd RV
+früher früh RG
 früher früher RG
 frühestens frühestens RG
 frühmorgens frühmorgens RG
@@ -318,6 +324,7 @@ gefälligst gefälligst RG
 gegebenenfalls gegebenenfalls RG
 gegen gegen RV
 gegeneinander gegeneinander RG
+gegenüber gegenüber RG
 gegenüber gegenüber RV
 geheim geheim RV
 gelegen gelegen RG
@@ -344,6 +351,7 @@ gesund gesund RV
 gewissermaßen gewissermassen RG
 gewissermaßen gewissermaßen RG
 gewiß gewiß RG
+glatt glatt RG
 glatt glatt RV
 gleich gleich RG
 gleich gleich RV
@@ -362,11 +370,13 @@ gratis gratis RG
 grundsätzlich grundsätzlich RG
 gruppenweit gruppenweit RG
 größtenteils größtenteils RG
+gut gut RG
 gut gut RV
 gängigerweise gängigerweise RG
 haften haften RV
 halbtags halbtags RG
 halbwegs halbwegs RG
+halt halt RG
 halt halt RV
 hart hart RV
 hauptsächlich hauptsächlich RG
@@ -504,12 +514,14 @@ kennen kennen RV
 klar klar RV
 kleben kleben RV
 klein klein RV
+knapp knapp RG
 knapp knapp RV
 konsequenterweise konsequenterweise RG
 krank krank RV
 kreuz kreuz RG
 kund kund RV
 kurioserweise kurioserweise RG
+kurz kurz RG
 kurz kurz RV
 kurzerhand kurzerhand RG
 kurzum kurzum RG
@@ -562,6 +574,7 @@ meistens meistens RG
 minder minder RG
 mindestens mindestens RG
 minus minus RG
+mit mit RG
 mit mit RV
 miteinander miteinander RG
 mithin mithin RG
@@ -580,6 +593,7 @@ morgen morgen RG
 morgens morgens RG
 möglicherweise möglicherweise RG
 möglichst möglichst RG
+nach nach RG
 nach nach RV
 nachdem nachdem RG
 nacheinander nacheinander RG
@@ -601,6 +615,7 @@ nebenan nebenan RG
 nebenbei nebenbei RG
 nebeneinander nebeneinander RG
 nebenher nebenher RG
+nein nein RG
 nein nein RN
 netto netto RG
 neu neu RV
@@ -609,7 +624,9 @@ neulich neulich RG
 nicht nicht RN
 nichtsdestotrotz nichtsdestotrotz RG
 nichtsdestoweniger nichtsdestoweniger RG
+nie nie RG
 nie nie RN
+nieder nieder RG
 nieder nieder RV
 niemals niemals RG
 niemals niemals RN
@@ -630,6 +647,7 @@ nun nun RG
 nunmehr nunmehr RG
 nur nur RG
 nächstens nächstens RG
+näher näher RG
 näher näher RV
 nämlich nämlich RG
 oben oben RG
@@ -679,8 +697,10 @@ rechtens rechtens RG
 rechts rechts RG
 rechtzeitig rechtzeitig RG
 reihenweise reihenweise RG
+rein rein RG
 rein rein RV
 retour retour RG
+richtig richtig RG
 richtig richtig RV
 ringsum ringsum RG
 rosa rosa RG
@@ -712,6 +732,7 @@ schnurstracks schnurstracks RG
 schon schon RG
 schuld schuld RG
 schwarz schwarz RV
+schwer schwer RG
 schwer schwer RV
 schätzen schätzen RV
 schätzungsweise schätzungsweise RG
@@ -731,6 +752,7 @@ selbst selbst RG
 selbstredend selbstredend RG
 selbstverständlich selbstverständlich RG
 selten selten RG
+sicher sicher RG
 sicher sicher RV
 sicherheitshalber sicherheitshalber RG
 sicherlich sicherlich RG
@@ -759,6 +781,7 @@ sozusagen sozusagen RG
 spazieren spazieren RV
 spitz spitz RV
 sprich sprich RG
+später spät RG
 später später RG
 spätestens spätestens RG
 stand stand RV
@@ -807,7 +830,7 @@ unisono unisono RG
 unlängst unlängst RG
 unnötigerweise unnötigerweise RG
 unten unten RG
-unter unter RG
+unter unter RV
 unterdessen unterdessen RG
 untereinander untereinander RG
 unterschiedslos unterschiedslos RG
@@ -834,6 +857,7 @@ vielleicht vielleicht RG
 vielmehr vielmehr RG
 viermal viermal RG
 viertens viertens RG
+voll voll RG
 voll voll RV
 vollends vollends RG
 voneinander voneinander RG
@@ -886,6 +910,7 @@ weiland weiland RG
 weit weit RG
 weitab weitab RG
 weitaus weitaus RG
+weiter weiter RG
 weiter weiter RV
 weiterhin weiterhin RG
 weitgehend weitgehend RG
@@ -959,6 +984,7 @@ zufrieden zufrieden RV
 zugegebenermaßen zugegebenermaßen RG
 zugleich zugleich RG
 zugrunde zugrunde RG
+zugrunde zugrunde RV
 zugute zugute RG
 zugute zugute RV
 zuhaus zuhaus RG
@@ -966,6 +992,7 @@ zuleide zuleide RG
 zuletzt zuletzt RG
 zumal zumal RG
 zumeist zumeist RG
+zumindest zuminde RG
 zumindest zumindest RG
 zumindestens zumindestens RG
 zumute zumute RG
@@ -982,6 +1009,7 @@ zusehends zusehends RG
 zustande zustande RG
 zustande zustande RV
 zutage zutage RG
+zutage zutage RV
 zuteil zuteil RV
 zutiefst zutiefst RG
 zuviel zuviel RG
@@ -1005,6 +1033,7 @@ zwischendurch zwischendurch RG
 öffentlich öffentlich RG
 öfter öfter RG
 öfters öfters RG
+übel übel RG
 übel übel RV
 über über RG
 über über RV
