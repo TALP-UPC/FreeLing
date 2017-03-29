@@ -84,8 +84,8 @@ namespace freeling {
 
     // list of default preferences of lemma/pos to sort analysis 
     // in case tagger leaves residual ambiguity
-    std::map<std::wstring,std::wstring> lemma_prefs;
-    std::map<std::wstring,std::wstring> pos_prefs;
+    std::set<std::wstring> lemma_prefs;
+    std::set<std::wstring> pos_prefs;
 
     /// Smooth probabilities for the analysis of given word
     void smoothing(word &) const;

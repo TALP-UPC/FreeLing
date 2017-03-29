@@ -135,13 +135,19 @@ namespace freeling {
   void semgraph_extract::extract(freeling::document &doc) const {
 
     // extract entities into SG list of entities
+    TRACE(3,L"Extracting entities.");
     entities_extr->extract_entities(doc);
+
     // extract relations into SG list of relations, adding new entities to sg if needed
-    if (relations_extr != NULL) 
+    if (relations_extr != NULL) {
+      TRACE(3,L"Extracting relations.");
       relations_extr->extract_relations(doc);
+    }
 
     if (semdb!=NULL) {
 
+      TRACE(3,L"Adding SemDB information.");
+    
       semgraph::semantic_graph &sg = doc.get_semantic_graph();
 
       std::vector<semgraph::SG_entity> & ents = sg.get_entities();

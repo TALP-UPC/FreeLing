@@ -369,12 +369,16 @@ config* load_config(int argc, char *argv[]) {
     exit (1);        
   }
   
-  if (cfg->analyzer_invoke_options.OutputLevel>=COREF and not cfg->analyzer_invoke_options.NEC_NEClassification) {
+  if (cfg->analyzer_invoke_options.OutputLevel>=COREF and 
+      not cfg->analyzer_invoke_options.NEC_NEClassification and 
+      not cfg->analyzer_config_options.NEC_NECFile.empty()) {
     cfg->analyzer_invoke_options.NEC_NEClassification = true;
     wcerr << L"NEC activated since coreference or semantic graph was requested."<<endl;
   }
   
-  if (cfg->analyzer_invoke_options.OutputLevel>=COREF and cfg->analyzer_invoke_options.SENSE_WSD_which!=UKB) {
+  if (cfg->analyzer_invoke_options.OutputLevel>=COREF and 
+      cfg->analyzer_invoke_options.SENSE_WSD_which!=UKB and 
+      not cfg->analyzer_config_options.SENSE_ConfigFile.empty()) {
     cfg->analyzer_invoke_options.SENSE_WSD_which = UKB;
     wcerr << L"UKB sense disambiguation activated since coreference or semantic graph was requested."<<endl;
   }

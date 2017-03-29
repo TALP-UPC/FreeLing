@@ -32,8 +32,6 @@ A1_label A1
 </ArgumentRoles>
 
 <ExtractionRules>
-$L1:S:dol > $L2:G:* < $L3:S:ena   extract $L3 $L2 $L1
-$L1:S:dve > $L2:G:* < $L3:S:ena   extract $L3 $L2 $L1
-$L1:S:ena > $L2:G:* < $L3:S:štiri   extract $L1 $L2 $L3
+$L1:N:Sb > $L2:V:* < $L3:N:Obj   extract $L1 $L2 $L3
 </ExtractionRules>
 

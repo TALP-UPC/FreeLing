@@ -274,14 +274,14 @@ template<class T> void analyzer::do_analysis(T &doc) const {
 
   // --------- CHART PARSER
   // apply chart parser if needed
-  if ((current_invoke_options.OutputLevel>=COREF and current_invoke_options.InputLevel < SHALLOW)
+  if ((current_invoke_options.OutputLevel==COREF and current_invoke_options.InputLevel < SHALLOW)
       or (current_invoke_options.InputLevel < SHALLOW
           and (current_invoke_options.OutputLevel == SHALLOW or 
                current_invoke_options.OutputLevel == PARSED or 
                (current_invoke_options.OutputLevel > SHALLOW and current_invoke_options.DEP_which==TXALA)))) 
     parser->analyze(doc);
 
-  // if expected output was SHALLOW, we are done
+ // if expected output was SHALLOW, we are done
   if (current_invoke_options.OutputLevel==SHALLOW) return;
 
   if ((current_invoke_options.OutputLevel>=COREF 
@@ -291,7 +291,7 @@ template<class T> void analyzer::do_analysis(T &doc) const {
           and (current_invoke_options.OutputLevel == PARSED or 
                (current_invoke_options.OutputLevel > PARSED and current_invoke_options.DEP_which==TXALA)))) 
     deptxala->complete_parse_tree(doc);
-  
+
   // if expected output was PARSED, we are done
   if (current_invoke_options.OutputLevel==PARSED) return;
 
@@ -299,8 +299,10 @@ template<class T> void analyzer::do_analysis(T &doc) const {
   // apply dep parser if needed
   if (current_invoke_options.InputLevel<DEP and
       ((current_invoke_options.OutputLevel>=COREF and corfc!=NULL)
-       or (current_invoke_options.OutputLevel >= DEP and current_invoke_options.DEP_which==TREELER))) 
+       or (current_invoke_options.OutputLevel >= DEP and current_invoke_options.DEP_which==TREELER))) {
+
     deptreeler->analyze(doc);
+  }
   else if (current_invoke_options.InputLevel < DEP and
            current_invoke_options.OutputLevel >= DEP and current_invoke_options.DEP_which==TXALA) 
     deptxala->analyze(doc);
@@ -312,6 +314,7 @@ template<class T> void analyzer::do_analysis(T &doc) const {
 //---------------------------------------------
 
 void analyzer::analyze(document &doc) const {
+
   // analyze document
   do_analysis<document>(doc);
 
@@ -555,7 +558,7 @@ void analyzer::set_current_invoke_options(const invoke_options &opt, bool check)
       ERROR_CRASH(L"UKB word sense disambiguation requested, but it was not instantiated in config options.");
     
     if (parser==NULL 
-        and ((opt.OutputLevel >= COREF and opt.InputLevel < PARSED) 
+        and ((opt.OutputLevel == COREF and opt.InputLevel < PARSED) 
              or (opt.InputLevel < SHALLOW 
                  and (opt.OutputLevel == PARSED or opt.OutputLevel == SHALLOW))))
       ERROR_CRASH(L"Required analysis level requires chart parser, but it was not instantiated in config options");
@@ -567,7 +570,7 @@ void analyzer::set_current_invoke_options(const invoke_options &opt, bool check)
       ERROR_CRASH(L"Required analysis level requires depTxala parser, but it was not instantiated in config options");
     
     if (deptreeler==NULL 
-        and ((opt.OutputLevel == COREF and opt.InputLevel < DEP) 
+        and ((opt.OutputLevel >= COREF and opt.InputLevel < DEP) 
              or (opt.DEP_which==TREELER
                  and opt.InputLevel < DEP and opt.OutputLevel > DEP)))
       ERROR_CRASH(L"Required analysis level requires depTreeler parser, but it was not instantiated in config options");

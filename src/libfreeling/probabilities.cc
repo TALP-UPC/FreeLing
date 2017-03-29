@@ -95,7 +95,7 @@ namespace freeling {
         wistringstream sin(line);
         wstring lem1,lem2;
         sin>>lem1>>lem2;
-        lemma_prefs.insert(make_pair(lem1,lem2));
+        lemma_prefs.insert(lem1+L"#"+lem2);
         break;
       } 
 
@@ -103,7 +103,7 @@ namespace freeling {
         wistringstream sin(line);
         wstring pos1,pos2;
         sin>>pos1>>pos2;
-        pos_prefs.insert(make_pair(pos1,pos2));
+        pos_prefs.insert(pos1+L"#"+pos2);
         break;
       } 
 
@@ -528,22 +528,20 @@ namespace freeling {
     else if (a1.get_prob()<a2.get_prob()) return false;
 
     // -------- same probability, check lemma preferences
-    map<wstring,wstring>::const_iterator p;
-    
     wstring l1 = a1.get_lemma();
     wstring l2 = a2.get_lemma();
     // if a1 is preferred to a2, return true for a1<a2
-    p=lemma_prefs.find(l1); if (p!=lemma_prefs.end() && p->second==l2) return true;
-      // if a2 is preferred to a1, return false for a1<a2
-    p=lemma_prefs.find(l2); if (p!=lemma_prefs.end() && p->second==l1) return false;
+    if (lemma_prefs.find(l1+L"#"+l2)!=lemma_prefs.end()) return true;
+    // if a2 is preferred to a1, return false for a1<a2
+    if (lemma_prefs.find(l2+L"#"+l1)!=lemma_prefs.end()) return false;
     
     // --------- no lemma preference, check PoS tag preference
     wstring t1 = a1.get_tag();
     wstring t2 = a2.get_tag();
     // if a1 is preferred to a2, return true for a1<a2
-    p=pos_prefs.find(t1); if (p!=pos_prefs.end() && p->second==t2) return true;
+    if (pos_prefs.find(t1+L"#"+t2)!=pos_prefs.end()) return true;
     // if a2 is preferred to a1, return false for a1<a2
-    p=pos_prefs.find(t2); if (p!=pos_prefs.end() && p->second==t1) return false;
+    if (pos_prefs.find(t2+L"#"+t1)!=pos_prefs.end()) return false;
     
     // same probability, no preferences, use alphabetical order of lemma, then tag.
     return l1<l2 or (l1==l2 and t1<t2);    
