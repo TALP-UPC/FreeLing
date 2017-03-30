@@ -28,7 +28,7 @@ namespace freeling {
     // word embeddings
     freeling::embeddings *wordVec;    
     // number of best solutions stored on the alternatives kbest
-    const unsigned int STORED_SOLUTIONS = 10U;
+    static const unsigned int STORED_SOLUTIONS = 10U;
     
     // original incorrect => correct (actual correction)
     std::list<std::tuple<std::wstring, std::wstring, std::wstring>> missed_corrections;
@@ -36,8 +36,8 @@ namespace freeling {
     //-------------------------------
     // Evaluation weights
     //-------------------------------
-    const float WORD_EMBEDDINGS_WEIGHT = 0.3;
-    const float WORD_DISTANCE_WEIGHT   = 0.7;
+    static constexpr float WORD_EMBEDDINGS_WEIGHT = 0.3;
+    static constexpr float WORD_DISTANCE_WEIGHT   = 0.7;
 
     // chat language abreviations
     std::map<std::wstring, std::wstring> chat_lang;
@@ -58,16 +58,16 @@ namespace freeling {
     //-------------------------------
     // Damerau-Levenshtein distance
     //-------------------------------
-    const unsigned int TRANSPOSITION_COST      = 60U;
-    const unsigned int DELETION_COST           = 100U;
-    const unsigned int INSERTION_COST          = 100U;
-    const unsigned int SUBSTITUTION_COST       = 100U;
-    const unsigned int INSERT_REPETITION_COST  = 30U;
-    const unsigned int SUBST_REPETITION_COST   = 100U;
-    const unsigned int VOWEL_DELETION_COST     = 80U;
-    const unsigned int VOWEL_INSERTION_COST    = 80U;
-    const unsigned int VOWEL_SUBSTITUTION_COST = 80U;
-    const unsigned int SEPARATION_COST         = 40U;
+    static const unsigned int TRANSPOSITION_COST      = 60U;
+    static const unsigned int DELETION_COST           = 100U;
+    static const unsigned int INSERTION_COST          = 100U;
+    static const unsigned int SUBSTITUTION_COST       = 100U;
+    static const unsigned int INSERT_REPETITION_COST  = 30U;
+    static const unsigned int SUBST_REPETITION_COST   = 100U;
+    static const unsigned int VOWEL_DELETION_COST     = 80U;
+    static const unsigned int VOWEL_INSERTION_COST    = 80U;
+    static const unsigned int VOWEL_SUBSTITUTION_COST = 80U;
+    static const unsigned int SEPARATION_COST         = 40U;
     
     unsigned int DL_distance_recursive(const std::wstring &str_A, const std::wstring &str_B);
     unsigned int DL_distance_rec(const std::wstring &str_A, const std::wstring &str_B, int i, int j);
