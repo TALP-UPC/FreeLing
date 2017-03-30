@@ -83,11 +83,11 @@ aufseiten auf_seiten SP
 aus aus SC
 aus aus SP
 aus aus SS
-ausser außer SP
-ausserhalb außerhalb SP
+ausser ausser SP
+ausserhalb ausserhalb SP
 ausweislich ausweislich SP
-außer außer SP
-außerhalb außerhalb SP
+außer ausser SP
+außerhalb ausserhalb SP
 bei bei SP
 beide beide DIA0P
 beide beide DIN0P
@@ -436,8 +436,8 @@ einiges einiges PIANS00
 einiges einiges PINNS00
 eins einer PIANS00
 eins einer PINNS00
-einschliesslich einschließlich SP
-einschließlich einschließlich SP
+einschliesslich einschliesslich SP
+einschließlich einschliesslich SP
 einzelne einzelnes PIA0P00
 einzelne einzelnes PIN0P00
 einzelnem einzelnes PIDNS00
@@ -528,8 +528,8 @@ falls falls CS
 für für SP
 gegen gegen SP
 gegenüber gegenüber SP
-gemäss gemäß SP
-gemäß gemäß SP
+gemäss gemäss SP
+gemäß gemäss SP
 gen gen SP
 genug genug DI000
 geschweige geschweige CC

@@ -101,7 +101,7 @@ class WINDLL analyzer {
        double TAGGER_RelaxScaleFactor;
        double TAGGER_RelaxEpsilon;
        bool TAGGER_Retokenize;
-       int TAGGER_kbest=1;
+       int TAGGER_kbest;
        ForceSelectStrategy TAGGER_ForceSelect;
        /// Chart parser config file
        std::wstring PARSER_GrammarFile;
