@@ -313,11 +313,11 @@ void output_json::PrintDepTreeJSON (wostream &sout, const std::wstring &sid,
     if (n->get_label()==L"VIRTUAL_ROOT") 
       sout << L"{\"token\" : \"VIRTUAL_ROOT\""; 
     else {
-      sout << L"{\"token\" : \"" <<  get_token_id(sid,n->get_word().get_position()+1) 
-           << "\", \"function\" : \"" << n->get_label() 
-           << L"\", \"word\" : \"" << escapeJSON(n->get_word().get_form());
+      sout << L"{\"token\" : \"" <<  get_token_id(sid,n->get_word().get_position()+1) << L"\""
+           << L", \"function\" : \"" << n->get_label() << L"\""
+           << L", \"word\" : \"" << escapeJSON(n->get_word().get_form()) << L"\"";
     }
-    sout << "\", \"children\" : [" << endl;
+    sout << ", \"children\" : [" << endl;
 
     // Sort children. Chunks first, then by their word position.
     // (this is just for aesthetic reasons)
