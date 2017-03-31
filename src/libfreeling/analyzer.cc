@@ -263,10 +263,10 @@ template<class T> void analyzer::do_analysis(T &doc) const {
     if (current_invoke_options.TAGGER_which==HMM) hmm->analyze(doc);
     else if (current_invoke_options.TAGGER_which==RELAX) relax->analyze(doc);
       
-    if (current_invoke_options.OutputLevel >= TAGGED and (current_invoke_options.SENSE_WSD_which == UKB)) 
+    if (current_invoke_options.OutputLevel >= TAGGED and current_invoke_options.SENSE_WSD_which == UKB and dsb != NULL) 
       dsb->analyze(doc);
 
-    if (current_invoke_options.OutputLevel >= TAGGED and current_invoke_options.NEC_NEClassification) 
+    if (current_invoke_options.OutputLevel >= TAGGED and current_invoke_options.NEC_NEClassification and neclass != NULL) 
       neclass->analyze(doc);
   }
   // if expected output was TAGGED, we are done
@@ -274,22 +274,24 @@ template<class T> void analyzer::do_analysis(T &doc) const {
 
   // --------- CHART PARSER
   // apply chart parser if needed
-  if ((current_invoke_options.OutputLevel==COREF and current_invoke_options.InputLevel < SHALLOW)
-      or (current_invoke_options.InputLevel < SHALLOW
-          and (current_invoke_options.OutputLevel == SHALLOW or 
-               current_invoke_options.OutputLevel == PARSED or 
-               (current_invoke_options.OutputLevel > SHALLOW and current_invoke_options.DEP_which==TXALA)))) 
+  if (parser != NULL and
+      ((current_invoke_options.OutputLevel>=COREF and current_invoke_options.InputLevel < SHALLOW)
+       or (current_invoke_options.InputLevel < SHALLOW
+	   and (current_invoke_options.OutputLevel == SHALLOW or 
+		current_invoke_options.OutputLevel == PARSED or 
+		(current_invoke_options.OutputLevel > SHALLOW and current_invoke_options.DEP_which==TXALA)))))
     parser->analyze(doc);
-
+  
  // if expected output was SHALLOW, we are done
   if (current_invoke_options.OutputLevel==SHALLOW) return;
 
-  if ((current_invoke_options.OutputLevel>=COREF 
-       and current_invoke_options.InputLevel < PARSED
-       and corfc!=NULL)
-      or (current_invoke_options.InputLevel < PARSED
-          and (current_invoke_options.OutputLevel == PARSED or 
-               (current_invoke_options.OutputLevel > PARSED and current_invoke_options.DEP_which==TXALA)))) 
+  if (deptxala != NULL and 
+      ((current_invoke_options.OutputLevel>=COREF 
+	and current_invoke_options.InputLevel < PARSED
+	and corfc!=NULL)
+       or (current_invoke_options.InputLevel < PARSED
+	   and (current_invoke_options.OutputLevel == PARSED or 
+		(current_invoke_options.OutputLevel > PARSED and current_invoke_options.DEP_which==TXALA)))) )
     deptxala->complete_parse_tree(doc);
 
   // if expected output was PARSED, we are done
@@ -297,13 +299,14 @@ template<class T> void analyzer::do_analysis(T &doc) const {
 
   // --------- DEP PARSER (+SRL where available).
   // apply dep parser if needed
-  if (current_invoke_options.InputLevel<DEP and
+  if (deptreeler!=NULL and 
+      current_invoke_options.InputLevel<DEP and
       ((current_invoke_options.OutputLevel>=COREF and corfc!=NULL)
        or (current_invoke_options.OutputLevel >= DEP and current_invoke_options.DEP_which==TREELER))) {
 
     deptreeler->analyze(doc);
   }
-  else if (current_invoke_options.InputLevel < DEP and
+  else if (deptxala != NULL and current_invoke_options.InputLevel < DEP and
            current_invoke_options.OutputLevel >= DEP and current_invoke_options.DEP_which==TXALA) 
     deptxala->analyze(doc);
 }
