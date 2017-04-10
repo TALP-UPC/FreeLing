@@ -90,23 +90,26 @@ namespace freeling {
       ERROR_CRASH(L"Feature list not found in relaxcor model file "+fmodel);
   }
 
-  //////////////////////////////////////////////////
-  /// true when the wstring is the name of a feature in our model
-  //////////////////////////////////////////////////
   
+  //////////////////////////////////////////////////
+  /// checks for exsisting feature 
+  //////////////////////////////////////////////////
+
   bool relaxcor_model::is_feature_name(const std::wstring &name) const {
-    return (_Feature_names.find(name)!=_Feature_names.end());
+    return _Feature_names.find(name) != _Feature_names.end();
   }
-  
+
   //////////////////////////////////////////////////
   /// returns the id of the feature name described as parameter
   //////////////////////////////////////////////////
 
-  unsigned int relaxcor_model::feature_name_id(const std::wstring &name) {
-    if (!is_feature_name(name))
-	ERROR_CRASH(L"Error: feature "+name+L" does not exists");
+  unsigned int relaxcor_model::feature_name_id(const std::wstring &name) const {
+    TfeaturesNames::const_iterator p= _Feature_names.find(name);
+    if (p == _Feature_names.end()) {
+      ERROR_CRASH(L"Error: feature "+name+L" does not exists");
+    }
 
-    return _Feature_names[name];
+    return p->second;
   }
 
   //////////////////////////////////////////////////////////////////

@@ -36,6 +36,7 @@
 #ifndef RELAXCOR_MODEL_H
 #define RELAXCOR_MODEL_H
 
+#include <map>
 #include "freeling/windll.h"
 
 namespace freeling {
@@ -63,14 +64,13 @@ namespace freeling {
 
   public:
 
-
     relaxcor_model(const std::wstring&);
     virtual ~relaxcor_model() {};
     
-    /// true when the wstring is the name of a feature in our model
+    /// checks for existing feature
     bool is_feature_name(const std::wstring&) const;
     /// returns the id of the feature name described as parameter
-    unsigned int feature_name_id(const std::wstring&);
+    unsigned int feature_name_id(const std::wstring&) const;
 
     /// iterators of feature names
     TfeaturesNames::const_iterator begin_features() const;
