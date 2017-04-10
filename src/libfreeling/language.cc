@@ -1309,6 +1309,27 @@ namespace freeling {
     chain = -1;
   }
 
+  /// Constructor from a dep_tree node
+  mention::mention(int i, int ns, paragraph::const_iterator ps, dep_tree::const_iterator dt) {
+    id = i;
+    sent = ns;
+    s = ps;
+    single_subsumtion = false;
+    initial = false;
+
+    dtree = dt;
+
+    posBegin = dep_tree::get_first_word(dt);
+    posEnd = dep_tree::get_last_word(dt);
+
+    itBegin = ps->get_word_iterator((*ps)[posBegin]);
+    itEnd = ps->get_word_iterator((*ps)[posEnd]);
+    
+    itHead = ps->get_word_iterator((*ps)[dt->get_word().get_position()]);
+    chain = -1;
+  }
+
+
   /// fuzzy constructor from start/end positions
   /// the mention is created from start1 to end1 (start1 >= start and end1 <= end) 
   /// [start1, end1] is the sequence closest to start with the maximal subsuming node ptree 
@@ -1358,6 +1379,7 @@ namespace freeling {
     single_subsumtion = m.single_subsumtion;
     initial = m.initial;
     ptree = m.ptree;
+    dtree = m.dtree;
     posBegin = m.posBegin;
     posEnd = m.posEnd;
     itBegin = m.itBegin;
@@ -1410,6 +1432,9 @@ namespace freeling {
   }
   parse_tree::const_iterator mention::get_ptree() const {
     return ptree;
+  }
+  dep_tree::const_iterator mention::get_dtree() const {
+    return dtree;
   }
   const word& mention::get_head() const {
     return *itHead;

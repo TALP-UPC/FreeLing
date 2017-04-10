@@ -161,7 +161,7 @@ namespace freeling {
     // load model
     model = new coref_model(fmodel);
     // create helper modules
-    detector = new mention_detector(fmention_detector, language);
+    detector = new mention_detector(fmention_detector);
     extractor = new relaxcor_fex(ffeature_extractor, model, language);
 
     TRACE(3,L"analyzer succesfully created");
@@ -328,16 +328,11 @@ namespace freeling {
   void relaxcor::analyze(document &doc) const {
 
     relaxcor_fex::Mfeatures M;
-    size_t dim=500;
-
     TRACE(3,L"Detecting mentions");
 
     // searching for mentions
-    vector<mention> mentions;
-    mentions.reserve(dim);
-
     clock_t t0 = clock();  // initial time
-    detector->detect(doc,mentions);
+    vector<mention> mentions = detector->detect(doc);
     clock_t t1 = clock();  // final time
     TRACE(3,L"detection time: "+util::double2wstring(double(t1-t0)/double(CLOCKS_PER_SEC)));
 

@@ -829,6 +829,7 @@ namespace freeling {
     bool single_subsumtion;
     /// the node_tree of the mention
     parse_tree::const_iterator ptree;
+    dep_tree::const_iterator dtree;
     /// the starting position within the sentence
     int posBegin;
     /// the ending position
@@ -858,6 +859,8 @@ namespace freeling {
 
     /// constructor from a parse_tree
     mention(int, int, paragraph::const_iterator, parse_tree::const_iterator, int, sentence::const_iterator);
+    /// constructor from a dep_tree
+    mention(int i, int ns, paragraph::const_iterator ps, dep_tree::const_iterator dt);
     /// constructor from start/end word iterators
     mention(int, int, paragraph::const_iterator, sentence::const_iterator, sentence::const_iterator);
     /// Copy constructor
@@ -890,6 +893,7 @@ namespace freeling {
     bool is_initial() const;
     bool is_subsumed_with_no_verb() const;
     parse_tree::const_iterator get_ptree() const;
+    dep_tree::const_iterator get_dtree() const;
     const word& get_head() const;
     std::wstring value(int lc=0) const;    
   };

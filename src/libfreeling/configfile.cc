@@ -40,7 +40,7 @@ using namespace std;
 namespace freeling {
 
 #define MOD_TRACENAME L"CONFIG_FILE"
-#define MOD_TRACECODE 0xFFFFFFFF
+#define MOD_TRACECODE CONFIG_TRACE
 
   //////////////////////////////////////////
   ///

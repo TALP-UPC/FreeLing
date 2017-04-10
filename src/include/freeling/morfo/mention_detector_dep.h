@@ -28,13 +28,13 @@
 
 ///////////////////////////////////////////////
 //
-//   Author: Lluís Padro
+//   Author: Lluis Padro
 //
 ///////////////////////////////////////////////
 
 
-#ifndef MENTION_DETECTOR_H
-#define MENTION_DETECTOR_H
+#ifndef MENTION_DETECTOR_DEP_H
+#define MENTION_DETECTOR_DEP_H
 
 #include <map>
 #include <set>
@@ -42,34 +42,30 @@
 
 #include "freeling/windll.h"
 #include "freeling/morfo/language.h"
-#include "freeling/morfo/mention_detector_constit.h"
-#include "freeling/morfo/mention_detector_dep.h"
+#include "freeling/morfo/tagset.h"
 
 namespace freeling {
 
   ////////////////////////////////////////////////////////////////
-  ///  The class mention_detector is a wrapper to provide unique
-  ///  access to either mention_detector_constit or mention_detector_dep
+  ///  The class mention_detector implements a rule-based entity
+  ///  mention detector
   ////////////////////////////////////////////////////////////////
 
-  class WINDLL mention_detector {
+  class WINDLL mention_detector_dep {
 
   private:
-    // type of the wrapped mention detectors
-    typedef enum {CONSTIT, DEP} mdType;
-    mdType type;
-    // pointers to wrapped mention detector (only one is used, depending on "type")
-    mention_detector_constit * mdc;
-    mention_detector_dep * mdd;
+    std::set<std::wstring> mention_tags;
+    std::set<std::wstring> excluded;
+    tagset *Tags;
 
   public:
     /// Constructor
-    mention_detector(const std::wstring &);
+    mention_detector_dep(const std::wstring &);
     /// Destructor
-    ~mention_detector();
-  
-    /// Detects entity mentions from parse tree nodes of sentences, and fills given vector
-    std::vector<mention> detect(const document &) const;    
+    ~mention_detector_dep();
+
+    /// Detects entity mentions from parse tree nodes of sentences
+    std::vector<mention> detect(const document &) const;
   };
 
 } // namespace
