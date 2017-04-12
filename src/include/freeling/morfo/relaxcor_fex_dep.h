@@ -66,21 +66,45 @@ namespace freeling {
     relaxcor_fex_abs::Mfeatures extract(const std::vector<mention>&) const;    
 
   private:
+    std::map<std::wstring,freeling::regexp> _Labels;
+
+    std::map<std::wstring,freeling::regexp>::const_iterator get_label(const std::wstring &) const;
+
     void extract_pair(const mention &m1, const mention &m2, const std::vector<mention> &mentions, 
                       feature_cache &fcache, relaxcor_model::Tfeatures &ft) const;
-    /// structural features
-    void get_structural(const mention &m1, const mention &m2, const std::vector<mention> &mentions, 
+    /// feature groups
+    int get_structural(const mention &m1, const mention &m2, const std::vector<mention> &mentions, 
                       feature_cache &fcache, relaxcor_model::Tfeatures &ft) const;
-    void get_lexical(const mention &m1, const mention &m2, const std::vector<mention> &mentions, 
+    int get_lexical(const mention &m1, const mention &m2, const std::vector<mention> &mentions, 
                       feature_cache &fcache, relaxcor_model::Tfeatures &ft) const;
-    void get_morphological(const mention &m1, const mention &m2, const std::vector<mention> &mentions, 
+    int get_morphological(const mention &m1, const mention &m2, const std::vector<mention> &mentions, 
                       feature_cache &fcache, relaxcor_model::Tfeatures &ft) const;
-    void get_syntactic(const mention &m1, const mention &m2, const std::vector<mention> &mentions, 
+    int get_syntactic(const mention &m1, const mention &m2, const std::vector<mention> &mentions, 
                       feature_cache &fcache, relaxcor_model::Tfeatures &ft) const;
-    void get_semantic(const mention &m1, const mention &m2, const std::vector<mention> &mentions, 
+    int get_semantic(const mention &m1, const mention &m2, const std::vector<mention> &mentions, 
                       feature_cache &fcache, relaxcor_model::Tfeatures &ft) const;
-    void get_discourse(const mention &m1, const mention &m2, const std::vector<mention> &mentions, 
+    int get_discourse(const mention &m1, const mention &m2, const std::vector<mention> &mentions, 
                       feature_cache &fcache, relaxcor_model::Tfeatures &ft) const;
+
+    /// single mention features
+    bool in_quotes(const mention &m, feature_cache &fcache) const;
+    bool start_with_indef(const mention &m, feature_cache &fcache) const;
+    bool indef_head(const mention &m, feature_cache &fcache) const;
+    std::wstring get_arguments(const mention &m, feature_cache &fcache) const;
+
+    /// mention pair features
+    bool nested(const mention &m1, const mention &m2, const std::vector<mention> &mentions, 
+                feature_cache &fcache, relaxcor_model::Tfeatures &ft) const;
+    bool same_quote(const mention &m1, const mention &m2, const std::vector<mention> &mentions, 
+                    feature_cache &fcache, relaxcor_model::Tfeatures &ft) const;
+    unsigned int dist_in_phrases(const mention &m1, const mention &m2, const std::vector<mention> &mentions, 
+                                 feature_cache &fcache, relaxcor_model::Tfeatures &ft) const;
+    bool appositive(const mention &m1, const mention &m2, const std::vector<mention> &mentions, 
+                    feature_cache &fcache, relaxcor_model::Tfeatures &ft) const;
+    bool rel_antecedent(const mention &m1, const mention &m2, const std::vector<mention> &mentions, 
+                        feature_cache &fcache, relaxcor_model::Tfeatures &ft) const;
+    bool predicate_nominative(const mention &m1, const mention &m2, const std::vector<mention> &mentions, 
+                              feature_cache &fcache, relaxcor_model::Tfeatures &ft) const;
     
   };
 

@@ -56,15 +56,19 @@ namespace freeling {
     /// auxiliary functions for feature extraction   
     void set_feature(int, mentionFeature, unsigned int);
     void set_feature(int, mentionWsFeature, const std::vector<std::wstring>&);
+    void set_feature(const std::wstring&, const std::wstring&);
     unsigned int get_feature(int, mentionFeature) const;
     const std::vector<std::wstring>& get_feature(int, mentionWsFeature) const;
+    std::wstring get_feature(const std::wstring&) const;
     bool computed_feature(int, mentionFeature) const;
     bool computed_feature(int, mentionWsFeature) const;
+    bool computed_feature(const std::wstring&) const;
 
   private:
     /// auxiliar maps of some feature values for individual mentions
-    std::map<int, std::map<mentionFeature, unsigned int>> features;
-    std::map<int, std::map<mentionWsFeature, std::vector<std::wstring> >> wsfeatures;
+    std::map<int, std::map<mentionFeature, unsigned int>> i_features;
+    std::map<int, std::map<mentionWsFeature, std::vector<std::wstring> >> vs_features;
+    std::map<std::wstring, std::wstring> s_features;
   };
 
 
@@ -78,6 +82,8 @@ namespace freeling {
     typedef std::map<std::wstring, relaxcor_model::Tfeatures > Mfeatures;
     relaxcor_fex_abs(const relaxcor_model &m);
     virtual ~relaxcor_fex_abs();
+
+    const unsigned int INFINITE = 100000;
 
   protected:
     const relaxcor_model &model;

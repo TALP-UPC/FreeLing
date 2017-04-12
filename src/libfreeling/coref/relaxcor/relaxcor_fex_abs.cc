@@ -49,22 +49,31 @@ namespace freeling {
   feature_cache::~feature_cache() {};
 
   void feature_cache::set_feature(int id, mentionFeature f, unsigned int v) {
-    features[id][f]=v;
+    i_features[id][f]=v;
   }
   void feature_cache::set_feature(int id, mentionWsFeature f, const vector<wstring>& v) {
-    wsfeatures[id][f]=v;
+    vs_features[id][f]=v;
+  }
+  void feature_cache::set_feature(const wstring &id, const wstring &v) {
+    s_features[id]=v;
   }
   unsigned int feature_cache::get_feature(int id, mentionFeature f) const {
-    return features.find(id)->second.find(f)->second;
+    return i_features.find(id)->second.find(f)->second;
   }
   const vector<wstring>& feature_cache::get_feature(int id, mentionWsFeature f) const {
-    return wsfeatures.find(id)->second.find(f)->second;
+    return vs_features.find(id)->second.find(f)->second;
+  }
+  wstring feature_cache::get_feature(const wstring &id) const {
+    return s_features.find(id)->second;
   }
   bool feature_cache::computed_feature(int id, mentionFeature f) const {
-    return features.find(id)!=features.end() and features.find(id)->second.find(f)!=features.find(id)->second.end();
+    return i_features.find(id)!=i_features.end() and i_features.find(id)->second.find(f)!=i_features.find(id)->second.end();
   }
   bool feature_cache::computed_feature(int id, mentionWsFeature f) const {
-    return wsfeatures.find(id)!=wsfeatures.end() and wsfeatures.find(id)->second.find(f)!=wsfeatures.find(id)->second.end();
+    return vs_features.find(id)!=vs_features.end() and vs_features.find(id)->second.find(f)!=vs_features.find(id)->second.end();
+  }
+  bool feature_cache::computed_feature(const wstring &id) const {
+    return s_features.find(id)!=s_features.end();
   }
 
 
