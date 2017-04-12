@@ -56,7 +56,8 @@ namespace freeling {
   /// Constructor. Sets defaults
   //////////////////////////////////////////////////////////////////
 
-  relaxcor_fex_dep::relaxcor_fex_dep(const wstring &filename, const relaxcor_model &m) : relaxcor_fex(m) {
+  relaxcor_fex_dep::relaxcor_fex_dep(const wstring &filename, const relaxcor_model &m) : relaxcor_fex_abs(m) {
+
     TRACE(2,L"Module successfully loaded");
   }
 
@@ -64,7 +65,38 @@ namespace freeling {
   /// Destructor
   //////////////////////////////////////////////////////////////////
 
-  relaxcor_fex_dep::~relaxcor_fex_dep() {
+  relaxcor_fex_dep::~relaxcor_fex_dep() { }
+
+
+  void relaxcor_fex_dep::get_structural(const mention &m1, const mention &m2, const std::vector<mention> &mentions, 
+                                        feature_cache &fcache, relaxcor_model::Tfeatures &ft) const {}
+  void relaxcor_fex_dep::get_lexical(const mention &m1, const mention &m2, const std::vector<mention> &mentions, 
+                                     feature_cache &fcache, relaxcor_model::Tfeatures &ft) const {}
+  void relaxcor_fex_dep::get_morphological(const mention &m1, const mention &m2, const std::vector<mention> &mentions, 
+                                           feature_cache &fcache, relaxcor_model::Tfeatures &ft) const {}
+  void relaxcor_fex_dep::get_syntactic(const mention &m1, const mention &m2, const std::vector<mention> &mentions, 
+                                       feature_cache &fcache, relaxcor_model::Tfeatures &ft) const {}
+  void relaxcor_fex_dep::get_semantic(const mention &m1, const mention &m2, const std::vector<mention> &mentions, 
+                                      feature_cache &fcache, relaxcor_model::Tfeatures &ft) const {}
+  void relaxcor_fex_dep::get_discourse(const mention &m1, const mention &m2, const std::vector<mention> &mentions, 
+                                       feature_cache &fcache, relaxcor_model::Tfeatures &ft) const {}
+  
+  
+  //////////////////////////////////////////////////////////////////
+  ///    Extract the configured features for a pair of mentions 
+  //////////////////////////////////////////////////////////////////
+
+  void relaxcor_fex_dep::extract_pair(const mention &m1, const mention &m2, 
+                                      const vector<mention> &mentions, 
+                                      feature_cache &fcache,
+                                      relaxcor_model::Tfeatures &ft) const {
+    /// structural features
+    get_structural(m1, m2, mentions, fcache, ft);
+    get_lexical(m1, m2, mentions, fcache, ft);
+    get_morphological(m1, m2, mentions, fcache, ft);
+    get_syntactic(m1, m2, mentions, fcache, ft);
+    get_semantic(m1, m2, mentions, fcache, ft);
+    get_discourse(m1, m2, mentions, fcache, ft);
   }
 
 
@@ -72,9 +104,26 @@ namespace freeling {
   ///    Extract the configured features for all mentions  
   //////////////////////////////////////////////////////////////////
 
-  relaxcor_fex::Mfeatures relaxcor_fex_dep::extract(vector<mention> &mentions) const {
-    relaxcor_fex::Mfeatures M;
+  relaxcor_fex_abs::Mfeatures relaxcor_fex_dep::extract(const vector<mention> &mentions) const {
+    relaxcor_fex_abs::Mfeatures M;
+
+    feature_cache fcache;
+    
+    for (vector<mention>::const_iterator m1=mentions.begin()+1; m1!=mentions.end(); ++m1) {
+      TRACE(4,L"Extracting all pairs for mention "+util::int2wstring(m1->get_id())+L" ("+m1->value()+L") " + m1->get_head().get_form() + L" " + m1->get_head().get_lemma() + L" " + m1->get_head().get_tag());
+      
+      for (vector<mention>::const_iterator m2=mentions.begin(); m2!=m1; ++m2) {	
+	wstring mention_pair = util::int2wstring(m1->get_id());
+	mention_pair += L":";
+	mention_pair += util::int2wstring(m2->get_id());
+        
+	TRACE(5,L"PAIR: "+mention_pair+L" "+m1->get_head().get_form()+L":"+m2->get_head().get_form());
+	
+        extract_pair(*m1, *m2, mentions, fcache, M[mention_pair]);
+      }
+    }
+
     return M;
   }
-
+  
 } // namespace

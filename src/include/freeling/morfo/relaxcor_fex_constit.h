@@ -50,7 +50,7 @@
 #include "freeling/morfo/semdb.h"
 #include "freeling/morfo/tagset.h"
 #include "freeling/morfo/relaxcor_model.h"
-#include "freeling/morfo/relaxcor_fex.h"
+#include "freeling/morfo/relaxcor_fex_abs.h"
 
 namespace freeling {
 
@@ -65,41 +65,17 @@ namespace freeling {
 #define RCF_SET_ALL             0xFFFFFFFF
 
 
-  /// Class to store already computed features that may be needed again
-
-  class feature_cache {
-  public:
-    typedef enum {IN_QUOTES, HEAD_TERM, IS_ACRONYM, POSSESSIVE, NUMBER, GENDER, SEM_CLASS, THIRD_PERSON, REFLEXIVE, DEF_NP, INDEF_NP, DEM_NP, MAXIMAL_NP, EMBEDDED_NOUN} mentionFeature;
-    typedef enum {ARGUMENTS, ROLES} mentionWsFeature;
-
-    feature_cache();
-    ~feature_cache();
-
-    /// auxiliary functions for feature extraction   
-    void set_feature(int, mentionFeature, unsigned int);
-    void set_feature(int, mentionWsFeature, const std::vector<std::wstring>&);
-    unsigned int get_feature(int, mentionFeature) const;
-    const std::vector<std::wstring>& get_feature(int, mentionWsFeature) const;
-    bool computed_feature(int, mentionFeature) const;
-    bool computed_feature(int, mentionWsFeature) const;
-
-  private:
-    /// auxiliar maps of some feature values for individual mentions
-    std::map<int, std::map<mentionFeature, unsigned int>> features;
-    std::map<int, std::map<mentionWsFeature, std::vector<std::wstring> >> wsfeatures;
-  };
-
   //////////////////////////////////////////////////////////////////
   ///    Class for the feature extractor.
   //////////////////////////////////////////////////////////////////
 
-  class relaxcor_fex_constit : public relaxcor_fex {
+  class relaxcor_fex_constit : public relaxcor_fex_abs {
   public:
 
     relaxcor_fex_constit(const std::wstring&, const relaxcor_model &);
     ~relaxcor_fex_constit();
 
-    relaxcor_fex::Mfeatures extract(std::vector<mention>&) const;
+    relaxcor_fex_abs::Mfeatures extract(const std::vector<mention>&) const;
 
   private:
 
@@ -159,12 +135,12 @@ namespace freeling {
     /// group feature functions
     void get_structural(const mention&, const mention&, relaxcor_model::Tfeatures&, feature_cache &) const;
     void get_lexical(const mention&, const mention&, relaxcor_model::Tfeatures&, feature_cache &) const;
-    void get_morphological(const mention &, const mention&, relaxcor_model::Tfeatures&, std::vector<mention>&, feature_cache &) const;
-    void get_syntactic(const mention &, const mention&, relaxcor_model::Tfeatures&, std::vector<mention>&, feature_cache &) const;
-    void get_semantic(const mention &, const mention&, relaxcor_model::Tfeatures&, std::vector<mention>&, feature_cache &) const;
+    void get_morphological(const mention &, const mention&, relaxcor_model::Tfeatures&, const std::vector<mention>&, feature_cache &) const;
+    void get_syntactic(const mention &, const mention&, relaxcor_model::Tfeatures&, const std::vector<mention>&, feature_cache &) const;
+    void get_semantic(const mention &, const mention&, relaxcor_model::Tfeatures&, const std::vector<mention>&, feature_cache &) const;
     void get_discourse(const mention &, const mention&, relaxcor_model::Tfeatures&, feature_cache &) const;
 
-    void get_group_features(std::vector<mention>&, relaxcor_model::Tfeatures&, feature_cache &) const;
+    void get_group_features(const std::vector<mention>&, relaxcor_model::Tfeatures&, feature_cache &) const;
 
     /// feature functions
     unsigned int dist_in_phrases(const mention&, const mention&, feature_cache &) const; 
@@ -183,22 +159,22 @@ namespace freeling {
     unsigned int same_gender(const mention&, const mention&, feature_cache &) const;
     unsigned int is_3rd_person(const mention&, feature_cache &) const;
     unsigned int agreement(const mention&, const mention&, feature_cache &) const;
-    unsigned int closest_agreement(const mention&, const mention&, std::vector<mention>&, feature_cache &) const;
+    unsigned int closest_agreement(const mention&, const mention&, const std::vector<mention>&, feature_cache &) const;
     unsigned int is_reflexive(const mention&, feature_cache &) const;
     // syntactic
     unsigned int is_def_NP(const mention&, feature_cache &) const;
     unsigned int is_dem_NP(const mention&, feature_cache &) const;
-    bool share_maximal_NP(const mention&, const mention&, std::vector<mention>&, feature_cache &) const;
-    unsigned int is_maximal_NP(const mention&, std::vector<mention>&, feature_cache &) const;
+    bool share_maximal_NP(const mention&, const mention&, const std::vector<mention>&, feature_cache &) const;
+    unsigned int is_maximal_NP(const mention&, const std::vector<mention>&, feature_cache &) const;
     unsigned int is_indef_NP(const mention&, feature_cache &) const;
-    unsigned int is_embedded_noun(const mention&, std::vector<mention>&, feature_cache &) const;
+    unsigned int is_embedded_noun(const mention&, const std::vector<mention>&, feature_cache &) const;
     bool binding_pos(const mention&, const mention&, bool, feature_cache &) const;
     bool binding_neg(const mention&, const mention&, bool, feature_cache &) const;
     void get_arguments(const mention&, std::wstring&, std::wstring&, feature_cache &) const;
     bool same_preds(bool, const std::wstring&, const std::wstring&, feature_cache &) const;
     bool same_args(bool, const std::wstring&, const std::wstring&, relaxcor_model::Tfeatures&, feature_cache &) const;
     // semantic
-    bool separated_by_verb_is(const mention&, const mention&, std::vector<mention>&, feature_cache &) const;
+    bool separated_by_verb_is(const mention&, const mention&, const std::vector<mention>&, feature_cache &) const;
     bool sem_class_match(const mention&, const mention&, feature_cache &) const;
     bool is_semantic_type(const mention&, const std::wstring&, feature_cache &) const;
     bool animacy(const mention&, const mention&, feature_cache &) const;
@@ -233,11 +209,11 @@ namespace freeling {
       //std::wstring extract_person(const std::wstring&);
     mention::SEMmentionType extract_semclass(const mention&, feature_cache &) const;
     void isa(const std::wstring&, std::vector<bool>&) const;
-    int get_maximal_NP(const mention&, std::vector<mention>&, feature_cache &) const;
+    int get_maximal_NP(const mention&, const std::vector<mention>&, feature_cache &) const;
     const std::wstring& get_argument(sentence::predicates::const_iterator, dep_tree::const_iterator, paragraph::const_iterator) const;
     bool verb_is_between(const mention&, const mention&) const;
 
-    void extract_pair(mention &, mention &, relaxcor_model::Tfeatures &, std::vector<mention>&, feature_cache &) const;
+    void extract_pair(const mention &, const mention &, relaxcor_model::Tfeatures &, const std::vector<mention>&, feature_cache &) const;
     
   };
 

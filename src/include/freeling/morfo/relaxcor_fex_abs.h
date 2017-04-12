@@ -31,8 +31,8 @@
 /////////////////////////////////////////////////
 
 
-#ifndef RELAXCOR_FEX_H
-#define RELAXCOR_FEX_H
+#ifndef RELAXCOR_FEX_ABS_H
+#define RELAXCOR_FEX_ABS_H
 
 #include <string>
 #include <vector>
@@ -43,26 +43,55 @@
 namespace freeling {
 
   //////////////////////////////////////////////////////////////////
-  /// Class relaxcor_fex is a wrapper providing transparent access
-  /// to either relaxcor_fex_dep or relaxcor_fex_constit
+  /// Auxiliary Class to store already computed features that may be needed again
+
+  class feature_cache {
+  public:
+    typedef enum {IN_QUOTES, HEAD_TERM, IS_ACRONYM, POSSESSIVE, NUMBER, GENDER, SEM_CLASS, THIRD_PERSON, REFLEXIVE, DEF_NP, INDEF_NP, DEM_NP, MAXIMAL_NP, EMBEDDED_NOUN} mentionFeature;
+    typedef enum {ARGUMENTS, ROLES} mentionWsFeature;
+
+    feature_cache();
+    ~feature_cache();
+
+    /// auxiliary functions for feature extraction   
+    void set_feature(int, mentionFeature, unsigned int);
+    void set_feature(int, mentionWsFeature, const std::vector<std::wstring>&);
+    unsigned int get_feature(int, mentionFeature) const;
+    const std::vector<std::wstring>& get_feature(int, mentionWsFeature) const;
+    bool computed_feature(int, mentionFeature) const;
+    bool computed_feature(int, mentionWsFeature) const;
+
+  private:
+    /// auxiliar maps of some feature values for individual mentions
+    std::map<int, std::map<mentionFeature, unsigned int>> features;
+    std::map<int, std::map<mentionWsFeature, std::vector<std::wstring> >> wsfeatures;
+  };
+
+
+  //////////////////////////////////////////////////////////////////
+  /// Class relaxcor_fex_abs is an abstract class for a relaxcor
+  ///  feature extractor
   //////////////////////////////////////////////////////////////////
 
-  class relaxcor_fex {
+  class relaxcor_fex_abs {
   public:
     typedef std::map<std::wstring, relaxcor_model::Tfeatures > Mfeatures;
-    relaxcor_fex(const relaxcor_model &m);
-    ~relaxcor_fex();
+    relaxcor_fex_abs(const relaxcor_model &m);
+    virtual ~relaxcor_fex_abs();
 
   protected:
     const relaxcor_model &model;
-    unsigned int ID(const std::wstring &) const;
+    unsigned int fid(const std::wstring &) const;
+    bool def(const std::wstring &) const;
+    bool defid(const std::wstring &, unsigned int &) const;
 
   private: 
     /// extract features for all mention pairs in given vector.
-    virtual Mfeatures extract(std::vector<mention>&) const = 0;
+    virtual Mfeatures extract(const std::vector<mention>&) const = 0;
     /// dump extracted features for debugging
     virtual void print(Mfeatures&, unsigned int) const;
   };
+
 
 }
 

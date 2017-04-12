@@ -54,9 +54,12 @@ namespace freeling {
   class WINDLL mention_detector_dep {
 
   private:
-    std::set<std::wstring> mention_tags;
+    std::map<std::wstring, mention::mentionType> mention_tags;
     std::set<std::wstring> excluded;
+    std::wstring CoordLabel;
     tagset *Tags;
+
+    mention::mentionType check_type(dep_tree::const_iterator h, bool whole=true) const;
 
   public:
     /// Constructor

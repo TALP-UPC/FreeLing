@@ -860,7 +860,7 @@ namespace freeling {
     /// constructor from a parse_tree
     mention(int, int, paragraph::const_iterator, parse_tree::const_iterator, int, sentence::const_iterator);
     /// constructor from a dep_tree
-    mention(int i, int ns, paragraph::const_iterator ps, dep_tree::const_iterator dt);
+    mention(int i, int ns, paragraph::const_iterator ps, dep_tree::const_iterator dt, int end=-1);
     /// constructor from start/end word iterators
     mention(int, int, paragraph::const_iterator, sentence::const_iterator, sentence::const_iterator);
     /// Copy constructor

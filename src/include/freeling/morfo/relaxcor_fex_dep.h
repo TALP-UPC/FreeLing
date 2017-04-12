@@ -49,32 +49,39 @@
 #include "freeling/morfo/language.h"
 #include "freeling/morfo/semdb.h"
 #include "freeling/morfo/tagset.h"
-#include "freeling/morfo/relaxcor_fex.h"
+#include "freeling/morfo/relaxcor_fex_abs.h"
 
 namespace freeling {
-
-  // -- Feature group codes    
-#define RCF_SET_STRUCTURAL      0x00000001
-#define RCF_SET_LEXICAL         0x00000002
-#define RCF_SET_MORPHO          0x00000004
-#define RCF_SET_SYNTACTIC       0x00000008
-#define RCF_SET_SEMANTIC        0x00000010
-#define RCF_SET_DISCOURSE       0x00000020
-  //                                                                          
-#define RCF_SET_ALL             0xFFFFFFFF
-
 
   //////////////////////////////////////////////////////////////////
   ///    Class for the feature extractor.
   //////////////////////////////////////////////////////////////////
 
-  class relaxcor_fex_dep : public relaxcor_fex {
+  class relaxcor_fex_dep : public relaxcor_fex_abs {
   public:
 
     relaxcor_fex_dep(const std::wstring&, const relaxcor_model &);
     ~relaxcor_fex_dep();
 
-    relaxcor_fex::Mfeatures extract(std::vector<mention>&) const;    
+    relaxcor_fex_abs::Mfeatures extract(const std::vector<mention>&) const;    
+
+  private:
+    void extract_pair(const mention &m1, const mention &m2, const std::vector<mention> &mentions, 
+                      feature_cache &fcache, relaxcor_model::Tfeatures &ft) const;
+    /// structural features
+    void get_structural(const mention &m1, const mention &m2, const std::vector<mention> &mentions, 
+                      feature_cache &fcache, relaxcor_model::Tfeatures &ft) const;
+    void get_lexical(const mention &m1, const mention &m2, const std::vector<mention> &mentions, 
+                      feature_cache &fcache, relaxcor_model::Tfeatures &ft) const;
+    void get_morphological(const mention &m1, const mention &m2, const std::vector<mention> &mentions, 
+                      feature_cache &fcache, relaxcor_model::Tfeatures &ft) const;
+    void get_syntactic(const mention &m1, const mention &m2, const std::vector<mention> &mentions, 
+                      feature_cache &fcache, relaxcor_model::Tfeatures &ft) const;
+    void get_semantic(const mention &m1, const mention &m2, const std::vector<mention> &mentions, 
+                      feature_cache &fcache, relaxcor_model::Tfeatures &ft) const;
+    void get_discourse(const mention &m1, const mention &m2, const std::vector<mention> &mentions, 
+                      feature_cache &fcache, relaxcor_model::Tfeatures &ft) const;
+    
   };
 
 } // namespace

@@ -57,7 +57,7 @@ namespace freeling {
   mention_detector_dep::mention_detector_dep(const wstring &filename) {
 
     // read configuration file and store information
-    enum sections {TAGSET, MTAGS, EXCLUDED};
+    enum sections {TAGSET, MTAGS, EXCLUDED, COORD};
     config_file cfg(true,L"%");
     map<unsigned int, wstring> labels_section;
 
@@ -65,6 +65,7 @@ namespace freeling {
 
     cfg.add_section(L"TagsetFile", TAGSET, true);
     cfg.add_section(L"MentionTags", MTAGS, true);
+    cfg.add_section(L"CoordLabel", COORD);
     cfg.add_section(L"Excluded", EXCLUDED);
 
     if (not cfg.open(filename))
@@ -90,12 +91,27 @@ namespace freeling {
 
       case MTAGS: {
         // list of tags that are extracted as mentions
-        wstring tag;
-        sin >> tag;
-	mention_tags.insert(tag);
-        TRACE(6,L"Loaded mention tag "<<tag);
+        wstring tag, typ;
+        sin >> tag >> typ;
+        mention::mentionType t;
+        if (typ==L"NounPhrase") t=mention::NOUN_PHRASE;
+        else if (typ==L"ProperNoun") t=mention::PROPER_NOUN;
+        else if (typ==L"Pronoun") t=mention::PRONOUN;
+        else {
+          WARNING(L"Invalid mention type "<<typ<<" in file "<<filename<<L". Using default (NounPhrase).");
+          t=mention::NOUN_PHRASE;
+        }
+	mention_tags.insert(make_pair(tag,t));
+        TRACE(6,L"Loaded mention tag "<<tag<<L" "<<typ);
 	break;
       }
+
+      case COORD: {
+        // dep function label for coordinations
+        sin >> CoordLabel;
+	break;
+      }
+
       case EXCLUDED: {
         // list of lemmas excluded from mention extraction
 	wstring lemma;
@@ -123,6 +139,30 @@ namespace freeling {
 
 
   /////////////////////////////////////////////////
+  /// Decide mention type, depending on its tag and tree
+  /// whole==true -> use all subtree for coordinations
+  /// whole==false -> ignore coordinations
+  /////////////////////////////////////////////////
+
+  mention::mentionType mention_detector_dep::check_type(dep_tree::const_iterator h, bool whole) const {
+
+    if (whole) {
+      // taking into account coordinations. Look for one.
+      bool found = false;    
+      for (dep_tree::const_sibling_iterator s=h.begin(); s!=h.end() and not found; ++s)
+        found = s->get_label() == CoordLabel;
+
+      if (found) 
+        return mention::COMPOSITE;
+    }
+
+    // if not coordinations present or we are ignorig them, use the type given by the tag.
+    wstring tag = Tags->get_short_tag(h->get_word().get_tag());
+    map<wstring,mention::mentionType>::const_iterator t = mention_tags.find(tag);
+    return t->second;
+  }
+
+  /////////////////////////////////////////////////
   /// Detect entity mentions in a given document.
   /////////////////////////////////////////////////
 
@@ -148,11 +188,31 @@ namespace freeling {
               excluded.find(h->get_word().get_lemma())==excluded.end()) {
             // candidate mention, store it
             mention m(mentn, sentn, se, h);
+
+            // deduce mention type from its tag and nearby tree.
+            m.set_type(check_type(h));
             mentions.push_back(m);
             ++mentn;
+
+            // if the mention is a coordination, create also a mention for the head alone
+            if (m.is_type(mention::COMPOSITE)) {
+
+              // if it is composite, one of the children has CoordLabel. Locate it.
+              dep_tree::const_sibling_iterator s; 
+              for (s=h.begin(); 
+                   s->get_label()!=CoordLabel;
+                   ++s);
+              
+              // use word previous to coordination as mention end
+              mention m(mentn, sentn, se, h, s->get_word().get_position()-1);
+
+              m.set_type(check_type(h,false));
+              mentions.push_back(m);
+              ++mentn;
+            }
           }          
         }
-        
+       
         ++sentn;
       }
     }

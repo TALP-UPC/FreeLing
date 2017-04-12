@@ -67,10 +67,10 @@ namespace freeling {
     relaxcor_model(const std::wstring&);
     virtual ~relaxcor_model() {};
     
-    /// checks for existing feature
-    bool is_feature_name(const std::wstring&) const;
-    /// returns the id of the feature name described as parameter
-    unsigned int feature_name_id(const std::wstring&) const;
+    /// checks for existing feature and returns id if it exists
+    bool feature_name_defid(const std::wstring &name, unsigned int &id) const;
+    bool is_feature_name(const std::wstring &name) const;
+    unsigned int feature_name_id(const std::wstring &name) const;
 
     /// iterators of feature names
     TfeaturesNames::const_iterator begin_features() const;

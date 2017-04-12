@@ -162,7 +162,7 @@ namespace freeling {
     model = new coref_model(fmodel);
     // create helper modules
     detector = new mention_detector(fmention_detector);
-    extractor = new relaxcor_fex_constit(ffeature_extractor, (*model) );
+    extractor = new relaxcor_fex(ffeature_extractor, (*model) );
 
     TRACE(3,L"analyzer succesfully created");
   }
@@ -338,7 +338,7 @@ namespace freeling {
     // extracting features of mention-pairs
     TRACE(3,L"Extracting features");
     t0 = clock();  // initial time
-    relaxcor_fex::Mfeatures M = extractor->extract(mentions);
+    relaxcor_fex_abs::Mfeatures M = extractor->extract(mentions);
     t1 = clock();  // final time
     TRACE(3,L"extraction time: "+util::double2wstring(double(t1-t0)/double(CLOCKS_PER_SEC)));
    

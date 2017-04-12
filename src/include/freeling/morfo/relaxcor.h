@@ -42,7 +42,7 @@
 #include "freeling/morfo/language.h"
 #include "freeling/morfo/processor.h"
 #include "freeling/morfo/mention_detector.h"
-#include "freeling/morfo/relaxcor_fex_constit.h"
+#include "freeling/morfo/relaxcor_fex.h"
 #include "freeling/morfo/relaxcor_modelDT.h"
 
 namespace freeling {
@@ -97,7 +97,7 @@ namespace freeling {
     /// mention detector
     mention_detector *detector;
     /// mention-pair features extractor
-    relaxcor_fex_constit *extractor;
+    relaxcor_fex *extractor;
 
     
     /// auxiliary for constructors

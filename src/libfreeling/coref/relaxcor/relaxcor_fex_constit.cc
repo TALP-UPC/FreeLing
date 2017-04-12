@@ -58,32 +58,6 @@ namespace freeling {
 #define MOD_TRACENAME L"RELAXCOR_FEX"
 #define MOD_TRACECODE COREF_TRACE
 
-  /////////////////////////////////////////////
-  /// Class feature_cache stores already computed mention features
-  /////////////////////////////////////////////
-
-  feature_cache::feature_cache() {};
-  feature_cache::~feature_cache() {};
-
-  void feature_cache::set_feature(int id, mentionFeature f, unsigned int v) {
-    features[id][f]=v;
-  }
-  void feature_cache::set_feature(int id, mentionWsFeature f, const vector<wstring>& v) {
-    wsfeatures[id][f]=v;
-  }
-  unsigned int feature_cache::get_feature(int id, mentionFeature f) const {
-    return features.find(id)->second.find(f)->second;
-  }
-  const vector<wstring>& feature_cache::get_feature(int id, mentionWsFeature f) const {
-    return wsfeatures.find(id)->second.find(f)->second;
-  }
-  bool feature_cache::computed_feature(int id, mentionFeature f) const {
-    return features.find(id)!=features.end() and features.find(id)->second.find(f)!=features.find(id)->second.end();
-  }
-  bool feature_cache::computed_feature(int id, mentionWsFeature f) const {
-    return wsfeatures.find(id)!=wsfeatures.end() and wsfeatures.find(id)->second.find(f)!=wsfeatures.find(id)->second.end();
-  }
-
 
   const freeling::regexp relaxcor_fex_constit::acronym_re1(L"^[A-Z]+\\_?\\&?\\_?[A-Z]+$");
   const freeling::regexp relaxcor_fex_constit::acronym_re2(L"^([A-Z]\\.)+\\_?\\&?\\_?([A-Z]\\.)+$");
@@ -106,7 +80,7 @@ namespace freeling {
   /// Constructor. Sets defaults
   //////////////////////////////////////////////////////////////////
 
-  relaxcor_fex_constit::relaxcor_fex_constit(const wstring &filename, const relaxcor_model &m) : relaxcor_fex(m) {
+  relaxcor_fex_constit::relaxcor_fex_constit(const wstring &filename, const relaxcor_model &m) : relaxcor_fex_abs(m) {
 
     // default set of features
     _Active_features = RCF_SET_ALL;
@@ -308,186 +282,194 @@ namespace freeling {
     
     // distance in #sentences
     unsigned int dist = abs(m1.get_n_sentence() - m2.get_n_sentence());
-    ft[ID(L"RCF_DIST_SEN_0")]   = (dist==0)? true : false;
-    ft[ID(L"RCF_DIST_SEN_1")]   = (dist==1)? true : false;
-    ft[ID(L"RCF_DIST_SEN_L3")]  = (dist<=3)? true : false;
-    ft[ID(L"RCF_DIST_SEN_G3")]  = (dist>3)?  true : false;
+    ft[fid(L"RCF_DIST_SEN_0")]   = (dist==0);
+    ft[fid(L"RCF_DIST_SEN_1")]   = (dist==1);
+    ft[fid(L"RCF_DIST_SEN_L3")]  = (dist<=3);
+    ft[fid(L"RCF_DIST_SEN_G3")]  = (dist>3);
     // #mentions between both mentions
     dist = abs(m1.get_id() - m2.get_id()) - 1;
-    ft[ID(L"RCF_DIST_MEN_0")]   = (dist==0)?  true : false;
-    ft[ID(L"RCF_DIST_MEN_L3")]  = (dist<=3)?  true : false;
-    ft[ID(L"RCF_DIST_MEN_L10")] = (dist<=10)? true : false;
-    ft[ID(L"RCF_DIST_MEN_G10")] = (dist>10)?  true : false;
+    ft[fid(L"RCF_DIST_MEN_0")]   = (dist==0);
+    ft[fid(L"RCF_DIST_MEN_L3")]  = (dist<=3);
+    ft[fid(L"RCF_DIST_MEN_L10")]  = (dist<=10);
+    ft[fid(L"RCF_DIST_MEN_G10")]  = (dist>10);
     // distance in #phrases
     dist = dist_in_phrases(m1,m2,fcache);
     TRACE(6,L"      dist in phrases "+m1.value()+L":"+m2.value()+L" = "+util::int2wstring(dist));
-    ft[ID(L"RCF_DIST_PHR_0")]   = (dist==0)?  true : false;
-    ft[ID(L"RCF_DIST_PHR_1")]   = (dist==1)?  true : false;
-    ft[ID(L"RCF_DIST_PHR_L3")]  = (dist<=3)?  true : false;
+    ft[fid(L"RCF_DIST_PHR_0")]   = (dist==0);
+    ft[fid(L"RCF_DIST_PHR_1")]   = (dist==1);
+    ft[fid(L"RCF_DIST_PHR_L3")]  = (dist<=3);
     // in quotes?
-    ft[ID(L"RCF_I_IN_QUOTES")] = (in_quotes(m1,fcache) ==1)? true : false;
-    ft[ID(L"RCF_J_IN_QUOTES")] = (in_quotes(m2,fcache) ==1)? true : false;
+    ft[fid(L"RCF_I_IN_QUOTES")] = (in_quotes(m1,fcache)==1);
+    ft[fid(L"RCF_J_IN_QUOTES")] = (in_quotes(m2,fcache)==1);
     // first mention in sentence?
-    ft[ID(L"RCF_I_FIRST")] = m1.is_initial();
-    ft[ID(L"RCF_J_FIRST")] = m2.is_initial();
+    ft[fid(L"RCF_I_FIRST")] = m1.is_initial();
+    ft[fid(L"RCF_J_FIRST")] = m2.is_initial();
     // one is appositive of the other
-    ft[ID(L"RCF_APPOSITIVE")] = appositive(m1,m2,fcache);
+    ft[fid(L"RCF_APPOSITIVE")] = appositive(m1,m2,fcache);
     // one is nested to the other
-    ft[ID(L"RCF_NESTED")] = nested(m1,m2);
+    ft[fid(L"RCF_NESTED")] = nested(m1,m2);
     // type of mention
-    ft[ID(L"RCF_I_TYPE_P")] = m1.is_type(mention::PRONOUN);
-    ft[ID(L"RCF_I_TYPE_S")] = m1.is_type(mention::NOUN_PHRASE) or m1.is_type(mention::COMPOSITE) or m1.is_type(mention::VERB_PHRASE);
-    ft[ID(L"RCF_I_TYPE_E")] = m1.is_type(mention::PROPER_NOUN);
-    ft[ID(L"RCF_J_TYPE_P")] = m2.is_type(mention::PRONOUN);
-    ft[ID(L"RCF_J_TYPE_S")] = m2.is_type(mention::NOUN_PHRASE) or m2.is_type(mention::COMPOSITE) or m2.is_type(mention::VERB_PHRASE);
-    ft[ID(L"RCF_J_TYPE_E")] = m2.is_type(mention::PROPER_NOUN);
+    ft[fid(L"RCF_I_TYPE_P")] = m1.is_type(mention::PRONOUN);
+    ft[fid(L"RCF_I_TYPE_S")] = m1.is_type(mention::NOUN_PHRASE) or m1.is_type(mention::COMPOSITE) or m1.is_type(mention::VERB_PHRASE);
+    ft[fid(L"RCF_I_TYPE_E")] = m1.is_type(mention::PROPER_NOUN);
+    ft[fid(L"RCF_J_TYPE_P")] = m2.is_type(mention::PRONOUN);
+    ft[fid(L"RCF_J_TYPE_S")] = m2.is_type(mention::NOUN_PHRASE) or m2.is_type(mention::COMPOSITE) or m2.is_type(mention::VERB_PHRASE);
+    ft[fid(L"RCF_J_TYPE_E")] = m2.is_type(mention::PROPER_NOUN);
   }
+
+  //////////////////////////////////////////////////////////////////
+  ///    Lexical features.
+  //////////////////////////////////////////////////////////////////
 
   void relaxcor_fex_constit::get_lexical(const mention &m1, const mention &m2, relaxcor_model::Tfeatures &ft, feature_cache &fcache) const {
     TRACE(6,L"get lexical features");
     
     // string matchings without some first determinants (param DetWords) 
-    ft[ID(L"RCF_STR_MATCH")]       = string_match(m1, m2, fcache);
-    ft[ID(L"RCF_PRO_STR")]         = pronoun_string_match(m1, m2, ft[ID(L"RCF_STR_MATCH")], fcache);
-    ft[ID(L"RCF_PN_STR")]          = proper_noun_string_match(m1, m2, ft[ID(L"RCF_STR_MATCH")], fcache);
-    ft[ID(L"RCF_SOON_STR_NONPRO")] = no_pronoun_string_match(m1, m2, ft[ID(L"RCF_STR_MATCH")], fcache);
+    ft[fid(L"RCF_STR_MATCH")] = string_match(m1, m2, fcache); 
+    ft[fid(L"RCF_PRO_STR")]         = pronoun_string_match(m1, m2, ft[fid(L"RCF_STR_MATCH")], fcache);
+    ft[fid(L"RCF_PN_STR")]          = proper_noun_string_match(m1, m2, ft[fid(L"RCF_STR_MATCH")], fcache);
+    ft[fid(L"RCF_SOON_STR_NONPRO")]  = no_pronoun_string_match(m1, m2, ft[fid(L"RCF_STR_MATCH")], fcache);
     // head and term equivalences
-    ft[ID(L"RCF_I_HEAD_TERM")] = (head_is_term(m1, fcache) == 1)? true : false;
-    ft[ID(L"RCF_J_HEAD_TERM")] = (head_is_term(m2, fcache) == 1)? true : false;
-    ft[ID(L"RCF_HEAD_MATCH")]  = util::lowercase(m1.get_head().get_form()) == util::lowercase(m2.get_head().get_form());
-    ft[ID(L"RCF_TERM_MATCH")]  = util::lowercase(compute_term(m1)) == util::lowercase(compute_term(m2));
+    ft[fid(L"RCF_I_HEAD_TERM")] = (head_is_term(m1, fcache) == 1);
+    ft[fid(L"RCF_J_HEAD_TERM")] = (head_is_term(m2, fcache) == 1);
+    ft[fid(L"RCF_HEAD_MATCH")]  = util::lowercase(m1.get_head().get_form()) == util::lowercase(m2.get_head().get_form());
+    ft[fid(L"RCF_TERM_MATCH")]  = util::lowercase(compute_term(m1)) == util::lowercase(compute_term(m2));
 
     // one is alias of the other
     unsigned int known = alias(m1, m2, fcache);
-    ft[ID(L"RCF_ALIAS_YES")] = (known == 1)? true : false;
-    ft[ID(L"RCF_ALIAS_NO")]  = (known == 0)? true : false;
-    ft[ID(L"RCF_ALIAS_UN")]  = (known == 2)? true : false;
+    ft[fid(L"RCF_ALIAS_YES")] = (known == 1);
+    ft[fid(L"RCF_ALIAS_NO")]  = (known == 0);
+    ft[fid(L"RCF_ALIAS_UN")]  = (known == 2);
     TRACE(6, L"   Alias = "+ wstring(known==0 ? L"no" : (known==1? L"yes" : L"unknown") ) );
   }
 
-  void relaxcor_fex_constit::get_morphological(const mention &m1, const mention &m2, relaxcor_model::Tfeatures &ft, vector<mention> &mentions, feature_cache &fcache) const {
+  //////////////////////////////////////////////////////////////////
+  ///   Morphological features.
+  //////////////////////////////////////////////////////////////////
+
+  void relaxcor_fex_constit::get_morphological(const mention &m1, const mention &m2, relaxcor_model::Tfeatures &ft, const vector<mention> &mentions, feature_cache &fcache) const {
     TRACE(6,L"get morphological features");
     
-    ft[ID(L"RCF_I_POSSESSIVE")] = (is_possessive(m1, fcache) == 1)? true : false;
-    ft[ID(L"RCF_J_POSSESSIVE")] = (is_possessive(m2, fcache) == 1)? true : false;
+    ft[fid(L"RCF_I_POSSESSIVE")] = (is_possessive(m1, fcache) == 1);
+    ft[fid(L"RCF_J_POSSESSIVE")] = (is_possessive(m2, fcache) == 1);
     // they agree in number
     unsigned int num = same_number(m1,m2, fcache);
-    ft[ID(L"RCF_NUMBER_YES")] = (num == 1) ? true : false;
-    ft[ID(L"RCF_NUMBER_NO")]  = (num == 0) ? true : false;
-    ft[ID(L"RCF_NUMBER_UN")]  = (num == 2) ? true : false;
+    ft[fid(L"RCF_NUMBER_YES")] = (num == 1);
+    ft[fid(L"RCF_NUMBER_NO")]  = (num == 0);
+    ft[fid(L"RCF_NUMBER_UN")]  = (num == 2);
     // they agree in gender
     unsigned int gen = same_gender(m1,m2, fcache);
-    ft[ID(L"RCF_GENDER_YES")] = (gen == 1) ? true : false;
-    ft[ID(L"RCF_GENDER_NO")]  = (gen == 0) ? true : false;
-    ft[ID(L"RCF_GENDER_UN")]  = (gen == 2) ? true : false;
+    ft[fid(L"RCF_GENDER_YES")] = (gen == 1);
+    ft[fid(L"RCF_GENDER_NO")]  = (gen == 0);
+    ft[fid(L"RCF_GENDER_UN")]  = (gen == 2);
     // they are 3rd person
-    ft[ID(L"RCF_I_THIRD_PERSON")] = (is_3rd_person(m1, fcache) == 1) ? true : false;
-    ft[ID(L"RCF_J_THIRD_PERSON")]  = (is_3rd_person(m2, fcache) == 1) ? true : false;
+    ft[fid(L"RCF_I_THIRD_PERSON")] = (is_3rd_person(m1, fcache) == 1);
+    ft[fid(L"RCF_J_THIRD_PERSON")]  = (is_3rd_person(m2, fcache) == 1);
     // they are proper nouns
-    ft[ID(L"RCF_I_PROPER_NAME")] = m1.is_type(mention::PROPER_NOUN);
-    ft[ID(L"RCF_J_PROPER_NAME")] = m2.is_type(mention::PROPER_NOUN);
+    ft[fid(L"RCF_I_PROPER_NAME")] = m1.is_type(mention::PROPER_NOUN);
+    ft[fid(L"RCF_J_PROPER_NAME")] = m2.is_type(mention::PROPER_NOUN);
     // they are nouns
-    ft[ID(L"RCF_I_NOUN")] = m1.is_type(mention::NOUN_PHRASE);
-    ft[ID(L"RCF_J_NOUN")] = m2.is_type(mention::NOUN_PHRASE);
+    ft[fid(L"RCF_I_NOUN")] = m1.is_type(mention::NOUN_PHRASE);
+    ft[fid(L"RCF_J_NOUN")] = m2.is_type(mention::NOUN_PHRASE);
     // they agree in gender and number
     unsigned int agree=agreement(m1,m2, fcache);
-    ft[ID(L"RCF_AGREEMENT_YES")] = (agree == 1)? true : false;
-    ft[ID(L"RCF_AGREEMENT_NO")]  = (agree == 0)? true : false;
-    ft[ID(L"RCF_AGREEMENT_UN")]  = (agree == 2)? true : false;
+    ft[fid(L"RCF_AGREEMENT_YES")] = (agree == 1)? true : false;
+    ft[fid(L"RCF_AGREEMENT_NO")]  = (agree == 0)? true : false;
+    ft[fid(L"RCF_AGREEMENT_UN")]  = (agree == 2)? true : false;
     // m1 is the closest referent to m2 
     unsigned int cagree=closest_agreement(m1,m2,mentions, fcache);
-    ft[ID(L"RCF_C_AGREEMENT_YES")] = (cagree == 1)? true : false;
-    ft[ID(L"RCF_C_AGREEMENT_NO")]  = (cagree == 0)? true : false;
-    ft[ID(L"RCF_C_AGREEMENT_UN")]  = (cagree == 2)? true : false;
+    ft[fid(L"RCF_C_AGREEMENT_YES")] = (cagree == 1)? true : false;
+    ft[fid(L"RCF_C_AGREEMENT_NO")]  = (cagree == 0)? true : false;
+    ft[fid(L"RCF_C_AGREEMENT_UN")]  = (cagree == 2)? true : false;
     // they are reflexive
-    ft[ID(L"RCF_I_REFLEXIVE")] = (is_reflexive(m1, fcache) == 1) ? true : false;
-    ft[ID(L"RCF_J_REFLEXIVE")] = (is_reflexive(m2, fcache) == 1) ? true : false;
+    ft[fid(L"RCF_I_REFLEXIVE")] = (is_reflexive(m1, fcache) == 1);
+    ft[fid(L"RCF_J_REFLEXIVE")] = (is_reflexive(m2, fcache) == 1);
   }
 
-  void relaxcor_fex_constit::get_syntactic(const mention &m1, const mention&m2, relaxcor_model::Tfeatures &ft, vector<mention> &mentions, feature_cache &fcache) const {
+  void relaxcor_fex_constit::get_syntactic(const mention &m1, const mention&m2, relaxcor_model::Tfeatures &ft, const vector<mention> &mentions, feature_cache &fcache) const {
     TRACE(6,L"get syntactic features");
   
     // they are definite noun phrases
-    ft[ID(L"RCF_I_DEF_NP")] = (is_def_NP(m1, fcache) == 1) ? true : false;
-    ft[ID(L"RCF_J_DEF_NP")] = (is_def_NP(m2, fcache) == 1) ? true : false;
+    ft[fid(L"RCF_I_DEF_NP")] = (is_def_NP(m1, fcache) == 1);
+    ft[fid(L"RCF_J_DEF_NP")] = (is_def_NP(m2, fcache) == 1);
     // they are demonstrative noun phrases
-    ft[ID(L"RCF_I_DEM_NP")] = (is_dem_NP(m1, fcache) == 1) ? true : false;
-    ft[ID(L"RCF_J_DEM_NP")] = (is_dem_NP(m2, fcache) == 1) ? true : false;
+    ft[fid(L"RCF_I_DEM_NP")] = (is_dem_NP(m1, fcache) == 1);
+    ft[fid(L"RCF_J_DEM_NP")] = (is_dem_NP(m2, fcache) == 1);
     // they share the maximal noun phrase
-    ft[ID(L"RCF_MAXIMAL_NP")] = share_maximal_NP(m1, m2, mentions, fcache);
+    ft[fid(L"RCF_MAXIMAL_NP")] = share_maximal_NP(m1, m2, mentions, fcache);
     // they are maximal noun phrases
-    ft[ID(L"RCF_I_MAXIMAL_NP")] = (is_maximal_NP(m1, mentions, fcache) == 1) ? true : false;
-    ft[ID(L"RCF_J_MAXIMAL_NP")] = (is_maximal_NP(m2, mentions, fcache) == 1) ? true : false;
+    ft[fid(L"RCF_I_MAXIMAL_NP")] = (is_maximal_NP(m1, mentions, fcache) == 1);
+    ft[fid(L"RCF_J_MAXIMAL_NP")] = (is_maximal_NP(m2, mentions, fcache) == 1);
     // they are indefinite noun phrases
-    ft[ID(L"RCF_I_INDEF_NP")] = (is_indef_NP(m1, fcache) == 1) ? true : false;
-    ft[ID(L"RCF_J_INDEF_NP")] = (is_indef_NP(m2, fcache) == 1) ? true : false;
+    ft[fid(L"RCF_I_INDEF_NP")] = (is_indef_NP(m1, fcache) == 1);
+    ft[fid(L"RCF_J_INDEF_NP")] = (is_indef_NP(m2, fcache) == 1);
     // they are composite
-    ft[ID(L"RCF_I_COMPOSITE")] = m1.is_type(mention::COMPOSITE);
-    ft[ID(L"RCF_J_COMPOSITE")] = m2.is_type(mention::COMPOSITE);
+    ft[fid(L"RCF_I_COMPOSITE")] = m1.is_type(mention::COMPOSITE);
+    ft[fid(L"RCF_J_COMPOSITE")] = m2.is_type(mention::COMPOSITE);
     // they are embedded
-    ft[ID(L"RCF_I_EMBEDDED")] = (is_embedded_noun(m1, mentions, fcache) == 1) ? true : false;
-    ft[ID(L"RCF_J_EMBEDDED")] = (is_embedded_noun(m2, mentions, fcache) == 1) ? true : false;
+    ft[fid(L"RCF_I_EMBEDDED")] = (is_embedded_noun(m1, mentions, fcache) == 1);
+    ft[fid(L"RCF_J_EMBEDDED")] = (is_embedded_noun(m2, mentions, fcache) == 1);
     // they satisfy the positive/negative conditions of Binding Theory
     parse_tree::const_iterator pt1=m1.get_ptree();
     parse_tree::const_iterator pt2=m2.get_ptree();
     bool cc12 = parse_tree::C_commands(pt1,pt2);
     bool cc21 = parse_tree::C_commands(pt2,pt1);
-    ft[ID(L"RCF_BINDING_POS")] = binding_pos(m1, m2, cc12, fcache) or binding_pos(m2, m1, cc21, fcache);
-    ft[ID(L"RCF_BINDING_NEG")] = binding_neg(m1, m2, cc12, fcache) or binding_neg(m2, m1, cc21, fcache);
+    ft[fid(L"RCF_BINDING_POS")] = binding_pos(m1, m2, cc12, fcache) or binding_pos(m2, m1, cc21, fcache);
+    ft[fid(L"RCF_BINDING_NEG")] = binding_neg(m1, m2, cc12, fcache) or binding_neg(m2, m1, cc21, fcache);
     // they satisfy C_command features
-    ft[ID(L"RCF_C_COMMANDS_IJ")] = cc12;
-    ft[ID(L"RCF_C_COMMANDS_JI")] = cc21;
+    ft[fid(L"RCF_C_COMMANDS_IJ")] = cc12;
+    ft[fid(L"RCF_C_COMMANDS_JI")] = cc21;
     // SRL arguments
     // labels Y within RCF_X_SRL_ARG_Y are those defined as Semeval
     // should be changed to those from CoNLL 
     wstring args1=L"", preds1=L"";
     get_arguments(m1, args1, preds1, fcache);
-    ft[ID(L"RCF_I_SRL_ARG_0")] = args1.find('0')!=string::npos;
-    ft[ID(L"RCF_I_SRL_ARG_1")] = args1.find('1')!=string::npos;
-    ft[ID(L"RCF_I_SRL_ARG_2")] = args1.find('2')!=string::npos;
-    ft[ID(L"RCF_I_SRL_ARG_X")] = args1.find_first_of(L"345")!=string::npos;
-    ft[ID(L"RCF_I_SRL_ARG_NUM")] = ft[ID(L"RCF_I_SRL_ARG_0")] or ft[ID(L"RCF_I_SRL_ARG_1")] or ft[ID(L"RCF_I_SRL_ARG_2")] or ft[ID(L"RCF_I_SRL_ARG_X")];
-    ft[ID(L"RCF_I_SRL_ARG_M")] = args1.find('M')!=string::npos;
-    ft[ID(L"RCF_I_SRL_ARG_N")] = args1==argument::EMPTY_ROLE;
-    ft[ID(L"RCF_I_SRL_ARG_Z")] = !ft[ID(L"RCF_I_SRL_ARG_N")] and !ft[ID(L"RCF_I_SRL_ARG_NUM")] and !ft[ID(L"RCF_I_SRL_ARG_M")];
+    ft[fid(L"RCF_I_SRL_ARG_0")] = args1.find('0')!=string::npos;
+    ft[fid(L"RCF_I_SRL_ARG_1")] = args1.find('1')!=string::npos;
+    ft[fid(L"RCF_I_SRL_ARG_2")] = args1.find('2')!=string::npos;
+    ft[fid(L"RCF_I_SRL_ARG_X")] = args1.find_first_of(L"345")!=string::npos;
+    ft[fid(L"RCF_I_SRL_ARG_NUM")] = ft[fid(L"RCF_I_SRL_ARG_0")] or ft[fid(L"RCF_I_SRL_ARG_1")] or ft[fid(L"RCF_I_SRL_ARG_2")] or ft[fid(L"RCF_I_SRL_ARG_X")];
+    ft[fid(L"RCF_I_SRL_ARG_M")] = args1.find('M')!=string::npos;
+    ft[fid(L"RCF_I_SRL_ARG_N")] = args1==argument::EMPTY_ROLE;
+    ft[fid(L"RCF_I_SRL_ARG_Z")] = !ft[fid(L"RCF_I_SRL_ARG_N")] and !ft[fid(L"RCF_I_SRL_ARG_NUM")] and !ft[fid(L"RCF_I_SRL_ARG_M")];
     wstring args2=L"", preds2=L"";
     get_arguments(m2, args2, preds2, fcache);
-    ft[ID(L"RCF_J_SRL_ARG_0")] = args2.find('0')!=string::npos;
-    ft[ID(L"RCF_J_SRL_ARG_1")] = args2.find('1')!=string::npos;
-    ft[ID(L"RCF_J_SRL_ARG_2")] = args2.find('2')!=string::npos;
-    ft[ID(L"RCF_I_SRL_ARG_X")] = args2.find_first_of(L"345")!=string::npos;
-    ft[ID(L"RCF_J_SRL_ARG_NUM")] = ft[ID(L"RCF_J_SRL_ARG_0")] or ft[ID(L"RCF_J_SRL_ARG_1")] or ft[ID(L"RCF_J_SRL_ARG_2")] or ft[ID(L"RCF_J_SRL_ARG_X")];
-    ft[ID(L"RCF_J_SRL_ARG_M")] = args2.find('M')!=string::npos;
-    ft[ID(L"RCF_J_SRL_ARG_N")] = args2==argument::EMPTY_ROLE;
-    ft[ID(L"RCF_J_SRL_ARG_Z")] = !ft[ID(L"RCF_J_SRL_ARG_N")] and !ft[ID(L"RCF_J_SRL_ARG_NUM")] and !ft[ID(L"RCF_J_SRL_ARG_M")];
-    ft[ID(L"RCF_SRL_SAMEVERB")] = same_preds(ft[ID(L"RCF_DIST_SEN_0")], preds1, preds2, fcache);
-    ft[ID(L"RCF_SAME_SRL_ARG")] = same_args(ft[ID(L"RCF_DIST_SEN_0")], args1, args2, ft, fcache);
+    ft[fid(L"RCF_J_SRL_ARG_0")] = args2.find('0')!=string::npos;
+    ft[fid(L"RCF_J_SRL_ARG_1")] = args2.find('1')!=string::npos;
+    ft[fid(L"RCF_J_SRL_ARG_2")] = args2.find('2')!=string::npos;
+    ft[fid(L"RCF_I_SRL_ARG_X")] = args2.find_first_of(L"345")!=string::npos;
+    ft[fid(L"RCF_J_SRL_ARG_NUM")] = ft[fid(L"RCF_J_SRL_ARG_0")] or ft[fid(L"RCF_J_SRL_ARG_1")] or ft[fid(L"RCF_J_SRL_ARG_2")] or ft[fid(L"RCF_J_SRL_ARG_X")];
+    ft[fid(L"RCF_J_SRL_ARG_M")] = args2.find('M')!=string::npos;
+    ft[fid(L"RCF_J_SRL_ARG_N")] = args2==argument::EMPTY_ROLE;
+    ft[fid(L"RCF_J_SRL_ARG_Z")] = !ft[fid(L"RCF_J_SRL_ARG_N")] and !ft[fid(L"RCF_J_SRL_ARG_NUM")] and !ft[fid(L"RCF_J_SRL_ARG_M")];
+    ft[fid(L"RCF_SRL_SAMEVERB")] = same_preds(ft[fid(L"RCF_DIST_SEN_0")], preds1, preds2, fcache);
+    ft[fid(L"RCF_SAME_SRL_ARG")] = same_args(ft[fid(L"RCF_DIST_SEN_0")], args1, args2, ft, fcache);
 
   }
 
-  void relaxcor_fex_constit::get_semantic(const mention &m1, const mention&m2, relaxcor_model::Tfeatures &ft, vector<mention> &mentions, feature_cache &fcache) const {
+  void relaxcor_fex_constit::get_semantic(const mention &m1, const mention&m2, relaxcor_model::Tfeatures &ft, const vector<mention> &mentions, feature_cache &fcache) const {
     TRACE(6,L"get semantic features");
 
     /// the are close and separated by the verb "to be"
-    ft[ID(L"RCF_VERB_IS")] = separated_by_verb_is(m1,m2,mentions, fcache);
+    ft[fid(L"RCF_VERB_IS")] = separated_by_verb_is(m1,m2,mentions, fcache);
     /// they are of the same semantic class
     unsigned int sem_match = sem_class_match(m1,m2, fcache);
-    ft[ID(L"RCF_SEMCLASS_YES")] = (sem_match == 1) ? true : false;
-    ft[ID(L"RCF_SEMCLASS_NO")] = (sem_match == 0) ? true : false;
-    ft[ID(L"RCF_SEMCLASS_UN")] = (sem_match == 2) ? true : false;
+    ft[fid(L"RCF_SEMCLASS_YES")] = (sem_match == 1);
+    ft[fid(L"RCF_SEMCLASS_NO")] = (sem_match == 0);
+    ft[fid(L"RCF_SEMCLASS_UN")] = (sem_match == 2);
     // they are person
-    ft[ID(L"RCF_I_PERSON")] = is_semantic_type(m1, L"person",fcache);
-    ft[ID(L"RCF_J_PERSON")] = is_semantic_type(m2, L"person",fcache);
+    ft[fid(L"RCF_I_PERSON")] = is_semantic_type(m1, L"person",fcache);
+    ft[fid(L"RCF_J_PERSON")] = is_semantic_type(m2, L"person",fcache);
     // they are organizations
-    ft[ID(L"RCF_I_ORGANIZATION")] = is_semantic_type(m1, L"organization",fcache);
-    ft[ID(L"RCF_J_ORGANIZATION")] = is_semantic_type(m2, L"organization",fcache);
+    ft[fid(L"RCF_I_ORGANIZATION")] = is_semantic_type(m1, L"organization",fcache);
+    ft[fid(L"RCF_J_ORGANIZATION")] = is_semantic_type(m2, L"organization",fcache);
     // they are locations
-    ft[ID(L"RCF_I_LOCATION")] = is_semantic_type(m1, L"location",fcache);
-    ft[ID(L"RCF_J_LOCATION")] = is_semantic_type(m2, L"location",fcache);
+    ft[fid(L"RCF_I_LOCATION")] = is_semantic_type(m1, L"location",fcache);
+    ft[fid(L"RCF_J_LOCATION")] = is_semantic_type(m2, L"location",fcache);
     // they are animacy
-    ft[ID(L"RCF_ANIMACY")] = animacy(m1, m2, fcache);
+    ft[fid(L"RCF_ANIMACY")] = animacy(m1, m2, fcache);
     // they are semantically incompatible
-    ft[ID(L"RCF_INCOMPATIBLES")] = incompatible(m1, m2, fcache);
+    ft[fid(L"RCF_INCOMPATIBLES")] = incompatible(m1, m2, fcache);
     // SRL features
     // they have the same semantic role (following semeval) for non numerical arguments
     // (LOC,EXT,TMP,DIS,ADV,NEG,MOD,CAU,PNC,MNR,DIR,PRD)
@@ -496,7 +478,7 @@ namespace freeling {
     get_roles(m1, roles1, fcache);
     get_roles(m2, roles2, fcache);
 
-    ft[ID(L"RCF_SRL_SAME_ROLE")] = (roles1.size()<roles2.size())? same_roles(roles1,roles2, fcache) : same_roles(roles2,roles1, fcache);
+    ft[fid(L"RCF_SRL_SAME_ROLE")] = (roles1.size()<roles2.size())? same_roles(roles1,roles2, fcache) : same_roles(roles2,roles1, fcache);
     
   }
 
@@ -506,7 +488,7 @@ namespace freeling {
      // include if necessary
  }
 
-  void relaxcor_fex_constit::get_group_features(vector<mention> &mentions, relaxcor_model::Tfeatures &ft, feature_cache &fcache) const {
+  void relaxcor_fex_constit::get_group_features(const vector<mention> &mentions, relaxcor_model::Tfeatures &ft, feature_cache &fcache) const {
     TRACE(6,L"get group features");
 
     // include if necessary
@@ -976,7 +958,7 @@ namespace freeling {
   ///    Returns 1 m1 is the closest referent to m2
   //////////////////////////////////////////////////////////////////
 
-  unsigned int relaxcor_fex_constit::closest_agreement(const mention &m1, const mention &m2, vector<mention> &mentions, feature_cache &fcache) const {
+  unsigned int relaxcor_fex_constit::closest_agreement(const mention &m1, const mention &m2, const vector<mention> &mentions, feature_cache &fcache) const {
 
     unsigned int r = agreement(m1,m2,fcache);
 
@@ -1088,7 +1070,7 @@ namespace freeling {
   ///    Returns true when they share the maximal noun phrase 
   //////////////////////////////////////////////////////////////////
 
-  bool relaxcor_fex_constit::share_maximal_NP(const mention &m1,  const mention &m2, std::vector<mention> &mentions, feature_cache &fcache) const {
+  bool relaxcor_fex_constit::share_maximal_NP(const mention &m1,  const mention &m2, const vector<mention> &mentions, feature_cache &fcache) const {
 
     int id1=get_maximal_NP(m1, mentions, fcache);
     int id2=get_maximal_NP(m2, mentions, fcache);
@@ -1102,7 +1084,7 @@ namespace freeling {
   ///    Returns 1 when it is a maximal noun phrase 
   //////////////////////////////////////////////////////////////////
 
-  unsigned int relaxcor_fex_constit::is_maximal_NP(const mention &m, std::vector<mention> &mentions, feature_cache &fcache) const {
+  unsigned int relaxcor_fex_constit::is_maximal_NP(const mention &m, const vector<mention> &mentions, feature_cache &fcache) const {
 
     int id=m.get_id();
     int id1=get_maximal_NP(m, mentions, fcache);
@@ -1148,7 +1130,7 @@ namespace freeling {
   ///    Returns 1 when it is a noun and is not a maximal noun phrase 
   //////////////////////////////////////////////////////////////////
 
-  unsigned int relaxcor_fex_constit::is_embedded_noun(const mention &m, std::vector<mention> &mentions, feature_cache &fcache) const {
+  unsigned int relaxcor_fex_constit::is_embedded_noun(const mention &m, const vector<mention> &mentions, feature_cache &fcache) const {
 
     int id=m.get_id();
 
@@ -1250,10 +1232,10 @@ namespace freeling {
 
     bool r=false;
     if (same_sentence) {
-      if ((ft[ID(L"RCF_I_SRL_ARG_0")] and ft[ID(L"RCF_J_SRL_ARG_0")]) 
-          or (ft[ID(L"RCF_I_SRL_ARG_1")] and ft[ID(L"RCF_J_SRL_ARG_1")]) 
-          or (ft[ID(L"RCF_I_SRL_ARG_2")] and ft[ID(L"RCF_J_SRL_ARG_2")])
-          or (ft[ID(L"RCF_I_SRL_ARG_M")] and ft[ID(L"RCF_J_SRL_ARG_M")])) 
+      if ((ft[fid(L"RCF_I_SRL_ARG_0")] and ft[fid(L"RCF_J_SRL_ARG_0")]) 
+          or (ft[fid(L"RCF_I_SRL_ARG_1")] and ft[fid(L"RCF_J_SRL_ARG_1")]) 
+          or (ft[fid(L"RCF_I_SRL_ARG_2")] and ft[fid(L"RCF_J_SRL_ARG_2")])
+          or (ft[fid(L"RCF_I_SRL_ARG_M")] and ft[fid(L"RCF_J_SRL_ARG_M")])) 
 	r = true;
       else {
 	r = false;
@@ -1293,7 +1275,7 @@ namespace freeling {
   ///    Returns 1 when they are close and separated by the verb "to be"
   ///////////////////////////////////////////////////////////////////////////////
 
-  bool relaxcor_fex_constit::separated_by_verb_is(const mention &m1, const mention &m2, vector<mention> &mencions, feature_cache &fcache) const {
+  bool relaxcor_fex_constit::separated_by_verb_is(const mention &m1, const mention &m2, const vector<mention> &mencions, feature_cache &fcache) const {
     bool r = false;
     if (m1.get_n_sentence()==m2.get_n_sentence() and not nested(m1,m2) 
         and is_maximal_NP(m1,mencions, fcache) and is_maximal_NP(m2,mencions, fcache)) 
@@ -2269,7 +2251,7 @@ namespace freeling {
   // ================  syntactic auxiliar functions
   // ===================================================
 
-  int relaxcor_fex_constit::get_maximal_NP(const mention &m,  std::vector<mention> &mentions, feature_cache &fcache) const {
+  int relaxcor_fex_constit::get_maximal_NP(const mention &m,  const vector<mention> &mentions, feature_cache &fcache) const {
 
     int id=m.get_id();
 
@@ -2366,7 +2348,7 @@ namespace freeling {
   ///    Extract the configured features for a pair of mentions 
   //////////////////////////////////////////////////////////////////
 
-  void relaxcor_fex_constit::extract_pair(mention &m1, mention &m2, relaxcor_model::Tfeatures &ft,vector<mention> &mentions, feature_cache &fcache) const {
+  void relaxcor_fex_constit::extract_pair(const mention &m1, const mention &m2, relaxcor_model::Tfeatures &ft, const vector<mention> &mentions, feature_cache &fcache) const {
 
     if (_Active_features & RCF_SET_STRUCTURAL) get_structural(m1, m2, ft, fcache);    
     if (_Active_features & RCF_SET_LEXICAL)    get_lexical(m1, m2, ft, fcache);
@@ -2381,16 +2363,16 @@ namespace freeling {
   ///    Extract the configured features for all mentions  
   //////////////////////////////////////////////////////////////////
 
-  relaxcor_fex::Mfeatures relaxcor_fex_constit::extract(vector<mention> &mentions) const {
+  relaxcor_fex_abs::Mfeatures relaxcor_fex_constit::extract(const vector<mention> &mentions) const {
 
-    relaxcor_fex::Mfeatures M;
+    relaxcor_fex_abs::Mfeatures M;
     feature_cache fcache;
 
-    for (vector<mention>::iterator m1=mentions.begin()+1; m1!=mentions.end(); ++m1) {
+    for (vector<mention>::const_iterator m1=mentions.begin()+1; m1!=mentions.end(); ++m1) {
       TRACE(4,L"Extracting all pairs for mention "+util::int2wstring(m1->get_id())+L" ("+m1->value()+L") " + m1->get_head().get_form() + L" " + m1->get_head().get_lemma() + L" " + m1->get_head().get_tag());
       clock_t t0 = clock();  // final time
       
-      for (vector<mention>::iterator m2=mentions.begin(); m2!=m1; ++m2) {	
+      for (vector<mention>::const_iterator m2=mentions.begin(); m2!=m1; ++m2) {	
 	wstring mention_pair = util::int2wstring(m1->get_id());
 	mention_pair += L":";
 	mention_pair += util::int2wstring(m2->get_id());

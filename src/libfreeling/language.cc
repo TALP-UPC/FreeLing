@@ -1310,7 +1310,7 @@ namespace freeling {
   }
 
   /// Constructor from a dep_tree node
-  mention::mention(int i, int ns, paragraph::const_iterator ps, dep_tree::const_iterator dt) {
+  mention::mention(int i, int ns, paragraph::const_iterator ps, dep_tree::const_iterator dt, int end) {
     id = i;
     sent = ns;
     s = ps;
@@ -1320,7 +1320,10 @@ namespace freeling {
     dtree = dt;
 
     posBegin = dep_tree::get_first_word(dt);
-    posEnd = dep_tree::get_last_word(dt);
+    if (end > 0) // end position given, use it
+      posEnd = end;
+    else  // no end position give, use last subsumed word
+      posEnd = dep_tree::get_last_word(dt);
 
     itBegin = ps->get_word_iterator((*ps)[posBegin]);
     itEnd = ps->get_word_iterator((*ps)[posEnd]);
@@ -1470,8 +1473,10 @@ namespace freeling {
     return single_subsumtion;
   }
   
-  /// get string of mention words, lowercasing the first "lc" (none by default)
+  /// get string of mention words, lowercasing the first "lc"
+  /// default: lc=0;  Use lc=-1 to lowercase all words
   wstring mention::value(int lc) const {
+    if (lc == -1) lc = posEnd - posBegin + 1;
     int p=1;
     wstring v=L"";
     for (sentence::const_iterator it=itBegin; it!=itEnd; it++) {

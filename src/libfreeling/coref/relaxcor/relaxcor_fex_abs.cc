@@ -34,40 +34,89 @@
 #include <string>
 
 #include "freeling/morfo/util.h"
-#include "freeling/morfo/relaxcor_fex.h"
+#include "freeling/morfo/relaxcor_fex_abs.h"
 
 using namespace std;
 
 namespace freeling {
 
-  //////////////////////////////////////////////////////////////////
-  /// Class relaxcor_fex is a wrapper providing transparent access
-  /// to either relaxcor_fex_dep or relaxcor_fex_constit
-  //////////////////////////////////////////////////////////////////
 
+  /////////////////////////////////////////////
+  /// Auxiliary class to store already computed mention features
+  /////////////////////////////////////////////
+
+  feature_cache::feature_cache() {};
+  feature_cache::~feature_cache() {};
+
+  void feature_cache::set_feature(int id, mentionFeature f, unsigned int v) {
+    features[id][f]=v;
+  }
+  void feature_cache::set_feature(int id, mentionWsFeature f, const vector<wstring>& v) {
+    wsfeatures[id][f]=v;
+  }
+  unsigned int feature_cache::get_feature(int id, mentionFeature f) const {
+    return features.find(id)->second.find(f)->second;
+  }
+  const vector<wstring>& feature_cache::get_feature(int id, mentionWsFeature f) const {
+    return wsfeatures.find(id)->second.find(f)->second;
+  }
+  bool feature_cache::computed_feature(int id, mentionFeature f) const {
+    return features.find(id)!=features.end() and features.find(id)->second.find(f)!=features.find(id)->second.end();
+  }
+  bool feature_cache::computed_feature(int id, mentionWsFeature f) const {
+    return wsfeatures.find(id)!=wsfeatures.end() and wsfeatures.find(id)->second.find(f)!=wsfeatures.find(id)->second.end();
+  }
+
+
+
+  //////////////////////////////////////////////////////////////////
+  /// Class relaxcor_fex_abs is an abstract class for a relaxcor
+  ///  feature extractor
+  //////////////////////////////////////////////////////////////////
 
   //////////////////////////////////////////////////////////////////
   /// constructor
   //////////////////////////////////////////////////////////////////
 
-  relaxcor_fex::relaxcor_fex(const relaxcor_model &m) : model(m) {}
+  relaxcor_fex_abs::relaxcor_fex_abs(const relaxcor_model &m) : model(m) {}
     
   //////////////////////////////////////////////////////////////////
   /// destructor
   //////////////////////////////////////////////////////////////////
 
-  relaxcor_fex::~relaxcor_fex() {}
+  relaxcor_fex_abs::~relaxcor_fex_abs() {}
 
 
-  unsigned int relaxcor_fex::ID(const std::wstring &x) const {
-    return model.feature_name_id(x);
+  //////////////////////////////////////////////////////////////////
+  // get feature existence and id from model
+  //////////////////////////////////////////////////////////////////
+
+  bool relaxcor_fex_abs::defid(const std::wstring &name, unsigned int &id) const { 
+    return model.feature_name_defid(name,id);
+  }
+
+
+  //////////////////////////////////////////////////////////////////
+  // get feature id from model
+  //////////////////////////////////////////////////////////////////
+
+  unsigned int relaxcor_fex_abs::fid(const std::wstring &name) const { 
+    return model.feature_name_id(name);
+  }
+
+  //////////////////////////////////////////////////////////////////
+  // get feature existence from model
+  //////////////////////////////////////////////////////////////////
+
+  bool relaxcor_fex_abs::def(const std::wstring &name) const { 
+    return model.is_feature_name(name);
   }
 
   /////////////////////////////////////////////////////////////////////////////
   /// Print the detected features
   /////////////////////////////////////////////////////////////////////////////
 
-  void relaxcor_fex::print(relaxcor_fex::Mfeatures &M, unsigned int nment) const {
+  void relaxcor_fex_abs::print(relaxcor_fex_abs::Mfeatures &M, unsigned int nment) const {
     for (unsigned int i=1; i<nment; i++) {
       for (unsigned int j=0; j<i; j++) {
 	wcerr << i << L":" << j << L" ";

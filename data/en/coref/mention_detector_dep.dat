@@ -8,14 +8,18 @@ Dependencies
 </TagsetFile>
 
 <MentionTags>
-NN
-NNS
-NP00000
-NP00SP0
-NP00O00
-NP00G00
-NP00V00
-PRP
-PRP$
-WDT
+NN      NounPhrase
+NNS     NounPhrase
+NP00000 ProperNoun
+NP00SP0 ProperNoun
+NP00O00 ProperNoun
+NP00G00 ProperNoun
+NP00V00 ProperNoun
+PRP     Pronoun
+PRP$    Pronoun
+WDT     Pronoun
 </MentionTags>
+
+<CoordLabel>
+COORD
+</CoordLabel>
