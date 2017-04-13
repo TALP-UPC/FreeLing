@@ -10,11 +10,7 @@ Dependencies
 <MentionTags>
 NN      NounPhrase
 NNS     NounPhrase
-NP00000 ProperNoun
-NP00SP0 ProperNoun
-NP00O00 ProperNoun
-NP00G00 ProperNoun
-NP00V00 ProperNoun
+NP      ProperNoun
 PRP     Pronoun
 PRP$    Pronoun
 WDT     Pronoun

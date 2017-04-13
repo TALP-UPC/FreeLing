@@ -72,9 +72,7 @@ namespace freeling {
     return sat;
   }
 
-  wstring relaxcor_modelDT::constraint::print() const {
-    return util::double2wstring(compatibility) + L" " + relaxcor_model::print(conditions);
-  }
+  const relaxcor_model::Tfeatures & relaxcor_modelDT::constraint::get_conditions() const {return conditions;}
   
   ///////////////////////////////////////////////////////////////
   /// Destructor
@@ -225,22 +223,25 @@ namespace freeling {
       if (it->satisfies(F)) {
         double c = it->get_compatibility();
 	w += c;
-        TRACE(7,L"  Applying constraint: "+it->print());
-        TRACE(7,L"      Accumulated w="+util::double2wstring(w));
+        TRACE(7,L"     Applying constraint: " << print(it->get_conditions(),true) << L" " << print(it->get_conditions(),false));
+        TRACE(7,L"     Accumulated w=" << util::double2wstring(w));
       }
     return w;
   }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-  void relaxcor_modelDT::print() const {
+  void relaxcor_modelDT::dump() const {
     
     print_feature_names();
 
     for(vector<constraint>::const_iterator it=_Constraints.begin(); it<_Constraints.end(); it++) {
-      wcerr << it->print() << endl;
+      wcerr << it->get_compatibility() << L" " 
+            << print(it->get_conditions(),true) << L" " 
+            << print(it->get_conditions(),false) << endl;
     }
 
   }
+
 
 } //namespace

@@ -133,7 +133,7 @@ namespace freeling {
 	mp += L":";
 	mp += util::int2wstring(j);
 
-        wcerr << relaxcor_model::print(M[mp]) << endl;
+        wcerr << model.print(M[mp],true) << L" " << model.print(M[mp],false) << endl;
       }
     }
   }

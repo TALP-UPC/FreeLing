@@ -63,7 +63,7 @@ namespace freeling {
     if (not cfg.open(fmodel))
       ERROR_CRASH(L"Error opening file "+fmodel);
 
-    bool has_features=false;
+    unsigned int fcode=1;
 
     wstring line;
     while (cfg.get_content_line(line)) {
@@ -73,11 +73,11 @@ namespace freeling {
       
       switch (cfg.get_section()) { 
         case FEATURES: {
-           has_features=true;
            wstring fname;
-           int fcode;
-           sin >> fname >> fcode;
+           sin >> fname;
            _Feature_names[fname] = fcode;
+           _Feature_ids[fcode] = fname;
+           ++fcode;
            break;
         }
 
@@ -86,32 +86,26 @@ namespace freeling {
     }    
     cfg.close();
 
-    if (not has_features) 
-      ERROR_CRASH(L"Feature list not found in relaxcor model file "+fmodel);
   }
 
 
   //////////////////////////////////////////////////
-  /// checks whether the fature exists, and returns the id if so
+  /// checks whether the feature exists, and returns the id if so
   //////////////////////////////////////////////////
 
-  bool relaxcor_model::feature_name_defid(const std::wstring &name, unsigned int &id) const {
+  bool relaxcor_model::feature_name_defid(const wstring &name, unsigned int &id) const {
     TfeaturesNames::const_iterator p= _Feature_names.find(name);
-    if (p == _Feature_names.end()) {
-      id = -1;
-      return false;
-    }
-    else {
+    id = -1;
+    if (p != _Feature_names.end()) 
       id = p->second;
-      return true;
-    }
+    return (p != _Feature_names.end());
   }
 
   //////////////////////////////////////////////////
   /// returns the id of given feature 
   //////////////////////////////////////////////////
 
-  unsigned int relaxcor_model::feature_name_id(const std::wstring &name) const {
+  unsigned int relaxcor_model::feature_name_id(const wstring &name) const {
     unsigned int x;
     if (not feature_name_defid(name,x)) {
       ERROR_CRASH("Attempt to get id for non-existing feature '"<<name<<L"'");
@@ -120,10 +114,34 @@ namespace freeling {
   }
 
   //////////////////////////////////////////////////
+  /// checks whether the feature exists, and returns the name if so
+  //////////////////////////////////////////////////
+
+  bool relaxcor_model::feature_id_defname(unsigned int id, std::wstring &name) const {
+    TfeaturesIDs::const_iterator p= _Feature_ids.find(id);
+    name = L"";
+    if (p != _Feature_ids.end()) 
+      name = p->second;
+    return (p != _Feature_ids.end());
+  }
+
+  //////////////////////////////////////////////////
+  /// returns the id of given feature 
+  //////////////////////////////////////////////////
+
+  wstring relaxcor_model::feature_id_name(unsigned int id) const {
+    wstring name;
+    if (not feature_id_defname(id,name)) {
+      ERROR_CRASH("Attempt to get name for non-existing feature '"<<id<<L"'");
+    }
+    return name;
+  }
+
+  //////////////////////////////////////////////////
   /// checks existence of feature
   //////////////////////////////////////////////////
 
-  bool relaxcor_model::is_feature_name(const std::wstring &name) const {
+  bool relaxcor_model::is_feature_name(const wstring &name) const {
     unsigned int x;
     return feature_name_defid(name,x);
   }
@@ -139,22 +157,17 @@ namespace freeling {
   }
 
 
-  wstring relaxcor_model::print(const relaxcor_model::Tfeatures &f, bool activeonly) {
+  wstring relaxcor_model::print(const relaxcor_model::Tfeatures &f, bool active) const {
     wstring s=L"";
     for (relaxcor_model::Tfeatures::const_iterator it=f.begin(); it!=f.end(); it++) {
-      if (activeonly) {
-         // print only active features, for readability
-        if (it->second) {
-          if (it!=f.begin()) s += L" ";
-          s += util::int2wstring(it->first);
-        }
-      }
-      else {
+      // print requested features (active or inactive)
+      if (it->second == active) {
         if (it!=f.begin()) s += L" ";
         if (not it->second) s += L"!";
-        s += util::int2wstring(it->first);
+        s += feature_id_name(it->first);
       }
     }
+    
     return s;
   }
 
@@ -166,7 +179,7 @@ namespace freeling {
   void relaxcor_model::print_feature_names() const {
 
     for (map<wstring, unsigned int>::const_iterator it=_Feature_names.begin(); it!=_Feature_names.end(); it++) {
-      wcerr << (*it).first << " " << (*it).second << endl;
+      wcerr << it->first << endl;
     }
   }
 

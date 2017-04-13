@@ -60,12 +60,16 @@ namespace freeling {
 
     // read configuration file and store information       
     enum sections {DEPLABELS, POSTAGS, WORDFEAT};
-    config_file cfg(false,L"%");
+    config_file cfg(true,L"%");
 
     // add compulsory sections
     cfg.add_section(L"DepLabels",DEPLABELS,true);
     cfg.add_section(L"PosTags",POSTAGS,true);
     cfg.add_section(L"WordFeatures",WORDFEAT,true);
+
+    if (not cfg.open(filename))
+      ERROR_CRASH(L"Error opening file "+filename);
+
     wstring path=filename.substr(0,filename.find_last_of(L"/\\")+1);
     wstring line;
     while (cfg.get_content_line(line)) {
@@ -95,7 +99,7 @@ namespace freeling {
 	wstring name, val;
         sin >> name >> val;
 	freeling::regexp re(val);
-	_Labels.insert(make_pair(L"WF_"+name,re));
+	_Labels.insert(make_pair(L"WRD_"+name,re));
 	break;
       }
       default: break;
@@ -136,7 +140,7 @@ namespace freeling {
     bool inq;
     if (fcache.computed_feature(fid)) {
       inq = util::wstring2int(fcache.get_feature(fid));
-      TRACE(7,L"      " << fid << L" = " << wstring(inq?L"yes":L"no") << "  (cached)");
+      TRACE(7,L"     " << fid << L" = " << wstring(inq?L"yes":L"no") << "  (cached)");
     }
     else {
       paragraph::const_iterator s = m.get_sentence();
@@ -152,7 +156,7 @@ namespace freeling {
       // we are inside quotes.
       inq = (nq%2!=0);
       fcache.set_feature(fid,util::int2wstring(inq));
-      TRACE(7,L"      " << fid << L" = "<< (inq?L"yes":L"no"));
+      TRACE(7,L"     " << fid << L" = "<< (inq?L"yes":L"no"));
     }
 
     return inq;
@@ -168,15 +172,15 @@ namespace freeling {
     bool ind;
     if (fcache.computed_feature(fid)) {
       ind = util::wstring2int(fcache.get_feature(fid));
-      TRACE(7,L"      " << fid << L" = " << wstring(ind?L"yes":L"no") << "  (cached)");
+      TRACE(7,L"     " << fid << L" = " << wstring(ind?L"yes":L"no") << "  (cached)");
     }
     else {
       // check whether the word is in the list of indefinite pronouns
-      auto re = get_label(L"WD_Indefinite");  if (re==_Labels.end()) return false;
+      auto re = get_label(L"WRD_Indefinite");  if (re==_Labels.end()) return false;
       ind = re->second.search(m.get_it_begin()->get_lemma());
 
       fcache.set_feature(fid,util::int2wstring(ind));
-      TRACE(7,L"      " << fid << L" = "<< (ind?L"yes":L"no"));
+      TRACE(7,L"     " << fid << L" = "<< (ind?L"yes":L"no"));
     }
 
     return ind;
@@ -193,15 +197,15 @@ namespace freeling {
     bool ind;
     if (fcache.computed_feature(fid)) {
       ind = util::wstring2int(fcache.get_feature(fid));
-      TRACE(7,L"      " << fid << L" = " << wstring(ind?L"yes":L"no") << "  (cached)");
+      TRACE(7,L"     " << fid << L" = " << wstring(ind?L"yes":L"no") << "  (cached)");
     }
     else {
       // check whether the word is in the list of indefinite pronouns
-      auto re = get_label(L"WD_Indefinite");  if (re==_Labels.end()) return false;
+      auto re = get_label(L"WRD_Indefinite");  if (re==_Labels.end()) return false;
       ind = re->second.search(m.get_head().get_lemma());
 
       fcache.set_feature(fid,util::int2wstring(ind));
-      TRACE(7,L"      " << fid << L" = "<< (ind?L"yes":L"no"));
+      TRACE(7,L"     " << fid << L" = "<< (ind?L"yes":L"no"));
     }
 
     return ind;
@@ -217,7 +221,7 @@ namespace freeling {
     wstring args;
     if (fcache.computed_feature(fid)) {
       args =  fcache.get_feature(fid);
-      TRACE(7,L"      "<<fid<<L" = ["<<args<<"]   (cached)");
+      TRACE(7,L"     "<<fid<<L" = ["<<args<<"]   (cached)");
     }
     else {
       list<pair<int,wstring>> roles;
@@ -232,7 +236,7 @@ namespace freeling {
       roles.sort();
       args = util::pairlist2wstring<int,wstring>(roles,L":",L"/");
       fcache.set_feature(fid, args);
-      TRACE(7,L"      "<<fid<<L" = ["<<args<<"]");
+      TRACE(7,L"     "<<fid<<L" = ["<<args<<"]");
     }
 
     return args;
@@ -254,11 +258,8 @@ namespace freeling {
     else {
       // check for quotes between m1 and m2. If none is found, they are in the same quotation (if any)
       sq = in_quotes(m1,fcache) and in_quotes(m2,fcache);      
-      sentence::const_iterator k = m1.get_it_end();
-      ++k;
-      while (k!=m2.get_it_begin() and sq) {
+      for (sentence::const_iterator k=m1.get_it_end(); k!=m2.get_it_begin() and sq; ++k ) {
         sq = (k->get_tag()==L"Fe" or k->get_tag()==L"Fra" or k->get_tag()==L"Frc");
-        ++k;
       }
       
       fcache.set_feature(fid, util::int2wstring(sq));
@@ -383,8 +384,8 @@ namespace freeling {
     else {
       auto reSubj = get_label(L"FUN_Subject");  if (reSubj==_Labels.end()) return false;
       auto rePred = get_label(L"FUN_Predicate");  if (rePred==_Labels.end()) return false;
-      auto reCop = get_label(L"WD_Copulative");  if (reCop==_Labels.end()) return false;
-      auto rePos = get_label(L"WD_Possessive");  if (rePos==_Labels.end()) return false;
+      auto reCop = get_label(L"WRD_Copulative");  if (reCop==_Labels.end()) return false;
+      auto rePos = get_label(L"WRD_Possessive");  if (rePos==_Labels.end()) return false;
 
       // m1 is SBJ and m2 is PRD of a copulative verb (or viceversa), and they are not possessive
       r = (((reSubj->second.search(m1.get_dtree()->get_label()) and rePred->second.search(m2.get_dtree()->get_label())) or
@@ -587,15 +588,11 @@ namespace freeling {
     feature_cache fcache;
     
     for (vector<mention>::const_iterator m1=mentions.begin()+1; m1!=mentions.end(); ++m1) {
-      TRACE(4,L"Extracting all pairs for mention "+util::int2wstring(m1->get_id())+L" ("+m1->value()+L") " + m1->get_head().get_form() + L" " + m1->get_head().get_lemma() + L" " + m1->get_head().get_tag());
+      TRACE(4,L"Extracting all pairs for mention "<<m1->get_id()<<L" ("+m1->value()<<L") ["<<m1->get_head().get_form()<<L","<<m1->get_head().get_lemma()<<L","<<m1->get_head().get_tag()<<L"]");
       
       for (vector<mention>::const_iterator m2=mentions.begin(); m2!=m1; ++m2) {	
-	wstring mention_pair = util::int2wstring(m1->get_id());
-	mention_pair += L":";
-	mention_pair += util::int2wstring(m2->get_id());
-        
-	TRACE(5,L"PAIR: "+mention_pair+L" "+m1->get_head().get_form()+L":"+m2->get_head().get_form());
-	
+	wstring mention_pair = util::int2wstring(m1->get_id()) + L":" + util::int2wstring(m2->get_id());
+	TRACE(5,L"PAIR: "<<mention_pair<<L" "+m1->get_head().get_form()<<L":"<<m2->get_head().get_form());	
         extract_pair(*m1, *m2, mentions, fcache, M[mention_pair]);
       }
     }

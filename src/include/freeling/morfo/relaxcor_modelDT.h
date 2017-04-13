@@ -61,7 +61,7 @@ namespace freeling {
       void set_condition(unsigned int, bool);
       double get_compatibility() const;
       bool satisfies(const Tfeatures &) const;
-      std::wstring print() const;
+      const Tfeatures & get_conditions() const;
     };
     
     /// set of constraints from the DT model
@@ -79,7 +79,7 @@ namespace freeling {
     /// (positive or negative weight) by taking into account the constraints from the DT model
     /// Each mention-pair is given as the set of its features    
     double weight(const Tfeatures&) const;
-    void print() const;
+    void dump() const;
 
   };
 

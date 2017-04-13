@@ -84,7 +84,6 @@ namespace freeling {
         wstring ftags;
         sin>>ftags;
         // load tagset description
-        TRACE(3,L"Loading tagset file "+ util::absolute(ftags,path));      
         Tags = new tagset(util::absolute(ftags,path));
         break;
       }
@@ -102,7 +101,6 @@ namespace freeling {
           t=mention::NOUN_PHRASE;
         }
 	mention_tags.insert(make_pair(tag,t));
-        TRACE(6,L"Loaded mention tag "<<tag<<L" "<<typ);
 	break;
       }
 
@@ -117,7 +115,6 @@ namespace freeling {
 	wstring lemma;
         sin >> lemma;
         excluded.insert(lemma);
-        TRACE(6,L"Loaded mention excluded "<<lemma);
         break;
       }
       default: break;
@@ -125,7 +122,7 @@ namespace freeling {
     }
     cfg.close();
 
-    TRACE(3,L"mention detector succesfully created");
+    TRACE(3,L"Module succesfully created");
   }
 
 
@@ -224,8 +221,8 @@ namespace freeling {
             << " id=" << mentions[k].get_id()
             << ", ns=" << mentions[k].get_n_sentence()
             << ", head=" << mentions[k].get_head().get_position() << L" ("<<mentions[k].get_head().get_lemma() << L")"
-            << ", begin=" << mentions[k].get_pos_begin() << L" (" << (*mentions[k].get_sentence())[mentions[k].get_pos_begin()].get_form() << L")"
-            << ", end=" << mentions[k].get_pos_end() << L" (" << (*mentions[k].get_sentence())[mentions[k].get_pos_end()].get_form() << L")");
+            << ", mention=(" << mentions[k].get_pos_begin() << L"," << mentions[k].get_pos_end() << L")"
+            << " [" << mentions[k].value() << L"]");
     }
     #endif
 

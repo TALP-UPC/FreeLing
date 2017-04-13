@@ -91,8 +91,6 @@ namespace freeling {
     mdd = NULL; mdc = NULL;
     if (type==DEP) mdd = new mention_detector_dep(filename);
     else mdc = new mention_detector_constit(filename);
-
-    TRACE(3,L"mention detector succesfully created");
   }
 
   ///////////////////////////////////////////////////////////////

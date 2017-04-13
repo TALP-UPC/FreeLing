@@ -413,13 +413,13 @@ namespace freeling {
       // adding labels with equiprobable initial probabilities for each vertex 
       for (unsigned int l=0; l<m; l++) {
         coref_problem.add_label(m,prob);
-        TRACE(3,L"   building problem: adding label " + util::int2wstring(l) + 
+        TRACE(3,L"   adding label " + util::int2wstring(l) + 
                 L" to vertex "+ util::int2wstring(m) +
                 L" prob=" + util::double2wstring(prob));
       }
       // last label may have twice the probability if it was not a pronoun
       coref_problem.add_label(m,mult*prob);
-      TRACE(3,L"   building problem: adding label " + util::int2wstring(m) + 
+      TRACE(3,L"   adding label " + util::int2wstring(m) + 
               L" to vertex "+ util::int2wstring(m) +
               L" prob=" + util::double2wstring(mult*prob));
     }
@@ -457,9 +457,11 @@ namespace freeling {
 	
 	// computing the weight of the edge as the sum of compatibilities of the satisfied constraints
 	wstring mp = util::int2wstring(anaphor) + L":" + util::int2wstring(antecedent);
-        TRACE(7, L" Checking constraints for pair " + mp + 
-                 L" (" + sorted_mentions[m]->value() + L"," + sorted_mentions[m_ant]->value() + L")");
-        TRACE(7,L"  Pair features: " + relaxcor_model::print(M[mp],true) );
+        TRACE(7, L"  Checking constraints for pair " << mp << 
+              L" (" << sorted_mentions[m]->value() << L"," << sorted_mentions[m_ant]->value() << L")");
+        TRACE(7,L"     Pair features:  ");
+        TRACE(7,L"        active  : " << model->print(M[mp],true) );
+        TRACE(7,L"        inactive: " << model->print(M[mp],false) );
 	double w = model->weight(M[mp]);
 
 	if (w>0) Npos++;
@@ -472,8 +474,15 @@ namespace freeling {
       // for (unsigned int i=0; i<adjacents.size(); i++) 
       //   wcerr << L"(" << adjacents[i].first.first << L"," <<  adjacents[i].first.second << L") - "  << adjacents[i].second << endl;
       
-      TRACE(4,L" Found "+util::int2wstring(adjacents.size())+L" edges for mention "+util::int2wstring(sorted_mentions[m]->get_id())+L" ("+sorted_mentions[m]->value()+L")");
+      TRACE(4,L"  Found "+util::int2wstring(adjacents.size())+L" edges for mention "+util::int2wstring(sorted_mentions[m]->get_id())+L" ("+sorted_mentions[m]->value()+L")");
 
+      // If only negative arcs for this mention, it will end up a singleton. 
+      // Leave it alone (no edges) to speed up solving.
+      if (Npos==0 and Nneg>0) {
+        TRACE(4,L"  All edges are negative. Removing.");
+        adjacents.clear();
+      }        
+      
       ///////////////////////////////////////
       // Prunning edges if required
       // Keep only the N most relevant edges.
@@ -499,7 +508,7 @@ namespace freeling {
 	//  wcerr << endl;	
       }
 
-      TRACE(4,L"   "+util::int2wstring(adjacents.size())+L" edges remaining after pruning with Nprune="+util::int2wstring(_Nprune));
+      TRACE(4,L"  "+util::int2wstring(adjacents.size())+L" edges remaining after pruning with Nprune="+util::int2wstring(_Nprune));
     
       ////////////////////////////////////
       // Adding constraints to the problem from the edges 

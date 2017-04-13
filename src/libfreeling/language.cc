@@ -1327,7 +1327,8 @@ namespace freeling {
 
     itBegin = ps->get_word_iterator((*ps)[posBegin]);
     itEnd = ps->get_word_iterator((*ps)[posEnd]);
-    
+    ++itEnd;
+
     itHead = ps->get_word_iterator((*ps)[dt->get_word().get_position()]);
     chain = -1;
   }
@@ -1367,7 +1368,7 @@ namespace freeling {
 
     posEnd = end_it->get_position();
     itEnd = end_it; 
-    itEnd++;
+    ++itEnd;
 
     itHead = s->get_word_iterator(parse_tree::get_head_word(ptree));
     chain = -1;

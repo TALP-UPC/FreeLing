@@ -385,7 +385,7 @@ namespace freeling {
     if (_No_heads.find(m.get_head().get_lemma())==_No_heads.end()) {
       mentions.push_back(m);
       n++;
-      TRACE(7,L"      Added mention ["+m.value()+L"], type="+util::int2wstring(m.get_type()));
+      TRACE(7,L"      Added mention ["<<m.value()<<L"], type="<<m.get_type());
     }
     else { 
       TRACE(7,L"      Skipping fobidden head mention ["+m.value()+L"], type="+util::int2wstring(m.get_type()));

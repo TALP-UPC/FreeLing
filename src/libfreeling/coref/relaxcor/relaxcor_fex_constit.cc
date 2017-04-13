@@ -87,8 +87,7 @@ namespace freeling {
 
     // read configuration file and store information       
     enum sections {LANGUAGE, TAGSET, LABELS, SEM_DB, ACTIVE_FEATURES, DET_WORDS, PRON_WORDS, SEM_CLASS, CAPITALS, NATIONALITIES, GPE_REGEXPS, NICKS, FORENAMES, ACRO_TERMS, PERSONS, TITLES, OTHER_SECTION};
-    config_file cfg(false,L"%");
-    map<unsigned int, wstring> labels_section;
+    config_file cfg(true,L"%");
 
     cfg.add_section(L"Language",LANGUAGE,true);
     cfg.add_section(L"Tagset",TAGSET, true);
@@ -110,7 +109,6 @@ namespace freeling {
     if (not cfg.open(filename))
       ERROR_CRASH(L"Error opening file "+filename);
 
-    map<unsigned int, bool> exists_section;
     wstring path=filename.substr(0,filename.find_last_of(L"/\\")+1);
     wstring line;
     while (cfg.get_content_line(line)) {
@@ -119,6 +117,7 @@ namespace freeling {
       sin.str(line);
       
       switch (cfg.get_section()) {
+
       case LANGUAGE: {
 	// Read the language
         sin>>_Language;
