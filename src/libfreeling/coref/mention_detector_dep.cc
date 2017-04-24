@@ -143,7 +143,10 @@ namespace freeling {
 
   mention::mentionType mention_detector_dep::check_type(dep_tree::const_iterator h, bool whole) const {
 
-    if (whole) {
+    wstring tag = Tags->get_short_tag(h->get_word().get_tag());
+    map<wstring,mention::mentionType>::const_iterator t = mention_tags.find(tag);
+  
+    if (whole and t->second==mention::NOUN_PHRASE) {
       // taking into account coordinations. Look for one.
       bool found = false;    
       for (dep_tree::const_sibling_iterator s=h.begin(); s!=h.end() and not found; ++s)
@@ -154,8 +157,6 @@ namespace freeling {
     }
 
     // if not coordinations present or we are ignorig them, use the type given by the tag.
-    wstring tag = Tags->get_short_tag(h->get_word().get_tag());
-    map<wstring,mention::mentionType>::const_iterator t = mention_tags.find(tag);
     return t->second;
   }
 

@@ -43,3 +43,6 @@ model.dat
 <Nprune>
 8
 </Nprune>
+<RemoveIfAllNeg>
+no
+</RemoveIfAllNeg>

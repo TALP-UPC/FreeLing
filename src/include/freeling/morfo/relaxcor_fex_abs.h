@@ -83,7 +83,7 @@ namespace freeling {
     relaxcor_fex_abs(const relaxcor_model &m);
     virtual ~relaxcor_fex_abs();
 
-    const unsigned int INFINITE = 100000;
+    static const unsigned int INFINITE = 100000;
 
   protected:
     const relaxcor_model &model;

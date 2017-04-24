@@ -42,6 +42,7 @@
 #include "freeling/morfo/language.h"
 #include "freeling/morfo/processor.h"
 #include "freeling/morfo/mention_detector.h"
+#include "freeling/morfo/relax.h"
 #include "freeling/morfo/relaxcor_fex.h"
 #include "freeling/morfo/relaxcor_modelDT.h"
 
@@ -88,6 +89,9 @@ namespace freeling {
     double _Single_factor;
     /// maximum number of edges per vertex
     unsigned int _Nprune;
+    /// whether to remove all arcs for a vertex 
+    /// if they are all negative (to be used with Single_factor>0)
+    bool _RemoveAllNeg;
     
     /// singletons
     bool provide_singletons;
@@ -99,6 +103,14 @@ namespace freeling {
     /// mention-pair features extractor
     relaxcor_fex *extractor;
 
+    void sort_mentions(const std::vector<mention> &mentions, std::vector<std::vector<mention>::const_iterator> &sorted_mentions) const;
+    void add_vertexs(problem &coref_problem, const std::vector<std::vector<mention>::const_iterator> &sorted_mentions) const; 
+    void add_edges(problem &coref_problem, const std::vector<std::vector<mention>::const_iterator> &sorted_mentions, 
+                   relaxcor_fex_abs::Mfeatures &M) const;
+    void extract_chains(std::map<int, std::set<int> > &chains, 
+                        const problem &coref_problem, 
+                        std::vector<mention> &mentions, 
+                        std::vector<std::vector<mention>::const_iterator> &sorted_mentions) const;
     
     /// auxiliary for constructors
     /// DEPRECATED
