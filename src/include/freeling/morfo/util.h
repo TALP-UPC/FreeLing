@@ -133,6 +133,7 @@ namespace freeling {
     template<class C> static std::wstring wstring_from(const C&, const std::wstring &);
     template<class C> static std::wstring wstring_from(const C&);
     template<class C> static std::wstring wstring_from(const C*);
+    template<class C, class T> static C wstring_to(const std::wstring &, const std::wstring &, bool mcsep=true);
     template<class C> static C wstring_to(const std::wstring &, const std::wstring &, bool mcsep=true);
     template<class C> static C wstring_to(const std::wstring &);
 
@@ -147,6 +148,12 @@ namespace freeling {
     template<class T1,class T2> static bool ascending_second(const std::pair<T1,T2> &, const std::pair<T1,T2> &);
     template<class T1,class T2> static bool descending_first(const std::pair<T1,T2> &, const std::pair<T1,T2> &);
     template<class T1,class T2> static bool descending_second(const std::pair<T1,T2> &, const std::pair<T1,T2> &);
+
+
+  private:
+    // auxiliary for wstring to list/set/vector<T>
+    template<class T> static void read_next(std::wistringstream &, T &);
+
   };
 
 
@@ -172,13 +179,15 @@ namespace freeling {
     inline std::wstring util::wstring_from(const C& ls, const std::wstring &sep) {
     // if nothing to convert, we are done
     if (ls.empty()) return L"";  
+
+    std::wostringstream ss;
     // print first element to output
     typename C::const_iterator i=ls.begin();
-    std::wstring sn;  sn=(*i);  
+    ss << (*i);
     // print all remaining elements, adding separators
-    while (++i!=ls.end()) sn += sep+(*i);
+    while (++i!=ls.end()) ss << sep << (*i);
     // return resulting string
-    return(sn); 
+    return ss.str();
   }
  
   /////////////////////////////////////////////////////////////////////////////
@@ -237,28 +246,69 @@ namespace freeling {
     return wstring_from<std::string>(std::string(cp));
   }
 
+  /////////////////////////////////////////////////////////////////////////////
+  /// auxiliary for wstring to list/set/vector<T>
+
+  template<class T>
+    inline void util::read_next(std::wistringstream &ss, T &x) {
+    ss>>x;
+  }
+  
+  /////////////////////////////////////////////////////////////////////////////
+  /// auxiliary for wstring to list/set/vector<wstring>
+
+  template<>
+    inline void util::read_next(std::wistringstream &ss, std::wstring &x) {
+    getline(ss,x);
+  }
+
 
   /////////////////////////////////////////////////////////////////////////////
-  /// Convert a wstring with separators into a set/vector/list<wstring>.
+  /// Convert a wstring with separators into a set/vector/list<T>.
+  /// C is the type of container (e.g. list<int>) and T the type of element (e.g. int)
   /// If mcsep=true, "sep" is treated as a single (multichar) separator 
   /// If mcsep=false, "sep" is treated as a set of possible separator chars.
   /////////////////////////////////////////////////////////////////////////////
 
-  template<class C>
+  template<class C, class T>
     inline C util::wstring_to(const std::wstring &ws, const std::wstring &sep, bool mcsep) {
     C ls;
     std::wstring::size_type p,q;
+
     // at each occurence of separator "sep" in string "s", cut and insert at the end of the container
     p=0; q = (mcsep? ws.find(sep) : ws.find_first_of(sep));
-    while(q!=std::wstring::npos){
-      ls.insert(ls.end(),ws.substr(p,q-p));
-      p = q+sep.size();
+    size_t step = (mcsep? sep.size() : 1);
+
+    while (q!=std::wstring::npos) {
+      std::wistringstream ss;
+      ss.str(ws.substr(p,q-p));  
+      T x; read_next<T>(ss,x);
+
+      ls.insert(ls.end(),x);
+      p = q + step;
       q = (mcsep? ws.find(sep,p) : ws.find_first_of(sep,p));
     }
     // piece remaining after last separator, if any.
-    if (not ws.empty()) ls.insert(ls.end(),ws.substr(p,ws.size()-p));
+    if (not ws.empty()) {
+      std::wistringstream ss; 
+      ss.str(ws.substr(p,ws.size()-p)); 
+      T x; read_next<T>(ss,x);
+
+      ls.insert(ls.end(),x);
+    }
     return(ls);    
   }
+
+
+  /////////////////////////////////////////////////////////////////////////////
+  /// Convert a wstring with separators into a set/vector/list<wstring>.
+  /// Just for back compatibility. Use general purpose wstring_to<C,T> 
+  /////////////////////////////////////////////////////////////////////////////
+
+  //  template<class C>
+  //    inline C util::wstring_to(const std::wstring &ws, const std::wstring &sep, bool mcsep) {
+  //    return util::wstring_to<std::list<std::wstring>,std::wstring>(ws,sep,mcsep);
+  //  }
 
   /////////////////////////////////////////////////////////////////////////////
   /// Convert a wstring to int/double/longdouble
@@ -329,7 +379,7 @@ namespace freeling {
   template<class P1,class P2> 
     inline std::list<std::pair<P1,P2> > util::wstring2pairlist(const std::wstring &s, const std::wstring &sep_pair, const std::wstring &sep_list) {
     // split string at sep_list
-    std::list<std::wstring> ls = util::wstring_to<std::list<std::wstring> >(s,sep_list);
+    std::list<std::wstring> ls = util::wstring_to<std::list<std::wstring>,std::wstring>(s,sep_list);
     // split each pair in ls at sep_pair, and store to lps
     std::list<std::pair<P1,P2> > lps;
     P1 elem1;
@@ -382,9 +432,9 @@ namespace freeling {
   /////////////////////////////////////////////////////////////////////////////
   /// Macros for convenience (and back-compatibility)
 
-#define wstring2vector(x,y) wstring_to<std::vector<std::wstring> >(x,y)
-#define wstring2list(x,y) wstring_to<std::list<std::wstring> >(x,y)
-#define wstring2set(x,y) wstring_to<std::set<std::wstring> >(x,y)
+#define wstring2vector(x,y) wstring_to<std::vector<std::wstring>,std::wstring>(x,y)
+#define wstring2list(x,y) wstring_to<std::list<std::wstring>,std::wstring>(x,y)
+#define wstring2set(x,y) wstring_to<std::set<std::wstring>,std::wstring>(x,y)
 
 #define wstring2string(x) wstring_to<std::string>(x)
 #define wstring2int(x) wstring_to<int>(x) 

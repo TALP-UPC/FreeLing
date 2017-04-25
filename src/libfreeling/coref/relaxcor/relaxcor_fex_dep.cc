@@ -638,19 +638,11 @@ namespace freeling {
 
     wstring fid = util::int2wstring(m.get_id())+L":OBJ_REPORTING";
 
-    /////////////  ################   ATENCIO  !!!!!!!!!!!!!!
-    /////////////  ################
-    /////////////  ################  Canviar util.h per poder fer wstring_from i wstring_to de 
-    /////////////  ################  sets<X> on X!=wstring
-    /////////////  ################
-    /////////////  ################
-
     set<int> verbs;
     if (fcache.computed_feature(fid)) {
       wstring fval = fcache.get_feature(fid);
-      set<wstring> sverbs = util::wstring_to<set<wstring>>(fval,L","); 
-      for (auto v : sverbs) verbs.insert(util::wstring2int(v));
-      TRACE(6,L"     " << fid << L" = " << fval << "  (cached)");      
+      verbs = util::wstring_to<set<int>, int>(fval,L","); 
+      TRACE(6,L"     " << fid << L" = [" << fval << "]  (cached)");      
     }
     else {
       paragraph::const_iterator s = m.get_sentence();
@@ -672,12 +664,9 @@ namespace freeling {
         else n = n.get_parent();
       }
      
-      set<wstring> sverbs;
-      for (auto v : verbs) sverbs.insert(util::int2wstring(v));
-
-      wstring fval = util::wstring_from<set<wstring>>(sverbs,L",");
+      wstring fval = util::wstring_from<set<int>>(verbs,L",");
       fcache.set_feature(fid, fval);
-      TRACE(6,L"     " << fid << L" = " << fval);
+      TRACE(6,L"     " << fid << L" = [" << fval << L"]");
     }
 
     return verbs;
