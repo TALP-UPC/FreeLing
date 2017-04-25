@@ -275,7 +275,7 @@ namespace freeling {
 	  // eg "gnom(hombre, [np(IBM)])" ->"[gnom(hombre, [np(IBM)])]"
 	  // eg"gnom([np(IBM)], man)" ->"[gnom([np(IBM)], man)]"
 	  add_mention(candidate, mentions, mentn);
-	  newMentions[0].subsumed_with_no_verb(true); // they occur within a candidate in which no verb occurs
+	  newMentions[0].set_maximal(true); // they occur within a candidate in which no verb occurs
 	  add_mention(newMentions.front(), mentions, mentn);
 	}
 	else if (newMentions.front().get_type()==mention::PROPER_NOUN and (candidate.get_pos_end()-candidate.get_pos_begin()==0)) {
@@ -318,7 +318,7 @@ namespace freeling {
 		 !(pms->get_head() == candidate.get_head())) or 
 		(pms->get_type() == mention::PROPER_NOUN and pms->get_pos_begin()==candidate.get_pos_begin())) {
 
-	      pms->subsumed_with_no_verb(true); // they occur within a candidate in which any verb occurs
+	      pms->set_maximal(true); // they occur within a candidate in which any verb occurs
               add_mention(*pms, mentions, mentn); 
 	    }
           break;

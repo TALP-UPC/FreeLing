@@ -80,11 +80,6 @@ namespace freeling {
       wchar_t get_number(const std::wstring&) const;
       wchar_t get_gender(const std::wstring&) const;
       
-      bool same_type(const std::wstring&, const std::wstring&) const;
-      bool same_person(const std::wstring&, const std::wstring&) const;
-      bool same_number(const std::wstring&, const std::wstring&) const;
-      bool same_gender(const std::wstring&, const std::wstring&) const;
-      
       static std::wstring compatible_number(wchar_t, wchar_t);
       static std::wstring compatible_gender(wchar_t, wchar_t);
       
@@ -110,20 +105,15 @@ namespace freeling {
     std::map<std::wstring, std::pair<TFeatureFunction,TFeatureValue>> _FeatureFunction;
     void register_features();
 
-
     void extract_pair(const mention &m1, const mention &m2, feature_cache &fcache, relaxcor_model::Tfeatures &ft) const;
-    /// feature groups
-    int get_structural(const mention &m1, const mention &m2, feature_cache &fcache, relaxcor_model::Tfeatures &ft) const;
-    int get_lexical(const mention &m1, const mention &m2, feature_cache &fcache, relaxcor_model::Tfeatures &ft) const;
-    int get_morphological(const mention &m1, const mention &m2, feature_cache &fcache, relaxcor_model::Tfeatures &ft) const;
-    int get_syntactic(const mention &m1, const mention &m2, feature_cache &fcache, relaxcor_model::Tfeatures &ft) const;
-    int get_semantic(const mention &m1, const mention &m2, feature_cache &fcache, relaxcor_model::Tfeatures &ft) const;
-    int get_discourse(const mention &m1, const mention &m2, feature_cache &fcache, relaxcor_model::Tfeatures &ft) const;
 
     /// mention pair features
     static TFeatureValue dist_sentences_0(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue dist_sentences_1(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue dist_sentences_le3(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue dist_mentions_0(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue dist_mentions_le3(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue dist_mentions_le9(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue agreement(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue closest_agreement(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue same_quote(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
@@ -146,6 +136,8 @@ namespace freeling {
     static TFeatureValue mention_2_relative(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue mention_1_reflexive(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue mention_2_reflexive(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue mention_1_possessive(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue mention_2_possessive(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue mention_1_I(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue mention_2_I(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue mention_1_you(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
@@ -156,33 +148,72 @@ namespace freeling {
     static TFeatureValue mention_2_singular(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue mention_1_3pers(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue mention_2_3pers(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue same_person(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue mention_1_quotes(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue mention_2_quotes(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue mention_1_nested_in_m2(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue mention_2_nested_in_m1(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue nested_mentions(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue mention_1_embedded(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue mention_2_embedded(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue mention_1_nmod(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue mention_2_nmod(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
 
     static TFeatureValue predicative_ij(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue predicative_ji(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
 
+    static TFeatureValue str_match_strict(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue str_match_relaxed(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue str_head_match(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue relaxed_head_match_ij(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue relaxed_head_match_ji(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue num_match_ij(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue num_match_ji(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue word_inclusion_ij(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue word_inclusion_ji(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue compatible_mods_ij(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue compatible_mods_ji(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+
+    static TFeatureValue mention_1_subj_reporting(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue mention_2_subj_reporting(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue mention_1_obj_reporting(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue mention_2_obj_reporting(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue obj_same_reporting(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue subj_obj_reporting_ij(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue subj_obj_reporting_ji(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
 
     // auxiliar methods for feature computing
     static bool nested(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static int dist_sentences(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
-    static bool match_pronoun_features(const mention &m, wchar_t type, wchar_t per, wchar_t num, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static int dist_mentions(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+
+    static bool predicative(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static bool relaxed_head_match(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+
+    static bool num_match(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static bool word_inclusion(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static bool compatible_mods(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static bool inclusion_match(const mention &m1, const mention &m2, const freeling::regexp &re);
+
+    /// single mention 
+    static bool match_pronoun_features(const mention &m, wchar_t type, wchar_t per, wchar_t num, 
+                                       feature_cache &fcache, const relaxcor_fex_dep &fex);
     static std::wstring get_arguments(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static std::list<std::pair<int,std::wstring>> get_arguments(paragraph::const_iterator s, int mpos);
     static wchar_t get_gender(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static wchar_t get_number(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static wchar_t get_person(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static unsigned int dist_in_phrases(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
-    /// single mention , const relaxcor_fex_dep&);
+
     static bool in_quotes(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static bool definite(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static bool indefinite(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static bool relative_pronoun(const mention& m, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static bool reflexive_pronoun(const mention& m, feature_cache &fcache, const relaxcor_fex_dep &fex);
-    static bool predicative(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
-
+    static bool is_noun_modifier(const mention& m, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static bool possessive_determiner(const mention& m, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static int subj_reporting(const mention& m, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static std::set<int> obj_reporting(const mention& m, feature_cache &fcache, const relaxcor_fex_dep &fex);
   };
 
 

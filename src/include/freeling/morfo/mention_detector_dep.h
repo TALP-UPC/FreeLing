@@ -60,6 +60,7 @@ namespace freeling {
     tagset *Tags;
 
     mention::mentionType check_type(dep_tree::const_iterator h, bool whole=true) const;
+    void detect_mentions(freeling::dep_tree::const_iterator h, freeling::paragraph::const_iterator se, int sentn, bool maximal, std::vector<mention> & mentions, int &mentn) const;
 
   public:
     /// Constructor

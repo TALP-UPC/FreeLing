@@ -407,15 +407,27 @@ namespace freeling {
 
       for (unsigned int m_ant=0; m_ant<m; m_ant++) {
 	  
-	int anaphor = max (sorted_mentions[m]->get_id(), sorted_mentions[m_ant]->get_id());
-	int antecedent = min (sorted_mentions[m]->get_id(), sorted_mentions[m_ant]->get_id());
+	int anaphor, antecedent, pos_anaf, pos_antc;
+        if (sorted_mentions[m]->get_id() < sorted_mentions[m_ant]->get_id()) {
+          antecedent = sorted_mentions[m]->get_id();
+          anaphor = sorted_mentions[m_ant]->get_id();
+          pos_antc = m;
+          pos_anaf = m_ant;
+        }
+        else {
+          antecedent = sorted_mentions[m_ant]->get_id();
+          anaphor = sorted_mentions[m]->get_id();
+          pos_antc = m_ant;
+          pos_anaf = m;
+        }
+            
 	if (anaphor == antecedent)
 	  ERROR_CRASH(L"Two different mentions with the same identifier");
 	
 	// computing the weight of the edge as the sum of compatibilities of the satisfied constraints
 	wstring mp = util::int2wstring(anaphor) + L":" + util::int2wstring(antecedent);
-        TRACE(7, L"  Checking constraints for pair " << mp << 
-              L" (" << sorted_mentions[m]->value() << L"," << sorted_mentions[m_ant]->value() << L")");
+        TRACE(7, L"  Checking constraints for pair " << antecedent << L":" << anaphor << 
+              L" (" << sorted_mentions[pos_antc]->value() << L"," << sorted_mentions[pos_anaf]->value() << L")");
         TRACE(7,L"     Pair features:  ");
         TRACE(7,L"        active  : " << model->print(M[mp],true) );
         TRACE(7,L"        inactive: " << model->print(M[mp],false) );

@@ -134,6 +134,51 @@ namespace freeling {
     delete Tags;
   }
 
+  /////////////////////////////////////////////////
+  /// Recursively navigate the tree, extracting mentions
+  /////////////////////////////////////////////////
+  
+  void mention_detector_dep::detect_mentions(freeling::dep_tree::const_iterator h, freeling::paragraph::const_iterator se, int sentn, bool maximal, vector<mention> &mentions, int &mentn) const {
+
+    bool found_mention = false;
+
+    wstring tag = Tags->get_short_tag(h->get_word().get_tag());
+    if (mention_tags.find(tag)!=mention_tags.end() and
+        excluded.find(h->get_word().get_lemma())==excluded.end()) {
+      // candidate mention, store it
+      mention m(mentn, sentn, se, h);
+      
+      // deduce mention type from its tag and nearby tree.
+      m.set_type(check_type(h));
+      m.set_maximal(maximal);
+      mentions.push_back(m);
+      ++mentn;
+
+      found_mention = true;
+      
+      // if the mention is a coordination, create also a mention for the head alone
+      if (m.is_type(mention::COMPOSITE)) {
+        
+        // if it is composite, one of the children has CoordLabel. Locate it.
+        dep_tree::const_sibling_iterator s; 
+        for (s=h.sibling_begin(); 
+             s->get_label()!=CoordLabel;
+             ++s);
+        
+        // use word previous to coordination as mention end
+        mention m(mentn, sentn, se, h, s->get_word().get_position()-1);
+
+        m.set_type(check_type(h,false));
+        mentions.push_back(m);
+        ++mentn;
+      }
+    }
+
+    // dive into children. If we are a mention or inside one, tell them they are not maximal
+    for (dep_tree::const_sibling_iterator c=h.sibling_begin(); c!=h.sibling_end(); ++c)
+      detect_mentions(c, se, sentn, not found_mention and maximal, mentions, mentn);
+  }
+
 
   /////////////////////////////////////////////////
   /// Decide mention type, depending on its tag and tree
@@ -146,14 +191,13 @@ namespace freeling {
     wstring tag = Tags->get_short_tag(h->get_word().get_tag());
     map<wstring,mention::mentionType>::const_iterator t = mention_tags.find(tag);
   
-    if (whole and t->second==mention::NOUN_PHRASE) {
+    if (whole) {
       // taking into account coordinations. Look for one.
       bool found = false;    
-      for (dep_tree::const_sibling_iterator s=h.begin(); s!=h.end() and not found; ++s)
+      for (dep_tree::const_sibling_iterator s=h.sibling_begin(); s!=h.sibling_end() and not found; ++s)
         found = s->get_label() == CoordLabel;
 
-      if (found) 
-        return mention::COMPOSITE;
+      if (found) return mention::COMPOSITE;
     }
 
     // if not coordinations present or we are ignorig them, use the type given by the tag.
@@ -178,39 +222,7 @@ namespace freeling {
 
     for (document::const_iterator par=doc.begin(); par!=doc.end(); ++par) {
       for (paragraph::const_iterator se=par->begin(); se!=par->end(); ++se) {
-       
-        const freeling::dep_tree &dt = se->get_dep_tree();
-        for (dep_tree::const_iterator h = dt.begin(); h != dt.end(); ++h) {
-          wstring tag = Tags->get_short_tag(h->get_word().get_tag());
-          if (mention_tags.find(tag)!=mention_tags.end() and
-              excluded.find(h->get_word().get_lemma())==excluded.end()) {
-            // candidate mention, store it
-            mention m(mentn, sentn, se, h);
-
-            // deduce mention type from its tag and nearby tree.
-            m.set_type(check_type(h));
-            mentions.push_back(m);
-            ++mentn;
-
-            // if the mention is a coordination, create also a mention for the head alone
-            if (m.is_type(mention::COMPOSITE)) {
-
-              // if it is composite, one of the children has CoordLabel. Locate it.
-              dep_tree::const_sibling_iterator s; 
-              for (s=h.begin(); 
-                   s->get_label()!=CoordLabel;
-                   ++s);
-              
-              // use word previous to coordination as mention end
-              mention m(mentn, sentn, se, h, s->get_word().get_position()-1);
-
-              m.set_type(check_type(h,false));
-              mentions.push_back(m);
-              ++mentn;
-            }
-          }          
-        }
-       
+        detect_mentions (se->get_dep_tree().begin(), se, sentn, true, mentions, mentn);       
         ++sentn;
       }
     }

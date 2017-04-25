@@ -1297,7 +1297,7 @@ namespace freeling {
     id = i;
     sent = ns;
     s = ps;
-    single_subsumtion = false;
+    maximal = false;
     initial = false;
     posBegin = word_b; 
     itBegin = itword;
@@ -1314,7 +1314,7 @@ namespace freeling {
     id = i;
     sent = ns;
     s = ps;
-    single_subsumtion = false;
+    maximal = false;
     initial = false;
 
     dtree = dt;
@@ -1341,7 +1341,7 @@ namespace freeling {
     id = i;
     sent = ns;
     s = ps;
-    single_subsumtion = false;
+    maximal = false;
     initial = false;
     // initially the maximal subsumed sequence is [start_it,start_it] and the node
     // subsuming it is the node corresponding to start_it word
@@ -1380,7 +1380,7 @@ namespace freeling {
     mType = m.mType;
     sent = m.sent;
     s = m.s;
-    single_subsumtion = m.single_subsumtion;
+    maximal = m.maximal;
     initial = m.initial;
     ptree = m.ptree;
     dtree = m.dtree;
@@ -1420,8 +1420,8 @@ namespace freeling {
   void mention::set_group(int g) {
     chain=g;
   }
-  void mention::subsumed_with_no_verb(bool b) {
-    single_subsumtion=b;
+  void mention::set_maximal(bool b) {
+    maximal=b;
   }
 
   /// getters
@@ -1470,8 +1470,8 @@ namespace freeling {
   bool mention::is_initial() const {
     return initial;
   }
-  bool mention::is_subsumed_with_no_verb() const {
-    return single_subsumtion;
+  bool mention::is_maximal() const {
+    return maximal;
   }
   
   /// get string of mention words, lowercasing the first "lc"

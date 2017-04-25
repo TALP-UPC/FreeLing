@@ -825,8 +825,8 @@ namespace freeling {
     paragraph::const_iterator s;
     /// is the first mention in the sentence?
     bool initial;
-    /// subsumed by another mention in which any verb occurs?
-    bool single_subsumtion;
+    /// not subsumed by another mention ?
+    bool maximal;
     /// the node_tree of the mention
     parse_tree::const_iterator ptree;
     dep_tree::const_iterator dtree;
@@ -876,7 +876,7 @@ namespace freeling {
     void set_type(mentionType);
     void set_initial(bool);
     void set_group(int);
-    void subsumed_with_no_verb(bool b=false);
+    void set_maximal(bool b);
 
     /// getters
     int get_id() const;
@@ -891,7 +891,7 @@ namespace freeling {
     int get_group() const;
     bool is_type(mentionType) const;
     bool is_initial() const;
-    bool is_subsumed_with_no_verb() const;
+    bool is_maximal() const;
     parse_tree::const_iterator get_ptree() const;
     dep_tree::const_iterator get_dtree() const;
     const word& get_head() const;
