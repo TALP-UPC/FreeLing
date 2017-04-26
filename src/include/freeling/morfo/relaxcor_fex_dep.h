@@ -181,6 +181,8 @@ namespace freeling {
     static TFeatureValue obj_same_reporting(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue subj_obj_reporting_ij(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue subj_obj_reporting_ji(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue subj_obj_same_verb_ij(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue subj_obj_same_verb_ji(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
 
     // auxiliar methods for feature computing
     static bool nested(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
@@ -195,15 +197,17 @@ namespace freeling {
     static bool compatible_mods(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static bool inclusion_match(const mention &m1, const mention &m2, const freeling::regexp &re);
 
+    static bool subj_obj_reporting(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static bool subj_obj_same_verb(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+
     /// single mention 
+    static unsigned int dist_in_phrases(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static bool match_pronoun_features(const mention &m, wchar_t type, wchar_t per, wchar_t num, 
                                        feature_cache &fcache, const relaxcor_fex_dep &fex);
-    static std::wstring get_arguments(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex);
-    static std::list<std::pair<int,std::wstring>> get_arguments(paragraph::const_iterator s, int mpos);
     static wchar_t get_gender(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static wchar_t get_number(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static wchar_t get_person(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex);
-    static unsigned int dist_in_phrases(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static std::wstring get_arguments(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex);
 
     static bool in_quotes(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static bool definite(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex);
@@ -212,8 +216,19 @@ namespace freeling {
     static bool reflexive_pronoun(const mention& m, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static bool is_noun_modifier(const mention& m, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static bool possessive_determiner(const mention& m, feature_cache &fcache, const relaxcor_fex_dep &fex);
-    static int subj_reporting(const mention& m, feature_cache &fcache, const relaxcor_fex_dep &fex);
+
+    static std::set<int> subj_reporting(const mention& m, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static std::set<int> obj_reporting(const mention& m, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static std::set<int> is_subj_of(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static std::set<int> inside_obj_of(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex);
+
+    static std::set<int> is_arg_of(const mention &m, const freeling::regexp &re);
+    static std::set<int> inside_arg_of(const mention &m, const freeling::regexp &re);
+
+    // other
+    static std::set<int> select_by_lemma(paragraph::const_iterator s, const std::set<int> &pos, const freeling::regexp &re);
+    static std::list<std::pair<int,std::wstring>> get_arguments(paragraph::const_iterator s, int mpos);
+
   };
 
 

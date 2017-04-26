@@ -43,7 +43,7 @@ namespace freeling {
       /// empty constructor
       output_handler();
       /// destructor
-      ~output_handler();
+      virtual ~output_handler();
 
       // Print appropriate header for the ourput format (e.g. XML header or tag opening)
       virtual void PrintHeader(std::wostream &sout) const;

@@ -101,7 +101,7 @@ namespace freeling {
     relation(const std::wstring s, const std::wstring t);
 
     /// Destructor
-    ~relation();
+    virtual ~relation();
 
     /// True if the words tag is compatible with the relation
     bool is_compatible(const freeling::word &w) const;

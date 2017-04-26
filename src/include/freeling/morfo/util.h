@@ -152,8 +152,7 @@ namespace freeling {
 
   private:
     // auxiliary for wstring to list/set/vector<T>
-    template<class T> static void read_next(std::wistringstream &, T &);
-
+    template<class T> static void extract(const std::wstring &, T&);
   };
 
 
@@ -250,7 +249,9 @@ namespace freeling {
   /// auxiliary for wstring to list/set/vector<T>
 
   template<class T>
-    inline void util::read_next(std::wistringstream &ss, T &x) {
+    inline void util::extract(const std::wstring &s, T &x) {
+    std::wistringstream ss;
+    ss.str(s);  
     ss>>x;
   }
   
@@ -258,7 +259,9 @@ namespace freeling {
   /// auxiliary for wstring to list/set/vector<wstring>
 
   template<>
-    inline void util::read_next(std::wistringstream &ss, std::wstring &x) {
+    inline void util::extract(const std::wstring &s, std::wstring &x) {
+    std::wistringstream ss;
+    ss.str(s);  
     getline(ss,x);
   }
 
@@ -273,42 +276,22 @@ namespace freeling {
   template<class C, class T>
     inline C util::wstring_to(const std::wstring &ws, const std::wstring &sep, bool mcsep) {
     C ls;
-    std::wstring::size_type p,q;
+    if (ws.empty()) return ls;
 
     // at each occurence of separator "sep" in string "s", cut and insert at the end of the container
-    p=0; q = (mcsep? ws.find(sep) : ws.find_first_of(sep));
     size_t step = (mcsep? sep.size() : 1);
-
-    while (q!=std::wstring::npos) {
-      std::wistringstream ss;
-      ss.str(ws.substr(p,q-p));  
-      T x; read_next<T>(ss,x);
-
+    size_t p=0; 
+    while (p != std::wstring::npos) {
+      size_t q = (mcsep? ws.find(sep,p) : ws.find_first_of(sep,p));
+      T x;
+      extract(ws.substr(p,q-p), x);
       ls.insert(ls.end(),x);
-      p = q + step;
-      q = (mcsep? ws.find(sep,p) : ws.find_first_of(sep,p));
-    }
-    // piece remaining after last separator, if any.
-    if (not ws.empty()) {
-      std::wistringstream ss; 
-      ss.str(ws.substr(p,ws.size()-p)); 
-      T x; read_next<T>(ss,x);
 
-      ls.insert(ls.end(),x);
+      p = (q==std::wstring::npos ? q : q+step);
     }
     return(ls);    
   }
 
-
-  /////////////////////////////////////////////////////////////////////////////
-  /// Convert a wstring with separators into a set/vector/list<wstring>.
-  /// Just for back compatibility. Use general purpose wstring_to<C,T> 
-  /////////////////////////////////////////////////////////////////////////////
-
-  //  template<class C>
-  //    inline C util::wstring_to(const std::wstring &ws, const std::wstring &sep, bool mcsep) {
-  //    return util::wstring_to<std::list<std::wstring>,std::wstring>(ws,sep,mcsep);
-  //  }
 
   /////////////////////////////////////////////////////////////////////////////
   /// Convert a wstring to int/double/longdouble

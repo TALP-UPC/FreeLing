@@ -224,6 +224,8 @@ namespace freeling {
     _FeatureFunction[L"RCF_OBJ_SAME_REPORTING"] = make_pair(&relaxcor_fex_dep::obj_same_reporting, ff_YES);
     _FeatureFunction[L"RCF_SUBJ_OBJ_REPORTING_IJ"] = make_pair(&relaxcor_fex_dep::subj_obj_reporting_ij, ff_YES);
     _FeatureFunction[L"RCF_SUBJ_OBJ_REPORTING_JI"] = make_pair(&relaxcor_fex_dep::subj_obj_reporting_ji, ff_YES);
+    _FeatureFunction[L"RCF_SUBJ_OBJ_SAME_VERB_IJ"] = make_pair(&relaxcor_fex_dep::subj_obj_same_verb_ij, ff_YES);
+    _FeatureFunction[L"RCF_SUBJ_OBJ_SAME_VERB_JI"] = make_pair(&relaxcor_fex_dep::subj_obj_same_verb_ji, ff_YES);
   }
 
 
@@ -528,30 +530,24 @@ namespace freeling {
       if (m.is_type(mention::PRONOUN)) {
         // check in pronWords list. 
         gen = fex._Morf.get_gender(m.get_head().get_lemma());
-        // not found in list, set to unknown
+        // not found in list, leave as unknown
         if (gen==L'#') gen=L'u';
       }
-      else gen=L'u';
+ 
+     else if (m.is_type(mention::PROPER_NOUN)) {
+       // if it is a proper noun of type PERS -> gen = 'b'
+       if (fex.get_label_RE(L"TAG_PersNE").search(m.get_head().get_tag())) 
+         gen=L'b';
+     }
 
       /*  TODO
       else if (m.is_type(mention::COMPOSITE)) {
-        // if it is a coordination, is 
-        gen = L'';
+        // if it is a coordination, gender is
+        gen = L''; ?????
       }
       else if (m.is_type(mention::NOUN_PHRASE)) {
-        // if it is a noun_phrase, check head PoS tag
-        auto reNS = get_label_RE(L"TAG_NounSg"); 
-        auto reNP = get_label_RE(L"TAG_NounPl"); 
-
-        if (reNS!=_Labels.end() and reNS->second.search(m.get_head().get_tag())) gen=L's';
-        else if (reNP!=_Labels.end() and reNP->second.search(m.get_head().get_tag())) gen=L'p';
-        else gen=L'u';
-      }
-      else if (m.is_type(mention::PROPER_NOUN)) {
-        // if it is a proper noun, ORGs are '0', and the others 'u'
-        auto re = get_label_RE(L"TAG_OrgNE"); 
-        if (re!=_Labels.end() and re->second.search(m.get_head().get_tag())) gen=L'0';
-        else gen=L'u';
+        // if it is a noun_phrase, check head PoS tag, gender is ??
+        gen = L''; ?????
       }
       */
 
@@ -570,68 +566,158 @@ namespace freeling {
 
     wstring fid = util::int2wstring(m.get_id())+L":PERSON";
 
-    wchar_t num=L'3';
+    wchar_t per=L'3';
     if (fcache.computed_feature(fid)) {
-      num = fcache.get_feature(fid)[0];
-      TRACE(6,L"     " << fid << L" = " << num << "  (cached)");      
+      per = fcache.get_feature(fid)[0];
+      TRACE(6,L"     " << fid << L" = " << per << "  (cached)");      
     }
     else {
       if (m.is_type(mention::PRONOUN)) {
         // check in pronWords list. 
-        num = fex._Morf.get_person(m.get_head().get_lemma());
+        per = fex._Morf.get_person(m.get_head().get_lemma());
         // not found in list, set to 3rd
-        if (num==L'#') num=L'3';
+        if (per==L'#') per=L'3';
       }
       else // all other mentions are 3rd.
-        num = L'3';
+        per = L'3';
 
-      fcache.set_feature(fid, wstring(1,num));
-      TRACE(6,L"     " << fid << L" = " << num);
+      fcache.set_feature(fid, wstring(1,per));
+      TRACE(6,L"     " << fid << L" = " << per);
     }
 
-    return num;
+    return per;
   }
-   
+
   ////////////////////////////////////////////////////
-  ///  If given mention is the subject of a reporting verb, returns position of the verb
-  ///  Otherwise, returns -1
+  ///  Return list of positions of verbs for which m is the argument defined by 're'
   ////////////////////////////////////////////////////  
 
-  int relaxcor_fex_dep::subj_reporting(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex) {
+  set<int> relaxcor_fex_dep::is_arg_of(const mention &m, const freeling::regexp &re) {
+    set<int> verbs;
+    paragraph::const_iterator s = m.get_sentence();
+    int mpos = m.get_head().get_position();
+    list<pair<int,wstring> > args = get_arguments(s, mpos);        
+    for (list<pair<int,wstring> >::const_iterator p=args.begin(); p!=args.end(); ++p) {
+      if (re.search(p->second)) 
+        verbs.insert(p->first);
+    }
+    return verbs;
+  }
+
+  ////////////////////////////////////////////////////
+  ///  Return list of positions of verbs for which m inside the argument defined by 're'
+  ////////////////////////////////////////////////////  
+
+  set<int> relaxcor_fex_dep::inside_arg_of(const mention &m, const freeling::regexp &re) {
+    set<int> verbs;
+    paragraph::const_iterator s = m.get_sentence();
+    dep_tree::const_iterator n = s->get_dep_tree().get_node_by_pos(m.get_head().get_position());
+    bool top = false;
+    while (not top) {
+      int mpos = n->get_word().get_position();
+      list<pair<int,wstring>> args = get_arguments(s, mpos); 
+      for (list<pair<int,wstring> >::const_iterator p=args.begin(); p!=args.end(); ++p) {
+        if (re.search(p->second)) 
+          verbs.insert(p->first);
+      }      
+      if (n.is_root()) top=true;
+      else n = n.get_parent();
+    }
+    return verbs;
+  }
+
+
+  ////////////////////////////////////////////////////
+  ///  Obtain verbs of which given mention is subject 
+  ////////////////////////////////////////////////////  
+
+  set<int> relaxcor_fex_dep::is_subj_of(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex) {
+
+    wstring fid = util::int2wstring(m.get_id())+L":SUBJECT_OF";
+
+    set<int> verbs;
+    if (fcache.computed_feature(fid)) {
+      wstring fval = fcache.get_feature(fid);
+      verbs = util::wstring_to<set<int>,int>(fval,L",");    
+      TRACE(6,L"     " << fid << L" = [" << fval << "]  (cached)");      
+    }
+    else {
+      verbs = is_arg_of(m, fex.get_label_RE(L"FUN_Arg0"));
+      wstring fval = util::wstring_from<set<int>>(verbs,L",");
+      fcache.set_feature(fid, fval);
+      TRACE(6,L"     " << fid << L" = [" << fval << L"]");
+    }
+
+    return verbs;
+  }
+
+  ////////////////////////////////////////////////////
+  ///  Obtain verbs of which given mention i is inside object
+  ////////////////////////////////////////////////////  
+
+  set<int> relaxcor_fex_dep::inside_obj_of(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex) {
+
+    wstring fid = util::int2wstring(m.get_id())+L":INSIDE_OBJECT_OF";
+
+    set<int> verbs;
+    if (fcache.computed_feature(fid)) {
+      wstring fval = fcache.get_feature(fid);
+      verbs = util::wstring_to<set<int>,int>(fval,L",");    
+      TRACE(6,L"     " << fid << L" = [" << fval << "]  (cached)");      
+    }
+    else {
+      verbs = inside_arg_of(m, fex.get_label_RE(L"FUN_Arg1"));
+      wstring fval = util::wstring_from<set<int>>(verbs,L",");
+      fcache.set_feature(fid, fval);
+      TRACE(6,L"     " << fid << L" = [" << fval << L"]");
+    }
+
+    return verbs;
+  }
+
+
+  ////////////////////////////////////////////////////
+  ///  Given a sentence, a list of positions, and a regexp, return a list only with the positions whose lemma matches regex
+  ////////////////////////////////////////////////////  
+
+  set<int> relaxcor_fex_dep::select_by_lemma(paragraph::const_iterator s, const set<int> &pos, const freeling::regexp &re) {
+    set<int> res;
+    for (auto v=pos.begin(); v!=pos.end(); ++v) {
+      if (re.search((*s)[*v].get_lemma())) 
+        res.insert(*v);
+    }
+    return res;
+  }  
+
+   
+  ////////////////////////////////////////////////////
+  ///  Returns positions of reporting verbs the given mention is the subject of
+  ////////////////////////////////////////////////////  
+
+  set<int> relaxcor_fex_dep::subj_reporting(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex) {
 
     wstring fid = util::int2wstring(m.get_id())+L":SUBJ_REPORTING";
 
-    int verb = -1;
+    set<int> verbs;
     if (fcache.computed_feature(fid)) {
-      verb = util::wstring2int(fcache.get_feature(fid));    
-      TRACE(6,L"     " << fid << L" = " << verb << "  (cached)");      
+      wstring fval = fcache.get_feature(fid);
+      verbs = util::wstring_to<set<int>,int>(fval,L",");    
+      TRACE(6,L"     " << fid << L" = [" << fval << "]  (cached)");      
     }
     else {
-      list<pair<int,wstring> > args = util::wstring2pairlist<int,wstring>(get_arguments(m,fcache,fex),L":",L"/");
+      set<int> verbs = is_subj_of(m, fcache, fex);
+      verbs = select_by_lemma(m.get_sentence(), verbs, fex.get_label_RE(L"WRD_Reporting"));
 
-      bool found = false;
-      paragraph::const_iterator s=m.get_sentence();
-      for (list<pair<int,wstring> >::const_iterator p=args.begin(); p!=args.end() and not found; ++p) {        
-        if (fex.get_label_RE(L"FUN_Arg0").search(p->second)) {
-          int pred = p->first;
-          wstring word = (*s)[pred].get_lemma();
-          if (fex.get_label_RE(L"WRD_Reporting").search(word)) {
-            found = true;
-            verb = pred;
-          }
-        }
-      }
-
-      fcache.set_feature(fid, util::int2wstring(verb));
-      TRACE(6,L"     " << fid << L" = " << verb);
+      wstring fval = util::wstring_from<set<int>>(verbs,L",");
+      fcache.set_feature(fid, fval);
+      TRACE(6,L"     " << fid << L" = [" << fval << L"]");
     }
 
-    return verb;
+    return verbs;
   }
 
   ////////////////////////////////////////////////////
-  ///  If given mention is inside the object of a reporting verb, returns position of the verb
-  ///  Otherwise, returns -1
+  ///  Returns positions of reporting verbs the given mention is inside the object of
   ////////////////////////////////////////////////////  
 
   set<int> relaxcor_fex_dep::obj_reporting(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex) {
@@ -641,29 +727,13 @@ namespace freeling {
     set<int> verbs;
     if (fcache.computed_feature(fid)) {
       wstring fval = fcache.get_feature(fid);
-      verbs = util::wstring_to<set<int>, int>(fval,L","); 
+      verbs = util::wstring_to<set<int>,int>(fval,L",");    
       TRACE(6,L"     " << fid << L" = [" << fval << "]  (cached)");      
     }
     else {
-      paragraph::const_iterator s = m.get_sentence();
-      dep_tree::const_iterator n = s->get_dep_tree().get_node_by_pos(m.get_head().get_position());
-      bool top = false;
-      while (not top) {
-        int mpos = n->get_word().get_position();
-        list<pair<int,wstring>> roles = get_arguments(s, mpos); 
-        for (list<pair<int,wstring> >::const_iterator p=roles.begin(); p!=roles.end(); ++p) {        
-          if (fex.get_label_RE(L"FUN_Arg1").search(p->second)) {
-            int pred = p->first;
-            wstring word = (*s)[pred].get_lemma();
-            if (fex.get_label_RE(L"WRD_Reporting").search(word)) 
-              verbs.insert(pred);
-          }
-        }
-          
-        if (n.is_root()) top=true;
-        else n = n.get_parent();
-      }
-     
+      set<int> verbs = inside_obj_of(m, fcache, fex);
+      verbs = select_by_lemma(m.get_sentence(), verbs, fex.get_label_RE(L"WRD_Reporting"));
+
       wstring fval = util::wstring_from<set<int>>(verbs,L",");
       fcache.set_feature(fid, fval);
       TRACE(6,L"     " << fid << L" = [" << fval << L"]");
@@ -672,6 +742,64 @@ namespace freeling {
     return verbs;
   }
 
+
+  //////////////////////////////////////////////////////////////////
+  ///    Returns whether m1 is the subject and m2 inside the object of the same reporting verb
+  //////////////////////////////////////////////////////////////////
+
+  bool relaxcor_fex_dep::subj_obj_reporting(const mention &m1, const mention &m2,
+                                            feature_cache &fcache, const relaxcor_fex_dep &fex) {
+
+    wstring fid = util::int2wstring(m1.get_id())+L":"+util::int2wstring(m2.get_id())+L":SUBJ_OBJ_REPORTING";
+    bool res;
+    if (fcache.computed_feature(fid)) {
+      res = util::wstring2int(fcache.get_feature(fid));    
+      TRACE(6,L"   " << fid << L" = " << (res ? L"yes" : L"no") << L"  (cached)");
+    }
+    else {  
+      res = false;
+      if (m1.get_n_sentence()==m2.get_n_sentence()) {
+        set<int> sub1 = subj_reporting(m1,fcache,fex);
+        set<int> obj2 = obj_reporting(m2,fcache,fex);
+        for (auto v=sub1.begin(); v!=sub1.end() and not res; ++v) 
+          res = (obj2.find(*v)!=obj2.end());
+      }
+
+      fcache.set_feature(fid, util::int2wstring(res));
+      TRACE(6,L"   " << fid << L" = " << (res ? L"yes" : L"no"));
+    }
+
+    return res;
+  }
+
+  //////////////////////////////////////////////////////////////////
+  ///    Returns whether m1 is the subject and m2 inside the object of the same verb
+  //////////////////////////////////////////////////////////////////
+
+  bool relaxcor_fex_dep::subj_obj_same_verb(const mention &m1, const mention &m2,
+                                            feature_cache &fcache, const relaxcor_fex_dep &fex) {
+
+    wstring fid = util::int2wstring(m1.get_id())+L":"+util::int2wstring(m2.get_id())+L":SUBJ_OBJ_SAME_VERB";
+    bool res;
+    if (fcache.computed_feature(fid)) {
+      res = util::wstring2int(fcache.get_feature(fid));    
+      TRACE(6,L"   " << fid << L" = " << (res ? L"yes" : L"no") << L"  (cached)");
+    }
+    else {  
+      res = false;
+      if (m1.get_n_sentence()==m2.get_n_sentence()) {
+        set<int> sub1 = is_subj_of(m1,fcache,fex);
+        set<int> obj2 = inside_obj_of(m2,fcache,fex);
+        for (auto v=sub1.begin(); v!=sub1.end() and not res; ++v) 
+          res = (obj2.find(*v)!=obj2.end());
+      }
+
+      fcache.set_feature(fid, util::int2wstring(res));
+      TRACE(6,L"   " << fid << L" = " << (res ? L"yes" : L"no"));
+    }
+
+    return res;
+  }
 
   //////////////////////////////////////////////////////////////////
   ///    Computes and caches the distance in mentions
@@ -1493,12 +1621,12 @@ namespace freeling {
   ///    Returns whether mention 1 is subject of a reporting verb
   relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::mention_1_subj_reporting(const mention &m1, const mention &m2,
                                                                              feature_cache &fcache, const relaxcor_fex_dep &fex) {
-    return (subj_reporting(m1,fcache,fex)>=0 ? ff_YES : ff_NO);
+    return (not subj_reporting(m1,fcache,fex).empty() ? ff_YES : ff_NO);
   }
   ///    Returns whether mention 2 is subject of a reporting verb
   relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::mention_2_subj_reporting(const mention &m1, const mention &m2,
                                                                              feature_cache &fcache, const relaxcor_fex_dep &fex) {
-    return (subj_reporting(m2,fcache,fex)>=0 ? ff_YES : ff_NO);
+    return (not subj_reporting(m2,fcache,fex).empty() ? ff_YES : ff_NO);
   }
 
   ///    Returns whether mention 1 is inside the object of a reporting verb
@@ -1515,21 +1643,53 @@ namespace freeling {
   ///    Returns whether both mentions are inside the object of the same reporting verb
   relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::obj_same_reporting(const mention &m1, const mention &m2,
                                                                        feature_cache &fcache, const relaxcor_fex_dep &fex) {
-    return (m1.get_n_sentence()==m2.get_n_sentence() and obj_reporting(m1,fcache,fex)==obj_reporting(m2,fcache,fex) ? ff_YES : ff_NO);
+    wstring fid = util::int2wstring(m1.get_id())+L":"+util::int2wstring(m2.get_id())+L":OBJ_SAME_REPORTING";
+    bool res;
+    if (fcache.computed_feature(fid)) {
+      res = util::wstring2int(fcache.get_feature(fid));    
+      TRACE(6,L"   " << fid << L" = " << (res ? L"yes" : L"no") << L"  (cached)");
+    }
+    else {  
+      res = false;
+      if (m1.get_n_sentence()==m2.get_n_sentence()) {
+        set<int> obj1 = obj_reporting(m1,fcache,fex);
+        set<int> obj2 = obj_reporting(m2,fcache,fex);
+        for (auto v=obj1.begin(); v!=obj1.end() and not res; ++v) 
+          res = (obj2.find(*v)!=obj2.end());
+      }
+
+      fcache.set_feature(fid, util::int2wstring(res));
+      TRACE(6,L"   " << fid << L" = " << (res ? L"yes" : L"no"));
+    }
+
+    return (res ? ff_YES : ff_NO);
   }
 
-  ///    Returns whether m1 is inside the subject and m2 inside the object of the same reporting verb
+  ///    Returns whether m1 is the subject and m2 inside the object of the same reporting verb
   relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::subj_obj_reporting_ij(const mention &m1, const mention &m2,
                                                                           feature_cache &fcache, const relaxcor_fex_dep &fex) {
-    set<int> obj = obj_reporting(m2,fcache,fex);
-    return (m1.get_n_sentence()==m2.get_n_sentence() and obj.find(subj_reporting(m1,fcache,fex))!=obj.end() ? ff_YES : ff_NO);
+    return (subj_obj_reporting(m1,m2,fcache,fex) ? ff_YES : ff_NO);
   }
-  ///    Returns whether m2 is inside the subject and m1 inside the object of the same reporting verb
+
+  ///    Returns whether m2 is the subject and m1 inside the object of the same reporting verb
   relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::subj_obj_reporting_ji(const mention &m1, const mention &m2,
                                                                           feature_cache &fcache, const relaxcor_fex_dep &fex) {
-    set<int> obj = obj_reporting(m1,fcache,fex);
-    return (m1.get_n_sentence()==m2.get_n_sentence() and obj.find(subj_reporting(m2,fcache,fex))!=obj.end() ? ff_YES : ff_NO);
+    return (subj_obj_reporting(m2,m1,fcache,fex) ? ff_YES : ff_NO);
   }
+
+
+  ///    Returns whether m1 is the subject and m2 inside the object of the same verb
+  relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::subj_obj_same_verb_ij(const mention &m1, const mention &m2,
+                                                                          feature_cache &fcache, const relaxcor_fex_dep &fex) {
+    return (subj_obj_same_verb(m1,m2,fcache,fex) ? ff_YES : ff_NO);
+  }
+
+  ///    Returns whether m2 is the subject and m1 inside the object of the same verb
+  relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::subj_obj_same_verb_ji(const mention &m1, const mention &m2,
+                                                                          feature_cache &fcache, const relaxcor_fex_dep &fex) {
+    return (subj_obj_same_verb(m2,m1,fcache,fex) ? ff_YES : ff_NO);
+  }
+
 
 
   ////////////////////////////////////////////////////////////////// 
