@@ -51,25 +51,30 @@ namespace freeling {
 #define MOD_TRACENAME L"RELAXCOR_FEX"
 #define MOD_TRACECODE COREF_TRACE
 
-
   //////////////////////////////////////////////////////////////////
   /// Class for a feature extractor for coreference resolution
   //////////////////////////////////////////////////////////////////
+
+  const freeling::regexp relaxcor_fex_dep::re_Acronym(L"^[A-Z]+(\\&)?[A-Z]+$");
+  const freeling::regexp relaxcor_fex_dep::re_EMPTY(L"^$");
 
   //////////////////////////////////////////////////////////////////
   /// Constructor. Sets defaults
   //////////////////////////////////////////////////////////////////
 
-  relaxcor_fex_dep::relaxcor_fex_dep(const wstring &filename, const relaxcor_model &m) : relaxcor_fex_abs(m), _Morf(filename), reEMPTY(L"^$") {
+  relaxcor_fex_dep::relaxcor_fex_dep(const wstring &filename, const relaxcor_model &m) : relaxcor_fex_abs(m), _Morf(filename) {
 
     // read configuration file and store information       
-    enum sections {DEPLABELS, POSTAGS, WORDFEAT, PRONWORDS};
+    enum sections {SEM_DB, MINPAGERANK, DEPLABELS, POSTAGS, WORDFEAT, SEMFEAT};
     config_file cfg(true,L"%");
 
     // add compulsory sections
+    cfg.add_section(L"SemDB",SEM_DB,true);
+    cfg.add_section(L"MinPageRank",MINPAGERANK,true);
     cfg.add_section(L"DepLabels",DEPLABELS,true);
     cfg.add_section(L"PosTags",POSTAGS,true);
     cfg.add_section(L"WordFeatures",WORDFEAT,true);
+    cfg.add_section(L"SemanticFeatures",SEMFEAT,true);
 
     if (not cfg.open(filename))
       ERROR_CRASH(L"Error opening file "+filename);
@@ -82,6 +87,20 @@ namespace freeling {
       sin.str(line);
 
       switch (cfg.get_section()) {
+      case SEM_DB: {
+        // load SEMDB section           
+        wstring fname;
+        sin>>fname;
+        wstring sdbf= util::absolute(fname,path);
+        _Semdb= new semanticDB(sdbf);
+        break;
+      }
+
+      case MINPAGERANK: {
+        sin>>_MinPageRank;
+        break;
+      }
+
       case DEPLABELS: {
         // Read regexs to identify labels for dependency functions
 	wstring name, val;
@@ -106,6 +125,14 @@ namespace freeling {
 	_Labels.insert(make_pair(L"WRD_"+name,re));
 	break;
       }
+      case SEMFEAT: {
+        // Read regexs to identify labels for PoS tags
+	wstring name, val;
+        sin >> name >> val;
+	freeling::regexp re(val);
+	_Labels.insert(make_pair(L"SEM_"+name,re));
+	break;
+      }
 
       default: break;
       }
@@ -115,10 +142,11 @@ namespace freeling {
 
     // register implemented feature functionrs
     register_features();
+
     // check whether all model features are implemented
     for (auto f=model.begin_features(); f!=model.end_features(); ++f) {
       if (_FeatureFunction.find(f->first)==_FeatureFunction.end())
-        WARNING(L"Feature '"<<f->first<<L" not implemented. It will be ignored");
+        WARNING(L"Requested feature "<<f->first<<L" not implemented. It will be ignored.");
     }
 
     TRACE(2,L"Module successfully loaded");
@@ -209,6 +237,9 @@ namespace freeling {
     _FeatureFunction[L"RCF_HEAD_MATCH"] = make_pair(&relaxcor_fex_dep::str_head_match, ff_YES);
     _FeatureFunction[L"RCF_RELAXED_HEAD_MATCH_IJ"] = make_pair(&relaxcor_fex_dep::relaxed_head_match_ij, ff_YES);
     _FeatureFunction[L"RCF_RELAXED_HEAD_MATCH_JI"] = make_pair(&relaxcor_fex_dep::relaxed_head_match_ji, ff_YES);
+    _FeatureFunction[L"RCF_NAME_MATCH_IJ"] = make_pair(&relaxcor_fex_dep::name_match_ij, ff_YES);
+    _FeatureFunction[L"RCF_NAME_MATCH_JI"] = make_pair(&relaxcor_fex_dep::name_match_ji, ff_YES);
+    _FeatureFunction[L"RCF_PRON_MATCH"] = make_pair(&relaxcor_fex_dep::str_pron_match, ff_YES);
 
     _FeatureFunction[L"RCF_NUM_MATCH_IJ"] = make_pair(&relaxcor_fex_dep::num_match_ij, ff_YES);
     _FeatureFunction[L"RCF_NUM_MATCH_JI"] = make_pair(&relaxcor_fex_dep::num_match_ji, ff_YES);
@@ -226,6 +257,17 @@ namespace freeling {
     _FeatureFunction[L"RCF_SUBJ_OBJ_REPORTING_JI"] = make_pair(&relaxcor_fex_dep::subj_obj_reporting_ji, ff_YES);
     _FeatureFunction[L"RCF_SUBJ_OBJ_SAME_VERB_IJ"] = make_pair(&relaxcor_fex_dep::subj_obj_same_verb_ij, ff_YES);
     _FeatureFunction[L"RCF_SUBJ_OBJ_SAME_VERB_JI"] = make_pair(&relaxcor_fex_dep::subj_obj_same_verb_ji, ff_YES);
+
+    _FeatureFunction[L"RCF_ACRONYM"] = make_pair(&relaxcor_fex_dep::acronym, ff_YES);
+    _FeatureFunction[L"RCF_SAME_SEMCLASS_YES"] = make_pair(&relaxcor_fex_dep::same_semclass, ff_YES);
+    _FeatureFunction[L"RCF_SAME_SEMCLASS_NO"] = make_pair(&relaxcor_fex_dep::same_semclass, ff_NO);
+    _FeatureFunction[L"RCF_SAME_SEMCLASS_UNK"] = make_pair(&relaxcor_fex_dep::same_semclass, ff_UNK);
+
+    #ifdef VERBOSE
+    TRACE(3,L"Available features")
+    for (auto f : _FeatureFunction)
+      TRACE(3,L"    " << f.first);
+    #endif
   }
 
 
@@ -238,7 +280,7 @@ namespace freeling {
     auto re = _Labels.find(key);
     if (re==_Labels.end()) {
       WARNING(L"No regex defined for label "<<key<<L". Ignoring affected features");
-      return reEMPTY;
+      return re_EMPTY;
     }
     return re->second;
   }
@@ -379,8 +421,9 @@ namespace freeling {
       TRACE(7,L"     " << fid << L" = " << (rp?L"yes":L"no") << "  (cached)");
     }
     else {
-      // check whether the mention is a reflexive pronoun
-      rp = (fex._Morf.get_type(m.get_head().get_lemma()) == L'P');
+      // check whether the mention is a possessive
+      rp = (fex.get_label_RE(L"TAG_Poss").search(m.get_head().get_tag()) and 
+            fex._Morf.get_type(m.get_head().get_lemma()) == L'P');
       fcache.set_feature(fid,util::int2wstring(rp));
       TRACE(7,L"     " << fid << L" = "<< (rp?L"yes":L"no"));
     }
@@ -464,8 +507,9 @@ namespace freeling {
     }
     else {
       wstring w=m.get_head().get_lemma();
-      pf = fex._Morf.get_type(w)==type and fex._Morf.get_person(w)==per
-        and morph_features::compatible_number(fex._Morf.get_number(w), num)==L"yes";
+      pf = (type==L'-' or fex._Morf.get_type(w)==type)  
+        and (per==L'-' or fex._Morf.get_person(w)==per) 
+        and morph_features::compatible_number(fex._Morf.get_number(w), num)==ff_YES;
 
       fcache.set_feature(fid, util::int2wstring(pf));
       TRACE(6,L"     " << fid << L" = " << (pf?L"yes":L"no"));
@@ -504,7 +548,7 @@ namespace freeling {
       }
       else if (m.is_type(mention::PROPER_NOUN)) {
         // if it is a proper noun, ORGs are '0', and the others 'u'
-        if (fex.get_label_RE(L"TAG_OrgNE").search(m.get_head().get_tag())) num=L'0';
+        if (fex.get_label_RE(L"TAG_OrganizationNE").search(m.get_head().get_tag())) num=L'0';
         else num=L'u';
       }
 
@@ -536,7 +580,7 @@ namespace freeling {
  
      else if (m.is_type(mention::PROPER_NOUN)) {
        // if it is a proper noun of type PERS -> gen = 'b'
-       if (fex.get_label_RE(L"TAG_PersNE").search(m.get_head().get_tag())) 
+       if (fex.get_label_RE(L"TAG_PersonNE").search(m.get_head().get_tag())) 
          gen=L'b';
      }
 
@@ -643,6 +687,30 @@ namespace freeling {
     }
     else {
       verbs = is_arg_of(m, fex.get_label_RE(L"FUN_Arg0"));
+      wstring fval = util::wstring_from<set<int>>(verbs,L",");
+      fcache.set_feature(fid, fval);
+      TRACE(6,L"     " << fid << L" = [" << fval << L"]");
+    }
+
+    return verbs;
+  }
+
+  ////////////////////////////////////////////////////
+  ///  Obtain verbs of which given mention is any non-A0 object
+  ////////////////////////////////////////////////////  
+
+  set<int> relaxcor_fex_dep::is_obj_of(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex) {
+
+    wstring fid = util::int2wstring(m.get_id())+L":OBJECT_OF";
+
+    set<int> verbs;
+    if (fcache.computed_feature(fid)) {
+      wstring fval = fcache.get_feature(fid);
+      verbs = util::wstring_to<set<int>,int>(fval,L",");    
+      TRACE(6,L"     " << fid << L" = [" << fval << "]  (cached)");      
+    }
+    else {
+      verbs = is_arg_of(m, fex.get_label_RE(L"FUN_Arg123"));
       wstring fval = util::wstring_from<set<int>>(verbs,L",");
       fcache.set_feature(fid, fval);
       TRACE(6,L"     " << fid << L" = [" << fval << L"]");
@@ -773,7 +841,7 @@ namespace freeling {
   }
 
   //////////////////////////////////////////////////////////////////
-  ///    Returns whether m1 is the subject and m2 inside the object of the same verb
+  ///    Returns whether m1 is the subject and m2 is the object of the same verb
   //////////////////////////////////////////////////////////////////
 
   bool relaxcor_fex_dep::subj_obj_same_verb(const mention &m1, const mention &m2,
@@ -789,7 +857,7 @@ namespace freeling {
       res = false;
       if (m1.get_n_sentence()==m2.get_n_sentence()) {
         set<int> sub1 = is_subj_of(m1,fcache,fex);
-        set<int> obj2 = inside_obj_of(m2,fcache,fex);
+        set<int> obj2 = is_obj_of(m2,fcache,fex);
         for (auto v=sub1.begin(); v!=sub1.end() and not res; ++v) 
           res = (obj2.find(*v)!=obj2.end());
       }
@@ -956,8 +1024,40 @@ namespace freeling {
     else {
       r = false;
       wstring head = m2.get_head().get_lc_form();
-      for(sentence::const_iterator it=m1.get_it_begin(); it!=m1.get_it_end() and not r; it++)
+      for(sentence::const_iterator it=m1.get_it_begin(); it!=m1.get_it_end() and not r; ++it)
         r = (it->get_lc_form()==head);
+      
+      fcache.set_feature(fid, util::int2wstring(r));
+      TRACE(6,L"   " << fid << L" = " << (r?L"yes":L"no"));
+    }
+
+    return r;
+  }
+
+  //////////////////////////////////////////////////////////////////
+  ///  Returns whether m1 and m2 are NE and the last word in m2 head is contained in m1 head, 
+  ///  and there are no stop words before it (e.g. it matches "President_Putin" and "Putin", 
+  ///  but not "President_Putin_of_Russia" and "Russia".
+  //////////////////////////////////////////////////////////////////
+
+  bool relaxcor_fex_dep::name_match(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex) {
+    wstring fid = util::int2wstring(m1.get_id())+L":"+util::int2wstring(m2.get_id())+L":NAME_MATCH";
+
+    bool r;
+    if (fcache.computed_feature(fid)) {
+      r = util::wstring2int(fcache.get_feature(fid));
+      TRACE(6,L"   " << fid << L" = " << (r?L"yes":L"no") << "  (cached)");
+    }
+    else {
+      r = false;
+      if (m1.is_type(mention::PROPER_NOUN) and m2.is_type(mention::PROPER_NOUN)) {
+        vector<wstring> w1 = util::wstring2vector(m1.get_head().get_lc_form(),L"_");
+        vector<wstring> w2 = util::wstring2vector(m2.get_head().get_lc_form(),L"_");
+        wstring last = w2[w2.size()-1];
+
+        for (auto w=w1.begin(); w!=w1.end() and not r and not fex.get_label_RE(L"WRD_AcronymInfix").search(*w); ++w)
+          r = (*w)==last;
+      }
       
       fcache.set_feature(fid, util::int2wstring(r));
       TRACE(6,L"   " << fid << L" = " << (r?L"yes":L"no"));
@@ -1060,6 +1160,125 @@ namespace freeling {
 
     return r;
   }
+
+  //////////////////////////////////////////////////////////////////
+  ///    Returns true iff letters in m1 match initials of words in m2
+  ///    assumes that m1 is an acronym (w.g. "IBM", "S&P", "C_&_A", "ABC_&_DE")
+  //////////////////////////////////////////////////////////////////
+
+  bool relaxcor_fex_dep::initial_match(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex) {
+
+    wstring fid = util::int2wstring(m1.get_id())+L":"+util::int2wstring(m2.get_id())+L":ACRONYM";
+
+    bool acr;
+    if (fcache.computed_feature(fid)) {
+      acr = util::wstring2int(fcache.get_feature(fid));
+      TRACE(6,L"   " << fid << L" = " << (acr?L"yes":L"no") << "  (cached)");
+    }
+    else {
+      acr = false;
+      wstring f1 = m1.value();
+      // get acronym without underscores or dots
+      util::find_and_replace(f1,L"_",L"");
+      util::find_and_replace(f1,L".",L"");
+
+      vector<wstring> w2 = util::wstring2vector(m2.get_head().get_lc_form(),L"_");
+
+      // is m1 is not an acronym, or it has more letters than words in m2, don't bother
+      if (re_Acronym.search(f1) and f1.length() <= w2.size()) {
+
+        f1 = util::lowercase(f1);
+        int i=0;
+        vector<wstring>::const_iterator w = w2.begin();
+        acr = true;
+        while (i<f1.length() and w!=w2.end() and acr) {
+          // check if ith word in m2 starts with ith char in m1 (skipping stopwords)     
+          if (not fex.get_label_RE(L"WRD_AcronymInfix").search(*w)) {
+            acr = (*w)[0]==f1[i];
+            ++i;
+          }
+          ++w;
+        }
+
+        // if all matches, but there are words left in m2, check they are valid stopwords followed by valid suffixes
+        // (e.g. to accept when m2 is "Incredibly Blooming Margerites & Co", and m1 is just "IBM")
+        if (acr and w!=w2.end()) {
+          // consume stop words and suffix words, remembering whether the last seen was a suffix
+          bool suf = true;
+          while (w!=w2.end() and (fex.get_label_RE(L"WRD_AcronymInfix").search(*w) or suf)) {
+            acr = fex.get_label_RE(L"WRD_AcronymSuffix").search(*w);
+            ++w;
+          }
+
+          // if we consumed all the words and the last one is a suffix, we are good
+          acr = (w==w2.end() and suf);
+        }
+      }
+      
+      fcache.set_feature(fid, util::int2wstring(acr));
+      TRACE(6,L"   " << fid << L" = " << (acr?L"yes":L"no"));
+    }
+
+    return acr;
+  }
+
+
+  //////////////////////////////////////////////////////////////////
+  ///    Returns the semantic class of the mention
+  //////////////////////////////////////////////////////////////////
+
+  relaxcor_fex_dep::TSemanticClass relaxcor_fex_dep::get_semantic_class(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex) {
+
+    wstring fid = util::int2wstring(m.get_id())+L":SEMANTIC_CLASS";
+    TSemanticClass sc;
+    if (fcache.computed_feature(fid)) {
+      sc = (TSemanticClass) util::wstring2int(fcache.get_feature(fid));
+      TRACE(6,L"   " << fid << L" = " << sc_string(sc) << "  (cached)");
+    }
+    else {
+      sc = sc_UNK;
+      if (m.is_type(mention::PROPER_NOUN)) {
+        if (fex.get_label_RE(L"TAG_OrganizationNE").search(m.get_head().get_tag())) sc = sc_ORG;
+        else if (fex.get_label_RE(L"TAG_PersonNE").search(m.get_head().get_tag())) sc = sc_PER;
+        else if (fex.get_label_RE(L"TAG_LocationNE").search(m.get_head().get_tag())) sc = sc_LOC;
+      }
+
+      else if (m.is_type(mention::PRONOUN)) {
+        // check in pronWords list. 
+        wchar_t h = fex._Morf.get_human(m.get_head().get_lemma());
+        if (h==L'h') sc = sc_PER;
+      }
+
+      else if (m.is_type(mention::NOUN_PHRASE)) {
+        // get SUMO information for word sense, and use it to decide semantic class
+        wstring sense;
+        const list<pair<wstring,double>> &ls = m.get_head().get_senses();
+        if (not ls.empty()) {
+          TRACE(7, L"    - semantic class for '"<< m.get_head().get_form() << L"'");
+          // Use as class that provided by sense ranked highest by UKB that has a class
+          auto s = ls.begin();
+          while  (s!=ls.end() and sc==sc_UNK and s->second>=fex._MinPageRank) {
+            sense_info si = fex._Semdb->get_sense_info(s->first);
+            TRACE(7, L"      sense="<< s->first << L" (" << s->second << L") sumo="<<si.sumo );
+            if (fex.get_label_RE(L"SEM_OrganizationSUMO").search(si.sumo)) sc = sc_ORG;
+            else if (fex.get_label_RE(L"SEM_PersonSUMO").search(si.sumo)) sc = sc_PER;
+            else if (fex.get_label_RE(L"SEM_LocationSUMO").search(si.sumo)) sc = sc_LOC;
+
+            ++s;
+          }
+        }
+        else {
+          TRACE(7,"    - semantic class for '"<< m.get_head().get_form() << L"'. Not found in WN.");
+        }
+      }
+
+      fcache.set_feature(fid, util::int2wstring(sc));
+      TRACE(6,L"   " << fid << L" = " <<  sc_string(sc));
+    }
+
+    return sc;
+  }
+
 
 
   //// ######################  REGISTERED FEATURE FUNCTIONS ###########################
@@ -1193,17 +1412,17 @@ namespace freeling {
   ///    Returns whether mention 1 is "I"
   relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::mention_1_I(const mention &m1, const mention &m2,
                                                                 feature_cache &fcache, const relaxcor_fex_dep &fex) {
-    return (match_pronoun_features(m1,L'S',L'1',L's',fcache,fex) ? ff_YES : ff_NO);
+    return (match_pronoun_features(m1,L'-',L'1',L's',fcache,fex) ? ff_YES : ff_NO);
   }
   ///    Returns whether mention 2 is "I"
   relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::mention_2_I(const mention &m1, const mention &m2,
                                                                 feature_cache &fcache, const relaxcor_fex_dep &fex) {
-    return (match_pronoun_features(m2,L'S',L'1',L's',fcache,fex) ? ff_YES : ff_NO);
+    return (match_pronoun_features(m2,L'-',L'1',L's',fcache,fex) ? ff_YES : ff_NO);
   }
   ///    Returns whether mention 1 is "you"
   relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::mention_1_you(const mention &m1, const mention &m2,
                                                                   feature_cache &fcache, const relaxcor_fex_dep &fex) {
-    return (match_pronoun_features(m1,L'S',L'2',L'0',fcache,fex) ? ff_YES : ff_NO);
+    return (match_pronoun_features(m1,L'-',L'2',L'0',fcache,fex) ? ff_YES : ff_NO);
   }
   ///    Returns whether mention 2 is "you"
   relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::mention_2_you(const mention &m1, const mention &m2,
@@ -1213,12 +1432,12 @@ namespace freeling {
   ///    Returns whether mention 1 is "we"
   relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::mention_1_we(const mention &m1, const mention &m2,
                                                                   feature_cache &fcache, const relaxcor_fex_dep &fex) {
-    return (match_pronoun_features(m1,L'S',L'1',L'p',fcache,fex) ? ff_YES : ff_NO);
+    return (match_pronoun_features(m1,L'-',L'1',L'p',fcache,fex) ? ff_YES : ff_NO);
   }
   ///    Returns whether mention 2 is "we"
   relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::mention_2_we(const mention &m1, const mention &m2,
                                                                   feature_cache &fcache, const relaxcor_fex_dep &fex) {
-    return (match_pronoun_features(m2,L'S',L'1',L'p',fcache,fex) ? ff_YES : ff_NO);
+    return (match_pronoun_features(m2,L'-',L'1',L'p',fcache,fex) ? ff_YES : ff_NO);
   }
   ///    Returns whether mention 1 is singular
   relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::mention_1_singular(const mention &m1, const mention &m2,
@@ -1257,36 +1476,36 @@ namespace freeling {
 
   relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::agreement(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex) {
     wstring fid = util::int2wstring(m1.get_id())+L":"+util::int2wstring(m2.get_id())+L":AGREEMENT";
-    wstring ag;
+    TFeatureValue ag;
     if (fcache.computed_feature(fid)) {
-      ag = fcache.get_feature(fid);
-      TRACE(6,L"   " << fid << L" = " << ag << "  (cached)");
+      ag = (TFeatureValue) util::wstring2int(fcache.get_feature(fid));
+      TRACE(6,L"   " << fid << L" = " << ff_string(ag) << "  (cached)");
     }
     else {
       wchar_t n1 = get_number(m1,fcache,fex);   
       wchar_t n2 = get_number(m2,fcache,fex); 
-      wstring numagr = morph_features::compatible_number(n1,n2);
+      TFeatureValue numagr = morph_features::compatible_number(n1,n2);
       // consider "unk" as "yes" for proper nouns
-      if (numagr==L"unk" and (m1.is_type(mention::PROPER_NOUN) or m1.is_type(mention::PROPER_NOUN)))
-        numagr = L"yes";
+      if (numagr==ff_UNK and (m1.is_type(mention::PROPER_NOUN) or m1.is_type(mention::PROPER_NOUN)))
+        numagr = ff_YES;
 
       wchar_t g1 = get_gender(m1,fcache,fex);
       wchar_t g2 = get_gender(m2,fcache,fex);
-      wstring genagr = morph_features::compatible_gender(g1,g2);
+      TFeatureValue genagr = morph_features::compatible_gender(g1,g2);
 
-      if (numagr==L"no" or genagr==L"no")
-        ag = L"no";
-      else if (numagr==L"unk" and genagr==L"unk") 
-        ag = L"unk";
+      if (numagr==ff_NO or genagr==ff_NO)
+        ag = ff_NO;
+      else if (numagr==ff_UNK and genagr==ff_UNK) 
+        ag = ff_UNK;
       else 
-        ag = L"yes";
+        ag = ff_YES;
 
 
       fcache.set_feature(fid, util::int2wstring(ag));
-      TRACE(6,L"   " << fid << L" = " << ag);
+      TRACE(6,L"   " << fid << L" = " <<  ff_string(ag));
     }
 
-    return (ag==L"yes"? ff_YES : (ag==L"no" ? ff_NO : ff_UNK));
+    return ag;
   }
 
 
@@ -1302,10 +1521,10 @@ namespace freeling {
 
     wstring pair = util::int2wstring(m1.get_id())+L":"+util::int2wstring(m2.get_id());
     wstring fid = pair+L":CLOSEST_AGREEMENT";
-    wstring ag;
+    TFeatureValue ag;
     if (fcache.computed_feature(fid)) {
-      ag = fcache.get_feature(fid);
-      TRACE(6,L"   " << fid << L" = " << ag << "  (cached)");
+      ag = (TFeatureValue) util::wstring2int(fcache.get_feature(fid));
+      TRACE(6,L"   " << fid << L" = " << ff_string(ag) << "  (cached)");
     }
     else {
       // complain if agreement was not activated
@@ -1315,28 +1534,28 @@ namespace freeling {
       }
 
       // check whether m1 and m2 agree
-      ag = fcache.get_feature(pair+L":AGREEMENT");
-      if (ag == L"yes") {
+      ag = (TFeatureValue) util::wstring2int(fcache.get_feature(pair+L":AGREEMENT"));
+      if (ag == ff_YES) {
         // if they agree, check closestness
         bool found=false;
         for (int mx=m1.get_id()+1; mx<m2.get_id() and not found; ++mx) {
           wstring fid2 = util::int2wstring(m1.get_id())+L":"+util::int2wstring(mx)+L":AGREEMENT";
           if (not fcache.computed_feature(fid2)) {
-            WARNING(L"Feature "<<fid2<<" not found while computing "<<fid);
+            WARNING(L"Feature "<<fid2<<" should be computed before attempting to compute "<<fid);
             return ff_NO;
           }
-          wstring ag2 = fcache.get_feature(fid2);
-          TRACE(6,L"     " << fid2 << L" = " << ag2);
-          found = (ag2==L"yes");
+          TFeatureValue ag2 = (TFeatureValue) util::wstring2int(fcache.get_feature(fid2));
+          TRACE(6,L"     " << fid2 << L" = " <<  ff_string(ag2));
+          found = (ag2==ff_YES);
         }          
-        if (found) ag=L"no";
+        if (found) ag = ff_NO;
       }
 
       fcache.set_feature(fid, util::int2wstring(ag));
-      TRACE(6,L"   " << fid << L" = " << ag);
+      TRACE(6,L"   " << fid << L" = " <<  ff_string(ag));
     }
 
-    return (ag==L"yes"? ff_YES : (ag==L"no" ? ff_NO : ff_UNK));
+    return ag;
   }
 
 
@@ -1556,7 +1775,7 @@ namespace freeling {
 }
 
   //////////////////////////////////////////////////////////////////
-  ///    Returns whether both mentions heads are identical
+  ///    Returns whether both mentions heads are non-pronouns and identical
   //////////////////////////////////////////////////////////////////
 
   relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::str_head_match(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex) {
@@ -1577,6 +1796,28 @@ namespace freeling {
     return (r ? ff_YES : ff_NO);
   }
 
+  //////////////////////////////////////////////////////////////////
+  ///    Returns whether both mentions heads are pronouns and identical
+  //////////////////////////////////////////////////////////////////
+
+  relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::str_pron_match(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex) {
+    wstring fid = util::int2wstring(m1.get_id())+L":"+util::int2wstring(m2.get_id())+L":STR_PRON_MATCH";
+
+    bool r;
+    if (fcache.computed_feature(fid)) {
+      r = util::wstring2int(fcache.get_feature(fid));
+      TRACE(6,L"   " << fid << L" = " << (r?L"yes":L"no") << "  (cached)");
+    }
+    else {
+      r = m1.is_type(mention::PRONOUN) and m2.is_type(mention::PRONOUN) and  m1.get_head().get_lc_form()==m2.get_head().get_lc_form();
+
+      fcache.set_feature(fid, util::int2wstring(r));
+      TRACE(6,L"   " << fid << L" = " << (r?L"yes":L"no"));
+    }
+
+    return (r ? ff_YES : ff_NO);
+  }
+
 
   ///    Returns whether m2 head is contained in m1
   relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::relaxed_head_match_ji(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex) {
@@ -1586,6 +1827,16 @@ namespace freeling {
   ///    Returns whether m1 head is contained in m2
   relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::relaxed_head_match_ij(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex) {
     return (relaxed_head_match(m2,m1,fcache,fex) ? ff_YES : ff_NO);
+  }
+  
+  ///    Returns whether m1 and m2 are NE and last word in m2 head is contained in m1 head
+  relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::name_match_ji(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex) {
+    return (name_match(m1,m2,fcache,fex) ? ff_YES : ff_NO);
+  }
+
+  ///    Returns whether m1 and m2 are NE and last word in m1 head is contained in m2 head
+  relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::name_match_ij(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex) {
+    return (name_match(m2,m1,fcache,fex) ? ff_YES : ff_NO);
   }
   
   ///    Returns whether any numerical modifier of m2 is also in m1
@@ -1678,18 +1929,47 @@ namespace freeling {
   }
 
 
-  ///    Returns whether m1 is the subject and m2 inside the object of the same verb
+  ///    Returns whether m1 is the subject and m2 is the object of the same verb
   relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::subj_obj_same_verb_ij(const mention &m1, const mention &m2,
                                                                           feature_cache &fcache, const relaxcor_fex_dep &fex) {
     return (subj_obj_same_verb(m1,m2,fcache,fex) ? ff_YES : ff_NO);
   }
 
-  ///    Returns whether m2 is the subject and m1 inside the object of the same verb
+  ///    Returns whether m2 is the subject and m1 is the object of the same verb
   relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::subj_obj_same_verb_ji(const mention &m1, const mention &m2,
                                                                           feature_cache &fcache, const relaxcor_fex_dep &fex) {
     return (subj_obj_same_verb(m2,m1,fcache,fex) ? ff_YES : ff_NO);
   }
 
+  ///    Returns whether one mention is acronyim of the other
+  relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::acronym(const mention &m1, const mention &m2,
+                                                            feature_cache &fcache, const relaxcor_fex_dep &fex) {
+    return (m2.is_type(mention::PROPER_NOUN) and m2.is_type(mention::PROPER_NOUN) and (initial_match(m1,m2,fcache,fex) or initial_match(m2,m1,fcache,fex))? ff_YES : ff_NO);
+  }
+
+  ///    Returns whether both mentions belong to the same semantic class (person, location, organization)
+  relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::same_semclass(const mention &m1, const mention &m2,
+                                                                  feature_cache &fcache, const relaxcor_fex_dep &fex) {
+    wstring fid = util::int2wstring(m1.get_id())+L":"+util::int2wstring(m2.get_id())+L":SAME_SEMCLASS";
+    TFeatureValue sclass;
+    if (fcache.computed_feature(fid)) {
+      sclass = (TFeatureValue) util::wstring2int(fcache.get_feature(fid));
+      TRACE(6,L"   " << fid << L" = " << ff_string(sclass) << "  (cached)");
+    }
+    else {
+      TSemanticClass sc1 = get_semantic_class(m1, fcache, fex);
+      TSemanticClass sc2 = get_semantic_class(m2, fcache, fex);
+
+      if (sc1==sc_UNK or sc2==sc_UNK) sclass = ff_UNK;
+      else if (sc1==sc2) sclass = ff_YES;
+      else sclass = ff_NO;
+
+      fcache.set_feature(fid, util::int2wstring(sclass));
+      TRACE(6,L"   " << fid << L" = " <<  ff_string(sclass));
+    }
+
+    return sclass;
+  }
 
 
   ////////////////////////////////////////////////////////////////// 
@@ -1792,40 +2072,41 @@ namespace freeling {
   /// get type, person, number, or gender
 
   wchar_t relaxcor_fex_dep::morph_features::get_type(const wstring &w) const { return get_feature(w,0); }
-  wchar_t relaxcor_fex_dep::morph_features::get_person(const wstring &w) const { return get_feature(w,1); }
-  wchar_t relaxcor_fex_dep::morph_features::get_gender(const wstring &w) const { return get_feature(w,2); }
-  wchar_t relaxcor_fex_dep::morph_features::get_number(const wstring &w) const { return get_feature(w,3); }
+  wchar_t relaxcor_fex_dep::morph_features::get_human(const wstring &w) const { return get_feature(w,1); }
+  wchar_t relaxcor_fex_dep::morph_features::get_person(const wstring &w) const { return get_feature(w,2); }
+  wchar_t relaxcor_fex_dep::morph_features::get_gender(const wstring &w) const { return get_feature(w,3); }
+  wchar_t relaxcor_fex_dep::morph_features::get_number(const wstring &w) const { return get_feature(w,4); }
   
-  wstring relaxcor_fex_dep::morph_features::compatible_number(wchar_t n1, wchar_t n2) {
+  relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::morph_features::compatible_number(wchar_t n1, wchar_t n2) {
     // number is compatible if they match or at least one of them is underspecified
-    wstring cn;
+    relaxcor_fex_dep::TFeatureValue cn;
     if (n1==L'0' or
         n2==L'0' or
         (n1==n2 and n1!=L'u'))
-      cn = L"yes";
+      cn = ff_YES;
     else if (n1==L'u' or n2==L'u') 
-      cn = L"unk";
+      cn = ff_UNK;
     else 
-      cn = L"no";
-    TRACE(7,L"      - compatible number " << n1 << L":" << n2 << L"=" << cn);
+      cn = ff_NO;
+    TRACE(7,L"      - compatible number " << n1 << L":" << n2 << L"=" <<  ff_string(cn));
     return cn;
   }
 
-  wstring relaxcor_fex_dep::morph_features::compatible_gender(wchar_t g1, wchar_t g2) {
+  relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::morph_features::compatible_gender(wchar_t g1, wchar_t g2) {
     // gender is compatible if they match, at least one of them is underspecified, or
     // one is M/F and the other is M or F
-    wstring cg;
+    relaxcor_fex_dep::TFeatureValue cg;
     if (g1==L'0' or 
         g2==L'0' or
         (g1==g2 and g1!=L'u') or
         (g1==L'b' and (g2==L'm' or g2==L'f')) or
         (g2==L'b' and (g1==L'm' or g1==L'f')))
-      cg = L"yes";
+      cg = ff_YES;
     else if (g1==L'u' or g2==L'u') 
-      cg = L"unk";
+      cg = ff_UNK;
     else 
-      cg = L"no";
-    TRACE(7,L"      - compatible gender " << g1 << L":" << g2 << L"=" << cg);
+      cg = ff_NO;
+    TRACE(7,L"      - compatible gender " << g1 << L":" << g2 << L"=" <<  ff_string(cg));
     return cg;
   }
   

@@ -64,40 +64,21 @@ namespace freeling {
     relaxcor_fex_abs::Mfeatures extract(const std::vector<mention>&) const;    
 
   private:
-    
-    //////////////////////////////////////////////////////////////////
-    ///    Auxiliary class for the feature extractor.
-    ///    Used to store morphological information about words
-    //////////////////////////////////////////////////////////////////
-    
-    class morph_features {
-    public:
-      morph_features(const std::wstring&);
-      ~morph_features();
-      
-      wchar_t get_type(const std::wstring&) const;
-      wchar_t get_person(const std::wstring&) const;
-      wchar_t get_number(const std::wstring&) const;
-      wchar_t get_gender(const std::wstring&) const;
-      
-      static std::wstring compatible_number(wchar_t, wchar_t);
-      static std::wstring compatible_gender(wchar_t, wchar_t);
-      
-    private:
-      std::map<std::wstring,std::wstring> _Words;
-      
-      wchar_t get_feature(const std::wstring &w, int k) const;      
-    };
-    
-    //////////// Members
-
-    // list of morphological features
-    morph_features _Morf;
 
     /// regexps from config file
     std::map<std::wstring, freeling::regexp> _Labels;
-    freeling::regexp reEMPTY;
+    static const freeling::regexp re_EMPTY;
+    static const freeling::regexp re_Acronym;
+
     freeling::regexp get_label_RE(const std::wstring &) const;
+
+    // access to WN and SUMO information
+    freeling::semanticDB *_Semdb;
+    // minimum PgRank UKB value to accept a sense as valid
+    double _MinPageRank;
+
+    // mention semantic classes
+    typedef enum {sc_PER, sc_ORG, sc_LOC, sc_UNK} TSemanticClass;
 
     // map of feature names to feature functions
     typedef enum {ff_YES,ff_NO,ff_UNK} TFeatureValue;
@@ -165,8 +146,11 @@ namespace freeling {
     static TFeatureValue str_match_strict(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue str_match_relaxed(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue str_head_match(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue str_pron_match(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue relaxed_head_match_ij(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue relaxed_head_match_ji(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue name_match_ij(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue name_match_ji(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue num_match_ij(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue num_match_ji(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue word_inclusion_ij(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
@@ -184,13 +168,18 @@ namespace freeling {
     static TFeatureValue subj_obj_same_verb_ij(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue subj_obj_same_verb_ji(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
 
+    static relaxcor_fex_dep::TFeatureValue acronym(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex) ;
+    static relaxcor_fex_dep::TFeatureValue same_semclass(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex) ;
+
     // auxiliar methods for feature computing
+    static unsigned int dist_in_phrases(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static bool nested(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static int dist_sentences(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static int dist_mentions(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
 
     static bool predicative(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static bool relaxed_head_match(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static bool name_match(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
 
     static bool num_match(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static bool word_inclusion(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
@@ -199,15 +188,16 @@ namespace freeling {
 
     static bool subj_obj_reporting(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static bool subj_obj_same_verb(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static bool initial_match(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
 
     /// single mention 
-    static unsigned int dist_in_phrases(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static bool match_pronoun_features(const mention &m, wchar_t type, wchar_t per, wchar_t num, 
                                        feature_cache &fcache, const relaxcor_fex_dep &fex);
     static wchar_t get_gender(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static wchar_t get_number(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static wchar_t get_person(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static std::wstring get_arguments(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TSemanticClass get_semantic_class(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex);
 
     static bool in_quotes(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static bool definite(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex);
@@ -220,6 +210,7 @@ namespace freeling {
     static std::set<int> subj_reporting(const mention& m, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static std::set<int> obj_reporting(const mention& m, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static std::set<int> is_subj_of(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static std::set<int> is_obj_of(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static std::set<int> inside_obj_of(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex);
 
     static std::set<int> is_arg_of(const mention &m, const freeling::regexp &re);
@@ -229,8 +220,44 @@ namespace freeling {
     static std::set<int> select_by_lemma(paragraph::const_iterator s, const std::set<int> &pos, const freeling::regexp &re);
     static std::list<std::pair<int,std::wstring>> get_arguments(paragraph::const_iterator s, int mpos);
 
-  };
+    //////////////////////////////////////////////////////////////////
+    ///    Auxiliary class for the feature extractor.
+    ///    Used to store morphological information about words
+    //////////////////////////////////////////////////////////////////
+    
+    class morph_features {
+    public:
+      morph_features(const std::wstring&);
+      ~morph_features();
+      
+      wchar_t get_type(const std::wstring&) const;
+      wchar_t get_human(const std::wstring&) const;
+      wchar_t get_person(const std::wstring&) const;
+      wchar_t get_number(const std::wstring&) const;
+      wchar_t get_gender(const std::wstring&) const;
+      
+      static relaxcor_fex_dep::TFeatureValue compatible_number(wchar_t, wchar_t);
+      static relaxcor_fex_dep::TFeatureValue compatible_gender(wchar_t, wchar_t);
+      
+    private:
+      std::map<std::wstring,std::wstring> _Words;
+      
+      wchar_t get_feature(const std::wstring &w, int k) const;      
+    };
+    
+    // list of morphological features
+    morph_features _Morf;
 
+    // for easier tracing
+    #define ff_string(x) (x==ff_YES ? L"yes" : \
+                         (x==ff_NO ? L"no" : \
+                          L"unk"))
+    #define sc_string(x) (x==sc_PER ? L"person" : \
+                         (x==sc_ORG ? L"organization" : \
+                         (x==sc_LOC ? L"location" : \
+                          L"unk")))
+  };
+  
 
 } // namespace
 
