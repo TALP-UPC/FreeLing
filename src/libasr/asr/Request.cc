@@ -22,12 +22,8 @@ namespace freeling {
     seconds_to_decode_ = seconds_to_decode;
 
     // Check if number of channels and selected decode channels are valid. If not, decode channel 0 by default
-    if (channel_index_ < 0) {
-      WARNING(L"The decoded channel parameter must be either 0 or a positive integer. Decoding channel 0 by default.");
-      channel_index_ = 0;
-    }
-    if (channels_ <= channel_index_) {
-      WARNING(L"The provided decoded channel doesn't exist in the audio. Decoding channel 0 by default.");
+    if (channel_index_ < 0 or channel_index_ >= channels_) {
+      WARNING(L"Requested channel " << channel_index_ << L" doesn't exist in the audio. Decoding channel 0 by default.");
       channel_index_ = 0;
     }
 
