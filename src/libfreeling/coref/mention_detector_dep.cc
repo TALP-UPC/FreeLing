@@ -90,8 +90,8 @@ namespace freeling {
 
       case MTAGS: {
         // list of tags that are extracted as mentions
-        wstring tag, typ;
-        sin >> tag >> typ;
+        wstring tag, fun, typ;
+        sin >> tag >> fun >> typ;
         mention::mentionType t;
         if (typ==L"NounPhrase") t=mention::NOUN_PHRASE;
         else if (typ==L"ProperNoun") t=mention::PROPER_NOUN;
@@ -100,7 +100,7 @@ namespace freeling {
           WARNING(L"Invalid mention type "<<typ<<" in file "<<filename<<L". Using default (NounPhrase).");
           t=mention::NOUN_PHRASE;
         }
-	mention_tags.insert(make_pair(tag,t));
+	mention_tags.insert(make_pair(tag,make_pair(fun,t)));
 	break;
       }
 
@@ -143,13 +143,20 @@ namespace freeling {
     bool found_mention = false;
 
     wstring tag = Tags->get_short_tag(h->get_word().get_tag());
-    if (mention_tags.find(tag)!=mention_tags.end() and
-        excluded.find(h->get_word().get_lemma())==excluded.end()) {
+    auto p = mention_tags.find(tag);
+
+    // If the tag is in the list of mention tags, and the function is different from the 
+    // forbiden value (if any), then it is a valid mention
+    if (p!=mention_tags.end() and
+        excluded.find(h->get_word().get_lemma())==excluded.end() and
+        (p->second.first==L"-" or h->get_label()!=p->second.first)) {
+
       // candidate mention, store it
-      mention m(mentn, sentn, se, h);
-      
-      // deduce mention type from its tag and nearby tree.
-      m.set_type(check_type(h));
+      mention m(mentn, sentn, se, h);      
+      // if is is a coordination, set appropriate type, otherwise use type from config file
+      if (is_coordination(h)) m.set_type(mention::COMPOSITE);
+      else m.set_type(p->second.second);
+      // store maximality 
       m.set_maximal(maximal);
       mentions.push_back(m);
       ++mentn;
@@ -167,8 +174,9 @@ namespace freeling {
         
         // use word previous to coordination as mention end
         mention m(mentn, sentn, se, h, s->get_word().get_position()-1);
+        // use type given by head tag
+        m.set_type(p->second.second);
 
-        m.set_type(check_type(h,false));
         mentions.push_back(m);
         ++mentn;
       }
@@ -181,27 +189,14 @@ namespace freeling {
 
 
   /////////////////////////////////////////////////
-  /// Decide mention type, depending on its tag and tree
-  /// whole==true -> use all subtree for coordinations
-  /// whole==false -> ignore coordinations
+  /// check whether given depnode is heading a coordination
   /////////////////////////////////////////////////
 
-  mention::mentionType mention_detector_dep::check_type(dep_tree::const_iterator h, bool whole) const {
-
-    wstring tag = Tags->get_short_tag(h->get_word().get_tag());
-    map<wstring,mention::mentionType>::const_iterator t = mention_tags.find(tag);
-  
-    if (whole) {
-      // taking into account coordinations. Look for one.
-      bool found = false;    
-      for (dep_tree::const_sibling_iterator s=h.sibling_begin(); s!=h.sibling_end() and not found; ++s)
-        found = s->get_label() == CoordLabel;
-
-      if (found) return mention::COMPOSITE;
-    }
-
-    // if not coordinations present or we are ignorig them, use the type given by the tag.
-    return t->second;
+  bool mention_detector_dep::is_coordination(dep_tree::const_iterator h) const {
+    bool found = false;    
+    for (dep_tree::const_sibling_iterator s=h.sibling_begin(); s!=h.sibling_end() and not found; ++s)
+      found = (s->get_label() == CoordLabel);
+    return found;
   }
 
   /////////////////////////////////////////////////

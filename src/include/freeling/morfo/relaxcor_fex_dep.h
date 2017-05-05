@@ -230,7 +230,7 @@ namespace freeling {
       morph_features(const std::wstring&);
       ~morph_features();
       
-      wchar_t get_type(const std::wstring&) const;
+      bool has_type(const std::wstring&, wchar_t) const;
       wchar_t get_human(const std::wstring&) const;
       wchar_t get_person(const std::wstring&) const;
       wchar_t get_number(const std::wstring&) const;
@@ -240,7 +240,8 @@ namespace freeling {
       static relaxcor_fex_dep::TFeatureValue compatible_gender(wchar_t, wchar_t);
       
     private:
-      std::map<std::wstring,std::wstring> _Words;
+      std::map<std::wstring,std::wstring> _PronFeats;
+      std::map<std::wstring,std::wstring> _PronTypes;
       
       wchar_t get_feature(const std::wstring &w, int k) const;      
     };
