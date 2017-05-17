@@ -7,4 +7,4 @@ dict-dependencies = ../maps/dependencies.map
 wdir = .
 wt = 002
 wavg = 1
-multiroot = 1
+multiroot = 0

@@ -101,7 +101,7 @@ namespace freeling {
       return false;
     }
     if (!(word_syms_ = fst::SymbolTable::ReadText(word_syms_rxfilename_))) {
-      ERROR_CRASH(L"Could not read symbol table from file " + util::string2wstring(word_syms_rxfilename_));
+      ERROR_CRASH(L"Could not read symbol table from file " << util::string2wstring(word_syms_rxfilename_) );
     }
     return true;
   }
@@ -121,7 +121,7 @@ namespace freeling {
 
         std::wstring ws = util::string2wstring(s);
         if (ws == L"") {
-          WARNING(L"Word-id " + std::to_wstring(input.words[i]) + L" not in symbol table.");
+          WARNING(L"Word-id " << input.words[i] << L" not in symbol table.");
         } else {
           outss << ws;
         }
@@ -140,8 +140,9 @@ namespace freeling {
   }
 
   void OnlineDecoder::Decode(Request &request, Response &response) {
-    if (request.Frequency() != decoder_frequency_)
-      ERROR_CRASH(L"Audio frequency doesn't match decoder frequency. Audio frequency: " + util::string2wstring(std::to_string(request.Frequency())) + L", decoder frequency: " + util::string2wstring(std::to_string(decoder_frequency_)));
+    if (request.Frequency() != decoder_frequency_) {
+      ERROR_CRASH(L"Audio frequency doesn't match decoder frequency. Audio frequency: " << request.Frequency() << L", decoder frequency: " << decoder_frequency_ );
+    }
     
     /// INITIALIZE THE DECODER
     InputStarted();

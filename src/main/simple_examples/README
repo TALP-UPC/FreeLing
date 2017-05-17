@@ -203,3 +203,27 @@
   Where 'freelinsharedir' is an absolute path to the directrory
   share/freeling under freeling installation directory 
   (e.g. /usr/local)
+
+
+  ** ASR.cc ****
+
+  This program shows the use of the Automatic Speech Recognition module.
+  Given an audio input, the most likely sentences are obtained as text.
+
+  Use it with
+    ./asr config-file  nbest channel  < input-audio.b64
+
+  E.g. 
+    ./asr /usr/local/share/freeling/en/asr/general-16k.dat 3 0 myaudio.wav
+
+  The input file must be a .wav file.  Note that the model file is dependent
+  on the sampling rate. You need to use a model with the appropriate sampling
+  rate for the input file.
+
+  'nbest' is the number of desired output alternative sentences (typically 1)
+  'channel' is the channel to decode (in case the input is e.g. stereo)
+            For mono input, use channel 0.
+
+   IMPORTANT:  For this example to work, you need to have Kaldi installed
+            and FreeLing must be compiled with option --with-kaldi-asr=path 
+            See INSTALL file in freeling source root directory for details.
