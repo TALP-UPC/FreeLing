@@ -125,6 +125,6 @@ namespace treeler {
   };
 }
 
-#include "treeler/learn/perceptron-v0.1.tcc"
+#include "treeler/algo/perceptron-v0.1.tcc"
 
 #endif /* LEARN_PERCEPTRON_H */
