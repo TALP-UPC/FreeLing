@@ -287,4 +287,18 @@ namespace freeling {
   }
 
 
+  ////////////////////////////////////////////
+  /// Extract sample rate of a WAV header. Return zero in case of any error
+  ////////////////////////////////////////////
+  
+  int asr::extract_frequency(const string &rawdata) {
+    std::istringstream stream(std::ios_base::binary);
+    stream.str(rawdata);
+    
+    kaldi::WaveInfoHolder wh;
+    if (not wh.Read(stream)) return 0;
+    
+    return (int) wh.Value().SampFreq();    
+  }
+
 } // namespace

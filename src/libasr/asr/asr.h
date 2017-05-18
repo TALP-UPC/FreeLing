@@ -41,6 +41,8 @@ class asr {
   // Returns the frequency of the decoder contained in the class 
   // NECESSARY?
   int getFrequency() const;
+
+  static int extract_frequency(const std::string &rawdata);
   
  private:
   std::string usage_;
