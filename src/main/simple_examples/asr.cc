@@ -3,7 +3,6 @@
 
 #include "freeling/morfo/util.h"
 #include "asr/asr.h"
-#include "asr/base64.h"
 #include "feat/wave-reader.h"
 #include "base/kaldi-types.h"
 #include "matrix/kaldi-vector.h"
