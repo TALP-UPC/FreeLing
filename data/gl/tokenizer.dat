@@ -24,10 +24,10 @@ INDEX_SEQUENCE  0  (\.{4,}|-{2,}|\*{2,}|_{2,}|/{2,})
 INITIALS1       1  ([A-Z](\.[A-Z])+)(\.\.\.)
 INITIALS2 	0  ([A-Z]\.)+
 TIMES           0  (([01]?[0-9]|2[0-4]):[0-5][0-9])
-NAMES_CODES	0  ({ALPHA}|{SYMNUM})*[0-9]({ALPHA}|[0-9]|{SYMNUM}+{ALPHANUM})*
 THREE_DOTS 	0  (\.\.\.)
 QUOTES	        0  (``|<<|>>|'')
 MAILS 	        0  {ALPHANUM}+([\._]{ALPHANUM}+)*@{ALPHANUM}+([\._]{ALPHANUM}+)*
+NAMES_CODES	0  ({ALPHA}|{SYMNUM})*[0-9]({ALPHA}|[0-9]|{SYMNUM}+{ALPHANUM})*
 URLS            1  (^(news|http|https|ftp|ftps)://[^\s]+)
 URLS0 	        1  (^(www(\.[\w\-\/\~]+)+))
 URLS1 	        0  ((mailto:|(news|http|https|ftp|ftps)://)[\w\.\-/]+|^(www(\.[\w\-/]+)+))

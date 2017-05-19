@@ -24,11 +24,11 @@ OTHERS     .
 INDEX_SEQUENCE   0  (\.{4,}|-{2,}|\*{2,}|_{2,}|/{2,})
 INITIALS1 	 1  ([A-Z](\.[A-Z])+)(\.\.\.)
 INITIALS2 	 0  ([A-Z]\.)+
-TIMES           0  (([01]?[0-9]|2[0-4]):[0-5][0-9])
-NAMES_CODES	0  ({ALPHA}|{SYMNUM})*[0-9]({ALPHA}|[0-9]|{SYMNUM}+{ALPHANUM})*
+TIMES            0  (([01]?[0-9]|2[0-4]):[0-5][0-9])
 THREE_DOTS 	 0  (\.\.\.)
 QUOTES	         0  (``|<<|>>|'')
 MAILS 	         0  {ALPHANUM}+([\._]{ALPHANUM}+)*@{ALPHANUM}+([\._]{ALPHANUM}+)*
+NAMES_CODES	 0  ({ALPHA}|{SYMNUM})*[0-9]({ALPHA}|[0-9]|{SYMNUM}+{ALPHANUM})*
 URLS1  	         0  ((mailto:|(news|http|https|ftp|ftps)://)[\w\.\-/]+|^(www(\.[\w\-/]+)+))
 URLS2            1  ([\w\.\-/]+\.(com|org|net))[\s]
 CONTRACT1        1  ({ALPHA}+)('([sdm]|ma|na|m|th|ch|i|u|n|un|r)({NOALPHANUM}|$))

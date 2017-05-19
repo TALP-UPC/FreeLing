@@ -26,10 +26,10 @@ INITIALS1 	 1  ([A-Z](\.[A-Z])+)(\.\.\.)
 INITIALS2 	 0  ([A-Z]\.)+
 TIMES            0  (([01]?[0-9]|2[0-4]):[0-5][0-9])
 DAYNUMS		 1  ([0-3]?[0-9]\.)\s*(Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember) CI
-NAMES_CODES	 0  ({ALPHA}|{SYMNUM})*[0-9]({ALPHA}|[0-9]|{SYMNUM}+{ALPHANUM})*
 THREE_DOTS 	 0  (\.\.\.)
 QUOTES	         0  (``|<<|>>|'')
 MAILS 	         0  {ALPHANUM}+([\._]{ALPHANUM}+)*@{ALPHANUM}+([\._]{ALPHANUM}+)*
+NAMES_CODES	 0  ({ALPHA}|{SYMNUM})*[0-9]({ALPHA}|[0-9]|{SYMNUM}+{ALPHANUM})*
 URLS1 	         0  ((mailto:|(news|http|https|ftp|ftps)://)[\w\.\-/]+|^(www(\.[\w\-/]+)+))
 URLS2            1  ([\w\.\-/]+\.(com|org|net))[\s]
 ##CONTRACT_0a      1  (i'(m|d|ll|ve))({NOALPHANUM}|$) CI
