@@ -8,10 +8,10 @@ AM_CXXFLAGS = -Wno-unused-local-typedefs
 
 lib_LTLIBRARIES = libasr.la
 
-libasr_la_SOURCES = asr/asr.cc asr/base64.cc asr/Nnet3LatgenFasterDecoder.cc asr/OnlineDecoder.cc asr/Request.cc asr/Response.cc
+libasr_la_SOURCES = asr/asr.cc asr/Nnet3LatgenFasterDecoder.cc asr/OnlineDecoder.cc asr/Request.cc asr/Response.cc
 
 librarydir=$(includedir)
-nobase_library_HEADERS = asr/asr.h asr/base64.h asr/Decoder.h asr/Nnet3LatgenFasterDecoder.h asr/OnlineDecoder.h asr/Request.h asr/Response.h
+nobase_library_HEADERS = asr/asr.h asr/Decoder.h asr/Nnet3LatgenFasterDecoder.h asr/OnlineDecoder.h asr/Request.h asr/Response.h
 
 libasr_la_LIBADD = $(KALDI_DEPS) -lfreeling
 

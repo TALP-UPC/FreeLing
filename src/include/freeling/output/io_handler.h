@@ -43,7 +43,7 @@ namespace freeling {
       io_handler();
       /// destructor
       ~io_handler();
-
+      
       // load tagset rules for PoS shortening and MSD descriptions
       void load_tagset(const std::wstring &ftag);
       // set language 
