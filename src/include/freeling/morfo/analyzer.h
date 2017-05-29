@@ -199,6 +199,8 @@ class WINDLL analyzer {
                        bool flush, 
                        splitter::session_id sp_ses) const;
 
+   static std::wistream& safe_getline(std::wistream& is, std::wstring& t);
+
  public:
    typedef analyzer_config_options config_options;
    typedef analyzer_invoke_options invoke_options;
