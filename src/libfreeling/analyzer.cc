@@ -340,6 +340,37 @@ void analyzer::analyze(list<sentence> &ls) const {
 }
 
 
+wistream& analyzer::safe_getline(wistream& is, wstring& t)  {
+  t.clear();
+  
+  // The characters in the stream are read one-by-one using a std::streambuf.
+  // That is faster than reading them one-by-one using the std::istream.
+  // Code that uses streambuf this way must be guarded by a sentry object.
+  // The sentry object performs various tasks,
+  // such as thread synchronization and updating the stream state.
+  
+  std::wistream::sentry se(is, true);
+  std::wstreambuf* sb = is.rdbuf();
+  
+  for(;;) {
+    wchar_t c = sb->sbumpc();
+    switch (c) {
+    case L'\n':
+      return is;
+    case L'\r':
+      if(sb->sgetc() == '\n') sb->sbumpc();
+      return is;
+    case EOF:
+      // Also handle the case when the last line has no line ending
+      if (t.empty()) is.setstate(std::ios::eofbit);
+      return is;
+    default:
+      t += (wchar_t) c;
+    }
+  }
+}
+  
+  
 //---------------------------------------------
 // Apply analyzer cascade to sentences in 'text',
 // return results as a single document.
@@ -361,7 +392,7 @@ void analyzer::analyze(const wstring &text, document &doc, bool parag) const {
     wistringstream tin(text);
     wstring line;
     wstring paragraph;
-    while (getline(tin,line)) {
+    while (safe_getline(tin,line)) {
       if (line.empty()) {
         doc.push_back(list<sentence>());
         tokenize_split(paragraph, doc.back(), offs, av, nsent, true, sp_ses);
