@@ -33,6 +33,7 @@ using namespace std;
 
 namespace freeling {
 
+  ///----------------------------------------------------------------------
   word_pos::word_pos(const word &w_p, const sentence &s_p, int n_paragraph,
                      int n_sentence, int position) : w(w_p), s(s_p) {
     this->n_paragraph = n_paragraph;
@@ -40,16 +41,16 @@ namespace freeling {
     this->position = position;
   }
 
-  bool word_pos::operator==(word_pos other) const {
+  bool word_pos::operator==(const word_pos &other) const {
     return n_paragraph == other.n_paragraph && n_sentence == other.n_sentence && position == other.position;
   }
 
-  bool word_pos::operator<(word_pos other) const {
+  bool word_pos::operator<(const word_pos &other) const {
     if (n_sentence < other.n_sentence) return true;
     else return n_sentence == other.n_sentence && position < other.position;
   }
 
-  bool word_pos::operator>(word_pos other) const {
+  bool word_pos::operator>(const word_pos &other) const {
     if (n_sentence > other.n_sentence) return true;
     else return n_sentence == other.n_sentence && position > other.position;
   }
@@ -60,6 +61,7 @@ namespace freeling {
     return res;
   }
 
+  ///----------------------------------------------------------------------
   related_words::related_words(const word_pos &w_p1, const word_pos &w_p2,
                                double relatedness) : w1(w_p1), w2(w_p2) {
     this->relatedness = relatedness;
@@ -71,19 +73,19 @@ namespace freeling {
     return res;
   }
 
-  relation::relation(const wstring s, const wstring t) : label(s), compatible_tag(t) {}
+  ///----------------------------------------------------------------------
+  int relation::max_distance = 0;
+
+  relation::relation(RelType s, const wstring &t) : label(s), compatible_tag(t) { }
 
   relation::~relation() {}
-
-  int relation::max_distance = 0;
 
   bool relation::is_compatible(const word &w) const {
     return compatible_tag.search(w.get_tag());
   }
 
-  same_word::same_word(wstring expr) : relation(L"Same Word", expr) {
-
-  }
+  ///----------------------------------------------------------------------
+  same_word::same_word(const wstring &expr) : relation(relation::SAME_WORD, expr) {}
 
   bool same_word::compute_word (const word &w, const sentence &s, const document &doc,
                                 int n_paragraph, int n_sentence, int position, list<word_pos> &words,
@@ -136,15 +138,15 @@ namespace freeling {
     return res;
   }
 
-  hypernymy::hypernymy(int k, double alpha, const wstring &semfile, wstring expr) : relation(L"Hypernymy", expr) {
-    if (semdb == NULL) semdb = new semanticDB(semfile);
+  ///----------------------------------------------------------------------
+  hypernymy::hypernymy(int k, double alpha, const wstring &semfile, const wstring &expr) : relation(relation::HYPERNYMY, expr) {
+    semdb = new semanticDB(semfile);
     depth = k;
     this->alpha = alpha;
   }
 
-  semanticDB * hypernymy::semdb = NULL;
-  int hypernymy::depth = 0;
-  double hypernymy::alpha = 0.9;
+  void hypernymy::set_depth(int d) { depth = d; }
+  int hypernymy::get_depth() const { return depth; }
 
   const word_pos &hypernymy::count_relations(int n, const list<related_words> &relations) const {
     unordered_map<wstring, int> wp_count;
@@ -233,7 +235,7 @@ namespace freeling {
     return res;
   }
 
-  int hypernymy::hypernymyAux(wstring s1, wstring s2, int k) const {
+  int hypernymy::hypernymyAux(const wstring &s1, const wstring &s2, int k) const {
     if (k <= depth) {
       if (s1 == s2) {
         return k;
@@ -289,7 +291,8 @@ namespace freeling {
     return inserted;
   }
 
-  same_coref_group::same_coref_group(wstring expr) : relation(L"Same Coreference Group", expr) { }
+  ///----------------------------------------------------------------------
+  same_coref_group::same_coref_group(const wstring &expr) : relation(relation::SAME_COREF_GROUP, expr) { }
 
   double same_coref_group::get_homogeneity_index(const list<word_pos> &words, const list<related_words> &relations,
                                                  const unordered_map<wstring, pair<int, word_pos*> > &unique_words) const {

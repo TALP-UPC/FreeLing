@@ -40,6 +40,9 @@ namespace freeling {
 #define MOD_TRACECODE SUMMARIZER_TRACE
 #define MOD_TRACENAME L"SUMMARIZER"
 
+  /// static members
+  relation* summarizer::default_relation = new same_word(L"^(N|V)");
+
   ////////////////////////////////////////////////////////////////
   /// Constructor
   ////////////////////////////////////////////////////////////////
@@ -144,7 +147,7 @@ namespace freeling {
     cfg.close();
 
     // if no relations defined, use default
-    if (used_relations.size() == 0) used_relations.insert(new same_word(L"^(NP|VB|NN)"));
+    if (used_relations.empty()) used_relations.insert(default_relation);
 
     TRACE(1, L"Module sucessfully loaded");
   }
@@ -156,13 +159,15 @@ namespace freeling {
   summarizer::~summarizer() {
     for (set<relation*>::iterator r=used_relations.begin(); r!=used_relations.end(); r++)
       delete (*r);
+    for (set<relation*>::iterator r=unused_relations.begin(); r!=unused_relations.end(); r++)
+      delete (*r);
   }
 
   ////////////////////////////////////////////////////////////////
   /// Computes and returns the average scores of the lexical chains.
   ////////////////////////////////////////////////////////////////
 
-  double summarizer::average_scores(map<wstring, list<lexical_chain> > &chains) const {
+  double summarizer::average_scores(map<relation::RelType, list<lexical_chain> > &chains) const {
     double sum = 0;
     int size = 0;
     for (set<relation*>::const_iterator r=used_relations.begin(); r!=used_relations.end(); r++) {
@@ -178,7 +183,7 @@ namespace freeling {
   /// Computes and returns the standard deviation of the lexical chains scores.
   ////////////////////////////////////////////////////////////////
 
-  double summarizer::standard_deviation_scores(map<wstring, list<lexical_chain> > &chains,
+  double summarizer::standard_deviation_scores(map<relation::RelType, list<lexical_chain> > &chains,
                                                const double avg) const {
     double sd = 0;
     int size = 0;
@@ -195,7 +200,7 @@ namespace freeling {
   /// Concatenate all the lists in the map chains_type into a single list.
   ////////////////////////////////////////////////////////////////
 
-  list<lexical_chain> summarizer::map_to_lists(map<wstring, list<lexical_chain> > &chains) const {
+  list<lexical_chain> summarizer::map_to_lists(map<relation::RelType, list<lexical_chain> > &chains) const {
     list<lexical_chain> spliced_lists;
     for (set<relation*>::const_iterator r=used_relations.begin(); r!=used_relations.end(); r++) 
       spliced_lists.splice(spliced_lists.end(), chains[(*r)->label]);
@@ -248,7 +253,7 @@ namespace freeling {
   /// which form the summary using the heuristic FirstWord.  
   ////////////////////////////////////////////////////////////////
 
-  list<word_pos> summarizer::first_word(map<wstring, list<lexical_chain> > &chains, int num_words) const {
+  list<word_pos> summarizer::first_word(map<relation::RelType, list<lexical_chain> > &chains, int num_words) const {
     list<lexical_chain> lexical_chains = map_to_lists(chains);
     lexical_chains.sort(compare_lexical_chains);
     set<const sentence*> sent_set;
@@ -266,7 +271,7 @@ namespace freeling {
   /// which form the summary using the heuristic FirstWord.  
   ////////////////////////////////////////////////////////////////
 
-  list<word_pos> summarizer::first_most_weighted_word(map<wstring, list<lexical_chain> > &chains, int num_words) const {
+  list<word_pos> summarizer::first_most_weighted_word(map<relation::RelType, list<lexical_chain> > &chains, int num_words) const {
     list<lexical_chain> lexical_chains = map_to_lists(chains);
     lexical_chains.sort(compare_lexical_chains);
     set<const sentence*> sent_set;
@@ -298,7 +303,7 @@ namespace freeling {
   /// which form the summary using the heuristic SumOfChainWeights 
   ////////////////////////////////////////////////////////////////
 
-  list<word_pos> summarizer::sum_of_chain_weights(map<wstring, list<lexical_chain> > &chains, int num_words) const {
+  list<word_pos> summarizer::sum_of_chain_weights(map<relation::RelType, list<lexical_chain> > &chains, int num_words) const {
     list<lexical_chain> lexical_chains = map_to_lists(chains);
     lexical_chains.sort(compare_lexical_chains);
 
@@ -356,8 +361,8 @@ namespace freeling {
   /// Builds all the lexical chains.
   ////////////////////////////////////////////////////////////////
 
-  map<wstring, list<lexical_chain>> summarizer::build_lexical_chains(const document &doc) const {
-    map<wstring, list<lexical_chain>> chains;
+  map<relation::RelType, list<lexical_chain>> summarizer::build_lexical_chains(const document &doc) const {
+    map<relation::RelType, list<lexical_chain>> chains;
     for (set<relation*>::const_iterator it_t = used_relations.begin(); it_t != used_relations.end(); it_t++) {
       relation *rel = *it_t;
       int i = 0;
@@ -393,7 +398,7 @@ namespace freeling {
   /// Remove lexical chains with only one word
   ////////////////////////////////////////////////////////////////
 
-  void summarizer::remove_one_word_lexical_chains(map<wstring, list<lexical_chain>> &chains) const {
+  void summarizer::remove_one_word_lexical_chains(map<relation::RelType, list<lexical_chain>> &chains) const {
     for (set<relation*>::const_iterator it_t = used_relations.begin(); it_t != used_relations.end(); it_t++) {
       list<lexical_chain> &lc = chains[(*it_t)->label];
       list<lexical_chain>::iterator it = lc.begin();
@@ -411,7 +416,7 @@ namespace freeling {
   /// Remove lexical chains which does not satisfy the strength criterion.
   ////////////////////////////////////////////////////////////////
 
-  void summarizer::remove_weak_lexical_chains(map<wstring, list<lexical_chain>> &chains) const {
+  void summarizer::remove_weak_lexical_chains(map<relation::RelType, list<lexical_chain>> &chains) const {
     double avg = average_scores(chains);
     double sd = standard_deviation_scores(chains, avg);
 
@@ -432,7 +437,7 @@ namespace freeling {
   /// Print lexical chains. Only for debugging.
   ////////////////////////////////////////////////////////////////
 
-  void summarizer::print_lexical_chains(map<wstring, list<lexical_chain>> &chains) const {
+  void summarizer::print_lexical_chains(map<relation::RelType, list<lexical_chain>> &chains) const {
     for (set<relation*>::const_iterator it_t = used_relations.begin(); it_t != used_relations.end(); it_t++) {
       list<lexical_chain> &lexical_chains = chains[(*it_t)->label];
       for (list<lexical_chain>::iterator it = lexical_chains.begin(); it != lexical_chains.end(); it++)
@@ -451,7 +456,7 @@ namespace freeling {
   list<const sentence*> summarizer::summarize(const document &doc, int num_words) const {
 
     // building lexical chains
-    map<wstring, list<lexical_chain> > chains = build_lexical_chains(doc);
+    map<relation::RelType, list<lexical_chain> > chains = build_lexical_chains(doc);
 
     // remove one word lexical chains
     remove_one_word_lexical_chains(chains);
@@ -495,6 +500,59 @@ namespace freeling {
 
     return (res);
   }
+  
+  void summarizer::set_heuristic(summarizer::Heuristics h) { heuristic = h; }
+  summarizer::Heuristics summarizer::get_heuristic() const { return heuristic; }
+  
+  void summarizer::set_only_strong(bool s) { only_strong = s; }
+  bool summarizer::get_only_strong() const { return only_strong; }
+  
+  void summarizer::set_remove_used_chains(bool s) { remove_used_lexical_chains = s; }
+  bool summarizer::get_remove_used_chains() const { return remove_used_lexical_chains; }
+  
+
+  void summarizer::move_relations(relation::RelType t, set<relation*> &from, set<relation*> &to) {
+    set<relation*>::iterator r=from.begin(); 
+    while (r!=from.end()) {
+      if ((*r)->label == t) {
+        to.insert(*r);
+        r = from.erase(r);
+      }
+      else
+        ++r;
+    }
+  }
+
+  void summarizer::enable_all_relations() {
+    // for each existing relation type, enable relations
+    enable_relation(relation::SAME_WORD);   
+    enable_relation(relation::SAME_COREF_GROUP);   
+    enable_relation(relation::HYPERNYMY);   
+  }
+
+  void summarizer::disable_all_relations() {
+    // for each existing relation type, disable relations
+    disable_relation(relation::SAME_WORD);   
+    disable_relation(relation::SAME_COREF_GROUP);   
+    disable_relation(relation::HYPERNYMY);   
+  }
+
+  void summarizer::enable_relation(relation::RelType t) {
+    // if only the default relation is active, deactivate it 
+    if (used_relations.size()==1 and (*used_relations.begin()) == summarizer::default_relation) 
+      used_relations.clear();
+    // move relations with given type from disabled to enabled list
+    move_relations(t, unused_relations, used_relations);
+  }
+
+  void summarizer::disable_relation(relation::RelType t) {
+    // move relations with given type from enabled to disabled list
+    move_relations(t, unused_relations, used_relations);
+    // if no relations left, use default
+    if (used_relations.empty()) 
+      used_relations.insert(default_relation);
+  }
+
 
 
 } // namespace

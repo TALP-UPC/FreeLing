@@ -7,7 +7,7 @@ MaxDistanceBetweenWords 6
 </General>
 
 <Relations>
-SameWord ^(NP|V|NC)
-SameCoreferenceGroup ^(NP|NN|PRP|Z)
-Hypernymy ^(NP|V|NC) 2 0.6
+SameWord ^(NP|V|NN)
+SameCoreferenceGroup ^(NP|NN|PRP)
+Hypernymy ^(NP|V|NN) 2 0.6
 </Relations>

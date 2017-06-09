@@ -54,6 +54,20 @@ namespace freeling {
 
     typedef enum {FIRST_WORD,FIRST_MOST_WEIGHT,WEIGHT_SUM} Heuristics;
 
+    void set_heuristic(Heuristics h);
+    Heuristics get_heuristic() const;
+
+    void set_only_strong(bool s);
+    bool get_only_strong() const;
+
+    void set_remove_used_chains(bool s);
+    bool get_remove_used_chains() const;
+
+    void enable_all_relations();
+    void disable_all_relations();
+    void enable_relation(relation::RelType);
+    void disable_relation(relation::RelType);
+
   private:
 
     /// If true, the used lexical_chains will be removed.
@@ -66,35 +80,40 @@ namespace freeling {
     double alpha;
     /// Path to the semantic DB.
     std::wstring semdb_path;
-    /// A set with the relations that will be used.
+    /// A set with active relations 
     std::set<relation*> used_relations;
+    /// A set with available but disabled relations
+    std::set<relation*> unused_relations;
     /// A string that indicates the heuristic that will be used.
     Heuristics heuristic;
 
+    // relation to use if none is defined
+    static relation* default_relation;
+
     /// Builds all the lexical chains.
-    std::map<std::wstring, std::list<lexical_chain>> build_lexical_chains(const freeling::document &doc) const;
+    std::map<relation::RelType, std::list<lexical_chain>> build_lexical_chains(const freeling::document &doc) const;
 
     /// Remove the lexical chains with only one word
-    void remove_one_word_lexical_chains(std::map<std::wstring, std::list<lexical_chain>> &chains) const;
+    void remove_one_word_lexical_chains(std::map<relation::RelType, std::list<lexical_chain>> &chains) const;
 
     /// Remove the lexical chains which does not satisfy the strength criterion.
-    void remove_weak_lexical_chains(std::map<std::wstring, std::list<lexical_chain>> &chains) const;
+    void remove_weak_lexical_chains(std::map<relation::RelType, std::list<lexical_chain>> &chains) const;
     
     /// Print the lexical chains. Only for debugging.
-    void print_lexical_chains(std::map<std::wstring, std::list<lexical_chain>> &chains) const;
+    void print_lexical_chains(std::map<relation::RelType, std::list<lexical_chain>> &chains) const;
     
     /// Counts the number of occurences of the word w in the document doc.
     int count_occurences(const freeling::word &w, const freeling::document &doc) const;
     
     /// Computes and returns the average scores of the lexical chains.
-    double average_scores(std::map<std::wstring, std::list<lexical_chain> > &chains_type) const;
+    double average_scores(std::map<relation::RelType, std::list<lexical_chain> > &chains_type) const;
     
     /// Computes and returns the standard deviation of the lexical chains scores.
-    double standard_deviation_scores(std::map<std::wstring, std::list<lexical_chain> > &chains_type,
+    double standard_deviation_scores(std::map<relation::RelType, std::list<lexical_chain> > &chains_type,
                                      const double avg) const;
     
     /// Concatenate all the lists in the map chains_type into a single list.
-    std::list<lexical_chain> map_to_lists(std::map<std::wstring,
+    std::list<lexical_chain> map_to_lists(std::map<relation::RelType,
                                           std::list<lexical_chain> > &chains_type) const;
     
     /// Auxiliar function for first_word and first_most_weighted_word function. Computes
@@ -105,21 +124,23 @@ namespace freeling {
     
     /// Returns the list of sentences embedded in a word_pos struct which composes the
     /// summary using the heuristic FirstWord.
-    std::list<word_pos> first_word(std::map<std::wstring,
+    std::list<word_pos> first_word(std::map<relation::RelType,
                                    std::list<lexical_chain> > &chains_type, int num_words) const;
     
     /// Returns the list of sentences embedded in a word_pos struct which composes the
     /// summary using the heuristic FirstMostWeightedWord.
-    std:: list<word_pos> first_most_weighted_word(std::map<std::wstring, 
+    std:: list<word_pos> first_most_weighted_word(std::map<relation::RelType, 
                                                   std::list<lexical_chain> > &chains, 
                                                   int num_words) const;
     
     /// Returns the list of sentences embedded in a word_pos struct which composes the
     /// summary using the heuristic SumOfChainWeights.
-    std::list<word_pos> sum_of_chain_weights(std::map<std::wstring, 
+    std::list<word_pos> sum_of_chain_weights(std::map<relation::RelType, 
                                              std::list<lexical_chain> > &chains, 
                                              int num_words) const;
 
+    // move relations of given type from list "from" to list "to"
+    void move_relations(relation::RelType t, std::set<relation*> &from, std::set<relation*> &to);
   };
 
 } // namespace

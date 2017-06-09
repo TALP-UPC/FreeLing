@@ -54,13 +54,13 @@ namespace freeling {
              int n_paragraph, int n_sentence, int position);
 
     /// Two words are equal if they are in the same position, phrase and paragraph.
-    bool operator==(word_pos other) const;
+    bool operator==(const word_pos &other) const;
 
     /// One word is smaller than other one if it appears later in the text.
-    bool operator<(word_pos other) const;
+    bool operator<(const word_pos &other) const;
 
     /// One word is greater than other one if it appears sooner in the text.
-    bool operator>(word_pos other) const;
+    bool operator>(const word_pos &other) const;
 
     /// Get a string representation of the word_pos to debug
     std::wstring toString() const;
@@ -92,16 +92,19 @@ namespace freeling {
   class relation {
   public:
 
-    /// Label with the name of the related. It is used for debugging.
-    const std::wstring label;
+    // types of relations
+    typedef enum {SAME_WORD, SAME_COREF_GROUP, HYPERNYMY} RelType;
+
+    /// Label with the name of the relation. It is used for debugging.
+    const RelType label;
     /// The maximum distance in phrases between two words to be related
     static int max_distance;
 
     /// Constructor
-    relation(const std::wstring s, const std::wstring t);
+    relation(RelType s, const std::wstring &t);
 
     /// Destructor
-    ~relation();
+    virtual ~relation();
 
     /// True if the words tag is compatible with the relation
     bool is_compatible(const freeling::word &w) const;
@@ -138,7 +141,7 @@ namespace freeling {
   public:
 
     /// Constructor
-    same_word(std::wstring expr);
+    same_word(const std::wstring &expr);
 
     /// Computes the homogeinity index of the given structures using the specific formula
     /// of this relation.
@@ -173,7 +176,7 @@ namespace freeling {
   public:
 
     /// Constructor
-    hypernymy(int k, double alpha, const std::wstring &semfile, std::wstring expr);
+    hypernymy(int k, double alpha, const std::wstring &semfile, const std::wstring &expr);
 
     /// Computes the homogeinity index of the given structures using the specific formula
     /// of this relation.
@@ -194,17 +197,21 @@ namespace freeling {
     std::list<word_pos> order_words_by_weight(const std::unordered_map<std::wstring,
                                               std::pair<int, word_pos*> > &unique_words) const;
 
+    // get/set depth
+    void set_depth(int d);
+    int get_depth() const;
+
   private:
 
     /// Semantic DB to check the hypernymy.
-    static freeling::semanticDB * semdb;
+    freeling::semanticDB * semdb;
     /// Maximum depth.
-    static int depth;
+    int depth;
     /// Used to compute the homogeinity index.
-    static double alpha;
+    double alpha;
 
     /// Recursive auxiliar function to check if two words are related.
-    int hypernymyAux(std::wstring s1, std::wstring s2, int k) const;
+    int hypernymyAux(const std::wstring &s1, const std::wstring &s2, int k) const;
 
     /// Gets the word which appears in most relations.
     const word_pos &count_relations(int n, const std::list<related_words> &relations) const;
@@ -221,7 +228,7 @@ namespace freeling {
   public:
 
     /// Constructor
-    same_coref_group(std::wstring expr);
+    same_coref_group(const std::wstring &expr);
 
     /// Computes the homogeinity index of the given structures using the specific formula
     /// of this relation.
