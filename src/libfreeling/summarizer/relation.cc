@@ -42,17 +42,21 @@ namespace freeling {
   }
 
   bool word_pos::operator==(const word_pos &other) const {
-    return n_paragraph == other.n_paragraph && n_sentence == other.n_sentence && position == other.position;
+    return (n_paragraph == other.n_paragraph and 
+            n_sentence == other.n_sentence and 
+            position == other.position);
   }
 
   bool word_pos::operator<(const word_pos &other) const {
-    if (n_sentence < other.n_sentence) return true;
-    else return n_sentence == other.n_sentence && position < other.position;
+    return (n_paragraph < other.n_paragraph or
+            (n_paragraph == other.n_paragraph and n_sentence < other.n_sentence) or
+            (n_paragraph == other.n_paragraph and n_sentence == other.n_sentence and position < other.position));
   }
 
   bool word_pos::operator>(const word_pos &other) const {
-    if (n_sentence > other.n_sentence) return true;
-    else return n_sentence == other.n_sentence && position > other.position;
+    return (n_paragraph > other.n_paragraph or
+            (n_paragraph == other.n_paragraph and n_sentence > other.n_sentence) or
+            (n_paragraph == other.n_paragraph and n_sentence == other.n_sentence and position > other.position));
   }
 
   wstring word_pos::toString() const {
