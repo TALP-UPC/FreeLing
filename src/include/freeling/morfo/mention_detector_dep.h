@@ -60,7 +60,11 @@ namespace freeling {
     tagset *Tags;
 
     bool is_coordination(dep_tree::const_iterator h) const;
-    void detect_mentions(freeling::dep_tree::const_iterator h, freeling::paragraph::const_iterator se, int sentn, bool maximal, std::vector<mention> & mentions, int &mentn) const;
+    void detect_mentions(freeling::dep_tree::const_iterator h, 
+                         freeling::paragraph::const_iterator se, 
+                         int sentn, bool maximal,
+                         std::vector<mention> & mentions, int &mentn) const;
+    bool check_mention_tags(freeling::dep_tree::const_iterator h, mention::mentionType &t) const;
 
   public:
     /// Constructor

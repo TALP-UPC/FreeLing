@@ -125,6 +125,8 @@ namespace freeling {
     static TFeatureValue mention_2_you(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue mention_1_we(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue mention_2_we(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue mention_1_it(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue mention_2_it(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue mention_1_singular(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue mention_2_singular(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue mention_1_3pers(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
@@ -191,7 +193,7 @@ namespace freeling {
     static bool initial_match(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
 
     /// single mention 
-    static bool match_pronoun_features(const mention &m, wchar_t type, wchar_t per, wchar_t num, 
+    static bool match_pronoun_features(const mention &m, const std::wstring &, const std::wstring &pgn,
                                        feature_cache &fcache, const relaxcor_fex_dep &fex);
     static wchar_t get_gender(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static wchar_t get_number(const mention &m, feature_cache &fcache, const relaxcor_fex_dep &fex);
@@ -230,7 +232,7 @@ namespace freeling {
       morph_features(const std::wstring&);
       ~morph_features();
       
-      bool has_type(const std::wstring&, wchar_t) const;
+      bool has_type(const std::wstring&, const std::wstring&) const;
       wchar_t get_human(const std::wstring&) const;
       wchar_t get_person(const std::wstring&) const;
       wchar_t get_number(const std::wstring&) const;

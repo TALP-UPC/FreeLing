@@ -200,6 +200,8 @@ namespace freeling {
     _FeatureFunction[L"RCF_J_YOU"] = make_pair(&relaxcor_fex_dep::mention_2_you, ff_YES);
     _FeatureFunction[L"RCF_I_WE"] = make_pair(&relaxcor_fex_dep::mention_1_we, ff_YES);
     _FeatureFunction[L"RCF_J_WE"] = make_pair(&relaxcor_fex_dep::mention_2_we, ff_YES);
+    _FeatureFunction[L"RCF_I_IT"] = make_pair(&relaxcor_fex_dep::mention_1_it, ff_YES);
+    _FeatureFunction[L"RCF_J_IT"] = make_pair(&relaxcor_fex_dep::mention_2_it, ff_YES);
 
     _FeatureFunction[L"RCF_I_NUMBER_SG"] = make_pair(&relaxcor_fex_dep::mention_1_singular, ff_YES);
     _FeatureFunction[L"RCF_J_NUMBER_SG"] = make_pair(&relaxcor_fex_dep::mention_2_singular, ff_YES);
@@ -354,8 +356,8 @@ namespace freeling {
     }
     else {
       // check whether the head or first are in the list of indefinite pronouns/adjectives
-      ind = fex._Morf.has_type(m.get_head().get_lemma(),L'I') or
-        fex._Morf.has_type(m.get_it_begin()->get_lemma(),L'I');
+      ind = fex._Morf.has_type(m.get_head().get_lemma(),L"I") or
+        fex._Morf.has_type(m.get_it_begin()->get_lemma(),L"I");
       
       fcache.set_feature(fid,util::int2wstring(ind));
       TRACE(7,L"     " << fid << L" = "<< (ind?L"yes":L"no"));
@@ -401,7 +403,7 @@ namespace freeling {
     }
     else {
       // check whether the mention is a reflexive pronoun
-      rp = fex._Morf.has_type(m.get_head().get_lemma(),L'R');
+      rp = fex._Morf.has_type(m.get_head().get_lemma(),L"R");
       fcache.set_feature(fid,util::int2wstring(rp));
       TRACE(7,L"     " << fid << L" = "<< (rp?L"yes":L"no"));
     }
@@ -423,7 +425,7 @@ namespace freeling {
     else {
       // check whether the mention is a possessive
       rp = (fex.get_label_RE(L"TAG_Poss").search(m.get_head().get_tag()) and 
-            fex._Morf.has_type(m.get_head().get_lemma(),L'P'));
+            fex._Morf.has_type(m.get_head().get_lemma(),L"P"));
       fcache.set_feature(fid,util::int2wstring(rp));
       TRACE(7,L"     " << fid << L" = "<< (rp?L"yes":L"no"));
     }
@@ -496,20 +498,23 @@ namespace freeling {
   ///    Returns whether m1 matches given pronoun features
   ////////////////////////////////////////////////////
   
-  bool relaxcor_fex_dep::match_pronoun_features(const mention &m, wchar_t type, wchar_t per, wchar_t num, feature_cache &fcache, const relaxcor_fex_dep &fex) {
+  bool relaxcor_fex_dep::match_pronoun_features(const mention &m, const wstring &type, const wstring &pgn, feature_cache &fcache, const relaxcor_fex_dep &fex) {
 
-    wstring code(3,L'.'); code[0]=type; code[1]=per; code[2]=num;
-    wstring fid = util::int2wstring(m.get_id())+L":PRONFEAT:"+code;
+    wstring fid = util::int2wstring(m.get_id())+L":PRONFEAT:"+type+L"/"+pgn;
     bool pf;
     if (fcache.computed_feature(fid)) {
       pf = util::wstring2int(fcache.get_feature(fid));
       TRACE(6,L"     " << fid << L" = " << (pf?L"yes":L"no") << "  (cached)");
     }
     else {
+      wchar_t per = pgn[0];
+      wchar_t gen = pgn[1];
+      wchar_t num = pgn[2];
       wstring w=m.get_head().get_lemma();
-      pf = (type==L'-' or fex._Morf.has_type(w,type))  
+      pf = (type==L"-" or fex._Morf.has_type(w,type))
         and (per==L'-' or fex._Morf.get_person(w)==per) 
-        and morph_features::compatible_number(fex._Morf.get_number(w), num)==ff_YES;
+        and (gen==L'-' or morph_features::compatible_gender(fex._Morf.get_gender(w), gen)==ff_YES)
+        and (num==L'-' or morph_features::compatible_number(fex._Morf.get_number(w), num)==ff_YES);
 
       fcache.set_feature(fid, util::int2wstring(pf));
       TRACE(6,L"     " << fid << L" = " << (pf?L"yes":L"no"));
@@ -993,8 +998,8 @@ namespace freeling {
     }
     else {
       // m1 is SBJ and m2 is PRD of a copulative verb (or viceversa), and they are not possessive
-      r = ( not fex._Morf.has_type(m1.get_head().get_lemma(),L'P') and  // not possessives 
-            not fex._Morf.has_type(m2.get_head().get_lemma(),L'P') and
+      r = ( not fex._Morf.has_type(m1.get_head().get_lemma(),L"P") and  // not possessives 
+            not fex._Morf.has_type(m2.get_head().get_lemma(),L"P") and
             fex.get_label_RE(L"FUN_Subject").search(m1.get_dtree()->get_label()) and
             fex.get_label_RE(L"FUN_Predicate").search(m2.get_dtree()->get_label())  and
             m1.get_dtree().get_parent() == m2.get_dtree().get_parent() and
@@ -1412,32 +1417,42 @@ namespace freeling {
   ///    Returns whether mention 1 is "I"
   relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::mention_1_I(const mention &m1, const mention &m2,
                                                                 feature_cache &fcache, const relaxcor_fex_dep &fex) {
-    return (match_pronoun_features(m1,L'-',L'1',L's',fcache,fex) ? ff_YES : ff_NO);
+    return (match_pronoun_features(m1,L"-",L"1-s",fcache,fex) ? ff_YES : ff_NO);
   }
   ///    Returns whether mention 2 is "I"
   relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::mention_2_I(const mention &m1, const mention &m2,
                                                                 feature_cache &fcache, const relaxcor_fex_dep &fex) {
-    return (match_pronoun_features(m2,L'-',L'1',L's',fcache,fex) ? ff_YES : ff_NO);
+    return (match_pronoun_features(m2,L"-",L"1-s",fcache,fex) ? ff_YES : ff_NO);
   }
   ///    Returns whether mention 1 is "you"
   relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::mention_1_you(const mention &m1, const mention &m2,
                                                                   feature_cache &fcache, const relaxcor_fex_dep &fex) {
-    return (match_pronoun_features(m1,L'-',L'2',L'0',fcache,fex) ? ff_YES : ff_NO);
+    return (match_pronoun_features(m1,L"-",L"2-0",fcache,fex) ? ff_YES : ff_NO);
   }
   ///    Returns whether mention 2 is "you"
   relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::mention_2_you(const mention &m1, const mention &m2,
                                                                   feature_cache &fcache, const relaxcor_fex_dep &fex) {
-    return (match_pronoun_features(m2,L'S',L'2',L'0',fcache,fex) ? ff_YES : ff_NO);
+    return (match_pronoun_features(m2,L"-",L"2-0",fcache,fex) ? ff_YES : ff_NO);
   }
   ///    Returns whether mention 1 is "we"
   relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::mention_1_we(const mention &m1, const mention &m2,
                                                                   feature_cache &fcache, const relaxcor_fex_dep &fex) {
-    return (match_pronoun_features(m1,L'-',L'1',L'p',fcache,fex) ? ff_YES : ff_NO);
+    return (match_pronoun_features(m1,L"-",L"1-p",fcache,fex) ? ff_YES : ff_NO);
   }
   ///    Returns whether mention 2 is "we"
   relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::mention_2_we(const mention &m1, const mention &m2,
                                                                   feature_cache &fcache, const relaxcor_fex_dep &fex) {
-    return (match_pronoun_features(m2,L'-',L'1',L'p',fcache,fex) ? ff_YES : ff_NO);
+    return (match_pronoun_features(m2,L"-",L"1-p",fcache,fex) ? ff_YES : ff_NO);
+  }
+  ///    Returns whether mention 1 is "it"
+  relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::mention_1_it(const mention &m1, const mention &m2,
+                                                                  feature_cache &fcache, const relaxcor_fex_dep &fex) {
+    return (match_pronoun_features(m1,L"SOPR",L"3ns",fcache,fex) ? ff_YES : ff_NO);
+  }
+  ///    Returns whether mention 2 is "it"
+  relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::mention_2_it(const mention &m1, const mention &m2,
+                                                                  feature_cache &fcache, const relaxcor_fex_dep &fex) {
+    return (match_pronoun_features(m2,L"SOPR",L"3ns",fcache,fex) ? ff_YES : ff_NO);
   }
   ///    Returns whether mention 1 is singular
   relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::mention_1_singular(const mention &m1, const mention &m2,
@@ -2070,12 +2085,22 @@ namespace freeling {
 
 
   /// --------------------------------------------------------
-  /// get type, person, number, or gender
+  /// get type, and see if it is one of the given in t
 
-  bool relaxcor_fex_dep::morph_features::has_type(const wstring &w, wchar_t t) const { 
+  bool relaxcor_fex_dep::morph_features::has_type(const wstring &w, const wstring &t) const { 
     auto p = _PronTypes.find(w);
-    return  (p!=_PronTypes.end() and p->second.find(t)!=wstring::npos);
+    // not in the list, no type to check. 
+    if (p==_PronTypes.end()) 
+      return false; 
+    // check all types in t and see if the word has any of them
+    for (int i=0; i<t.size(); ++i)
+      if (p->second.find(t[i]) != wstring::npos) 
+        return true;
+    // no searched types found
+    return false;
   }
+
+  // get morhpological atributes
   wchar_t relaxcor_fex_dep::morph_features::get_human(const wstring &w) const { return get_feature(w,0); }
   wchar_t relaxcor_fex_dep::morph_features::get_person(const wstring &w) const { return get_feature(w,1); }
   wchar_t relaxcor_fex_dep::morph_features::get_gender(const wstring &w) const { return get_feature(w,2); }

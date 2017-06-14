@@ -89,7 +89,7 @@ namespace freeling {
       }
 
       case MTAGS: {
-        // list of tags that are extracted as mentions
+        // list of tags (or lemmas) that are extracted as mentions
         wstring tag, fun, typ;
         sin >> tag >> fun >> typ;
         mention::mentionType t;
@@ -135,6 +135,39 @@ namespace freeling {
   }
 
   /////////////////////////////////////////////////
+  /// Check whether the tag/lemma/function of the word
+  /// match some rule in "mention_tags", return mention type in "t" if so.
+  /////////////////////////////////////////////////
+  
+  bool mention_detector_dep::check_mention_tags(freeling::dep_tree::const_iterator h, mention::mentionType &t) const {
+
+    wstring tag = Tags->get_short_tag(h->get_word().get_tag());
+    wstring lem = h->get_word().get_lemma();
+    wstring fun = h->get_label();
+
+    // if the lemma is in excluded list, forget about it.
+    if (excluded.find(lem)!=excluded.end()) return false;
+
+    // the tag is in the list, and the function is not the barrier => it's a mention
+    auto p = mention_tags.find(tag);
+    if (p!=mention_tags.end() and
+        (p->second.first==L"-" or fun!=p->second.first)) {
+      t = p->second.second;
+      return true;
+    }
+
+    // the lemma is in the list, and the function is not the barrier => it's a mention
+    auto q = mention_tags.find(lem);
+    if (q!=mention_tags.end() and
+        (q->second.first==L"-" or fun!=q->second.first)) {
+      t = q->second.second;
+      return true;
+    }
+
+    return false;
+  }
+
+  /////////////////////////////////////////////////
   /// Recursively navigate the tree, extracting mentions
   /////////////////////////////////////////////////
   
@@ -142,20 +175,14 @@ namespace freeling {
 
     bool found_mention = false;
 
-    wstring tag = Tags->get_short_tag(h->get_word().get_tag());
-    auto p = mention_tags.find(tag);
-
-    // If the tag is in the list of mention tags, and the function is different from the 
-    // forbiden value (if any), then it is a valid mention
-    if (p!=mention_tags.end() and
-        excluded.find(h->get_word().get_lemma())==excluded.end() and
-        (p->second.first==L"-" or h->get_label()!=p->second.first)) {
+    mention::mentionType type;    
+    if (check_mention_tags(h, type)) {
 
       // candidate mention, store it
       mention m(mentn, sentn, se, h);      
       // if is is a coordination, set appropriate type, otherwise use type from config file
       if (is_coordination(h)) m.set_type(mention::COMPOSITE);
-      else m.set_type(p->second.second);
+      else m.set_type(type);
       // store maximality 
       m.set_maximal(maximal);
       mentions.push_back(m);
@@ -175,7 +202,7 @@ namespace freeling {
         // use word previous to coordination as mention end
         mention m(mentn, sentn, se, h, s->get_word().get_position()-1);
         // use type given by head tag
-        m.set_type(p->second.second);
+        m.set_type(type);
 
         mentions.push_back(m);
         ++mentn;
