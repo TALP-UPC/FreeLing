@@ -220,7 +220,7 @@ namespace freeling {
   /// Auxiliar function for first_word and first_most_weighted_word function.
   /// Computes whether a sentence should be included in the summary
   ////////////////////////////////////////////////////////////////
-
+  /*
   void summarizer::compute_sentence(const list<word_pos> &wps, list<word_pos> &wp_list,
                                     set<const sentence*> &sent_set, int &acc_n_words,
                                     int num_words) const {
@@ -247,22 +247,48 @@ namespace freeling {
       }
     }
   }
-
+  */
+  
   ////////////////////////////////////////////////////////////////
   /// Returns a list of word_pos containing the sentences
   /// which form the summary using the heuristic FirstWord.  
   ////////////////////////////////////////////////////////////////
 
-  list<word_pos> summarizer::first_word(map<relation::RelType, list<lexical_chain> > &chains, int num_words) const {
+  list<word_pos> summarizer::first_word(map<relation::RelType, list<lexical_chain> > &chains, int num_words, bool use_weights) const {
     list<lexical_chain> lexical_chains = map_to_lists(chains);
     lexical_chains.sort(compare_lexical_chains);
     set<const sentence*> sent_set;
     list<word_pos> wp_list;
     int acc_n_words = 0;
-    for (list<lexical_chain>::const_iterator it = lexical_chains.begin(); it != lexical_chains.end(); it++) {
-      const list<word_pos> &wps = it->get_words();
-      compute_sentence(wps, wp_list, sent_set, acc_n_words, num_words);
+
+    for (list<lexical_chain>::const_iterator ch=lexical_chains.begin(); ch!=lexical_chains.end() and acc_n_words<num_words; ch++) {
+
+      list<word_pos>::const_iterator chainwords_begin, chainwords_end;
+      if (use_weights) {
+        chainwords_begin = ch->get_ordered_words().begin();
+        chainwords_end = ch->get_ordered_words().end();
+      }
+      else { 
+        chainwords_begin = ch->get_words().begin();
+        chainwords_end = ch->get_words().end();
+      }
+
+      bool stop = false;
+      list<word_pos>::const_iterator wp = chainwords_begin;
+      while (wp!=chainwords_end and acc_n_words<num_words and not stop) {
+
+        if (sent_set.find(&wp->s) == sent_set.end()) {          
+          sent_set.insert(&wp->s);
+          acc_n_words += wp->s.size();
+          wp_list.push_back(*wp);
+
+          if (remove_used_lexical_chains) stop = true;          
+        }
+
+        ++wp;
+      }
     }
+
     return wp_list;
   }
 
@@ -270,19 +296,19 @@ namespace freeling {
   /// Returns a list of word_pos containing the sentences
   /// which form the summary using the heuristic FirstMostWeight
   ////////////////////////////////////////////////////////////////
-
+  /*
   list<word_pos> summarizer::first_most_weighted_word(map<relation::RelType, list<lexical_chain> > &chains, int num_words) const {
     list<lexical_chain> lexical_chains = map_to_lists(chains);
     lexical_chains.sort(compare_lexical_chains);
     set<const sentence*> sent_set;
     list<word_pos> wp_list;
     int acc_n_words = 0;
-    for (list<lexical_chain>::const_iterator it = lexical_chains.begin(); it != lexical_chains.end(); it++) {
-      list<word_pos> wps = it->get_ordered_words();
-      compute_sentence(wps, wp_list, sent_set, acc_n_words, num_words);
+    for (list<lexical_chain>::const_iterator ch = lexical_chains.begin(); ch != lexical_chains.end(); ch++) {
+      compute_sentence(ch->get_ordered_words(), wp_list, sent_set, acc_n_words, num_words);
     }
     return wp_list;
   }
+  */
 
   ////////////////////////////////////////////////////////////////
   /// Auxiliary to sort sentences by score and position
@@ -335,21 +361,11 @@ namespace freeling {
     int acc_n_words = 0;
     list<word_pos> wp_list;
     for (list<pair<double, const word_pos*> >::const_iterator swp=score_wp_list.begin();
-         swp!=score_wp_list.end() and acc_n_words < num_words; swp++) {
-      int s_size = 0;
-      const word_pos *wp = swp->second;
-      const sentence &s = (wp->s);
-
-      // Counting the number of words (here we exclude commas, points,
-      // exclamation symbols, etc...)
-      for (sentence::const_iterator w=s.begin(); w!=s.end(); w++) {
-        if (w->get_tag()[0] != L'F') 
-          s_size++;
-      }
+         swp!=score_wp_list.end() and acc_n_words<num_words; swp++) {
 
       if (acc_n_words <= num_words) {
-        acc_n_words += s_size;
-        wp_list.push_back(*wp);
+        acc_n_words += swp->second->s.size();
+        wp_list.push_back(*swp->second);
       }
     }
     return wp_list;
@@ -468,8 +484,8 @@ namespace freeling {
     // select most relevant sentences using active heuristic
     list<word_pos> wp_res;
     switch (heuristic) {
-      case FIRST_WORD: wp_res = first_word(chains, num_words); break;
-      case FIRST_MOST_WEIGHT: wp_res = first_most_weighted_word(chains, num_words); break;
+    case FIRST_WORD: wp_res = first_word(chains, num_words, false); break;
+    case FIRST_MOST_WEIGHT: wp_res = first_word(chains, num_words, true); break;
       case WEIGHT_SUM: wp_res = sum_of_chain_weights(chains, num_words); break;
     }
 

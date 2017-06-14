@@ -118,20 +118,21 @@ namespace freeling {
     
     /// Auxiliar function for first_word and first_most_weighted_word function. Computes
     /// a sentence to include it in the summary or not.
-    void compute_sentence(const std::list<word_pos> &wps, std::list<word_pos> &wp_list,
-                          std::set<const freeling::sentence*> &sent_set, int &acc_n_words,
-                          int num_words) const;
+    //void compute_sentence(const std::list<word_pos> &wps, std::list<word_pos> &wp_list,
+    //                      std::set<const freeling::sentence*> &sent_set, int &acc_n_words,
+    //                      int num_words) const;
     
     /// Returns the list of sentences embedded in a word_pos struct which composes the
     /// summary using the heuristic FirstWord.
     std::list<word_pos> first_word(std::map<relation::RelType,
-                                   std::list<lexical_chain> > &chains_type, int num_words) const;
+                                   std::list<lexical_chain> > &chains_type, 
+                                   int num_words, bool use_weights) const;
     
     /// Returns the list of sentences embedded in a word_pos struct which composes the
     /// summary using the heuristic FirstMostWeightedWord.
-    std:: list<word_pos> first_most_weighted_word(std::map<relation::RelType, 
-                                                  std::list<lexical_chain> > &chains, 
-                                                  int num_words) const;
+    //std:: list<word_pos> first_most_weighted_word(std::map<relation::RelType, 
+    //                                              std::list<lexical_chain> > &chains, 
+    //                                              int num_words) const;
     
     /// Returns the list of sentences embedded in a word_pos struct which composes the
     /// summary using the heuristic SumOfChainWeights.
