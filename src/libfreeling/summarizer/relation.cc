@@ -75,6 +75,8 @@ namespace freeling {
 
   ///----------------------------------------------------------------------
   int relation::max_distance = 0;
+  freeling::regexp relation::re_np(L"^NP");
+  freeling::regexp relation::re_nn(L"^N[NC]");
 
   relation::relation(RelType s, const wstring &t) : label(s), compatible_tag(t) { }
 
@@ -88,25 +90,26 @@ namespace freeling {
   same_word::same_word(const wstring &expr) : relation(relation::SAME_WORD, expr) {}
 
   bool same_word::compute_word (const word &w, const sentence &s, const document &doc,
-                                int n_paragraph, int n_sentence, int position, list<word_pos> &words,
+                                int n_paragraph, int n_sentence, int position, 
+                                list<word_pos> &words,
                                 list<related_words> &relations, 
                                 unordered_map<wstring,pair<int, word_pos*> > &unique_words) const {
-    bool found = false;
-    word_pos * wp = NULL;
 
-    if (words.size() > 0 && is_compatible(w)) {
-      for (list<word_pos>::const_iterator it_w = words.begin(); it_w != words.end(); it_w++) {
-        // if the computed word form is equal to any word form from the lexical chain
-        // and their distance in sentences does not exceeds max_distance, then add it
-        if (words.begin()->w.get_lc_form() == w.get_lc_form() &&
-            (n_sentence - it_w->n_sentence) <= max_distance) {
-          if (!found) {
-            wp = new word_pos(w, s, n_paragraph, n_sentence, position);
-            found = true;
-          }
-          related_words rel_w(*wp, *it_w, 1);
-          relations.push_back(rel_w);
+    // if relation is not applicable to this word, forget it.
+    if (not is_compatible(w)) return false;
+
+    // if the new word is equal to any word from in the chain 'words'
+    // and within distance range, add it to the chain.
+    bool found = false;
+    word_pos *wp = NULL;
+    for (list<word_pos>::const_iterator it_w = words.begin(); it_w != words.end(); it_w++) {
+      if (words.begin()->w.get_lc_form() == w.get_lc_form() and (n_sentence-it_w->n_sentence) <= max_distance) {
+        if (not found) {
+          wp = new word_pos(w, s, n_paragraph, n_sentence, position);
+          found = true;
         }
+        related_words rel_w(*wp, *it_w, 1);
+        relations.push_back(rel_w);
       }
     }
 
@@ -117,6 +120,7 @@ namespace freeling {
       if (it_uw == unique_words.end()) unique_words[form] = pair<int, word_pos*>(1, wp);
       else (it_uw->second).first++;
     }
+
     return found;
   }
 
@@ -126,15 +130,13 @@ namespace freeling {
   }
 
 
-  list<word_pos> same_word::order_words_by_weight(const unordered_map<wstring,
-                                                  pair<int, word_pos*> > &unique_words) const {
+  list<word_pos> same_word::order_words_by_weight(const unordered_map<wstring,pair<int,word_pos*> > &unique_words) const {
     // In the same_word relation, we return word_pos ordered by its apparition order, so
     // we just need to convert it into a list of word_pos
     list<word_pos> res;
-    for (unordered_map<wstring, pair<int, word_pos*> >::const_iterator it = unique_words.begin();
-         it != unique_words.end(); it++) {
-      res.push_back(*(it->second).second);
-    }
+    for (auto w = unique_words.begin(); w != unique_words.end(); ++w) 
+      res.push_back(*(w->second).second);
+
     return res;
   }
 
@@ -214,24 +216,21 @@ namespace freeling {
     return res;
   }
 
-  bool order_by_score (const pair<int, word_pos*> &p1, const pair<int, word_pos*> &p2)
-  {
+  bool order_by_score (const pair<int, word_pos*> &p1, const pair<int, word_pos*> &p2) {
     return (p1.first >= p2.first);
   }
 
-  list<word_pos> hypernymy::order_words_by_weight(const unordered_map<wstring,
-                                                  pair<int, word_pos*> > &unique_words) const {
+  list<word_pos> hypernymy::order_words_by_weight(const unordered_map<wstring,pair<int,word_pos*> > &unique_words) const {
     list<pair<int, word_pos*> > lst_to_order;
-    for (unordered_map<wstring, pair<int, word_pos*> >::const_iterator it = unique_words.begin();
-         it != unique_words.end(); it++) {
-      lst_to_order.push_back(it->second);
-    }
+    for (auto uw = unique_words.begin(); uw != unique_words.end(); ++uw) 
+      lst_to_order.push_back(uw->second);
+
     lst_to_order.sort(order_by_score);
+
     list<word_pos> res;
-    for (list<pair<int, word_pos*> >::const_iterator it = lst_to_order.begin();
-         it != lst_to_order.end(); it++) {
-      res.push_back(*it->second);
-    }
+    for (auto w = lst_to_order.begin(); w != lst_to_order.end(); ++w) 
+      res.push_back(*(w->second));
+
     return res;
   }
 
@@ -251,7 +250,8 @@ namespace freeling {
   }
 
   bool hypernymy::compute_word (const word &w, const sentence &s, const document &doc,
-                                int n_paragraph, int n_sentence, int position, list<word_pos> &words,
+                                int n_paragraph, int n_sentence, int position, 
+                                list<word_pos> &words,
                                 list<related_words> &relations,
                                 unordered_map<wstring, pair<int, word_pos*> > &unique_words) const {
 
@@ -298,40 +298,40 @@ namespace freeling {
                                                  const unordered_map<wstring, pair<int, word_pos*> > &unique_words) const {
     int nnc = 0;
     int nnp = 0;
-    regexp re_np(L"^NP");
-    regexp re_nn(L"^NN");
     for (unordered_map<wstring, pair<int, word_pos*> >::const_iterator it = unique_words.begin();
          it != unique_words.end(); it++) {
-      if (re_np.search((it->second).second->w.get_tag())) {
+      if (relation::re_np.search((it->second).second->w.get_tag())) 
         nnp++;
-      } else if (re_nn.search((it->second).second->w.get_tag())) {
+      else if (relation::re_nn.search((it->second).second->w.get_tag())) 
         nnc++;
-      }
     }
     double numerator = 0;
     if (nnp > 0) numerator = nnp;
     else if (nnc > 0) numerator = nnc;
     else numerator = unique_words.size();
-    return (1.0 - (double) (numerator / words.size()));
+    return (1.0 - numerator/words.size());
   }
 
-  bool order_by_tag_and_score (const pair<int, word_pos*> &p1, const pair<int, word_pos*> &p2)
-  {
+  bool order_by_tag_and_score (const pair<int, word_pos*> &p1, const pair<int, word_pos*> &p2) {
     wstring tag1 = p1.second->w.get_tag();
     wstring tag2 = p2.second->w.get_tag();
-    regexp re_np(L"^NP");
-    regexp re_nn(L"^NN");
-    bool aux = re_np.search(tag2);
-    if (re_np.search(tag1) && !aux) return true;
-    if (aux) return false;
-    aux = re_nn.search(tag2);
-    if (re_nn.search(tag1) && !aux) return true;
-    if (aux) return false;
+
+    bool np1 = relation::re_np.search(tag1);
+    bool np2 = relation::re_np.search(tag2);
+    if (np1 and np2) return (p1.first >= p2.first);
+    else if (np1) return true;
+    else if (np2) return false; 
+
+    bool nn1 = relation::re_nn.search(tag1);
+    bool nn2 = relation::re_nn.search(tag2);
+    if (nn1 and nn2) return (p1.first >= p2.first);
+    else if (nn1) return true;
+    else if (nn2) return false; 
+
     return (p1.first >= p2.first);
   }
 
-  list<word_pos> same_coref_group::order_words_by_weight(const unordered_map<wstring,
-                                                         pair<int, word_pos*> > &unique_words) const {
+  list<word_pos> same_coref_group::order_words_by_weight(const unordered_map<wstring,pair<int,word_pos*> > &unique_words) const {
     list<pair<int, word_pos*> > lst_to_order;
     for (unordered_map<wstring, pair<int, word_pos*> >::const_iterator it = unique_words.begin();
          it != unique_words.end(); it++) {
@@ -347,7 +347,8 @@ namespace freeling {
   }
 
   bool same_coref_group::compute_word (const word &w, const sentence &s, const document &doc,
-                                       int n_paragraph, int n_sentence, int position, list<word_pos> &words,
+                                       int n_paragraph, int n_sentence, int position,
+                                       list<word_pos> &words,
                                        list<related_words> &relations, 
                                        unordered_map<wstring,pair<int, word_pos*> > &unique_words) const {
 
@@ -385,7 +386,6 @@ namespace freeling {
     }
     return false;
   }
-
 
 } //namespace
 

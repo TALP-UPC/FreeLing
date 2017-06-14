@@ -113,8 +113,8 @@ namespace freeling {
   bool lexical_chain::compute_word(const word &w, const sentence &s, const document &doc,
                                    int n_paragraph, int n_sentence, int position) {
     score = -1; // score needs to be computed again
-    return rel->compute_word(w, s, doc, n_paragraph, n_sentence, position, this->words,
-                             this->relations, this->unique_words);
+    return rel->compute_word(w, s, doc, n_paragraph, n_sentence, position, 
+                             this->words, this->relations, this->unique_words);
   }
 
 } // namespace

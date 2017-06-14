@@ -268,7 +268,7 @@ namespace freeling {
 
   ////////////////////////////////////////////////////////////////
   /// Returns a list of word_pos containing the sentences
-  /// which form the summary using the heuristic FirstWord.  
+  /// which form the summary using the heuristic FirstMostWeight
   ////////////////////////////////////////////////////////////////
 
   list<word_pos> summarizer::first_most_weighted_word(map<relation::RelType, list<lexical_chain> > &chains, int num_words) const {
@@ -277,10 +277,8 @@ namespace freeling {
     set<const sentence*> sent_set;
     list<word_pos> wp_list;
     int acc_n_words = 0;
-    for (list<lexical_chain>::const_iterator it = lexical_chains.begin();
-         it != lexical_chains.end(); it++) {
+    for (list<lexical_chain>::const_iterator it = lexical_chains.begin(); it != lexical_chains.end(); it++) {
       list<word_pos> wps = it->get_ordered_words();
-
       compute_sentence(wps, wp_list, sent_set, acc_n_words, num_words);
     }
     return wp_list;
@@ -363,24 +361,23 @@ namespace freeling {
 
   map<relation::RelType, list<lexical_chain>> summarizer::build_lexical_chains(const document &doc) const {
     map<relation::RelType, list<lexical_chain>> chains;
-    for (set<relation*>::const_iterator it_t = used_relations.begin(); it_t != used_relations.end(); it_t++) {
-      relation *rel = *it_t;
+    for (set<relation*>::const_iterator rel=used_relations.begin(); rel!=used_relations.end(); ++rel) {
       int i = 0;
       int j = 0;
-      for (list<paragraph>::const_iterator par=doc.begin(); par!=doc.end(); par++) {
-        for (paragraph::const_iterator sent=par->begin(); sent!=par->end(); sent++) {
+      for (list<paragraph>::const_iterator par=doc.begin(); par!=doc.end(); ++par) {
+        for (paragraph::const_iterator sent=par->begin(); sent!=par->end(); ++sent) {
           int k = 0;
-          for (sentence::const_iterator w=sent->begin(); w!=sent->end(); w++) {
-            if (rel->is_compatible(*w)) {
-              list<lexical_chain> &lc = chains[rel->label];
+          for (sentence::const_iterator w=sent->begin(); w!=sent->end(); ++w) {
+            if ((*rel)->is_compatible(*w)) {
+              list<lexical_chain> &lc = chains[(*rel)->label];
               bool inserted = false;
               // check addition of the word to every lexical chain
-              for (list<lexical_chain>::iterator ch=lc.begin(); ch!=lc.end(); ch++) 
+              for (list<lexical_chain>::iterator ch=lc.begin(); ch!=lc.end(); ++ch) 
                 inserted = inserted or ch->compute_word(*w, *sent, doc, i, j, k);
 
               // if the word was not inserted in any chain, then we build a new one
               if (not inserted) {
-                lexical_chain new_lc(rel, *w, *sent, i, j, k);
+                lexical_chain new_lc(*rel, *w, *sent, i, j, k);
                 lc.push_back(new_lc);
               }
             }

@@ -99,6 +99,8 @@ namespace freeling {
     const RelType label;
     /// The maximum distance in phrases between two words to be related
     static int max_distance;
+    static freeling::regexp re_np;
+    static freeling::regexp re_nn;
 
     /// Constructor
     relation(RelType s, const std::wstring &t);
@@ -109,11 +111,11 @@ namespace freeling {
     /// True if the words tag is compatible with the relation
     bool is_compatible(const freeling::word &w) const;
 
-    virtual bool compute_word (const freeling::word &w, const freeling::sentence &s,
-                               const freeling::document &doc, int n_paragraph,
-                               int n_sentence, int position, std::list<word_pos> &words,
-                               std::list<related_words> &relations, std::unordered_map<std::wstring,
-                               std::pair<int, word_pos*> > &unique_words) const = 0;
+    virtual bool compute_word (const freeling::word &w, const freeling::sentence &s, const freeling::document &doc, 
+                               int n_paragraph, int n_sentence, int position, 
+                               std::list<word_pos> &words,
+                               std::list<related_words> &relations, 
+                               std::unordered_map<std::wstring,std::pair<int, word_pos*> > &unique_words) const = 0;
 
     virtual double get_homogeneity_index(const std::list<word_pos> &words,
                                          const std::list<related_words> &relations,
