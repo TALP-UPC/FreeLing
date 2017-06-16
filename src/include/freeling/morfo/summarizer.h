@@ -126,7 +126,7 @@ namespace freeling {
     /// summary using the heuristic FirstWord.
     std::list<word_pos> first_word(std::map<relation::RelType,
                                    std::list<lexical_chain> > &chains_type, 
-                                   int num_words, bool use_weights) const;
+                                   int num_words, bool weighted) const;
     
     /// Returns the list of sentences embedded in a word_pos struct which composes the
     /// summary using the heuristic FirstMostWeightedWord.

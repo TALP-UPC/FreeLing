@@ -111,11 +111,16 @@ namespace freeling {
     /// True if the words tag is compatible with the relation
     bool is_compatible(const freeling::word &w) const;
 
+    /// Returns true and stores the word w in the list words, list relations and
+    /// unordered_map unique_words if w is compatible with the words in these
+    /// structures using this relation.
     virtual bool compute_word (const freeling::word &w, const freeling::sentence &s, const freeling::document &doc, 
                                int n_paragraph, int n_sentence, int position, 
                                std::list<word_pos> &words,
                                std::list<related_words> &relations, 
-                               std::unordered_map<std::wstring,std::pair<int, word_pos*> > &unique_words) const = 0;
+                               std::unordered_map<std::wstring,std::pair<int, word_pos*> > &unique_words) const;
+
+    virtual int matching_word(const word &w1, const word &w2) const;
 
     virtual double get_homogeneity_index(const std::list<word_pos> &words,
                                          const std::list<related_words> &relations,
@@ -152,14 +157,8 @@ namespace freeling {
                                  const std::unordered_map<std::wstring,
                                  std::pair<int, word_pos*> > &unique_words) const;
 
-    /// Returns true and stores the word w in the list words, list relations and
-    /// unordered_map unique_words if w is compatible with the words in these
-    /// structures using this relation.
-    bool compute_word (const freeling::word &w, const freeling::sentence &s,
-                       const freeling::document &doc, int n_paragraph,
-                       int n_sentence, int position, std::list<word_pos> &words,
-                       std::list<related_words> &relations, std::unordered_map<std::wstring,
-                       std::pair<int, word_pos*> > &unique_words) const;
+    /// see if w1 can be added to the same chain than w2, according to the relation
+    int matching_word(const word &w1, const word &w2) const;
 
     /// In same_word, the words in unique_words are not sorted because there is just
     /// one word. It returns the word_pos in unique_words in a list.
@@ -187,13 +186,8 @@ namespace freeling {
                                  const std::unordered_map<std::wstring,
                                  std::pair<int, word_pos*> > &unique_words) const;
 
-    /// Returns true and stores the word w in the list words, list relations and
-    /// unordered_map unique_words if w is compatible with the words in these
-    /// structures using this relation.
-    bool compute_word (const freeling::word &w, const freeling::sentence &s,
-                       const freeling::document &doc, int n_paragraph, int n_sentence,
-                       int position, std::list<word_pos> &words, std::list<related_words> &relations,
-                       std::unordered_map<std::wstring, std::pair<int, word_pos*> > &unique_words) const;
+    /// see if w1 can be added to the same chain than w2, according to the relation
+    int matching_word(const word &w1, const word &w2) const;
 
     /// Sorts the words in unique_words by word frequency and returns a list with them.
     std::list<word_pos> order_words_by_weight(const std::unordered_map<std::wstring,

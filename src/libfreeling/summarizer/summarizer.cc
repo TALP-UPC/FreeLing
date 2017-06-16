@@ -254,7 +254,7 @@ namespace freeling {
   /// which form the summary using the heuristic FirstWord.  
   ////////////////////////////////////////////////////////////////
 
-  list<word_pos> summarizer::first_word(map<relation::RelType, list<lexical_chain> > &chains, int num_words, bool use_weights) const {
+  list<word_pos> summarizer::first_word(map<relation::RelType, list<lexical_chain> > &chains, int num_words, bool weighted) const {
     list<lexical_chain> lexical_chains = map_to_lists(chains);
     lexical_chains.sort(compare_lexical_chains);
     set<const sentence*> sent_set;
@@ -264,7 +264,7 @@ namespace freeling {
     for (list<lexical_chain>::const_iterator ch=lexical_chains.begin(); ch!=lexical_chains.end() and acc_n_words<num_words; ch++) {
 
       list<word_pos>::const_iterator chainwords_begin, chainwords_end;
-      if (use_weights) {
+      if (weighted) {
         chainwords_begin = ch->get_ordered_words().begin();
         chainwords_end = ch->get_ordered_words().end();
       }
@@ -486,7 +486,7 @@ namespace freeling {
     switch (heuristic) {
     case FIRST_WORD: wp_res = first_word(chains, num_words, false); break;
     case FIRST_MOST_WEIGHT: wp_res = first_word(chains, num_words, true); break;
-      case WEIGHT_SUM: wp_res = sum_of_chain_weights(chains, num_words); break;
+    case WEIGHT_SUM: wp_res = sum_of_chain_weights(chains, num_words); break;
     }
 
     // sorts the sentences by position in the original text
