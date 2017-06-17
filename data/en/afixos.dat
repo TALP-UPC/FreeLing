@@ -57,6 +57,7 @@ sub-	*	^NN		*	0	0	0	A+L	0	-
 sub	*	^NN		*	0	0	0	A+L	0	-
 super-	*	^NN		*	0	0	0	A+L	0	-
 super	*	^NN		*	0	0	0	A+L	0	-
+meta	*	^NN		*	0	0	0	A+L	0	-
 
 ## added 23/07/2015
 auto	*	^NN	*	0	0	0	F	0	-
