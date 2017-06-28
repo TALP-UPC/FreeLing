@@ -49,8 +49,8 @@ namespace freeling {
     ~summarizer();
 
     /// Summarizes a document and returns the list of sentences that composes the summary.
-    std::list<const freeling::sentence*> summarize(const freeling::document &doc,
-                                                   int num_words) const;
+    std::list<std::pair<const freeling::sentence*,double> > summarize(const freeling::document &doc,
+                                                                      int num_words) const;
 
     typedef enum {FIRST_WORD,FIRST_MOST_WEIGHT,WEIGHT_SUM} Heuristics;
 

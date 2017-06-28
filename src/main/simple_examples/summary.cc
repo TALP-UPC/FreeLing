@@ -59,13 +59,13 @@ int main (int argc, char **argv) {
 
   // summarize document
   wcerr << L"Summarizing..." << endl;
-  list<const sentence*> selected_sentences = sum.summarize(doc, num_words);
-
+  list<pair<const sentence*,double> > selected_sentences = sum.summarize(doc, num_words);
+  
   // output results
-  for (list<const sentence*>::const_iterator s=selected_sentences.begin(); s!=selected_sentences.end(); s++) {
-    size_t beg=(*s)->front().get_span_start();
-    size_t end=(*s)->back().get_span_finish();
-    wcout << text.substr(beg, end-beg) << endl;
+  for (list<pair<const sentence*,double> >::const_iterator s=selected_sentences.begin(); s!=selected_sentences.end(); s++) {
+     size_t beg=(*s->first).front().get_span_start();
+     size_t end=(*s->first).back().get_span_finish();
+     wcout << s->second << L" [" << s->first->get_sentence_id() << L"] "<< text.substr(beg, end-beg) << endl;
   }
 
 }

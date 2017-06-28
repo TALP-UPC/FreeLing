@@ -2,12 +2,12 @@
 RemoveUsedChains false
 OnlyStrong false
 SemDBPath ./semdb.dat
-Heuristic FirstWord
+Heuristic SumOfChainWeights
 MaxDistanceBetweenWords 6
 </General>
 
 <Relations>
-SameWord ^(NP|V|NN)
-SameCoreferenceGroup ^(NP|NN|PRP)
-Hypernymy ^(NP|V|NN) 2 0.6
+SameWord             ^(NP|V|NN)    ^(be|have)$
+SameCoreferenceGroup ^(NP|NN|PRP)  -
+Hypernymy            ^(NP|V|NN)    ^(be|have)$   2   0.6
 </Relations>

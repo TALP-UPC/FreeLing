@@ -41,7 +41,7 @@ namespace freeling {
 #define MOD_TRACENAME L"SUMMARIZER"
 
   /// static members
-  relation* summarizer::default_relation = new same_word(L"^(N|V)");
+  relation* summarizer::default_relation = new same_word(L"^(N|V)", L"^(be|have)$");
 
   ////////////////////////////////////////////////////////////////
   /// Constructor
@@ -111,32 +111,32 @@ namespace freeling {
 
         break;
       }
-
+        
       case RELATIONS: {
         wistringstream sin;
         sin.str(line);
-        wstring elem, expr;
-        sin >> elem >> expr;
+        wstring elem, expr, excluded;
+        sin >> elem >> expr >> excluded;
         relation *rel = NULL;
- 
-       if (elem == L"SameWord") 
-          rel = new same_word(expr);
-
+        
+        if (elem == L"SameWord") {
+          rel = new same_word(expr, excluded);
+        }
         else if (elem == L"Hypernymy") {
           if (semdb_path.empty()) 
             ERROR_CRASH(L"Hypernymy relation used, but SemDBPath is not defined.\nPlease define SemDBPath in <General> section, placed before <Relations> section.");
           sin >> hypernymy_depth >> alpha;
-          rel = new hypernymy(hypernymy_depth, alpha, semdb_path, expr);
+          rel = new hypernymy(expr, excluded, hypernymy_depth, alpha, semdb_path);
         }
-
+        
         else if (elem == L"SameCoreferenceGroup") 
-          rel = new same_coref_group(expr);
-
+          rel = new same_coref_group(expr, excluded);
+        
         else {
           WARNING(L"Ignoring invalid line '"+line+L"' in file '"+datFile+L"'.");
           continue;
         }
-
+        
         used_relations.insert(rel);
         break;
       }
@@ -257,11 +257,12 @@ namespace freeling {
   list<word_pos> summarizer::first_word(map<relation::RelType, list<lexical_chain> > &chains, int num_words, bool weighted) const {
     list<lexical_chain> lexical_chains = map_to_lists(chains);
     lexical_chains.sort(compare_lexical_chains);
-    set<const sentence*> sent_set;
+
+    set<const sentence*> already_selected;
     list<word_pos> wp_list;
     int acc_n_words = 0;
 
-    for (list<lexical_chain>::const_iterator ch=lexical_chains.begin(); ch!=lexical_chains.end() and acc_n_words<num_words; ch++) {
+    for (list<lexical_chain>::iterator ch=lexical_chains.begin(); ch!=lexical_chains.end() and acc_n_words<num_words; ch++) {
 
       list<word_pos>::const_iterator chainwords_begin, chainwords_end;
       if (weighted) {
@@ -277,10 +278,11 @@ namespace freeling {
       list<word_pos>::const_iterator wp = chainwords_begin;
       while (wp!=chainwords_end and acc_n_words<num_words and not stop) {
 
-        if (sent_set.find(&wp->s) == sent_set.end()) {          
-          sent_set.insert(&wp->s);
+        if (already_selected.find(&wp->s) == already_selected.end()) {
+          already_selected.insert(&wp->s);
           acc_n_words += wp->s.size();
           wp_list.push_back(*wp);
+          wp_list.back().ch_score = ch->get_score();
 
           if (remove_used_lexical_chains) stop = true;          
         }
@@ -366,6 +368,7 @@ namespace freeling {
       if (acc_n_words <= num_words) {
         acc_n_words += swp->second->s.size();
         wp_list.push_back(*swp->second);
+        wp_list.back().ch_score = sentence_scores[swp->second->n_sentence].first;
       }
     }
     return wp_list;
@@ -434,12 +437,12 @@ namespace freeling {
     double sd = standard_deviation_scores(chains, avg);
 
     for (set<relation*>::const_iterator it_t = used_relations.begin(); it_t != used_relations.end(); it_t++) {
-      list<lexical_chain> &lexical_chains = chains[(*it_t)->label];
-      list<lexical_chain>::iterator it = lexical_chains.begin();
+      list<lexical_chain> &lc = chains[(*it_t)->label];
+      list<lexical_chain>::iterator it = lc.begin();
+      while (it != lc.end()) {
 
-      while (it != lexical_chains.end()) {
         if (it->get_score() <= (avg + 1.0 * sd)) 
-          it = lexical_chains.erase(it);
+          it = lc.erase(it);
         else 
           it++;
       }
@@ -466,7 +469,7 @@ namespace freeling {
   /// Summarizes a document and returns the list of sentences that form the summary.
   ////////////////////////////////////////////////////////////////
 
-  list<const sentence*> summarizer::summarize(const document &doc, int num_words) const {
+  list<pair<const sentence*,double>> summarizer::summarize(const document &doc, int num_words) const {
 
     // building lexical chains
     map<relation::RelType, list<lexical_chain> > chains = build_lexical_chains(doc);
@@ -479,7 +482,7 @@ namespace freeling {
       remove_weak_lexical_chains(chains);
 
     // debug
-    // print_lexical_chains(chains);
+    //print_lexical_chains(chains);
 
     // select most relevant sentences using active heuristic
     list<word_pos> wp_res;
@@ -493,9 +496,9 @@ namespace freeling {
     wp_res.sort();
 
     /// Transform the list of word_pos to a list of sentences.
-    list<const sentence*> res;
+    list<pair<const sentence*,double>> res;
     for (list<word_pos>::const_iterator it = wp_res.begin(); it != wp_res.end(); it++) 
-      res.push_back(&(it->s));
+      res.push_back(make_pair(&(it->s),it->ch_score));
 
     /// No sentences were selected (probably too short document, only 1-word chains).
     /// Get sentences from the beggining until we have enough words. 
@@ -504,7 +507,7 @@ namespace freeling {
       int done=false;
       for (document::const_iterator p=doc.begin(); p!=doc.end() and not done; p++) {
         for (paragraph::const_iterator s=p->begin(); s!=p->end() and not done; s++) {
-          res.push_back(&(*s));
+          res.push_back(make_pair(&(*s),1.0));
           n += s->size();
           done = (n>=num_words);
         }
@@ -560,7 +563,7 @@ namespace freeling {
 
   void summarizer::disable_relation(relation::RelType t) {
     // move relations with given type from enabled to disabled list
-    move_relations(t, unused_relations, used_relations);
+    move_relations(t, used_relations, unused_relations);
     // if no relations left, use default
     if (used_relations.empty()) 
       used_relations.insert(default_relation);

@@ -39,6 +39,7 @@ namespace freeling {
     this->n_paragraph = n_paragraph;
     this->n_sentence = n_sentence;
     this->position = position;
+    this->ch_score = 0.0;
   }
 
   bool word_pos::operator==(const word_pos &other) const {
@@ -60,8 +61,8 @@ namespace freeling {
   }
 
   wstring word_pos::toString() const {
-    wstring res = w.get_form() + L" [Paragraph " + to_wstring(n_paragraph) + L", Sentence " +
-      to_wstring(n_sentence) + L", Position " + to_wstring(position) + L"]";
+    wstring res = w.get_form() + L" [P" + to_wstring(n_paragraph) + L".S" +
+      to_wstring(n_sentence) + L".W" + to_wstring(position) + L"]";
     return res;
   }
 
@@ -72,8 +73,7 @@ namespace freeling {
   }
 
   wstring related_words::toString() const {
-    wstring res = w1.toString() + L" <-> " + w2.toString() +
-      L" (Relatedness = " + to_wstring(relatedness) + L")";
+    wstring res = to_wstring(relatedness) + L" " + w1.toString() + L" <-> " + w2.toString();
     return res;
   }
 
@@ -82,12 +82,12 @@ namespace freeling {
   freeling::regexp relation::re_np(L"^NP");
   freeling::regexp relation::re_nn(L"^N[NC]");
 
-  relation::relation(RelType s, const wstring &t) : label(s), compatible_tag(t) { }
+  relation::relation(RelType s, const wstring &t, const wstring &e) : label(s), compatible_tag(t), excluded_lemmas(e) { }
 
   relation::~relation() {}
 
   bool relation::is_compatible(const word &w) const {
-    return compatible_tag.search(w.get_tag());
+    return compatible_tag.search(w.get_tag()) and not excluded_lemmas.search(w.get_lemma());
   }
 
   int relation::matching_word(const word &w1, const word &w2) const { return -1; }
@@ -107,7 +107,7 @@ namespace freeling {
     for (list<word_pos>::const_iterator w2 = words.begin(); w2 != words.end(); w2++) {
       if ((n_sentence - w2->n_sentence) <= max_distance) {
         int x = matching_word(w,w2->w);
-        if (x > 0) {
+        if (x >= 0) {
           if (not inserted) {
             wp = new word_pos(w, s, n_paragraph, n_sentence, position);
             inserted = true;
@@ -131,7 +131,7 @@ namespace freeling {
 }
 
   ///----------------------------------------------------------------------
-  same_word::same_word(const wstring &expr) : relation(relation::SAME_WORD, expr) {}
+  same_word::same_word(const wstring &expr, const wstring &excluded) : relation(relation::SAME_WORD, expr, excluded) {}
 
   /// return whether w1 can be assigned to the same chain than w2, and their score
   /// -1: do not add.  >0: add
@@ -156,9 +156,9 @@ namespace freeling {
   }
 
   ///----------------------------------------------------------------------
-  hypernymy::hypernymy(int k, double alpha, const wstring &semfile, const wstring &expr) : relation(relation::HYPERNYMY, expr) {
+  hypernymy::hypernymy(const wstring &expr, const wstring &excluded, int dp, double alpha, const wstring &semfile) : relation(relation::HYPERNYMY, expr, excluded) {
     semdb = new semanticDB(semfile);
-    depth = k;
+    depth = dp;
     this->alpha = alpha;
   }
 
@@ -181,7 +181,8 @@ namespace freeling {
       if (word_int2 == wp_count.end()) {
         word_int2 = wp_count.insert(pair<wstring, int>(key_2, 1)).first;
         freq2 = 1;
-      } else {
+      }
+      else {
         word_int2->second++;
         freq2 = word_int2->second;
       }
@@ -207,15 +208,16 @@ namespace freeling {
   double hypernymy::get_homogeneity_index(const list<word_pos> &words, const list<related_words> &relations,
                                           const unordered_map<wstring, pair<int, word_pos*> > &unique_words) const {
     int n = words.size();
-    const word_pos &wp_core = count_relations(n, relations); // wp_core is the word_pos which appears in
-    // most relations
+
+    // wp_core is the word_pos which appears in most relations
+    const word_pos &wp_core = count_relations(n, relations); 
 
     vector<int> num_words_dist(depth + 1, 0);
     // The first position is also initialized to 0 because we want to
     // give the same homogeinity index than the same_word relation if
     // every word is the same.
     for (list<related_words>::const_iterator it = relations.begin(); it != relations.end(); it++) {
-      if (it->w1 == wp_core || it->w2 == wp_core) {
+      if (it->w1 == wp_core or it->w2 == wp_core) {
         num_words_dist[int(it->relatedness)]++;
       }
     }
@@ -267,17 +269,20 @@ namespace freeling {
   int hypernymy::matching_word(const word &w1, const word &w2) const {    
     const list<pair<wstring, double>> &ss1 = w1.get_senses();
     const list<pair<wstring, double>> &ss2 = w2.get_senses();
-    if (ss1.empty() or ss2.empty()) return false;
-    wstring s1 = ss1.begin()->first;
-    wstring s2 = ss2.begin()->first;
-    int lvl = hypernymyAux(s1, s2, 0);
-    if (lvl < 0) lvl = hypernymyAux(s2, s1, 0);
+    int lvl = -1;
+    if (not ss1.empty() and not ss2.empty()) {
+      wstring s1 = ss1.begin()->first;
+      wstring s2 = ss2.begin()->first;
+      lvl = hypernymyAux(s1, s2, 0);
+      if (lvl < 0) 
+        lvl = hypernymyAux(s2, s1, 0);
+    }
     return lvl;
   }
 
 
   ///----------------------------------------------------------------------
-  same_coref_group::same_coref_group(const wstring &expr) : relation(relation::SAME_COREF_GROUP, expr) { }
+  same_coref_group::same_coref_group(const wstring &expr, const wstring &excluded) : relation(relation::SAME_COREF_GROUP, expr, excluded) { }
 
   double same_coref_group::get_homogeneity_index(const list<word_pos> &words, const list<related_words> &relations,
                                                  const unordered_map<wstring, pair<int, word_pos*> > &unique_words) const {

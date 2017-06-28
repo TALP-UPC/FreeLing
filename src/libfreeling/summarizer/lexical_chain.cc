@@ -92,7 +92,12 @@ namespace freeling {
 
   wstring lexical_chain::toString() {
     wstring res;
-    res += rel->label + L" Lexical Chain\n";
+    wstring label = (rel->label==relation::SAME_WORD ? wstring(L"same_word") 
+                     : (rel->label==relation::HYPERNYMY ? wstring(L"hypernymy") 
+                     : (rel->label==relation::SAME_COREF_GROUP ? wstring(L"same_coref_group") 
+                     : wstring(L"unknown") )));
+ 
+    res += L"Lexical Chain. Type="+ label + L" score=" + std::to_wstring(get_score()) + L"\n";
     res += L"	Word list:\n";
     for (list<word_pos>::const_iterator it = words.begin(); it != words.end(); it++) {
       res += L"		" + it->toString() + L"\n";
@@ -101,7 +106,6 @@ namespace freeling {
     for (list<related_words>::const_iterator it = relations.begin(); it != relations.end(); it++) {
       res += L"		" + it->toString() + L"\n";
     }
-    res += L"	Score: " + to_wstring(get_score()) + L"\n";
     return res;
   }
 

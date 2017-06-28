@@ -46,6 +46,7 @@ namespace freeling {
   struct word_pos {
     const freeling::word &w;
     const freeling::sentence &s;
+    double ch_score;
     int n_paragraph;
     int n_sentence;
     int position;
@@ -103,7 +104,7 @@ namespace freeling {
     static freeling::regexp re_nn;
 
     /// Constructor
-    relation(RelType s, const std::wstring &t);
+    relation(RelType s, const std::wstring &t, const std::wstring &e);
 
     /// Destructor
     virtual ~relation();
@@ -136,6 +137,8 @@ namespace freeling {
     /// If a word tag matchs with compatible_tag, then the word is compatible
     /// with the relation.
     const freeling::regexp compatible_tag;
+    const freeling::regexp excluded_lemmas;
+
   };
 
   ////////////////////////////////////////////////////////////////
@@ -148,7 +151,7 @@ namespace freeling {
   public:
 
     /// Constructor
-    same_word(const std::wstring &expr);
+    same_word(const std::wstring &expr, const std::wstring &excluded);
 
     /// Computes the homogeinity index of the given structures using the specific formula
     /// of this relation.
@@ -164,6 +167,7 @@ namespace freeling {
     /// one word. It returns the word_pos in unique_words in a list.
     std::list<word_pos> order_words_by_weight(const std::unordered_map<std::wstring,
                                               std::pair<int, word_pos*> > &unique_words) const;
+
   };
 
   ////////////////////////////////////////////////////////////////
@@ -177,7 +181,7 @@ namespace freeling {
   public:
 
     /// Constructor
-    hypernymy(int k, double alpha, const std::wstring &semfile, const std::wstring &expr);
+    hypernymy(const std::wstring &expr, const std::wstring &excluded, int dp, double alpha, const std::wstring &semfile);
 
     /// Computes the homogeinity index of the given structures using the specific formula
     /// of this relation.
@@ -224,7 +228,7 @@ namespace freeling {
   public:
 
     /// Constructor
-    same_coref_group(const std::wstring &expr);
+    same_coref_group(const std::wstring &expr, const std::wstring &excluded);
 
     /// Computes the homogeinity index of the given structures using the specific formula
     /// of this relation.
