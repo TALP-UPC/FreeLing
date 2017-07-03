@@ -302,14 +302,13 @@ namespace freeling {
     else {
       paragraph::const_iterator s = m.get_sentence();
       sentence::const_reverse_iterator b(m.get_it_begin());
-      ++b;
       int nq = 0;
       while (b!=s->rend()) {
         if (b->get_tag()==L"Fe" or b->get_tag()==L"Fra" or b->get_tag()==L"Frc") ++nq;
         ++b;
       }
 
-      // if there is an odd number of quotes to the left of the mention first word, 
+      // if there is an (non zer) odd number of quotes to the left of the mention first word, 
       // we are inside quotes.
       inq = (nq%2!=0);
       fcache.set_feature(fid,util::int2wstring(inq));
