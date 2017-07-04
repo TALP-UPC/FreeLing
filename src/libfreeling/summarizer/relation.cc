@@ -28,6 +28,7 @@
 
 #include "freeling/morfo/relation.h"
 
+#include <iostream>
 using namespace std;
 
 
@@ -148,9 +149,12 @@ namespace freeling {
   list<word_pos> same_word::order_words_by_weight(const unordered_map<wstring,pair<int,word_pos*> > &unique_words) const {
     // In the same_word relation, we return word_pos ordered by its apparition order, so
     // we just need to convert it into a list of word_pos
+    wcerr<<L"ordenirg words by weight"<<endl;
+
     list<word_pos> res;
-    for (auto w = unique_words.begin(); w != unique_words.end(); ++w) 
-      res.push_back(*(w->second).second);
+    for (auto w = unique_words.begin(); w != unique_words.end(); ++w) {
+      res.push_back(*(w->second.second));
+    }
 
     return res;
   }

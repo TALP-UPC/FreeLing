@@ -264,10 +264,12 @@ namespace freeling {
 
     for (list<lexical_chain>::iterator ch=lexical_chains.begin(); ch!=lexical_chains.end() and acc_n_words<num_words; ch++) {
 
+      list<word_pos> ordered_words;
       list<word_pos>::const_iterator chainwords_begin, chainwords_end;
       if (weighted) {
-        chainwords_begin = ch->get_ordered_words().begin();
-        chainwords_end = ch->get_ordered_words().end();
+        ordered_words = ch->get_ordered_words();
+        chainwords_begin = ordered_words.begin();
+        chainwords_end = ordered_words.end();
       }
       else { 
         chainwords_begin = ch->get_words().begin();
@@ -276,8 +278,7 @@ namespace freeling {
 
       bool stop = false;
       list<word_pos>::const_iterator wp = chainwords_begin;
-      while (wp!=chainwords_end and acc_n_words<num_words and not stop) {
-
+      while (wp!=chainwords_end and acc_n_words<num_words and not stop) {        
         if (already_selected.find(&wp->s) == already_selected.end()) {
           already_selected.insert(&wp->s);
           acc_n_words += wp->s.size();
