@@ -1295,6 +1295,7 @@ namespace freeling {
   /// Constructor from a parse_tree pointer
   mention::mention(int i, int ns, paragraph::const_iterator ps, parse_tree::const_iterator pt, int word_b, sentence::const_iterator itword) {
     id = i;
+    sid = std::to_wstring(id);
     sent = ns;
     s = ps;
     maximal = false;
@@ -1310,8 +1311,9 @@ namespace freeling {
   }
 
   /// Constructor from a dep_tree node
-  mention::mention(int i, int ns, paragraph::const_iterator ps, dep_tree::const_iterator dt, int end) {
+  mention::mention(int i, int ns, paragraph::const_iterator ps, dep_tree::const_iterator dt, int begin, int end) {
     id = i;
+    sid = std::to_wstring(id);
     sent = ns;
     s = ps;
     maximal = false;
@@ -1319,11 +1321,12 @@ namespace freeling {
 
     dtree = dt;
 
-    posBegin = dep_tree::get_first_word(dt);
-    if (end > 0) // end position given, use it
-      posEnd = end;
-    else  // no end position give, use last subsumed word
-      posEnd = dep_tree::get_last_word(dt);
+    // use given begin/end positions, if given.  Otherwise, whole mention
+    if (begin>=0) posBegin = begin;
+    else posBegin = dep_tree::get_first_word(dt);
+
+    if (end >= 0) posEnd = end;
+    else posEnd = dep_tree::get_last_word(dt);
 
     itBegin = ps->get_word_iterator((*ps)[posBegin]);
     itEnd = ps->get_word_iterator((*ps)[posEnd]);
@@ -1339,6 +1342,7 @@ namespace freeling {
   /// [start1, end1] is the sequence closest to start with the maximal subsuming node ptree 
   mention::mention(int i, int ns, paragraph::const_iterator ps, sentence::const_iterator start_it, sentence::const_iterator end_it) {
     id = i;
+    sid = std::to_wstring(id);
     sent = ns;
     s = ps;
     maximal = false;
@@ -1377,6 +1381,7 @@ namespace freeling {
   /// Clone mention
   void mention::clone(const mention &m) {
     id = m.id;
+    sid = m.sid;
     mType = m.mType;
     sent = m.sent;
     s = m.s;
@@ -1409,7 +1414,8 @@ namespace freeling {
 
   /// setters
   void mention::set_id(int id) {
-    this->id=id;
+    this->id = id;
+    this->sid = std::to_wstring(id);
   }
   void mention::set_type(mention::mentionType t) { 
     mType=t; 
@@ -1427,6 +1433,9 @@ namespace freeling {
   /// getters
   int mention::get_id() const {
     return id;
+  }
+  wstring mention::get_str_id() const {
+    return sid;
   }
   int mention::get_n_sentence() const {
     return sent;

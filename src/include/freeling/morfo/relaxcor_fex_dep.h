@@ -129,6 +129,8 @@ namespace freeling {
     static TFeatureValue mention_2_it(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue mention_1_singular(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue mention_2_singular(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue mention_1_plural(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue mention_2_plural(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue mention_1_3pers(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue mention_2_3pers(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue same_person(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
@@ -174,7 +176,7 @@ namespace freeling {
     static relaxcor_fex_dep::TFeatureValue same_semclass(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex) ;
 
     // auxiliar methods for feature computing
-    static unsigned int dist_in_phrases(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static int dist_in_phrases(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static bool nested(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static int dist_sentences(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static int dist_mentions(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);

@@ -55,7 +55,13 @@ namespace freeling {
     vs_features[id][f]=v;
   }
   void feature_cache::set_feature(const wstring &id, const wstring &v) {
-    s_features[id]=v;
+    str_features[id]=v;
+  }
+  void feature_cache::set_feature(const wstring &id, int v) {
+    int_features[id]=v;
+  }
+  void feature_cache::set_feature(const wstring &id, bool v) {
+    bool_features[id]=v;
   }
   unsigned int feature_cache::get_feature(int id, mentionFeature f) const {
     return i_features.find(id)->second.find(f)->second;
@@ -63,17 +69,30 @@ namespace freeling {
   const vector<wstring>& feature_cache::get_feature(int id, mentionWsFeature f) const {
     return vs_features.find(id)->second.find(f)->second;
   }
-  wstring feature_cache::get_feature(const wstring &id) const {
-    return s_features.find(id)->second;
+  
+  bool feature_cache::get_str_feature(const wstring &id, wstring &val) const {
+    map<wstring,wstring>::const_iterator p = str_features.find(id);
+    bool found = (p!=str_features.end());
+    if (found) val = p->second;
+    return found;
+  }
+  bool feature_cache::get_int_feature(const wstring &id, int &val) const {
+    map<wstring,int>::const_iterator p = int_features.find(id);
+    bool found = (p!=int_features.end());
+    if (found) val = p->second;
+    return found;
+  }
+  bool feature_cache::get_bool_feature(const wstring &id, bool &val) const {
+    map<wstring,bool>::const_iterator p = bool_features.find(id);
+    bool found = (p!=bool_features.end());
+    if (found) val = p->second;
+    return found;
   }
   bool feature_cache::computed_feature(int id, mentionFeature f) const {
     return i_features.find(id)!=i_features.end() and i_features.find(id)->second.find(f)!=i_features.find(id)->second.end();
   }
   bool feature_cache::computed_feature(int id, mentionWsFeature f) const {
     return vs_features.find(id)!=vs_features.end() and vs_features.find(id)->second.find(f)!=vs_features.find(id)->second.end();
-  }
-  bool feature_cache::computed_feature(const wstring &id) const {
-    return s_features.find(id)!=s_features.end();
   }
 
 

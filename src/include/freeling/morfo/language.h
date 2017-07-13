@@ -817,6 +817,8 @@ namespace freeling {
 
     /// the id of the mention
     int id;
+    /// the id of the mention as string
+    std::wstring sid;
     /// the type of the mention
     mentionType mType;
     /// the number of sentence in which the mention occurs
@@ -860,7 +862,7 @@ namespace freeling {
     /// constructor from a parse_tree
     mention(int, int, paragraph::const_iterator, parse_tree::const_iterator, int, sentence::const_iterator);
     /// constructor from a dep_tree
-    mention(int i, int ns, paragraph::const_iterator ps, dep_tree::const_iterator dt, int end=-1);
+    mention(int i, int ns, paragraph::const_iterator ps, dep_tree::const_iterator dt, int begin=-1, int end=-1);
     /// constructor from start/end word iterators
     mention(int, int, paragraph::const_iterator, sentence::const_iterator, sentence::const_iterator);
     /// Copy constructor
@@ -880,6 +882,7 @@ namespace freeling {
 
     /// getters
     int get_id() const;
+    std::wstring get_str_id() const;
     int get_n_sentence() const;
     paragraph::const_iterator get_sentence() const;
     int get_pos_begin() const;

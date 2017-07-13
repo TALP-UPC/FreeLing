@@ -53,22 +53,29 @@ namespace freeling {
     feature_cache();
     ~feature_cache();
 
-    /// auxiliary functions for feature extraction   
+    /// auxiliary functions for feature extraction for relaxcor_fex_constit
     void set_feature(int, mentionFeature, unsigned int);
     void set_feature(int, mentionWsFeature, const std::vector<std::wstring>&);
-    void set_feature(const std::wstring&, const std::wstring&);
     unsigned int get_feature(int, mentionFeature) const;
     const std::vector<std::wstring>& get_feature(int, mentionWsFeature) const;
-    std::wstring get_feature(const std::wstring&) const;
     bool computed_feature(int, mentionFeature) const;
     bool computed_feature(int, mentionWsFeature) const;
-    bool computed_feature(const std::wstring&) const;
+
+    /// auxiliary functions for feature extraction for relaxcor_fex_dep
+    void set_feature(const std::wstring&, const std::wstring&);
+    void set_feature(const std::wstring&, int);
+    void set_feature(const std::wstring&, bool);
+    bool get_str_feature(const std::wstring&, std::wstring &val) const;
+    bool get_int_feature(const std::wstring&, int &val) const;
+    bool get_bool_feature(const std::wstring&, bool &val) const;
 
   private:
     /// auxiliar maps of some feature values for individual mentions
     std::map<int, std::map<mentionFeature, unsigned int>> i_features;
     std::map<int, std::map<mentionWsFeature, std::vector<std::wstring> >> vs_features;
-    std::map<std::wstring, std::wstring> s_features;
+    std::map<std::wstring, std::wstring> str_features;
+    std::map<std::wstring, int> int_features;
+    std::map<std::wstring, bool> bool_features;
   };
 
 

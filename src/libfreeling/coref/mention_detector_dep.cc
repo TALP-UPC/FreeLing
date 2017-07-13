@@ -183,7 +183,9 @@ namespace freeling {
       // if is is a coordination, set appropriate type, otherwise use type from config file
       if (is_coordination(h)) m.set_type(mention::COMPOSITE);
       else m.set_type(type);
+
       // store maximality 
+      TRACE(6,L"Added new mention ["<<m.value()<<L"] (" << m.get_pos_begin() << L"," << m.get_pos_end() << L")");
       m.set_maximal(maximal);
       mentions.push_back(m);
       ++mentn;
@@ -194,18 +196,31 @@ namespace freeling {
       if (m.is_type(mention::COMPOSITE)) {
         
         // if it is composite, one of the children has CoordLabel. Locate it.
-        dep_tree::const_sibling_iterator s; 
-        for (s=h.sibling_begin(); 
-             s->get_label()!=CoordLabel;
-             ++s);
-        
-        // use word previous to coordination as mention end
-        mention m(mentn, sentn, se, h, s->get_word().get_position()-1);
-        // use type given by head tag
-        m.set_type(type);
+        // Get last coord child to the left of the head, and first coord to the rigth,
+        // to cover cases with two particles e.g. "tanto Juan como Pedro"
 
-        mentions.push_back(m);
-        ++mentn;
+        int coordL,coordR;  coordL = coordR = -1;
+        int headpos = h->get_word().get_position();
+        for (dep_tree::const_sibling_iterator s=h.sibling_begin(); s!=h.sibling_end() and coordR<0; ++s) {
+          if (s->get_label()==CoordLabel) {
+            int x = s->get_word().get_position();
+            if (x<headpos) coordL=x;
+            else if (x>headpos) coordR=x;
+          }
+        }
+
+        if (coordL<0)
+          coordL = m.get_pos_begin()-1; // if no coordL, use same begin than whole mention
+        
+        // create mention for head alone (unless some error in the tree creates an empty range, or there is no coordR
+        if (coordR>=0 and coordL+1<=coordR-1) {
+          mention m(mentn, sentn, se, h, coordL+1, coordR-1);
+          TRACE(6,L"Composite, added head mention [" << m.value() << L"] (" << m.get_pos_begin() << L"," << m.get_pos_end() << L")");
+          // use type given by head tag
+          m.set_type(type);
+          mentions.push_back(m);
+          ++mentn;
+        }
       }
     }
 
@@ -220,9 +235,12 @@ namespace freeling {
   /////////////////////////////////////////////////
 
   bool mention_detector_dep::is_coordination(dep_tree::const_iterator h) const {
-    bool found = false;    
+    bool found = false;
+    int hpos = h->get_word().get_position();
     for (dep_tree::const_sibling_iterator s=h.sibling_begin(); s!=h.sibling_end() and not found; ++s)
-      found = (s->get_label() == CoordLabel);
+      // coordination is well formed if there is a child with function "coord" to the right of the head
+      found = (s->get_label() == CoordLabel and s->get_word().get_position() > hpos);
+    
     return found;
   }
 

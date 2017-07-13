@@ -350,7 +350,7 @@ namespace freeling {
 
     for (unsigned int m=0; m<sorted_mentions.size(); m++) {
       
-      TRACE(3, L"building problem: adding vertex " + util::int2wstring(m) +
+      TRACE(4, L"building problem: adding vertex " + util::int2wstring(m) +
             L" = mention " + util::int2wstring(sorted_mentions[m]->get_id()) + 
             L" (" +sorted_mentions[m]->value() + L")");
       
@@ -370,13 +370,13 @@ namespace freeling {
       // adding labels with equiprobable initial probabilities for each vertex 
       for (unsigned int l=0; l<m; l++) {
         coref_problem.add_label(m,prob);
-        TRACE(3,L"   building problem: adding label " + util::int2wstring(l) + 
+        TRACE(5,L"   building problem: adding label " + util::int2wstring(l) + 
               L" to vertex "+ util::int2wstring(m) +
               L" prob=" + util::double2wstring(prob));
       }
       // last label may have twice the probability if it was not a pronoun
       coref_problem.add_label(m,mult*prob);
-      TRACE(3,L"   building problem: adding label " + util::int2wstring(m) + 
+      TRACE(5,L"   building problem: adding label " + util::int2wstring(m) + 
             L" to vertex "+ util::int2wstring(m) +
             L" prob=" + util::double2wstring(mult*prob));
     }
@@ -582,15 +582,22 @@ namespace freeling {
   /////////////////////////////////////////////////////////////////////////////
 
   void relaxcor::analyze(document &doc) const {
-
+    clock_t t0, t1;
+    
     TRACE(3,L"Detecting mentions");
 
     // searching for mentions
+    t0 = clock();  // initial time
     vector<mention> mentions = detector->detect(doc);
-
+    t1 = clock();  // final time
+    TRACE(3,L"Detected "<<mentions.size()<<L" mentions. Detection time: "+util::double2wstring(double(t1-t0)/double(CLOCKS_PER_SEC)));
+    
     // extracting features of mention-pairs
     TRACE(3,L"Extracting features");
+    t0 = clock();  // initial time
     relaxcor_fex_abs::Mfeatures M = extractor->extract(mentions);
+    t1 = clock();  // final time
+    TRACE(3,L"extraction time: "+util::double2wstring(double(t1-t0)/double(CLOCKS_PER_SEC)));
    
     // coreferent chains, useful when removing singletons
     map<int, set<int> > chains;
@@ -615,8 +622,11 @@ namespace freeling {
     
     // Solving CLP problem
     TRACE(4,L"Solving");
+    t0 = clock();  // initial time
     relax coref_solver(_Max_iter, _Scale_factor, _Epsilon);
     coref_solver.solve(coref_problem);
+    t1 = clock();  // initial time
+    TRACE(3,L"solving time: "+util::double2wstring(double(t1-t0)/double(CLOCKS_PER_SEC)));
         
     // Extract created coreference chains 
     TRACE(4,L"Extracting chains from solution");
