@@ -57,7 +57,7 @@ namespace freeling {
   mention_detector_dep::mention_detector_dep(const wstring &filename) {
 
     // read configuration file and store information
-    enum sections {TAGSET, MTAGS, EXCLUDED, COORD};
+    enum sections {TAGSET, MTAGS, EXCLUDED, COORD, PUNCT_RE};
     config_file cfg(true,L"%");
     map<unsigned int, wstring> labels_section;
 
@@ -66,8 +66,8 @@ namespace freeling {
     cfg.add_section(L"TagsetFile", TAGSET, true);
     cfg.add_section(L"MentionTags", MTAGS, true);
     cfg.add_section(L"CoordLabel", COORD);
+    cfg.add_section(L"Punctuation", PUNCT_RE);
     cfg.add_section(L"Excluded", EXCLUDED);
-
     if (not cfg.open(filename))
       ERROR_CRASH(L"Error opening file "+filename);
 
@@ -110,6 +110,13 @@ namespace freeling {
 	break;
       }
 
+      case PUNCT_RE: {
+        // dep function label for coordinations
+        wstring s; sin >> s;
+        Punctuation = new freeling::regexp(s);
+	break;
+      }
+
       case EXCLUDED: {
         // list of lemmas excluded from mention extraction
 	wstring lemma;
@@ -132,6 +139,7 @@ namespace freeling {
 
   mention_detector_dep::~mention_detector_dep() {
     delete Tags;
+    delete Punctuation;
   }
 
   /////////////////////////////////////////////////
@@ -178,8 +186,15 @@ namespace freeling {
     mention::mentionType type;    
     if (check_mention_tags(h, type)) {
 
-      // candidate mention, store it
-      mention m(mentn, sentn, se, h);      
+      // found candidate mention.
+      
+      // remove trailing and leading punctuation
+      int pfirst = dep_tree::get_first_word(h);
+      while (Punctuation->search((*se)[pfirst].get_tag())) ++pfirst;      
+      int plast = dep_tree::get_last_word(h);
+      while (Punctuation->search((*se)[plast].get_tag())) --plast;
+
+      mention m(mentn, sentn, se, h, pfirst, plast);      
       // if is is a coordination, set appropriate type, otherwise use type from config file
       if (is_coordination(h)) m.set_type(mention::COMPOSITE);
       else m.set_type(type);
@@ -212,7 +227,7 @@ namespace freeling {
         if (coordL<0)
           coordL = m.get_pos_begin()-1; // if no coordL, use same begin than whole mention
         
-        // create mention for head alone (unless some error in the tree creates an empty range, or there is no coordR
+        // create mention for head alone (unless some error in the tree causes that there is no coordR or an empty range)
         if (coordR>=0 and coordL+1<=coordR-1) {
           mention m(mentn, sentn, se, h, coordL+1, coordR-1);
           TRACE(6,L"Composite, added head mention [" << m.value() << L"] (" << m.get_pos_begin() << L"," << m.get_pos_end() << L")");

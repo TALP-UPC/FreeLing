@@ -43,6 +43,7 @@
 #include "freeling/windll.h"
 #include "freeling/morfo/language.h"
 #include "freeling/morfo/tagset.h"
+#include "freeling/regexp.h"
 
 namespace freeling {
 
@@ -57,6 +58,7 @@ namespace freeling {
     std::map<std::wstring, std::pair<std::wstring, mention::mentionType>> mention_tags;
     std::set<std::wstring> excluded;
     std::wstring CoordLabel;
+    freeling::regexp *Punctuation;
     tagset *Tags;
 
     bool is_coordination(dep_tree::const_iterator h) const;
