@@ -583,16 +583,18 @@ namespace freeling {
           gen=L'b';
       }
 
-      /*  TODO
-          else if (m.is_type(mention::COMPOSITE)) {
-          // if it is a coordination, gender is
-          gen = L''; ?????
-          }
-          else if (m.is_type(mention::NOUN_PHRASE)) {
-          // if it is a noun_phrase, check head PoS tag, gender is ??
-          gen = L''; ?????
-          }
-      */
+      else if (m.is_type(mention::COMPOSITE)) {
+        // if it is a coordination, check children (TODO)
+        gen = L'u'; 
+      }
+      
+      else if (m.is_type(mention::NOUN_PHRASE)) {
+        // if it is a noun_phrase, check head PoS tag,
+        if (fex.get_label_RE(L"TAG_NounMasc").search(m.get_head().get_tag())) gen=L'm';
+        else if (fex.get_label_RE(L"TAG_NounFem").search(m.get_head().get_tag())) gen=L'f';
+        else gen=L'u';  
+      }
+
 
       fcache.set_feature(fid, wstring(1,gen));
       TRACE(6,L"     " << fid << L" = " << gen);
@@ -1107,6 +1109,7 @@ namespace freeling {
         // check in pronWords list. 
         wchar_t h = fex._Morf.get_human(m.get_head().get_lc_form());
         if (h==L'h') sc = sc_PER;
+        else if (h==L'n') sc = sc_NONPER;
       }
 
       else if (m.is_type(mention::NOUN_PHRASE)) {
@@ -1532,14 +1535,40 @@ namespace freeling {
   //////////////////////////////////////////////////////////////////
 
   relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::rel_antecedent(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex) {
-    // m2 is relative pronoun, is and child (SBJ or OBJ) of a verb that is NMOD of m1
-    bool r = fex.get_label_RE(L"TAG_RelPron").search(m2.get_head().get_tag()) and
-             (fex.get_label_RE(L"FUN_Subject").search(m2.get_dtree()->get_label()) or
-              fex.get_label_RE(L"FUN_Object").search(m2.get_dtree()->get_label())) and 
-              not m2.get_dtree().get_parent().is_root() and  
-              fex.get_label_RE(L"TAG_Verb").search(m2.get_dtree().get_parent()->get_word().get_tag()) and 
-              fex.get_label_RE(L"FUN_NounModifier").search(m2.get_dtree().get_parent()->get_label()) and 
-              m2.get_dtree().get_parent().get_parent() == m1.get_dtree();
+
+    bool r = false;
+
+    // m2 must be relative pronoun
+    if (fex.get_label_RE(L"TAG_RelPron").search(m2.get_head().get_tag()) and not m2.get_dtree().is_root() ) {
+
+      // locate verbal head and modifier 
+      dep_tree::const_iterator vhead;
+      dep_tree::const_iterator vmod;
+      bool headok = false;
+      
+      // m2 is and child (SBJ or OBJ) of a verb that is NMOD of m1.
+      if (fex.get_label_RE(L"TAG_Verb").search(m2.get_dtree().get_parent()->get_word().get_tag())) {
+        vmod = m2.get_dtree();
+        vhead = vmod.get_parent();
+        headok = true;
+      }
+      
+      // or either, m2 is and child of a preposition that is child (SBJ or OBJ) of a verb that is NMOD of m1
+      else if (fex.get_label_RE(L"TAG_Preposition").search(m2.get_dtree().get_parent()->get_word().get_tag()) and
+               not m2.get_dtree().get_parent().is_root() and
+               fex.get_label_RE(L"TAG_Verb").search(m2.get_dtree().get_parent().get_parent()->get_word().get_tag()) ) {
+        vmod = m2.get_dtree().get_parent();
+        vhead = vmod.get_parent();
+        headok = true;
+      }
+
+      r = headok and
+        (fex.get_label_RE(L"FUN_Subject").search(vmod->get_label()) or
+         fex.get_label_RE(L"FUN_Object").search(vmod->get_label())) and 
+        not vhead.is_root() and  
+        fex.get_label_RE(L"FUN_NounModifier").search(vhead->get_label()) and 
+        vhead.get_parent() == m1.get_dtree();
+    }
 
     TRACE(6,L"   " << m1.get_id()<<L":"<<m2.get_id() <<L":REL_ANTECEDENT" << L" = " << (r?L"yes":L"no"));
     return (r ? ff_YES : ff_NO);
@@ -1743,6 +1772,8 @@ namespace freeling {
 
     TFeatureValue sclass;
     if (sc1==sc_UNK or sc2==sc_UNK) sclass = ff_UNK;
+    else if (sc1==sc_NONPER and sc2!=sc_PER) sclass = ff_UNK;
+    else if (sc2==sc_NONPER and sc1!=sc_PER) sclass = ff_UNK;
     else if (sc1==sc2) sclass = ff_YES;
     else sclass = ff_NO;
 

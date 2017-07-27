@@ -57,7 +57,7 @@ namespace freeling {
   mention_detector_dep::mention_detector_dep(const wstring &filename) {
 
     // read configuration file and store information
-    enum sections {TAGSET, MTAGS, EXCLUDED, COORD, PUNCT_RE};
+    enum sections {TAGSET, MTAGS, EXCLUDED, COORD, COORDITEM, PUNCT_RE};
     config_file cfg(true,L"%");
     map<unsigned int, wstring> labels_section;
 
@@ -65,12 +65,15 @@ namespace freeling {
 
     cfg.add_section(L"TagsetFile", TAGSET, true);
     cfg.add_section(L"MentionTags", MTAGS, true);
-    cfg.add_section(L"CoordLabel", COORD);
-    cfg.add_section(L"Punctuation", PUNCT_RE);
+    cfg.add_section(L"CoordLabel", COORD, true);
+    cfg.add_section(L"CoordinateFunction", COORDITEM);
+    cfg.add_section(L"Punctuation", PUNCT_RE, true);
     cfg.add_section(L"Excluded", EXCLUDED);
     if (not cfg.open(filename))
       ERROR_CRASH(L"Error opening file "+filename);
 
+    Coordinate=NULL;
+    
     wstring line;
     while (cfg.get_content_line(line)) {
 
@@ -105,8 +108,15 @@ namespace freeling {
       }
 
       case COORD: {
-        // dep function label for coordinations
+        // dep function label for coordination
         sin >> CoordLabel;
+	break;
+      }
+
+      case COORDITEM: {
+        // dep function label for coordinate elements
+        wstring s; sin >> s;
+        Coordinate = new freeling::regexp(s);
 	break;
       }
 
@@ -129,6 +139,8 @@ namespace freeling {
     }
     cfg.close();
 
+    if (Coordinate==NULL) Coordinate = new freeling::regexp(L"^$");
+    
     TRACE(3,L"Module succesfully created");
   }
 
@@ -140,6 +152,7 @@ namespace freeling {
   mention_detector_dep::~mention_detector_dep() {
     delete Tags;
     delete Punctuation;
+    delete Coordinate;
   }
 
   /////////////////////////////////////////////////
@@ -175,6 +188,21 @@ namespace freeling {
     return false;
   }
 
+
+  /////////////////////////////////////////////////
+  /// create new mention, removing leading/trailing punctuation
+  /////////////////////////////////////////////////  
+
+  freeling::mention mention_detector_dep::create_mention(int mentn, int sentn, freeling::paragraph::const_iterator se, freeling::dep_tree::const_iterator h, int pfirst, int plast) const {
+      // remove trailing and leading punctuation
+      while (Punctuation->search((*se)[pfirst].get_tag())) ++pfirst;      
+      while (Punctuation->search((*se)[plast].get_tag())) --plast;
+      // create mention
+      mention m(mentn, sentn, se, h, pfirst, plast);      
+      return m;
+  }
+
+  
   /////////////////////////////////////////////////
   /// Recursively navigate the tree, extracting mentions
   /////////////////////////////////////////////////
@@ -184,17 +212,11 @@ namespace freeling {
     bool found_mention = false;
 
     mention::mentionType type;    
-    if (check_mention_tags(h, type)) {
-
-      // found candidate mention.
-      
+    if (check_mention_tags(h, type)) {      // found candidate mention.
+     
       // remove trailing and leading punctuation
-      int pfirst = dep_tree::get_first_word(h);
-      while (Punctuation->search((*se)[pfirst].get_tag())) ++pfirst;      
-      int plast = dep_tree::get_last_word(h);
-      while (Punctuation->search((*se)[plast].get_tag())) --plast;
+      mention m = create_mention(mentn, sentn, se, h, dep_tree::get_first_word(h), dep_tree::get_last_word(h));
 
-      mention m(mentn, sentn, se, h, pfirst, plast);      
       // if is is a coordination, set appropriate type, otherwise use type from config file
       if (is_coordination(h)) m.set_type(mention::COMPOSITE);
       else m.set_type(type);
@@ -223,13 +245,30 @@ namespace freeling {
             else if (x>headpos) coordR=x;
           }
         }
-
+        
         if (coordL<0)
           coordL = m.get_pos_begin()-1; // if no coordL, use same begin than whole mention
         
         // create mention for head alone (unless some error in the tree causes that there is no coordR or an empty range)
         if (coordR>=0 and coordL+1<=coordR-1) {
-          mention m(mentn, sentn, se, h, coordL+1, coordR-1);
+
+          // locate first child to the right of the head that is either the coorindation or a coordinate.
+          // the span of the head mention will end just before this child.
+          dep_tree::const_sibling_iterator s=h.sibling_begin();
+          int x = s->get_word().get_position();
+          bool found = false;
+          while ( x!=coordR and not found ) {
+            if (x>headpos and (s->get_label()==CoordLabel or Coordinate->search(s->get_label()))) 
+              found = true;
+            else {
+              ++s;
+              x = s->get_word().get_position();
+            }
+          }
+          coordR = dep_tree::get_first_word(s);
+
+          // create new mention
+          mention m = create_mention(mentn, sentn, se, h, coordL+1, coordR-1);         
           TRACE(6,L"Composite, added head mention [" << m.value() << L"] (" << m.get_pos_begin() << L"," << m.get_pos_end() << L")");
           // use type given by head tag
           m.set_type(type);

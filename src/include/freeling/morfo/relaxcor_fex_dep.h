@@ -78,7 +78,7 @@ namespace freeling {
     double _MinPageRank;
 
     // mention semantic classes
-    typedef enum {sc_PER, sc_ORG, sc_LOC, sc_UNK} TSemanticClass;
+    typedef enum {sc_PER, sc_ORG, sc_LOC, sc_NONPER, sc_UNK} TSemanticClass;
 
     // map of feature names to feature functions
     typedef enum {ff_YES,ff_NO,ff_UNK} TFeatureValue;

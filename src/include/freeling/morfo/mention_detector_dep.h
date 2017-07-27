@@ -58,6 +58,7 @@ namespace freeling {
     std::map<std::wstring, std::pair<std::wstring, mention::mentionType>> mention_tags;
     std::set<std::wstring> excluded;
     std::wstring CoordLabel;
+    freeling::regexp *Coordinate;
     freeling::regexp *Punctuation;
     tagset *Tags;
 
@@ -67,6 +68,9 @@ namespace freeling {
                          int sentn, bool maximal,
                          std::vector<mention> & mentions, int &mentn) const;
     bool check_mention_tags(freeling::dep_tree::const_iterator h, mention::mentionType &t) const;
+    freeling::mention create_mention(int mentn, int sentn,
+                                     freeling::paragraph::const_iterator se, freeling::dep_tree::const_iterator h,
+                                     int pfirst, int plast) const;
 
   public:
     /// Constructor
