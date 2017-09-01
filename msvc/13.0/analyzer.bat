@@ -1,12 +1,15 @@
 
 @Echo OFF
 
-set BASEDIR=%~dp0
+rem Quotes around entire argument of 'set' prevent problems when the path or a directory name contains '&'
+rem (which is legal in Windows and occurs with some MySQL setups)
 
-set OLDPATH=%PATH%
-set PATH=%PATH%;%BASEDIR%\..\dependencies\boost\lib\x86;%BASEDIR%\..\dependencies\boost\lib\x64;%BASEDIR%\..\dependencies\zlib\lib\x86;%BASEDIR%\..\dependencies\zlib\lib\x64;%BASEDIR%\..\dependencies\icu\lib\x86;%BASEDIR%\..\dependencies\icu\lib\x64;%BASEDIR%\..\lib;%BASEDIR%\..\bin
+set "BASEDIR=%~dp0"
 
-set FREELINGSHARE=%BASEDIR%..\data
+set "OLDPATH=%PATH%"
+set "PATH=%PATH%;%BASEDIR%\..\dependencies\boost\lib\x86;%BASEDIR%\..\dependencies\boost\lib\x64;%BASEDIR%\..\dependencies\zlib\lib\x86;%BASEDIR%\..\dependencies\zlib\lib\x64;%BASEDIR%\..\dependencies\icu\lib\x86;%BASEDIR%\..\dependencies\icu\lib\x64;%BASEDIR%\..\lib;%BASEDIR%\..\bin"
+
+set "FREELINGSHARE=%BASEDIR%..\data"
 
 set cmdline=
 
@@ -31,7 +34,7 @@ if "%~1" EQU "" goto :endloop
 
 analyzer.exe %cmdline%
 
-SET PATH=%OLDPATH%
+SET "PATH=%OLDPATH%"
 SET BASEDIR=
 SET FREELINGSHARE=
 SET cmdline=
