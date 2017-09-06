@@ -3,12 +3,8 @@
 %%%%%%%%%%%%%%%%%%%%%
 
 <Type>
-Constituents
+Dependencies
 </Type>
-
-<Language>
-ENGLISH
-</Language>
 
 %%%%%%%%%%%%%%%%%%%%%
 %%% FEATURE EXTRACTOR
@@ -18,136 +14,147 @@ ENGLISH
 ../../semdb.dat
 </SemDB>
 
-%%% POS Tagset
-<Tagset>
-../../tagset.dat
-</Tagset>
+<MinPageRank>
+0.0003
+</MinPageRank>
 
-<ActiveFeatures>
-0xFFFFFFFF
-</ActiveFeatures>
+<DepLabels>
+Apposition  ^APPO$
+Subject     ^SBJ$
+Object      ^OBJ$
+NounModifier ^NMOD$
+Predicate    ^PRD$
+Arg0         ^(A0|C-A0)$
+Arg1         ^(A1|C-A1)$
+Arg123       ^(A[123]|C-A[123])$
+</DepLabels>
 
-%%% Labels useful to extract features
-<Labels>
-COOR_NP ^sn-coor$
-NP ^(sn|n)-chunk$
-# Pronouns: personal=PRP, relative=WP$, who/what=WP, genitive=POS
-# WDT (who-determiner) is also considered
-PRON ^WDT|WP\$?|PRP\$?$
-% Warning: filter out WPs at the beginning of the interrogative sentences
-XPRON ^WP$
-% possessive particles
-POSS ^PRP\$|WP\$|POS$
 
-% Proper names and Named Entities
-PN ^NP
-% Subordinate clauses
-SUB ^rel-cl$
-% Colon: to detect explanatory subordinate clauses
-PC ^Fc$
-% Common names
-NC ^NN
-NCS ^NN$
-NCP ^NNS$
-% Adjectives
-ADJ ^JJ$
-% Dets
-DET ^DT$
-% Verbs
-VERB ^VB
-NUM ^Z
-</Labels>
+<PosTags>
+Verb ^V
+Number ^Z
+RelPron ^(WDT|WP)$
+Poss ^(PRP\$)$
+NounSg ^NN$
+NounPl ^NNS$
+ProperNoun ^NP
+NonStopWord ^[NJVR]
+NounAdj ^([NJZ]|VB[GN])
+OrganizationNE ^NP00O00$
+PersonNE ^NP00SP0$
+LocationNE ^NP00G00$
+Preposition ^IN
+</PosTags>
 
-%%% List of some words being Determinant
-%%% Used to compute some features
-<DetWords>
-a
-an
-the
-this
-these
-that
-those
-</DetWords>
+<SemanticFeatures>
+PersonSUMO ^(Human|Male|Female)[+=]$
 
-%%% List of words being pronouns and possessive particles
-%%% columns: pronoun/possesive referent_gender person number
-%%% (referent_gender: 'm'-male, 'f'-female, 'a'-both 'n'-neutral, '-'-any
-%%% Used to compute some features
+OrganizationSUMO ^(Care|Educational|Government|Judicial|Legislative|Mercantile|Military|Nonprofit|Police|Political|Religious|Terrorist|Union)?Organization[+=]$
+
+LocationSUMO ^(Island|Park|Plain|Reef|Glacier|Hill|Room|Building|Burrow|Creek|Field|StateOrProvince|Forest|MountainRange|Lake|Valley|City|Nation|StationaryArtifact|Region|FreshWaterArea|LowlandArea|SaltWaterArea|UplandArea|SlopedArea|CultivatedLandArea|ShoreArea|StaticWaterArea|WaterArea|StreamWaterArea|GeopoliticalArea|GeographicArea|LandArea)[+=]$
+</SemanticFeatures>
+
+<WordFeatures>
+Definite     ^(the|both|my|your|his|her|its|our|their|that|this|those|these)$
+Copulative   ^be$
+Reporting    ^(say|reply|tell)$
+AcronymInfix ^(and|und|et|y|\\&|the|of)$
+AcronymSuffix ^([Cc]o|[Ii]nc|[Cc]orp|SL|sl|SA|sa|Bro(s?)|bro(s?))\\.?$ 
+</WordFeatures>
+
+%%% Pronouns and possessive particles
+%%% columns: pronoun/possesive type humanity person gender number
+%%% (type: 'I'-indefinite, 'S'-subject, 'O'-object, 'P'-possessive, 'R'-reflexive 'L'-relative 'D'-demonstrative 'X'-interrogative)
+%%% (humanity: 'h'-human, 'n'-non-human, '0'-underspecified)
+%%% (person: 1, 2, 3)
+%%% (gender: 'm'-masculine, 'f'-femenine, 'n'-neuter, 'b'-m or f, '0'-unspecified)
+%%% (number: 's'-singular, 'p'-plural, '0'-unspecified)
 <PronWords>
-he m 3 s
-his m 3 s
-him m 3 s
-himself m 3 s
-she f 3 s
-her f 3 s
-hers f 3 s
-herself f 3 s
-i a 1 s
-my a 1 s
-mine a 1 s
-me a 1 s
-myself a 1 s
-we a 1 s
-us a 1 p
-our a 1 p
-ourselves a 1 p
-ours a 1 p
-you a 2 a
-your a 2 a
-yourself a 2 s
-yourselves a 2 p
-yours a 2 a
-they a 3 p
-them a 3 p
-themselves a 3 p
-theirs a 3 p
-their a 3 p
-one a 3 s
-it n 3 s
-its n 3 s
-itself n 3 s
-this - 3 s
-these - 3 p
-that - 3 a
-those - 3 p
-who a 3 a
-which - 3 a
+% subject
+i S h1bs
+you SO h2b0
+he S h3ms
+she S h3fs
+it SO n3ns
+we S h1bp
+they S 03bp
+% object
+me O h1bs
+him O h3ms
+her OP h3fs
+us O h1bp
+'s O h1bp
+them O 03bp
+'em O 03bp
+% possessive
+my P h1bs
+mine P h1bs
+your P h2b0
+yours P h2b0
+his P h3ms
+hers P h3fs
+its P n3ns
+our P h1bp
+ours P h1bp
+their P 03bp
+theirs P 03bp
+% demonstrative
+this D n30s
+these D n30p
+that D n30s
+those D n30p
+% reflexive
+myself R h1bs
+yourself R h2bs
+himself R h3ms
+herself R h3fs
+itself R n3ns
+oneself R h3bs
+ourselves R h1bp
+yourselves R h2bp
+themselves R 03bp
+% relative and interrogative
+that L 0300
+who LX h3b0
+which LX n3n0
+whom LX h3b0
+whose LX h3b0
+what X n3n0
+% indefinite
+one I h3ns
+one's I h3ns
+each I 030s
+someone I h3bs
+somebody I h3bs
+something I n3ns
+any I n3ns
+anyone I h3bs
+anybody I h3bs
+anything I n3ns
+nobody I h3bs
+nothing I n3ns
+everyone I h3bs
+everybody I h3bs
+everything I n3ns
+both I 030p
+few I 030p
+several I 030p
+all I 0300
+some I 0300
+none I 0300
+most I 0300
+fewer I 030p
+another I 03ns
+other I 03ns
+others I 03np
+either I 030s
+enough I 030s
+less I 030s
+much I 030s
+little I 030s
+plenty I 030s
+many I 030s
+more I 030s
+most I 030s
+such I 030s
 </PronWords>
-
-%%% List of semantic classes and their synsets ("-" when not necessary) and a regexp for sense-words (^$ when not necessary).
-<SemClass>
-person 00007846-n ^(person|.+_person)$
-male - ^(male|male\_.+|.+\_male|man|man\_.+|.+\_man)$
-female - ^(female|female\_.+|.+\_female|woman|woman\_.+|.+\_woman)$
-location 00027167-n ^$
-organization 08164585-n ^$
-</SemClass>
-
-%%% Gazeeters
-%%% Used to compute aliases
-<Capitals>
-./resources/capitals.txt
-</Capitals>
-<Nationalities>
-./resources/gentilicis.txt
-</Nationalities>
-<GPEregexps>
-./resources/gpe-regexps.txt
-</GPEregexps>
-<NickNames>
-./resources/llista-nicknames.txt
-</NickNames>
-<ForenameAlias>
-./resources/forenames.txt
-</ForenameAlias>
-<AcroTerms>
-INFIX ^(and|und|et|y|\&)$
-SUFFIX ^([Ii]nc|[Cc]orp|SL|sl|SA|sa|Bro|bro)\\.?$
-</AcroTerms>
-<PersonNames>
-./resources/person-names.txt
-</PersonNames>
-<Titles>
-./resources/titles.txt
-</Titles>
