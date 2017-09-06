@@ -7,10 +7,59 @@ Dependencies
 ../tagset.dat
 </TagsetFile>
 
+
 <MentionTags>
-NC
-NP
-PR
-AP
-DP
+%% Lines with format:  Tag  Funcion Type
+%% Any tree headed by 'Tag' will be a mention of type 'Type' provided it 
+%% does not have funcion 'Function' ('-' means no restrictions)
+NC   -     NounPhrase
+NP   -     ProperNoun
+PD   -     Pronoun
+PI   -     Pronoun
+PP   -     Pronoun
+PR   -     Pronoun
+PT   -     Pronoun
+DP   -     Pronoun
 </MentionTags>
+
+<CoordLabel>
+coord
+</CoordLabel>
+
+<CoordinateFunction>
+^(grup.nom|sn)$
+</CoordinateFunction>
+
+<Punctuation>
+^F
+</Punctuation>
+
+<Excluded>
+día
+semana
+mes
+año
+mañana
+tarde
+noche
+lunes
+martes
+miércoles
+jueves
+viernes
+sábado
+domingo
+enero
+febrero
+marzo
+abril
+mayo
+junio
+julio
+agosto
+septiembre
+octubre
+noviembre
+diciembre
+se
+</Excluded>

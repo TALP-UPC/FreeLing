@@ -3,17 +3,17 @@
 %%%%%%%%%%%%%%%%%%%%%
 
 <Language>
-SPANISH
+ENGLISH
 </Language>
 
 %%% detect mentions 
 <MentionDetector>
-../mention_detector_constit.dat
+../mention_detector_dep.dat
 </MentionDetector>
 
 %%% extract features 
 <FeatureExtractor>
-relaxcor_fex.dat
+./relaxcor_fex.dat
 </FeatureExtractor>
 
 
@@ -21,9 +21,9 @@ relaxcor_fex.dat
 %%% CHAIN GENERATION
 %%%%%%%%%%%%%%%%%%%%
 
-%%% files of constraints and weights in this order
+%%% files of constrains and weights in this order
 <Model>
-model.dat
+./model.dat
 </Model>
 
 %%% parameters for relax
@@ -31,18 +31,22 @@ model.dat
 4000
 </MaxIter>
 <ScaleFactor>
-8.0
+100.0
 </ScaleFactor>
 <Epsilon>
-0.001
+0.00001
 </Epsilon>
+
+% default weight favoring singletons
 <SingleFactor>
-0.1
+5
 </SingleFactor>
-% Nprune=0 means no prunning of the edges
+
+% Nprune=0 means no pruning of the edges
 <Nprune>
-8
+0
 </Nprune>
+
 <RemoveIfAllNeg>
 no
 </RemoveIfAllNeg>
