@@ -73,7 +73,7 @@ class WINDLL analyzer {
    ///
    ////////////////////////////////////////////////////////////////
 
-   class analyzer_config_options {
+   class WINDLL analyzer_config_options {
      public:
        /// Language of text to process
        std::wstring Lang;
@@ -129,7 +129,7 @@ class WINDLL analyzer {
    ///
    ////////////////////////////////////////////////////////////////
    
-   class analyzer_invoke_options {
+   class WINDLL analyzer_invoke_options {
      public:
        /// Level of analysis in input and output
        AnalysisLevel InputLevel, OutputLevel;
