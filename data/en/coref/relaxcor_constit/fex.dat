@@ -1,0 +1,153 @@
+%%%%%%%%%%%%%%%%%%%%%
+%%% GENERAL
+%%%%%%%%%%%%%%%%%%%%%
+
+<Type>
+Constituents
+</Type>
+
+<Language>
+ENGLISH
+</Language>
+
+%%%%%%%%%%%%%%%%%%%%%
+%%% FEATURE EXTRACTOR
+%%%%%%%%%%%%%%%%%%%%%
+
+<SemDB>
+../../semdb.dat
+</SemDB>
+
+%%% POS Tagset
+<Tagset>
+../../tagset.dat
+</Tagset>
+
+<ActiveFeatures>
+0xFFFFFFFF
+</ActiveFeatures>
+
+%%% Labels useful to extract features
+<Labels>
+COOR_NP ^sn-coor$
+NP ^(sn|n)-chunk$
+# Pronouns: personal=PRP, relative=WP$, who/what=WP, genitive=POS
+# WDT (who-determiner) is also considered
+PRON ^WDT|WP\$?|PRP\$?$
+% Warning: filter out WPs at the beginning of the interrogative sentences
+XPRON ^WP$
+% possessive particles
+POSS ^PRP\$|WP\$|POS$
+
+% Proper names and Named Entities
+PN ^NP
+% Subordinate clauses
+SUB ^rel-cl$
+% Colon: to detect explanatory subordinate clauses
+PC ^Fc$
+% Common names
+NC ^NN
+NCS ^NN$
+NCP ^NNS$
+% Adjectives
+ADJ ^JJ$
+% Dets
+DET ^DT$
+% Verbs
+VERB ^VB
+NUM ^Z
+</Labels>
+
+%%% List of some words being Determinant
+%%% Used to compute some features
+<DetWords>
+a
+an
+the
+this
+these
+that
+those
+</DetWords>
+
+%%% List of words being pronouns and possessive particles
+%%% columns: pronoun/possesive referent_gender person number
+%%% (referent_gender: 'm'-male, 'f'-female, 'a'-both 'n'-neutral, '-'-any
+%%% Used to compute some features
+<PronWords>
+he m 3 s
+his m 3 s
+him m 3 s
+himself m 3 s
+she f 3 s
+her f 3 s
+hers f 3 s
+herself f 3 s
+i a 1 s
+my a 1 s
+mine a 1 s
+me a 1 s
+myself a 1 s
+we a 1 s
+us a 1 p
+our a 1 p
+ourselves a 1 p
+ours a 1 p
+you a 2 a
+your a 2 a
+yourself a 2 s
+yourselves a 2 p
+yours a 2 a
+they a 3 p
+them a 3 p
+themselves a 3 p
+theirs a 3 p
+their a 3 p
+one a 3 s
+it n 3 s
+its n 3 s
+itself n 3 s
+this - 3 s
+these - 3 p
+that - 3 a
+those - 3 p
+who a 3 a
+which - 3 a
+</PronWords>
+
+%%% List of semantic classes and their synsets ("-" when not necessary) and a regexp for sense-words (^$ when not necessary).
+<SemClass>
+person 00007846-n ^(person|.+_person)$
+male - ^(male|male\_.+|.+\_male|man|man\_.+|.+\_man)$
+female - ^(female|female\_.+|.+\_female|woman|woman\_.+|.+\_woman)$
+location 00027167-n ^$
+organization 08164585-n ^$
+</SemClass>
+
+%%% Gazeeters
+%%% Used to compute aliases
+<Capitals>
+./resources/capitals.txt
+</Capitals>
+<Nationalities>
+./resources/gentilicis.txt
+</Nationalities>
+<GPEregexps>
+./resources/gpe-regexps.txt
+</GPEregexps>
+<NickNames>
+./resources/llista-nicknames.txt
+</NickNames>
+<ForenameAlias>
+./resources/forenames.txt
+</ForenameAlias>
+<AcroTerms>
+INFIX ^(and|und|et|y|\&)$
+SUFFIX ^([Ii]nc|[Cc]orp|SL|sl|SA|sa|Bro|bro)\\.?$
+</AcroTerms>
+<PersonNames>
+./resources/person-names.txt
+</PersonNames>
+<Titles>
+./resources/titles.txt
+</Titles>

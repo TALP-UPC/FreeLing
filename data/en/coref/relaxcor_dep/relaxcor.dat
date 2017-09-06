@@ -13,7 +13,7 @@ ENGLISH
 
 %%% extract features 
 <FeatureExtractor>
-./relaxcor_fex.dat
+./fex.dat
 </FeatureExtractor>
 
 

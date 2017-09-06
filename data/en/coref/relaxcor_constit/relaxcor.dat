@@ -1,0 +1,48 @@
+%%%%%%%%%%%%%%%%%%%%%
+%%% GENERAL
+%%%%%%%%%%%%%%%%%%%%%
+
+<Language>
+ENGLISH
+</Language>
+
+%%% detect mentions 
+<MentionDetector>
+../mention_detector_constit.dat
+</MentionDetector>
+
+%%% extract features 
+<FeatureExtractor>
+./fex.dat
+</FeatureExtractor>
+
+
+%%%%%%%%%%%%%%%%%%%%
+%%% CHAIN GENERATION
+%%%%%%%%%%%%%%%%%%%%
+
+%%% files of constrains and weights in this order
+<Model>
+./model.dat
+</Model>
+
+%%% parameters for relax
+<MaxIter>
+4000
+</MaxIter>
+<ScaleFactor>
+8.0
+</ScaleFactor>
+<Epsilon>
+0.001
+</Epsilon>
+<SingleFactor>
+0.1
+</SingleFactor>
+% Nprune=0 means no prunning of the edges
+<Nprune>
+8
+</Nprune>
+<RemoveIfAllNeg>
+no
+</RemoveIfAllNeg>
