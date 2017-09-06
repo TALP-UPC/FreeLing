@@ -79,7 +79,7 @@ namespace freeling {
     wstring fmodel; // relaxcor model file
 
     enum sections {LANGUAGE, MENTION_DETECTOR, FEATURE_EXTRACTOR, MODEL, 
-                   MAX_ITER, SCALE_FACTOR, EPSILON, SINGLE_FACTOR, N_PRUNE};
+                   MAX_ITER, SCALE_FACTOR, EPSILON, SINGLE_FACTOR, N_PRUNE, REMOVE_ALL_NEG};
 
     // read configuration file and store information.
     // do not allow undeclared sections.
@@ -94,6 +94,7 @@ namespace freeling {
     cfg.add_section(L"Epsilon",EPSILON,true);
     cfg.add_section(L"SingleFactor",SINGLE_FACTOR,true);
     cfg.add_section(L"Nprune",N_PRUNE,true); 
+    cfg.add_section(L"RemoveIfAllNeg",REMOVE_ALL_NEG,true);
 
     if (not cfg.open(filename)) ERROR_CRASH(L"Error opening file "+filename);
 
@@ -153,6 +154,13 @@ namespace freeling {
 	sin>>_Nprune;
 	break;
       }
+      case REMOVE_ALL_NEG: {
+        wstring b;
+	sin>>b;
+        b = util::lowercase(b);
+        _RemoveAllNeg = (b==L"yes" or b==L"y" or b==L"on");
+	break;
+      }
       default: break;
       }
     }
@@ -161,8 +169,8 @@ namespace freeling {
     // load model
     model = new coref_model(fmodel);
     // create helper modules
-    detector = new mention_detector(fmention_detector, language);
-    extractor = new relaxcor_fex(ffeature_extractor, model, language);
+    detector = new mention_detector(fmention_detector);
+    extractor = new relaxcor_fex(ffeature_extractor, (*model) );
 
     TRACE(3,L"analyzer succesfully created");
   }
@@ -314,65 +322,10 @@ namespace freeling {
 
 
   /////////////////////////////////////////////////////////////////////////////
-  /// Not much sense in using this, but it is virtual so we need to define it
+  /// Sort mentions in needed order: proper nouns -> noun phrases+composites -> pronouns
   /////////////////////////////////////////////////////////////////////////////
 
-  void relaxcor::analyze(sentence &s) const {
-    ERROR_CRASH (L"Coreference solver requires a document, not a sentence. Please call relaxcor::analyze(document &d).");
-  }
-
-  /////////////////////////////////////////////////////////////////////////////
-  /// Detect coreference chains in a given document.
-  /////////////////////////////////////////////////////////////////////////////
-
-  void relaxcor::analyze(document &doc) const {
-
-    relaxcor_fex::Mfeatures M;
-    size_t dim=500;
-
-    TRACE(3,L"Detecting mentions");
-
-    // searching for mentions
-    vector<mention> mentions;
-    mentions.reserve(dim);
-
-    clock_t t0 = clock();  // initial time
-    detector->detect(doc,mentions);
-    clock_t t1 = clock();  // final time
-    TRACE(3,L"detection time: "+util::double2wstring(double(t1-t0)/double(CLOCKS_PER_SEC)));
-
-    // extracting features of mention-pairs
-    TRACE(3,L"Extracting features");
-    t0 = clock();  // initial time
-    extractor->extract(mentions, M);
-    t1 = clock();  // final time
-    TRACE(3,L"extraction time: "+util::double2wstring(double(t1-t0)/double(CLOCKS_PER_SEC)));
-   
-    // print features
-    //print(M, mentions.size());
-    
-    TRACE(3,L"Ready to create chains");
-
-    // coreferent chains, useful when removing singletons
-    map<int, vector<int> > chains;
-
-    if (mentions.size() < 2) {
-      mentions[0].set_group(0);
-      chains[0] = vector<int>({0});
-    }
-    else {
-
-    ///////////////////////
-    // building the problem
-    ///////////////////////
- 
-    problem coref_problem(mentions.size());
-
-    t0 = clock();  // initial time
-
-    // first, they have to be sorted: proper nouns -> noun phrases+composites -> pronouns
-    vector<vector<mention>::const_iterator> sorted_mentions;
-    sorted_mentions.reserve(mentions.size());
+  void relaxcor::sort_mentions(const vector<mention> &mentions, vector<vector<mention>::const_iterator> &sorted_mentions) const {
 
     for (vector<mention>::const_iterator it=mentions.begin(); it!=mentions.end(); it++) {
       if (it->is_type(mention::PROPER_NOUN))
@@ -385,24 +338,22 @@ namespace freeling {
     for (vector<mention>::const_iterator it=mentions.begin(); it!=mentions.end(); it++) {
       if (it->is_type(mention::PRONOUN))
         sorted_mentions.push_back(it);
-    }
- 
-    t1 = clock();  // final time
-    TRACE(3,L"building problem: sort mentions time: "+util::double2wstring(double(t1-t0)/double(CLOCKS_PER_SEC)));
+    }    
+    TRACE(3,L"building problem: mentions sorted ");
+  }
 
-    ////////////////////////////////////
-    // adding vextexes (mentions)
-    // add one vertex per sorted mention and create the set of its labels (ie, all the previous mentions)
-    ////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////
+  /// Add mentions as variables to the CLP, with their corresponding labels
+  /////////////////////////////////////////////////////////////////////////////
 
-    t0 = clock();  // initial time
+  void relaxcor::add_vertexs(problem &coref_problem, const vector<vector<mention>::const_iterator> &sorted_mentions) const {
 
     for (unsigned int m=0; m<sorted_mentions.size(); m++) {
-
-      TRACE(3, L"building problem: adding vertex " + util::int2wstring(m) +
-               L" = mention " + util::int2wstring(sorted_mentions[m]->get_id()) + 
-               L" (" +sorted_mentions[m]->value() + L")");
-
+      
+      TRACE(4, L"building problem: adding vertex " + util::int2wstring(m) +
+            L" = mention " + util::int2wstring(sorted_mentions[m]->get_id()) + 
+            L" (" +sorted_mentions[m]->value() + L")");
+      
       double prob;      
       double mult;
       if (sorted_mentions[m]->is_type(mention::PRONOUN)) {
@@ -415,30 +366,30 @@ namespace freeling {
         prob = 1.0/(m+2);
         mult = 2;
       }
-
+      
       // adding labels with equiprobable initial probabilities for each vertex 
       for (unsigned int l=0; l<m; l++) {
         coref_problem.add_label(m,prob);
-        TRACE(3,L"   building problem: adding label " + util::int2wstring(l) + 
-                L" to vertex "+ util::int2wstring(m) +
-                L" prob=" + util::double2wstring(prob));
+        TRACE(5,L"   building problem: adding label " + util::int2wstring(l) + 
+              L" to vertex "+ util::int2wstring(m) +
+              L" prob=" + util::double2wstring(prob));
       }
       // last label may have twice the probability if it was not a pronoun
       coref_problem.add_label(m,mult*prob);
-      TRACE(3,L"   building problem: adding label " + util::int2wstring(m) + 
-              L" to vertex "+ util::int2wstring(m) +
-              L" prob=" + util::double2wstring(mult*prob));
+      TRACE(5,L"   building problem: adding label " + util::int2wstring(m) + 
+            L" to vertex "+ util::int2wstring(m) +
+            L" prob=" + util::double2wstring(mult*prob));
     }
-
-    t1 = clock();  // final time
-    TRACE(3,L"building problem: adding vertexes time: "+util::double2wstring(double(t1-t0)/double(CLOCKS_PER_SEC)));
-
-    //////////////////////////////////////////////////////////////////////////////////
-    // creating edges
-    // create one edge from mention m and a previous one, m_ant, using sorted_mentions
-    //////////////////////////////////////////////////////////////////////////////////
-
-    t0 = clock();  // initial time
+    
+  }
+  
+  /////////////////////////////////////////////////////////////////////////////
+  /// Add constraints to the CLP
+  ///////////////////////////////////////////////////////////////////////////
+  
+  void relaxcor::add_edges(problem &coref_problem, 
+                           const vector<vector<mention>::const_iterator> &sorted_mentions,
+                           relaxcor_fex_abs::Mfeatures &M) const {
 
     typedef vector< pair<pair<int, int >, double> > Tadjacents;
     int nedges=0;
@@ -456,16 +407,30 @@ namespace freeling {
 
       for (unsigned int m_ant=0; m_ant<m; m_ant++) {
 	  
-	int anaphor = max (sorted_mentions[m]->get_id(), sorted_mentions[m_ant]->get_id());
-	int antecedent = min (sorted_mentions[m]->get_id(), sorted_mentions[m_ant]->get_id());
+	int anaphor, antecedent, pos_anaf, pos_antc;
+        if (sorted_mentions[m]->get_id() < sorted_mentions[m_ant]->get_id()) {
+          antecedent = sorted_mentions[m]->get_id();
+          anaphor = sorted_mentions[m_ant]->get_id();
+          pos_antc = m;
+          pos_anaf = m_ant;
+        }
+        else {
+          antecedent = sorted_mentions[m_ant]->get_id();
+          anaphor = sorted_mentions[m]->get_id();
+          pos_antc = m_ant;
+          pos_anaf = m;
+        }
+            
 	if (anaphor == antecedent)
 	  ERROR_CRASH(L"Two different mentions with the same identifier");
 	
 	// computing the weight of the edge as the sum of compatibilities of the satisfied constraints
 	wstring mp = util::int2wstring(anaphor) + L":" + util::int2wstring(antecedent);
-        TRACE(7, L" Checking constraints for pair " + mp + 
-                 L" (" + sorted_mentions[m]->value() + L"," + sorted_mentions[m_ant]->value() + L")");
-        TRACE(7,L"  Pair features: " + relaxcor_model::print(M[mp],true) );
+        TRACE(7, L"  Checking constraints for pair " << antecedent << L":" << anaphor << 
+              L" (" << sorted_mentions[pos_antc]->value() << L"," << sorted_mentions[pos_anaf]->value() << L")");
+        TRACE(7,L"     Pair features:  ");
+        TRACE(7,L"        active  : " << model->print(M[mp],true) );
+        TRACE(7,L"        inactive: " << model->print(M[mp],false) );
 	double w = model->weight(M[mp]);
 
 	if (w>0) Npos++;
@@ -478,8 +443,15 @@ namespace freeling {
       // for (unsigned int i=0; i<adjacents.size(); i++) 
       //   wcerr << L"(" << adjacents[i].first.first << L"," <<  adjacents[i].first.second << L") - "  << adjacents[i].second << endl;
       
-      TRACE(4,L" Found "+util::int2wstring(adjacents.size())+L" edges for mention "+util::int2wstring(sorted_mentions[m]->get_id())+L" ("+sorted_mentions[m]->value()+L")");
+      TRACE(4,L"  Found "+util::int2wstring(adjacents.size())+L" edges for mention "+util::int2wstring(sorted_mentions[m]->get_id())+L" ("+sorted_mentions[m]->value()+L")");
 
+      // If only negative arcs for this mention, it will end up a singleton. 
+      // Leave it alone (no edges) to speed up solving.
+      if (_RemoveAllNeg and Npos==0 and Nneg>0) {
+        TRACE(4,L"  All edges are negative. Removing.");
+        adjacents.clear();
+      }        
+      
       ///////////////////////////////////////
       // Prunning edges if required
       // Keep only the N most relevant edges.
@@ -505,7 +477,7 @@ namespace freeling {
 	//  wcerr << endl;	
       }
 
-      TRACE(4,L"   "+util::int2wstring(adjacents.size())+L" edges remaining after pruning with Nprune="+util::int2wstring(_Nprune));
+      TRACE(4,L"  "+util::int2wstring(adjacents.size())+L" edges remaining after pruning with Nprune="+util::int2wstring(_Nprune));
     
       ////////////////////////////////////
       // Adding constraints to the problem from the edges 
@@ -528,92 +500,152 @@ namespace freeling {
 	  lconstraint.push_back(constraint);
 	  coref_problem.add_constraint(m,l,lconstraint,w);
 
-          nconstr+=1;
+          nconstr++;
 	}
+      }
+
+      if (_Single_factor>0) {
+        // add constraint reinforcing singleton value.
+        TRACE(4,L"   Creating singleton constraint.");
+        list<list<pair<int,int> > > lconstraint;
+        coref_problem.add_constraint(m,m, lconstraint, _Single_factor);
+        
+        nconstr++;
       }
     }
 
-    t1 = clock();  // final time
-    TRACE(3,L"building problem. Added "+util::int2wstring(nconstr)+L" constraints for "+util::int2wstring(nedges)+L" edges");
-    TRACE(3,L"building problem: adding constraints time: "+util::double2wstring(double(t1-t0)/double(CLOCKS_PER_SEC)));
-
-    /////////////////////////////////
-    // Solving the coreference chains
-    /////////////////////////////////
-
-    t0 = clock();  // initial time
-
-    relax coref_solver(_Max_iter, _Scale_factor, _Epsilon);
-    coref_solver.solve(coref_problem);
-
-    t1 = clock();  // final time
-    TRACE(3,L"solving time: "+util::double2wstring(double(t1-t0)/double(CLOCKS_PER_SEC)));
-
-    ////////////////////////////////////////////
-    // Adding coreference chains to the document
-    ////////////////////////////////////////////
-
-    t0 = clock();  // initial time
-
-    for (unsigned int m=0; m<sorted_mentions.size(); m++) {
-
-      int id, group;
-      list<int> best_sorted_groups = coref_problem.best_label(m);
-
-      if (best_sorted_groups.size()==1) {
-	int best = best_sorted_groups.front();
-	id = sorted_mentions[m]->get_id();
-	group = sorted_mentions[best]->get_id();
-      }
-      else {
-
-      // from best_groups, find the group which includes the mention closest to m, preferable by which is closer to the left
-	list<int>::const_iterator it = best_sorted_groups.begin();
-	int best_left = -1;
-	int best_right = -1;
-	int dist_best_left = 100000;
-	int dist_best_right = 100000;
-
-	id = sorted_mentions[m]->get_id();
-	
-	for (it= best_sorted_groups.begin(); it != best_sorted_groups.end(); it++) {
-	  
-	  int dist_left =  ((*it) == m)? 0 : offset(mentions[id], 1) - offset(mentions[sorted_mentions[(*it)]->get_id()], 0);
-	  int dist_right = ((*it) == m)? 0 : offset(mentions[sorted_mentions[(*it)]->get_id()], 1) - offset(mentions[id], 0);
-
-	  if (dist_left >= 0 and dist_left <= dist_best_left) {
-	    best_left = sorted_mentions[(*it)]->get_id();
-	    dist_best_left = dist_left;
-	  }
-	  else
-	    if (dist_right > 0 and dist_right < dist_best_right) {
-	      best_right = sorted_mentions[(*it)]->get_id();
-	      dist_best_right = dist_right;
-	    }
-	}
-
-	group = dist_best_left>dist_best_right ? best_right : best_left;
-      }
-
-      mentions[id].set_group(group);
-
-      if (chains.find(group) == chains.end())
-	chains[group] = vector<int>({id});
-      else
-	chains[group].push_back(id);
-     }
-
-    }
-
-    t1 = clock();  // final time
-    TRACE(3,L"adding chains to doc time: "+util::double2wstring(double(t1-t0)/double(CLOCKS_PER_SEC)));
-
-    for (unsigned int m=0; m<mentions.size(); m++) 
-      // ignore the mention when it is a singleton and provide_singletons=false 
-      if (provide_singletons or chains[mentions[m].get_group()].size()>1) 
-	doc.add_mention(mentions[m]);
   }
 
+  /////////////////////////////////////////////////////////////////////////////
+  /// Extract created coreference chains 
+  ////////////////////////////////////////////////////////////////////////////
+
+  void relaxcor::extract_chains(map<int, set<int> > &chains, 
+                                const problem &coref_problem, 
+                                vector<mention> &mentions, 
+                                vector<vector<mention>::const_iterator> &sorted_mentions) const {
+
+    for (unsigned int m=0; m<sorted_mentions.size(); m++) {
+      
+      int id, group;
+      list<int> best_sorted_groups = coref_problem.best_label(m);
+      
+      if (best_sorted_groups.size()==1) {
+        int best = best_sorted_groups.front();
+        id = sorted_mentions[m]->get_id();
+        group = sorted_mentions[best]->get_id();
+      }
+      else {        
+        // from best_groups, find the group which includes the mention
+        // closest to m, preferable by which is closer to the left
+        list<int>::const_iterator it = best_sorted_groups.begin();
+        int best_left = -1;
+        int best_right = -1;
+        int dist_best_left = 100000;
+        int dist_best_right = 100000;
+        
+        id = sorted_mentions[m]->get_id();
+        
+        for (it= best_sorted_groups.begin(); it != best_sorted_groups.end(); it++) {
+          
+          int dist_left =  ((*it) == m)? 0 : offset(mentions[id], 1) - offset(mentions[sorted_mentions[(*it)]->get_id()], 0);
+          int dist_right = ((*it) == m)? 0 : offset(mentions[sorted_mentions[(*it)]->get_id()], 1) - offset(mentions[id], 0);
+          
+          if (dist_left >= 0 and dist_left <= dist_best_left) {
+            best_left = sorted_mentions[(*it)]->get_id();
+            dist_best_left = dist_left;
+          }
+          else if (dist_right > 0 and dist_right < dist_best_right) {
+            best_right = sorted_mentions[(*it)]->get_id();
+            dist_best_right = dist_right;
+          }
+        }
+        
+        group = (dist_best_left>dist_best_right ? best_right : best_left);
+      }
+      
+      mentions[id].set_group(group);      
+      chains[group].insert(id);
+    }
+  }
+
+  /////////////////////////////////////////////////////////////////////////////
+  /// Not much sense in using this, but it is virtual so we need to define it
+  /////////////////////////////////////////////////////////////////////////////
+
+  void relaxcor::analyze(sentence &s) const {
+    ERROR_CRASH (L"Coreference solver requires a document, not a sentence. Please call relaxcor::analyze(document &d).");
+  }
+
+  /////////////////////////////////////////////////////////////////////////////
+  /// Detect coreference chains in a given document.
+  /////////////////////////////////////////////////////////////////////////////
+
+  void relaxcor::analyze(document &doc) const {
+    clock_t t0, t1;
+    
+    TRACE(3,L"Detecting mentions");
+
+    // searching for mentions
+    t0 = clock();  // initial time
+    vector<mention> mentions = detector->detect(doc);
+    t1 = clock();  // final time
+    TRACE(3,L"Detected "<<mentions.size()<<L" mentions. Detection time: "+util::double2wstring(double(t1-t0)/double(CLOCKS_PER_SEC)));
+    
+    // extracting features of mention-pairs
+    TRACE(3,L"Extracting features");
+    t0 = clock();  // initial time
+    relaxcor_fex_abs::Mfeatures M = extractor->extract(mentions);
+    t1 = clock();  // final time
+    TRACE(3,L"extraction time: "+util::double2wstring(double(t1-t0)/double(CLOCKS_PER_SEC)));
+   
+    // coreferent chains, useful when removing singletons
+    map<int, set<int> > chains;
+
+    // not enough mentions detected, no point in continuing
+    if (mentions.size()<=1) return;
+
+    // building the problem
+    problem coref_problem(mentions.size());
+    
+    // first, sort mentions: proper nouns -> noun phrases+composites -> pronouns
+    vector<vector<mention>::const_iterator> sorted_mentions;
+    sort_mentions(mentions, sorted_mentions);
+    
+    // add one vertex for each sorted mention and create the set of its labels (ie, all the previous mentions)
+    TRACE(4,L"Adding vertexs");
+    add_vertexs(coref_problem, sorted_mentions);
+    
+    // create one edge from mention m and a previous one, m_ant, using sorted_mentions
+    TRACE(4,L"Adding edges");
+    add_edges(coref_problem, sorted_mentions, M);
+    
+    // Solving CLP problem
+    TRACE(4,L"Solving");
+    t0 = clock();  // initial time
+    relax coref_solver(_Max_iter, _Scale_factor, _Epsilon);
+    coref_solver.solve(coref_problem);
+    t1 = clock();  // initial time
+    TRACE(3,L"solving time: "+util::double2wstring(double(t1-t0)/double(CLOCKS_PER_SEC)));
+        
+    // Extract created coreference chains 
+    TRACE(4,L"Extracting chains from solution");
+    extract_chains(chains, coref_problem, mentions, sorted_mentions);
+
+    // add chains to document
+    TRACE(4,L"Adding coreference chains to document");
+    for (unsigned int m=0; m<mentions.size(); m++) {
+      // ignore the mention when it is a singleton and provide_singletons=false 
+      if (mentions[m].get_group()!=-1 and (provide_singletons or chains[mentions[m].get_group()].size()>1) ) { 
+        doc.add_mention(mentions[m]);
+        TRACE(6,L"   Mention "<<mentions[m].get_id()<<L": ["<<mentions[m].value()<<L"]  --  Added to group "<<mentions[m].get_group());
+      }
+      else {
+        TRACE(8,L"   Mention "<<mentions[m].get_id()<<L": ["<<mentions[m].value()<<L"]  -- Singleton, skipped");
+      }
+    }
+  }
+  
 } // namespace
 
 

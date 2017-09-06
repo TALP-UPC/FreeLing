@@ -1295,9 +1295,10 @@ namespace freeling {
   /// Constructor from a parse_tree pointer
   mention::mention(int i, int ns, paragraph::const_iterator ps, parse_tree::const_iterator pt, int word_b, sentence::const_iterator itword) {
     id = i;
+    sid = std::to_wstring(id);
     sent = ns;
     s = ps;
-    single_subsumtion = false;
+    maximal = false;
     initial = false;
     posBegin = word_b; 
     itBegin = itword;
@@ -1309,14 +1310,42 @@ namespace freeling {
     chain = -1;
   }
 
+  /// Constructor from a dep_tree node
+  mention::mention(int i, int ns, paragraph::const_iterator ps, dep_tree::const_iterator dt, int begin, int end) {
+    id = i;
+    sid = std::to_wstring(id);
+    sent = ns;
+    s = ps;
+    maximal = false;
+    initial = false;
+
+    dtree = dt;
+
+    // use given begin/end positions, if given.  Otherwise, whole mention
+    if (begin>=0) posBegin = begin;
+    else posBegin = dep_tree::get_first_word(dt);
+
+    if (end >= 0) posEnd = end;
+    else posEnd = dep_tree::get_last_word(dt);
+
+    itBegin = ps->get_word_iterator((*ps)[posBegin]);
+    itEnd = ps->get_word_iterator((*ps)[posEnd]);
+    ++itEnd;
+
+    itHead = ps->get_word_iterator((*ps)[dt->get_word().get_position()]);
+    chain = -1;
+  }
+
+
   /// fuzzy constructor from start/end positions
   /// the mention is created from start1 to end1 (start1 >= start and end1 <= end) 
   /// [start1, end1] is the sequence closest to start with the maximal subsuming node ptree 
   mention::mention(int i, int ns, paragraph::const_iterator ps, sentence::const_iterator start_it, sentence::const_iterator end_it) {
     id = i;
+    sid = std::to_wstring(id);
     sent = ns;
     s = ps;
-    single_subsumtion = false;
+    maximal = false;
     initial = false;
     // initially the maximal subsumed sequence is [start_it,start_it] and the node
     // subsuming it is the node corresponding to start_it word
@@ -1343,7 +1372,7 @@ namespace freeling {
 
     posEnd = end_it->get_position();
     itEnd = end_it; 
-    itEnd++;
+    ++itEnd;
 
     itHead = s->get_word_iterator(parse_tree::get_head_word(ptree));
     chain = -1;
@@ -1352,12 +1381,14 @@ namespace freeling {
   /// Clone mention
   void mention::clone(const mention &m) {
     id = m.id;
+    sid = m.sid;
     mType = m.mType;
     sent = m.sent;
     s = m.s;
-    single_subsumtion = m.single_subsumtion;
+    maximal = m.maximal;
     initial = m.initial;
     ptree = m.ptree;
+    dtree = m.dtree;
     posBegin = m.posBegin;
     posEnd = m.posEnd;
     itBegin = m.itBegin;
@@ -1383,7 +1414,8 @@ namespace freeling {
 
   /// setters
   void mention::set_id(int id) {
-    this->id=id;
+    this->id = id;
+    this->sid = std::to_wstring(id);
   }
   void mention::set_type(mention::mentionType t) { 
     mType=t; 
@@ -1394,13 +1426,16 @@ namespace freeling {
   void mention::set_group(int g) {
     chain=g;
   }
-  void mention::subsumed_with_no_verb(bool b) {
-    single_subsumtion=b;
+  void mention::set_maximal(bool b) {
+    maximal=b;
   }
 
   /// getters
   int mention::get_id() const {
     return id;
+  }
+  wstring mention::get_str_id() const {
+    return sid;
   }
   int mention::get_n_sentence() const {
     return sent;
@@ -1410,6 +1445,9 @@ namespace freeling {
   }
   parse_tree::const_iterator mention::get_ptree() const {
     return ptree;
+  }
+  dep_tree::const_iterator mention::get_dtree() const {
+    return dtree;
   }
   const word& mention::get_head() const {
     return *itHead;
@@ -1441,12 +1479,14 @@ namespace freeling {
   bool mention::is_initial() const {
     return initial;
   }
-  bool mention::is_subsumed_with_no_verb() const {
-    return single_subsumtion;
+  bool mention::is_maximal() const {
+    return maximal;
   }
   
-  /// get string of mention words, lowercasing the first "lc" (none by default)
+  /// get string of mention words, lowercasing the first "lc"
+  /// default: lc=0;  Use lc=-1 to lowercase all words
   wstring mention::value(int lc) const {
+    if (lc == -1) lc = posEnd - posBegin + 1;
     int p=1;
     wstring v=L"";
     for (sentence::const_iterator it=itBegin; it!=itEnd; it++) {

@@ -8,7 +8,7 @@ ENGLISH
 
 %%% detect mentions 
 <MentionDetector>
-../mention_detector.dat
+../mention_detector_constit.dat
 </MentionDetector>
 
 %%% extract features 
@@ -43,3 +43,6 @@ model.dat
 <Nprune>
 8
 </Nprune>
+<RemoveIfAllNeg>
+no
+</RemoveIfAllNeg>

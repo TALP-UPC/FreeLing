@@ -36,6 +36,7 @@
 #ifndef RELAXCOR_MODEL_H
 #define RELAXCOR_MODEL_H
 
+#include <map>
 #include "freeling/windll.h"
 
 namespace freeling {
@@ -50,6 +51,7 @@ namespace freeling {
 
     // type representing the feature names with their IDs
     typedef std::map<std::wstring, unsigned int> TfeaturesNames;
+    typedef std::map<unsigned int, std::wstring> TfeaturesIDs;
     // type representing the sparse feature vector for any pairwise model
     typedef std::map<unsigned int,bool> Tfeatures;
 
@@ -57,20 +59,23 @@ namespace freeling {
 
     /// variable for the feature names with their ids 
     TfeaturesNames _Feature_names;
+    TfeaturesIDs _Feature_ids;
 
     /// print all the names and values of the model features
     void print_feature_names() const;
 
   public:
 
-
     relaxcor_model(const std::wstring&);
     virtual ~relaxcor_model() {};
     
-    /// true when the wstring is the name of a feature in our model
-    bool is_feature_name(const std::wstring&) const;
-    /// returns the id of the feature name described as parameter
-    unsigned int feature_name_id(const std::wstring&);
+    /// checks for existing feature name and returns id if it exists
+    bool feature_name_defid(const std::wstring &name, unsigned int &id) const;
+    bool is_feature_name(const std::wstring &name) const;
+    unsigned int feature_name_id(const std::wstring &name) const;
+    /// checks for existing feature id and return name if it exists
+    bool feature_id_defname(unsigned int id, std::wstring &name) const;
+    std::wstring feature_id_name(unsigned int id) const;
 
     /// iterators of feature names
     TfeaturesNames::const_iterator begin_features() const;
@@ -81,11 +86,11 @@ namespace freeling {
     /// Each mention-pair is given as the set of its features
     
     virtual double weight(const Tfeatures&) const = 0;
-    virtual void print() const = 0;
+    virtual void dump() const = 0;
 
     // print a feature vector (or constraint condition vector)
-    // (activeonly = optional flag to omit printing non-active features)
-    static std::wstring print(const Tfeatures &f, bool activeonly=false);
+    // prints only requested features (active or inactive).
+    std::wstring print(const Tfeatures &f, bool active) const;
   };
 
 } //namespace

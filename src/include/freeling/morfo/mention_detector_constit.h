@@ -28,13 +28,13 @@
 
 ///////////////////////////////////////////////
 //
-//   Author: Lluís Padro
+//   Author: Jordi Turmo (turmo@lsi.upc.edu)
 //
 ///////////////////////////////////////////////
 
 
-#ifndef RELAXCOR_FEX_H
-#define RELAXCOR_FEX_H
+#ifndef MENTION_DETECTOR_CONSTIT_H
+#define MENTION_DETECTOR_CONSTIT_H
 
 #include <map>
 #include <set>
@@ -42,33 +42,50 @@
 
 #include "freeling/windll.h"
 #include "freeling/morfo/language.h"
-#include "freeling/morfo/relaxcor_fex_constit.h"
-#include "freeling/morfo/relaxcor_fex_dep.h"
 
 namespace freeling {
 
   ////////////////////////////////////////////////////////////////
-  ///  The class relaxcor_fex is a wrapper to provide unique
-  ///  access to either relaxcor_fex_constit or relaxcor_fex_dep
+  ///  The class mention_detector implements a rule-based entity
+  ///  mention detector
   ////////////////////////////////////////////////////////////////
 
-  class WINDLL relaxcor_fex {
+  class WINDLL mention_detector_constit {
 
   private:
-    // type of the wrapped mention detectors
-    typedef enum {CONSTIT, DEP} feType;
-    feType type;
-    // pointers to wrapped mention detector (only one is used, depending on "type")
-    relaxcor_fex_constit * fec;
-    relaxcor_fex_dep * fed;
+    typedef enum {NONE, REL_CLAUSE, ESSENTIAL, PRE_NON_ESSENTIAL, NON_ESSENTIAL} subordinateType;
+
+    /// Configuration options
+    std::map<std::wstring, freeling::regexp> _Labels;
+    std::set<std::wstring> _No_heads;
+    bool _Reduce_mentions;
+    /// Language
+    std::wstring _Language;
+
+    /// Recursively finds all the mentions from a parse_tree
+    /// NPs, coordinated NPs, pronouns, proper names and NEs
+    void candidates(int, paragraph::const_iterator, int&, sentence::const_iterator &, int&, parse_tree::const_iterator, std::vector<mention>&, subordinateType&) const;
+
+    /// Discard some mentions with the same head
+    void discard_mentions(std::vector<mention>&) const;
+
+    /// add a new mention in a vector
+    void add_mention(const mention&, std::vector<mention>&, int&) const;
+    /// Mark those mentions which are the initial ones in their sentence
+    void mark_initial_mentions_from(int, std::vector<mention>&) const;
 
   public:
     /// Constructor
-    relaxcor_fex(const std::wstring &, const relaxcor_model &);
+    mention_detector_constit(const std::wstring &);
     /// Destructor
-    ~relaxcor_fex();
+    ~mention_detector_constit();
   
-    relaxcor_fex_abs::Mfeatures extract(const std::vector<mention> &ments) const;
+    /// get the labels of the configuration of the mention detector
+    const std::map<std::wstring, freeling::regexp>& get_config_labels() const;
+
+    /// Detects entity mentions from parse tree nodes of sentences, and fills given vector
+    std::vector<mention> detect(const document &) const;
+    
   };
 
 } // namespace

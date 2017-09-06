@@ -1,0 +1,16 @@
+
+<Type>
+Dependencies
+</Type>
+
+<TagsetFile>
+../tagset.dat
+</TagsetFile>
+
+<MentionTags>
+NC
+NP
+PR
+AP
+DP
+</MentionTags>

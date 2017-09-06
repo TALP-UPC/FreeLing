@@ -1,0 +1,21 @@
+
+<Type>
+Dependencies
+</Type>
+
+<TagsetFile>
+../tagset.dat
+</TagsetFile>
+
+<MentionTags>
+NN      NounPhrase
+NNS     NounPhrase
+NP      ProperNoun
+PRP     Pronoun
+PRP$    Pronoun
+WDT     Pronoun
+</MentionTags>
+
+<CoordLabel>
+COORD
+</CoordLabel>

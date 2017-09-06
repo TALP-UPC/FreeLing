@@ -37,7 +37,7 @@ using namespace std;
 namespace freeling {
 
 #define MOD_TRACENAME L"RELAX"
-#define MOD_TRACECODE TAGGER_TRACE
+#define MOD_TRACECODE RELAX_TRACE
 
 
   //---------- Class problem ----------------------------------

@@ -28,13 +28,13 @@
 
 ///////////////////////////////////////////////
 //
-//   Author: Lluís Padro
+//   Author: Lluis Padro
 //
 ///////////////////////////////////////////////
 
 
-#ifndef RELAXCOR_FEX_H
-#define RELAXCOR_FEX_H
+#ifndef MENTION_DETECTOR_DEP_H
+#define MENTION_DETECTOR_DEP_H
 
 #include <map>
 #include <set>
@@ -42,33 +42,44 @@
 
 #include "freeling/windll.h"
 #include "freeling/morfo/language.h"
-#include "freeling/morfo/relaxcor_fex_constit.h"
-#include "freeling/morfo/relaxcor_fex_dep.h"
+#include "freeling/morfo/tagset.h"
+#include "freeling/regexp.h"
 
 namespace freeling {
 
   ////////////////////////////////////////////////////////////////
-  ///  The class relaxcor_fex is a wrapper to provide unique
-  ///  access to either relaxcor_fex_constit or relaxcor_fex_dep
+  ///  The class mention_detector implements a rule-based entity
+  ///  mention detector
   ////////////////////////////////////////////////////////////////
 
-  class WINDLL relaxcor_fex {
+  class WINDLL mention_detector_dep {
 
   private:
-    // type of the wrapped mention detectors
-    typedef enum {CONSTIT, DEP} feType;
-    feType type;
-    // pointers to wrapped mention detector (only one is used, depending on "type")
-    relaxcor_fex_constit * fec;
-    relaxcor_fex_dep * fed;
+    std::map<std::wstring, std::pair<std::wstring, mention::mentionType>> mention_tags;
+    std::set<std::wstring> excluded;
+    std::wstring CoordLabel;
+    freeling::regexp *Coordinate;
+    freeling::regexp *Punctuation;
+    tagset *Tags;
+
+    bool is_coordination(dep_tree::const_iterator h) const;
+    void detect_mentions(freeling::dep_tree::const_iterator h, 
+                         freeling::paragraph::const_iterator se, 
+                         int sentn, bool maximal,
+                         std::vector<mention> & mentions, int &mentn) const;
+    bool check_mention_tags(freeling::dep_tree::const_iterator h, mention::mentionType &t) const;
+    freeling::mention create_mention(int mentn, int sentn,
+                                     freeling::paragraph::const_iterator se, freeling::dep_tree::const_iterator h,
+                                     int pfirst, int plast) const;
 
   public:
     /// Constructor
-    relaxcor_fex(const std::wstring &, const relaxcor_model &);
+    mention_detector_dep(const std::wstring &);
     /// Destructor
-    ~relaxcor_fex();
-  
-    relaxcor_fex_abs::Mfeatures extract(const std::vector<mention> &ments) const;
+    ~mention_detector_dep();
+
+    /// Detects entity mentions from parse tree nodes of sentences
+    std::vector<mention> detect(const document &) const;
   };
 
 } // namespace

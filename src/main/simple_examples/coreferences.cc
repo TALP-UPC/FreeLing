@@ -58,6 +58,7 @@ int main (int argc, char **argv) {
   // in a maco_options object. First, create the maco_options object with default values.
   maco_options opt(L"es");
   opt.UserMapFile=L"";
+  opt.QuantitiesFile=path+L"quantities.dat";
   opt.LocutionsFile=path+L"locucions.dat"; opt.AffixFile=path+L"afixos.dat";
   opt.ProbabilityFile=path+L"probabilitats.dat"; opt.DictionaryFile=path+L"dicc.src";
   opt.NPdataFile=path+L"np.dat"; opt.PunctuationFile=path+L"../common/punct.dat"; 
@@ -88,13 +89,13 @@ int main (int argc, char **argv) {
   // create a rule-based dep parser
   dep_txala txala(path+L"dep_txala/dependences.dat", parser.get_start_symbol ());
   // statistical dep-parser and SRL
-  dep_treeler treeler(path+L"dep_treeler/labeled/dependences.dat");
+  dep_treeler treeler(path+L"dep_treeler/dependences.dat");
   // create a coreference solver
-  relaxcor coref(path+L"coref/relaxcor/relaxcor.dat)");
+  relaxcor coref(path+L"coref/relaxcor/relaxcor.dat");
 
   wstring text,line;
   // get plain text input lines while not EOF.
-  while (getline(wcin,text)) 
+  while (getline(wcin,line)) 
     text = text + line + L"\n";
 
   // tokenize and split text into a list of sentences

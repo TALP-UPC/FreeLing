@@ -28,7 +28,7 @@
 
 ///////////////////////////////////////////////
 //
-//   Author: Jordi Turmo (turmo@lsi.upc.edu)
+//   Author: Lluís Padro
 //
 ///////////////////////////////////////////////
 
@@ -42,50 +42,34 @@
 
 #include "freeling/windll.h"
 #include "freeling/morfo/language.h"
+#include "freeling/morfo/mention_detector_constit.h"
+#include "freeling/morfo/mention_detector_dep.h"
 
 namespace freeling {
 
   ////////////////////////////////////////////////////////////////
-  ///  The class mention_detector implements a rule-based entity
-  ///  mention detector
+  ///  The class mention_detector is a wrapper to provide unique
+  ///  access to either mention_detector_constit or mention_detector_dep
   ////////////////////////////////////////////////////////////////
 
   class WINDLL mention_detector {
 
   private:
-    typedef enum {NONE, REL_CLAUSE, ESSENTIAL, PRE_NON_ESSENTIAL, NON_ESSENTIAL} subordinateType;
-
-    /// Configuration options
-    std::map<std::wstring, freeling::regexp> _Labels;
-    std::set<std::wstring> _No_heads;
-    bool _Reduce_mentions;
-    /// Language
-    std::wstring _Language;
-
-    /// Recursively finds all the mentions from a parse_tree
-    /// NPs, coordinated NPs, pronouns, proper names and NEs
-    void candidates(int, paragraph::const_iterator, int&, sentence::const_iterator &, int&, parse_tree::const_iterator, std::vector<mention>&, subordinateType&) const;
-
-    /// Discard some mentions with the same head
-    void discard_mentions(std::vector<mention>&) const;
-
-    /// add a new mention in a vector
-    void add_mention(const mention&, std::vector<mention>&, int&) const;
-    /// Mark those mentions which are the initial ones in their sentence
-    void mark_initial_mentions_from(int, std::vector<mention>&) const;
+    // type of the wrapped mention detectors
+    typedef enum {CONSTIT, DEP} mdType;
+    mdType type;
+    // pointers to wrapped mention detector (only one is used, depending on "type")
+    mention_detector_constit * mdc;
+    mention_detector_dep * mdd;
 
   public:
     /// Constructor
-    mention_detector(const std::wstring &, const std::wstring &lang=L"");
+    mention_detector(const std::wstring &);
     /// Destructor
     ~mention_detector();
   
-    /// get the labels of the configuration of the mention detector
-    std::map<std::wstring, freeling::regexp>& get_config_labels();
-
     /// Detects entity mentions from parse tree nodes of sentences, and fills given vector
-    void detect(const document &, std::vector<mention> &);
-    
+    std::vector<mention> detect(const document &) const;    
   };
 
 } // namespace

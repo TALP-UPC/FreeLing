@@ -25,10 +25,10 @@ OTHERS     .
 INDEX_SEQUENCE  0  (\.{4,}|-{2,}|\*{2,}|_{2,}|/{2,})
 INITIALS1       1  ([A-Z](\.[A-Z])+)(\.\.\.)
 INITIALS2 	0  ([A-Z]\.)+
-NAMES_CODES	0  ({ALPHA}|{SYMNUM})*[0-9]({ALPHA}|[0-9]|{SYMNUM}+{ALPHANUM})*
 THREE_DOTS 	0  (\.\.\.)
 QUOTES	        0  (``|<<|>>|'')
 MAILS 	        0  {ALPHANUM}+([\._]{ALPHANUM}+)*@{ALPHANUM}+([\._]{ALPHANUM}+)*
+NAMES_CODES	0  ({ALPHA}|{SYMNUM})*[0-9]({ALPHA}|[0-9]|{SYMNUM}+{ALPHANUM})*
 APOSTR_AS      1  (([dlmtsnpDLMTSNP]|qu|Qu|QU)')({ALPHA})
 APOSTR_AS2      2  ({ALPHA}*)('l)({NOALPHANUM}|$)
 PRON_AS1	2  ({ALPHA}*)(\-(y|yos|lu|lo|la|los|les))({NOALPHANUM}|$)
