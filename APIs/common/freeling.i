@@ -915,7 +915,7 @@ class paragraph : public std::list<freeling::sentence> {
     void set_type(mentionType);
     void set_initial(bool);
     void set_group(int);
-    void subsumed_with_no_verb(bool b=false);
+    void set_maximal(bool b);
 
     /// getters
     int get_id() const;
@@ -930,7 +930,7 @@ class paragraph : public std::list<freeling::sentence> {
     int get_group() const;
     bool is_type(mentionType) const;
     bool is_initial() const;
-    bool is_subsumed_with_no_verb() const;
+    bool is_maximal() const;
     parse_tree::const_iterator get_ptree() const;
     const word& get_head() const;
     std::wstring value() const;    
