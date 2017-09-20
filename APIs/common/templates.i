@@ -32,6 +32,8 @@
 %template(ListParagraphIterator) ListIterator<freeling::paragraph>;
 %template(ListSentenceIterator) ListIterator<freeling::sentence>;
 %template(ListWordIterator)     ListIterator<freeling::word>;
+%template(ListAnalysisIterator) ListIterator<freeling::analysis>;
+%template(ListStringIterator) ListIterator<std::wstring>;
 #endif
 
 %template(ListString) std::list<std::wstring>;
