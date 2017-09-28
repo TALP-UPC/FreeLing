@@ -1,11 +1,11 @@
 <Lexicon>
-ner-f87-poor1-5abs.lex
+ner-f80-poor1-1abs.lex
 </Lexicon>
 <ModelFile>
-ner-f87-poor1-5abs.abm
+ner-f80-poor1-1abs.abm
 </ModelFile>
 <RGF>
-ner-f87.rgf
+ner-f80.rgf
 </RGF>
 <NE_Tag>
 NP00000
