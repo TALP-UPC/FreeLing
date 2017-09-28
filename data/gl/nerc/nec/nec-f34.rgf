@@ -1,5 +1,6 @@
 ## tagset description used to compute short tag versions
-TAGSET ../tagset.dat
+TAGSET ../../tagset.dat
+
 
 ## features extracted only for words tagged as NP
 RULES t matches ^NP
@@ -12,7 +13,7 @@ RULES t matches ^NP
   has_dot@    [-3,3]  W matches \.
   has_dash@   [-3,3]  W matches \-
   is_punct@   [-3,3]  t matches ^F
-  funct@      [-3,3]  l in_set ../ner/function.dat
+  funct@      [-3,3]  l in_set ../data/function.dat
   roman@      [-3,3]  W matches ^[IVXDLM]+$ 
   
   suf3@:{$0}  [-3,3]  w matches ...$
@@ -20,17 +21,27 @@ RULES t matches ^NP
   suf4@:{$0}  [-3,3]  w matches ....$
   pre4@:{$0}  [-3,3]  w matches ^....
 
-  gazPER@     [-3,3]  l in_set ../nec/gazPER-c.dat
-  gazLOC@     [-3,3]  l in_set ../nec/gazLOC-c.dat
-  gazORG@     [-3,3]  l in_set ../nec/gazORG-c.dat
-  gazMISC@    [-3,3]  l in_set ../nec/gazMISC-c.dat
+  gazPER@     [-3,3]  l in_set ../data/gazPER-c.dat
+  gazLOC@     [-3,3]  l in_set ../data/gazLOC-c.dat
+  gazORG@     [-3,3]  l in_set ../data/gazORG-c.dat
+  gazMISC@    [-3,3]  l in_set ../data/gazMISC-c.dat
+  igazPER@    [-3,3]  l.split("_") in_set ../data/gazPER-p.dat
+  igazLOC@    [-3,3]  l.split("_") in_set ../data/gazLOC-p.dat
+  igazORG@    [-3,3]  l.split("_") in_set ../data/gazORG-p.dat
+  igazMISC@   [-3,3]  l.split("_") in_set ../data/gazMISC-p.dat
 
-  twPER@      [-3,3]  l in_set twPER.dat
-  twLOC@      [-3,3]  l in_set twLOC.dat
-  twORG@      [-3,3]    l in_set twORG.dat
-  twGENT@     [-3,3]    l in_set twGENT.dat
+  itwPER@     [-3,3]  l.split("_") in_set ../data/twPER.dat
+  itwLOC@     [-3,3]  l.split("_") in_set ../data/twLOC.dat
+  itwORG@     [-3,3]  l.split("_") in_set ../data/twORG.dat
+  itwGENT@    [-3,3]  l.split("_") in_set ../data/twGENT.dat
 
-  city@       [-2,2]   l in_set ../../common/nec/cities.dat
+  twPER@      [-3,3]  l in_set ../data/twPER.dat
+  twLOC@      [-3,3]  l in_set ../data/twLOC.dat
+  twORG@      [-3,3]    l in_set ../data/twORG.dat
+  twGENT@     [-3,3]    l in_set ../data/twGENT.dat
+
+  city@       [-2,2]   l in_set ../../../common/nec/cities.dat
+  icity@      [-2,2]   l.split("_") in_set ../../../common/nec/cities.dat
 
   W@:$W(0)    [-3,3]  t !matches ^[ZWF]
   w@:$w(0)    [-3,3]  ALL
@@ -48,8 +59,8 @@ RULES t matches ^NP
   bol:$l(0)   [1,5]    t matches ^[ANV]
 
   pat@:{pattern(0)} [-3,3]  ALL
-  {quoted(0)}       [0,0]  ALL
-  {parenthesis(0)}  [0,0]  ALL
+  {quoted(0)}       [-3,3]  ALL
+  {parenthesis(0)}  [-3,3]  ALL
 
   p1L:{pattern(-1)}_{pattern(0)}                             [0,0] ALL
   p2L:{pattern(-2)}_{pattern(-1)}_{pattern(0)}               [0,0] ALL
@@ -60,18 +71,4 @@ RULES t matches ^NP
 
   nw@={nwords(0)}  [0,0] ALL
 
-ENDRULES
-
-RULES t matches ^NP AND l matches "_"
-  igazPER@    [-3,3]  l.split("_") in_set ../nec/gazPER-p.dat
-  igazLOC@    [-3,3]  l.split("_") in_set ../nec/gazLOC-p.dat
-  igazORG@    [-3,3]  l.split("_") in_set ../nec/gazORG-p.dat
-  igazMISC@   [-3,3]  l.split("_") in_set ../nec/gazMISC-p.dat
-
-  itwPER@     [-3,3]  l.split("_") in_set twPER.dat
-  itwLOC@     [-3,3]  l.split("_") in_set twLOC.dat
-  itwORG@     [-3,3]  l.split("_") in_set twORG.dat
-  itwGENT@    [-3,3]  l.split("_") in_set twGENT.dat
-
-  icity@      [-2,2]   l.split("_") in_set ../../common/nec/cities.dat
 ENDRULES

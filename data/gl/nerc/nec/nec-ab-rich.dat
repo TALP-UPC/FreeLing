@@ -1,0 +1,18 @@
+<Lexicon>
+nec-f33-rich-1abs.lex
+</Lexicon>
+<Classifier>
+AdaBoost
+</Classifier>
+<RGF>
+nec-f33.rgf
+</RGF>
+<ModelFile>
+nec-f33-rich-1abs.abm
+</ModelFile>
+<Classes>
+0 NP00SP0 1 NP00G00 2 NP00O00 3 NP00V00
+</Classes>
+<NE_Tag>
+NP00000
+</NE_Tag>
