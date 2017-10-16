@@ -10,7 +10,9 @@
 %include std_map.i
 %include std_pair.i
 #ifndef FL_API_JAVA
+#ifndef FL_API_PHP
 %include std_set.i
+#endif
 #endif
 
 %template(VectorWord) std::vector<freeling::word>;
@@ -45,9 +47,11 @@
 %template(VectorString) std::vector<std::wstring>;
 
 #ifndef FL_API_JAVA
+#ifndef FL_API_PHP
 %template(VectorSetString) std::vector<std::set<std::wstring> >;
 %template(VectorSetInt) std::vector<std::set<int> >;
 %template(SetString) std::set<std::wstring>;
+#endif
 #endif
 
 %template(PairDoubleString) std::pair<double,std::wstring>;
