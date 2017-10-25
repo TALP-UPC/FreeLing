@@ -67,11 +67,11 @@ namespace freeling {
       /// information contained in the root node
       T *pinfo;
       /// parent node
-      tree<T>* parent;        
+      tree<T> *parent;        
       /// first/last child
-      tree<T>* first, *last;
+      tree<T> *first, *last;
       /// prev/next sibling
-      tree<T>* prev, *next;   
+      tree<T> *prev, *next;   
       /// number of children
       unsigned int nchildren;
    
@@ -119,6 +119,7 @@ namespace freeling {
 
       /// copy given tree and add it as a child
       void add_child(const tree<T>& t, bool last=true);
+      void add_child(const const_iterator &p, bool last=true);
       /// add given tree and as a child reordering structure. NO COPIES MADE.
       void hang_child(tree<T>& t, tree_sibling_iterator<T> where=tree_sibling_iterator<T>(NULL));
       void hang_child(preorder_iterator &p, tree_sibling_iterator<T> where=tree_sibling_iterator<T>(NULL));
@@ -209,13 +210,14 @@ namespace freeling {
 
   /////////////////////////////////////////////
   /// Auxiliary for copy and assignment
-
+  
   template<class T> void tree<T>::clone(const tree<T>& t) {
     pinfo = (not t.empty() ? new T(*t.pinfo) : NULL);
     parent = first = last = prev = next = NULL;
     nchildren = 0;
-    for (tree<T>* p = t.first; p!=NULL; p=p->next) 
+    for (tree<T>* p = t.first; p!=NULL; p=p->next)  {
       this->add_child(*p);
+    }
   }
 
   /////////////////////////////////////////////
@@ -409,6 +411,16 @@ namespace freeling {
 
   template<class T> void tree<T>::add_child(const tree<T>& t, bool last) {
     tree<T> *nt = new tree<T>(t);  // make a copy of given tree
+    // hang the copy under 'this'
+    if (last) this->hang_child(*nt,this->sibling_end());  
+    else this->hang_child(*nt,this->sibling_begin()); 
+  }
+
+  /////////////////////////////////////////////
+  /// copy tree under given iterator and add it as a child
+
+  template<class T> void tree<T>::add_child(const typename tree<T>::const_iterator &p, bool last) {
+    tree<T> *nt = new tree<T>(p);  // make a copy of given tree
     // hang the copy under 'this'
     if (last) this->hang_child(*nt,this->sibling_end());  
     else this->hang_child(*nt,this->sibling_begin()); 

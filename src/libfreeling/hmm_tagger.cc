@@ -614,6 +614,16 @@ namespace freeling {
     return p;  
   }
 
+
+  ///////////////////////////////////////////////////////////
+  /// Given an *annotated* sentence, compute model perplexity
+  ///////////////////////////////////////////////////////////
+
+  double hmm_tagger::Perplexity(const sentence &se, int k) const {
+    return exp(-SequenceProb_log(se,k)/se.size());
+  }
+
+
   ///////////////////////////////////////////////////////////////  
   ///  Disambiguate given sentences with provided options  
   ///////////////////////////////////////////////////////////////  
@@ -740,9 +750,10 @@ namespace freeling {
         }
     
         // mark them as selected analysis for that word
-        for (list<word::iterator>::iterator k=bestk.begin(); k!=bestk.end(); k++) 
+        for (list<word::iterator>::iterator k=bestk.begin(); k!=bestk.end(); k++) {
           w->select_analysis(*k,bp);
-      
+        }
+        
         // backtrack one more step if possible
         if (t>0) {
           back=tr.phi(t,st,kb);
@@ -754,7 +765,7 @@ namespace freeling {
         }
       }
     }
-  
+
     TRACE(3,L"sentence analyzed"); 
   }
 

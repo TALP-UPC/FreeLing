@@ -86,12 +86,12 @@ int main (int argc, char **argv) {
   if (argc < 2) ipath=L"/usr/local";
   else ipath=util::string2wstring(argv[1]);
 
-  wstring path=ipath+L"/share/freeling/es/";
+  wstring path=ipath+L"/share/freeling/en/";
 
   // if FreeLing was compiled with --enable-traces, you can activate
   // the required trace verbosity for the desired modules.
-  //   traces::TraceLevel=4;
-  //   traces::TraceModule=0xFFFFF;
+  //  traces::TraceLevel=4;
+  //  traces::TraceModule=TAGGER_TRACE;
   
   // create analyzers
   tk = new tokenizer(path+L"tokenizer.dat"); 
@@ -130,7 +130,7 @@ int main (int argc, char **argv) {
   // create chunker
   parser = new chart_parser(path+L"chunker/grammar-chunk.dat");
   // create dependency parser 
-  dep = new dep_txala(path+L"dep/dependences.dat", parser->get_start_symbol());
+  dep = new dep_txala(path+L"dep_txala/dependences.dat", parser->get_start_symbol());
 
   // get plain text input lines while not EOF.
   while (getline(wcin,text)) {
@@ -186,7 +186,7 @@ void PrintResults(const list<sentence> &ls) {
   for (list<sentence>::const_iterator is=ls.begin(); is!=ls.end(); is++,n++) {
     // for each of the k best sequences proposed by the tagger
     for (int k=0; k<is->num_kbest(); k++) {
-      wcout<<L"<BEST_SEQUENCE k=\""<<k<<L"\" logprob=\""<<tagger->SequenceProb_log(*is,k)<<L"\">"<<endl;
+      wcout<<L"<BEST_SEQUENCE k=\""<<k<<L"\" perplexity=\""<<tagger->Perplexity(*is,k)<<L"\">"<<endl;
       wcout<<L"<TAGGING>"<<endl;
       PrintMorfo(*is,k);
       wcout<<L"</TAGGING>"<<endl;

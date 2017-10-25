@@ -341,8 +341,8 @@ return *this;
             // if the skipped child was the head, preserve its head as new head for the father.
             // otherwise, make sure the child's head won't interfere
             if (ch == g) headset=true; 
-            else x->set_head(false);
-            tr.add_child(*x);
+            else x->set_head(false);            
+            tr.add_child(x);
           }
           TRACE(3, L"     skipped, sons raised. Headset="+wstring(headset?L"YES":L"NO"));
         }
@@ -362,7 +362,7 @@ return *this;
         WARNING(L"  Unset rule governor for "+label +L" at ("+util::int2wstring(x)+L","+util::int2wstring(y)+L")");
       }
     }
-
+  
     return tr;
   }
 

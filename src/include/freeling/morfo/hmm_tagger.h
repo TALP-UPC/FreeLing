@@ -176,6 +176,8 @@ namespace freeling {
     /// Given an *annotated* sentence, compute (log) probability of k-th best 
     /// sequence according to HMM parameters.
     double SequenceProb_log(const sentence &, int k=0) const;
+    /// Given an *annotated* sentence, compute model perplexity
+    double Perplexity(const sentence &se, int k=0) const;
 
   };
 

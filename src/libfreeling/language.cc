@@ -457,11 +457,11 @@ namespace freeling {
   const wstring word::NOT_FOUND=L"";
   /// Get lemma for the selected analysis in list.
   const wstring& word::get_lemma(int k) const {
-    return (this->get_n_analysis()>k ? selected_begin(k)->get_lemma() : NOT_FOUND);
+    return (this->num_kbest()>k ? selected_begin(k)->get_lemma() : NOT_FOUND);
   }
   /// Get PoS tag for the selected analysis in list.
   const wstring& word::get_tag(int k) const {
-    return (this->get_n_analysis()>k ? selected_begin(k)->get_tag() : NOT_FOUND);
+    return (this->num_kbest()>k ? selected_begin(k)->get_tag() : NOT_FOUND);
   }
   /// get reference to sense list for the selected analysis
   const list<pair<wstring,double> > & word::get_senses(int k) const {
@@ -811,7 +811,9 @@ namespace freeling {
     if (n.num_children()==0) { 
       if (n->is_head()) { wcerr<<L"+";}
       const word & w=n->get_word();
-      wcerr<<L"("<<w.get_form()<<L" "<<w.get_lemma(k)<<L" "<<w.get_tag(k);
+      wcerr<<L"("<<w.get_form();
+      wcerr<<L" "<<w.get_lemma(k);
+      wcerr<<L" "<<w.get_tag(k);
       wcerr<<L")"<<endl;
     }
     else { 

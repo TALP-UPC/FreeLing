@@ -73,6 +73,7 @@ namespace freeling {
     
       // navigate through the chart and obtain a parse tree for the sentence
       parse_tree tr=ch.get_tree(ch.get_size()-1,0);
+
       // associate leaf nodes in the tree with the right word in the sentence:
       sentence::iterator w=s.begin();
       for (parse_tree::preorder_iterator n=tr.begin(); n!=tr.end(); ++n) {
@@ -83,7 +84,7 @@ namespace freeling {
           w++;
         }
       }
-    
+
       // assign an id to each node and build an index to access them by id
       TRACE(3,L" Building node index.");
       tr.build_node_index(s.get_sentence_id());
