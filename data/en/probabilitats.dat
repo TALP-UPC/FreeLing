@@ -38216,7 +38216,7 @@ halted VBD-VBN NN 1 VBD 8 VBN 11
 halved VBD-VBN VBD 1 VBN 3
 hammered VBD-VBN VBD 0 VBN 5
 hampered VBD-VBN VBD 0 VBN 12
-hand NN-VB-VBP NN 92 VB 3 VBN 1 VBP 0
+hand NN-VB-VBP NN 92 VB 50 VBN 30 VBP 10
 hand-held NN-VBD-VBN NN 6 VBD 0 VBN 0
 handed VBD-VBN VBD 2 VBN 11
 handful NN-NNS NN 29 NNS 0
@@ -38379,7 +38379,7 @@ implemented VBD-VBN VBD 0 VBN 9
 implicated VBD-VBN VBD 0 VBN 4
 implied VBD-VBN VBD 1 VBN 4
 imply VB-VBP VB 2 VBP 2
-import NN-VB-VBP NN 34 VB 3 VBP 1
+import NN-VB-VBP NN 34 VB 20 VBP 10
 imported VBD-VBN VBD 1 VBN 23
 imports NNS-VBZ NNS 96 VBZ 2
 impose VB-VBP VB 14 VBP 0
@@ -39428,7 +39428,7 @@ prime JJ-NN-VB-VBP JJ 42 NN 54 NP 1 VB 0 VBP 0
 prime-time NN-VB-VBP NN 12 VB 0 VBP 0
 primitive JJ-NN JJ 4 NN 0
 principal JJ-NN JJ 31 NN 24
-print NN-VB-VBP NN 11 VB 0 VBP 1
+print NN-VB-VBP NN 11 VB 2 VBP 6
 printed VBD-VBN VBD 1 VBN 9
 printing NN-VBG NN 21 VBG 5
 prior JJ-NN JJ 49 NN 0
@@ -39760,7 +39760,7 @@ represented VBD-VBN VBD 19 VBN 13
 republican JJ-NN JJ 65 NN 2
 repurchase NN-VB-VBP NN 12 VB 3 VBD 3 VBN 7 VBP 0
 repurchased VBD-VBN VBD 2 VBN 2
-request NN-VB-VBP NN 47 VB 3 VBP 2
+request NN-VB-VBP NN 47 VB 18 VBP 25
 requested VBD-VBN VBD 13 VBN 11
 requests NNS-VBZ NNS 22 VBZ 0
 require VB-VBP VB 55 VBP 23
@@ -40731,7 +40731,7 @@ two-hour JJ-NN JJ 0 NN 4
 two-part JJ-NN JJ 0 NN 9
 two-tier JJ-NN JJ 0 NN 6
 two-year JJ-NN JJ 0 NN 35
-type NN-VB-VBP NN 34 VB 0 VBP 0
+type NN-VB-VBP NN 34 VB 10 VBP 15
 types NNS-VBZ NNS 37 VBZ 0
 u.s.-backed VBD-VBN VBD 0 VBN 4
 u.s.-made NN-VBD-VBN NN 4 VBD 0 VBN 0

@@ -183,7 +183,7 @@ namespace freeling {
     rules.push_back(make_pair(freeling::regexp(L"[ \\t\\n\\r]+"),0));
     rules.push_back(make_pair(freeling::regexp(L"%.*"),COMMENT));
     rules.push_back(make_pair(freeling::regexp(L"==>"),ARROW));
-    rules.push_back(make_pair(freeling::regexp(L"\\([[:alpha:]_'\\-\\·]+\\)"),FORM));
+    rules.push_back(make_pair(freeling::regexp(L"\\([[:alpha:]_'\\-\\·\\&]+\\)"),FORM));
     rules.push_back(make_pair(freeling::regexp(L"<[[:lower:]_'\\-\\·]+>"),LEMMA));
     rules.push_back(make_pair(freeling::regexp(L"\\(\\\"([A-Za-z]:)?[[:alnum:]_\\-\\./\\\\]+\\\"\\)"),FILENAME));
     rules.push_back(make_pair(freeling::regexp(L"<\\\"([A-Za-z]:)?[[:alnum:]_\\-\\./\\\\]+\\\">"),FILENAME));
