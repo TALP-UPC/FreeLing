@@ -696,13 +696,15 @@ namespace freeling {
     // sentence identifier, in case user application wants to set it.
     std::wstring sent_id;
     // vector with pointers to sentence words, for fast access by position
-    std::vector<word*> wpos; 
+    std::vector<word*> wpos;
     // remember if it is PoS tagged
     bool tagged;
     // parse tree (if sentence parsed)
     std::map<int,parse_tree> pts;
     // dependencey tree (if sentence dep. parsed)
     std::map<int,dep_tree> dts;
+    // number of best tags sequence. Zero by default, unless the user changes it
+    int best_seq;
     // clone sentence (used by assignment/copy constructors)
     void clone(const sentence &);
     // stack processing status for processor currently analyzing the sentence
@@ -727,6 +729,10 @@ namespace freeling {
     word& operator[](size_t);
     /// find out how many kbest sequences the tagger computed
     unsigned int num_kbest() const;
+    /// best tag sequence (Zero by default, unless the user changes it)
+    void set_best_seq(int k);
+    int get_best_seq() const;
+
     /// add a word to the sentence
     void push_back(const word &);
     /// rebuild word positional index

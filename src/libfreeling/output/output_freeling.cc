@@ -235,7 +235,7 @@ void output_freeling::PrintPredArgs(wostream &sout, const sentence &s) const {
 
   sout << L"Predicates {" << endl;
 
-  const dep_tree & dt = s.get_dep_tree();
+  const dep_tree & dt = s.get_dep_tree(s.get_best_seq());
   wstring sid = s.get_sentence_id();
 
   /// see which entities appear as arguments of predicates
@@ -418,14 +418,14 @@ void output_freeling::PrintResults (wostream &sout, const list<sentence > &ls) c
 
       // sentence is dep parsed, print dep tree
       if (OutputDepTree and is->is_dep_parsed()) {
-        PrintDepTree (sout, is->get_dep_tree().begin(), 0);
+        PrintDepTree (sout, is->get_dep_tree(is->get_best_seq()).begin(), 0);
 	// print SRL if any
         if (not is->get_predicates().empty()) PrintPredArgs(sout,*is);       
       }
 
       // no dep parsing, but constituents are found, print constituent tree
       else if (is->is_parsed()) {
-        const parse_tree & tr = is->get_parse_tree ();
+        const parse_tree & tr = is->get_parse_tree (is->get_best_seq());
         PrintTree (sout, tr.begin (), 0);
         sout << endl;
       }

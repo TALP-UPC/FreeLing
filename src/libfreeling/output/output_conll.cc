@@ -159,7 +159,7 @@ void output_conll::freeling2conll(const sentence &s,
   vector<wstring> openchunk(s.size(),L"");
   vector<wstring> closechunk(s.size(),L"");
   if (s.is_parsed() and FieldPos.find(L"SYNTAX")!=FieldPos.end() )
-    openclosechunks(s.get_parse_tree().begin(), openchunk, closechunk);
+    openclosechunks(s.get_parse_tree(s.get_best_seq()).begin(), openchunk, closechunk);
 
   for (sentence::const_iterator w=s.begin(); w!=s.end(); w++) {
 
@@ -356,7 +356,7 @@ wstring output_conll::compute_value(const sentence &s,
     // dependency head
     wstring dhead=L"-";
     if (s.is_dep_parsed()) {
-      dep_tree::const_iterator n = s.get_dep_tree().get_node_by_pos(id);
+      dep_tree::const_iterator n = s.get_dep_tree(s.get_best_seq()).get_node_by_pos(id);
       if (n.is_root() or n.get_parent()->get_label()==L"VIRTUAL_ROOT") dhead = L"0";
       else dhead = util::int2wstring(n.get_parent()->get_word().get_position()+1); 
     }
@@ -368,7 +368,7 @@ wstring output_conll::compute_value(const sentence &s,
     // dependency function   
     wstring drel=L"-";
     if (s.is_dep_parsed()) {
-      dep_tree::const_iterator n = s.get_dep_tree().get_node_by_pos(id);
+      dep_tree::const_iterator n = s.get_dep_tree(s.get_best_seq()).get_node_by_pos(id);
       drel = n->get_label();
     }
     return drel;

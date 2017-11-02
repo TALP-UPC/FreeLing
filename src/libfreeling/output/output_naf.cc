@@ -343,7 +343,7 @@ void output_naf::PrintChunksLayer(wostream &sout, const document &doc) const {
   for (document::const_iterator p=doc.begin(); p!=doc.end(); p++) {
     for (list<sentence>::const_iterator s=p->begin(); s!=p->end(); s++) {    
       wstring sid = s->get_sentence_id();
-      const parse_tree &pt = s->get_parse_tree();
+      const parse_tree &pt = s->get_parse_tree(s->get_best_seq());
       for (parse_tree::const_sibling_iterator t=pt.sibling_begin(); t!=pt.sibling_end(); t++) {
       const word &head=parse_tree::get_head_word(t);
       sout << L"<chunk id=\"c" << nchunk 
@@ -386,7 +386,7 @@ void output_naf::PrintConstituencyLayer(wostream &sout, const document &doc) con
       
       nonterminals << L"<nt id=\"nter" << s->get_sentence_id() << "\" label=\"ROOT\" />" << endl;
       
-      const parse_tree & pt = s->get_parse_tree();
+      const parse_tree & pt = s->get_parse_tree(s->get_best_seq());
       for (parse_tree::const_iterator t=pt.begin(); t!=pt.end(); t++) {
         
         wstring from;
@@ -428,7 +428,7 @@ void output_naf::PrintDepsLayer(wostream &sout, const document &doc) const {
   sout << L"<deps>" << endl;
   for (document::const_iterator p=doc.begin(); p!=doc.end(); p++) 
     for (list<sentence>::const_iterator s=p->begin(); s!=p->end(); s++) 
-       PrintDepTreeNAF (sout, s->get_dep_tree().begin(), s->get_sentence_id());
+       PrintDepTreeNAF (sout, s->get_dep_tree(s->get_best_seq()).begin(), s->get_sentence_id());
  
   sout << L"</deps>" << endl;
 }
@@ -465,7 +465,7 @@ void output_naf::PrintSRLLayer(wostream &sout, const document &doc) const {
           // print <externalReferences>, if any
           print_external_refs(sout,(*s)[arg->get_position()]);
           
-          dep_tree::const_iterator arghead = s->get_dep_tree().get_node_by_pos(arg->get_position());
+          dep_tree::const_iterator arghead = s->get_dep_tree(s->get_best_seq()).get_node_by_pos(arg->get_position());
           print_span(sout, *s, dep_tree::get_first_word(arghead), dep_tree::get_last_word(arghead));
           
           sout << L"</role>" << endl;

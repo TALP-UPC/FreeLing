@@ -257,14 +257,14 @@ void output_xml::PrintResults (wostream &sout, const list<sentence> &ls) const {
     // print parse tree, if any
     if (s->is_parsed()) {
       sout << L"  <constituents>" << endl;
-      PrintTreeXML (sout, s->get_sentence_id(), s->get_parse_tree().begin(), 2);      
+      PrintTreeXML (sout, s->get_sentence_id(), s->get_parse_tree(s->get_best_seq()).begin(), 2);      
       sout << L"  </constituents>" << endl;
     }
 
     //  print dependency tree, if any
     if (s->is_dep_parsed()) {
       sout << L"  <dependencies>" << endl;
-      PrintDepTreeXML (sout, s->get_sentence_id(), s->get_dep_tree().begin(), 2);
+      PrintDepTreeXML (sout, s->get_sentence_id(), s->get_dep_tree(s->get_best_seq()).begin(), 2);
       sout << L"  </dependencies>" << endl;
     
       // predicates, if any
@@ -361,7 +361,7 @@ void output_xml::PrintPredArgsXML(wostream &sout, const sentence &s) const {
 
   sout << L"  <predicates>" << endl;
 
-  const dep_tree & dt = s.get_dep_tree();
+  const dep_tree & dt = s.get_dep_tree(s.get_best_seq());
   wstring sid = s.get_sentence_id();
 
   /// see which entities appear as arguments of predicates

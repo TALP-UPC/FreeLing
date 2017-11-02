@@ -1077,12 +1077,14 @@ namespace freeling {
     preds.clear();  pred_index.clear(); 
     status.clear(); 
     sent_id=L"0"; tagged=false;
+    best_seq=0;
   }
   /// Create a new sentence from list<word>
   sentence::sentence(const list<word> &lw) : list<word>(lw) { 
     pts.clear(); dts.clear(); status.clear(); 
     preds.clear(); pred_index.clear();
     sent_id=L"0"; tagged=false;
+    best_seq=0;
     rebuild_word_index();
   }
   /// add a word to the sentence
@@ -1123,6 +1125,8 @@ namespace freeling {
     sent_id = s.sent_id;
     // copy tagged status
     tagged = s.tagged;
+    // copy best tag seq #
+    best_seq = s.best_seq;
     // copy word list
     wpos = vector<word*>(s.size(),(word*)NULL);
     map<const word*,word*> wps;
@@ -1189,6 +1193,11 @@ namespace freeling {
     if (this->empty()) return 0;
     else return this->begin()->num_kbest();
   }
+
+  /// best tag sequence (Zero by default, unless the user changes it)
+  void sentence::set_best_seq(int k) { best_seq = k; }
+  int sentence::get_best_seq() const { return best_seq; }
+
   /// Clear sentence and possible trees
   void sentence::clear() { 
     this->list<word>::clear(); 

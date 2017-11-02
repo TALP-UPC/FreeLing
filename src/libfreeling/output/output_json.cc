@@ -245,7 +245,7 @@ void output_json::PrintSentences (wostream &sout, const list<sentence> &ls) cons
     if (s->is_parsed()) {
       sout << L"," << endl;
       sout << L"        \"constituents\" : [" << endl;
-      PrintTreeJSON (sout, s->get_sentence_id(), s->get_parse_tree().begin(), 5); 
+      PrintTreeJSON (sout, s->get_sentence_id(), s->get_parse_tree(s->get_best_seq()).begin(), 5); 
       sout << L"]";
     }
 
@@ -253,7 +253,7 @@ void output_json::PrintSentences (wostream &sout, const list<sentence> &ls) cons
     if (s->is_dep_parsed()) {
       sout << L"," << endl;
       sout << L"        \"dependencies\" : [" << endl;
-      PrintDepTreeJSON (sout, s->get_sentence_id(), s->get_dep_tree().begin(), 5);
+      PrintDepTreeJSON (sout, s->get_sentence_id(), s->get_dep_tree(s->get_best_seq()).begin(), 5);
       sout << L"]";
     
       // predicates, if any
@@ -345,7 +345,7 @@ void output_json::PrintDepTreeJSON (wostream &sout, const std::wstring &sid,
 
 void output_json::PrintPredArgsJSON(wostream &sout, const sentence &s) const {
 
-  const dep_tree & dt = s.get_dep_tree();
+  const dep_tree & dt = s.get_dep_tree(s.get_best_seq());
   wstring sid = s.get_sentence_id();
 
   /// see which entities appear as arguments of predicates
