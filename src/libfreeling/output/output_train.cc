@@ -76,13 +76,13 @@ list<analysis> output_train::printRetokenizable(wostream &sout, const list<word>
 // print analysis for a word
 //---------------------------------------------
 
-void output_train::PrintWord (wostream &sout, const word &w, bool only_sel, bool probs) const {
+void output_train::PrintWord (wostream &sout, const word &w, bool only_sel, bool probs, int best) const {
   word::const_iterator ait;
 
   word::const_iterator a_beg,a_end;
   if (only_sel) {
-    a_beg = w.selected_begin();
-    a_end = w.selected_end();
+    a_beg = w.selected_begin(best);
+    a_end = w.selected_end(best);
   }
   else {
     a_beg = w.analysis_begin();
@@ -116,9 +116,9 @@ void output_train::PrintResults (wostream &sout, const list<sentence > &ls) cons
     for (sentence::const_iterator w = is->begin (); w != is->end (); w++) {
       sout << w->get_form();      
       /// Trainig output: selected analysis (no prob) + all analysis (with probs)
-      PrintWord(sout,*w,true,false);
+      PrintWord(sout,*w,true,false,is->get_best_seq());
       sout<<L" #";
-      PrintWord(sout,*w,false,true);      
+      PrintWord(sout,*w,false,true,is->get_best_seq());      
       sout << endl;   
     }
   }

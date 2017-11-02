@@ -205,9 +205,10 @@ namespace freeling {
     int ns=1;
     for (freeling::document::const_iterator ls=doc.begin(); ls!=doc.end(); ls++) {
       for(list<freeling::sentence>::const_iterator s = ls->begin(); s != ls->end(); ++s, ++ns) {
-        
+
+        int best = s->get_best_seq();
         // get dependency tree, and iterate over all nodes
-        const freeling::dep_tree &t=s->get_dep_tree(); 
+        const freeling::dep_tree &t=s->get_dep_tree(best); 
         
         for (freeling::dep_tree::const_preorder_iterator nd=t.begin(); nd!=t.end(); nd++) {
           
@@ -219,12 +220,12 @@ namespace freeling {
           for (r=xrules.begin(); r!=xrules.end(); r++) {
             TRACE(4,L"Checking rule "+r->id+L" at node "+nd->get_word().get_form());
             map<wstring,freeling::dep_tree::const_iterator> values;
-            if (match_rule(nd,r->rpath.begin(),values)) {
+            if (match_rule(nd, r->rpath.begin(), values, best)) {
               
               const freeling::word & wd = values[r->relation]->get_word();
 
-              semgraph::SG_frame fr(wd.get_lemma(),
-                                    (wd.get_senses().empty() ? L"" : wd.get_senses().begin()->first),
+              semgraph::SG_frame fr(wd.get_lemma(best),
+                                    (wd.get_senses(best).empty() ? L"" : wd.get_senses(best).begin()->first),
                                     s->get_sentence_id() + L"." + freeling::util::int2wstring(wd.get_position()+1),
                                     s->get_sentence_id());
               wstring fid = sg.add_frame(fr);
@@ -260,9 +261,10 @@ namespace freeling {
   
   bool rel_extract_SPR::match_rule(freeling::dep_tree::const_preorder_iterator nd, 
                                    list<node_pattern>::const_iterator p, 
-                                   map<wstring,freeling::dep_tree::const_iterator> &val) const {
+                                   map<wstring,freeling::dep_tree::const_iterator> &val,
+                                   int best) const {
     
-    wstring synset=nd->get_word().get_senses_string();
+    wstring synset=nd->get_word().get_senses_string(best);
     synset=synset.substr(0,synset.find(L":"));
     
     TRACE(5,L" Recursing. Item ("+p->lemma+L":"+p->pos+L":"+p->funct+L"), node "+nd->get_word().get_form()+L"  synset="+synset);
@@ -272,27 +274,27 @@ namespace freeling {
       // flexible pattern. Check wether current node matches next pattern
       list<node_pattern>::const_iterator q=p; q++;
       bool b=false;
-      if (check_attr(q->lemma,nd->get_word().get_lemma(),val) and
-          check_attr(q->pos,nd->get_word().get_tag(),val,true) and
+      if (check_attr(q->lemma,nd->get_word().get_lemma(best),val) and
+          check_attr(q->pos,nd->get_word().get_tag(best),val,true) and
           check_attr(q->funct,nd->get_label(),val)) {
         // current node matched. Store node
         val.insert(make_pair(p->lemma,nd));
         // continue with next node patterns      
-        b = next_node(nd,q,val);
+        b = next_node(nd,q,val,best);
       }
       
       TRACE(5,L"   back from flex b="+(b?wstring(L"true"):wstring(L"false")));
       
       if (b) return true; // recursion matched skipping zero nodes
-      else return next_node(nd,p,val); // no success on current node, or recursion failed. Try skipping this node
+      else return next_node(nd,p,val,best); // no success on current node, or recursion failed. Try skipping this node
     }
-    else if (check_attr(p->lemma,nd->get_word().get_lemma(),val) and
-             check_attr(p->pos,nd->get_word().get_tag(),val,true) and
+    else if (check_attr(p->lemma,nd->get_word().get_lemma(best),val) and
+             check_attr(p->pos,nd->get_word().get_tag(best),val,true) and
              check_attr(p->funct,nd->get_label(),val)) {
       // current node matched. Store node
       val.insert(make_pair(p->lemma,nd));
       // Recursively check rest of the rule.
-      return next_node(nd,p,val);
+      return next_node(nd,p,val,best);
     }
     
     TRACE(4,L"  rule match failed");
@@ -305,7 +307,8 @@ namespace freeling {
   
   bool rel_extract_SPR::next_node(freeling::dep_tree::const_preorder_iterator nd, 
                                   list<node_pattern>::const_iterator p, 
-                                  map<wstring,freeling::dep_tree::const_iterator> &val) const {
+                                  map<wstring,freeling::dep_tree::const_iterator> &val,
+                                  int best) const {
     
     TRACE(5,L"   next node. dir="+freeling::util::int2wstring(p->dir));
     
@@ -316,15 +319,15 @@ namespace freeling {
     if (p->dir > 0) { // rule goes up. Pass rest of the rule to the parent
       if (not p->flex) p++;
       TRACE(5,L"   next node. calling parent.");
-      return match_rule(nd.get_parent(), p, val);
+      return match_rule(nd.get_parent(), p, val, best);
     }
     else  { // p->dir<0, rule goes down. Check rest of the rule agains each children until one matches.
       list<node_pattern>::const_iterator q=p; q++;
       bool mch=false;
       for (freeling::dep_tree::const_sibling_iterator child=nd.sibling_begin(); not mch and child!=nd.sibling_end(); child++) {
         TRACE(5,L"   next node. calling child.");
-        if (p->flex) mch = match_rule(child, p, val);
-        else mch = match_rule(child, q, val);
+        if (p->flex) mch = match_rule(child, p, val, best);
+        else mch = match_rule(child, q, val, best);
       }
       return mch;
     }

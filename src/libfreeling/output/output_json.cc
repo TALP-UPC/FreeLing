@@ -142,6 +142,8 @@ void output_json::PrintSentences (wostream &sout, const list<sentence> &ls) cons
     if (s->empty()) continue;
     if (s!=ls.begin()) sout << L", " << endl;
 
+    int best = s->get_best_seq();
+    
     sout << L"      { \"id\":\"" << s->get_sentence_id() << L"\"," << endl;
     sout << L"        \"tokens\" : [" << endl;    
     for (sentence::const_iterator w=s->begin(); w!=s->end(); w++) {
@@ -162,15 +164,15 @@ void output_json::PrintSentences (wostream &sout, const list<sentence> &ls) cons
 
       // morpho & tagger stuff
       wstring lemma,tag;
-      if (w->selected_begin()->is_retokenizable()) {
-        const list <word> &rtk = w->selected_begin()->get_retokenizable();
+      if (w->selected_begin(best)->is_retokenizable()) {
+        const list <word> &rtk = w->selected_begin(best)->get_retokenizable();
         list <analysis> la=compute_retokenization(rtk, rtk.begin(), L"", L"");
         lemma = la.begin()->get_lemma();
         tag = la.begin()->get_tag();
       }
       else {
-        lemma = w->get_lemma();
-        tag = w->get_tag();
+        lemma = w->get_lemma(best);
+        tag = w->get_tag(best);
       }      
       sout << L", \"lemma\" : \"" << escapeJSON(lemma) << L"\"";
       sout << L", \"tag\" : \"" << tag << L"\"";
@@ -197,14 +199,14 @@ void output_json::PrintSentences (wostream &sout, const list<sentence> &ls) cons
 
       // NEC output, if any
       wstring nec=L"";
-      if (w->get_tag()==L"NP00SP0") nec=L"PER";
-      else if (w->get_tag()==L"NP00G00") nec=L"LOC";
-      else if (w->get_tag()==L"NP00O00") nec=L"ORG";
-      else if (w->get_tag()==L"NP00V00") nec=L"MISC";
+      if (w->get_tag(best)==L"NP00SP0") nec=L"PER";
+      else if (w->get_tag(best)==L"NP00G00") nec=L"LOC";
+      else if (w->get_tag(best)==L"NP00O00") nec=L"ORG";
+      else if (w->get_tag(best)==L"NP00V00") nec=L"MISC";
       if (not nec.empty()) sout << L", \"nec\" : \"" << nec << L"\"";
       
       // WSD output, if any
-      if (not w->get_senses().empty()) sout << L", \"wn\" : \"" << w->get_senses().begin()->first << L"\"";
+      if (not w->get_senses(best).empty()) sout << L", \"wn\" : \"" << w->get_senses(best).begin()->first << L"\"";
 
       if (AllAnalysis) {
         sout << L","<<endl;
@@ -225,11 +227,11 @@ void output_json::PrintSentences (wostream &sout, const list<sentence> &ls) cons
         sout << L"]";
       }
 
-      if (AllSenses and not w->get_senses().empty()) {
+      if (AllSenses and not w->get_senses(best).empty()) {
         sout << L"," << endl;
         sout << "             \"senses\" : [" <<endl;
-        for (list<pair<wstring,double> >::const_iterator s=w->get_senses().begin(); s!=w->get_senses().end(); s++) {
-          if (s!=w->get_senses().begin()) sout << L"," << endl;
+        for (list<pair<wstring,double> >::const_iterator s=w->get_senses(best).begin(); s!=w->get_senses(best).end(); s++) {
+          if (s!=w->get_senses(best).begin()) sout << L"," << endl;
           sout << L"                    { \"wn\" : \"" << s->first << L"\"";
           if (s->second!=0) sout << L", \"pgrank\" : \"" << s->second << "\"";
           sout << L"}";         

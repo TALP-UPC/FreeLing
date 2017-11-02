@@ -59,8 +59,8 @@ namespace freeling {
     void extract_entities_coref(freeling::document &doc) const;
     
     bool is_alias(const std::wstring &e1, const std::wstring &e2) const;
-    bool is_NE(const freeling::word &w) const;
-    std::wstring get_NE_class(const freeling::word &w) const;
+    bool is_NE(const std::wstring &w) const;
+    std::wstring get_NE_class(const std::wstring &w) const;
     
     /// PoS tag for named entites
     std::wstring NEtag;

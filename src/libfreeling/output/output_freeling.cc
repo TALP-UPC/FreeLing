@@ -141,20 +141,20 @@ wstring output_freeling::outputSenses (const analysis & a) const {
 // print parse tree
 //--------------------------------------------
 
-void output_freeling::PrintTree (wostream &sout, parse_tree::const_iterator n, int depth) const {
+void output_freeling::PrintTree (wostream &sout, parse_tree::const_iterator n, int depth, int best) const {
 
   parse_tree::const_sibling_iterator d;
 
   sout << wstring (depth * 2, ' ');  
-  if (n.num_children () == 0) {
-    if (n->is_head ()) sout << L"+";
-    const word & w = n->get_word ();
-    sout << L"(" << w.get_form() << L" " << w.get_lemma() << L" " << w.get_tag ();
-    sout << outputSenses ((*w.selected_begin ()));
+  if (n.num_children() == 0) {
+    if (n->is_head()) sout << L"+";
+    const word & w = n->get_word();
+    sout << L"(" << w.get_form() << L" " << w.get_lemma(best) << L" " << w.get_tag(best);
+    sout << outputSenses ((*w.selected_begin(best)));
     sout << L")" << endl;
   }
   else {
-    if (n->is_head ()) sout << L"+";
+    if (n->is_head()) sout << L"+";
 
     sout<<n->get_label();
 
@@ -168,7 +168,7 @@ void output_freeling::PrintTree (wostream &sout, parse_tree::const_iterator n, i
     sout << L"_[" << endl;
 
     for (d = n.sibling_begin (); d != n.sibling_end (); ++d) 
-      PrintTree (sout, d, depth + 1);
+      PrintTree (sout, d, depth + 1, best);
     sout << wstring (depth * 2, ' ') << L"]" << endl;
   }
 }
@@ -179,7 +179,7 @@ void output_freeling::PrintTree (wostream &sout, parse_tree::const_iterator n, i
 // print dependency tree
 //---------------------------------------------
 
-void output_freeling::PrintDepTree (wostream &sout, dep_tree::const_iterator n, int depth) const {
+void output_freeling::PrintDepTree (wostream &sout, dep_tree::const_iterator n, int depth, int best) const {
 
   sout << wstring (depth*2, ' ');
 
@@ -199,8 +199,8 @@ void output_freeling::PrintDepTree (wostream &sout, dep_tree::const_iterator n, 
   sout<< n->get_label() << L"/";  
   if (n->get_label()!=L"VIRTUAL_ROOT") {
     const word & w = n->get_word();
-    sout << L"(" << w.get_form() << L" " << w.get_lemma() << L" " << w.get_tag ();
-    sout << outputSenses ((*w.selected_begin()));
+    sout << L"(" << w.get_form() << L" " << w.get_lemma(best) << L" " << w.get_tag(best);
+    sout << outputSenses ((*w.selected_begin(best)));
     sout << L")";
   }
   
@@ -219,7 +219,7 @@ void output_freeling::PrintDepTree (wostream &sout, dep_tree::const_iterator n, 
     for (list<dep_tree::const_sibling_iterator>::const_iterator ch=children.begin();
          ch != children.end(); 
          ch++) 
-      PrintDepTree (sout, (*ch), depth + 1);
+      PrintDepTree (sout, (*ch), depth + 1, best);
        
     sout << wstring (depth * 2, ' ') << L"]";
   }
@@ -287,15 +287,15 @@ void output_freeling::PrintPredArgs(wostream &sout, const sentence &s) const {
 // print analysis for a word
 //---------------------------------------------
 
-void output_freeling::PrintWord (wostream &sout, const word &w, bool only_sel, bool probs) const {
+void output_freeling::PrintWord (wostream &sout, const word &w, bool only_sel, bool probs, int best) const {
 
   sout << w.get_form();
   if (OutputPhonetics) sout<<L" "<<w.get_ph_form();	  
 
   word::const_iterator a_beg,a_end;
   if (only_sel) {
-    a_beg = w.selected_begin();
-    a_end = w.selected_end();
+    a_beg = w.selected_begin(best);
+    a_end = w.selected_end(best);
   }
   else {
     a_beg = w.analysis_begin();
@@ -416,17 +416,18 @@ void output_freeling::PrintResults (wostream &sout, const list<sentence > &ls) c
 
     for (list<sentence>::const_iterator is = ls.begin (); is != ls.end (); is++) {
 
+      int best = is->get_best_seq();
       // sentence is dep parsed, print dep tree
       if (OutputDepTree and is->is_dep_parsed()) {
-        PrintDepTree (sout, is->get_dep_tree(is->get_best_seq()).begin(), 0);
+        PrintDepTree (sout, is->get_dep_tree(best).begin(), 0, best);
 	// print SRL if any
         if (not is->get_predicates().empty()) PrintPredArgs(sout,*is);       
       }
 
       // no dep parsing, but constituents are found, print constituent tree
       else if (is->is_parsed()) {
-        const parse_tree & tr = is->get_parse_tree (is->get_best_seq());
-        PrintTree (sout, tr.begin (), 0);
+        const parse_tree & tr = is->get_parse_tree(best);
+        PrintTree (sout, tr.begin (), 0, best);
         sout << endl;
       }
 
@@ -434,7 +435,7 @@ void output_freeling::PrintResults (wostream &sout, const list<sentence > &ls) c
       else {
 	for (sentence::const_iterator w = is->begin (); w != is->end (); w++) {
           /// Normal output: print selected analysis (with probs)
-          PrintWord(sout,*w,true,true);  
+          PrintWord(sout, *w, true, true, best);  
 	  sout << endl;   
 	}
       }

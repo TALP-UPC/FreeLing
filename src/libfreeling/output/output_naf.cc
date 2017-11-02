@@ -176,12 +176,12 @@ void output_naf::print_span(wostream &sout, const sentence &s, int from, int to)
 // auxiliary to print externalReferences of a word
 //---------------------------------------------
 
-void output_naf::print_external_refs(wostream &sout, const word &w) const {
+void output_naf::print_external_refs(wostream &sout, const word &w, int best) const {
 
-  if (not w.get_senses().empty()) {
+  if (not w.get_senses(best).empty()) {
     sout << L"<externalReferences>" << endl;
 
-    for (list<pair<wstring,double> >::const_iterator s=w.get_senses().begin(); s!=w.get_senses().end(); s++)
+    for (list<pair<wstring,double> >::const_iterator s=w.get_senses(best).begin(); s!=w.get_senses(best).end(); s++)
       sout << L"<externalRef resource=\"WN-3.1\""
            << L" reference=\""  << Lang << "-3.1-" << s->first << L"\"" 
            << L" confidence=\"" << s->second << L"\" />" << endl;
@@ -264,12 +264,13 @@ void output_naf::PrintTermsLayer (wostream &sout, const document &doc) const {
   int nword=1;
   for (document::const_iterator p=doc.begin(); p!=doc.end(); p++) {
     for (list<sentence>::const_iterator s=p->begin(); s!=p->end(); s++) {    
+      int best = s->get_best_seq();
       wstring sid = s->get_sentence_id();
       for (sentence::const_iterator w=s->begin(); w!=s->end(); w++) {
         sout << L"<term id=\"" << get_term_id(sid,*w) << "\""
-             << L" lemma=\"" << escapeXML(w->get_lemma()) << "\""
-             << L" pos=\"" << naf_pos_tag(w->get_tag()) << "\"";
-        if (Tags!=NULL) sout<< L" morphofeat=\"" << Tags->get_msd_string(w->get_tag()) << "\"";        
+             << L" lemma=\"" << escapeXML(w->get_lemma(best)) << "\""
+             << L" pos=\"" << naf_pos_tag(w->get_tag(best)) << "\"";
+        if (Tags!=NULL) sout<< L" morphofeat=\"" << Tags->get_msd_string(w->get_tag(best)) << "\"";
         sout << ">" << endl;
         
         sout << L"<span>" << endl;
@@ -277,7 +278,7 @@ void output_naf::PrintTermsLayer (wostream &sout, const document &doc) const {
         sout << L"</span>" << endl; 
         
         // print <externalReferences>, if any
-        print_external_refs(sout,*w);
+        print_external_refs(sout,*w,best);
         
         sout<<L"</term>"<<endl;         
         nword++;
@@ -301,19 +302,20 @@ void output_naf::PrintEntitiesLayer(wostream &sout, const document &doc) const {
   sout << L"<entities>" << endl;
   for (document::const_iterator p=doc.begin(); p!=doc.end(); p++) {
     for (list<sentence>::const_iterator s=p->begin(); s!=p->end(); s++) {    
+      int best = s->get_best_seq();
       wstring sid = s->get_sentence_id();
       for (sentence::const_iterator w=s->begin(); w!=s->end(); w++) {
 
         wstring nec=L"";
-        if (w->get_tag()==L"NP00SP0") nec=L"PER";
-        else if (w->get_tag()==L"NP00G00") nec=L"LOC";
-        else if (w->get_tag()==L"NP00O00") nec=L"ORG";
-        else if (w->get_tag()==L"NP00V00") nec=L"MISC";
-        else if (w->get_tag()==L"NP00000") nec=L"UNK";
+        if (w->get_tag(best)==L"NP00SP0") nec=L"PER";
+        else if (w->get_tag(best)==L"NP00G00") nec=L"LOC";
+        else if (w->get_tag(best)==L"NP00O00") nec=L"ORG";
+        else if (w->get_tag(best)==L"NP00V00") nec=L"MISC";
+        else if (w->get_tag(best)==L"NP00000") nec=L"UNK";
         
-        else if (w->get_tag()==L"W") nec=L"DATE-TIME";
-        else if (w->get_tag()==L"Zm") nec=L"MONEY";
-        else if (w->get_tag()==L"Zp") nec=L"PERCENT";
+        else if (w->get_tag(best)==L"W") nec=L"DATE-TIME";
+        else if (w->get_tag(best)==L"Zm") nec=L"MONEY";
+        else if (w->get_tag(best)==L"Zp") nec=L"PERCENT";
         
         if (not nec.empty()) {
           sout << L"<entity id=\"e" << nent << L"\" type=\"" << nec << L"\">" << endl;
@@ -445,6 +447,7 @@ void output_naf::PrintSRLLayer(wostream &sout, const document &doc) const {
   for (document::const_iterator p=doc.begin(); p!=doc.end(); p++) {
     for (list<sentence>::const_iterator s=p->begin(); s!=p->end(); s++) {
       wstring sid = s->get_sentence_id();
+      int best = s->get_best_seq();
       
       // print all predicates, referring to entities (or other predicates) as their arguments
       for (sentence::predicates::const_iterator pred=s->get_predicates().begin(); pred!=s->get_predicates().end(); pred++) {
@@ -453,7 +456,7 @@ void output_naf::PrintSRLLayer(wostream &sout, const document &doc) const {
         sout << L"<predicate id=\"pr" << pid << "\" uri=\"PropBank:" << pred->get_sense() << "\">" << endl;
         
         // print <externalReferences>, if any
-        print_external_refs(sout,(*s)[pred->get_position()]);
+        print_external_refs(sout, (*s)[pred->get_position()], best);
         
         print_span(sout, *s, pred->get_position(), pred->get_position());
         
@@ -463,7 +466,7 @@ void output_naf::PrintSRLLayer(wostream &sout, const document &doc) const {
           sout << L"<role id=\"r" << pid << L"-" << narg << L"\" semrole=\"" << arg->get_role() << L"\">" << endl;;
           
           // print <externalReferences>, if any
-          print_external_refs(sout,(*s)[arg->get_position()]);
+          print_external_refs(sout, (*s)[arg->get_position()], best);
           
           dep_tree::const_iterator arghead = s->get_dep_tree(s->get_best_seq()).get_node_by_pos(arg->get_position());
           print_span(sout, *s, dep_tree::get_first_word(arghead), dep_tree::get_last_word(arghead));

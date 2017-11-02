@@ -128,17 +128,19 @@ namespace freeling {
     /// get synsets for words in sentence, checking for duplicates
     int nw=0;
 
-    map<wstring,const freeling::word*> uniq;  // unique words in the sentence
+    map<wstring,pair<const freeling::word*,int> > uniq;  // unique words in the sentence
+
     for (list<freeling::sentence>::const_iterator s=ls.begin(); s!=ls.end(); s++) {
+      int best = s->get_best_seq();
       for (sentence::const_iterator w=s->begin(); w!=s->end(); w++) {
         // count the word as relevant if it has a WN tag (N,A,R,V), even if it has no synsets
-        if (RE_wnpos.search(w->get_tag())) {
+        if (RE_wnpos.search(w->get_tag(best))) {
           // check if first occurrence of word+PoS in the sentence list
-          wstring key=w->get_lc_form()+L"#"+freeling::util::lowercase(w->get_tag().substr(0,1));
+          wstring key=w->get_lc_form()+L"#"+freeling::util::lowercase(w->get_tag(best).substr(0,1));
           
           if (uniq.find(key)==uniq.end()) {  // new word, add it 
             nw++;
-            uniq.insert(make_pair(key,&(*w)));
+            uniq.insert(make_pair(key,make_pair(&(*w),best)));
           }
         }
       }
@@ -146,8 +148,10 @@ namespace freeling {
 
     // for each unique word-PoS, compute PV for its synsets
     vector<double>(wn->size(), 0.0).swap(pv);
-    for (map<wstring,const freeling::word*>::const_iterator u=uniq.begin(); u!=uniq.end(); u++) {
-      const list<pair<wstring,double> > & lsen = u->second->get_senses();
+    for (map<wstring,pair<const freeling::word*,int>>::const_iterator u=uniq.begin(); u!=uniq.end(); u++) {
+      const freeling::word *w = u->second.first;
+      int best = u->second.second;
+      const list<pair<wstring,double> > & lsen = w->get_senses(best);
       int nsyn = lsen.size();
       for (list<pair<wstring,double> >::const_iterator s=lsen.begin(); s!=lsen.end(); s++) {
         size_t syn = wn->get_vertex(s->first);
@@ -165,9 +169,10 @@ namespace freeling {
   void ukb::extract_ranks_to_sentences(list<freeling::sentence> &ls, const vector<double> &pv) const {
     /// move obtained ranks to word synsets, sorting sense list by rank
     for (list<freeling::sentence>::iterator s=ls.begin(); s!=ls.end(); s++) {
+      int best = s->get_best_seq();
       for (sentence::iterator w=s->begin(); w!=s->end(); w++) {
         // get reference to list of senses for the word
-        list<pair<wstring,double> > & lsen = w->get_senses();
+        list<pair<wstring,double> > & lsen = w->get_senses(best);
         // store obtained ranks in the list of senses
         for (list<pair<wstring,double> >::iterator p=lsen.begin(); p!=lsen.end(); p++) {
           // get rank for the synset

@@ -113,13 +113,13 @@ namespace freeling {
   /////////////////////////////////////////////////////
   /// Check if a word is a NE
   
-  bool ent_extract::is_NE(const word &w) const { return (w.get_tag().find(NEtag)==0); }
+  bool ent_extract::is_NE(const wstring &tag) const { return (tag.find(NEtag)==0); }
 
   /////////////////////////////////////////////////////
   /// get class of a NE
   
-  wstring ent_extract::get_NE_class(const word &w) const { 
-    map<wstring,wstring>::const_iterator p = NEclasses.find(w.get_tag());
+  wstring ent_extract::get_NE_class(const wstring &tag) const { 
+    map<wstring,wstring>::const_iterator p = NEclasses.find(tag);
     return (p==NEclasses.end() ? L"unknown" : p->second); 
   }
   
@@ -189,6 +189,7 @@ namespace freeling {
     for (list<int>::const_iterator g=doc.get_groups().begin(); g!=doc.get_groups().end(); g++) {
 
       // add each mention in the group to the entity, remembering longest lemma
+      int best=0;
       list<semgraph::SG_mention> lmen;
       list<int> ments = doc.get_coref_id_mentions(*g);
       const word *mx = NULL;
@@ -198,8 +199,10 @@ namespace freeling {
 
         // remember longest NE mention, (or just longest mention if none is NE)
         if (mx==NULL) mx = &hw;
-        if (hw.get_form().length()>mx->get_form().length() and (is_NE(hw) or not is_NE(*mx)))
+        if (hw.get_form().length()>mx->get_form().length() and (is_NE(hw.get_tag(best)) or not is_NE(mx->get_tag(best)))) {
           mx = &hw;
+          best = m.get_sentence()->get_best_seq();
+        }
         
         list<wstring> lw;
         for (int k=m.get_pos_begin(); k<=m.get_pos_end(); k++) 
@@ -212,11 +215,11 @@ namespace freeling {
       }
         
       // create a SG_entity for this coref group
-      semgraph::entityType ntype = (is_NE(*mx) ? semgraph::ENTITY : semgraph::WORD);
-      semgraph::SG_entity ent(mx->get_lemma(),
-                              get_NE_class(*mx),
+      semgraph::entityType ntype = (is_NE(mx->get_tag(best)) ? semgraph::ENTITY : semgraph::WORD);
+      semgraph::SG_entity ent(mx->get_lemma(best),
+                              get_NE_class(mx->get_tag(best)),
                               ntype, 
-                              (mx->get_senses().empty() ? L"" : mx->get_senses().begin()->first));
+                              (mx->get_senses(best).empty() ? L"" : mx->get_senses(best).begin()->first));
       wstring eid = sg.add_entity(ent);
 
       for (list<semgraph::SG_mention>::const_iterator m=lmen.begin(); m!=lmen.end(); m++ )
@@ -239,9 +242,10 @@ namespace freeling {
       for(list<sentence>::const_iterator s = ls->begin(); s != ls->end(); ++s) {        
         TRACE(3,L"   Extracting entities from sentence ");
         for (sentence::const_iterator w = s->begin(); w != s->end(); ++w) {
+          int best = s->get_best_seq();
           // if word is a NE, add to list of entities
-          if (is_NE(*w)) {
-            wstring ne_lemma = w->get_lemma();
+          if (is_NE(w->get_tag(best))) {
+            wstring ne_lemma = w->get_lemma(best);
             TRACE(3,L"Detected mention: form="+w->get_form()+L"  lemma="+ne_lemma);
 
             // see whether the entity already appeared
@@ -253,7 +257,7 @@ namespace freeling {
             // neither match nor alias found. Create new entity, assign new id, and insert into index
             if (eid.empty()) {
               semgraph::SG_entity newent(ne_lemma,
-                                         get_NE_class(w->get_tag()),
+                                         get_NE_class(w->get_tag(best)),
                                          semgraph::ENTITY);
               eid = sg.add_entity(newent);
             }

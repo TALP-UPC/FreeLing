@@ -180,6 +180,8 @@ namespace freeling {
 
     wstring wid = sent.get_sentence_id() + L"." + util::int2wstring(wd.get_position()+1);
 
+    int best = sent.get_best_seq();
+    
     TRACE(4,L"    Searching node for mention "+wid);
     wstring eid = sg.get_entity_id_by_mention(sent.get_sentence_id(),util::int2wstring(wd.get_position()+1));
     if (not eid.empty())
@@ -192,7 +194,7 @@ namespace freeling {
     TRACE(4,L"    Non-entity argument "+wd.get_form());
 
     // create mention for this word and see to which node it should be added
-    dep_tree dt = sent.get_dep_tree();
+    dep_tree dt = sent.get_dep_tree(best);
     dep_tree::const_iterator dn = dt.get_node_by_pos(wd.get_position());
     size_t w1 = dep_tree::get_first_word(dn);
     size_t w2 = dep_tree::get_last_word(dn);
@@ -202,15 +204,15 @@ namespace freeling {
 
     // Check if an entity with the same lemma-sense exists
     wstring wsarg;
-    wstring sens = (wd.get_senses().empty() ? L"" : wd.get_senses().begin()->first);
-    TRACE(4,L"    ... check for entity with lemma-sense "+wd.get_lemma()+L"#"+sens);
-    eid = sg.get_entity_id_by_lemma(wd.get_lemma(), sens);
+    wstring sens = (wd.get_senses(best).empty() ? L"" : wd.get_senses(best).begin()->first);
+    TRACE(4,L"    ... check for entity with lemma-sense "+wd.get_lemma(best)+L"#"+sens);
+    eid = sg.get_entity_id_by_lemma(wd.get_lemma(best), sens);
     if (not eid.empty()) {
       TRACE(4,L"    ... adding to matching node with id ="+eid);
     }
     else {	             
       // no node for this lemma, create one
-      semgraph::SG_entity ent (wd.get_lemma(), L"", semgraph::WORD, sens);
+      semgraph::SG_entity ent (wd.get_lemma(best), L"", semgraph::WORD, sens);
       eid = sg.add_entity(ent);
       TRACE(4,L"    ... Not existing. created node "+eid);
     }

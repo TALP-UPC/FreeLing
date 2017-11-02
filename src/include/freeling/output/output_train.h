@@ -46,7 +46,7 @@ namespace freeling {
       std::list<freeling::analysis> printRetokenizable(std::wostream &sout, const std::list<freeling::word> &rtk, 
                                                        std::list<freeling::word>::const_iterator w, const std::wstring &lem, 
                                                        const std::wstring &tag) const;
-      void PrintWord (std::wostream &sout, const freeling::word &w, bool only_sel=true, bool probs=true) const;
+      void PrintWord (std::wostream &sout, const freeling::word &w, bool only_sel=true, bool probs=true, int best=0) const;
 
 
     public:   

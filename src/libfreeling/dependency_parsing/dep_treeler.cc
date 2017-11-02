@@ -230,15 +230,18 @@ void dep_treeler::analyze(freeling::sentence &s) const {
 
 void dep_treeler::FL2Treeler(const freeling::sentence& fl_sentence, treeler::dependency_parser::sentence &tl_sentence) const {
 
+  // best tagger sequence (first one by default, unless user selects another)
+  int best = fl_sentence.get_best_seq(); 
+
   // Create the treeler sentence
   // copy each word in FL sentence to new sentence, with appropriate changes
   for (freeling::sentence::const_iterator wd = fl_sentence.begin(); wd!=fl_sentence.end(); ++wd) {
 
     // obtain token information
     string word = freeling::util::wstring2string(wd->get_form());
-    string lemma = freeling::util::wstring2string(wd->get_lemma());
+    string lemma = freeling::util::wstring2string(wd->get_lemma(best));
 
-    wstring fpos = wd->get_tag();
+    wstring fpos = wd->get_tag(best);
     string fine_pos = freeling::util::wstring2string(fpos);
     string coarse_pos =  freeling::util::wstring2string(tags->get_short_tag(fpos));
 
@@ -321,7 +324,7 @@ void dep_treeler::Treeler2FL(freeling::sentence &fl_sentence,
 
   //add the dep_tree to FreeLing sentence
   TRACE(4, L"dep tree built, adding to sentence");
-  fl_sentence.set_dep_tree(*dt);
+  fl_sentence.set_dep_tree(*dt, fl_sentence.get_best_seq());
 
   // add sem roles to FL sentence   //fl_sentence.pred_args = tl_roles;
   TRACE(3, L"adding SRL output to sentence");
@@ -472,7 +475,7 @@ void dep_treeler::compute_predicates(const treeler::srl_parser::basic_sentence &
 
     // PoS is a possible predicate. Look up synset
     bool found=false;
-    const list<pair<wstring,double> > &senses = fls[i].get_senses();
+    const list<pair<wstring,double> > &senses = fls[i].get_senses(fls.get_best_seq());
     if (not senses.empty()) {
       map<wstring,treeler::srl::PossiblePredArgs>::const_iterator syn = pred->second.find(senses.begin()->first);
       if (syn!=pred->second.end()) {  // predicate found, use information in predicates list

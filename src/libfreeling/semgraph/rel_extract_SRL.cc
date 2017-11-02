@@ -1,4 +1,4 @@
-//////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
 //
 //    FreeLing - Open Source Language Analyzers
 //
@@ -134,9 +134,10 @@ namespace freeling {
   bool rel_extract_SRL::is_aux(const freeling::sentence &s, int pos, int &childpos) const {
 
     childpos = -1;
-
+    int best = s.get_best_seq();
+    
     // look up lemma in auxiliary verbs list
-    map<wstring,wstring>::const_iterator aux = auxiliary.find(s[pos].get_lemma());
+    map<wstring,wstring>::const_iterator aux = auxiliary.find(s[pos].get_lemma(best));
   
     // if not found, it is not an auxiliary verb
     if (aux==auxiliary.end()) return false;
@@ -145,10 +146,10 @@ namespace freeling {
     if (aux->second==L"*") return true;
 
     // if found with child constraints, check it has a child with required PoS
-    freeling::dep_tree::const_iterator dn = s.get_dep_tree().get_node_by_pos(pos);
+    freeling::dep_tree::const_iterator dn = s.get_dep_tree(best).get_node_by_pos(pos);
     freeling::dep_tree::const_sibling_iterator ch;
     for (ch=dn.sibling_begin(); ch!=dn.sibling_end(); ch++) {
-      if (ch->get_word().get_tag().find(aux->second)==0) {
+      if (ch->get_word().get_tag(best).find(aux->second)==0) {
         childpos = ch->get_word().get_position();
         return true;
       }
@@ -167,22 +168,23 @@ namespace freeling {
   int rel_extract_SRL::get_argument_head(const freeling::sentence &s, int apos, int ppos) const {
 
     int p,child;
+    int best = s.get_best_seq();
 
     // unless changed below, the given argument is the head
     p = apos;
 
-    if (not ContentArgument.search(s[apos].get_tag())) {
+    if (not ContentArgument.search(s[apos].get_tag(best))) {
       TRACE(4,L"    Non content argument. Check children");
       // s[apos] is not the head (it is not ContentWord, 
       // (e.g.  "go A1=[to Paris]"  "say A1=[that he comes]" 
       //  The content is under it.
 
       // There should be a unique child that should be the content word
-      freeling::dep_tree::const_iterator dn = s.get_dep_tree().get_node_by_pos(apos);
+      freeling::dep_tree::const_iterator dn = s.get_dep_tree(best).get_node_by_pos(apos);
 
       // but the tagger may mess it up, so we look for the first content child.
       freeling::dep_tree::const_sibling_iterator ch = dn.sibling_begin();
-      while (ch != dn.sibling_end() and not ContentArgument.search(ch->get_word().get_tag()) )
+      while (ch != dn.sibling_end() and not ContentArgument.search(ch->get_word().get_tag(best)) )
         ch++;
 
       if (ch == dn.sibling_end()) {
@@ -208,19 +210,19 @@ namespace freeling {
     }
   
     TRACE(5,L"    Check for non-head relative.");
-    map<wstring,wstring>::const_iterator r=nh_relatives.find(s[p].get_lemma());
-    if (r!=nh_relatives.end() and s[p].get_tag().find(r->second)==0) {
+    map<wstring,wstring>::const_iterator r=nh_relatives.find(s[p].get_lemma(best));
+    if (r!=nh_relatives.end() and s[p].get_tag(best).find(r->second)==0) {
       TRACE(4,L"    Non-head relative. Get predicate parent.");
       // it is a relative and the parser puts them under the verb of the 
       // relative clause. The PR antecedent is the parent of the verb (if it
       // is a contentArgument).  "The man [that talked fast] went away"
     
       // parent of the predicate (if any)
-      freeling::dep_tree::const_iterator par = s.get_dep_tree().get_node_by_pos(ppos);
+      freeling::dep_tree::const_iterator par = s.get_dep_tree(best).get_node_by_pos(ppos);
       if (not par.is_root()) {
         par=par.get_parent();
         // if it is ContentArgument, that is the head
-        if (ContentArgument.search(par->get_word().get_tag())) 
+        if (ContentArgument.search(par->get_word().get_tag(best))) 
           p = par->get_word().get_position();
       }
 
@@ -251,19 +253,20 @@ namespace freeling {
     int ns=1;
     for (freeling::document::const_iterator ls=doc.begin(); ls!=doc.end(); ls++) {
       for(list<freeling::sentence>::const_iterator s = ls->begin(); s != ls->end(); s++, ns++) {
+        int best = s->get_best_seq();
         // remember which words (positions) are which predicates
         map<int,wstring> pospred;
         // for each predicate, create a frame and fill arguments
         for (freeling::sentence::predicates::const_iterator p=s->get_predicates().begin(); 
              p!=s->get_predicates().end(); p++) {
           // skip nominal predicates without arguments (or with just one self-argument)
-          if (not ((*s)[p->get_position()].get_tag().substr(0,1)==L"N" and 
+          if (not ((*s)[p->get_position()].get_tag(best).substr(0,1)==L"N" and 
                    (p->empty() or (p->size()==1 and p->has_argument(p->get_position()))))) {                        
             // create frame for current predicate
             int ppos = p->get_position();
             TRACE(3,L"Creating frame for predicate "+freeling::util::int2wstring(ppos)+L" ("+(*s)[ppos].get_form()+L")");
             semgraph::SG_frame fr(p->get_sense(),
-                                  ((*s)[ppos].get_senses().empty() ? L"" : (*s)[ppos].get_senses().begin()->first),
+                                  ((*s)[ppos].get_senses(best).empty() ? L"" : (*s)[ppos].get_senses(best).begin()->first),
                                   util::int2wstring(ppos+1),
                                   s->get_sentence_id());
             wstring fid = sg.add_frame(fr);

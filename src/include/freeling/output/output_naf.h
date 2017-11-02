@@ -59,7 +59,7 @@ namespace freeling {
       static std::wstring get_term_id(const std::wstring &sid, const freeling::word &w, const std::wstring &pref=L"");
       static void print_tokens(std::wostream &sout, const freeling::word &w, bool wf, const std::wstring &nsent, int &ntok);
       static void print_span(std::wostream &sout, const freeling::sentence &s, int from, int to);
-      void print_external_refs(std::wostream &sout, const freeling::word &w) const;
+      void print_external_refs(std::wostream &sout, const freeling::word &w, int best=0) const;
 
     public:   
       // constructor. 

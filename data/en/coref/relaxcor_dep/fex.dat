@@ -44,6 +44,10 @@ OrganizationNE ^NP00O00$
 PersonNE ^NP00SP0$
 LocationNE ^NP00G00$
 Preposition ^IN
+
+%% just to prevent warnings
+NounMasc ^$
+NounFem ^$
 </PosTags>
 
 <SemanticFeatures>

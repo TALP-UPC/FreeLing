@@ -87,10 +87,12 @@ namespace freeling {
                     std::map<std::wstring,freeling::dep_tree::const_iterator> &val, bool pref=false) const;
     bool next_node(freeling::dep_tree::const_preorder_iterator nd, 
                    std::list<node_pattern>::const_iterator p, 
-                   std::map<std::wstring,freeling::dep_tree::const_iterator> &val) const;
+                   std::map<std::wstring,freeling::dep_tree::const_iterator> &val,
+                   int best=0) const;
     bool match_rule(freeling::dep_tree::const_preorder_iterator nd, 
                     std::list<node_pattern>::const_iterator p, 
-                    std::map<std::wstring,freeling::dep_tree::const_iterator> &val) const;
+                    std::map<std::wstring,freeling::dep_tree::const_iterator> &val,
+                    int best=0) const;
         
   public:
     rel_extract_SPR(const std::wstring &);

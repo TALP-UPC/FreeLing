@@ -163,6 +163,8 @@ void output_xml::PrintResults (wostream &sout, const list<sentence> &ls) const {
     wstring sid = s->get_sentence_id();
     sout << L"<sentence id=\"" << sid << L"\">" <<endl;
 
+    int best = s->get_best_seq();
+    
     for (sentence::const_iterator w=s->begin(); w!=s->end(); w++) {
       // basic token stuff
       sout << L"  <token id=\"" << get_token_id(sid,w->get_position()+1) << L"\"";
@@ -204,25 +206,25 @@ void output_xml::PrintResults (wostream &sout, const list<sentence> &ls) const {
       }
       else {
         // tagger output 
-        if (w->selected_begin()->is_retokenizable()) {
-          const list <word> &rtk = w->selected_begin()->get_retokenizable();
+        if (w->selected_begin(best)->is_retokenizable()) {
+          const list <word> &rtk = w->selected_begin(best)->get_retokenizable();
           list <analysis> la=compute_retokenization(rtk, rtk.begin(), L"", L"");
           print_analysis(sout,*(la.begin()),false,false);
         }
         else
-          print_analysis(sout,*(w->selected_begin()),false,false);
+          print_analysis(sout,*(w->selected_begin(best)),false,false);
 
         // print other info (NEC, WSD...)
         // NEC output, if any
         wstring nec=L"";
-        if (w->get_tag()==L"NP00SP0") nec=L"PER";
-        else if (w->get_tag()==L"NP00G00") nec=L"LOC";
-        else if (w->get_tag()==L"NP00O00") nec=L"ORG";
-        else if (w->get_tag()==L"NP00V00") nec=L"MISC";
+        if (w->get_tag(best)==L"NP00SP0") nec=L"PER";
+        else if (w->get_tag(best)==L"NP00G00") nec=L"LOC";
+        else if (w->get_tag(best)==L"NP00O00") nec=L"ORG";
+        else if (w->get_tag(best)==L"NP00V00") nec=L"MISC";
         if (not nec.empty()) sout << L" nec=\"" << nec << L"\"";
         
         // WSD output, if any
-        if (not w->get_senses().empty()) sout << L" wn=\"" << w->get_senses().begin()->first << L"\"";
+        if (not w->get_senses(best).empty()) sout << L" wn=\"" << w->get_senses(best).begin()->first << L"\"";
 
         sout<< L" >" << endl;
 
@@ -239,9 +241,9 @@ void output_xml::PrintResults (wostream &sout, const list<sentence> &ls) const {
 
         // if all senses requested, print them all
         if (AllSenses) { 
-          if (not w->get_senses().empty()) {
+          if (not w->get_senses(best).empty()) {
             sout << L"    <senses>" << endl;
-            for (list<pair<wstring,double> >::const_iterator s=w->get_senses().begin(); s!=w->get_senses().end(); s++) {
+            for (list<pair<wstring,double> >::const_iterator s=w->get_senses(best).begin(); s!=w->get_senses(best).end(); s++) {
               sout << L"       <sense wn=\"" << s->first << L"\"";
               if (s->second!=0) sout << " pgrank=\"" << s->second << "\"";
               sout << " />" << endl; 

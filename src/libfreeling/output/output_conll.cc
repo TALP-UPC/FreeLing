@@ -210,7 +210,8 @@ wstring output_conll::compute_value(const sentence &s,
                                     const map<wstring,wstring> &closemention) const {
 
   int id = w.get_position();
-
+  int best = s.get_best_seq();
+  
   switch (field_code(field)) {
     
   case ID: {
@@ -242,13 +243,13 @@ wstring output_conll::compute_value(const sentence &s,
     wstring lemma;
     if (w.empty()) 
       lemma = L"-";
-    else if (w.selected_begin()->is_retokenizable()) {
-      const list <word> &rtk = w.selected_begin()->get_retokenizable();
+    else if (w.selected_begin(best)->is_retokenizable()) {
+      const list <word> &rtk = w.selected_begin(best)->get_retokenizable();
       list <analysis> la=compute_retokenization(rtk, rtk.begin(), L"", L"");
       lemma = la.begin()->get_lemma();
     }
     else 
-      lemma = w.get_lemma();
+      lemma = w.get_lemma(best);
     
     return lemma;
     break;
@@ -259,13 +260,13 @@ wstring output_conll::compute_value(const sentence &s,
     wstring tag;
     if (w.empty()) 
       tag = L"-";
-    else if (w.selected_begin()->is_retokenizable()) {
-      const list <word> &rtk = w.selected_begin()->get_retokenizable();
+    else if (w.selected_begin(best)->is_retokenizable()) {
+      const list <word> &rtk = w.selected_begin(best)->get_retokenizable();
       list <analysis> la=compute_retokenization(rtk, rtk.begin(), L"", L"");
       tag = la.begin()->get_tag();
     }
     else 
-      tag = w.get_tag();
+      tag = w.get_tag(best);
     
     return tag;
     break;
@@ -275,7 +276,7 @@ wstring output_conll::compute_value(const sentence &s,
     // Short PoS tag
     wstring shtag;
     if (not w.empty() and Tags!=NULL) {
-      list<wstring> tgs=util::wstring2list(w.get_tag(),L"+");
+      list<wstring> tgs=util::wstring2list(w.get_tag(best),L"+");
       for (list<wstring>::const_iterator t=tgs.begin(); t!=tgs.end(); t++) 
         shtag += L"+" + Tags->get_short_tag(*t);
       shtag = shtag.substr(1);
@@ -292,13 +293,13 @@ wstring output_conll::compute_value(const sentence &s,
     wstring msd;
     if (not w.empty() and Tags!=NULL) {
       wstring tag;
-      if (w.selected_begin()->is_retokenizable()) {
-        const list <word> &rtk = w.selected_begin()->get_retokenizable();
+      if (w.selected_begin(best)->is_retokenizable()) {
+        const list <word> &rtk = w.selected_begin(best)->get_retokenizable();
         list <analysis> la=compute_retokenization(rtk, rtk.begin(), L"", L"");
         tag = la.begin()->get_tag();
       }
       else 
-        tag = w.get_tag();
+        tag = w.get_tag(best);
 
       list<wstring> tgs=util::wstring2list(tag,L"+");
       for (list<wstring>::const_iterator t=tgs.begin(); t!=tgs.end(); t++) 
@@ -316,10 +317,10 @@ wstring output_conll::compute_value(const sentence &s,
     // NEC
     wstring nec=L"-";
     if (not w.empty()) {
-      if (w.get_tag()==L"NP00SP0") nec=L"B-PER";
-      else if (w.get_tag()==L"NP00G00") nec=L"B-LOC";
-      else if (w.get_tag()==L"NP00O00") nec=L"B-ORG";
-      else if (w.get_tag()==L"NP00V00") nec=L"B-MISC";    
+      if (w.get_tag(best)==L"NP00SP0") nec=L"B-PER";
+      else if (w.get_tag(best)==L"NP00G00") nec=L"B-LOC";
+      else if (w.get_tag(best)==L"NP00O00") nec=L"B-ORG";
+      else if (w.get_tag(best)==L"NP00V00") nec=L"B-MISC";    
     }
     return nec;
     break;
@@ -328,7 +329,7 @@ wstring output_conll::compute_value(const sentence &s,
   case SENSE: {
     // WSD
     wstring wsd=L"-";
-    if (not w.get_senses().empty()) wsd = w.get_senses().begin()->first;
+    if (not w.get_senses(best).empty()) wsd = w.get_senses(best).begin()->first;
     return wsd;
     break;
   } 
@@ -336,7 +337,7 @@ wstring output_conll::compute_value(const sentence &s,
   case ALL_SENSES: {
     // All senses, with ranking if available
     wstring wsd=L"-";
-    if (not w.get_senses().empty()) wsd = util::pairlist2wstring(w.get_senses(),L":",L"/");
+    if (not w.get_senses(best).empty()) wsd = util::pairlist2wstring(w.get_senses(best),L":",L"/");
     return wsd;
     break;
   } 

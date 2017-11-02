@@ -57,10 +57,10 @@ namespace freeling {
       output_freeling(const std::wstring &cfgFile);
       ~output_freeling ();
 
-      void PrintTree (std::wostream &sout, freeling::parse_tree::const_iterator n, int depth) const;
-      void PrintDepTree (std::wostream &sout, freeling::dep_tree::const_iterator n, int depth) const;
+      void PrintTree (std::wostream &sout, freeling::parse_tree::const_iterator n, int depth, int best=0) const;
+      void PrintDepTree (std::wostream &sout, freeling::dep_tree::const_iterator n, int depth, int best=0) const;
       void PrintPredArgs (std::wostream &sout, const freeling::sentence &s) const;
-      void PrintWord (std::wostream &sout, const freeling::word &w, bool only_sel=true, bool probs=true) const;
+      void PrintWord (std::wostream &sout, const freeling::word &w, bool only_sel=true, bool probs=true, int best=0) const;
       void PrintCorefs(std::wostream &sout, const freeling::document &doc) const;
       void PrintSemgraph(std::wostream &sout, const freeling::document &doc) const;
 
