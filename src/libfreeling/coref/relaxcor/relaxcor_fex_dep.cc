@@ -303,9 +303,10 @@ namespace freeling {
     else {
       paragraph::const_iterator s = m.get_sentence();
       sentence::const_reverse_iterator b(m.get_it_begin());
+      int best = m.get_sentence()->get_best_seq();
       int nq = 0;
       while (b!=s->rend()) {
-        if (b->get_tag()==L"Fe" or b->get_tag()==L"Fra" or b->get_tag()==L"Frc") ++nq;
+        if (b->get_tag(best)==L"Fe" or b->get_tag(best)==L"Fra" or b->get_tag(best)==L"Frc") ++nq;
         ++b;
       }
 
@@ -333,7 +334,8 @@ namespace freeling {
     }
     else {
       // check whether the first mention word is in the list of definite determiners
-      def = fex.get_label_RE(L"WRD_Definite").search(m.get_it_begin()->get_lemma());
+      int best = m.get_sentence()->get_best_seq();
+      def = fex.get_label_RE(L"WRD_Definite").search(m.get_it_begin()->get_lemma(best));
 
       fcache.set_feature(fid,def);
       TRACE(7,L"     " << fid << L" = "<< (def?L"yes":L"no"));
@@ -355,8 +357,9 @@ namespace freeling {
     }
     else {
       // check whether the head or first are in the list of indefinite pronouns/adjectives
-      ind = fex._Morf.has_type(m.get_head().get_lemma(),L"I") or
-        fex._Morf.has_type(m.get_it_begin()->get_lemma(),L"I");
+      int best = m.get_sentence()->get_best_seq();
+      ind = fex._Morf.has_type(m.get_head().get_lemma(best),L"I") or
+            fex._Morf.has_type(m.get_it_begin()->get_lemma(best),L"I");
       
       fcache.set_feature(fid,ind);
       TRACE(7,L"     " << fid << L" = "<< (ind?L"yes":L"no"));
@@ -378,7 +381,8 @@ namespace freeling {
     }
     else {
       // check whether the mention is a relative pronoun
-      rp = fex.get_label_RE(L"TAG_RelPron").search(m.get_head().get_tag());
+      int best = m.get_sentence()->get_best_seq();
+      rp = fex.get_label_RE(L"TAG_RelPron").search(m.get_head().get_tag(best));
 
       fcache.set_feature(fid,rp);
       TRACE(7,L"     " << fid << L" = "<< (rp?L"yes":L"no"));
@@ -400,7 +404,8 @@ namespace freeling {
     }
     else {
       // check whether the mention is a reflexive pronoun
-      rp = fex._Morf.has_type(m.get_head().get_lemma(),L"R");
+      int best = m.get_sentence()->get_best_seq();
+      rp = fex._Morf.has_type(m.get_head().get_lemma(best),L"R");
       fcache.set_feature(fid,rp);
       TRACE(7,L"     " << fid << L" = "<< (rp?L"yes":L"no"));
     }
@@ -420,8 +425,9 @@ namespace freeling {
     }
     else {
       // check whether the mention is a possessive
-      rp = (fex.get_label_RE(L"TAG_Poss").search(m.get_head().get_tag()) and 
-            fex._Morf.has_type(m.get_head().get_lemma(),L"P"));
+      int best = m.get_sentence()->get_best_seq();
+      rp = (fex.get_label_RE(L"TAG_Poss").search(m.get_head().get_tag(best)) and 
+            fex._Morf.has_type(m.get_head().get_lemma(best),L"P"));
       fcache.set_feature(fid,rp);
       TRACE(7,L"     " << fid << L" = "<< (rp?L"yes":L"no"));
     }
@@ -541,13 +547,15 @@ namespace freeling {
       }
       else if (m.is_type(mention::NOUN_PHRASE)) {
         // if it is a noun_phrase, check head PoS tag
-        if (fex.get_label_RE(L"TAG_NounSg").search(m.get_head().get_tag())) num=L's';
-        else if (fex.get_label_RE(L"TAG_NounPl").search(m.get_head().get_tag())) num=L'p';
+        int best = m.get_sentence()->get_best_seq();
+        if (fex.get_label_RE(L"TAG_NounSg").search(m.get_head().get_tag(best))) num=L's';
+        else if (fex.get_label_RE(L"TAG_NounPl").search(m.get_head().get_tag(best))) num=L'p';
         else num=L'u';
       }
       else if (m.is_type(mention::PROPER_NOUN)) {
+        int best = m.get_sentence()->get_best_seq();
         // if it is a proper noun, ORGs are '0', and the others 'u'
-        if (fex.get_label_RE(L"TAG_OrganizationNE").search(m.get_head().get_tag())) num=L'0';
+        if (fex.get_label_RE(L"TAG_OrganizationNE").search(m.get_head().get_tag(best))) num=L'0';
         else num=L'u';
       }
 
@@ -579,7 +587,8 @@ namespace freeling {
  
       else if (m.is_type(mention::PROPER_NOUN)) {
         // if it is a proper noun of type PERS -> gen = 'b'
-        if (fex.get_label_RE(L"TAG_PersonNE").search(m.get_head().get_tag())) 
+        int best = m.get_sentence()->get_best_seq();
+        if (fex.get_label_RE(L"TAG_PersonNE").search(m.get_head().get_tag(best))) 
           gen=L'b';
       }
 
@@ -590,11 +599,11 @@ namespace freeling {
       
       else if (m.is_type(mention::NOUN_PHRASE)) {
         // if it is a noun_phrase, check head PoS tag,
-        if (fex.get_label_RE(L"TAG_NounMasc").search(m.get_head().get_tag())) gen=L'm';
-        else if (fex.get_label_RE(L"TAG_NounFem").search(m.get_head().get_tag())) gen=L'f';
+        int best = m.get_sentence()->get_best_seq();
+        if (fex.get_label_RE(L"TAG_NounMasc").search(m.get_head().get_tag(best))) gen=L'm';
+        else if (fex.get_label_RE(L"TAG_NounFem").search(m.get_head().get_tag(best))) gen=L'f';
         else gen=L'u';  
       }
-
 
       fcache.set_feature(fid, wstring(1,gen));
       TRACE(6,L"     " << fid << L" = " << gen);
@@ -657,7 +666,8 @@ namespace freeling {
   set<int> relaxcor_fex_dep::inside_arg_of(const mention &m, const freeling::regexp &re) {
     set<int> verbs;
     paragraph::const_iterator s = m.get_sentence();
-    dep_tree::const_iterator n = s->get_dep_tree().get_node_by_pos(m.get_head().get_position());
+    int best = s->get_best_seq();
+    dep_tree::const_iterator n = s->get_dep_tree(best).get_node_by_pos(m.get_head().get_position());
     bool top = false;
     while (not top) {
       int mpos = n->get_word().get_position();
@@ -753,7 +763,8 @@ namespace freeling {
   set<int> relaxcor_fex_dep::select_by_lemma(paragraph::const_iterator s, const set<int> &pos, const freeling::regexp &re) {
     set<int> res;
     for (auto v=pos.begin(); v!=pos.end(); ++v) {
-      if (re.search((*s)[*v].get_lemma())) 
+      int best = s->get_best_seq();
+      if (re.search((*s)[*v].get_lemma(best))) 
         res.insert(*v);
     }
     return res;
@@ -927,12 +938,15 @@ namespace freeling {
 
   bool relaxcor_fex_dep::predicative(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex) {
     // m1 is SBJ and m2 is PRD of a copulative verb (or viceversa), and they are not possessive
-    bool r = ( not fex._Morf.has_type(m1.get_head().get_lemma(),L"P") and  // not possessives 
-               not fex._Morf.has_type(m2.get_head().get_lemma(),L"P") and
+    int best1 = m1.get_sentence()->get_best_seq();
+    int best2 = m2.get_sentence()->get_best_seq();
+
+    bool r = ( not fex._Morf.has_type(m1.get_head().get_lemma(best1),L"P") and  // not possessives 
+               not fex._Morf.has_type(m2.get_head().get_lemma(best2),L"P") and
                fex.get_label_RE(L"FUN_Subject").search(m1.get_dtree()->get_label()) and
                fex.get_label_RE(L"FUN_Predicate").search(m2.get_dtree()->get_label())  and
                m1.get_dtree().get_parent() == m2.get_dtree().get_parent() and
-               fex.get_label_RE(L"WRD_Copulative").search(m1.get_dtree().get_parent()->get_word().get_lemma())
+               fex.get_label_RE(L"WRD_Copulative").search(m1.get_dtree().get_parent()->get_word().get_lemma(best1))
                );
 
     TRACE(6,L"   " << m1.get_id()<<L":"<<m2.get_id()<<L":PREDICATIVE" << L" = " << (r?L"yes":L"no"));
@@ -981,21 +995,23 @@ namespace freeling {
 
   bool relaxcor_fex_dep::inclusion_match(const mention &m1, const mention &m2, const freeling::regexp &re) {
     dep_tree::const_iterator t;
+    int best1 = m1.get_sentence()->get_best_seq();
+    int best2 = m2.get_sentence()->get_best_seq();
       
     // get non-stopword modifiers of m1 head
     set<wstring> mod1;
     t = m1.get_dtree().begin();
     for (dep_tree::const_sibling_iterator c=t.sibling_begin(); c!=t.sibling_end(); ++c) {
-      if (re.search(c->get_word().get_tag())) 
-        mod1.insert(c->get_word().get_lemma());
+      if (re.search(c->get_word().get_tag(best1))) 
+        mod1.insert(c->get_word().get_lemma(best1));
     }
       
     // r is true as long as we don't find a m2 modifier that is not also in m1.
     bool r = true;
     t = m2.get_dtree().begin();
     for (dep_tree::const_sibling_iterator c=t.sibling_begin(); c!=t.sibling_end() and r; ++c) {
-      if (re.search(c->get_word().get_tag())) 
-        r = (mod1.find(c->get_word().get_lemma())!=mod1.end());
+      if (re.search(c->get_word().get_tag(best2))) 
+        r = (mod1.find(c->get_word().get_lemma(best2))!=mod1.end());
     }
 
     return r;
@@ -1100,9 +1116,10 @@ namespace freeling {
     else {
       sc = sc_UNK;
       if (m.is_type(mention::PROPER_NOUN)) {
-        if (fex.get_label_RE(L"TAG_OrganizationNE").search(m.get_head().get_tag())) sc = sc_ORG;
-        else if (fex.get_label_RE(L"TAG_PersonNE").search(m.get_head().get_tag())) sc = sc_PER;
-        else if (fex.get_label_RE(L"TAG_LocationNE").search(m.get_head().get_tag())) sc = sc_LOC;
+        int best = m.get_sentence()->get_best_seq();
+        if (fex.get_label_RE(L"TAG_OrganizationNE").search(m.get_head().get_tag(best))) sc = sc_ORG;
+        else if (fex.get_label_RE(L"TAG_PersonNE").search(m.get_head().get_tag(best))) sc = sc_PER;
+        else if (fex.get_label_RE(L"TAG_LocationNE").search(m.get_head().get_tag(best))) sc = sc_LOC;
       }
 
       else if (m.is_type(mention::PRONOUN)) {
@@ -1115,7 +1132,8 @@ namespace freeling {
       else if (m.is_type(mention::NOUN_PHRASE)) {
         // get SUMO information for word sense, and use it to decide semantic class
         wstring sense;
-        const list<pair<wstring,double>> &ls = m.get_head().get_senses();
+        int best = m.get_sentence()->get_best_seq();
+        const list<pair<wstring,double>> &ls = m.get_head().get_senses(best);
         if (not ls.empty()) {
           TRACE(7, L"    - semantic class for '"<< m.get_head().get_form() << L"'");
           // Use as class that provided by sense ranked highest by UKB that has a class
@@ -1504,12 +1522,16 @@ namespace freeling {
   
   relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::same_quote(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex) {
 
-    // check for quotes between m1 and m2. If none is found, they are in the same quotation (if any)
-    bool sq = in_quotes(m1,fcache,fex) and in_quotes(m2,fcache,fex);      
-    for (sentence::const_iterator k=m1.get_it_end(); k!=m2.get_it_begin() and sq; ++k ) {
-      sq = (k->get_tag()==L"Fe" or k->get_tag()==L"Fra" or k->get_tag()==L"Frc");
+    bool sq = false;
+    if (m1.get_n_sentence()==m2.get_n_sentence()) {
+      // check for quotes between m1 and m2. If none is found, they are in the same quotation (if any)
+      int best = m1.get_sentence()->get_best_seq();
+      sq = in_quotes(m1,fcache,fex) and in_quotes(m2,fcache,fex);      
+      for (sentence::const_iterator k=m1.get_it_end(); k!=m2.get_it_begin() and sq; ++k ) {
+        sq = (k->get_tag(best)==L"Fe" or k->get_tag(best)==L"Fra" or k->get_tag(best)==L"Frc");
+      }
     }
-      
+    
     TRACE(6,L"   " << m1.get_id()<<L":"<<m2.get_id() <<L":SAME_QUOTE" << L" = " << (sq?L"yes":L"no"));
     return (sq ? ff_YES : ff_NO);
   }
@@ -1537,9 +1559,10 @@ namespace freeling {
   relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::rel_antecedent(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex) {
 
     bool r = false;
-
+    int best2 = m2.get_sentence()->get_best_seq();
+ 
     // m2 must be relative pronoun
-    if (fex.get_label_RE(L"TAG_RelPron").search(m2.get_head().get_tag()) and not m2.get_dtree().is_root() ) {
+    if (fex.get_label_RE(L"TAG_RelPron").search(m2.get_head().get_tag(best2)) and not m2.get_dtree().is_root() ) {
 
       // locate verbal head and modifier 
       dep_tree::const_iterator vhead;
@@ -1547,16 +1570,16 @@ namespace freeling {
       bool headok = false;
       
       // m2 is and child (SBJ or OBJ) of a verb that is NMOD of m1.
-      if (fex.get_label_RE(L"TAG_Verb").search(m2.get_dtree().get_parent()->get_word().get_tag())) {
+      if (fex.get_label_RE(L"TAG_Verb").search(m2.get_dtree().get_parent()->get_word().get_tag(best2))) {
         vmod = m2.get_dtree();
         vhead = vmod.get_parent();
         headok = true;
       }
       
       // or either, m2 is and child of a preposition that is child (SBJ or OBJ) of a verb that is NMOD of m1
-      else if (fex.get_label_RE(L"TAG_Preposition").search(m2.get_dtree().get_parent()->get_word().get_tag()) and
+      else if (fex.get_label_RE(L"TAG_Preposition").search(m2.get_dtree().get_parent()->get_word().get_tag(best2)) and
                not m2.get_dtree().get_parent().is_root() and
-               fex.get_label_RE(L"TAG_Verb").search(m2.get_dtree().get_parent().get_parent()->get_word().get_tag()) ) {
+               fex.get_label_RE(L"TAG_Verb").search(m2.get_dtree().get_parent().get_parent()->get_word().get_tag(best2)) ) {
         vmod = m2.get_dtree().get_parent();
         vhead = vmod.get_parent();
         headok = true;
@@ -1582,11 +1605,13 @@ namespace freeling {
   relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::str_match_strict(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex) {
     // get m1 value with lowercased first word (unless it is a proper noun)
     wstring dd1;
-    if (fex.get_label_RE(L"TAG_ProperNoun").search(m1.get_it_begin()->get_tag())) dd1 = m1.value();
+    int best1 = m1.get_sentence()->get_best_seq();
+    if (fex.get_label_RE(L"TAG_ProperNoun").search(m1.get_it_begin()->get_tag(best1))) dd1 = m1.value();
     else dd1 = m1.value(1);    
     // get m2 value with lowercased first word (unless it is a proper noun)
     wstring dd2;
-    if (fex.get_label_RE(L"TAG_ProperNoun").search(m2.get_it_begin()->get_tag())) dd2 = m2.value();
+    int best2 = m2.get_sentence()->get_best_seq();
+    if (fex.get_label_RE(L"TAG_ProperNoun").search(m2.get_it_begin()->get_tag(best2))) dd2 = m2.value();
     else dd2 = m2.value(1);
     
     bool r = not m1.is_type(mention::PRONOUN) and not m2.is_type(mention::PRONOUN) and dd1==dd2;
@@ -1604,8 +1629,9 @@ namespace freeling {
 
     // get m1 first word lowercased (unless it is a proper noun)
     wstring dd1;        
+    int best1 = m1.get_sentence()->get_best_seq();
     w = m1.get_it_begin();
-    if (fex.get_label_RE(L"TAG_ProperNoun").search(w->get_tag())) dd1 = w->get_form();
+    if (fex.get_label_RE(L"TAG_ProperNoun").search(w->get_tag(best1))) dd1 = w->get_form();
     else dd1 = w->get_lc_form();
     // add other words up to head
     wend = m1.get_it_head(); ++wend;
@@ -1613,8 +1639,9 @@ namespace freeling {
 
     // get m2 first word lowercased (unless it is a proper noun)
     wstring dd2;        
+    int best2 = m2.get_sentence()->get_best_seq();
     w = m2.get_it_begin();
-    if (fex.get_label_RE(L"TAG_ProperNoun").search(w->get_tag())) dd2 = w->get_form();
+    if (fex.get_label_RE(L"TAG_ProperNoun").search(w->get_tag(best2))) dd2 = w->get_form();
     else dd2 = w->get_lc_form();
     // add other words up to head
     wend = m2.get_it_head(); ++wend;
@@ -1792,9 +1819,11 @@ namespace freeling {
     feature_cache fcache;
     
     for (int m2=1; m2<mentions.size(); ++m2) {
-      TRACE(4,L"Extracting all pairs for mention "<<mentions[m2].get_id()<<L" ("+mentions[m2].value()<<L") ["<<mentions[m2].get_head().get_form()<<L","<<mentions[m2].get_head().get_lemma()<<L","<<mentions[m2].get_head().get_tag()<<L"]");
+      int best2 = mentions[m2].get_sentence()->get_best_seq();
+
+      TRACE(4,L"Extracting all pairs for mention "<<mentions[m2].get_id()<<L" ("+mentions[m2].value()<<L") ["<<mentions[m2].get_head().get_form()<<L","<<mentions[m2].get_head().get_lemma(best2)<<L","<<mentions[m2].get_head().get_tag(best2)<<L"]");
       
-      for (int m1=m2-1; m1>=0; --m1) {	
+      for (int m1=m2-1; m1>=0; --m1) {
 	TRACE(5,L"PAIR: "<<mentions[m1].get_id()<<L":"<<mentions[m2].get_id()<<L" "+mentions[m1].get_head().get_form()<<L":"<<mentions[m2].get_head().get_form()<<L" ["<<mentions[m1].value()<<"]:["<<mentions[m2].value()<<"]");	
 
         // feature tables are stored with key m2:m1 for compatibility with relaxcor and other extractors.

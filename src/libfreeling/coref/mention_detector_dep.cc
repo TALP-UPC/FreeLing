@@ -160,10 +160,10 @@ namespace freeling {
   /// match some rule in "mention_tags", return mention type in "t" if so.
   /////////////////////////////////////////////////
   
-  bool mention_detector_dep::check_mention_tags(freeling::dep_tree::const_iterator h, mention::mentionType &t) const {
+  bool mention_detector_dep::check_mention_tags(freeling::dep_tree::const_iterator h, mention::mentionType &t, int best) const {
 
-    wstring tag = Tags->get_short_tag(h->get_word().get_tag());
-    wstring lem = h->get_word().get_lemma();
+    wstring tag = Tags->get_short_tag(h->get_word().get_tag(best));
+    wstring lem = h->get_word().get_lemma(best);
     wstring fun = h->get_label();
 
     // if the lemma is in excluded list, forget about it.
@@ -193,13 +193,14 @@ namespace freeling {
   /// create new mention, removing leading/trailing punctuation
   /////////////////////////////////////////////////  
 
-  freeling::mention mention_detector_dep::create_mention(int mentn, int sentn, freeling::paragraph::const_iterator se, freeling::dep_tree::const_iterator h, int pfirst, int plast) const {
-      // remove trailing and leading punctuation
-      while (Punctuation->search((*se)[pfirst].get_tag())) ++pfirst;      
-      while (Punctuation->search((*se)[plast].get_tag())) --plast;
-      // create mention
-      mention m(mentn, sentn, se, h, pfirst, plast);      
-      return m;
+  freeling::mention mention_detector_dep::create_mention(int mentn, int sentn, freeling::paragraph::const_iterator se, freeling::dep_tree::const_iterator h, int pfirst, int plast) const {    
+    int best = se->get_best_seq();
+    // remove trailing and leading punctuation
+    while (Punctuation->search((*se)[pfirst].get_tag(best))) ++pfirst;      
+    while (Punctuation->search((*se)[plast].get_tag(best))) --plast;
+    // create mention
+    mention m(mentn, sentn, se, h, pfirst, plast);      
+    return m;
   }
 
   
@@ -210,9 +211,10 @@ namespace freeling {
   void mention_detector_dep::detect_mentions(freeling::dep_tree::const_iterator h, freeling::paragraph::const_iterator se, int sentn, bool maximal, vector<mention> &mentions, int &mentn) const {
 
     bool found_mention = false;
+    int best = se->get_best_seq();
 
     mention::mentionType type;    
-    if (check_mention_tags(h, type)) {      // found candidate mention.
+    if (check_mention_tags(h, type, best)) {      // found candidate mention.
      
       // remove trailing and leading punctuation
       mention m = create_mention(mentn, sentn, se, h, dep_tree::get_first_word(h), dep_tree::get_last_word(h));
@@ -316,7 +318,8 @@ namespace freeling {
 
     for (document::const_iterator par=doc.begin(); par!=doc.end(); ++par) {
       for (paragraph::const_iterator se=par->begin(); se!=par->end(); ++se) {
-        detect_mentions (se->get_dep_tree().begin(), se, sentn, true, mentions, mentn);       
+        int best = se->get_best_seq();
+        detect_mentions (se->get_dep_tree(best).begin(), se, sentn, true, mentions, mentn);       
         ++sentn;
       }
     }
@@ -324,10 +327,11 @@ namespace freeling {
     TRACE(3,L"Mention detection done. Found " << mentions.size() << L" mentions.");
     #ifdef VERBOSE
     for (int k=0; k<mentions.size(); ++k) {
+      int best = mentions[k].get_sentence()->get_best_seq();
       TRACE(5, L"Mention " << k << L": " 
             << " id=" << mentions[k].get_id()
             << ", ns=" << mentions[k].get_n_sentence()
-            << ", head=" << mentions[k].get_head().get_position() << L" ("<<mentions[k].get_head().get_lemma() << L")"
+            << ", head=" << mentions[k].get_head().get_position() << L" ("<<mentions[k].get_head().get_lemma(best) << L")"
             << ", mention=(" << mentions[k].get_pos_begin() << L"," << mentions[k].get_pos_end() << L")"
             << " [" << mentions[k].value() << L"]");
     }

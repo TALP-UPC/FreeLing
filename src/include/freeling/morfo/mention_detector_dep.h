@@ -67,7 +67,7 @@ namespace freeling {
                          freeling::paragraph::const_iterator se, 
                          int sentn, bool maximal,
                          std::vector<mention> & mentions, int &mentn) const;
-    bool check_mention_tags(freeling::dep_tree::const_iterator h, mention::mentionType &t) const;
+    bool check_mention_tags(freeling::dep_tree::const_iterator h, mention::mentionType &t, int best=0) const;
     freeling::mention create_mention(int mentn, int sentn,
                                      freeling::paragraph::const_iterator se, freeling::dep_tree::const_iterator h,
                                      int pfirst, int plast) const;

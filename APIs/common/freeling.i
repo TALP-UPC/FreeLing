@@ -824,6 +824,10 @@ class sentence : public std::list<freeling::word> {
   void set_is_tagged(bool);
   bool is_tagged() const;
 
+  /// best tag sequence (Zero by default, unless the user changes it)
+  void set_best_seq(int k);
+  int get_best_seq() const;
+  
   void set_parse_tree(const parse_tree &, int k=0);
   parse_tree & get_parse_tree(int k=0);
   #ifndef FL_API_JAVA
