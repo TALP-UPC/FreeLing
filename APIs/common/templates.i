@@ -31,13 +31,13 @@
 %template(VectorSGFrame) std::vector<freeling::semgraph::SG_frame>;
 
 #ifdef FL_API_JAVA
-%template(ListParagraphIterator) ListIterator<freeling::paragraph>;
-%template(ListSentenceIterator) ListIterator<freeling::sentence>;
-%template(ListWordIterator)     ListIterator<freeling::word>;
-%template(ListAnalysisIterator) ListIterator<freeling::analysis>;
-%template(ListAlternativeIterator) ListIterator<freeling::alternative>;
-%template(ListStringIterator) ListIterator<std::wstring>;
-%template(ListIntIterator) ListIterator<int>;
+%template(ListParagraphIterator) ListRefIterator<freeling::paragraph>;
+%template(ListSentenceIterator) ListRefIterator<freeling::sentence>;
+%template(ListWordIterator)     ListRefIterator<freeling::word>;
+%template(ListAnalysisIterator) ListRefIterator<freeling::analysis>;
+%template(ListAlternativeIterator) ListRefIterator<freeling::alternative>;
+%template(ListStringIterator) ListCopyIterator<std::wstring>;
+%template(ListIntIterator) ListCopyIterator<int>;
 #endif
 
 %template(ListString) std::list<std::wstring>;
