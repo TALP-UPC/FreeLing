@@ -810,6 +810,10 @@ class sentence : public std::list<freeling::word> {
 
   /// find out how many kbest sequences the tagger computed
   unsigned int num_kbest() const;
+  //  set i-th tagger sequence as preferred one
+  void set_best_seq(unsigned int i);
+  //  get preferred tagger sequence index
+  unsigned int get_best_seq() const;
   /// add a word to the sentence
   void push_back(const word &);
   /// rebuild word positional index
@@ -2155,6 +2159,11 @@ class util {
   static std::wstring pairlist2wstring(const std::list<std::pair<std::wstring, std::wstring> > &, const std::wstring &, const std::wstring &);
   static std::list<std::wstring> wstring2list(const std::wstring &, const std::wstring &);
   static std::vector<std::wstring> wstring2vector(const std::wstring &, const std::wstring &);
+  /// capitalization functions
+  static int capitalization(const std::wstring &);
+  static std::wstring capitalize(const std::wstring &, int, bool);
+  static std::wstring lowercase(const std::wstring &);
+  static std::wstring uppercase(const std::wstring &);
 };
 
 
