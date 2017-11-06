@@ -810,10 +810,6 @@ class sentence : public std::list<freeling::word> {
 
   /// find out how many kbest sequences the tagger computed
   unsigned int num_kbest() const;
-  //  set i-th tagger sequence as preferred one
-  void set_best_seq(unsigned int i);
-  //  get preferred tagger sequence index
-  unsigned int get_best_seq() const;
   /// add a word to the sentence
   void push_back(const word &);
   /// rebuild word positional index
