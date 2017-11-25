@@ -4,6 +4,7 @@ foma/apply.c foma/coaccessible.c foma/constructions.c foma/define.c foma/determi
 )
 
 add_library(foma ${sources})
+target_link_libraries(foma ${ZLIB_LIBRARIES})
 set_target_properties(foma PROPERTIES LINKER_LANGUAGE CXX)
 target_include_directories(foma PUBLIC .)
 

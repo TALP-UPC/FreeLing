@@ -11,6 +11,7 @@ add_definitions(-DPACKAGE_STRING=${PACKAGE_STRING} -DVERSION=${VERSION})
 # Global configuration
 set(CMAKE_CXX_STANDARD 11)
 option(BUILD_SHARED_LIBS "Build shared libraries" ON)
+option(BUILD_TESTS "Build tests" ON)
 
 # All sources are under this directory
 add_subdirectory(src)
