@@ -4,7 +4,7 @@
 #     make FREELINGDIR=/my/freeling/dir PYTHONDIR=/my/python/dir
 
 FREELINGDIR = /usr/local
-PYTHONVER = python3.4
+PYTHONVER = python3.5
 PYTHONDIR = /usr/include/$(PYTHONVER)
 
 _freeling.so: freeling_pythonAPI.cxx

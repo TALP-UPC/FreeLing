@@ -8,7 +8,7 @@ FREELINGDIR ?= /usr/local
 # Output directory for compiled library & JNI
 FREELINGOUT ?= .
 # swig and java location in your system
-SWIGDIR ?= /usr/share/swig2.0
+SWIGDIR ?= /usr/share/swig3.0
 JAVADIR ?= /usr/lib/jvm/default-java
 
 # you may change the package name if you want

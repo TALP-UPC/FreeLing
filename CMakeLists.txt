@@ -15,3 +15,10 @@ option(BUILD_TESTS "Build tests" ON)
 
 # All sources are under this directory
 add_subdirectory(src)
+
+install(DIRECTORY data/as data/ca data/common data/config data/cs
+                  data/cy data/de data/en data/es data/fr data/gl
+                  data/hr data/it data/nb data/pt data/ru data/sl
+        DESTINATION share/freeling
+        PATTERN "dictionary" EXCLUDE)
+

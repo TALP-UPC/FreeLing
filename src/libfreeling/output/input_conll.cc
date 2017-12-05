@@ -401,10 +401,12 @@ void input_conll::add_field_content(const wstring &field, const wstring &val, in
 
   TRACE(6,L"     adding field "<<field<<L" content: "<<val<<L" to word "<<i<<L" "<<w.get_form());
   
-  // no information in the field, do nothing
-  if (val==L"-") return;
+  conll_handler::ConllColumns fcode = field_code(field);
 
-  switch (field_code(field)) {
+  // no information in the field, do nothing
+  if (val==L"-" and fcode!=FORM and fcode!=LEMMA) return;
+
+  switch (fcode) {
 
   case ID: {
     w.set_position(util::wstring2int(val)-1);
