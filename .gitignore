@@ -33,6 +33,8 @@
 .libs
 Makefile
 Makefile.in
+build
+install
 
 # MacOS
 .DS_Store
