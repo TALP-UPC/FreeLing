@@ -123,7 +123,7 @@ dep=freeling.dep_txala(DATA+LANG+"/dep_txala/dependences.dat", parser.get_start_
 # process input text
 lin=sys.stdin.readline();
 
-print ("Text language is: "+la.identify_language(lin,["es","ca","en","it"])+"\n");
+print ("Text language is: "+la.identify_language(lin)+"\n");
 
 while (lin) :
         
