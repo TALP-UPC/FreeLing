@@ -1909,6 +1909,7 @@ soltada_de_trenzas soltada_de_trenzas NCFS000 I
 <sonar>_como_arpa_vieja sonar_como_arpa_vieja $1:VM I
 <sonar>_como_guatapique sonar_como_guatapique $1:VM I
 <sonar>_como_tarro sonar_como_tarro $1:VM I
+sopas_tontas sopas_tontas NCCN000
 sóplame_este_ojo sóplame_este_ojo I I
 stick_fix stick_fix NCMS000 I
 <subir>_a_el_columpio subir_al_columpio $1:VM I

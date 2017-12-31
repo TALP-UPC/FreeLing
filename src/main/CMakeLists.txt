@@ -17,7 +17,6 @@ target_link_libraries(threaded_analyzer freeling ${Boost_LIBRARIES} ${CMAKE_THRE
 add_executable(analyzer_client sample_analyzer/analyzer_client.cc sample_analyzer/socket.h)
 target_link_libraries(analyzer_client freeling ${Boost_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 
-
 # Install targets
 install(PROGRAMS sample_analyzer/analyze DESTINATION bin)
 install(FILES sample_analyzer/fl_initialize DESTINATION bin)

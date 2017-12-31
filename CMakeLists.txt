@@ -11,14 +11,63 @@ add_definitions(-DPACKAGE_STRING=${PACKAGE_STRING} -DVERSION=${VERSION})
 # Global configuration
 set(CMAKE_CXX_STANDARD 11)
 option(BUILD_SHARED_LIBS "Build shared libraries" ON)
-option(BUILD_TESTS "Build tests" ON)
+option(BUILD_TESTS "Build tests" OFF)
 
 # All sources are under this directory
 add_subdirectory(src)
 
-install(DIRECTORY data/as data/ca data/common data/config data/cs
-                  data/cy data/de data/en data/es data/fr data/gl
-                  data/hr data/it data/nb data/pt data/ru data/sl
+install(DIRECTORY data/
         DESTINATION share/freeling
-        PATTERN "dictionary" EXCLUDE)
+        PATTERN "dictionary" EXCLUDE
+	PATTERN "parameters.*.gz.*" EXCLUDE
+	PATTERN "Makefile*" EXCLUDE)
+
+
+#### Data installation hooks
+      
+SET(languages "as;ca;cs;cy;de;en;es;fr;gl;hr;it;nb;pt;ru;sl")
+SET(variants "es/es-old;es/es-ar;es/es-cl;ca/balear;ca/valencia")      
+
+foreach (lg ${languages})
+  # build dictionary for each language
+  if (EXISTS ${CMAKE_SOURCE_DIR}/data/${lg}/dictionary/header)
+    install(CODE "message(STATUS \"  Creating ${lg} dictionary...\")" )
+    install(CODE "execute_process(COMMAND ${CMAKE_BINARY_DIR}/src/utilities/build-dict ${CMAKE_SOURCE_DIR}/data/${lg}/dictionary/header ${CMAKE_SOURCE_DIR}/data/${lg}/dictionary/entries  OUTPUT_FILE ${CMAKE_INSTALL_PREFIX}/share/freeling/${lg}/dicc.src)" )
+  endif (EXISTS ${CMAKE_SOURCE_DIR}/data/${lg}/dictionary/header)
+
+  # build phonetic dictionary
+  if (EXISTS ${CMAKE_SOURCE_DIR}/data/${lg}/alternatives-phon.dat)
+    install(CODE "message(STATUS \"  Creating ${lg} phonetic dictionary...\")" )
+  endif (EXISTS ${CMAKE_SOURCE_DIR}/data/${lg}/alternatives-phon.dat)
+
+  foreach (variant ${variants})
+    # for variants matching this language, build specific dictionary and multiwords file
+    if (${variant} MATCHES "^${lg}/")
+      install(CODE "message(STATUS \"  Creating ${variant} dictionary...\")" )
+      install(CODE "file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/share/freeling/${variant})") 
+      install(CODE "execute_process(COMMAND ${CMAKE_BINARY_DIR}/src/utilities/build-dict ${CMAKE_SOURCE_DIR}/data/${variant}/dictionary/header ${CMAKE_SOURCE_DIR}/data/${lg}/dictionary/entries ${CMAKE_SOURCE_DIR}/data/${variant}/dictionary/entries ${CMAKE_SOURCE_DIR}/data/${variant}/remove OUTPUT_FILE ${CMAKE_INSTALL_PREFIX}/share/freeling/${variant}/dicc.src)" )
+      if (EXISTS ${CMAKE_SOURCE_DIR}/data/${variant}/locucions.dat)
+	install(CODE "execute_process(COMMAND ${CMAKE_BINARY_DIR}/src/utilities/fusion-mw ${CMAKE_SOURCE_DIR}/data/${variant}/locucions.dat ${CMAKE_SOURCE_DIR}/data/${lg}/locucions.dat OUTPUT_FILE ${CMAKE_INSTALL_PREFIX}/share/freeling/${variant}/locucions.dat)" )
+      endif (EXISTS ${CMAKE_SOURCE_DIR}/data/${variant}/locucions.dat)
+    endif (${variant} MATCHES "^${lg}/")
+  endforeach(variant)
+
+  # if treeler parameter files are splitted due to GitHub 50M limitation, join them
+  file(GLOB partial1 ${CMAKE_SOURCE_DIR}/data/${lg}/dep_treeler/srl/parameters.*.gz.aa)
+  if (partial1)
+    STRING(REGEX REPLACE ".aa\$" "" paramfile "${partial1}")
+    STRING(REGEX REPLACE "${CMAKE_SOURCE_DIR}/data" "${CMAKE_INSTALL_PREFIX}/share/freeling" paramfile "${paramfile}")
+    
+    install(CODE "file(WRITE ${paramfile} \"\")")
+    file(GLOB partialfiles ${CMAKE_SOURCE_DIR}/data/${lg}/dep_treeler/srl/parameters.*.gz.*)
+    list(SORT partialfiles)
+    #foreach(gzfile ${partialfiles})
+     # install(CODE "message(STATUS \"  Concat file  ${gzfile} to  ${paramfile}\")")
+      install(CODE "file(GENERATE OUTPUT ${paramfile} INPUT ${partial1})")
+      #install(CODE "file(READ ${gzfile} content)")
+      #install(CODE "file(APPEND ${paramfile} \"${content}\")")
+    #endforeach(gzfile ${partialfiles})
+  endif (partial1)
+  
+endforeach(lg)
 

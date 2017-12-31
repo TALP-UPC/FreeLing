@@ -1362,10 +1362,6 @@ maculino maculino AQ0MS00
 maculino maculino NCMS000
 maculinos maculino AQ0MP00
 maculinos maculino NCMP000
-mafileño, -a mafileño AQ0CS00
-mafileño, -a mafileño NCCS000
-mafileño, -as mafileño AQ0CP00
-mafileño, -as mafileño NCCP000
 magallánica magallánico AQ0FS00
 magallánica magallánico NCFS000
 magallánicas magallánico AQ0FP00
@@ -1630,14 +1626,6 @@ olmueíno olmueíno AQ0MS00
 olmueíno olmueíno NCMS000
 olmueínos olmueíno AQ0MP00
 olmueínos olmueíno NCMP000
-osornino, -a osornino AQ0CS00
-osornino, -a osornino NCCS000
-osornino, -as osornino AQ0CP00
-osornino, -as osornino NCCP000
-ovallino, -a ovallino AQ0CS00
-ovallino, -a ovallino NCCS000
-ovallino, -as ovallino AQ0CP00
-ovallino, -as ovallino NCCP000
 padrehurtadina padrehurtadino AQ0FS00
 padrehurtadina padrehurtadino NCFS000
 padrehurtadinas padrehurtadino AQ0FP00
@@ -2098,66 +2086,6 @@ puyehuino puyehuino AQ0MS00
 puyehuino puyehuino NCMS000
 puyehuinos puyehuino AQ0MP00
 puyehuinos puyehuino NCMP000
-queilino, -a queilino AQ0CS00
-queilino, -a queilino NCCS000
-queilino, -as queilino AQ0CP00
-queilino, -as queilino NCCP000
-quellonino, -a quellonino AQ0CS00
-quellonino, -a quellonino NCCS000
-quellonino, -as quellonino AQ0CP00
-quellonino, -as quellonino NCCP000
-quemchino, -a quemchino AQ0CS00
-quemchino, -a quemchino NCCS000
-quemchino, -as quemchino AQ0CP00
-quemchino, -as quemchino NCCP000
-quilaquino, -a quilaquino AQ0CS00
-quilaquino, -a quilaquino NCCS000
-quilaquino, -as quilaquino AQ0CP00
-quilaquino, -as quilaquino NCCP000
-quilicurano, -a quilicurano AQ0CS00
-quilicurano, -a quilicurano NCCS000
-quilicurano, -as quilicurano AQ0CP00
-quilicurano, -as quilicurano NCCP000
-quillecano, -a quillecano AQ0CS00
-quillecano, -a quillecano NCCS000
-quillecano, -as quillecano AQ0CP00
-quillecano, -as quillecano NCCP000
-quillonino, -a quillonino AQ0CS00
-quillonino, -a quillonino NCCS000
-quillonino, -as quillonino AQ0CP00
-quillonino, -as quillonino NCCP000
-quillotano, -a quillotano AQ0CS00
-quillotano, -a quillotano NCCS000
-quillotano, -as quillotano AQ0CP00
-quillotano, -as quillotano NCCP000
-quilpueíno, -a quilpueíno AQ0CS00
-quilpueíno, -a quilpueíno NCCS000
-quilpueíno, -as quilpueíno AQ0CP00
-quilpueíno, -as quilpueíno NCCP000
-quinchaíno, -a quinchaíno AQ0CS00
-quinchaíno, -a quinchaíno NCCS000
-quinchaíno, -as quinchaíno AQ0CP00
-quinchaíno, -as quinchaíno NCCP000
-quintano, -a quintano AQ0CS00
-quintano, -a quintano NCCS000
-quintano, -as quintano AQ0CP00
-quintano, -as quintano NCCP000
-quintanormalino, -a quintanormalino AQ0CS00
-quintanormalino, -a quintanormalino NCCS000
-quintanormalino, -as quintanormalino AQ0CP00
-quintanormalino, -as quintanormalino NCCP000
-quinterano, -a quinterano AQ0CS00
-quinterano, -a quinterano NCCS000
-quinterano, -as quinterano AQ0CP00
-quinterano, -as quinterano NCCP000
-quirihuano, -a quirihuano AQ0CS00
-quirihuano, -a quirihuano NCCS000
-quirihuano, -as quirihuano AQ0CP00
-quirihuano, -as quirihuano NCCP000
-quisqueño, -a quisqueño AQ0CS00
-quisqueño, -a quisqueño NCCS000
-quisqueño, -as quisqueño AQ0CP00
-quisqueño, -as quisqueño NCCP000
 rancagüina rancagüino AQ0FS00
 rancagüina rancagüino NCFS000
 rancagüinas rancagüino AQ0FP00
@@ -2846,3 +2774,147 @@ zapallarinos zapallarino AQ0MP00
 zapallarinos zapallarino NCMP000
 zapallarino zapallarino AQ0MS00
 zapallarino zapallarino NCMS000
+mafileño mafileño AQ0MS00
+mafileña mafileño AQ0FS00
+mafileño mafileño NCMS000
+mafileña mafileño NCFS000
+mafileños mafileño AQ0MP00
+mafileñas mafileño AQ0FP00
+mafileños mafileño NCMP000
+mafileñas mafileño NCFP000
+osornino osornino AQ0MS00
+osornina osornino AQ0FS00
+osornino osornino NCMS000
+osornina osornino NCFS000
+osorninos osornino AQ0MP00
+osorninas osornino AQ0FP00
+osorninos osornino NCMP000
+osorninas osornino NCFP000
+ovallino ovallino AQ0MS00
+ovallina ovallino AQ0FS00
+ovallino ovallino NCMS000
+ovallina ovallino NCFS000
+ovallinos ovallino AQ0MP00
+ovallinas ovallino AQ0FP00
+ovallinos ovallino NCMP000
+ovallinas ovallino NCFP000
+queilino queilino AQ0MS00
+queilina queilino AQ0FS00
+queilino queilino NCMS000
+queilina queilino NCFS000
+queilinos queilino AQ0MP00
+queilinas queilino AQ0FP00
+queilinos queilino NCMP000
+queilinas queilino NCFP000
+quellonino quellonino AQ0MS00
+quellonina quellonino AQ0FS00
+quellonino quellonino NCMS000
+quellonina quellonino NCFS000
+quelloninos quellonino AQ0MP00
+quelloninas quellonino AQ0FP00
+quelloninos quellonino NCMP000
+quelloninas quellonino NCFP000
+quemchino quemchino AQ0MS00
+quemchina quemchino AQ0FS00
+quemchino quemchino NCMS000
+quemchina quemchino NCFS000
+quemchinos quemchino AQ0MP00
+quemchinas quemchino AQ0FP00
+quemchinos quemchino NCMP000
+quemchinas quemchino NCFP000
+quilaquino quilaquino AQ0MS00
+quilaquina quilaquino AQ0FS00
+quilaquino quilaquino NCMS000
+quilaquina quilaquino NCFS000
+quilaquinos quilaquino AQ0MP00
+quilaquinas quilaquino AQ0FP00
+quilaquinos quilaquino NCMP000
+quilaquinas quilaquino NCFP000
+quilicurano quilicurano AQ0MS00
+quilicurana quilicurano AQ0FS00
+quilicurano quilicurano NCMS000
+quilicurana quilicurano NCFS000
+quilicuranos quilicurano AQ0MP00
+quilicuranas quilicurano AQ0FP00
+quilicuranos quilicurano NCMP000
+quilicuranas quilicurano NCFP000
+quillecano quillecano AQ0MS00
+quillecana quillecano AQ0FS00
+quillecano quillecano NCMS000
+quillecana quillecano NCFS000
+quillecanos quillecano AQ0MP00
+quillecanas quillecano AQ0FP00
+quillecanos quillecano NCMP000
+quillecanas quillecano NCFP000
+quillonino quillonino AQ0MS00
+quillonina quillonino AQ0FS00
+quillonino quillonino NCMS000
+quillonina quillonino NCFS000
+quilloninos quillonino AQ0MP00
+quilloninas quillonino AQ0FP00
+quilloninos quillonino NCMP000
+quilloninas quillonino NCFP000
+quillotano quillotano AQ0MS00
+quillotana quillotano AQ0FS00
+quillotano quillotano NCMS000
+quillotana quillotano NCFS000
+quillotanos quillotano AQ0MP00
+quillotanas quillotano AQ0FP00
+quillotanos quillotano NCMP000
+quillotanas quillotano NCFP000
+quilpueíno quilpueíno AQ0MS00
+quilpueína quilpueíno AQ0FS00
+quilpueíno quilpueíno NCMS000
+quilpueína quilpueíno NCFS000
+quilpueínos quilpueíno AQ0MP00
+quilpueínas quilpueíno AQ0FP00
+quilpueínos quilpueíno NCMP000
+quilpueínas quilpueíno NCFP000
+quinchaíno quinchaíno AQ0MS00
+quinchaína quinchaíno AQ0FS00
+quinchaíno quinchaíno NCMS000
+quinchaína quinchaíno NCFS000
+quinchaínos quinchaíno AQ0MP00
+quinchaínas quinchaíno AQ0FP00
+quinchaínos quinchaíno NCMP000
+quinchaínas quinchaíno NCFP000
+quintano quintano AQ0MS00
+quintana quintano AQ0FS00
+quintano quintano NCMS000
+quintana quintano NCFS000
+quintanos quintano AQ0MP00
+quintanas quintano AQ0FP00
+quintanos quintano NCMP000
+quintanas quintano NCFP000
+quintanormalino quintanormalino AQ0MS00
+quintanormalina quintanormalino AQ0FS00
+quintanormalino quintanormalino NCMS000
+quintanormalina quintanormalino NCFS000
+quintanormalinos quintanormalino AQ0MP00
+quintanormalinas quintanormalino AQ0FP00
+quintanormalinos quintanormalino NCMP000
+quintanormalinas quintanormalino NCFP000
+quinterano quinterano AQ0MS00
+quinterana quinterano AQ0FS00
+quinterano quinterano NCMS000
+quinterana quinterano NCFS000
+quinteranos quinterano AQ0MP00
+quinteranas quinterano AQ0FP00
+quinteranos quinterano NCMP000
+quinteranas quinterano NCFP000
+quirihuano quirihuano AQ0MS00
+quirihuana quirihuano AQ0FS00
+quirihuano quirihuano NCMS000
+quirihuana quirihuano NCFS000
+quirihuanos quirihuano AQ0MP00
+quirihuanas quirihuano AQ0FP00
+quirihuanos quirihuano NCMP000
+quirihuanas quirihuano NCFP000
+quisqueño quisqueño AQ0MS00
+quisqueña quisqueño AQ0FS00
+quisqueño quisqueño NCMS000
+quisqueña quisqueño NCFS000
+quisqueños quisqueño AQ0MP00
+quisqueñas quisqueño AQ0FP00
+quisqueños quisqueño NCMP000
+quisqueñas quisqueño NCFP000
