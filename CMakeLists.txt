@@ -36,9 +36,10 @@ foreach (lg ${languages})
   endif (EXISTS ${CMAKE_SOURCE_DIR}/data/${lg}/dictionary/header)
 
   # build phonetic dictionary
-  if (EXISTS ${CMAKE_SOURCE_DIR}/data/${lg}/alternatives-phon.dat)
+  if (EXISTS ${CMAKE_INSTALL_PREFIX}/share/freeling/${lg}/alternatives-phon.dat)
     install(CODE "message(STATUS \"  Creating ${lg} phonetic dictionary...\")" )
-  endif (EXISTS ${CMAKE_SOURCE_DIR}/data/${lg}/alternatives-phon.dat)
+    install(CODE "execute_process(COMMAND ${CMAKE_BINARY_DIR}/src/utilities/dicc2phon ${CMAKE_INSTALL_PREFIX}/share/freeling/${lg}/dicc.src ${CMAKE_INSTALL_PREFIX}/share/freeling/${lg}/alternatives-phon.dat)" )
+  endif (EXISTS ${CMAKE_INSTALL_PREFIX}/share/freeling/${lg}/alternatives-phon.dat)
 
   foreach (variant ${variants})
     # for variants matching this language, build specific dictionary and multiwords file
@@ -53,21 +54,12 @@ foreach (lg ${languages})
   endforeach(variant)
 
   # if treeler parameter files are splitted due to GitHub 50M limitation, join them
-  file(GLOB partial1 ${CMAKE_SOURCE_DIR}/data/${lg}/dep_treeler/srl/parameters.*.gz.aa)
-  if (partial1)
-    STRING(REGEX REPLACE ".aa\$" "" paramfile "${partial1}")
-    STRING(REGEX REPLACE "${CMAKE_SOURCE_DIR}/data" "${CMAKE_INSTALL_PREFIX}/share/freeling" paramfile "${paramfile}")
-    
-    install(CODE "file(WRITE ${paramfile} \"\")")
-    file(GLOB partialfiles ${CMAKE_SOURCE_DIR}/data/${lg}/dep_treeler/srl/parameters.*.gz.*)
-    list(SORT partialfiles)
-    #foreach(gzfile ${partialfiles})
-     # install(CODE "message(STATUS \"  Concat file  ${gzfile} to  ${paramfile}\")")
-      install(CODE "file(GENERATE OUTPUT ${paramfile} INPUT ${partial1})")
-      #install(CODE "file(READ ${gzfile} content)")
-      #install(CODE "file(APPEND ${paramfile} \"${content}\")")
-    #endforeach(gzfile ${partialfiles})
-  endif (partial1)
+  file(GLOB aafiles ${CMAKE_SOURCE_DIR}/data/${lg}/dep_treeler/srl/parameters.*.gz.aa ${CMAKE_SOURCE_DIR}/data/${lg}/dep_treeler/dep/parameters.*.gz.aa)
+  foreach (model ${aafiles})
+    STRING(REGEX REPLACE ".aa\$" "" gzfile "${model}")
+    STRING(REGEX REPLACE "${CMAKE_SOURCE_DIR}/data" "${CMAKE_INSTALL_PREFIX}/share/freeling" gzfile "${gzfile}")
+    install(CODE "execute_process(COMMAND ${CMAKE_BINARY_DIR}/src/utilities/gz-cat ${model} ${gzfile})")
+  endforeach (model ${aafiles})    
   
 endforeach(lg)
 
