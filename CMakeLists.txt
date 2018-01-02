@@ -36,10 +36,10 @@ foreach (lg ${languages})
   endif (EXISTS ${CMAKE_SOURCE_DIR}/data/${lg}/dictionary/header)
 
   # build phonetic dictionary
-  if (EXISTS ${CMAKE_INSTALL_PREFIX}/share/freeling/${lg}/alternatives-phon.dat)
+  if (EXISTS ${CMAKE_SOURCE_DIR}/data/${lg}/alternatives-phon.dat)
     install(CODE "message(STATUS \"  Creating ${lg} phonetic dictionary...\")" )
     install(CODE "execute_process(COMMAND ${CMAKE_BINARY_DIR}/src/utilities/dicc2phon ${CMAKE_INSTALL_PREFIX}/share/freeling/${lg}/dicc.src ${CMAKE_INSTALL_PREFIX}/share/freeling/${lg}/alternatives-phon.dat)" )
-  endif (EXISTS ${CMAKE_INSTALL_PREFIX}/share/freeling/${lg}/alternatives-phon.dat)
+  endif (EXISTS ${CMAKE_SOURCE_DIR}/data/${lg}/alternatives-phon.dat)
 
   foreach (variant ${variants})
     # for variants matching this language, build specific dictionary and multiwords file

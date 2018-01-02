@@ -20,7 +20,7 @@ target_link_libraries(analyzer_client freeling ${Boost_LIBRARIES} ${CMAKE_THREAD
 # Install targets
 install(PROGRAMS sample_analyzer/analyze DESTINATION bin)
 install(FILES sample_analyzer/fl_initialize DESTINATION bin)
-install(TARGETS analyzer threaded_analyzer
+install(TARGETS analyzer threaded_analyzer analyzer_client
         RUNTIME DESTINATION bin
         LIBRARY DESTINATION lib
         ARCHIVE DESTINATION lib/static)
