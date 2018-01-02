@@ -4,7 +4,7 @@ include_directories(include)
 
 find_package( ZLIB REQUIRED )
 if ( ZLIB_FOUND )
-    include_directories( ${ZLIB_INCLUDE_DIRS} )
+  include_directories( ${ZLIB_INCLUDE_DIRS} )
 endif( ZLIB_FOUND )
 
 add_subdirectory(libfoma)
@@ -13,7 +13,7 @@ add_subdirectory(libfreeling)
 add_subdirectory(main)
 add_subdirectory(utilities)
 if(BUILD_TESTS)
-    add_subdirectory(tests)
+   add_subdirectory(tests)
 endif()
 
 install(DIRECTORY include/ DESTINATION include

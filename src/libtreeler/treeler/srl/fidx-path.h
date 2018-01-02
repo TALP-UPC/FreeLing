@@ -76,7 +76,7 @@ namespace treeler {
 	while (!end){
 	  //get the syn label
 	  int synl = *it; 
-	  assert(synl >= 0);
+	  assert(synl >= 0); (void)synl; // (shut up compiler about unused variables)	 
 	  res |= kSynLabelSize;
 	  //get the direction
 	  bool dir = *it;

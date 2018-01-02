@@ -45,8 +45,8 @@ namespace freeling {
   /// Auxiliary class to store already computed mention features
   /////////////////////////////////////////////
 
-  feature_cache::feature_cache() {};
-  feature_cache::~feature_cache() {};
+  feature_cache::feature_cache() {}
+  feature_cache::~feature_cache() {}
 
   void feature_cache::set_feature(int id, mentionFeature f, unsigned int v) {
     i_features[id][f]=v;

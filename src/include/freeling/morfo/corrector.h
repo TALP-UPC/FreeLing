@@ -82,8 +82,8 @@ namespace freeling {
     std::vector<std::vector<std::pair<float, unsigned int*>>> gen_states;
     unsigned int current_generation;
     
-    void genetic_algorithm(const alt_t &alternatives, unsigned int num_incorrect_words, unsigned int *best_solutions);
-    void genetic_initialize_pool(unsigned int *relevant_positions, unsigned int num_incorrect_words, const alt_t &alternatives);
+    void genetic_algorithm(const alt_t &alternatives, unsigned int num_incorrect_words, std::vector<std::vector<unsigned int>> &best_solutions);
+    void genetic_initialize_pool(std::vector<unsigned int>& relevant_positions, unsigned int num_incorrect_words, const alt_t &alternatives);
     unsigned int roulette_selection(float sum_weights);
     
     //-------------------------------
@@ -91,10 +91,10 @@ namespace freeling {
     //-------------------------------
     
     // returns true if current_state has been modified, false otherwise (next state based on current search_algorithm)
-    bool next_state(const alt_t &alternatives, unsigned int *current_state);
+    bool next_state(const alt_t &alternatives, std::vector<unsigned int> &current_state);
     
     // returns current state evaluation value (calculations based on current evaluation_method)
-    float eval_state(const alt_t &alternatives, const unsigned int *current_state);
+    float eval_state(const alt_t &alternatives, const std::vector<unsigned int> &current_state);
     
     // move data from sentences to alternatives data structure, returns number of incorrect words found
     unsigned int set_alternatives(std::list<freeling::sentence> &ls, alt_t &alternatives);

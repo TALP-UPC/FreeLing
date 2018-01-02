@@ -394,6 +394,7 @@ namespace treeler {
     /* assert(sizeof(ft) == sizeof(FeatureIdx)); */	\
     uint32_t x = (uint32_t)(ft >> 32);		\
     int ft_fw_nwrite = sprintf(str, "%08x", x);	\
+    (void)ft_fw_nwrite;                         \
     assert(ft_fw_nwrite == 8);			\
     x = (uint32_t)(ft & 0xffffffff);		\
     ft_fw_nwrite = sprintf(str + 8, "%08x", x);	\
@@ -403,6 +404,7 @@ namespace treeler {
     /* assert(sizeof(ft) == sizeof(FeatureIdx)); */	\
     uint32_t x = (uint32_t)(ft >> 32);		\
     int ft_fw_nwrite = gzprintf(f, "%08x", x);	\
+    (void)ft_fw_nwrite;                         \
     assert(ft_fw_nwrite == 8);			\
     x = (uint32_t)(ft & 0xffffffff);		\
     ft_fw_nwrite = gzprintf(f, "%08x", x);	\

@@ -53,10 +53,10 @@ analyzer::analyzer_config_options::analyzer_config_options() {
   TAGGER_Retokenize = true;
   TAGGER_kbest = 1;
   TAGGER_ForceSelect=TAGGER;
-};
+}
   
 /// destructor
-analyzer::analyzer_config_options::~analyzer_config_options() {};
+analyzer::analyzer_config_options::~analyzer_config_options() {}
 
 /// invoke options constructor, default values 
 analyzer::analyzer_invoke_options::analyzer_invoke_options() {
@@ -73,10 +73,10 @@ analyzer::analyzer_invoke_options::analyzer_invoke_options() {
   SENSE_WSD_which=NO_WSD;
   TAGGER_which=HMM;
   DEP_which=NO_DEP;    
-};
+}
 
 /// destructor
-analyzer::analyzer_invoke_options::~analyzer_invoke_options() {};
+analyzer::analyzer_invoke_options::~analyzer_invoke_options() {}
 
 
 //---------------------------------------------

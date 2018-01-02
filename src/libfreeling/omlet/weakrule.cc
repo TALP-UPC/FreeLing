@@ -580,6 +580,7 @@ namespace freeling {
     }
 
     const wstring name=L"mlDTree";
+    //const bool registered=wr_factory::register_weak_rule_type(name,create_mlDTree);
     const bool registered=wr_factory::register_weak_rule_type(name,create_mlDTree);
   }
 

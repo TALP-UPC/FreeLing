@@ -285,10 +285,7 @@ namespace freeling {
     if (num_incorrect_words == 0) return;
     
     // create aux algorithm variables
-    unsigned int best_solutions[STORED_SOLUTIONS][alternatives.size()];
-    for (unsigned int i = 0; i < STORED_SOLUTIONS; i++)
-      fill_n(best_solutions[i], alternatives.size(), 0);
-    
+    vector<vector<unsigned int> > best_solutions(STORED_SOLUTIONS, vector<unsigned int>(alternatives.size(),0));    
     // set algorithm to EXHAUSTIVE if the number of states to search is low
     search_algorithms selected_algorithm = search_algorithm;
     if (total_states <= 100000) selected_algorithm = EXHAUSTIVE;
@@ -296,11 +293,9 @@ namespace freeling {
     switch (selected_algorithm) {
     case EXHAUSTIVE: { //========== EXHAUSTIVE SEARCH ============  
       unsigned int num_states_evaluated = 0;
-      float best_results[STORED_SOLUTIONS];
-      fill_n(best_results, STORED_SOLUTIONS, -1.0);
-      unsigned int current_state[alternatives.size()];
+      vector<float> best_results(STORED_SOLUTIONS, -1.0);
+      vector<unsigned int> current_state(alternatives.size(),0);
       bool state_found = true;
-      fill_n(current_state, alternatives.size(), 0);
       
       // exhaustive search, classic binary table generation algorithm
       while (state_found) {
@@ -313,16 +308,15 @@ namespace freeling {
         if (result > best_results[index]) {
           // copy to last position
           best_results[index] = result;
-          copy(current_state, current_state + alternatives.size(), best_solutions[index]);
+          copy(current_state.begin(), current_state.end(), best_solutions[index].begin());
           
           // swap
           while (index > 0 && result > best_results[index - 1]) {
             // swap array
-            unsigned int aux[alternatives.size()];
-            memcpy(aux, best_solutions[index - 1], sizeof(unsigned int)*alternatives.size());
-            memcpy(best_solutions[index - 1], best_solutions[index], sizeof(unsigned int)*alternatives.size());
-            memcpy(best_solutions[index], aux, sizeof(unsigned int)*alternatives.size());
-            
+            vector<unsigned int> aux = best_solutions[index - 1];
+	    best_solutions[index - 1] = best_solutions[index];
+	    best_solutions[index] = aux;
+	    
             // swap score
             int aux_value           = best_results[index - 1];
             best_results[index - 1] = best_results[index];
@@ -340,7 +334,7 @@ namespace freeling {
       break;
     }
     case GENETIC: { //========== GENETIC ALGORITHM ============
-      genetic_algorithm(alternatives, num_incorrect_words, &best_solutions[0][0]);
+      genetic_algorithm(alternatives, num_incorrect_words, best_solutions);
       break;
     }
     }
@@ -383,7 +377,7 @@ namespace freeling {
   /////////////////////////////////////////////////////////////////////////////
   
   // return value between [-1.0, 1.0]
-  float corrector::eval_state(const alt_t &alternatives, const unsigned int *current_state) {
+  float corrector::eval_state(const alt_t &alternatives, const vector<unsigned int> &current_state) {
     float MIN_DISTANCE       = 15.0;
     float embeddings_result  = 0.0;
     
@@ -527,7 +521,7 @@ namespace freeling {
     return (embeddings_result + distance_result);
   }
   
-  bool corrector::next_state(const alt_t &alternatives, unsigned int *current_state) {
+  bool corrector::next_state(const alt_t &alternatives, vector<unsigned int> &current_state) {
     bool state_found = false;
     unsigned int ind = 0;
     
@@ -549,7 +543,7 @@ namespace freeling {
   /// Genetic functions
   /////////////////////////////////////////////////////////////////////////////
   
-  void corrector::genetic_initialize_pool(unsigned int *relevant_positions, unsigned int num_incorrect_words, const alt_t &alternatives) {
+  void corrector::genetic_initialize_pool(std::vector<unsigned int>& relevant_positions, unsigned int num_incorrect_words, const alt_t &alternatives) {
     unsigned int first_half = (int) GEN_POPULATION/2;
     for (unsigned int i = 0; i < first_half; i++) {
       // for every relevant position, set random alternative
@@ -592,7 +586,7 @@ namespace freeling {
     return GEN_POPULATION - 1; // float precision errors
   }
   
-  void corrector::genetic_algorithm(const alt_t &alternatives, unsigned int num_incorrect_words, unsigned int *best_solutions) {
+  void corrector::genetic_algorithm(const alt_t &alternatives, unsigned int num_incorrect_words, vector<vector<unsigned int>> &best_solutions) {
     // genetic algorithm basic variables
     // 2 may be changed to keep track of more generations. 2 is the minimum required, the max would be GEN_ITERATIONS
     gen_states = vector<vector<pair<float, unsigned int*>>>(2);
@@ -604,8 +598,7 @@ namespace freeling {
     }
     
     current_generation = 0;
-    float best_results[STORED_SOLUTIONS];
-    fill_n(best_results, STORED_SOLUTIONS, -1.0);
+    vector<float> best_results(STORED_SOLUTIONS, -1.0);
     unsigned int num_states_evaluated = 0;
     
     unsigned int total_mutations = 0;
@@ -614,7 +607,7 @@ namespace freeling {
     srand((unsigned int) time(0));
     
     // modify only words with alternatives
-    unsigned int relevant_positions[num_incorrect_words];
+    vector<unsigned int> relevant_positions(num_incorrect_words);
     unsigned int relevant_index = 0;
     for (unsigned int i = 0; i < alternatives.size(); i++) {
       if (alternatives[i].second.size() > 1) {
@@ -626,12 +619,10 @@ namespace freeling {
     // generate initial pool of solutions
     genetic_initialize_pool(relevant_positions, num_incorrect_words, alternatives);
     vector<float> probabilities(GEN_POPULATION, 0.0);
-    unsigned int evaluation_state[alternatives.size()]; // dummy state for evaluation
-    fill_n(evaluation_state, alternatives.size(), 0);
+    vector<unsigned int> evaluation_state(alternatives.size(),0); // dummy state for evaluation
     // calculate constants from genetic params:
     unsigned int mutation_rate100 = (unsigned int) (mutation_rate*100.0);
-    
-    
+        
     // for every iteration, evaluate and apply operators
     for (unsigned int iter = 0; iter < GEN_ITERATIONS; iter++) {
       
@@ -651,16 +642,15 @@ namespace freeling {
           // copy to last position
           best_results[index] = result;
           // copy(evaluation_state, evaluation_state + alternatives.size(), best_solutions[index]);
-          memcpy(&best_solutions[index], evaluation_state, sizeof(unsigned int)*alternatives.size());
+	  best_solutions[index] = evaluation_state;
           
           // swap
           while (index > 0 && result > best_results[index - 1]) {
             // swap array
-            unsigned int aux[alternatives.size()];
-            memcpy(aux, &best_solutions[index - 1], sizeof(unsigned int)*alternatives.size());
-            memcpy(&best_solutions[index - 1], &best_solutions[index], sizeof(unsigned int)*alternatives.size());
-            memcpy(&best_solutions[index], aux, sizeof(unsigned int)*alternatives.size());
-            
+            vector<unsigned int> aux = best_solutions[index - 1];
+	    best_solutions[index - 1] = best_solutions[index];
+	    best_solutions[index] = aux;
+	                
             // swap score
             int aux_value           = best_results[index - 1];
             best_results[index - 1] = best_results[index];

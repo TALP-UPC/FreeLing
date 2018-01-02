@@ -1,8 +1,9 @@
 cmake_minimum_required(VERSION 3.1)
 
 project(FreeLing)
-set(PACKAGE_STRING "\"FreeLing\"") # TODO: Get this from proper place
-set(VERSION "33") # TODO: Get this from proper place
+set(PACKAGE_NAME "FreeLing") 
+set(VERSION "4.1") 
+set(PACKAGE_STRING "\"${PACKAGE_NAME} ${VERSION}\"")
 set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib") # Needed to find libraries if not installed in system path
 
 # Add compiler definitions
@@ -11,7 +12,13 @@ add_definitions(-DPACKAGE_STRING=${PACKAGE_STRING} -DVERSION=${VERSION})
 # Global configuration
 set(CMAKE_CXX_STANDARD 11)
 option(BUILD_SHARED_LIBS "Build shared libraries" ON)
+
+# compilation options
 option(BUILD_TESTS "Build tests" OFF)
+option(TRACES "Enable traces" OFF)
+option(WARNINGS "Enable warnings" ON)
+option(XPRESSIVE "Xpressive regex" OFF)
+option(EMBEDDINGS "Get word Embeddings" OFF)
 
 # All sources are under this directory
 add_subdirectory(src)
@@ -21,7 +28,6 @@ install(DIRECTORY data/
         PATTERN "dictionary" EXCLUDE
 	PATTERN "parameters.*.gz.*" EXCLUDE
 	PATTERN "Makefile*" EXCLUDE)
-
 
 #### Data installation hooks
       
@@ -63,3 +69,14 @@ foreach (lg ${languages})
   
 endforeach(lg)
 
+if (EMBEDDINGS)
+  if (EXISTS ${CMAKE_INSTALL_PREFIX}/share/freeling/en/embeddings)
+    install(CODE "message(STATUS \"Word embedding data already installed. To force reinstallation, remove folder ${CMAKE_INSTALL_PREFIX}/share/freeling/en/embeddings and 'make install' again\")" )
+  else (EXISTS ${CMAKE_INSTALL_PREFIX}/share/freeling/en/embeddings)
+    install(CODE "message(STATUS \"Downloading word embedding data from 'nlp.cs.upc.edu/freeling/extradata'. Please wait...\")" )
+    install(CODE "file(DOWNLOAD nlp.cs.upc.edu/freeling/extradata/freeling_embeddings.tar.bz2 ${CMAKE_BINARY_DIR}/freeling_embeddings.tar.bz2 )" ) 
+    install(CODE "message(STATUS \"Uncompressing word embeddings data. Please wait...\")" )
+    install(CODE "execute_process(COMMAND ${CMAKE_COMMAND} -E tar xjf ${CMAKE_BINARY_DIR}/freeling_embeddings.tar.bz2 WORKING_DIRECTORY ${CMAKE_INSTALL_PREFIX}/share/freeling)")
+    install(CODE "file(REMOVE ${CMAKE_BINARY_DIR}/freeling_embeddings.tar.bz2 )" ) 
+  endif (EXISTS ${CMAKE_INSTALL_PREFIX}/share/freeling/en/embeddings)
+endif()
