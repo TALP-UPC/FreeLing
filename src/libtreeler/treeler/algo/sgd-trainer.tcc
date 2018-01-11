@@ -217,7 +217,7 @@ namespace egstra {
     if(_rand_type != EGSTRA_DETERMINISTIC) {
       /* only report this for randomized EG */
       cerr << myname << " : seeding the RNG with value " << _seed << endl;
-      srandom(_seed);
+      srand(_seed);
     }
 
     cerr << myname << " : provided eta0 = " << _lrate;

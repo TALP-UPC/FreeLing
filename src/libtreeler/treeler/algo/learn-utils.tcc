@@ -54,7 +54,7 @@ namespace treeler {
 					     DataSet<X,Y>& data) {
     const int N = data.size();
     /* produce a random value in [0, 1) */
-    const double rand_01 = ((double)random())/(1.0 + (double)RAND_MAX);
+    const double rand_01 = ((double)rand())/(1.0 + (double)RAND_MAX);
     if(t == RAND_UNIFORM) {
       /* in this case, just pick an example at random */
       const double rand_0n = N*rand_01;

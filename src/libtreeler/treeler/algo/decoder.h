@@ -125,7 +125,8 @@ namespace treeler {
     template <typename X, typename Y, typename IO>
     class functor_ostream {
     public:
-      functor_ostream(IO& io, ostream& o) : _io(io), _display_x(true), _display_ygold(false), _o(o), _fo(NULL) {}
+      //functor_ostream(IO& io, ostream& o) : _io(io), _display_x(true), _display_ygold(false), _o(o), _fo(NULL) {}
+      functor_ostream(IO& io, ostream& o) : _io(io), _display_x(true), _display_ygold(false), _o(o)  {}
       functor_ostream(IO& io, const string& filename) : _io(io), _display_x(true), _display_ygold(false), _o(cerr) {
 	_fo.open(filename.c_str());
 	if (!_fo.good()) {

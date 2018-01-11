@@ -3,8 +3,19 @@ file(GLOB_RECURSE treeler_SRC
 treeler/base/token.cc treeler/base/fidx.cc treeler/base/dictionary.cc treeler/util/options.cc treeler/util/char-utils.cc treeler/util/timer.cc treeler/io/io-basic.cc treeler/control/factory-base.cc treeler/dep/part-dep1.cc treeler/dep/parser-projdep1.cc treeler/dep/part-dep2.cc treeler/dep/part-dep2-index.cc treeler/dep/parser-projdep2.cc treeler/dep/pos-symbols.cc treeler/dep/dependency_parser.cc treeler/tag/part-tag.cc treeler/tag/tuple-seq.cc treeler/tag/io-tag.cc treeler/class/class-basic.cc treeler/class/io-class.cc treeler/class/fgen-class.cc treeler/class/model-mc.cc treeler/srl/part-srl0.cc treeler/srl/simple-parser.cc treeler/srl/srl_parser.cc 
 )
 
+
+if (WIN32)
+  list(APPEND treeler_SRC treeler/base/windll.cc)
+endif()
+
+find_package(ZLIB REQUIRED)
+include_directories( ${ZLIB_INCLUDE_DIRS} )
+
+add_definitions(-DTREELER_EXPORTS=1 -D_CRT_SECURE_NO_WARNINGS=1 -DNDEBUG=1 -D_WINDOWS=1 -DWIN32=1 -DNOMINMAX=1)
+
 add_library(treeler ${treeler_SRC})
 set_target_properties(treeler PROPERTIES LINKER_LANGUAGE CXX)
+target_link_libraries(treeler ${ZLIB_LIBRARIES})
 target_include_directories(treeler PUBLIC .) # TODO: Here we are also including 'main'
 
 install(TARGETS treeler
@@ -43,8 +54,14 @@ install(FILES treeler/util/char-utils.h treeler/util/math-utils.h treeler/util/o
 
 install(FILES treeler/srl/srl.h treeler/srl/sentence.h treeler/srl/paths-container.h treeler/srl/part-srl0.h treeler/srl/simple-parser.h treeler/srl/io.h treeler/srl/fgen-srl-v1.h treeler/srl/fgen-srl-types.h treeler/srl/ftemplates-srl.h treeler/srl/fidx-path.h treeler/srl/srl-eval.h treeler/srl/factory-srl.h treeler/srl/paths-defs.h treeler/srl/srl_parser.h treeler/srl/scorers.h
         DESTINATION include/treeler/srl)
-  
-add_subdirectory(main)
+
+# treeler main is used only for training and gives problems in windows.
+# If needed, models can be trained on linux and copied to the windows production system      
+if (NOT WIN32)
+  add_subdirectory(main)
+endif()
+
+
 
 
 

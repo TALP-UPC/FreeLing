@@ -1,5 +1,10 @@
 
 
+find_package(ZLIB REQUIRED)
+include_directories( ${ZLIB_INCLUDE_DIRS} )
+
+add_definitions(-DFOMA_EXPORTS=1 -D_CRT_SECURE_NO_WARNINGS=1 -D_CRT_NONSTDC_NO_DEPRECATE=1 -DYY_NO_UNISTD_H=1 -DNDEBUG=1 -D_WINDOWS=1 -D_USRDLL=1 -DLIBFOMA_EXPORTS=1 -DWIN32=1)
+
 file(GLOB_RECURSE sources
 foma/apply.c foma/coaccessible.c foma/constructions.c foma/define.c foma/determinize.c foma/dynarray.c foma/extract.c foma/flags.c foma/int_stack.c foma/io.c foma/lex.cmatrix.c foma/lexcread.c foma/lex.lexc.c foma/lex.yy.c foma/mem.c foma/minimize.c foma/regex.c foma/reverse.c foma/rewrite.c foma/sigma.c foma/spelling.c foma/stringhash.c foma/structures.c foma/topsort.c foma/trie.c foma/utf8.c
 )

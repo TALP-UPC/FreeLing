@@ -1,7 +1,8 @@
 
 file(GLOB_RECURSE treeler_main_SRC
-treeler.cc scripts/registry.cc scripts/train.cc scripts/decode.cc scripts/dump.cc scripts/srl.cc
-)
+     treeler.cc scripts/registry.cc scripts/train.cc scripts/decode.cc scripts/dump.cc scripts/srl.cc)
+
+add_definitions(-DTREELER_EXPORTS=1 -D_CRT_SECURE_NO_WARNINGS=1 -DNDEBUG=1 -D_WINDOWS=1 -DWIN32=1 -DNOMINMAX=1)
 
 add_executable(treeler_bin ${treeler_main_SRC})
 target_include_directories(treeler_bin PRIVATE .)

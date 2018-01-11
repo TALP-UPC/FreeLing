@@ -96,7 +96,7 @@ namespace treeler {
     
     if(config.rand_type != LearnUtils::DETERMINISTIC) {
       cerr << myname(config) << " : seeding the RNG with value " << config.seed << endl;
-      srandom(config.seed);
+      srand(config.seed);
     }
     
     const int Ntr = trdata.size();
