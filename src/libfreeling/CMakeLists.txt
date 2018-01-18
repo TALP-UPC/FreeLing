@@ -11,8 +11,6 @@ if (WIN32)
   # compiler defintions for windows
   add_definitions(-DFL_EXPORTS=1 -D_CRT_SECURE_NO_WARNINGS=1 -D_CRT_NONSTDC_NO_DEPRECATE=1 -DNOMINMAX -DNDEBUG=1 -D_WINDOWS=1 -D_USRDLL=1 -DLIBFREELING_EXPORTS=1 -DWIN32=1)
   list(APPEND freeling_SRCS windll.cc)
-  SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/src/libfreeling)
-  SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/src/libfreeling)
 endif()
 
 # Force to always compile with Wall

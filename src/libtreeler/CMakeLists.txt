@@ -8,8 +8,8 @@ include_directories( ${ZLIB_INCLUDE_DIRS} )
 if (WIN32)
   list(APPEND treeler_SRC treeler/base/windll.cc)
   add_definitions(-DTREELER_EXPORTS=1 -D_CRT_SECURE_NO_WARNINGS=1 -DNDEBUG=1 -D_WINDOWS=1 -DWIN32=1 -DNOMINMAX=1)
-  SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/src/libtreeler)
-  SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/src/libtreeler)
+  #SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/src/libtreeler)
+  #SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/src/libtreeler)
 endif()
 
 # Force to always compile with Wall

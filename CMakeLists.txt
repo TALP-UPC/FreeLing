@@ -6,8 +6,6 @@ set(VERSION "4.1")
 set(PACKAGE_STRING "\"${PACKAGE_NAME} ${VERSION}\"")
 set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib") # Needed to find libraries if not installed in system path
 
-#set(CMAKE_BUILD_TYPE CACHE STRING "Release" FORCE)
-
 # Add compiler definitions
 add_definitions(-DPACKAGE_STRING=${PACKAGE_STRING} -DVERSION=${VERSION})
 
@@ -21,6 +19,18 @@ option(TRACES "Enable traces" OFF)
 option(WARNINGS "Enable warnings" ON)
 option(XPRESSIVE "Xpressive regex" OFF)
 option(EMBEDDINGS "Get word Embeddings" OFF)
+
+# Check for dependencies
+find_package(ZLIB REQUIRED)
+find_package(Boost COMPONENTS regex system filesystem thread program_options REQUIRED)
+# Icu component names differ in windows
+if (WIN32)
+  find_package(ICU COMPONENTS dt in uc REQUIRED)
+else()
+  find_package(ICU COMPONENTS data i18n uc REQUIRED)
+  find_package(Threads REQUIRED)
+endif()
+
 
 # All sources are under this directory
 add_subdirectory(src)
@@ -37,27 +47,27 @@ SET(languages "as;ca;cs;cy;de;en;es;fr;gl;hr;it;nb;pt;ru;sl")
 SET(variants "es/es-old;es/es-ar;es/es-cl;ca/balear;ca/valencia")      
 
 if (WIN32)
-  # !!!!!!!!!!!!!!!! ARA FALLA EL BOOST!! 
-  install(CODE "set(ENV{PATH} ${Boost_LIBRARY_DIRS};${ZLIB_INCLUDE_DIRS}/../bin;${ICU_INCLUDE_DIRS}/../bin64;${CMAKE_BINARY_DIR}/src/libfreeling;${CMAKE_BINARY_DIR}/src/libfoma;${CMAKE_BINARY_DIR}/src/libtreeler)")
+  # set library path for installation programs
+  install(CODE "set(ENV{PATH} \"${Boost_LIBRARY_DIRS};${ICU_INCLUDE_DIRS}/../bin64;${ZLIB_INCLUDE_DIRS}/../bin;${CMAKE_BINARY_DIR}/src/libfreeling;${CMAKE_BINARY_DIR}/src/libfoma;${CMAKE_BINARY_DIR}/src/libtreeler;\")")
 endif()
 
 foreach (lg ${languages})
   # build dictionary for each language
   if (EXISTS ${CMAKE_SOURCE_DIR}/data/${lg}/dictionary/header)
-    install(CODE "message(STATUS \"  Creating ${lg} dictionary...\")" )
+    install(CODE "message(STATUS \"Creating ${lg} dictionary...\")" )
     install(CODE "execute_process(COMMAND ${CMAKE_BINARY_DIR}/src/utilities/build-dict ${CMAKE_SOURCE_DIR}/data/${lg}/dictionary/header ${CMAKE_SOURCE_DIR}/data/${lg}/dictionary/entries  OUTPUT_FILE ${CMAKE_INSTALL_PREFIX}/share/freeling/${lg}/dicc.src)" )
   endif()
   
   # build phonetic dictionary
   if (EXISTS ${CMAKE_SOURCE_DIR}/data/${lg}/alternatives-phon.dat)
-    install(CODE "message(STATUS \"  Creating ${lg} phonetic dictionary...\")" )
+    install(CODE "message(STATUS \"-- Creating ${lg} phonetic dictionary...\")" )
     install(CODE "execute_process(COMMAND ${CMAKE_BINARY_DIR}/src/utilities/dicc2phon ${CMAKE_INSTALL_PREFIX}/share/freeling/${lg}/dicc.src ${CMAKE_INSTALL_PREFIX}/share/freeling/${lg}/alternatives-phon.dat)" )
   endif()
 
   foreach (variant ${variants})
     # for variants matching this language, build specific dictionary and multiwords file
     if (${variant} MATCHES "^${lg}/")
-      install(CODE "message(STATUS \"  Creating ${variant} dictionary...\")" )
+      install(CODE "message(STATUS \"-- Creating ${variant} dictionary...\")" )
       install(CODE "file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/share/freeling/${variant})")      
       install(CODE "execute_process(COMMAND ${CMAKE_BINARY_DIR}/src/utilities/build-dict ${CMAKE_SOURCE_DIR}/data/${variant}/dictionary/header ${CMAKE_SOURCE_DIR}/data/${lg}/dictionary/entries ${CMAKE_SOURCE_DIR}/data/${variant}/dictionary/entries ${CMAKE_SOURCE_DIR}/data/${variant}/remove OUTPUT_FILE ${CMAKE_INSTALL_PREFIX}/share/freeling/${variant}/dicc.src)" )
       if (EXISTS ${CMAKE_SOURCE_DIR}/data/${variant}/locucions.dat)

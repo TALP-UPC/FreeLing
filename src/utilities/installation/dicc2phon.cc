@@ -95,7 +95,7 @@ void read_config(const wstring &altsFile, wstring &phdic, wstring &phrules) {
 int main(int argc, char *argv[]){
 
   util::init_locale(L"default");
-		
+  
   if (argc!=3) { 
     wcout << L"Usage: "<< util::string2wstring(argv[0]) << " dicc.src alternatives-phon" << endl; 
     exit(1);

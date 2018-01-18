@@ -1,0 +1,137 @@
+COMPILING FREELING IN Ms-Windows
+================================
+
+This file describes how to build FreeLing from source using MS Visual Studio.
+
+Unless you have a special interest in compiling FreeLing, installing it from a binary package is recommended.
+Following the procedure described here makes sense only in one of the following cases:
+   - You want to use a development FreeLing version for which there is no binary package yet
+   - You want to modify or extend FreeLing
+
+
+PRELIMINARIES
+=============
+
+1.- Install MSVC (MS Visual Studio, with C++ compiler)
+
+2.- Install CMake (3.7 or newer) using installer available at https://cmake.org/download/
+
+3.- Decide where will you install FreeLing (e.g. C:\FreeLing, C:\Program Files\FreeLing, etc)
+    Anything we install in this README will go under this folder.
+    From now on, we will refer to this folder as %FLINSTALL%
+
+4.- Find out which version of MSVC you are using, and which is the identifier that
+    CMake uses for it. For example, MSVC 2015 is "Visual Studio 14 2015", and 
+    MSVC 2017 is "Visual Studio 15 2017".
+      Also, find out whether your system is 32 or 64 bits. Most modern windows are 64bits,
+    but you can check that in "Control Panel" -> "System & Security" -> "System" and look
+    for "System type".
+    
+
+INSTALL DEPENDENCIES
+====================
+
+5.- Install ZLIB
+     a.- Download zlib source from http://www.zlib.net/
+     b.- Unzip the source file
+     c.- From the start menu, open a "Visual Studio x64 Native Tools Command Prompt" 
+         (or "x86" if your system is 32 bits)
+     d.- change to the folder where you unzipped the source:
+     e.- Execute:
+           mkdir build
+           cd build
+           cmake .. -DCMAKE_INSTALL_PREFIX=%FLINSTALL%\dependencies\zlib -G "NMake Makefiles"
+           nmake install
+
+6.- Install Boost and ICU
+     The easiest way to install these dependencies is to get precompiled binary packages.
+
+     a) Get boost binaries from: https://www.npcglib.org/~stathis/blog/precompiled-boost/
+        Select a package that matches your MSVC version (2014, 2015, ...) and architecture (32/64 bits)
+
+     b) Uncompress boost package in %FLINSTALL%\dependencies 
+
+     c) Each boost binary package has associated an ICU version, which is mentioned in the
+        rightmost column of the table ("Notes").
+        Follow the link to the associated ICU version, and download the package. 
+        Make sure you are getting the right version (you may need to go 
+        to "past builds" page https://www.npcglib.org/~stathis/blog/precompiled-icu-past/)
+        Also, make sure the package matches your MSVC version and architecture.
+    
+     d) Uncompress icu package in %FLINSTALL%\dependencies.
+
+        The content of your %FLINSTALL% folder should look like (version numbers may differ):
+
+          %FLINSTALL%\dependencies\zlib
+                                  \boost64-1.61.0-vs2015
+                                  \icu-57.1-vs2015
+ 
+        You can keep these names or change them to "boost" and "icu".
+	(From now on we will assume you changed them, so if you keep the full names, you'll need
+	to change some paths in the commands described in step 7 below).
+	Now you folder looks like:
+
+          %FLINSTALL%\dependencies\zlib
+                                  \boost
+                                  \icu
+
+BUILD FREELING
+==============
+
+7.- Compile FreeLing
+     a.- Download FreeLing source zipfile from GitHub (or clone git repository)
+     b.- Unzip the source file 
+     c.- Open a "Visual Studio x64 Native Tools Command Prompt" from the start menu
+     d.- Change to the folder where you unzipped the source
+     e.- Execute
+           mkdir build
+           cd build
+           cmake .. -DCMAKE_INSTALL_PREFIX=%FLINSTALL%\freeling -DZLIB_INCLUDE_DIR=%FLINSTALL%\dependencies\zlib\include -DZLIB_LIBRARY=%FLINSTALL%\dependencies\zlib\lib\zlibd.lib -DBOOST_ROOT=%FLINSTALL%\dependencies\boost -DICU_ROOT=%FLINSTALL%\dependencies\icu -G "NMake Makefiles"
+           nmake install
+
+      With this, you are done. Your %FLINSTALL% folder should look like:
+
+          %FLINSTALL%\dependencies\zlib
+                     |            \boost
+                     |            \icu
+                     \freeling\bin
+                              \include
+                              \lib
+                              \share
+
+      If you want a clean re-install, you can delete folder %FLINSTALL%\freeling, 
+      and run again "msbuild INSTALL.vcxproj" from the "build" folder.
+
+      If you want a clean re-build, you can delete the "build" folder, and repeat the 
+      whole procedure.
+
+
+8.- Execute FreeLing
+
+      a.- Execute "analyze.bat" file:
+           %FLINSTALL%\freeling\bin\analyze.bat -f en.cfg < myfile.txt
+
+          "analyze.bat" behaves just the Linux "analyze" script. Check FreeLing
+          manual (https://talp-upc.gitbooks.io/freeling-user-manual/),
+          section "Using the analyze script", to find out the parameters it accepts.
+
+          Note that the input text must be UTF8 encoded.
+	  You can provide input from the terminal and end it with ctl-Z. Take into account
+	  windows command prompt is not UTF8, so you will find problems if you use non-ascii 
+	  characters.
+
+
+OBSERVATIONS
+============
+
+  * Installing dependencies in different folders
+
+    You can install zlib, boost, and icu anywhere (that is, they don't HAVE to
+    be in %FLINSTALL%\dependencies).
+    If you install them somewhere else, you just need to set the right paths for
+    variables ZLIB_INCLUDE_DIR, ZLIB_LIBRARY, BOOST_ROOT, and ICU_ROOT in the "cmake"
+    command in step 7.
+
+    If you plan to use the "analyzer.bat" script, you'll need to edit it and adjust
+    the paths to those libraries too.
+    
