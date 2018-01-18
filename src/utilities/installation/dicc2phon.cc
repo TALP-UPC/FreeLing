@@ -51,6 +51,10 @@
 #include "freeling/morfo/configfile.h"
 #include "freeling/morfo/phonetics.h"
 
+#if defined WIN32 
+#include "iso646.h"
+#endif
+
 using namespace std;
 using namespace freeling;
 
@@ -100,7 +104,7 @@ int main(int argc, char *argv[]){
   // get phonetic rules file name and target dictionary name
   wstring dic_file, ph_file;
   read_config(util::string2wstring(argv[2]), dic_file, ph_file);
-  
+
   // create phonetic encoder
   phonetics ph(ph_file);
   

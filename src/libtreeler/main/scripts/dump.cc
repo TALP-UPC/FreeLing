@@ -159,7 +159,7 @@ namespace treeler {
       
       config.fidx_type = "";
       options.get("fidx", config.fidx_type);       
-    };
+    }
 
 
     

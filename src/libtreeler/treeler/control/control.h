@@ -60,8 +60,7 @@
 
 namespace treeler {
   namespace control {
-
-  };
+  }
 }
 
 #endif

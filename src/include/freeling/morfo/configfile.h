@@ -35,6 +35,8 @@
 #include <map>
 #include <set>
 
+#include "freeling/windll.h"
+
 namespace freeling {
 
   //////////////////////////////////////////
@@ -44,7 +46,7 @@ namespace freeling {
   ///
   ///////////////////////////////////////////
 
-  class config_file {
+  class WINDLL config_file {
 
   private:
     std::map<std::wstring,int> sectionsopen, sectionsclose;

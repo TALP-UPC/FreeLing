@@ -90,8 +90,6 @@ namespace freeling {
     relaxcor_fex_abs(const relaxcor_model &m);
     virtual ~relaxcor_fex_abs();
 
-    static const unsigned int INFINITE = 100000;
-
   protected:
     const relaxcor_model &model;
     unsigned int fid(const std::wstring &) const;

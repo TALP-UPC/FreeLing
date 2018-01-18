@@ -118,8 +118,8 @@ namespace freeling {
       static const_iterator get_rightmost_leaf(const_iterator);
 
       /// copy given tree and add it as a child
-      void add_child(const tree<T>& t, bool last=true);
-      void add_child(const const_iterator &p, bool last=true);
+      void add_child(const tree<T>& t, bool back=true);
+      void add_child(const const_iterator &p, bool back=true);
       /// add given tree and as a child reordering structure. NO COPIES MADE.
       void hang_child(tree<T>& t, tree_sibling_iterator<T> where=tree_sibling_iterator<T>(NULL));
       void hang_child(preorder_iterator &p, tree_sibling_iterator<T> where=tree_sibling_iterator<T>(NULL));
@@ -409,20 +409,20 @@ namespace freeling {
   /////////////////////////////////////////////
   /// copy given tree and add it as a child
 
-  template<class T> void tree<T>::add_child(const tree<T>& t, bool last) {
+  template<class T> void tree<T>::add_child(const tree<T>& t, bool back) {
     tree<T> *nt = new tree<T>(t);  // make a copy of given tree
     // hang the copy under 'this'
-    if (last) this->hang_child(*nt,this->sibling_end());  
+    if (back) this->hang_child(*nt,this->sibling_end());  
     else this->hang_child(*nt,this->sibling_begin()); 
   }
 
   /////////////////////////////////////////////
   /// copy tree under given iterator and add it as a child
 
-  template<class T> void tree<T>::add_child(const typename tree<T>::const_iterator &p, bool last) {
+  template<class T> void tree<T>::add_child(const typename tree<T>::const_iterator &p, bool back) {
     tree<T> *nt = new tree<T>(p);  // make a copy of given tree
     // hang the copy under 'this'
-    if (last) this->hang_child(*nt,this->sibling_end());  
+    if (back) this->hang_child(*nt,this->sibling_end());  
     else this->hang_child(*nt,this->sibling_begin()); 
   }
 
@@ -608,7 +608,7 @@ namespace freeling {
       tree_sibling_iterator<T> sibling_rend();
 
       /// copy given tree and add it as a child
-      void add_child(const tree<T>& t, bool last=true);
+      void add_child(const tree<T>& t, bool back=true);
       /// add given tree and as a child reordering structure. NO COPIES MADE.      
       void hang_child(tree<T>& t, tree_sibling_iterator<T> where=tree_sibling_iterator<T>(NULL));
       void hang_child(basic_nonconst_tree_iterator &p, tree_sibling_iterator<T> where=tree_sibling_iterator<T>(NULL));
@@ -785,7 +785,7 @@ namespace freeling {
   template<class T> tree_sibling_iterator<T> basic_nonconst_tree_iterator<T>::sibling_end() {return this->tr->sibling_end();}
   template<class T> tree_sibling_iterator<T> basic_nonconst_tree_iterator<T>::sibling_rbegin() {return this->tr->sibling_rbegin();}
   template<class T> tree_sibling_iterator<T> basic_nonconst_tree_iterator<T>::sibling_rend() {return this->tr->sibling_rend();}
-  template<class T> void basic_nonconst_tree_iterator<T>::add_child(const tree<T>& t,bool last) {this->tr->add_child(t,last);}
+  template<class T> void basic_nonconst_tree_iterator<T>::add_child(const tree<T>& t,bool back) {this->tr->add_child(t,back);}
   template<class T> void basic_nonconst_tree_iterator<T>::hang_child(tree<T>& t, tree_sibling_iterator<T> where) {this->tr->hang_child(t,where);}
   template<class T> void basic_nonconst_tree_iterator<T>::hang_child(basic_nonconst_tree_iterator<T>& p, tree_sibling_iterator<T> where) {this->tr->hang_child(*p.tr,where);}
 

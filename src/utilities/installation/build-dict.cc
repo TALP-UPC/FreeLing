@@ -1,9 +1,14 @@
+
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
 #include <map>
 #include <set>
 #include <boost/filesystem.hpp>
+
+#if defined WIN32 
+#include "iso646.h"
+#endif
 
 using namespace std;
 namespace fs = boost::filesystem;

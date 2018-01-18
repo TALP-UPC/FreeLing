@@ -48,12 +48,9 @@ namespace treeler {
   
   using namespace control;
   
-  ScriptDecode::ScriptDecode() : Script("decode")
-  {};
+  ScriptDecode::ScriptDecode() : Script("decode") {}
   
-  
-  ScriptDecode::~ScriptDecode() 
-  {};
+  ScriptDecode::~ScriptDecode() {}
   
   typedef control::ModelSelector<ScriptDecode, TAG1, DEP1, DEP2> GenericModel; 
 

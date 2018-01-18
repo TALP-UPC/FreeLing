@@ -589,6 +589,7 @@ int main (int argc, char **argv) {
     anlz->set_current_invoke_options(cfg->analyzer_invoke_options);
   }
 
+
   if (ServerMode) {
     wcerr<<L"SERVER: Analyzers loaded."<<endl;
     InitServer(cfg);

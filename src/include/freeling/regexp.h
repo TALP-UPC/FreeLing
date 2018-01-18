@@ -43,10 +43,6 @@
 #ifndef _FL_REGEXP_H_
 #define _FL_REGEXP_H_
 
-#if defined USE_XPRESSIVE_REGEX && defined USE_BOOST_LOCALE
-#error boost::xpressive does not support boost::locale. USE_XPRESSIVE_REGEX and USE_BOOST_LOCALE can not be defined simultaneously.
-#endif
-
 #if defined USE_XPRESSIVE_REGEX
 #include <boost/xpressive/xpressive.hpp>
 #else

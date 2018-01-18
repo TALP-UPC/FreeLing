@@ -36,8 +36,8 @@ namespace freeling {
     //-------------------------------
     // Evaluation weights
     //-------------------------------
-    static constexpr float WORD_EMBEDDINGS_WEIGHT = 0.3;
-    static constexpr float WORD_DISTANCE_WEIGHT   = 0.7;
+    static constexpr float WORD_EMBEDDINGS_WEIGHT = 0.3f;
+    static constexpr float WORD_DISTANCE_WEIGHT   = 0.7f;
 
     // chat language abreviations
     std::map<std::wstring, std::wstring> chat_lang;

@@ -3,15 +3,21 @@ file(GLOB_RECURSE treeler_SRC
 treeler/base/token.cc treeler/base/fidx.cc treeler/base/dictionary.cc treeler/util/options.cc treeler/util/char-utils.cc treeler/util/timer.cc treeler/io/io-basic.cc treeler/control/factory-base.cc treeler/dep/part-dep1.cc treeler/dep/parser-projdep1.cc treeler/dep/part-dep2.cc treeler/dep/part-dep2-index.cc treeler/dep/parser-projdep2.cc treeler/dep/pos-symbols.cc treeler/dep/dependency_parser.cc treeler/tag/part-tag.cc treeler/tag/tuple-seq.cc treeler/tag/io-tag.cc treeler/class/class-basic.cc treeler/class/io-class.cc treeler/class/fgen-class.cc treeler/class/model-mc.cc treeler/srl/part-srl0.cc treeler/srl/simple-parser.cc treeler/srl/srl_parser.cc 
 )
 
+include_directories( ${ZLIB_INCLUDE_DIRS} )
 
 if (WIN32)
   list(APPEND treeler_SRC treeler/base/windll.cc)
+  add_definitions(-DTREELER_EXPORTS=1 -D_CRT_SECURE_NO_WARNINGS=1 -DNDEBUG=1 -D_WINDOWS=1 -DWIN32=1 -DNOMINMAX=1)
+  SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/src/libtreeler)
+  SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/src/libtreeler)
 endif()
 
-find_package(ZLIB REQUIRED)
-include_directories( ${ZLIB_INCLUDE_DIRS} )
-
-add_definitions(-DTREELER_EXPORTS=1 -D_CRT_SECURE_NO_WARNINGS=1 -DNDEBUG=1 -D_WINDOWS=1 -DWIN32=1 -DNOMINMAX=1)
+# Force to always compile with Wall
+if(MSVC)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W3")
+elseif(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-sign-compare -pedantic")
+endif()
 
 add_library(treeler ${treeler_SRC})
 set_target_properties(treeler PROPERTIES LINKER_LANGUAGE CXX)

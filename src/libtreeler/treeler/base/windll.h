@@ -1,5 +1,5 @@
 
-#if defined WIN32 || defined WIN64
+#ifdef WIN32
 #  pragma warning(disable : 4251)
 #  pragma warning(disable : 4275)
 #endif
@@ -8,7 +8,7 @@
 #ifndef __WINDLL_H__
 #define __WINDLL_H__
 
-#if defined WIN32 || defined WIN64 
+#ifdef WIN32
   #define getcwd _getcwd
   #include <iso646.h>
 

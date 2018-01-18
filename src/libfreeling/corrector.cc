@@ -212,12 +212,12 @@ namespace freeling {
         }
         
         // sum alternatives, set probability
-        double sum = 0.0;
+        float sum = 0.0;
         for (unsigned int i = 0; i < alts.size(); i++) {
-          sum += 100.0/alts[i].get_distance();
+          sum += 100.0f/alts[i].get_distance();
         }
         for (unsigned int i = 0; i < alts.size(); i++) {
-          double inv_dist = 100.0/alts[i].get_distance();
+          float inv_dist = 100.0f/alts[i].get_distance();
           alts[i].set_probability(inv_dist/sum);
         }
         
@@ -318,7 +318,7 @@ namespace freeling {
 	    best_solutions[index] = aux;
 	    
             // swap score
-            int aux_value           = best_results[index - 1];
+            float aux_value           = best_results[index - 1];
             best_results[index - 1] = best_results[index];
             best_results[index]     = aux_value;
             --index;
@@ -409,7 +409,7 @@ namespace freeling {
           embeddings_result += wordVec->cos_similarity(first_word, second_word);
         }
       }
-      embeddings_result = (float) embeddings_result / (float) (alternatives.size() - 1);
+      embeddings_result = embeddings_result / (alternatives.size() - 1);
       break;
     }
     
@@ -422,11 +422,8 @@ namespace freeling {
           embeddings_result += wordVec->cos_similarity(first_word, second_word);
         }
       }
-      float sum = alternatives.size()*(alternatives.size()/2);
-      if (alternatives.size() % 2 != 0) {
-        sum += (alternatives.size() + 1)/2.0;
-      }
-      embeddings_result = (float) embeddings_result / (float) sum;
+      int sum = alternatives.size()*(alternatives.size()-1)/2;
+      embeddings_result = embeddings_result / sum;
       break;
     }
     
@@ -438,15 +435,11 @@ namespace freeling {
         for (unsigned int j = i + 1; j < alternatives.size(); j++) {
           wstring second_word = alternatives[j].second[current_state[j]].get_form();
           float edit_probability   = alternatives[j].second[current_state[j]].get_probability()*first_prob;
-          embeddings_result += ((1.0 + wordVec->cos_similarity(first_word, second_word))/2.0)*edit_probability;
+          embeddings_result += ((1.0f + wordVec->cos_similarity(first_word, second_word))/2)*edit_probability;
         }
       }
-      
-      float sum = alternatives.size()*(alternatives.size()/2);
-      if (alternatives.size() % 2 != 0) {
-        sum += (alternatives.size() + 1)/2.0;
-      }
-      embeddings_result = (float) embeddings_result / (float) sum;
+      int sum = alternatives.size()*(alternatives.size()-1)/2;
+      embeddings_result = embeddings_result / sum;
       return embeddings_result;
       break;
     }
@@ -472,11 +465,11 @@ namespace freeling {
               }
             }
           }          
-          sum_vector = sum_vector * (1.0/sum_counter);
+          sum_vector = sum_vector * (1.0f/sum_counter);
           embeddings_result += norm_vector::cos_similarity(first_vec, sum_vector);
         }
       }
-      embeddings_result = (float) embeddings_result / (float) alternatives.size();
+      embeddings_result = embeddings_result / alternatives.size();
       break;
     }
     
@@ -484,7 +477,7 @@ namespace freeling {
       for (unsigned int i = 0; i < alternatives.size(); i++) {
         // get vector value of every other word, compare
         wstring first_word = alternatives[i].second[current_state[i]].get_form();
-        double edit_probability  = alternatives[i].second[current_state[i]].get_probability();
+        float edit_probability  = alternatives[i].second[current_state[i]].get_probability();
         freeling::norm_vector first_vec = wordVec->get_vector(first_word);
         if (first_vec.empty()) 
           embeddings_result += -1;
@@ -507,7 +500,7 @@ namespace freeling {
           embeddings_result += norm_vector::cos_similarity(first_vec, sum_vector) * edit_probability;
         }
       }
-      embeddings_result = (float) embeddings_result / (float) alternatives.size();
+      embeddings_result = embeddings_result / alternatives.size();
       return embeddings_result;
       break;
     }
@@ -515,7 +508,7 @@ namespace freeling {
     default: break;
     } 
     
-    embeddings_result = (embeddings_result + 1.0)/2.0; // normalization to [0, 1]
+    embeddings_result = (embeddings_result + 1.0f)/2.0f; // normalization to [0, 1]
     embeddings_result = embeddings_result*WORD_EMBEDDINGS_WEIGHT;
     distance_result = distance_result*WORD_DISTANCE_WEIGHT;
     return (embeddings_result + distance_result);
@@ -589,14 +582,14 @@ namespace freeling {
   void corrector::genetic_algorithm(const alt_t &alternatives, unsigned int num_incorrect_words, vector<vector<unsigned int>> &best_solutions) {
     // genetic algorithm basic variables
     // 2 may be changed to keep track of more generations. 2 is the minimum required, the max would be GEN_ITERATIONS
-    gen_states = vector<vector<pair<float, unsigned int*>>>(2);
+    vector<vector<pair<float, vector<unsigned int>>>> gen_states(2);
     for (unsigned int i = 0; i < gen_states.size(); i++) {
-      gen_states[i] = vector<pair<float, unsigned int*>>(GEN_POPULATION);
+      gen_states[i] = vector<pair<float, vector<unsigned int>>>(GEN_POPULATION);
       for (unsigned int j = 0; j < gen_states[i].size(); j++) {
-        gen_states[i][j] = make_pair(-1.0, new unsigned int[num_incorrect_words]);
+        gen_states[i][j] = make_pair(-1.0f, vector<unsigned int>(num_incorrect_words));
       }
     }
-    
+
     current_generation = 0;
     vector<float> best_results(STORED_SOLUTIONS, -1.0);
     unsigned int num_states_evaluated = 0;
@@ -652,7 +645,7 @@ namespace freeling {
 	    best_solutions[index] = aux;
 	                
             // swap score
-            int aux_value           = best_results[index - 1];
+            float aux_value           = best_results[index - 1];
             best_results[index - 1] = best_results[index];
             best_results [index]    = aux_value;
             --index;
@@ -710,13 +703,6 @@ namespace freeling {
     TRACE(4, L"Total mutations:      " << total_mutations);
     TRACE(4, L"Num states evaluated: " << num_states_evaluated);
     
-    // free memory
-    for (unsigned int individual = 0; individual < GEN_POPULATION; individual++) {
-      for (unsigned int generation = 0; generation < gen_states.size(); generation++) {
-        if (gen_states[generation][individual].second != NULL)
-          delete[] gen_states[generation][individual].second;
-      }
-    }
   }
   
   

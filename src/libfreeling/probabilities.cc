@@ -49,11 +49,6 @@ namespace freeling {
   ///////////////////////////////////////////////////////////////
 
   probabilities::probabilities(const std::wstring &probFile, double Threshold) : RE_PunctNum(RE_FZ) {
-    wstring line;
-    wstring key,clas,frq,tag,ftags;
-    map<wstring,double>::iterator k;
-    map<wstring,double> temp_map;
-    double probab, sumUnk, sumSing, count;
 
     activate_guesser=true;
 
@@ -83,16 +78,17 @@ namespace freeling {
     if (not cfg.open(probFile))
       ERROR_CRASH(L"Error opening file "+probFile);
 
-    sumUnk=0; sumSing=0; long_suff=0;
+    wstring ftags;
+    double sumUnk=0; double sumSing=0;
+    long_suff=0;
+    wstring line;
     while (cfg.get_content_line(line)) {
     
-      wistringstream sin;
-      sin.str(line);
+      wistringstream sin(line);
 
       switch (cfg.get_section()) {
 
       case LEMMA_PREF: { // reading lemma preferences
-        wistringstream sin(line);
         wstring lem1,lem2;
         sin>>lem1>>lem2;
         lemma_prefs.insert(lem1+L"#"+lem2);
@@ -100,7 +96,6 @@ namespace freeling {
       } 
 
       case POS_PREF: { // reading pos preferences
-        wistringstream sin(line);
         wstring pos1,pos2;
         sin>>pos1>>pos2;
         pos_prefs.insert(pos1+L"#"+pos2);
@@ -109,8 +104,9 @@ namespace freeling {
 
       case SINGLE_TAG: {
         // reading Single tag frequencies
+	wstring key,frq;
         sin>>key>>frq;
-        probab=util::wstring2double(frq);
+        double probab=util::wstring2double(frq);
         single_tags.insert(make_pair(key,probab));
         sumSing += probab;
         break;
@@ -118,10 +114,11 @@ namespace freeling {
         
       case CLASS_TAG: {
         // reading tag class frequencies
-        temp_map.clear();
+	map<wstring,double> temp_map;
+	wstring key,tag,frq;
         sin>>key;
         while (sin>>tag>>frq) {
-          probab=util::wstring2double(frq);
+          double probab = util::wstring2double(frq);
           temp_map.insert(make_pair(tag,probab));
         }
         class_tags.insert(make_pair(key,temp_map));
@@ -130,10 +127,11 @@ namespace freeling {
 
       case FORM_TAG: {
         // reading form tag frequencies
-        temp_map.clear();
+	map<wstring,double> temp_map;
+	wstring key,clas,tag,frq;
         sin>>key>>clas;
         while (sin>>tag>>frq) {
-          probab=util::wstring2double(frq);
+          double probab = util::wstring2double(frq);
           temp_map.insert(make_pair(tag,probab));
         }
         lexical_tags.insert(make_pair(key,temp_map));
@@ -142,8 +140,9 @@ namespace freeling {
 
       case UNKNOWN: {
         // reading tags for unknown words
+	wstring tag,frq;
         sin>>tag>>frq;
-        probab=util::wstring2double(frq);
+        double probab = util::wstring2double(frq);
         sumUnk += probab;
         unk_tags.insert(make_pair(tag,probab));
         break;
@@ -151,19 +150,21 @@ namespace freeling {
 
       case THEETA: {
         // reading theeta parameter
+	wstring frq;	
         sin>>frq;
-        theeta=util::wstring2double(frq);
+        theeta = util::wstring2double(frq);
         break;
       }
 
       case SUFFIXES: {
         // reading suffixes for unknown words
-        temp_map.clear();
+	map<wstring,double> temp_map;
+	wstring key,frq,tag;
         sin>>key>>frq;
         long_suff = (key.length()>long_suff ? key.length() : long_suff);
-        count = util::wstring2double(frq);
+        double count = util::wstring2double(frq);
         while (sin>>tag>>frq) {
-          probab=util::wstring2double(frq)/count;
+          double probab=util::wstring2double(frq)/count;
           temp_map.insert(make_pair(tag,probab));
         }
         unk_suffs.insert(make_pair(key,temp_map));
@@ -172,6 +173,7 @@ namespace freeling {
 
       case SUFF_BIASS: {
         // reading BiassSuffixes parameter
+	wstring frq;
         sin>>frq;
         BiassSuffixes=util::wstring2double(frq);
         break;
@@ -179,6 +181,7 @@ namespace freeling {
 
       case LAMBDA_LEX: {
         // reading LidstoneLambdaLexical parameter
+	wstring frq;
         sin>>frq;
         LidstoneLambdaLexical=util::wstring2double(frq);
         break;
@@ -186,6 +189,7 @@ namespace freeling {
 
       case LAMBDA_CLASS: {
         // reading LidstoneLambdaClass parameter
+	wstring frq;
         sin>>frq;
         LidstoneLambdaClass=util::wstring2double(frq);
         break;
@@ -203,10 +207,10 @@ namespace freeling {
     cfg.close(); 
     
     // normalizing the probabilities in unk_tags map
-    for (k=unk_tags.begin(); k!=unk_tags.end(); k++)
+    for (map<wstring,double>::iterator k=unk_tags.begin(); k!=unk_tags.end(); k++)
       k->second = k->second / sumUnk;
 
-    for (k=single_tags.begin(); k!=single_tags.end(); k++) 
+    for (map<wstring,double>::iterator k=single_tags.begin(); k!=single_tags.end(); k++) 
       k->second = k->second / sumSing;
 
     // load tagset description

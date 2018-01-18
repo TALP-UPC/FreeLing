@@ -123,15 +123,15 @@ namespace freeling {
 
     /// Private function to re-arrange sentence when match found
     virtual sentence::iterator BuildMultiword(sentence &se, sentence::iterator start, sentence::iterator end, int fs, bool &built, T *st) const {
-      sentence::iterator i;
-      std::list<word> mw;
-      std::wstring form;
     
       TRACE(3,L"Building multiword");
         
       // ignore initial tokens, if needed (e.g. in_1982 -> 1982)
       for (int i=0; i<((automat_status*)st)->shiftbegin && start!=end; i++) start++;
     
+      sentence::iterator i;
+      std::wstring form;
+      std::list<word> mw;
       for (i=start; i!=end; i++){
         mw.push_back(*i);           
         form += i->get_form()+L"_";

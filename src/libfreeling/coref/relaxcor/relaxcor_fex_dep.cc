@@ -36,8 +36,9 @@
 //////////////////////////////////////////////////////////////////
 
 #include <string>
-#include <stdlib.h> // abs
+#include <cstdlib> // abs
 #include <ctime>
+#include <climits> // INT_MAX
 
 #include "freeling/morfo/traces.h"
 #include "freeling/morfo/util.h"
@@ -903,14 +904,14 @@ namespace freeling {
 
   int relaxcor_fex_dep::dist_in_phrases(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex) {
 
-    if (m1.get_n_sentence() != m2.get_n_sentence()) return INFINITE;
+    if (m1.get_n_sentence() != m2.get_n_sentence()) return INT_MAX;
     if (nested(m1,m2,fcache,fex) or nested(m2,m1,fcache,fex)) return 0;
       
     list<pair<int,wstring> > args1 = util::wstring2pairlist<int,wstring>(get_arguments(m1,fcache,fex),L":",L"/");
     list<pair<int,wstring> > args2 = util::wstring2pairlist<int,wstring>(get_arguments(m2,fcache,fex),L":",L"/");
-    if (args1.empty() or args2.empty()) return INFINITE;
+    if (args1.empty() or args2.empty()) return INT_MAX;
       
-    unsigned int mindif=INFINITE;
+    unsigned int mindif = INT_MAX;
     list<pair<int,wstring>>::const_iterator p1=args1.begin();
     list<pair<int,wstring>>::const_iterator p2=args2.begin();
       

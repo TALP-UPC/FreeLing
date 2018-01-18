@@ -227,8 +227,7 @@ namespace treeler {
     }
     
     return ret;
-  };
-
+  }
 
   template <typename FIdx, typename Val>
   void SparseParameters<FIdx,Val>::zero() {

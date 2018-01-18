@@ -6,6 +6,8 @@
 #include <list>
 #include <unordered_map>
 
+#include "freeling/windll.h"
+
 namespace freeling {
 
 
@@ -46,7 +48,7 @@ namespace freeling {
   ///  embeddings based on the original word2Vec implementation.
   ////////////////////////////////////////////////////////////////
 
-  class embeddings {
+  class WINDLL embeddings {
   private:
     /// size of the model vocabulary
     unsigned int vocabSize;

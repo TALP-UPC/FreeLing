@@ -6,6 +6,10 @@
 #include "freeling/morfo/util.h"
 #include "freeling/morfo/embeddings.h"
 
+#if defined WIN32 
+#include "iso646.h"
+#endif
+
 using namespace std;
 
 int main(int argc, char* argv[]){

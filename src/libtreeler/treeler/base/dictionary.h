@@ -69,7 +69,7 @@ namespace treeler {
    * \todo add support for gzipped dictionary files
    *
    */
-  class WINDLL Dictionary {
+  class Dictionary {
   public:
   Dictionary() 
     : _n(0), _id_unknowns(0), _str_unknowns("__UNK__"), _universal(false)
