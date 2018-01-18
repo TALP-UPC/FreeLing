@@ -1,4 +1,4 @@
-EXTRA_DIST = coref corrector dicc-management lang_ident train-nerc train-tagger
+EXTRA_DIST = coref corrector dicc-management embeddings lang_ident train-nerc train-tagger
 
 AUTOMAKE_OPTIONS = subdir-objects
 
@@ -11,7 +11,7 @@ dicc2phon_CPPFLAGS = $(CPPFLAGS) -I$(top_srcdir)/src/include/
 dicc2phon_LDADD = -lfreeling $(FREELING_DEPS)
 dicc2phon_LDFLAGS = $(LDFLAGS) -L$(top_srcdir)/src/libfreeling $(KALDI_LIBS)
 
-convert_model_SOURCES = corrector/convert_model.cc
+convert_model_SOURCES = embeddings/convert_model.cc
 convert_model_CPPFLAGS = $(CPPFLAGS) -I$(top_srcdir)/src/include
 convert_model_LDADD = -lfreeling $(FREELING_DEPS)
 convert_model_LDFLAGS = $(LDFLAGS) -L$(top_srcdir)/src/libfreeling $(KALDI_LIBS)

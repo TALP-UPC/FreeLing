@@ -26,9 +26,8 @@ target_link_libraries(dicc2phon freeling)
 add_executable(gz-cat installation/gz-cat.cc)
 target_link_libraries(gz-cat freeling ${Boost_LIBRARIES})
 
-
-# convert_model <- not "corrector" related, to be moved to somewhere else
-add_executable(convert_model corrector/convert_model.cc)
+# convert_model
+add_executable(convert_model embeddings/convert_model.cc)
 target_link_libraries(convert_model freeling)
 
 install(TARGETS convert_model
