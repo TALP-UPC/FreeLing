@@ -18,13 +18,19 @@ option(BUILD_TESTS "Build tests" OFF)
 option(TRACES "Enable traces" OFF)
 option(WARNINGS "Enable warnings" ON)
 option(XPRESSIVE "Xpressive regex" OFF)
-option(EMBEDDINGS "Get word Embeddings" OFF)
+option(EMBEDDINGS "Download word embeddings" OFF)
 
-# Check for dependencies
+# Check for dependencies -- ZLIB
 find_package(ZLIB REQUIRED)
+# Check for dependencies -- Boost
+if(BUILD_TESTS)
+  find_package(Boost COMPONENTS regex system filesystem thread program_options unit_test_framework REQUIRED)
+else()
 find_package(Boost COMPONENTS regex system filesystem thread program_options REQUIRED)
-# Icu component names differ in windows
+endif()
+# Check for dependencies -- ICU
 if (WIN32)
+  # Icu component names differ in windows
   find_package(ICU COMPONENTS dt in uc REQUIRED)
 else()
   find_package(ICU COMPONENTS data i18n uc REQUIRED)
