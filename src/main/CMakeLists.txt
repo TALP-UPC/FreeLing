@@ -30,8 +30,13 @@ target_link_libraries(threaded_analyzer freeling)
 
 
 # Install targets
-install(PROGRAMS sample_analyzer/analyze DESTINATION bin)
-install(FILES sample_analyzer/fl_initialize DESTINATION bin)
+if (WIN32)
+  install(PROGRAMS sample_analyzer/analyzer.bat DESTINATION bin)
+else()
+  install(PROGRAMS sample_analyzer/analyze DESTINATION bin)
+  install(PROGRAMS sample_analyzer/fl_initialize DESTINATION bin)
+endif()
+
 install(TARGETS analyzer threaded_analyzer analyzer_client
         RUNTIME DESTINATION bin
         LIBRARY DESTINATION lib
