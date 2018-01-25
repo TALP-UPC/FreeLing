@@ -37,7 +37,6 @@ else()
   find_package(Threads REQUIRED)
 endif()
 
-
 # All sources are under this directory
 add_subdirectory(src)
 

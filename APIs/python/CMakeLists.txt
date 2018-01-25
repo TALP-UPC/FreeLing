@@ -1,0 +1,24 @@
+
+FIND_PACKAGE(PythonLibs)
+INCLUDE_DIRECTORIES(${PYTHON_INCLUDE_PATH})
+
+find_library(FREELING freeling
+             PATHS ${FREELING_PREFIX}/lib)
+
+INCLUDE_DIRECTORIES(${FREELING_PREFIX}/include)
+	   
+## FALTA AFEGIR ELS INCLUDES DEL BOOST PQ ES PUGUI COMPILAR L'API EN WINDOWS
+
+SET_PROPERTY(SOURCE freeling_pythonAPI.i PROPERTY CPLUSPLUS ON)
+set (CMAKE_CXX_STANDARD 11)
+
+SWIG_ADD_LIBRARY(freeling TYPE SHARED LANGUAGE python SOURCES freeling_pythonAPI.i)
+if(WIN32)
+  SWIG_LINK_LIBRARIES(freeling ${FREELING_PREFIX}/bin/libfreeling.dll)
+else()
+  SWIG_LINK_LIBRARIES(freeling ${FREELING_PREFIX}/lib/libfreeling.so)
+endif()
+
+# This install the APIs in /usr/local/APIs... Need to think of a better place
+#install(FILES ${CMAKE_CURRENT_BINARY_DIR}/_freeling.so ${CMAKE_CURRENT_BINARY_DIR}/freeling.py
+#        DESTINATION APIs/python)
