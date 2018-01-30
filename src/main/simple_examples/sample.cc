@@ -234,7 +234,7 @@ void rec_PrintTree(parse_tree::iterator n, int depth) {
   wcout<<wstring(depth*3,' '); 
   if (n.num_children()==0) { 
     const word & w=n->get_word();
-    wcout<<L"<WORD form=\""<<w.get_form()<<L"\" lemma=\""<<w.get_lemma()<<L"\" tag=\""<<w.get_tag()<<" head=\""<<(n->is_head()? L"1" : L"0")<<"\" />"<<endl;
+    wcout<<L"<WORD form=\""<<w.get_form()<<L"\" lemma=\""<<w.get_lemma()<<L"\" tag=\""<<w.get_tag()<<"\" head=\""<<(n->is_head()? L"1" : L"0")<<"\" />"<<endl;
   }
   else { 
     wcout<<L"<CHUNK type=\""<<n->get_label()<<L"\" head=\""<<(n->is_head()? L"1" : L"0")<<"\">"<<endl;
