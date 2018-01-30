@@ -1256,7 +1256,7 @@ class traces {
     // current trace level
     static int TraceLevel;
     // modules to trace
-    static unsigned long TraceModule;
+    static unsigned long long TraceModule;
 };
 
 
