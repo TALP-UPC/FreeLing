@@ -1,5 +1,15 @@
 cmake_minimum_required(VERSION 3.7)
 
+# disallow in-source builds
+if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
+   message("")
+   message(" You are attempting to build in your source Directory.")
+   message(" You should run cmake from a build directory.")
+   message("")
+   message(FATAL_ERROR "Build aborted.")
+endif()
+
+
 project(FreeLing)
 set(PACKAGE_NAME "FreeLing") 
 set(VERSION "4.1") 
