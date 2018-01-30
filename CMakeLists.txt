@@ -9,7 +9,6 @@ if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
    message(FATAL_ERROR "Build aborted.")
 endif()
 
-
 project(FreeLing)
 set(PACKAGE_NAME "FreeLing") 
 set(VERSION "4.1") 

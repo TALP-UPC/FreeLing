@@ -1,4 +1,4 @@
-FROM ubuntu:trusty-20160711
+FROM ubuntu:trusty
 MAINTAINER Alexander Merkulov <sasha@merqlove.ru>
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -21,16 +21,16 @@ RUN apt-get install -qq -y software-properties-common curl && \
 # Freeling Deps
 RUN locale-gen en_US.UTF-8 && \
     apt-get install -y automake autoconf libtool wget swig \
-                       libicu52 libboost-regex1.55.0 \
-                       libboost-system1.55.0 libboost-program-options1.55.0 \
-                       libboost-thread1.55.0 libboost-filesystem1.55.0 && \
+                       libicu52 libboost-regex1.54.0 \
+                       libboost-system1.54.0 libboost-program-options1.54.0 \
+                       libboost-thread1.54.0 libboost-filesystem1.54.0 && \
     apt-get install -y libicu-dev libboost-regex-dev libboost-system-dev \
                        libboost-program-options-dev libboost-thread-dev \
                        zlib1g-dev
 
 # Install Freeling
 RUN cd /tmp && \
-    wget -q --progress=dot:giga https://github.com/TALP-UPC/FreeLing/releases/download/4.0/freeling-4.0-trusty-amd64.deb && \
+    wget -q https://github.com/TALP-UPC/FreeLing/releases/download/4.0/freeling-4.0-trusty-amd64.deb && \
     dpkg -i freeling-4.0-trusty-amd64.deb
 
 # BUILD JNI
@@ -39,19 +39,16 @@ ENV SWIGDIR /usr/share/swig2.0
 ENV FREELINGDIR /usr
 ENV FREELINGOUT /usr/local/lib
 
-RUN mkdir /FreeLing && \
-    cd /FreeLing && \
-    git init && \
-    git remote add -f origin https://github.com/TALP-UPC/FreeLing.git && \
-    git config core.sparseCheckout true && \
-    echo "APIs/" >> .git/info/sparse-checkout && \
-    git pull --depth=1 origin master && \
-    rm -rf /FreeLing/.git/* && \
-    cd /FreeLing/APIs/java && \
+RUN cd / && \
+    wget -q https://github.com/TALP-UPC/FreeLing/releases/download/4.0/freeling-4.0.tar.gz && \
+    tar -xzf freeling-4.0.tar.gz &&\
+    cd FreeLing-4.0/APIs/java && \
     make all
 
 # Cleanup
 RUN sudo rm -f /tmp/freeling-4.0-trusty-amd64.deb && \
+    sudo rm -f /tmp/freeling-4.0.tar.gz && \
+    sudo rm -rf /FreeLing
     sudo apt-get autoremove -y && \
     sudo apt-get clean -y && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
