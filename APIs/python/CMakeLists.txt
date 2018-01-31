@@ -19,6 +19,5 @@ else()
   SWIG_LINK_LIBRARIES(freeling ${FREELING_PREFIX}/lib/libfreeling.so)
 endif()
 
-# This install the APIs in /usr/local/APIs... Need to think of a better place
-#install(FILES ${CMAKE_CURRENT_BINARY_DIR}/_freeling.so ${CMAKE_CURRENT_BINARY_DIR}/freeling.py
-#        DESTINATION APIs/python)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/_freeling.so ${CMAKE_CURRENT_BINARY_DIR}/freeling.py
+        DESTINATION APIs/python)

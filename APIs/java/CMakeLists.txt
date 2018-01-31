@@ -22,7 +22,6 @@ ADD_CUSTOM_COMMAND(TARGET Jfreeling POST_BUILD
     COMMAND "${Java_JAR_EXECUTABLE}" -cf freeling.jar edu/upc/freeling/*.class
  )
 
-# This install the APIs in /usr/local/APIs... Need to think of a better place
-#install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libJfreeling.so ${CMAKE_CURRENT_BINARY_DIR}/freeling.jar
-#        DESTINATION APIs/java)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libJfreeling.so ${CMAKE_CURRENT_BINARY_DIR}/freeling.jar
+        DESTINATION APIs/java)
 
