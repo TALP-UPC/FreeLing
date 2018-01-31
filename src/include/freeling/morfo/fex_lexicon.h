@@ -32,6 +32,7 @@
 #include <map>
 #include <set>
 #include <string>
+#include "freeling/windll.h"
 
 namespace freeling {
 
@@ -51,7 +52,7 @@ namespace freeling {
   /// Feature lexicon. Stores feature codes and frequencies
   ////////////////////////////////////////////////////////////////
 
-  class fex_lexicon : std::map<std::wstring,lex_entry> {
+  class WINDLL fex_lexicon : std::map<std::wstring,lex_entry> {
 
   private:
     unsigned int freq_sum;

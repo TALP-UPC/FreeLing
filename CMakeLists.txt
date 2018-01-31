@@ -35,7 +35,7 @@ find_package(ZLIB REQUIRED)
 if(BUILD_TESTS)
   find_package(Boost COMPONENTS regex system filesystem thread program_options unit_test_framework REQUIRED)
 else()
-find_package(Boost COMPONENTS regex system filesystem thread program_options REQUIRED)
+  find_package(Boost COMPONENTS regex system filesystem thread program_options REQUIRED)
 endif()
 # Check for dependencies -- ICU
 if (WIN32)
