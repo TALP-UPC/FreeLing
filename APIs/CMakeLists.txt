@@ -19,7 +19,7 @@ else()
   endif()
 endif()
 
-find_package(Boost REQUIRED)
+find_package(Boost COMPONENTS system REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 
 if (WIN32)
