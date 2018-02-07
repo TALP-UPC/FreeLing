@@ -1,0 +1,13 @@
+
+ - Install msvc and cmake
+ - Install Freeling
+
+ - Install swigwin (www.swig.org)
+
+ python
+ - Install python
+ 
+   mkdir build-apis
+   cd build-apis
+cmake ..\APIs -DSWIG_DIR=E:/Software/install/swig-win -DSWIG_EXECUTABLE=E:/Software/install/swig-win/swig.exe -DFREELING_PREFIX=E:/Software/install/FL-win-cmake/freeling -DCMAKE_INSTALL_PREFIX=E:/Software/install/FL-APIS -DBOOST_ROOT=E:/Software/install/FL-win-cmake/dependencies/boost -DICU_ROOT=E:/Software/install/FL-win-cmake/dependencies/icu -DZLIB_INCLUDE_DIR=E:/Software/install/FL-win-cmake/dependencies/zlib/include -DZLIB_LIBRARY=E:/Software/install/FL-win-cmake/dependencies/zlib/lib/zlibd.lib -DPYTHON_API=ON -G "NMake Makefiles" 
+   nmake

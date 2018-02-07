@@ -44,6 +44,7 @@ namespace freeling {
   public:
     unsigned int code;
     unsigned int freq;
+    lex_entry() {};    
     lex_entry(unsigned int c, unsigned int f) {code=c; freq=f;};
   };
 

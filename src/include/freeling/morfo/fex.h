@@ -46,7 +46,7 @@ namespace freeling {
   ///  Class fex implements a feature extractor.
   ////////////////////////////////////////////////////////////////
 
-  class fex {
+  class WINDLL fex {
   private:
     /// tagset desription used to compute short versions of PoS tags
     const tagset *Tags;
