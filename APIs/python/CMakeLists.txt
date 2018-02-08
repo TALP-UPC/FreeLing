@@ -1,7 +1,6 @@
 
 FIND_PACKAGE(PythonLibs 3)
 INCLUDE_DIRECTORIES(${PYTHON_INCLUDE_DIRS})
-#INCLUDE_DIRECTORIES(${FREELING_PREFIX}/include)
 
 include_directories(${Boost_INCLUDE_DIRS})
 include_directories(${ICU_INCLUDE_DIRS})
@@ -33,6 +32,7 @@ else()
   SWIG_LINK_LIBRARIES(pyfreeling freeling)
 endif()
 
+install(TARGETS _pyfreeling DESTINATION share/freeling/APIs/python)
+install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/pyfreeling.py ${CMAKE_CURRENT_SOURCE_DIR}/sample.py
+        DESTINATION share/freeling/APIs/python)
 
-#install(FILES  ${CMAKE_CURRENT_BINARY_DIR}/freeling.py ${CMAKE_CURRENT_BINARY_DIR}/freeling.lib
-#        DESTINATION APIs/python)

@@ -17,6 +17,7 @@ PRELIMINARIES
 2.- Install CMake (3.7 or newer) using installer available at https://cmake.org/download/
 
 3.- Decide where will you install FreeLing (e.g. C:\FreeLing, C:\Program Files\FreeLing, etc)
+    and create this folder.
     Anything we install in this README will go under this folder.
     From now on, we will refer to this folder as %FLINSTALL%
 
@@ -79,7 +80,8 @@ INSTALL DEPENDENCIES
 INSTALL APIs REQUIREMENTS (optional)
 ====================================
 
-If you do not intend to use FreeLing from Java or Python, then you can skip this section
+If you do not intend to use FreeLing from Java or Python, then you can skip this section.
+
 If you want to call FreeLing library from one of these languages, you need to:
 
 A1.- Install SWIG.
@@ -96,6 +98,7 @@ A3.- Add the following options to the "cmake" command described below in step 7e
       -DSWIG_EXECUTABLE=%SWIGDIR%/swig.exe 
       -DPYTHON_API=ON                      (if you want to build Python API)
       -DJAVA_API=ON                        (if you want to build Java API)
+
 
 BUILD FREELING
 ==============
@@ -143,6 +146,42 @@ BUILD FREELING
 	  characters.
 
 
+9.- Call FreeLing library from Python or Java (optional)
+
+   PYTHON
+   ------
+  
+    If you built the Python API (steps A1, A2, A3), you'll find
+    in %FLINSTALL%/share/freeling/APIs/python the following files:
+
+        pyfreeling.py    FreeLing python module, to be imported from your program.
+	                 Must be in the same folder than your program or in a folder
+			 included in %PYTHONPATH%
+
+        _pyfreeling.lib  The actual API DLL, bridging between Python and C++.
+        _pyfreeling.pyd  They both must be in the same folder than your program
+	                 or in a folder included in %PATH%
+
+        sample.py        An example of a python program that calls FreeLing.
+	
+    To run the example, do:
+    
+        cd %FLINSTALL%\share\freeling\APIs\python
+        python sample.py < mytext.txt
+
+    * If you get "ImportError" about not found DLLs, you need to set the PATH
+    so all the required libraries (freeling and all its dependencies) are found
+    (you need to do this only once per session, or set it in your system-wide
+     configuration):
+
+       set PATH=%PATH%;%FLINSTALL%\freeling\bin;%FLINSTALL%\dependencies\boost\lib;%FLINSTALL%\dependencies\zlib\bin;%FLINSTALL%\dependencies\icu\bin64;
+
+    * If you get "FREELINGDIR not defined", you need to set the location where
+    FreeLing was installed:
+       
+       set FREELINGDIR=%FLINSTALL%\freeling
+
+
 OBSERVATIONS
 ============
 
@@ -152,7 +191,7 @@ OBSERVATIONS
     be in %FLINSTALL%\dependencies).
     If you install them somewhere else, you just need to set the right paths for
     variables ZLIB_INCLUDE_DIR, ZLIB_LIBRARY, BOOST_ROOT, and ICU_ROOT in the "cmake"
-    command in step 7.
+    command in step 7, and paths in step 9 if you are using an API.
 
     If you plan to use the "analyzer.bat" script, you'll need to edit it and adjust
     the paths to those libraries too.

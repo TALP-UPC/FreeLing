@@ -22,11 +22,11 @@ RUN apt-get install -y automake autoconf libtool wget swig build-essential && \
     apt-get install -y libboost-regex-dev libicu-dev zlib1g-dev \
 					   libboost-system-dev libboost-program-options-dev libboost-thread-dev
                        
-
 # Install Freeling from github --- take a cofee in the meanwhile
 # You can change the URL to master develpment branch, but the Java API is not guaranteed to be updated.
-RUN git clone --depth=1 https://github.com/TALP-UPC/FreeLing/releases/download/4.0/FreeLing-4.0.tar.gz Freeling 
-WORKDIR /Freeling
+RUN wget -q https://github.com/TALP-UPC/FreeLing/releases/download/4.0/FreeLing-4.0.tar.gz
+RUN tar -xzf FreeLing-4.0.tar.gz            
+WORKDIR /Freeling-4.0
 RUN autoreconf --install && ./configure && make && make install
 
 # Java Deps
@@ -45,8 +45,5 @@ ENV CLASSPATH=".:/usr/local/lib/"
 ENV LD_LIBRARY_PATH=/usr/local/lib/
      
 # Cleanup
-RUN apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /Freeling 
-
-WORKDIR /lists/* /tmp/* /var/tmp/*
-
+RUN apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /lists/* /tmp/* /var/tmp/* /Freeling-4.0 /FreeLing-4.0.tar.gz 
 WORKDIR /
