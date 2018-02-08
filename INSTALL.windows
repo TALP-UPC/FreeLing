@@ -69,11 +69,33 @@ INSTALL DEPENDENCIES
         You can keep these names or change them to "boost" and "icu".
 	(From now on we will assume you changed them, so if you keep the full names, you'll need
 	to change some paths in the commands described in step 7 below).
-	Now you folder looks like:
+	Now your installation folder looks like:
 
           %FLINSTALL%\dependencies\zlib
                                   \boost
                                   \icu
+
+
+INSTALL APIs REQUIREMENTS (optional)
+====================================
+
+If you do not intend to use FreeLing from Java or Python, then you can skip this section
+If you want to call FreeLing library from one of these languages, you need to:
+
+A1.- Install SWIG.
+     Download swigwin.zip package from http://swig.org and uncompress it anywhere
+     you want (e.g. C:\Program Files\swigwin).
+     We will refer to this folder as %SWIGDIR% from now on
+
+A2.- Install target language, including interfaces, that is:
+     * For Python: Install Python 3.
+     * For Java: Install Java Development Kit.
+
+A3.- Add the following options to the "cmake" command described below in step 7e.
+      -DSWIG_DIR=%SWIGDIR%             
+      -DSWIG_EXECUTABLE=%SWIGDIR%/swig.exe 
+      -DPYTHON_API=ON                      (if you want to build Python API)
+      -DJAVA_API=ON                        (if you want to build Java API)
 
 BUILD FREELING
 ==============
@@ -100,7 +122,7 @@ BUILD FREELING
                               \share
 
       If you want a clean re-install, you can delete folder %FLINSTALL%\freeling, 
-      and run again "msbuild INSTALL.vcxproj" from the "build" folder.
+      and run again "nmake install" from the "build" folder.
 
       If you want a clean re-build, you can delete the "build" folder, and repeat the 
       whole procedure.

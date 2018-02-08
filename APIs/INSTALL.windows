@@ -2,7 +2,7 @@
  - Install msvc and cmake
  - Install Freeling
 
- - Install swigwin (www.swig.org)
+ - Install swigwin (swig.org)
 
  python
  - Install python
@@ -12,7 +12,7 @@
 cmake ..\APIs -DSWIG_DIR=E:/Software/install/swig-win -DSWIG_EXECUTABLE=E:/Software/install/swig-win/swig.exe -DFREELING_PREFIX=%FLINSTALL%/freeling -DCMAKE_INSTALL_PREFIX=E:/Software/install/FL-APIS -DBOOST_ROOT=%FLINSTALL%/dependencies/boost -DICU_ROOT=%FLINSTALL%/dependencies/icu -DZLIB_INCLUDE_DIR=%FLINSTALL%/dependencies/zlib/include -DZLIB_LIBRARY=%FLINSTALL%/dependencies/zlib/lib/zlibd.lib -DPYTHON_API=ON -G "NMake Makefiles" 
    nmake
 
-   % - generar amb nom .pyd enlloc de .dll
-   % - Per executar, afegir al path tots els directoris (boost, icu, zlib, freeling, i el de la propia API)
-       [ veure quins son exactament i fer que el cmake crei un .bat, o si mes no, tregui un missatge dient-los ]
-       
+## - Per executar, afegir al path tots els directoris (boost, icu, zlib, freeling, i el de la propia API)
+
+   set PATH=%PATH%;%FLINSTALL%\freeling\bin;%FLINSTALL%\dependencies\boost\lib;%FLINSTALL%\dependencies\zlib\bin;%FLINSTALL%\dependencies\icu\bin64;
+   python sample.py

@@ -33,7 +33,7 @@
 //
 ////////////////////////////////////////////////////////////////
 
-%module freeling
+%module pyfreeling
 %{
  #include "freeling.h"
  #include "freeling/io.h"
