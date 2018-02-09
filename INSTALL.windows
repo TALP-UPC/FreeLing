@@ -90,7 +90,8 @@ A1.- Install SWIG.
      We will refer to this folder as %SWIGDIR% from now on
 
 A2.- Install target language, including interfaces, that is:
-     * For Python: Install Python 3.
+     * For Python: Install Python 3. (For python2 API, see "Observations"
+                                      at the end of this document)
      * For Java: Install Java Development Kit.
 
 A3.- Add the following options to the "cmake" command described below in step 7e.
@@ -148,6 +149,9 @@ BUILD FREELING
 
 9.- Call FreeLing library from Python or Java (optional)
 
+   If you don't want to write Python or Java programs that call Freeling, you can
+   skip this section
+
    PYTHON
    ------
   
@@ -171,8 +175,42 @@ BUILD FREELING
 
     * If you get "ImportError" about not found DLLs, you need to set the PATH
     so all the required libraries (freeling and all its dependencies) are found
-    (you need to do this only once per session, or set it in your system-wide
-     configuration):
+    (you need to do this only once per session, or you can set it once
+    and forever in your system-wide configuration):
+
+       set PATH=%PATH%;%FLINSTALL%\freeling\bin;%FLINSTALL%\dependencies\boost\lib;%FLINSTALL%\dependencies\zlib\bin;%FLINSTALL%\dependencies\icu\bin64;
+
+    * If you get "FREELINGDIR not defined", you need to set the location where
+    FreeLing was installed:
+       
+       set FREELINGDIR=%FLINSTALL%\freeling
+
+
+   JAVA
+   ----
+  
+    If you built the Python API (steps A1, A2, A3), you'll find
+    in %FLINSTALL%/share/freeling/APIs/python the following files:
+
+        Jfreeling.jar    FreeLing Java module, to be imported from your program.
+	                 Must be included in %CLASSPATH%
+
+        Jfreeling.lib  The actual API DLL, bridging between Java and C++.
+        Jfreeling.dll  They both must be in the same folder than your program
+	               or in a folder included in %PATH%
+
+        Analyzer.java  An example of a Java program that calls FreeLing.
+	
+    To run the example, do:
+    
+        cd %FLINSTALL%\share\freeling\APIs\java
+	javac Analyzer.java
+        java Analyzer < mytext.txt
+
+    * If you get "UnsatisfiedLinkError" about not found libraries, you need to
+    set the PATH so all the required libraries (freeling and all its dependencies) 
+    are found (you need to do this only once per session, or you can set it once
+    and forever in your system-wide configuration):
 
        set PATH=%PATH%;%FLINSTALL%\freeling\bin;%FLINSTALL%\dependencies\boost\lib;%FLINSTALL%\dependencies\zlib\bin;%FLINSTALL%\dependencies\icu\bin64;
 
@@ -185,7 +223,7 @@ BUILD FREELING
 OBSERVATIONS
 ============
 
-  * Installing dependencies in different folders
+ ** Installing dependencies in different folders
 
     You can install zlib, boost, and icu anywhere (that is, they don't HAVE to
     be in %FLINSTALL%\dependencies).
@@ -195,4 +233,24 @@ OBSERVATIONS
 
     If you plan to use the "analyzer.bat" script, you'll need to edit it and adjust
     the paths to those libraries too.
-    
+
+
+ ** Using Python2 instead of Python3
+
+    FreeLing uses UTF8 encoding to support multilinguality. Python3 is native
+    in UTF8, which provides a much smoother integration with FreeLing.
+
+    However, you can use FreeLing from Python2 too (though if you encounter
+    encoding problems, don't complain, we told you so...)
+    The steps to build the API are the same than for python3, but before
+    running cmake you'll need to edit the file APIs/python/CMakeLists.txt
+    in FreeLing sources and change the following:
+
+    1) Change the line:
+         FIND_PACKAGE(PythonLibs 3)
+       to:
+         FIND_PACKAGE(PythonLibs 2)
+
+    2) Comment out (or delete) the line:
+         SET(CMAKE_SWIG_FLAGS "-py3")
+ 

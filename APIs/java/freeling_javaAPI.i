@@ -33,7 +33,7 @@
 //
 ////////////////////////////////////////////////////////////////
 
-%module freeling
+%module Jfreeling
 %{
  #include "freeling.h"
  #include "freeling/io.h"

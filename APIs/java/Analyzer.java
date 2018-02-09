@@ -1,22 +1,41 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
+import java.io.File;
 
-import edu.upc.freeling.*;
+import edu.upc.Jfreeling.*;
 
 public class Analyzer {
-  // Modify this line to be your FreeLing installation directory
-  private static final String FREELINGDIR = "/usr/local";
-  private static final String DATA = FREELINGDIR + "/share/freeling/";
-  private static final String LANG = "es";
 
+  private static final String OS = System.getProperty("os.name").toLowerCase();
+    
   public static void main( String argv[] ) throws IOException {
-    System.loadLibrary( "freeling_javaAPI" );
+    // connect to FreeLing library
+    System.loadLibrary( "Jfreeling" );
 
+    // Check whether we know where to find FreeLing data files
+    String FLDIR = System.getenv("FREELINGDIR");
+    if (FLDIR==null) {
+	if (OS.indexOf("win") >= 0) FLDIR = "C:\\Program Files";
+	else  FLDIR = "/usr/local";
+	System.err.println("FREELINGDIR environment variable not defined, trying "+FLDIR);
+    }
+
+    File f = new File(FLDIR+"/share/freeling");
+    if (! f.exists()) {
+	System.err.println("Folder "+FLDIR+"/share/freeling not found.");
+        System.err.println("Please set FREELINGDIR environment variable to FreeLing installation directory");
+	System.exit(1);
+    }
+    
+    // Location of FreeLing configuration files.
+    String DATA = FLDIR + "/share/freeling/";
+    
+    // Init locales
     Util.initLocale( "default" );
 
-    // Create options set for maco analyzer.
-    // Default values are Ok, except for data files.
+    // Create options set for maco analyzer. Default values are Ok, except for data files.
+    String LANG = "es";
     MacoOptions op = new MacoOptions( LANG );
 
     op.setDataFiles( "", 

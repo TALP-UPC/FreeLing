@@ -96,6 +96,7 @@ if not os.path.exists(os.environ["FREELINGDIR"]+"/share/freeling") :
 # Location of FreeLing configuration files.
 DATA = os.environ["FREELINGDIR"]+"/share/freeling/";
 
+# Init locales
 pyfreeling.util_init_locale("default");
 
 # create language analyzer
