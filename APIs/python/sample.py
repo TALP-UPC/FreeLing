@@ -99,8 +99,9 @@ DATA = os.environ["FREELINGDIR"]+"/share/freeling/";
 # Init locales
 pyfreeling.util_init_locale("default");
 
-# create language analyzer
-la=pyfreeling.lang_ident(DATA+"common/lang_ident/ident.dat");
+# create language detector. Used just to show it. Results are printed
+# but ignored (after, it is assumed language is LANG)
+la=pyfreeling.lang_ident(DATA+"common/lang_ident/ident-few.dat");
 
 # create options set for maco analyzer. Default values are Ok, except for data files.
 LANG="es";

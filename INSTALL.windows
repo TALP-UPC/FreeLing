@@ -219,6 +219,9 @@ BUILD FREELING
        
        set FREELINGDIR=%FLINSTALL%\freeling
 
+    * If you get memory-related errors (allocation error, array out of range, etc), it
+    may be that your JVM has to few memory for FreeLing.  Try with -Xmx1G or more.
+
 
 OBSERVATIONS
 ============

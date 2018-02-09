@@ -34,7 +34,7 @@ public class Analyzer {
     // Init locales
     Util.initLocale( "default" );
 
-    // Create options set for maco analyzer. Default values are Ok, except for data files.
+    // Create options set for maco analyzer.
     String LANG = "es";
     MacoOptions op = new MacoOptions( LANG );
 
@@ -50,9 +50,9 @@ public class Analyzer {
 
     // Create analyzers.
 
-    // language detector. Used just to show it. Results are printed  but ignored. 
-    // See below.
-    LangIdent lgid = new LangIdent(DATA + "/common/lang_ident/ident.dat");
+    // language detector. Used just to show it. Results are printed
+    // but ignored (after, it is assumed language is LANG)
+    LangIdent lgid = new LangIdent(DATA + "/common/lang_ident/ident-few.dat");
 
     Tokenizer tk = new Tokenizer( DATA + LANG + "/tokenizer.dat" );
     Splitter sp = new Splitter( DATA + LANG + "/splitter.dat" );

@@ -1,5 +1,5 @@
-## configuration file for a language identifier
-## aware of a few European languages.
+## configuration file for a language identifier aware of a few European languages.
+## Dealing with less languages speeds up both loading and identification.
 <Languages>
 ./de.dat
 ./en.dat
@@ -7,10 +7,3 @@
 ./fr.dat
 ./pt.dat
 </Languages>
-<Threshold>
-0.4
-</Threshold>
-<ScaleFactor>
-5.0
-</ScaleFactor>
-
