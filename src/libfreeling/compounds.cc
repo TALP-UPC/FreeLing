@@ -186,6 +186,7 @@ namespace freeling {
       }
 
       TRACE(3,L"Splitting annotated");
+      TRACE_WORD_LIST(4,wds);
       
       // check each possible pattern, to see if it matches the word
       set<wstring> seen;
@@ -218,7 +219,7 @@ namespace freeling {
             break;
           }
 
-          TRACE(5,L"       found "+a->get_tag());
+          TRACE(5,L"       found ["<<a->get_lemma()<<L","<<a->get_tag()<<L"]");
           // store lemma, and tag if it is the head.
           lemma = lemma + L"_" + a->get_lemma();
           if (i == p->head) tag = a->get_tag();
@@ -230,8 +231,9 @@ namespace freeling {
         
         // add new compound analysis to word, if not already there.
         if (p->head<0) tag = p->tag;
-        TRACE(5,L"pattern "+p->patr+L" good="+util::int2wstring(int(good))+L"  tag="+tag);
+        TRACE(5,L"pattern "<<p->patr<<L" good="<<good)
         if (good and seen.find(lemma+L"#"+tag)==seen.end()) {
+	  TRACE(5, L"  Adding analysis "<<L"lemma="<<lemma.substr(1)<<L" tag="<<tag);
           w.add_analysis(analysis(lemma.substr(1),tag));
           // record this word was analyzed by this module
           w.set_analyzed_by(word::COMPOUNDS);

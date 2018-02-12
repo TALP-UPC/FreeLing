@@ -425,10 +425,14 @@ namespace freeling {
     list<analysis>::const_iterator a;
     bool contr;
 
-    TRACE(3,L"check contracted for word "+form);
+    TRACE(3,L"check contracted for word "<<form<<L" ("<<lem<<L","<<tag<<L")");
+
+    // if it is a multiword or compound, will conflict with contraction checking: drop it.
+    if ( lem.find_first_of(L"_")!=wstring::npos ) return false;
+
     // remember the capitalization pattern of the word, to keep the format in its parts
     int caps=util::capitalization(form); 
-
+    
     contr=false;
     pl=lem.find_first_of(L"+");   pt=tag.find_first_of(L"+");
 
@@ -505,8 +509,13 @@ namespace freeling {
   ///  Return true iff word is a contraction.
   /////////////////////////////////////////////////////////////////////////////
 
-  bool dictionary::annotate_word(word &w, list<word> &lw, bool override) const {
+  bool dictionary::annotate_word(word &w, list<word> &lw,
+				 dictionary::Option compounds,
+				 dictionary::Option retok) const {
 
+    if (retok==DEFAULT) retok = (RetokenizeContractions? ON : OFF);
+    if (compounds==DEFAULT) compounds = (CompoundAnalysis? ON : OFF);
+    
     ///////////// SEARCH IN DICTIONARY
     TRACE(3,L"Searching in dictionary, word: "+w.get_form());
     list<analysis> la;
@@ -530,19 +539,19 @@ namespace freeling {
 
     #ifndef NO_LIBFOMA
       ///////////// CHECK FOR COMPOUNDS
-      if (CompoundAnalysis) {
+      if (compounds) {
         // check whether the word is a compound
         TRACE(2,L"Compound analisys active. SEARCHING FOR COMPOUND. word n_analysis="+util::int2wstring(w.get_n_analysis()));
-
-        if (comp->check_compound(w))
-          // if it is a compound, deactivate retokenization
-          override=true;
+	// if it is a compound, deactivate retokenization
+        if (comp->check_compound(w)) {
+	  retok = OFF;
+	}
       }
     #endif
 
     ///////////// HANDLE CONTRACTION RETOKENIZATION, IF ANY
     bool contr=false;
-    if (not RetokenizeContractions or override) {
+    if (retok==OFF) {
       // RetokenizeContractions is OFF, or overriden for this call.
       // Just add retokenization information to each analysis, in case it is needed later.
       list<analysis> newla;
@@ -551,7 +560,7 @@ namespace freeling {
         // split contractoin tags, if any (e.g. PRP+MD/VB =>  PRP, MD/VB)
         list<wstring> tgs = util::wstring2list(a->get_tag(),L"+");
         // generate tag combinations for contractions (e.g. PRP+MD, PRP+VB).
-        // Regular words get just 1 combianation consisting of a single tag
+        // Regular words get just 1 combination consisting of a single tag
         list<wstring> tc = tag_combinations(tgs.begin(),--tgs.end()); 
 
         if (tc.size()>1) {
@@ -576,7 +585,7 @@ namespace freeling {
           // The analysis is retokenizable, lw contains retokenization info.
           a->set_retokenizable(lw);
         }
-      }
+      }	
     }
     else {
       // RetokenizeContractions is ON. Only first contracted
@@ -591,7 +600,8 @@ namespace freeling {
     
       if (ca!=w.end() and w.get_n_analysis()>1) {
         // contraction found. If more analysis, issue a warning.
-        WARNING(L"Contraction "+w.get_form()+L" has several analysis in dictionary. All ignored except ("+ca->get_lemma()+L","+ca->get_tag()+L"). Set RetokenizeContractions=false to keep all analysis.");
+        WARNING(L"Contraction "<<w.get_form()<<L" has several analysis in dictionary. All ignored except ("
+		<<ca->get_lemma()<<L","<<ca->get_tag()<<L"). Set RetokenizeContractions=false to keep all analysis.");
       }
       else 
         // one analysis, or no contractions (or no analysis)
@@ -609,12 +619,13 @@ namespace freeling {
   /////////////////////////////////////////////////////////////////////////////
   ///  Search form in the dictionary.
   ///  *Add* found analysis to the given word.
-  ///  Do not retokenize contractions, nor return a component list.
+  ///  Do not apply compounds analysis,
+  ///  do not retokenize contractions, nor return a component list.
   /////////////////////////////////////////////////////////////////////////////
 
   void dictionary::annotate_word(word &w) const {
     list<word> lw;
-    annotate_word(w,lw,true);
+    annotate_word(w,lw,OFF,OFF);
   }
 
   ////////////////////////////////////////////////////////////////////////

@@ -185,12 +185,15 @@ BUILD FREELING
        
        set FREELINGDIR=%FLINSTALL%\freeling
 
+    (this is because the example program "sample.py" checks that variable, it is
+     not a general requirement of the API)
+
 
    JAVA
    ----
   
     If you built the Python API (steps A1, A2, A3), you'll find
-    in %FLINSTALL%/share/freeling/APIs/python the following files:
+    in %FLINSTALL%/share/freeling/APIs/java the following files:
 
         Jfreeling.jar    FreeLing Java module, to be imported from your program.
 	                 Must be included in %CLASSPATH%
@@ -218,6 +221,9 @@ BUILD FREELING
     FreeLing was installed:
        
        set FREELINGDIR=%FLINSTALL%\freeling
+
+    (this is because the example program "Analyzer.java" checks that variable, it is
+     not a general requirement of the API)
 
     * If you get memory-related errors (allocation error, array out of range, etc), it
     may be that your JVM has to few memory for FreeLing.  Try with -Xmx1G or more.

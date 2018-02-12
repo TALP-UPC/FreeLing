@@ -14,9 +14,7 @@ else()
   SWIG_LINK_LIBRARIES(pyfreeling freeling)
 endif()
 
-install(TARGETS _pyfreeling DESTINATION share/freeling/APIs/python)
+install(TARGETS _pyfreeling DESTINATION share/freeling/APIs/python3)
 install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/pyfreeling.py ${CMAKE_CURRENT_SOURCE_DIR}/sample.py
-        DESTINATION share/freeling/APIs/python)
-
-
+        DESTINATION share/freeling/APIs/python3)
 

@@ -29,7 +29,8 @@ option(WARNINGS "Enable warnings" ON)
 option(XPRESSIVE "Xpressive regex" OFF)
 option(EMBEDDINGS "Download word embeddings" OFF)
 option(JAVA_API "Build Java API" OFF)
-option(PYTHON_API "Build Python API" OFF)
+option(PYTHON3_API "Build Python 3 API" OFF)
+option(PYTHON2_API "Build Python 2.7 API" OFF)
 option(PERL_API "Build Perl API" OFF)
 
 # Check for dependencies -- ZLIB
@@ -53,7 +54,7 @@ endif()
 add_subdirectory(src)
 
 # if any APIs were requested, build them
-if(PYTHON_API OR JAVA_API OR PERL_API)
+if(PYTHON3_API OR PYTHON2_API OR JAVA_API OR PERL_API)
   add_subdirectory(APIs)
 endif()
 

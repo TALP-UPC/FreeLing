@@ -1506,6 +1506,8 @@ class dates {
 /*------------------------------------------------------------------------*/
 class dictionary {
  public:
+    typedef enum {OFF,ON,DEFAULT} Option;
+
     /// Constructor
     dictionary(const std::wstring &Lang, const std::wstring &dicFile, 
                const std::wstring &sufFile, const std::wstring &compFile,
@@ -1533,10 +1535,10 @@ class dictionary {
     /// Fills the analysis list of a word, checking for suffixes and contractions.
     /// Returns true iff the form is a contraction, returns contraction components
     /// in given list
-    bool annotate_word(word &, std::list<word> &, bool override=false) const;
+    bool annotate_word(word &, std::list<word> &, dictionary::Option compounds=DEFAULT, dictionary::Option retok=DEFAULT) const;
     /// Fills the analysis list of a word, checking for suffixes and contractions.
     /// Never retokenizing contractions, nor returning component list.
-    /// It is just a convenience equivalent to "annotate_word(w,dummy,true)"
+    /// It is just a convenience equivalent to "annotate_word(w,dummy,OFF,OFF)"
     void annotate_word(word &) const;
     /// Get possible forms for a lemma+pos
     std::list<std::wstring> get_forms(const std::wstring &, const std::wstring &) const;
