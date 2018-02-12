@@ -1,6 +1,19 @@
 Installation Instructions
 *************************
 
+ ******  IMPORTANT NOTICE *****************************************
+ **
+ **  FreeLing Installation has been moved to CMake, which eases and
+ **  unifies installation across platforms.
+ **
+ **  This file describes old installation procedure based on
+ **  GNU autotools. It is deprecated and may be removed at anytime.
+ **
+ **  Please install FreeLing following CMake procedures described in
+ **  INSTALL.linux or INSTALL.windows
+ **
+ ******************************************************************
+
 This file describes how to install FreeLing library from source.
 
 Additional information about FreeLing, how to install and use it
