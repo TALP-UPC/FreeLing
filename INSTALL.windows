@@ -77,30 +77,6 @@ INSTALL DEPENDENCIES
                                   \icu
 
 
-INSTALL APIs REQUIREMENTS (optional)
-====================================
-
-If you do not intend to use FreeLing from Java or Python, then you can skip this section.
-
-If you want to call FreeLing library from one of these languages, you need to:
-
-A1.- Install SWIG.
-     Download swigwin.zip package from http://swig.org and uncompress it anywhere
-     you want (e.g. C:\Program Files\swigwin).
-     We will refer to this folder as %SWIGDIR% from now on
-
-A2.- Install target language, including interfaces, that is:
-     * For Python: Install Python 3. (For python2 API, see "Observations"
-                                      at the end of this document)
-     * For Java: Install Java Development Kit.
-
-A3.- Add the following options to the "cmake" command described below in step 7e.
-      -DSWIG_DIR=%SWIGDIR%             
-      -DSWIG_EXECUTABLE=%SWIGDIR%/swig.exe 
-      -DPYTHON_API=ON                      (if you want to build Python API)
-      -DJAVA_API=ON                        (if you want to build Java API)
-
-
 BUILD FREELING
 ==============
 
@@ -130,6 +106,21 @@ BUILD FREELING
 
       If you want a clean re-build, you can delete the "build" folder, and repeat the 
       whole procedure.
+
+
+    Available options that can be added to "cmake" command:
+
+      -DCMAKE_INSTALL_PREFIX=[path]  Install FreeLing in given location (default: /usr/local)
+
+      -DTRACES=ON        Build FreeLing with debugging traces (default: OFF)
+      -DWARNINGS=OFF     Build FreeLing without warning messages (default: ON)
+      -DXPRESSIVE=ON     Build FreeLing using boost::xpressive regexps instead of boost::regex  (default: OFF)
+      -DEMBEDDINGS=ON    Download word embeddings files when installing (default: OFF)
+
+      -DJAVA_API=ON      Build Java API (see "Observations" below before running cmake) (default: OFF)
+      -DPYTHON2_API=ON   Build Python 2 API (see "Observations" below before running cmake) (default: OFF)
+      -DPYTHON3_API=ON   Build Python 3 API (see "Observations" below before running cmake) (default: OFF)
+
 
 
 8.- Execute FreeLing
@@ -244,6 +235,27 @@ OBSERVATIONS
     the paths to those libraries too.
 
 
+ ** APIs REQUIREMENTS 
+
+    If you want to call FreeLing library from one of these languages, you need to:
+
+    A1.- Install SWIG.
+         Download swigwin.zip package from http://swig.org and uncompress it anywhere
+         you want (e.g. C:\Program Files\swigwin).
+         We will refer to this folder as %SWIGDIR% from now on
+
+    A2.- Install target language, including interfaces, that is:
+        * For Python: Install Python2 or Python3.
+        * For Java: Install Java Development Kit.
+
+    A3.- Add the following options to the "cmake" command
+       -DSWIG_DIR=%SWIGDIR%             
+       -DSWIG_EXECUTABLE=%SWIGDIR%/swig.exe 
+       -DPYTHON2_API=ON     (if you want to build Python 2 API. Not compatible with -DPYTHON3_API)
+       -DPYTHON3_API=ON     (if you want to build Python 3 API. Not compatible with -DPYTHON2_API)
+       -DJAVA_API=ON        (if you want to build Java API)
+
+
  ** Using Python2 instead of Python3
 
     FreeLing uses UTF8 encoding to support multilinguality. Python3 is native
@@ -251,15 +263,4 @@ OBSERVATIONS
 
     However, you can use FreeLing from Python2 too (though if you encounter
     encoding problems, don't complain, we told you so...)
-    The steps to build the API are the same than for python3, but before
-    running cmake you'll need to edit the file APIs/python/CMakeLists.txt
-    in FreeLing sources and change the following:
-
-    1) Change the line:
-         FIND_PACKAGE(PythonLibs 3)
-       to:
-         FIND_PACKAGE(PythonLibs 2)
-
-    2) Comment out (or delete) the line:
-         SET(CMAKE_SWIG_FLAGS "-py3")
- 
+    Just specify cmake option -DPYTHON2_API instead of -DPYTHON3_API.
