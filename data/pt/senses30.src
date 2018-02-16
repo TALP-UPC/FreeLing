@@ -1393,7 +1393,7 @@
 00097941-v regenerar
 00098043-a inviável não_viável
 00098051-n desempenho_linguístico
-00098083-v _ressuscitar ressuscitar reviver
+00098083-v ressuscitar reviver
 00098147-a assassinado morto
 00098166-r em_casa
 00098267-r em_casa
@@ -2486,7 +2486,7 @@
 00196203-r decentemente devidamente
 00196364-v atear_fogo queimar
 00196417-r atenciosamente atentamente
-00196485-n mudança substituição substituição_(processos_químicos)
+00196485-n mudança substituição
 00196540-r enormemente extremamente muitíssimo
 00196692-r generosamente
 00196758-v escaldar
@@ -2606,7 +2606,7 @@
 00208557-r inevitavelmente
 00208749-a sobreposto superposto
 00208836-v decair desmoronar esfacelar
-00208943-n deposição deposição_(poluição)
+00208943-n deposição
 00209132-n suspensão
 00209174-v decompor
 00209381-r cordialmente
@@ -3040,7 +3040,7 @@
 00253498-r descaradamente
 00253577-n catarse
 00253761-v desenvolver
-00253919-n esterilização esterilização_(biologia) esterilização_(processo)
+00253919-n esterilização
 00253938-r pagamento_na_entrega
 00254059-r no_sentido_anti-horário
 00254150-v incubar
@@ -3088,7 +3088,7 @@
 00258854-n correção rectificação retificação
 00258857-v avariar danificar romper
 00259096-r mais_cedo
-00259177-n reparação_(legal)
+00259177-n reparação
 00259544-n retribuição
 00259643-n compensação
 00259755-v danificar
@@ -3130,7 +3130,7 @@
 00264034-v encher inchar inflar
 00264192-n clarificação
 00264262-a valente
-00264366-n enriquecimento enriquecimento_(nutrientes)
+00264366-n enriquecimento
 00264386-v alargar ampliar aumentar expandir
 00264459-a destemido
 00264529-n fortificação
@@ -4090,7 +4090,7 @@
 00373130-n inclusão
 00373209-a castanho marrom
 00373250-v aquecer esquentar
-00373278-n incorporação incorporação_(processos_industriais)
+00373278-n incorporação
 00373418-n anexação atribuição dotação
 00373544-n ascensão elevação enaltecimento engrandecimento
 00373621-a coral
@@ -4312,7 +4312,7 @@
 00400193-a policromático
 00400278-n florestamento florestação
 00400427-v simplificar
-00400449-n cobertura_vegetal_(restauração) reflorestamento reflorestação
+00400449-n cobertura_vegetal reflorestamento reflorestação
 00400472-a ruão
 00400645-n reabilitação
 00400883-v complicar elaborar refinar
@@ -4327,7 +4327,7 @@
 00402389-v sofisticar
 00402419-a colorido vivo
 00402539-v complicar
-00402671-n enchimento enchimento_(materiais) saturação
+00402671-n enchimento saturação
 00402764-r milagrosamente
 00402855-a brilhante vivo
 00402938-r miseravelmente miseràvel
@@ -4487,7 +4487,7 @@
 00418394-n irritação
 00418408-v enrijecer rigidificar
 00418563-v endurecer inrijecer
-00418615-n _descuido negligência
+00418615-n descuido negligência
 00418903-n exploração
 00418921-v restringir
 00419058-a puro
@@ -4846,7 +4846,7 @@
 00461782-n boliche
 00461971-a nublado
 00462016-r para_o_sudeste
-00462092-v _reprimir conquistar conter dominar sufocar suprimir
+00462092-v conquistar conter dominar reprimir sufocar suprimir
 00462383-n bolão
 00462520-r sem
 00462689-v inibir
@@ -5660,7 +5660,7 @@
 00578405-n auditoria_contábil
 00578523-a incompatível
 00578662-a irregular
-00578708-n lavagem lavagem_(roupa)
+00578708-n lavagem
 00578733-v recomendar
 00578993-v arruinar_se
 00579082-n engraxate
@@ -5751,14 +5751,14 @@
 00590390-a contestável
 00590642-v comprender
 00590669-a discutível
-00590761-v _intuir
+00590761-v intuir
 00590913-n consulado
 00590923-a incontestável que_não_se_pode_contestar
 00590924-v cogitar digerir meditar
 00591115-v compreender entender ver
 00591147-a demonstrável
 00591236-n assessoria
-00591519-v perceber_
+00591519-v perceber
 00591710-a irrefutável
 00591755-v clicar despontar entender penetrar perceber realizar
 00591858-n direcção
@@ -5795,7 +5795,7 @@
 00594953-n virilidade
 00595146-n maestria mestria
 00595299-a assíduo constante continuado contínuo imudável imutável incessante ininterrupto permanecente permanente perpétuo seguido sem_paradas
-00595306-v perder_(se) perder_o_controle
+00595306-v perder perder_o_controle
 00595505-v desconhecer ignorar
 00595630-v conhecer saber
 00595863-a constante contínuo
@@ -5817,7 +5817,7 @@
 00598056-n cadeira cátedra
 00598278-v aprender_de_novo reaprender
 00598502-v desaprender esquecer
-00598629-v _esquecer apagar desaprender
+00598629-v apagar desaprender esquecer
 00598679-a controlado
 00598753-v atualizar_se
 00598954-v achar descobrir informar-se inteirar ouvir saber ver
@@ -5837,7 +5837,7 @@
 00600903-v consumir esgotar
 00601043-v focar
 00601250-a torrencial
-00601378-v mergulhar_ submergir
+00601378-v mergulhar submergir
 00601581-v estar_imerso_em
 00601659-v engulir
 00601783-a controverso polémico polêmico
@@ -5861,7 +5861,7 @@
 00604228-n sinecura
 00604347-v brincar_de_brigar
 00604424-n conferência
-00604449-v desfraldar tirar_a_fralda_(de_uma_criança)_
+00604449-v desfraldar tirar_a_fralda
 00604523-n administração
 00604576-v decorar memorizar saber_de_cor
 00604617-a conveniente
@@ -5977,13 +5977,13 @@
 00617692-n pirotecnia pirotécnica
 00617748-v confundir equivocar errar
 00617865-n sapataria sapateiro
-00618057-v _enganar-se _tropeçar
+00618057-v enganar-se tropeçar
 00618267-v confundir errar identificar_erroneamente
 00618377-a assado
 00618451-v identificar
 00618493-a saltear
 00618682-v tipar
-00618734-n contabilidade contabilidade_(execução)
+00618734-n contabilidade
 00618878-v identificar reconhecer
 00619011-n contabilidade_de_custos
 00619183-v aprazar datar
@@ -6026,7 +6026,7 @@
 00623862-n dificuldade problema
 00623947-v espiritualizar
 00624026-a apreciável considerável importante notável ponderável sensível
-00624140-v _reinterpretar
+00624140-v reinterpretar
 00624263-v alegorizar
 00624476-v entender ler
 00624553-n esforço
@@ -6084,9 +6084,9 @@
 00631378-n prática
 00631391-a certo correto justo recto
 00631398-v teologizar
-00631591-v _introspectar refletir
+00631591-v introspectar refletir
 00631712-n consultas consultoria gabinete
-00631737-v achar acreditar ajuizar conjeturar crer esperar imaginar julgar pensar pressupor presumir prever supor ter_ideia_(de)
+00631737-v achar acreditar ajuizar conjeturar crer esperar imaginar julgar pensar pressupor presumir prever supor ter_ideia
 00631798-a afinado certo exacto exato perfeito preciso
 00631887-n cosmetologia
 00632236-v assumir pressupor presumir supor
@@ -6185,7 +6185,7 @@
 00642498-v dividir_em_quatro
 00642644-v extrapolar interpolar
 00642725-a grosseiro
-00642803-v diferenciar diferenciar_
+00642803-v diferenciar
 00642934-a civil
 00642980-v integrar
 00643197-v analisar
@@ -6202,7 +6202,7 @@
 00644583-v analisar analizar atentar_em considerar debater debruçar encarar esmiunçar esmiuçar estudar examinar pesar ponderar tentear
 00644702-n exame teste
 00644839-a acreditável credível crível verosímil
-00644967-n selecção_(processos_físicos)
+00644967-n selecção
 00645169-a provável
 00645241-v anatomizar pormenorizar
 00645281-a suposto
@@ -6271,7 +6271,7 @@
 00653449-v silogizar
 00653518-n contagem_regressiva retrocontagem
 00653620-v equiparar
-00653811-n _contagem
+00653811-n contagem
 00653958-n recontagem
 00654015-v reconsiderar
 00654258-v reconsiderar
@@ -6314,7 +6314,7 @@
 00659048-n massagem
 00659112-v reordenar
 00659259-a plano
-00659260-v contramarchar_
+00659260-v contramarchar
 00659373-v desclassificar superar
 00659530-a alisado
 00659535-v subordinar
@@ -6336,7 +6336,7 @@
 00661091-n terapia terapias terapêutica tratamento
 00661213-v aferir contrastar
 00661584-v contradistinguir diferenciar
-00661713-v comparar_
+00661713-v comparar
 00661824-v checar conferir verificar
 00662139-a furador
 00662182-v verificar
@@ -6361,8 +6361,8 @@
 00664788-v demonstrar estabelecer provar testar validar
 00664849-n alimentação nutrição
 00665156-a curioso
-00665235-v provar_(se)
-00665335-v detonar explodir_
+00665235-v provar
+00665335-v detonar explodir
 00665476-v estabelecer fazer instituir
 00665630-v demonstrar provar
 00665886-v afirmar apoiar aprovar asseverar atestar certificar comprovar confirmar constatar corroborar esforçar favorecer firmar fundamentar provar ratificar roborar robustecer sancionar substanciar suportar sustentar
@@ -6383,7 +6383,7 @@
 00667822-a actual em_curso
 00667847-n castração
 00667936-a em_linha ligado online
-00667942-v falsificar falsificar_
+00667942-v falsificar
 00668099-v acomodar-se admitir agonizar aguentar agüentar amargar amochar aparar apoiar aturar coadunar-se compadecer comportar condescender confranger consentir conter-se curtir digerir engolir esmoer experimentar gramar lidar padecer passar penar receber reprimir-se sobrelevar sofrer suportar tolerar tragar transigir
 00668112-n cauterização
 00668208-a actual atual até_a_data moderno vigente
@@ -6400,7 +6400,7 @@
 00669366-v sofrer_em_silêncio
 00669478-a maldita maldito
 00669481-n curetagem
-00669528-v falhar_
+00669528-v falhar
 00669687-n aborto_por_sucção
 00669762-v aceitar
 00669853-a amaldiçoado maldito
@@ -6408,7 +6408,7 @@
 00669942-a amaldiçoado condenado maldito
 00670261-v avaliar balizar julgar opinar
 00670741-a bendito
-00670991-v posicionar_(se)_
+00670991-v posicionar
 00671190-v mal_julgar
 00671335-v subestimar
 00671351-n cirurgia intervenção operação operação_cirúrgica
@@ -6631,7 +6631,7 @@
 00699146-n desintoxicação
 00699320-n desintoxicação
 00699334-v ajustar reajustar
-00699485-v _decidir_(se) fazer_decidir
+00699485-v decidir fazer_decidir
 00699521-a primário
 00699626-v decidir propor-se resolver
 00699736-n cura_pela_fé
@@ -6657,7 +6657,7 @@
 00701877-v decidir
 00702065-v reformar renovar
 00702418-n inundações
-00702434-v indexar_
+00702434-v indexar
 00702601-v cadenciar ritmar
 00702773-v predeterminar
 00702969-v predestinar preordenar
@@ -6666,7 +6666,7 @@
 00703512-v cogitar
 00703615-a deprimido trevas
 00703688-n terapia_em_grupo
-00703708-v decidir_ ver
+00703708-v decidir ver
 00703875-v contemplar
 00704064-n hipnoterapia
 00704073-v premeditar
@@ -6735,8 +6735,8 @@
 00712225-n aplicação banho camada capa cobertura embrulho envoltório invólucro mão revestimento
 00712389-v errar subestimar
 00712419-a fundamental imprescindível primordial
-00712556-v considerar contar contar_
-00712708-v contar_(com) depender
+00712556-v considerar contar
+00712708-v contar depender
 00712833-n unção
 00712877-a insistente urgente
 00712979-n fumigação
@@ -6836,7 +6836,7 @@
 00724029-v fazer_orçamento orçar
 00724081-a confiável de_confiança digno_de_confiança fidedigno fiável
 00724150-v afetar aplicar destinar reservar separar
-00724492-v importar_(se)_ preocupar_(se)_
+00724492-v importar preocupar
 00724596-a procurado
 00724664-v precaver precaver-se ter_cuidado tomar_cuidado
 00724832-v admirar assombrar espantar estontear surpreender
@@ -6871,7 +6871,7 @@
 00727743-n guard
 00727791-v acreditar agradecer atribuir dar_credito reconhecer
 00727991-v culpar
-00728224-v registar registrar_
+00728224-v registar registrar
 00728225-a autónomo
 00728393-v impressionar marcar
 00728431-a autónomo autônomo
@@ -7178,7 +7178,7 @@
 00770141-v arredar demover dissuadir
 00770270-n contravenção delito desmando desobediência falta ilegalidade infracção infração ofensa transgressão violação
 00770316-a imediato
-00770437-v abrir causar estimular fazer induzir levar provocar resultar_(em) tornar
+00770437-v abrir causar estimular fazer induzir levar provocar resultar tornar
 00770480-a direto
 00770543-n violação
 00770834-n pirataria_moderna
@@ -7548,7 +7548,7 @@
 00824321-a ocidental
 00824631-a ocidental
 00824753-a ocidental
-00824767-v acoimar acusar admoestar amaldiçoar anatematizar arguir atacar berrar bombar brigar buzinar cardar causticar censurar chegar chumbar condenar contestar criticar deplorar desaprovar descascar descompor destoar difamar dizer_mal_(de) escarnecer esculhambar estender estranhar exprobar exprobrar ferretoar glosar gritar injuriar insultar invetivar lastimar maldizer malhar morder murmurar objurgar opor-se ralhar recriminar refutar remocar remorder repreender reprimendar reprimir reprovar ser_contra tachar tesoirar tesourar traquejar trautear unhar verberar vituperar vociferar zoar zurzir
+00824767-v acoimar acusar admoestar amaldiçoar anatematizar arguir atacar berrar bombar brigar buzinar cardar causticar censurar chegar chumbar condenar contestar criticar deplorar desaprovar descascar descompor destoar difamar dizer_mal escarnecer esculhambar estender estranhar exprobar exprobrar ferretoar glosar gritar injuriar insultar invetivar lastimar maldizer malhar morder murmurar objurgar opor-se ralhar recriminar refutar remocar remorder repreender reprimendar reprimir reprovar ser_contra tachar tesoirar tesourar traquejar trautear unhar verberar vituperar vociferar zoar zurzir
 00825089-a ocidental
 00825331-n aikido
 00825375-a ocidental
@@ -7592,7 +7592,7 @@
 00830981-a analfabeto ignorante iletrado
 00831074-v advertir informar instruir
 00831191-n fôlego respiração
-00831225-a _iletrado ignorante néscio
+00831225-a ignorante iletrado néscio
 00831476-v interrogar
 00831651-v comunicar informar noticiar
 00831782-n respiração
@@ -8194,7 +8194,7 @@
 00910533-n playback
 00910555-v protestar
 00910891-v lamentar reclamar
-00910973-v gritar protestar_(contra) queixar-se reclamar
+00910973-v gritar protestar queixar-se reclamar
 00911048-n construção edificação edifício ereção fabricação feitura imóvel prédio
 00911091-a nivelado
 00911327-a desigual desnivelado despadronizado desuniforme irregular
@@ -8398,7 +8398,7 @@
 00935264-v revelar
 00935359-a insignificante inútil
 00935456-v sair_do_armário
-00935608-n decantação decantação_(floculação)
+00935608-n decantação
 00935631-v desmascarar
 00935827-v anunciar
 00935940-n desenho
@@ -8939,7 +8939,7 @@
 01011031-v afirmar jurar
 01011166-n lista relação tabela
 01011392-a arquetípico
-01011425-n inventário inventários_(elaboração)
+01011425-n inventário inventários
 01011542-v protestar
 01011725-v afirmar
 01011883-n chamada
@@ -9540,7 +9540,7 @@
 01090117-n esmola
 01090225-n esmola
 01090308-a funcional
-01090335-v batalhar brigar combater debater-se esforçar-se_(por) guerrear lidar lutar pelejar renhir travar
+01090335-v batalhar brigar combater debater-se esforçar-se guerrear lidar lutar pelejar renhir travar
 01090446-n comercialismo comércio mercantilismo
 01090593-a estrutural
 01090820-a útil
@@ -9797,7 +9797,7 @@
 01126846-v bloquear
 01126856-n aprovação promulgação
 01126961-v bloquear cortar
-01127019-n aplicação coerção cumprimento cumprimento_(legal) execução imposição observação
+01127019-n aplicação coerção cumprimento execução imposição observação
 01127075-v barrar fazer_barricadas
 01127147-a horrível
 01127245-n coacção
@@ -9907,7 +9907,7 @@
 01140290-a ligeiro
 01140315-v pescar_vieiras
 01140471-n comissão delegação mandato
-01140514-a _esquisito estranho
+01140514-a esquisito estranho
 01140658-n mandato
 01140794-v catar pescar
 01140839-n delegação
@@ -9958,7 +9958,7 @@
 01147060-v bloquear defletir impedir
 01147135-n prisão_domiciliar
 01147433-a haplóide
-01147451-n contenção contenção_(indústria_nuclear)
+01147451-n contenção
 01147622-a diplóide
 01147950-n supressão
 01148101-v canelar
@@ -10251,7 +10251,7 @@
 01185292-n adoção
 01185304-v almoçar comer
 01185475-v alimentar
-01185611-n apelação apelo recurso recursos_(legislação)
+01185611-n apelação apelo recurso recursos
 01185740-v desjejuar
 01185875-v fornecer_café_da_manhã
 01185916-a maciço sólido
@@ -10356,7 +10356,7 @@
 01199881-v acender_cigarro fumar
 01200095-a coerente uniforme
 01200339-a sólido
-01200440-v drogar_(se)
+01200440-v drogar
 01200806-v dopar drogar_se
 01201021-n separação
 01201089-v mascar mastigar
@@ -10658,7 +10658,7 @@
 01240432-n mediação
 01240720-v raspar roçar tocar
 01240850-n neutralidade
-01240931-a rega_(pulverização)
+01240931-a rega
 01240935-v aguilhoar atiçar
 01240979-n anulação
 01241073-v aguilhoar
@@ -10761,7 +10761,7 @@
 01253022-a frigorífico
 01253060-n emanação emissão
 01253592-a gelado gélido
-01253661-a refrigerante_(mecânica)
+01253661-a refrigerante
 01253778-n harmonização
 01253808-v escoriar
 01254253-n separação
@@ -11041,7 +11041,7 @@
 01300508-n ypres
 01300661-a disciplinar
 01300937-v reprimir
-01301051-v constrangir conter_ restringir
+01301051-v constrangir conter restringir
 01301230-v tolher
 01301316-a grave inclemente rigoroso severo
 01301410-v aguentar agüentar confinar conter reter sujeitar
@@ -11234,7 +11234,7 @@
 01327028-n anaeróbio
 01327133-v fazerdormir
 01327301-v liquidar neutralizar
-01327322-n _mestiço cruzamento híbrido
+01327322-n cruzamento híbrido mestiço
 01327582-v eliminar erradicar exterminar extinguir suprimir
 01327816-v prender
 01328012-v capturar prender
@@ -12672,7 +12672,7 @@
 01562733-v colidir
 01562992-a voador
 01563005-v dividir secionar segmentar
-01563147-a chaminés_(indústria) chaminés_indústria
+01563147-a chaminés chaminés_indústria
 01563336-v separar_em_sílabas
 01563349-a cinético
 01563494-a móvel
@@ -13495,7 +13495,7 @@
 01691687-a iconoclástico
 01691927-v sobreescrever
 01692143-n helodermatidae
-01692222-a _ao_ar_livre exterior externo
+01692222-a ao_ar_livre exterior externo
 01692333-n monstro-de-gila monstro_de_gila
 01692579-v caracter_alfabético
 01692713-n lacertidae
@@ -15310,7 +15310,7 @@
 01967803-a cíclico
 01968033-a diário
 01968165-a diário
-01968275-v _saltar_de_paraquedas pular_de_paraquedas
+01968275-v pular_de_paraquedas saltar_de_paraquedas
 01968315-n cefalopodes cefalópodes
 01968352-a noturno
 01968503-a semanal
@@ -15991,7 +15991,7 @@
 02074929-a doido doidão imprudente insensato lelé lelé_da_cuca louco pirado sandeu
 02075049-v correr escapar escapulir fugir
 02075321-a louco
-02075462-v abalar azular bazar cavar dar_azo_(a) debandar derreter desalvorar desandar desarvorar desopilar desviar-se escamar escapar escapulir-se escoar-se esquipar evadir-se fugir grimpar lascar pirar pirar-se pisgar-se raspar raspar-se safar-se sumir-se voar zagaiar
+02075462-v abalar azular bazar cavar dar_azo debandar derreter desalvorar desandar desarvorar desopilar desviar-se escamar escapar escapulir-se escoar-se esquipar evadir-se fugir grimpar lascar pirar pirar-se pisgar-se raspar raspar-se safar-se sumir-se voar zagaiar
 02075594-a certificável
 02075612-n omnívoro
 02075737-a estúpido
@@ -16807,8 +16807,8 @@
 02200630-n mosquito
 02200686-v cadastrar dar dar_de_presente descadastrar entregar oferecer presentear regalar
 02200705-n aedes
-02200850-n aedes_(stegomyia)_aegypti aedes_aegypti aëdes_aegypti
-02201000-n aedes_(stegomyia)_albopictus aedes_albopictus
+02200850-n aedes aedes_aegypti aëdes_aegypti
+02201000-n aedes aedes_albopictus
 02201252-n anopheles
 02201268-v dotar
 02201644-v distribuir repartir
@@ -16967,12 +16967,12 @@
 02224055-v livrar remover retirar sacar tirar
 02224466-n mastotermes_darwiniensis
 02224945-v jogar_fora mandar_embora
-02225204-v jogar_fora jogar_no_lixo livrar-se_de_
+02225204-v jogar_fora jogar_no_lixo livrar-se_de
 02225342-v aposentar retirar
 02225492-v conservar guardar manter poupar preservar salvar
 02225959-n orthoptera
 02226028-a cumplido cumprido realizado
-02226162-a adestrado ajeitado ardiloso arguto barra batido calejado_( competente conhecedor conhecido consumado desembaraçado desenrascado encanecido encartado entendedor entendido espada especialista esperto estratégico exercitado expedito experiente experimentado experto habilidoso hábil louvado matraqueado mestre perito professo prático rodado sabedor sábio técnico versado veterano vivido
+02226162-a adestrado ajeitado ardiloso arguto barra batido calejado competente conhecedor conhecido consumado desembaraçado desenrascado encanecido encartado entendedor entendido espada especialista esperto estratégico exercitado expedito experiente experimentado experto habilidoso hábil louvado matraqueado mestre perito professo prático rodado sabedor sábio técnico versado veterano vivido
 02226183-n ortópteros
 02226429-n gafanhoto
 02226598-n acrididae
@@ -17199,7 +17199,7 @@
 02265560-v debitar
 02265726-v confiar fiar
 02265815-a hidrossolúvel
-02265979-v _poupar economizar poupar
+02265979-v economizar poupar
 02266145-a solúvel
 02266351-a questionável
 02266580-n sialidae
@@ -17242,7 +17242,7 @@
 02272871-n bichas-cadelas dermaptera
 02272938-v reconquistar
 02273120-n forficulidae
-02273293-v apoderar-se_(de) apossar-se_(de) apreender arrestar confiscar
+02273293-v apoderar-se apossar-se apreender arrestar confiscar
 02273326-a digno_de_confiança sólido
 02273392-n forficula_auricularia
 02273545-n lepidoptera
@@ -18096,7 +18096,7 @@
 02406166-a inquieto nervoso
 02406370-a irritável nervoso tenso
 02406449-v derrubar expulsar substituir
-02406585-v acontecer seguir suceder vir_depois_de_
+02406585-v acontecer seguir suceder vir_depois_de
 02406647-n charolais
 02406749-n gado_jersey
 02406790-a isotônico
@@ -18628,7 +18628,7 @@
 02481819-v confiar
 02481823-n chimpancé chimpanzé chimpanzé-comum chimpanzé_comum jocó pongo
 02481900-v integrar
-02482425-v abater acabar_(com) aniquilar assassinar aviar cometer_homicídio despachar destruir eliminar liquidar matar remover vindimar
+02482425-v abater acabar aniquilar assassinar aviar cometer_homicídio despachar destruir eliminar liquidar matar remover vindimar
 02482644-a seccionado
 02482650-n bonobo
 02482932-a trifurcada trifurcado
@@ -20425,7 +20425,7 @@
 02745555-a ideológico
 02745739-a idiopático
 02745862-a imune
-02746140-v ser_melhor superar_
+02746140-v ser_melhor superar
 02746275-v ter
 02746290-a imunológico
 02746365-n arma armas artilharia
@@ -21661,7 +21661,7 @@
 02955216-a revivalista
 02955247-n capacitor condensador
 02955358-a luterano
-02955540-n armadilhas armadilhas_(animais)
+02955540-n armadilhas
 02955562-a metodista
 02955767-n manto
 02955806-a mórmon
@@ -22999,7 +22999,7 @@
 03236217-n draga
 03236735-n hábito vestido
 03237416-n cartola
-03237639-n _curativo atadura
+03237639-n atadura curativo
 03237839-n frasqueira
 03237992-n roupão
 03238131-n banheiro camarim casa_de_banho
@@ -23041,7 +23041,7 @@
 03260293-n dinamite
 03260504-n dinamo dínamo
 03260733-n dinamómetro dinamômetro
-03261395-n sistemas_de_alerta_(imediato)
+03261395-n sistemas_de_alerta
 03261603-n abafador
 03261776-n auricular estetoscópio fone_de_cabeça fone_de_ouvido
 03262072-n protetor_auricular
@@ -24369,7 +24369,7 @@
 03861959-n arte_bruta
 03862531-n salão_oval
 03862676-n forno fornos
-03863108-n _macacão jardineira
+03863108-n jardineira macacão
 03863262-n macacão
 03864356-n colapso
 03864692-n retroprojector retroprojetor
@@ -24479,7 +24479,7 @@
 03910033-n penicilina
 03910723-n benzilpenicilina
 03911513-n cárcere penitenciaria penitenciária presídio
-03911658-n canivete canivete_(suíço) canivete_suíço
+03911658-n canivete canivete_suíço
 03912218-n flauta_irlandesa
 03912328-n pentaeritritol
 03912664-n pentazocina
@@ -24516,7 +24516,7 @@
 03924407-n fotocátodo
 03924679-n fotocopiadora
 03924811-n fotocópia xérox
-03925226-n desenho exposição figura foto fotografia fotografia_(imagem) ilustração imagem retrato
+03925226-n desenho exposição figura foto fotografia ilustração imagem retrato
 03926412-n papel_fotográfico
 03926876-n fotómetro fotômetro
 03927201-n fotomontagem
@@ -24579,7 +24579,7 @@
 03955941-n planetário
 03956157-n planetário
 03956785-n agenda
-03956922-n fábrica planta produtos_industriais_(plantas) usina
+03956922-n fábrica planta produtos_industriais usina
 03957420-n diaquilão
 03957567-n gesso
 03958097-n artes_plásticas
@@ -24687,7 +24687,7 @@
 04006584-n probenecida
 04006727-n procaína
 04007894-n bens produto produtos produção produções
-04008385-n _linha_de_produção linha_de_montagem
+04008385-n linha_de_montagem linha_de_produção
 04008634-n míssil projéctil projétil
 04008947-n projeção
 04009382-n projecção projeção
@@ -25058,7 +25058,7 @@
 04180888-n sextante
 04181228-n algema cadeia grilhão
 04181561-n manilha
-04182322-n _haste cabo vara
+04182322-n cabo haste vara
 04182514-n chaminé poço
 04183329-n chocalho
 04183516-n champô xampu
@@ -25103,7 +25103,7 @@
 04200908-n forma
 04201064-n shofar
 04201845-n carreira_de_tiro carreiras_de_tiro
-04202417-n armazém comércio estabelecimento loja lojas mercearia quitanda_( tenda
+04202417-n armazém comércio estabelecimento loja lojas mercearia quitanda tenda
 04204347-n carrinho_de_supermercado
 04204755-n curto-circuito curto_circuito
 04204953-n atalho tecla_de_atalho
@@ -25765,7 +25765,7 @@
 04525584-n persiana veneziana
 04525821-n diagrama_de_venn
 04526241-n espiráculo
-04526520-n ventilação ventilação_(processos_industriais)
+04526520-n ventilação
 04526964-n circulador_de_ar exaustor ventilador ventilador_pulmonar
 04527648-n galeria varanda
 04528079-n azinhavre zinabre
@@ -25989,7 +25989,7 @@
 04622772-n isolamento
 04622932-n intimidade privacidade
 04623113-n naturaleza natureza índole
-04623612-n _temperamento caráter compleição disposição feitio génio natureza personalidade temperamento índole
+04623612-n caráter compleição disposição feitio génio natureza personalidade temperamento índole
 04624826-n coração espírito ânimo
 04624959-n nervosismo
 04625129-n moral
@@ -26286,7 +26286,7 @@
 04754237-n determinação segurança
 04754440-n conclusão finalidade
 04754780-n garantia segurança
-04755466-n demonstrabilidade demonstrabilidade_(ciência) demonstração prova teste
+04755466-n demonstrabilidade demonstração prova teste
 04756025-n previsibilidade
 04756172-n probabilidade
 04756504-n chance chances
@@ -26927,7 +26927,7 @@
 05025935-n massa_atomica massa_atómica massa_atômica peso_atômico
 05026508-n equivalente
 05026843-n peso
-05027135-n peso peso_(aspectos_físicos)
+05027135-n peso
 05028700-n ante-projecto leveza microgravidade
 05029137-n quantidade_de_movimento_linear
 05029327-n momento_angular
@@ -27071,7 +27071,7 @@
 05086450-n distancia_focal distância_focal
 05086740-n salto
 05087173-n distância
-05087297-n dispersão_(processos_físico-químicos)
+05087297-n dispersão
 05087894-n diáspora
 05088056-n difusão disseminação
 05088189-n inervação
@@ -27201,7 +27201,7 @@
 05147237-n ocasião um_e_noventa_e_nove
 05147381-n fecundidade
 05147586-n riqueza
-05147940-n produtividade rendimento_(economia)
+05147940-n produtividade rendimento
 05148186-n aridez aspereza esterilidade secura
 05148399-n indigencia pobreza
 05148699-n proveito utilidade
@@ -27253,7 +27253,7 @@
 05162985-n perda prejuízo privação
 05163807-n custo importe preço
 05164521-n desvantagem inconveniente obstáculo
-05164673-n _pegadinha artifício
+05164673-n artifício pegadinha
 05164845-n sanção
 05165175-n inferioridade
 05166397-n veneno venenos
@@ -27270,7 +27270,7 @@
 05171800-n urgência
 05172322-n magnitude peso
 05173579-n insignificância
-05174653-n direito direito_(ordenamento_jurídico)
+05174653-n direito
 05175467-n acesso
 05175904-n reclamo reivindicação
 05176188-n aceitação acesso adesão admissão admitância entrada reconhecimento
@@ -27279,7 +27279,7 @@
 05178394-n preempção
 05178571-n direito_de_preferência_na_aquisição direito_de_preferência_na_compra preempção
 05178715-n direito_exclusivo prerrogativa privilégio
-05179180-n servidão servidão_(legal)
+05179180-n servidão
 05179567-n privilégio
 05181199-n direito
 05182563-n direitos_do_cidadão
@@ -27761,7 +27761,7 @@
 05415395-n muco
 05415815-n escarro muco sputa
 05416048-n muco
-05416128-n macaco_(fig.)
+05416128-n macaco
 05416198-n cuspe cuspo saliva
 05416678-n baba cuspo saliva
 05417162-n esmegma
@@ -28331,7 +28331,7 @@
 05640729-n conhecimento especialidade especializado perícia
 05641556-n coordenação
 05641959-n controle controlo domínio
-05642175-n _competência facilidade habilidade
+05642175-n competência facilidade habilidade
 05642678-n toque_final
 05642815-n destreza habilidade
 05642947-n fluência
@@ -28498,7 +28498,7 @@
 05706954-n omissão
 05707269-n elisão excepção exceção exclusão
 05707495-n intuição
-05707718-n _intuição emoção sensação sentimento
+05707718-n emoção intuição sensação sentimento
 05708030-n gnose
 05708207-n sexto_sentido
 05708432-n percepção
@@ -28509,7 +28509,7 @@
 05710687-n detecção identificação
 05710860-n percepção_visual visão
 05711084-n contraste
-05711503-n audição_(sentidos)
+05711503-n audição
 05711915-n melodia
 05712076-n sensação
 05712426-n gatilho
@@ -28591,7 +28591,7 @@
 05747582-n nova_avaliação reavaliação
 05747815-n balanço
 05748054-n discriminação
-05748285-n diferenciação diferenciação_(biologia) distinção
+05748285-n diferenciação distinção
 05748614-n contraposição
 05748786-n contraste demarcaçao demarcação linha
 05749402-n individualização
@@ -28748,7 +28748,7 @@
 05802730-n interpolação
 05802912-n conversão
 05803212-n digitalização
-05803379-n _aproximação _estimativa aproximação estimativa ideia
+05803379-n aproximação estimativa ideia
 05803747-n nota_de_risco
 05803938-n conjetura
 05805277-n previsão
@@ -28758,7 +28758,7 @@
 05806623-n apreciação apreço compreensão
 05807012-n senso sentido
 05807147-n discernimento
-05807306-n _insight _lampejo epifania ideia idéia intuição
+05807306-n epifania ideia idéia insight intuição lampejo
 05807540-n compreensão entendimento reconhecimento
 05807933-n luz
 05808102-n revelação
@@ -28838,7 +28838,7 @@
 05837370-n insídia
 05837850-n ideia idéia opinião pensamento view
 05837957-n ideia julgamento juízo opinião parecer
-05838176-n decisão determinação resolução resoluções resoluções_(legislação)
+05838176-n decisão determinação resolução resoluções
 05838765-n categoria classe família
 05839024-n casta categoria classe condição espécie espécies forma género nação raça simulacro sorte tipo
 05839776-n rubrica
@@ -29106,7 +29106,7 @@
 05942579-n analogia
 05942888-n certeza convicção fé
 05943066-n confiança fé
-05943300-n catecismo catequese doutrina doutrina_(direito) evangelho filosofia sistema teoria
+05943300-n catecismo catequese doutrina evangelho filosofia sistema teoria
 05944686-n filosofia
 05944958-n expectativa expetativa perspectiva
 05945642-n ideia idéia opinião parecer pensamento perspicácia visão
@@ -29605,7 +29605,7 @@
 06148148-n ciência_política política
 06148748-n geopolitica geopolítica
 06149038-n realpolitik
-06149484-n economia economia_(ciência)
+06149484-n economia
 06150222-n teoria_dos_jogos
 06150449-n econometria
 06150933-n macroeconomia
@@ -29663,7 +29663,7 @@
 06169050-n diacronia linguística_histórica lingüística_histórica
 06169285-n literatura
 06169488-n literatura
-06169806-n criticismo_literário literatura_(avaliação)
+06169806-n criticismo_literário literatura
 06170498-n retorica retórica
 06170892-n biblioteconomia biblioteconomia_e_ciência_da_informação
 06171040-n filologia linguística lingüística
@@ -29891,7 +29891,7 @@
 06253140-n difusão divulgação
 06253518-n propagação
 06253690-n mensagem
-06254007-n difusão mensagem_(de_rádio_ou_tv)
+06254007-n difusão mensagem
 06254475-n meio médio
 06254669-n meios_de_comunicação mídia
 06254915-n éter
@@ -30534,7 +30534,7 @@
 06490743-n sub-directório subdirectório subdiretório
 06490887-n enumeração
 06491026-n faq
-06491786-n índice índices_(parâmetros)
+06491786-n índice índices
 06492188-n chave
 06492320-n palavra-chave
 06492664-n arrolamente inventário inventários
@@ -30595,7 +30595,7 @@
 06512580-n candidatura pedido solicitação solicitude
 06513366-n abaixo-assinado apelo instância pedido petição requerimento requisição solicitação
 06513624-n memorial
-06513764-n _solicitação apelo colecta coleção recolha
+06513764-n apelo colecta coleção recolha solicitação
 06514093-n crónica crônica história
 06514529-n história_antiga história_da_antiguidade
 06514621-n etimologia
@@ -30964,7 +30964,7 @@
 06660942-n política_externa
 06661243-n brinkmanship
 06661396-n imperialismo
-06661562-n _interferência intervenção
+06661562-n interferência intervenção
 06662193-n isolacionismo
 06662366-n doutrina_monroe
 06662522-n doutrina_truman
@@ -31043,7 +31043,7 @@
 06689297-n aprovação autorização consenso consentimento permissão sanção
 06689667-n consentimento
 06689948-n sinal_verde
-06690408-n _laissez-passer passe
+06690408-n laissez-passer passe
 06690647-n cartão_de_embarque
 06691083-n passaporte
 06691267-n salvaguarda salvo-conduto
@@ -31088,7 +31088,7 @@
 06709692-n reprovação
 06709998-n censura reprovação
 06710546-n crítica
-06711159-n _fogo ataque
+06711159-n ataque fogo
 06711855-n admoestação censura descompostura repreensão reprimenda
 06712325-n pregação sermão
 06712761-n censura
@@ -31107,7 +31107,7 @@
 06720600-n aleive aleivosia calúnia injúria
 06720964-n epíteto nome
 06721604-n invectiva vitupério
-06721813-n _insolência descaramento impertinência
+06721813-n descaramento impertinência insolência
 06721949-n boca embocadura lábio mossa
 06722453-n afirmação declaração descrição
 06723452-n expressão
@@ -31225,7 +31225,7 @@
 06766544-n alusão menção referência
 06767035-n ideia idéia observação pensamento reflexão
 06767512-n lei_de_parkinson
-06767777-n _gracejo _piada chacota saída xiste
+06767777-n chacota gracejo piada saída xiste
 06768394-n bujão
 06768528-n pergunta_retórica
 06769392-n erro
@@ -31742,7 +31742,7 @@
 06946497-n línguas_germânicas
 06946823-n línguas_germânicas_ocidentais
 06947032-n inglês lingua_inglesa língua_inglesa
-06947479-n americano inglês_(estados_unidos) inglês_americano inglês_estadunidense
+06947479-n americano inglês inglês_americano inglês_estadunidense
 06947658-n inglês_vernáculo_afro-americano
 06948761-n inglês_médio língua_inglesa_média
 06948943-n midlands_oriental
@@ -31812,7 +31812,7 @@
 06965406-n língua_occitana occitano
 06965580-n francês_antigo
 06965834-n anglo-normando língua_anglo-normanda
-06965961-n francês_(canadá)
+06965961-n francês
 06966070-n língua_valona valão
 06966190-n occitano occitânica occitânico
 06966310-n língua_portuguesa português
@@ -32367,7 +32367,7 @@
 07161741-n proposta proposta_de_casamento
 07161912-n oferta proposição proposta
 07162059-n pergunta
-07162194-n fornecimento_(comércio) proposição proposta
+07162194-n fornecimento proposição proposta
 07162545-n hipótese
 07162680-n oferta proposição proposta sugestão
 07162975-n introdução
@@ -32381,7 +32381,7 @@
 07166281-n recompensa
 07167041-n preço
 07167415-n apresentação
-07167578-n _entrada submissão
+07167578-n entrada submissão
 07168131-n comando ordem orden
 07168486-n contra-ordem
 07168623-n ordem
@@ -34350,7 +34350,7 @@
 07934800-n darjeeling
 07935152-n chá_verde
 07935379-n oolong
-07935504-n h2o água água_(substância)
+07935504-n h2o água
 07936015-n água_das_nascentes
 07936177-n água_da_torneira água_encanada
 07936263-n água_potável
@@ -35115,7 +35115,7 @@
 08309409-n concílio conselho
 08309754-n foro fórum
 08310389-n encontro festa reunião
-08310949-n conselho conselho_(administrativo)
+08310949-n conselho
 08312359-n cimeira conferência cúpula
 08312559-n concílio
 08312988-n concílios_ecuménicos concílios_ecuménicos_católicos concílios_ecumênicos_católicos
@@ -35271,7 +35271,7 @@
 08384342-n federal_deposit_insurance_corporation
 08384539-n freddie_mac
 08384738-n fannie_mae
-08385009-n _hora_marcada compromisso data encontro
+08385009-n compromisso data encontro hora_marcada
 08385280-n visita
 08385717-n encontro
 08386555-n elite escol
@@ -35388,7 +35388,7 @@
 08436288-n corpo
 08436562-n ofício ordem
 08436759-n coberto_vegetal flora vegetaçao vegetação
-08437515-n arvoredo_(talhadia)
+08437515-n arvoredo
 08437968-n bosquezinho
 08438223-n chaparral
 08438533-n bosque floresta madeira mata
@@ -35586,7 +35586,7 @@
 08542081-n zonas_climáticas
 08542304-n bens_comunais
 08542634-n confluencia
-08543625-n centro_da_cidade_(degradado) inner_city
+08543625-n centro_da_cidade inner_city
 08543916-n cinturão_do_milho
 08544125-n espiga sabugo
 08544419-n quina rincão
@@ -35707,7 +35707,7 @@
 08586218-n ponto_quente
 08586330-n ponto_quente
 08586825-n sede
-08587174-n reserva reservas reservas_(ecologia)
+08587174-n reserva reservas
 08587328-n reserva_indígena
 08587709-n distrito_escolar
 08587828-n condado shire
@@ -35873,7 +35873,7 @@
 08643499-n camp_david
 08643648-n canto
 08643729-n ninho
-08643933-n refúgio refúgios refúgios_(ecologia) segurança
+08643933-n refúgio refúgios segurança
 08644552-n rubicão
 08644722-n campo zona_rural áreas_rurais
 08645033-n campo interior roça áreas_rurais
@@ -35964,7 +35964,7 @@
 08684191-n área_de_trabalho
 08684769-n zénite zênite
 08685188-n zodíaco
-08685677-n _signo_ _signo_do_zodíaco casa_astral
+08685677-n casa_astral signo signo_do_zodíaco
 08686129-n áries
 08686332-n constelação_de_taurus taurus touro
 08686495-n gémeos gêmeos
@@ -37903,7 +37903,7 @@
 09232989-n canis_minor constelação_de_canis_minor
 09233134-n canopus
 09233284-n cordilheira_cantábrica
-09233446-n canhão canhão_(geologia) cânions desfiladeiro
+09233446-n canhão cânions desfiladeiro
 09233715-n cabo
 09234104-n cabo_canaveral
 09234374-n baía_de_cape_cod
@@ -38226,7 +38226,7 @@
 09333706-n lago_urmia
 09333905-n lago_vänern
 09334049-n lago_vitória
-09334396-n chão herdade relevo relevo_(geografia) solo terra terra_firme tierra
+09334396-n chão herdade relevo solo terra terra_firme tierra
 09335240-n chão solo solos terra
 09335809-n aterro aterro_sanitário
 09335916-n continente
@@ -40169,7 +40169,7 @@
 10044879-n chefe_de_reportagem editor editor_chefe redator redator_chefe
 10045454-n educador
 10045713-n educacionista educador pedagogo
-10046387-n alguém_pertencente_a_(ou_como_se_pertencente_a)_época_de_edward_vii eduardiano
+10046387-n alguém_pertencente_a eduardiano
 10047459-n egoísta
 10047822-n egiptólogo egiptólogos
 10048117-n ejaculador
@@ -40661,7 +40661,7 @@
 10271124-n long_shot
 10271216-n amparo cuidado cívico escolta guarda policiamento polícia porteiro ronda santificar segurança sentinela vedeta vigia vigilante vigilância vigília
 10271677-n lorde nobre senhor
-10273064-n _fracassado perdedor
+10273064-n fracassado perdedor
 10273572-n mané underdog
 10273669-n departamento_de_lot lot
 10274639-n bobo estúpido idiota ignaro ignorante néscio parvo tolo
@@ -41019,7 +41019,7 @@
 10453357-n pobre
 10453533-n farinha padre-santo papa pontífice santo_padre sumo_pontífice
 10455094-n pornógrafo
-10455447-n _carregador
+10455447-n carregador
 10455619-n retratista
 10456138-n positivista
 10457597-n postulador
@@ -43733,7 +43733,7 @@
 11416722-n repercussão
 11416988-n resposta resultado
 11417129-n reação
-11417387-n efeito_secundário efeito_secundário_(química)
+11417387-n efeito_secundário
 11417561-n motor
 11418138-n acaso azar casualidade coincidência contingência ensejo fortuna inadvertidamente irrefletidamente sorte
 11418460-n fortuna sorte
@@ -43808,7 +43808,7 @@
 11444117-n morte
 11444643-n decomposição descomposição
 11444816-n deiscência
-11445395-n aluvião depósito sedimentação sedimentação_(geologia) sedimentação_(processo_industrial)
+11445395-n aluvião depósito sedimentação
 11445564-n descamação
 11445753-n exfoliação
 11446067-n filão veia veio
@@ -43916,7 +43916,7 @@
 11480521-n paramagnetismo
 11480930-n som
 11481209-n ultra-sons
-11481334-n trajectória trajectória_(parâmetro) trajetória
+11481334-n trajectória trajetória
 11481487-n balística
 11482013-n energia_mecânica
 11482140-n degelo
@@ -44041,7 +44041,7 @@
 11524110-n vulcanismo
 11524324-n tromba_de_água
 11524451-n onda
-11524662-n clima condições_meteorológicas fenómenos_meteorológicos tempo tempo_(meteorologia) vento
+11524662-n clima condições_meteorológicas fenómenos_meteorológicos tempo vento
 11525779-n redemoinho turbilhão
 11525955-n ar vento
 11526894-n energia_eólica
@@ -46293,7 +46293,7 @@
 13084834-n cultivar
 13084993-n plantas_cultivadas
 13085113-n erva_daninha ervas_daninhas maconha
-13085864-n colheita colheitas cultura rendimento_(agricultura) safra
+13085864-n colheita colheitas cultura rendimento safra
 13086063-n culturas_de_rendimento
 13086908-n componentes_das_plantas fragmento parte
 13087625-n órgão
@@ -46497,7 +46497,7 @@
 13270545-n dízimo
 13270906-n contribuição__política
 13271320-n dotação
-13271498-n enriquecimento enriquecimento_(nutrientes)
+13271498-n enriquecimento
 13271631-n património patrimônio
 13271937-n doação presente
 13272059-n prémio recompensa
@@ -46531,7 +46531,7 @@
 13285176-n atribuição parte percentagem
 13285855-n esmola
 13286099-n porção ração tranche
-13286254-n _mesada pensão
+13286254-n mesada pensão
 13286524-n fatia parte pedaço quinhão
 13286801-n interesse participação
 13289159-n participação_nos_lucros proveito
@@ -46588,7 +46588,7 @@
 13320045-n usura
 13320168-n custo estipêndio honorário remunerações tarifa taxa
 13320860-n comissão
-13321495-n _preço_de_entrada admissão entrada
+13321495-n admissão entrada preço_de_entrada
 13323460-n quid_pro_quo
 13323749-n pedágio portagem
 13324297-n prémio ágio
@@ -46696,7 +46696,7 @@
 13378518-n crédito
 13379753-n carta_de_crédito cartadecrédito
 13380820-n ordem_de_pagamento
-13381145-n _depósito_bancário depósito depósito_ rendimento
+13381145-n depósito depósito_bancário rendimento
 13381734-n cheque
 13382975-n contra-cheque
 13383696-n assinaturaembranco cartabranca
@@ -46752,7 +46752,7 @@
 13405962-n contabilidade sistemas_de_contabilidade
 13408023-n dividendo
 13408980-n balanço
-13409160-n saldo_(económico)
+13409160-n saldo
 13409363-n balança_comercial
 13410458-n balanço_de_pagamentos
 13410803-n conta_corrente
@@ -46853,7 +46853,7 @@
 13450206-n combustão
 13450417-n deflagração
 13450862-n operação_informática
-13451348-n condensação_(processo)
+13451348-n condensação
 13451804-n consumo
 13452347-n convalescência recuperação
 13452614-n convecção
@@ -47084,7 +47084,7 @@
 13545627-n radiolise
 13545973-n passeio_aleatório
 13546169-n racionalização
-13547677-n redução redução_(química)
+13547677-n redução
 13547925-n renovação substituição
 13548105-n refinação
 13548531-n arrefecimento esfriamento referigeração refrigeração
@@ -47092,7 +47092,7 @@
 13548931-n regressão
 13549672-n libertação
 13550089-n repressão
-13550318-n reprodução reprodução_(biologia)
+13550318-n reprodução
 13550504-n ressorção
 13551396-n reabsorção recaptação recaptação_neuronal
 13551617-n reversibilidade
@@ -47113,7 +47113,7 @@
 13558003-n erosão_do_solo
 13558125-n solvatação
 13558325-n processo_solvay
-13558490-n adsorção sorção sorção_(processos_químicos)
+13558490-n adsorção sorção
 13558696-n classificação
 13558953-n código-fonte fonte
 13559509-n espalação
@@ -47144,8 +47144,8 @@
 13568983-n tradução
 13569226-n enovelamento_de_proteínas
 13569464-n translocação
-13569774-n transpiração transpiração_(flora)
-13569905-n transpiração_(flora)
+13569774-n transpiração
+13569905-n transpiração
 13570236-n transporte
 13570574-n tumefação
 13570783-n ulceração
@@ -47848,7 +47848,7 @@
 13857676-n contradição
 13858045-n incompatibilidade
 13858270-n contrário
-13858604-n _reverso contrário inverso invés oposto reverso
+13858604-n contrário inverso invés oposto reverso
 13858833-n contrário inversão_térmica
 13859043-n alteração câmbio modificação mudança troca variação
 13859307-n diferença
@@ -47989,7 +47989,7 @@
 13901925-n lágrima
 13902229-n ondulação
 13902336-n borda
-13902482-n _pico ponta
+13902482-n pico ponta
 13902905-n quádrica quádricas
 13903079-n borda fronteira limite margem_interior
 13903387-n borda fronteira limite margem perímetro
@@ -48434,7 +48434,7 @@
 14081941-n convulsão crise
 14082303-n acidente_vascular_cerebral apoplexia avc derrame
 14082595-n convulsão
-14082788-n _paroxismo convulsão crise
+14082788-n convulsão crise paroxismo
 14083061-n clônus
 14083790-n doença_mental transtorno_mental
 14084291-n síndrome_de_asperger
@@ -48955,7 +48955,7 @@
 14310292-n síndrome_de_morte_súbita_infantil
 14310504-n tetania
 14310830-n síndrome_do_desfiladeiro_torácico
-14311977-n efeito_colateral efeito_secundário efeito_secundário_(química)
+14311977-n efeito_colateral efeito_secundário
 14312172-n abcesso abscesso apostema
 14312481-n cabeça
 14313017-n exoftalmia
@@ -49595,7 +49595,7 @@
 14539826-n seguro seguros
 14539960-n abrigo proteção
 14540318-n pax_romana
-14540765-n perigo perigos_(segurança_no_trabalho)
+14540765-n perigo perigos
 14541044-n ameaça perigo risco
 14541677-n insegurança periculosidade
 14541852-n ameaça aperto cachopo contratempo debuxo defeito desenho desvantagem esboço estorvo facada inconveniente incómodo lance mal navalhada novidade perigo prejuízo problema raio revés risca risco transtorno traça traçado
@@ -49784,7 +49784,7 @@
 14616508-n ácido_sulfónico ácido_sulfônico ácidos_sulfônicos
 14616740-n dióxido_de_titânio
 14617189-n alquila
-14618253-n base bases bases_(química) álcali
+14618253-n base bases álcali
 14619225-n átomo
 14619658-n isótopo isótopos
 14620549-n bromofórmio
@@ -51530,7 +51530,7 @@
 15239033-n monção
 15239174-n estação_seca
 15239292-n estação tempo temporada
-15239579-n estação estações_(clima) tempo temporada
+15239579-n estação estações tempo temporada
 15241507-n advento
 15242029-n quaresma
 15242209-n pentecostes
