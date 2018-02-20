@@ -471,7 +471,7 @@
 00062367-a habelencioso xurdio
 00062451-n culminación cumprimento execución realización
 00062650-r involuntariamente
-00062671-n realización realización_(persoal) realización_persoal
+00062671-n realización realización_persoal
 00062857-r consecuentemente en_consecuencia por_tanto
 00063095-v incubar
 00063172-r no_canto_de ou_se_non
@@ -4299,7 +4299,7 @@
 00781000-v continuar proseguir
 00781168-a borroso confuso desdebuxado escuro impreciso indefinido inintelixible non_nítido opaco turbio
 00781303-v dar_o_paso ir_adiante
-00781480-n furto roubo roubo_(en_tendas)
+00781480-n furto roubo
 00781685-n atraco
 00782216-a borroso
 00782518-n crime_de_guerra
@@ -4307,7 +4307,7 @@
 00782856-a centrado enfocado
 00782957-a desenfocado fóra_de_foco
 00783129-a diversificado
-00783199-n secuestro toma_de_reféns_(secuestro)
+00783199-n secuestro toma_de_reféns
 00783527-n pirataría piratería
 00783675-a non_diversificado
 00783840-a xeral
@@ -6526,7 +6526,7 @@
 01305731-v amarrar
 01305796-n revolución_mexicana
 01306358-n guerras_napoleónicas
-01306645-a ao_corrente ao_corrente_de ao_tanto ao_tanto_de de_a estar_ao_tanto_(de) informado
+01306645-a ao_corrente ao_corrente_de ao_tanto ao_tanto_de de_a estar_ao_tanto informado
 01307067-a familiarizado
 01307754-n revolución_de_febreiro
 01307896-v degradar
@@ -6931,7 +6931,7 @@
 01422243-a prealfabetizado
 01422556-a en_directo non_inventariado
 01423851-a habitable habitábel
-01424238-a de_uniforme de_uniforme_de_librea vestido_de_uniforme_(de_librea)
+01424238-a de_uniforme de_uniforme_de_librea vestido_de_uniforme
 01424420-n plasmodium_vivax
 01425529-a local
 01426077-a xeral
@@ -11459,7 +11459,7 @@
 02527271-n morea murénido
 02527498-n congro
 02527588-a solicitado
-02527622-n lamprea lamprea_(de_mar) lamprea_de_mar
+02527622-n lamprea lamprea_de_mar
 02527651-v cagala derramar escangallar escarallar estragar facela_boa fodela foder
 02527734-a innecesario superfluo
 02527813-n teleósteos
@@ -12045,7 +12045,7 @@
 02697759-n calella canella ruela
 02697911-a clerical
 02698031-a clerical de_oficina
-02698634-n caxato caxato_(de_alpinista) caxato_de_alpinista
+02698634-n caxato caxato_de_alpinista
 02699343-n alprazolam
 02699494-n altar
 02699497-v representar
@@ -12165,7 +12165,7 @@
 02732072-n acuario
 02732433-n acueduto
 02732572-n arabesco
-02732798-v aforamento ter_ ter_cabemento ter_cabida ter_capacidade
+02732798-v aforamento ter ter_cabemento ter_cabida ter_capacidade
 02732827-n ceador ramalleira
 02733075-n xardín_botánico
 02733187-a gástrico
@@ -14033,7 +14033,7 @@
 03920288-n placa_de_petri
 03920497-n torres_petronas
 03920737-n biso combinación enagua
-03920867-n banco banco_(da_igrexa) banco_da_igrexa
+03920867-n banco banco_da_igrexa
 03920989-n produto_farmacéutico
 03921209-n farmacopea
 03923379-n ampola
@@ -15611,7 +15611,7 @@
 05261310-n palla
 05261404-n pelo_facial
 05261566-n barba
-05261894-n peluxe peluxe_primeira_barba_dun_adolescente_
+05261894-n peluxe peluxe_primeira_barba_dun_adolescente
 05261999-n barba barba_imperial
 05262120-n castor
 05262185-n bigote bigoteira mostacho
@@ -22928,7 +22928,7 @@
 09196103-n amur río_amur
 09196302-n ancohuma janq'u_uma
 09196611-n andes
-09197271-n andrómeda_(constelación)
+09197271-n andrómeda
 09197432-n río_angara
 09197815-n anión
 09197945-n annapurna
@@ -24839,7 +24839,7 @@
 10413834-n penitente
 10414612-n pensionista xubilado
 10415638-n artista
-10417168-n acusado autor autor_(dun_crime) culpable culpábel reo
+10417168-n acusado autor culpable culpábel reo
 10417843-n persona_grata
 10417969-n persona_non_grata
 10418302-n personificación reencarnación
@@ -25081,7 +25081,7 @@
 10638385-n representante
 10638734-n portavoz voceira
 10638922-n deportista
-10639637-n reporteiro_(deportivo) reporteiro_deportivo
+10639637-n reporteiro reporteiro_deportivo
 10639925-n afeccionado
 10640620-n compañeiro consorte cónxuxe esposa esposo marido muller
 10641413-n corredor_de_velocidade
@@ -28713,7 +28713,7 @@
 13348456-n reaseguranza reaseguro
 13350322-n arles
 13350702-n prenda
-13352138-n crédito_(hipotecario) hipoteca
+13352138-n crédito hipoteca
 13353280-n riqueza
 13353607-n capital
 13354154-n medios
@@ -29130,7 +29130,7 @@
 13687160-n lira_turca
 13687420-n asper
 13687652-n loti
-13688033-n marco marco_(alemán) marco_alemán
+13688033-n marco marco_alemán
 13688190-n pfénnig
 13688447-n marco_finlandés markaa markka
 13688577-n penni penniä
