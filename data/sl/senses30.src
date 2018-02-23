@@ -293,7 +293,6 @@
 00043411-a aktiven
 00043480-v parfumirati
 00043609-n odlaganje odstranjevanje odvajanje
-00043615-a !?miren
 00043765-a dejanski pravi sedanji
 00043902-n zadetek
 00044076-r zato
@@ -2495,7 +2494,7 @@
 00357906-n zgostitev zgoščanje
 00358089-n drobljenje
 00358290-n drobitev drobljenje meljava mletev mletje mlin pulverizacija upraševnaje
-00358431-v !?izdahniti !?izdihniti !?preminiti biti ginevati giniti hoditi iti izdihniti končati_se miniti oditi pocrkati pogibati poginiti ponesrečiti_se poteči preminiti slabeti umirati umreti uničiti veneti
+00358431-v biti ginevati giniti hoditi iti izdihniti končati_se miniti oditi pocrkati pogibati poginiti ponesrečiti_se poteči preminiti slabeti umirati umreti uničiti veneti
 00358516-r navpik
 00358528-n iztisk
 00358678-a pozitiven
@@ -3455,7 +3454,6 @@
 00522349-a mrtev popoln
 00522441-v narediti_translacijo premakniti prevesti
 00522463-a izčrpen korenit nadroben podroben popoln temeljit
-00522613-v ???
 00522736-n predložitev
 00522751-v biti dobiti imeti izpostaviti_se nabaviti najti nastati naučiti_se prejeti pridobiti sprejemati sprejeti ugotoviti
 00522885-a cel celoten poln popoln
@@ -3673,7 +3671,7 @@
 00565302-n udarec
 00565592-v spolstiti_se
 00566298-n odboj_žogice
-00566342-a ?sosednji mejen soseden sosednji
+00566342-a mejen soseden sosednji
 00566733-a dodaten
 00566835-a povezan soroden
 00566961-a soseden
@@ -3861,7 +3859,7 @@
 00599835-v ujeti
 00599992-v brati vzeti
 00600192-a anarhičen
-00600370-v ?okupirati ?prevzeti absorbirati vsrkati zaposliti zavzemati
+00600370-v absorbirati vsrkati zaposliti zavzemati
 00600540-a neudržen neugnan neukrotljiv nezadržen nezadržljiv
 00601043-v absorbirati pogrezniti potopiti
 00601650-a divji
@@ -6953,7 +6951,6 @@
 01094398-a oblečen
 01094725-n posel poslovanje
 01095218-v biti služiti uporabljati zagotoviti
-01095581-v ???
 01095753-n komercialna_dejavnost poslovna_aktivnost poslovna_dejavnost
 01095899-v delovati predstavljati
 01095966-n posel
@@ -8131,7 +8128,7 @@
 01290255-v biti
 01290422-v biti pritrditi
 01291069-v srečati_se združiti_se
-01291517-n !?bitka_pri_platajah bitka_pri_platajah
+01291517-n bitka_pri_platajah
 01291589-a prenosen
 01291839-n poitiers
 01291941-v bližati_se približati_se zapreti
@@ -8436,7 +8433,7 @@
 01349927-a inozemski tuj
 01349948-n bacil bacillus
 01350225-a tuj zunanji
-01350226-n ?bacillus_anthracis
+01350226-n bacillus_anthracis
 01350283-v zgrabiti
 01350449-v na_silo_delati
 01350485-n bacillus_subtilis
@@ -9018,7 +9015,6 @@
 01458746-n kožica mrenica opna
 01458842-n zametek zarodek
 01458973-v ločiti se_ločiti
-01459295-a !?brezalkoholen !?brezalkoholna !?brezalkoholno
 01459755-a ljubek ljubezniv
 01459791-n fetus plod zarodek
 01459896-v skuhati
@@ -9885,7 +9881,6 @@
 01580968-a obvezen zapovedan
 01581041-n perisoreus
 01581115-a brezkoristen brezpredmeten nepotreben potreben
-01581166-n ?perisoreus_canadensis
 01581305-a nadštevilen nepotreben odvečen presežen rezerven
 01581607-n nucifraga
 01581874-n nucifraga_caryocatactes
@@ -11692,7 +11687,6 @@
 01838860-v biti
 01838961-n picus
 01839086-n picus_viridis
-01839170-v ???
 01839221-n picoides
 01839404-v leteti
 01839470-n colaptes
@@ -17079,7 +17073,7 @@
 02649689-n triglidae
 02649830-v bivati domovati ložirati nastaniti_se prebivati stanovati živeti
 02650083-a zlat zlatonosen
-02650552-v !?biti !?bivati !?domovati !?ložirati !?prebivati !?stanovati !?živeti biti nastaniti prebivati stanovati
+02650552-v biti nastaniti prebivati stanovati
 02650840-v poseliti poseljevati
 02651014-a avtorski
 02651244-a avtobiografski
@@ -18881,9 +18875,7 @@
 03054409-a katalitičen
 03054605-n kasetna_bomba
 03054978-a citronski
-03055159-n !?sklopek
 03055374-a klimatičen klimatski podneben vremenski
-03055418-n !?sklopek
 03055670-n kočija
 03055809-a spominski
 03056010-a koncesiven popustljiv spravljiv
@@ -19276,7 +19268,6 @@
 03185746-n naprava
 03186399-n diagram shema
 03186696-n sončna_ura
-03187268-n !?plošča !?pogon !?streha !?tabla
 03187972-n karo
 03188416-n diapazon
 03188531-n plenica
@@ -23784,7 +23775,6 @@
 05537576-n privesek slepič
 05537806-n danka
 05538016-n anus ritnik zadnjik zadnjična_odprtina
-05538215-n !?anus !?zadnjik
 05538494-n presredek
 05538625-n glava
 05539454-n buča
@@ -28987,7 +28977,7 @@
 08195323-n društvo_narodov
 08195797-n letalska_enota
 08196024-n vojaško_letalstvo vojno_letalstvo
-08196230-n ?vojno_letalstvo_združenih_držav_amerike vojno_letalstvo
+08196230-n vojno_letalstvo
 08196892-n vesoljsko_poveljstvo_vojnega_letalstva_zda
 08197149-n ang
 08197742-n oklepniki
@@ -30206,7 +30196,6 @@
 08838319-n guam teritorij_guam zveza_guam
 08838556-n wake
 08838716-n karolinsko_otočje
-08839296-n !?bikini
 08840749-n kiribati republika_kiribati
 08841667-n polinezija
 08843215-n borneo
@@ -30486,7 +30475,6 @@
 09008333-n kazan
 09008723-n murmansk
 09009372-n molotov perm
-09009693-n !?kazan
 09010085-n volgograd
 09010565-n omsk
 09010670-n vladivostok
@@ -39833,7 +39821,6 @@
 13752172-n bilijon
 13753274-n kvintilijon
 13754008-n pi
-13754165-n ?e
 13754293-n dodatek porast
 13756125-n zabojnik
 13757249-n korak
@@ -40618,7 +40605,7 @@
 14131950-n herpes
 14132829-n pasovec
 14132975-n norice vodene_koze
-14133159-n ?spolno_prenosljiva_bolezen spolna_bolezen
+14133159-n spolna_bolezen
 14133543-n gonoreja kapavica triper
 14133985-n lues sifilis
 14135181-n tabes
@@ -42313,7 +42300,7 @@
 15169873-n teden
 15170331-n dva_tedna štrinajst_dni
 15170504-n konec_tedna vikend
-15171307-n ?sodni_dan dan_poslednje_sodbe sodni_dan
+15171307-n dan_poslednje_sodbe sodni_dan
 15172212-n razmik
 15172423-n oddaljenost
 15172664-n vstavitev
