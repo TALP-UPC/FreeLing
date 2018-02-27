@@ -887,17 +887,17 @@ namespace freeling {
     int last, min;
     bool trob;
 
-    wcout << wstring (depth*2, ' ');
+    wcerr << wstring (depth*2, ' ');
 
     parse_tree::const_iterator pn = n->get_link();
-    wcout<<pn->get_label(); 
-    wcout<<L"/" << n->get_label() << L"/";
+    wcerr<<pn->get_label(); 
+    wcerr<<L"/" << n->get_label() << L"/";
 
     const word & w = n->get_word();
-    wcout << L"(" << w.get_form() << L" " << w.get_lemma() << L" " << w.get_tag () << L")";
+    wcerr << L"(" << w.get_form() << L" " << w.get_lemma() << L" " << w.get_tag () << L")";
   
     if (n.num_children () > 0) {
-      wcout << L" [" << endl;
+      wcerr << L" [" << endl;
     
       // Print Nodes
       for (d = n.sibling_begin (); d != n.sibling_end (); ++d)
@@ -926,9 +926,9 @@ namespace freeling {
         last = min;
       }
     
-      wcout << wstring (depth * 2, ' ') << L"]";
+      wcerr << wstring (depth * 2, ' ') << L"]";
     }
-    wcout << endl;
+    wcerr << endl;
   }
 
   ////////////////////////////////////////////////////////////////
