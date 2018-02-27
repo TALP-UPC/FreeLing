@@ -599,11 +599,32 @@ namespace freeling {
       }
       
       else if (m.is_type(mention::NOUN_PHRASE)) {
+        // gender unknown, unless we find evidence otherwise
+        gen=L'u';
+
         // if it is a noun_phrase, check head PoS tag,
         int best = m.get_sentence()->get_best_seq();
         if (fex.get_label_RE(L"TAG_NounMasc").search(m.get_head().get_tag(best))) gen=L'm';
         else if (fex.get_label_RE(L"TAG_NounFem").search(m.get_head().get_tag(best))) gen=L'f';
-        else gen=L'u';  
+
+        // PoS tag had no gender information (e.g. English), check SUMO for semantic information
+        else {
+          wstring sense;
+          int best = m.get_sentence()->get_best_seq();
+          const list<pair<wstring,double>> &ls = m.get_head().get_senses(best);
+          if (not ls.empty()) {
+            TRACE(7, L"    - semantic gender for '"<< m.get_head().get_form() << L"'");
+            // Use as class that provided by sense ranked highest by UKB that has a class
+            auto s = ls.begin();
+            while  (s!=ls.end() and gen==L'u' and s->second>=fex._MinPageRank) {
+              sense_info si = fex._Semdb->get_sense_info(s->first);
+              TRACE(7, L"      sense="<< s->first << L" (" << s->second << L") sumo="<<si.sumo );
+              if (fex.get_label_RE(L"SEM_MaleSUMO").search(si.sumo)) gen = L'm';
+              else (fex.get_label_RE(L"SEM_FemaleSUMO").search(si.sumo)) gen = L'f';
+              ++s;
+            }
+          }
+        }
       }
 
       fcache.set_feature(fid, wstring(1,gen));

@@ -52,6 +52,8 @@ NounFem ^$
 
 <SemanticFeatures>
 PersonSUMO ^(Human|Male|Female)[+=]$
+MaleSUMO ^Male[+=]$ 
+FemaleSUMO ^Female[+=]$ 
 
 OrganizationSUMO ^(Care|Educational|Government|Judicial|Legislative|Mercantile|Military|Nonprofit|Police|Political|Religious|Terrorist|Union)?Organization[+=]$
 
