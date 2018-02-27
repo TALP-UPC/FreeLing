@@ -49,9 +49,9 @@ Preposition ^SP
 </PosTags>
 
 <SemanticFeatures>
-PersonSUMO ^(Human|Male|Female)[+=]$ 
-MaleSUMO ^Male[+=]$ 
-FemaleSUMO ^Female[+=]$ 
+PersonSUMO ^(Human|Man|Woman)[+=]$ 
+MaleSUMO ^(Male|Man)[+=]$ 
+FemaleSUMO ^(Female|Woman)[+=]$ 
 
 OrganizationSUMO ^(Care|Educational|Government|Judicial|Legislative|Mercantile|Military|Nonprofit|Police|Political|Religious|Terrorist|Union)?Organization[+=]$ 
 

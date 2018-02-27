@@ -620,7 +620,7 @@ namespace freeling {
               sense_info si = fex._Semdb->get_sense_info(s->first);
               TRACE(7, L"      sense="<< s->first << L" (" << s->second << L") sumo="<<si.sumo );
               if (fex.get_label_RE(L"SEM_MaleSUMO").search(si.sumo)) gen = L'm';
-              else (fex.get_label_RE(L"SEM_FemaleSUMO").search(si.sumo)) gen = L'f';
+              else if (fex.get_label_RE(L"SEM_FemaleSUMO").search(si.sumo)) gen = L'f';
               ++s;
             }
           }
