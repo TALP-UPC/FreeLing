@@ -66,6 +66,8 @@ namespace freeling {
   private:
 
     /// regexps from config file
+    std::map<std::wstring, wchar_t> _PersonTitles;
+    std::map<std::wstring, wchar_t> _PersonNames;
     std::map<std::wstring, freeling::regexp> _Labels;
     static const freeling::regexp re_EMPTY;
     static const freeling::regexp re_Acronym;

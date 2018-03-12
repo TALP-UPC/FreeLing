@@ -164,3 +164,39 @@ more I 030s
 most I 030s
 such I 030s
 </PronWords>
+
+<PersonTitles>
+Mr.	m
+Mr	m
+Mrs.	f
+Mrs	f
+Sir	m
+Lord	m
+Madam	f
+Dame	f
+Lady	f
+Mister	m
+Master	m
+Miss	f
+Ms.	f
+Ms	f
+Esq.	m
+Esq	m
+Dr.	a
+Dr	a
+Prof.	a
+Prof	a
+King	m
+Queen	f
+Prince	m
+Princess	f
+Marquis		m
+Marquise	f
+Duke		m
+Duchess		f
+Count		m
+Countess	f
+Baron		m
+Baroness	f
+President	a
+</PersonTitles>

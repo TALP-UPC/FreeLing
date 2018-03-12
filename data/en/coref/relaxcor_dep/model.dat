@@ -34,6 +34,7 @@ RCF_J_NUMBER_SG		# mention J is in singular (pronoun: check list PronWords, NP: 
 RCF_I_THIRD_PERSON	# mention I is in 3rd person (pronoun: check list PronWords, others -> 3rd)
 RCF_J_THIRD_PERSON	# mention J is in 3rd person (pronoun: check list PronWords, others -> 3rd)
 RCF_SAME_PERSON		# the two mentions have the same person (pronoun: check list PronWords, others -> 3rd)
+RCF_AGREEMENT_NO        # the mentions have different gender or number
 RCF_AGREEMENT_YES       # the mentions have the same number and gender 
 RCF_AGREEMENT_UNK       # the mentions have compatible number and unknown gender
 RCF_C_AGREEMENT_YES     # the mentions are the closest agreement (i.e. mention "J" is the closest mention to mention "I" with which it agrees)
@@ -82,6 +83,9 @@ RCF_SUBJ_OBJ_SAME_VERB_IJ	# mention I is the subject of verb and mention J is an
 
 ## non-corefering nested mentions
 -100	RCF_NESTED_JI !RCF_APPOSITION_JI !RCF_REL_ANTECEDENT_IJ
+
+## prevent different gender or number from being put toghether
+-100    RCF_AGREEMENT_NO
 
 # indefinite mentions
 -50	RCF_J_INDEF_NP !RCF_PRED_NP_IJ
