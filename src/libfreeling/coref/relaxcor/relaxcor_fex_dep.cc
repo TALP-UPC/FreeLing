@@ -66,7 +66,7 @@ namespace freeling {
   relaxcor_fex_dep::relaxcor_fex_dep(const wstring &filename, const relaxcor_model &m) : relaxcor_fex_abs(m), _Morf(filename) {
 
     // read configuration file and store information       
-    enum sections {SEM_DB, MINPAGERANK, DEPLABELS, POSTAGS, WORDFEAT, SEMFEAT, TITLES};
+    enum sections {SEM_DB, MINPAGERANK, DEPLABELS, POSTAGS, WORDFEAT, SEMFEAT, RESOURCES};
     config_file cfg(true,L"%");
 
     // add compulsory sections
@@ -76,7 +76,7 @@ namespace freeling {
     cfg.add_section(L"PosTags",POSTAGS,true);
     cfg.add_section(L"WordFeatures",WORDFEAT,true);
     cfg.add_section(L"SemanticFeatures",SEMFEAT,true);
-    cfg.add_section(L"PersonTitles",TITLES,false);
+    cfg.add_section(L"Resources",RESOURCES,false);
 
     if (not cfg.open(filename))
       ERROR_CRASH(L"Error opening file "+filename);
@@ -139,12 +139,18 @@ namespace freeling {
 	break;
       }
 
-      case TITLES: {
+      case RESOURCES: {
         // Read regexs to identify labels for PoS tags
 	wstring name;
-	wchar_t val;
-        sin >> name >> val;
-	_PersonTitles.insert(make_pair(name,val));
+	wstring fname;
+        sin >> name >> fname;
+        wstring fabs = util::absolute(fname,path);
+        if (name==L"PersonTitles") util::file2map<wstring,wchar_t>(fabs, _PersonTitles); 
+        else if (name==L"PersonNames") util::file2map<wstring,wchar_t>(fabs, _PersonNames); 
+        else {
+          WARNING(L"Ignored unknown resource "<< name << " in file "<<filename);
+        }
+          
 	break;
       }
 
@@ -604,7 +610,7 @@ namespace freeling {
 
 	vector<wstring> wds = util::wstring2vector(m.get_head().get_form(),L"_");
 	int pos = 0;
-	
+
 	map<wstring,wchar_t>::const_iterator pT = fex._PersonTitles.find(wds[pos]);
 	// first word is a title 
 	if (pT != fex._PersonTitles.end()) {
@@ -618,10 +624,13 @@ namespace freeling {
 	// person name ('pos' is either the first word or the word after an ambiguous title)
 	if (gen == L'u') {
 	  map<wstring,wchar_t>::const_iterator pN = fex._PersonNames.find(wds[pos]);
-	  // name found in list
-	  if (pN != fex._PersonNames.end()) gen = pN->second;
-	  // name not found, but NEC says it is a person -> gen = 'b'
-	  else if (fex.get_label_RE(L"TAG_PersonNE").search(m.get_head().get_tag(best))) gen = L'b';
+	  // name found in list as non-ambiguos
+	  if (pN != fex._PersonNames.end() and pN->second != L'a') 
+            gen = pN->second;          
+	  // name found but ambiguous, or not found but NEC says it is a person -> gen = 'b'
+	  else if (pN != fex._PersonNames.end() or
+                   fex.get_label_RE(L"TAG_PersonNE").search(m.get_head().get_tag(best)))
+            gen = L'b';
 	}
       }
 

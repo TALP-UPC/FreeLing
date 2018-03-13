@@ -39,6 +39,8 @@
 
 #include <locale>
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include "freeling/utf8/utf8.h"
 
 #include "freeling/regexp.h"
@@ -139,6 +141,8 @@ namespace freeling {
 
     template<class P1,class P2> static std::wstring pairlist2wstring(const std::list<std::pair<P1,P2> > &, const std::wstring &, const std::wstring &);
     template<class P1,class P2> static std::list<std::pair<P1,P2> > wstring2pairlist(const std::wstring &, const std::wstring &, const std::wstring &);
+
+    template<class K, class V> static void file2map(const std::wstring &, std::map<K,V> &);
 
     static int capitalization(const std::wstring &);
     static std::wstring capitalize(const std::wstring &, int, bool);
@@ -377,7 +381,26 @@ namespace freeling {
     return(lps);
   }
 
+  /////////////////////////////////////////////////////////////////////////////
+  /// Load a file of lines with pairs key, value into a map
+  /////////////////////////////////////////////////////////////////////////////
 
+  template<class K, class V>
+    inline void util::file2map(const std::wstring &fname, std::map<K,V> &res) {
+    std::wifstream f;
+    util::open_utf8_file(f, fname);
+    if (f.fail()) ERROR_CRASH(L"Error opening file "+fname);
+    std::wstring line;    
+    while (getline(f,line)) {
+      std::wistringstream sin; sin.str(line);
+      K key; V val;
+      sin >> key >> val;
+      res.insert(make_pair(key,val));
+    }
+    f.close();
+  }
+
+  
   /////////////////////////////////////////////////////////////////////////////
   /// Sort lists of pairs by ascending first component
   /////////////////////////////////////////////////////////////////////////////

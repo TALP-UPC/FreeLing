@@ -14,6 +14,11 @@ Dependencies
 ../../semdb.dat
 </SemDB>
 
+<Resources>
+PersonNames ../relaxcor_constit/resources/person-names.txt
+PersonTitles ../relaxcor_constit/resources/titles.txt
+</Resources>
+
 <MinPageRank>
 0.0003
 </MinPageRank>
@@ -238,40 +243,3 @@ unos I 03mp
 varias I 03fp
 varios I 03mp
 </PronWords>
-
-<PersonTitles>
-Sr.	m
-Sr	m
-Señor	m
-Sra.	f
-Sra	f
-Señora	f
-Srta.	f
-Srta.   f
-Señorita	m
-Madam	f
-Lady	f
-Lord	m
-Dr.	m
-Dr	m
-Doctor	m
-Dra.	f
-Dra	f
-Doctora	f
-Prof.	a
-Prof	a
-Rey	m
-Reina	f
-Príncipe	m
-Princesa	f
-Marqués		m
-Marquesa	f
-Duque		m
-Duquesa		f
-Conde		m
-Condesa		f
-Barón		m
-Baronesa	f
-Presidente	m
-Presidenta	f
-</PersonTitles>
