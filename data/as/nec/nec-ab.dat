@@ -6,7 +6,7 @@ AdaBoost
 </Classifier>
 <RGF>
 nec.rgf
-<RGF>
+</RGF>
 <ModelFile>
 nec.abm
 </ModelFile>
