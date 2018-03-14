@@ -26,15 +26,17 @@
 //
 ////////////////////////////////////////////////////////////////
 
+
+#ifndef SAFEMAP_H
+#define SAFEMAP_H
+
+#define BOOST_SYSTEM_NO_DEPRECATED
 #include <boost/thread/mutex.hpp>
 #include <iostream>
 
 ////////////////////////////////////////////////////////////////
 /// This class provides a map with thread_safe writing acces.
 ////////////////////////////////////////////////////////////////
-
-#ifndef SAFEMAP_H
-#define SAFEMAP_H
 
 template <class T1, class T2> 
   class safe_map : public std::map<T1,T2> {

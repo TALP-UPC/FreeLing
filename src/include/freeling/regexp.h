@@ -43,6 +43,8 @@
 #ifndef _FL_REGEXP_H_
 #define _FL_REGEXP_H_
 
+#define BOOST_SYSTEM_NO_DEPRECATED
+
 #if defined USE_XPRESSIVE_REGEX
 #include <boost/xpressive/xpressive.hpp>
 #else

@@ -47,22 +47,6 @@
 #include "freeling/windll.h"
 #include "freeling/morfo/traces.h"
 
-#ifdef WIN32
-#include <windows.h>
-#define getpid() GetCurrentProcessId()
-#define pid_t DWORD
-#define err_type errno_t
-#define NEW_TMPNAME(buf,sz) tmpnam_s(buf,sz)
-#define TMPNAME_FAILED(x) x
-#define TMPNAME_PREFIX L"."
-#else
-#define err_type char*
-#define NEW_TMPNAME(buf,sz) tmpnam(buf)
-#define TMPNAME_FAILED(x) (x==NULL)
-#define TMPNAME_PREFIX L""
-#endif
-
-
 // Capitalization patterns
 #define UPPER_NONE 0
 #define UPPER_1ST 1
@@ -159,20 +143,6 @@ namespace freeling {
     template<class T> static void extract(const std::wstring &, T&);
   };
 
-
-  /////////////////////////////////////////////////////////////////////////////
-  /// Return a hopefully unique name for a temporary file
-  /////////////////////////////////////////////////////////////////////////////
-
-  inline std::wstring util::new_tempfile_name() {
-    char* tempfile = new char[L_tmpnam+1]; 
-    err_type err = NEW_TMPNAME(tempfile,L_tmpnam+1);
-    if (TMPNAME_FAILED(err))
-      ERROR_CRASH(L"Error occurred creating unique filename.");
-    std::wstring fname = TMPNAME_PREFIX + wstring_from(tempfile)+L"-FL-"+wstring_from(getpid());
-    delete[] tempfile;
-    return fname;
-  }
 
   /////////////////////////////////////////////////////////////////////////////
   /// Convert a set/vector/list<T> into a wstring with separators
@@ -433,8 +403,7 @@ namespace freeling {
   template<class T1,class T2> inline bool util::descending_second(const std::pair<T1,T2> &p1, const std::pair<T1,T2> &p2) {
     return (p1.second>p2.second or (p1.second==p2.second and p1.first>p2.first));
   }
-
-
+  
   /////////////////////////////////////////////////////////////////////////////
   /// Macros for convenience (and back-compatibility)
 
@@ -456,7 +425,6 @@ namespace freeling {
 #define longdouble2wstring(x) wstring_from(x)
 
 #define wstring2pairlist(x,y,z) wstring2pairlist<std::wstring,std::wstring>(x,y,z)
-
 
 #undef MOD_TRACENAME
 #undef MOD_TRACECODE

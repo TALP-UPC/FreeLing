@@ -31,10 +31,20 @@
 #include <iomanip>  
 #include <algorithm>
 
+#define BOOST_SYSTEM_NO_DEPRECATED
+#include <boost/filesystem.hpp>
+
 #include "freeling/morfo/util.h"
 
 #if defined MACOSX
 #include <codecvt>
+#endif
+
+// getpid related stuff
+#if defined WIN32 || defined WIN64
+#include <windows.h>
+#define getpid() GetCurrentProcessId()
+#define pid_t DWORD
 #endif
 
 /// locale-related stuff
@@ -294,6 +304,17 @@ namespace freeling {
 
   wstring util::expand_filename(const wstring &s) {
     return util::string2wstring(util::expand_filename(util::wstring2string(s)));
+  }
+
+  /////////////////////////////////////////////////////////////////////////////
+  /// Return a hopefully unique name for a temporary file
+  /////////////////////////////////////////////////////////////////////////////
+
+  wstring util::new_tempfile_name() {
+    boost::filesystem::path tmpf = boost::filesystem::temp_directory_path();
+    tmpf /= "%%%%-%%%%-%%%%-%%%%-FL-"+std::to_string(getpid());
+    boost::filesystem::path fname = boost::filesystem::unique_path(tmpf);
+    return wstring_from(fname.string());
   }
 
 
