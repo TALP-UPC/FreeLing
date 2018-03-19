@@ -67,7 +67,6 @@ install(DIRECTORY data/
 	PATTERN "Makefile*" EXCLUDE)
 
 #### Data installation hooks
-      
 SET(languages "as;ca;cs;cy;de;en;es;fr;gl;hr;it;nb;pt;ru;sl")
 SET(variants "es/es-old;es/es-ar;es/es-cl;ca/balear;ca/valencia")      
 
