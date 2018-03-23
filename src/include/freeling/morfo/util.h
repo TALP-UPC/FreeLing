@@ -105,7 +105,7 @@ namespace freeling {
     /// filename management: expand environment variables in a path
     static std::wstring expand_filename(const std::wstring &);
     /// filename management: get unique tempfile name
-    static std::wstring new_tempfile_name();
+    //static std::wstring new_tempfile_name();
     /// remove occurrences of given chars
     static std::wstring remove_chars(const std::wstring &, const std::wstring &);
     /// wstring handling

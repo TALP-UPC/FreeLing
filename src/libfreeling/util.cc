@@ -310,12 +310,12 @@ namespace freeling {
   /// Return a hopefully unique name for a temporary file
   /////////////////////////////////////////////////////////////////////////////
 
-  wstring util::new_tempfile_name() {
-    boost::filesystem::path tmpf = boost::filesystem::temp_directory_path();
-    tmpf /= "%%%%-%%%%-%%%%-%%%%-FL-"+std::to_string(getpid());
-    boost::filesystem::path fname = boost::filesystem::unique_path(tmpf);
-    return wstring_from(fname.string());
-  }
+  //  wstring util::new_tempfile_name() {
+  //    boost::filesystem::path tmpf = boost::filesystem::temp_directory_path();
+  //    tmpf /= "%%%%-%%%%-%%%%-%%%%-FL-"+std::to_string(getpid());
+  //  boost::filesystem::path fname = boost::filesystem::unique_path(tmpf);
+  //  return wstring_from(fname.string());
+  //}
 
 
   /////////////////////////////////////////////////////////////////////////////
