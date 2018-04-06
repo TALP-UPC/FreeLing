@@ -8,9 +8,13 @@ link_directories(${Boost_LIBRARY_DIRS})
 link_directories(${ICU_LIBRARY_DIRS})
 
 if (WIN32)
-  # compiler defintions for windows
-  add_definitions(-DFL_EXPORTS=1 -D_CRT_SECURE_NO_WARNINGS=1 -D_CRT_NONSTDC_NO_DEPRECATE=1 -DNOMINMAX -DNDEBUG=1 -D_WINDOWS=1 -D_USRDLL=1 -DLIBFREELING_EXPORTS=1 -DWIN32=1)
-  list(APPEND freeling_SRCS windll.cc)
+   # compiler definitions for windows
+   add_definitions(-DFL_EXPORTS=1 -D_CRT_SECURE_NO_WARNINGS=1 -D_CRT_NONSTDC_NO_DEPRECATE=1 -DNOMINMAX -DNDEBUG=1 -D_WINDOWS=1 -D_USRDLL=1 -DLIBFREELING_EXPORTS=1 -DWIN32=1)
+   list(APPEND freeling_SRCS windll.cc)
+
+elseif(APPLE)
+   # compiler definitions for MACOS
+   add_definitions(-DMACOSX)
 endif()
 
 # Force to always compile with Wall
