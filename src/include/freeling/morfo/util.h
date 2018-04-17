@@ -39,27 +39,13 @@
 
 #include <locale>
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include "freeling/utf8/utf8.h"
 
 #include "freeling/regexp.h"
 #include "freeling/windll.h"
 #include "freeling/morfo/traces.h"
-
-#ifdef WIN32
-#include <windows.h>
-#define getpid() GetCurrentProcessId()
-#define pid_t DWORD
-#define err_type errno_t
-#define NEW_TMPNAME(buf,sz) tmpnam_s(buf,sz)
-#define TMPNAME_FAILED(x) x
-#define TMPNAME_PREFIX L"."
-#else
-#define err_type char*
-#define NEW_TMPNAME(buf,sz) tmpnam(buf)
-#define TMPNAME_FAILED(x) (x==NULL)
-#define TMPNAME_PREFIX L""
-#endif
-
 
 // Capitalization patterns
 #define UPPER_NONE 0
@@ -119,7 +105,7 @@ namespace freeling {
     /// filename management: expand environment variables in a path
     static std::wstring expand_filename(const std::wstring &);
     /// filename management: get unique tempfile name
-    static std::wstring new_tempfile_name();
+    //static std::wstring new_tempfile_name();
     /// remove occurrences of given chars
     static std::wstring remove_chars(const std::wstring &, const std::wstring &);
     /// wstring handling
@@ -140,6 +126,8 @@ namespace freeling {
     template<class P1,class P2> static std::wstring pairlist2wstring(const std::list<std::pair<P1,P2> > &, const std::wstring &, const std::wstring &);
     template<class P1,class P2> static std::list<std::pair<P1,P2> > wstring2pairlist(const std::wstring &, const std::wstring &, const std::wstring &);
 
+    template<class K, class V> static void file2map(const std::wstring &, std::map<K,V> &);
+
     static int capitalization(const std::wstring &);
     static std::wstring capitalize(const std::wstring &, int, bool);
 
@@ -155,20 +143,6 @@ namespace freeling {
     template<class T> static void extract(const std::wstring &, T&);
   };
 
-
-  /////////////////////////////////////////////////////////////////////////////
-  /// Return a hopefully unique name for a temporary file
-  /////////////////////////////////////////////////////////////////////////////
-
-  inline std::wstring util::new_tempfile_name() {
-    char* tempfile = new char[L_tmpnam+1]; 
-    err_type err = NEW_TMPNAME(tempfile,L_tmpnam+1);
-    if (TMPNAME_FAILED(err))
-      ERROR_CRASH(L"Error occurred creating unique filename.");
-    std::wstring fname = TMPNAME_PREFIX + wstring_from(tempfile)+L"-FL-"+wstring_from(getpid());
-    delete[] tempfile;
-    return fname;
-  }
 
   /////////////////////////////////////////////////////////////////////////////
   /// Convert a set/vector/list<T> into a wstring with separators
@@ -377,7 +351,26 @@ namespace freeling {
     return(lps);
   }
 
+  /////////////////////////////////////////////////////////////////////////////
+  /// Load a file of lines with pairs key, value into a map
+  /////////////////////////////////////////////////////////////////////////////
 
+  template<class K, class V>
+    inline void util::file2map(const std::wstring &fname, std::map<K,V> &res) {
+    std::wifstream f;
+    util::open_utf8_file(f, fname);
+    if (f.fail()) ERROR_CRASH(L"Error opening file "+fname);
+    std::wstring line;    
+    while (getline(f,line)) {
+      std::wistringstream sin; sin.str(line);
+      K key; V val;
+      sin >> key >> val;
+      res.insert(make_pair(key,val));
+    }
+    f.close();
+  }
+
+  
   /////////////////////////////////////////////////////////////////////////////
   /// Sort lists of pairs by ascending first component
   /////////////////////////////////////////////////////////////////////////////
@@ -410,8 +403,7 @@ namespace freeling {
   template<class T1,class T2> inline bool util::descending_second(const std::pair<T1,T2> &p1, const std::pair<T1,T2> &p2) {
     return (p1.second>p2.second or (p1.second==p2.second and p1.first>p2.first));
   }
-
-
+  
   /////////////////////////////////////////////////////////////////////////////
   /// Macros for convenience (and back-compatibility)
 
@@ -433,7 +425,6 @@ namespace freeling {
 #define longdouble2wstring(x) wstring_from(x)
 
 #define wstring2pairlist(x,y,z) wstring2pairlist<std::wstring,std::wstring>(x,y,z)
-
 
 #undef MOD_TRACENAME
 #undef MOD_TRACECODE

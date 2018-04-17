@@ -66,7 +66,7 @@ namespace freeling {
   relaxcor_fex_dep::relaxcor_fex_dep(const wstring &filename, const relaxcor_model &m) : relaxcor_fex_abs(m), _Morf(filename) {
 
     // read configuration file and store information       
-    enum sections {SEM_DB, MINPAGERANK, DEPLABELS, POSTAGS, WORDFEAT, SEMFEAT};
+    enum sections {SEM_DB, MINPAGERANK, DEPLABELS, POSTAGS, WORDFEAT, SEMFEAT, RESOURCES};
     config_file cfg(true,L"%");
 
     // add compulsory sections
@@ -76,6 +76,7 @@ namespace freeling {
     cfg.add_section(L"PosTags",POSTAGS,true);
     cfg.add_section(L"WordFeatures",WORDFEAT,true);
     cfg.add_section(L"SemanticFeatures",SEMFEAT,true);
+    cfg.add_section(L"Resources",RESOURCES,false);
 
     if (not cfg.open(filename))
       ERROR_CRASH(L"Error opening file "+filename);
@@ -110,6 +111,7 @@ namespace freeling {
 	_Labels.insert(make_pair(L"FUN_"+name,re));
         break;
       }
+
       case POSTAGS: {
         // Read regexs to identify labels for PoS tags
 	wstring name, val;
@@ -118,6 +120,7 @@ namespace freeling {
 	_Labels.insert(make_pair(L"TAG_"+name,re));
 	break;
       }
+
       case WORDFEAT: {
         // Read regexs to identify labels for PoS tags
 	wstring name, val;
@@ -126,12 +129,28 @@ namespace freeling {
 	_Labels.insert(make_pair(L"WRD_"+name,re));
 	break;
       }
+	
       case SEMFEAT: {
         // Read regexs to identify labels for PoS tags
 	wstring name, val;
         sin >> name >> val;
 	freeling::regexp re(val);
 	_Labels.insert(make_pair(L"SEM_"+name,re));
+	break;
+      }
+
+      case RESOURCES: {
+        // Read regexs to identify labels for PoS tags
+	wstring name;
+	wstring fname;
+        sin >> name >> fname;
+        wstring fabs = util::absolute(fname,path);
+        if (name==L"PersonTitles") util::file2map<wstring,wchar_t>(fabs, _PersonTitles); 
+        else if (name==L"PersonNames") util::file2map<wstring,wchar_t>(fabs, _PersonNames); 
+        else {
+          WARNING(L"Ignored unknown resource "<< name << " in file "<<filename);
+        }
+          
 	break;
       }
 
@@ -587,17 +606,37 @@ namespace freeling {
       }
  
       else if (m.is_type(mention::PROPER_NOUN)) {
-        // if it is a proper noun of type PERS -> gen = 'b'
-        int best = m.get_sentence()->get_best_seq();
-        if (fex.get_label_RE(L"TAG_PersonNE").search(m.get_head().get_tag(best))) 
-          gen=L'b';
+        int best = m.get_sentence()->get_best_seq(); 
+
+	vector<wstring> wds = util::wstring2vector(m.get_head().get_form(),L"_");
+	int pos = 0;
+
+	map<wstring,wchar_t>::const_iterator pT = fex._PersonTitles.find(wds[pos]);
+	// first word is a title 
+	if (pT != fex._PersonTitles.end()) {
+	  // if the title has unambiguous gender (e.g. Mr., Duchess, Sir, Madam, etc), that's it.
+	  if (pT->second != L'a') gen = pT->second;       
+	  // title with ambiguous gender (e.g. President, Dr.), advance to second word (if it exists)
+	  else if (wds.size() > 1) ++pos;
+	}
+	
+	// gender still not solved (no title, or ambiguous title), check for 
+	// person name ('pos' is either the first word or the word after an ambiguous title)
+	if (gen == L'u') {
+	  map<wstring,wchar_t>::const_iterator pN = fex._PersonNames.find(wds[pos]);
+	  // name found in list as non-ambiguos
+	  if (pN != fex._PersonNames.end() and pN->second != L'a') 
+            gen = pN->second;          
+	  // name found but ambiguous, or not found but NEC says it is a person -> gen = 'b'
+	  else if (pN != fex._PersonNames.end() or
+                   fex.get_label_RE(L"TAG_PersonNE").search(m.get_head().get_tag(best)))
+            gen = L'b';
+	}
       }
 
-      else if (m.is_type(mention::COMPOSITE)) {
-        // if it is a coordination, check children (TODO)
-        gen = L'u'; 
-      }
-      
+      else if (m.is_type(mention::COMPOSITE)) 
+	gen = L'u';
+            
       else if (m.is_type(mention::NOUN_PHRASE)) {
         // gender unknown, unless we find evidence otherwise
         gen=L'u';
@@ -612,17 +651,20 @@ namespace freeling {
           wstring sense;
           int best = m.get_sentence()->get_best_seq();
           const list<pair<wstring,double>> &ls = m.get_head().get_senses(best);
+	  gen = L'n';
           if (not ls.empty()) {
             TRACE(7, L"    - semantic gender for '"<< m.get_head().get_form() << L"'");
             // Use as class that provided by sense ranked highest by UKB that has a class
             auto s = ls.begin();
-            while  (s!=ls.end() and gen==L'u' and s->second>=fex._MinPageRank) {
+            while  (s!=ls.end() and gen==L'n' and s->second>=fex._MinPageRank) {
               sense_info si = fex._Semdb->get_sense_info(s->first);
               TRACE(7, L"      sense="<< s->first << L" (" << s->second << L") sumo="<<si.sumo );
               if (fex.get_label_RE(L"SEM_MaleSUMO").search(si.sumo)) gen = L'm';
               else if (fex.get_label_RE(L"SEM_FemaleSUMO").search(si.sumo)) gen = L'f';
+              else if (fex.get_label_RE(L"SEM_PersonSUMO").search(si.sumo)) gen = L'b';
               ++s;
             }
+
           }
         }
       }

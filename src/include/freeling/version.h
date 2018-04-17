@@ -33,6 +33,7 @@
 #define FREELING_VERSION PACKAGE_STRING
 #endif
 
+#define BOOST_SYSTEM_NO_DEPRECATED
 #include <boost/version.hpp>
 #if BOOST_VERSION < 104000
 #error This FreeLing version requires libboost>=1.40 to be compiled

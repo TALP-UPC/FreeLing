@@ -33,7 +33,9 @@
 
 #include <string>
 
-#include "boost/thread/mutex.hpp"
+#define BOOST_SYSTEM_NO_DEPRECATED
+#include <boost/thread/mutex.hpp>
+
 #include "freeling/omlet/example.h"
 #include "freeling/omlet/classifier.h"
 #include "freeling/omlet/libsvm.h"

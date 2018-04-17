@@ -74,7 +74,7 @@ wstring print_sigma(struct sigma *sigma) {
     
     // load dictionary into a FSA
     fsa = load_dictionary_file(fname);
-    TRACE(3,L"loaded FSA from dictionary. "+print_sigma(fsa->sigma));
+    TRACE(3,L"loaded FSA from disk dictionary. "+print_sigma(fsa->sigma));
     
     // is join character list provided, convert to compound FSA
     if (not joins.empty()) {
@@ -107,7 +107,7 @@ wstring print_sigma(struct sigma *sigma) {
 
     // load dictionary into a FSA
     fsa = load_dictionary_buffer(buff);
-    TRACE(3,L"loaded FSA from dictionary. "+print_sigma(fsa->sigma));
+    TRACE(3,L"loaded FSA from buffer dictionary. "+print_sigma(fsa->sigma));
     
     // is join character list provided, convert to compound FSA
     if (not joins.empty()) {

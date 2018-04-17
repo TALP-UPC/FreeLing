@@ -12,7 +12,6 @@ RULES t matches ^NP
   has_dot@    [-3,3]  W matches \.
   has_dash@   [-3,3]  W matches \-
   is_punct@   [-3,3]  t matches ^F
-  funct@      [-3,3]  l in_set ../ner/function.dat
   roman@      [-3,3]  W matches ^[IVXDLM]+$ 
   
   suf3@:{$0}  [-3,3]  w matches ...$

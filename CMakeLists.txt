@@ -35,12 +35,14 @@ option(PERL_API "Build Perl API" OFF)
 
 # Check for dependencies -- ZLIB
 find_package(ZLIB REQUIRED)
+
 # Check for dependencies -- Boost
 if(BUILD_TESTS)
-  find_package(Boost COMPONENTS regex system filesystem thread program_options unit_test_framework REQUIRED)
+  find_package(Boost COMPONENTS regex filesystem thread program_options unit_test_framework REQUIRED)
 else()
-  find_package(Boost COMPONENTS regex system filesystem thread program_options REQUIRED)
+  find_package(Boost COMPONENTS regex filesystem thread program_options REQUIRED)
 endif()
+
 # Check for dependencies -- ICU
 if (WIN32)
   # Icu component names differ in windows
@@ -65,7 +67,6 @@ install(DIRECTORY data/
 	PATTERN "Makefile*" EXCLUDE)
 
 #### Data installation hooks
-      
 SET(languages "as;ca;cs;cy;de;en;es;fr;gl;hr;it;nb;pt;ru;sl")
 SET(variants "es/es-old;es/es-ar;es/es-cl;ca/balear;ca/valencia")      
 

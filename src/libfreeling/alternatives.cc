@@ -155,17 +155,8 @@ namespace freeling {
       ph = new phonetics(ph_file);
     }
 
-    wstring phonlist;
+    wstringstream dic_buff;
     if (DistanceType==PHONETIC) {
-
-      wofstream fphon;
-      if (dic_type==ORTHOGRAPHIC) {
-        // if dictionary is not phonetic create temp file to encode a phonetic version
-        phonlist = util::new_tempfile_name()+L".src";
-        TRACE(3,L"Creating phonetics list in "+phonlist);
-        util::open_utf8_file(fphon,phonlist);
-        if (fphon.fail()) ERROR_CRASH(L"Error creating temp file "+phonlist);      
-      }
 
       // open given dictionary
       wifstream fdic;
@@ -186,35 +177,31 @@ namespace freeling {
         else if (dic_type==ORTHOGRAPHIC) {
           // dictionary is orthographic. Encode key, and store pair sound-key
           sound = ph->get_sound(key);  // compute sound
-          fphon<<sound<<endl;           // write sound to temp file
-          orthography.insert(make_pair(sound,key));
+          dic_buff << sound << endl;     // write sound to temp buffer dictionary
+          orthography.insert(make_pair(sound,key)); // remember which word sounds like this
         }
       }      
       fdic.close();
-
-      // If we encoded an ortohgraphic dictionary, use phonetic version to build the FSM
-      if (dic_type==ORTHOGRAPHIC) {
-        fphon.close();
-        dic_file=phonlist;
-      }
     }
 
     // create FSM 
     TRACE(3,L"Creating foma FSMs for SED");
-    sed = new foma_FSM(dic_file, cost_file);
+
+    bool phon_converted = (DistanceType==PHONETIC and dic_type==ORTHOGRAPHIC);
+    // distance is phonetic but dictionary was orthographic.  Use converted dictionary in dic_buff
+    if (phon_converted) sed = new foma_FSM(dic_buff, cost_file);  
+    // distance and dictionary are of the same kind, use given file straightforwardly
+    else sed = new foma_FSM(dic_file, cost_file);
     sed->set_cutoff_threshold(DistanceThreshold);
 
     if (compounds) {
       TRACE(3,L"Creating foma FSMs for COMP");
       list<wstring> joins={L"-"};
-      comp = new foma_FSM(dic_file, cost_file, joins);
+      if (phon_converted) comp = new foma_FSM(dic_buff, cost_file, joins);
+      else comp = new foma_FSM(dic_file, cost_file, joins);
       comp->set_cutoff_threshold(DistanceThreshold);
     }
-
-    // remove temp 
-    if (DistanceType==PHONETIC and dic_type==ORTHOGRAPHIC) 
-      remove(util::wstring2string(phonlist).c_str());
-
+    
     TRACE(1,L"alternatives succesfully created");
   }
 
@@ -229,6 +216,8 @@ namespace freeling {
     delete ph;
     // delete Foma FSA
     delete sed;
+    // delete compounds Foma FSA
+    delete comp;
   }
 
 

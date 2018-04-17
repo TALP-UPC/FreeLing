@@ -18,6 +18,11 @@ Dependencies
 0.0003
 </MinPageRank>
 
+<Resources>
+PersonNames ../relaxcor_constit/resources/person-names.txt
+PersonTitles ../relaxcor_constit/resources/titles.txt
+</Resources>
+
 <DepLabels>
 Apposition  ^APPO$
 Subject     ^SBJ$
@@ -164,3 +169,4 @@ more I 030s
 most I 030s
 such I 030s
 </PronWords>
+
