@@ -1546,11 +1546,11 @@ namespace freeling {
 	  ptree = new_ptree;
 	}
 	// if the last word is before the one in p2, we try the new pointers
-	else if (w_end_pos <  ps2->get_position()) 
+	else if (w_end_pos <  ps2->get_position()) {
 	  ps_res = new_ps_res;
 	  ptree = new_ptree;
 	  set_iterators(ps1, ps2, parse, ps_res, ptree);
-   
+        }   
 	// if the last word is after ps2, ptree and ps_res are the input ones.
       }
     }
