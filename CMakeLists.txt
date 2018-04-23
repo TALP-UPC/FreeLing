@@ -79,7 +79,11 @@ foreach (lg ${languages})
   # build dictionary for each language
   if (EXISTS ${CMAKE_SOURCE_DIR}/data/${lg}/dictionary/header)
     install(CODE "message(STATUS \"Creating ${lg} dictionary...\")" )
-    install(CODE "execute_process(COMMAND ${CMAKE_BINARY_DIR}/src/utilities/build-dict ${CMAKE_SOURCE_DIR}/data/${lg}/dictionary/header ${CMAKE_SOURCE_DIR}/data/${lg}/dictionary/entries  OUTPUT_FILE ${CMAKE_INSTALL_PREFIX}/share/freeling/${lg}/dicc.src)" )
+    install(CODE "execute_process(COMMAND ${CMAKE_BINARY_DIR}/src/utilities/build-dict ${CMAKE_SOURCE_DIR}/data/${lg}/dictionary/header ${CMAKE_SOURCE_DIR}/data/${lg}/dictionary/entries  OUTPUT_FILE ${CMAKE_INSTALL_PREFIX}/share/freeling/${lg}/dicc.src RESULT_VARIABLE _res) " )
+    # make sure installation helpers work.  If this one works, the others should too.
+    install(CODE "If (NOT \${_res} EQUAL \"0\")
+                     message(FATAL_ERROR \"Error executing dictionary indexation program. Make sure compilation ended without errors, and that boost libraries can be found in the path.\")
+                  endif() ")
   endif()
   
   # build phonetic dictionary
