@@ -37,11 +37,13 @@
 namespace freeling {
 
 // codes for input-output formats
-typedef enum {TEXT,IDENT,TOKEN,SPLITTED,MORFO,TAGGED,SENSES,SHALLOW,PARSED,DEP,COREF,SEMGRAPH} AnalysisLevel;
+typedef enum {TEXT,IDENT,TOKEN,SPLITTED,MORFO,TAGGED,SENSES,SHALLOW,PARSED,DEP,SRL,COREF,SEMGRAPH} AnalysisLevel;
 // codes for tagging algorithms
 typedef enum {NO_TAGGER,HMM,RELAX} TaggerAlgorithm;
 // codes for dependency parsers
- typedef enum {NO_DEP,TXALA,TREELER,LSTM} DependencyParser;
+typedef enum {NO_DEP,TXALA,TREELER,LSTM} DependencyParser;
+// codes for SRL parsers
+typedef enum {NO_SRL,SRL_TREELER} SRLParser;
 // codes for sense annotation
 typedef enum {NO_WSD,ALL,MFS,UKB} WSDAlgorithm;
 // codes for ForceSelect
@@ -108,7 +110,9 @@ class WINDLL analyzer {
        /// Dependency parsers config files
        std::wstring DEP_TxalaFile;   
        std::wstring DEP_TreelerFile;   
-       std::wstring DEP_LSTMFile;   
+       std::wstring DEP_LSTMFile;
+       // SRL parsers config files
+       std::wstring SRL_TreelerFile;   
        /// Coreference resolution config file
        std::wstring COREF_CorefFile;
        /// semantic graph extractor config file
@@ -150,6 +154,7 @@ class WINDLL analyzer {
        WSDAlgorithm SENSE_WSD_which;
        TaggerAlgorithm TAGGER_which;
        DependencyParser DEP_which;    
+       SRLParser SRL_which;    
 
        /// constructor
        analyzer_invoke_options();
@@ -173,6 +178,7 @@ class WINDLL analyzer {
    dep_txala *deptxala;
    dep_treeler *deptreeler;
    dep_lstm *deplstm;
+   srl_treeler *srltreeler;
    relaxcor *corfc;
    semgraph_extract *sge;
 

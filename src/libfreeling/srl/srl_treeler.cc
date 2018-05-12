@@ -83,7 +83,7 @@ srl_treeler::srl_treeler(const wstring &config)  {
   map<wstring,wstring> prefiles;
 
   // configuration file
-  enum sections {DEPENDENCIES, SRL};
+  enum sections {SRL};
   config_file cfg;  
   cfg.add_section(L"SRL",SRL);
   
@@ -104,6 +104,10 @@ srl_treeler::srl_treeler(const wstring &config)  {
       if (key==L"SRLTreeler") {
         sin>>name;
         srl_cfg = freeling::util::wstring2string(freeling::util::absolute(name,path));
+      }
+      else if (key==L"Tagset") {
+	sin>>name;
+        tagsetFile = freeling::util::absolute(name,path);
       }
       else if (key==L"DefaultArgs") {
         while (sin>>name) 
@@ -133,20 +137,22 @@ srl_treeler::srl_treeler(const wstring &config)  {
   }
   cfg.close();
 
-  // create required tagset handler 
+  // consistency checks
   if (tagsetFile.empty()) {
       ERROR_CRASH(L"No Tagset specified configuration file "+config+L".");
-  }
-  tags = new freeling::tagset(tagsetFile);
-  TRACE(3,L"Tagset loaded");
-  
-  // Create semantic role labeller, if required
+  }  
   if (prefiles.empty()) {
       ERROR_CRASH(L"No Predicates file specified in "+config+L".");
   }
   if (srl_cfg.empty()) {
       ERROR_CRASH(L"No SRLTreeler configuration file specified in "+config+L".");
   }
+
+  // create required tagset handler 
+  tags = new freeling::tagset(tagsetFile);
+  TRACE(3,L"Tagset loaded");
+  
+  // Create semantic role labeller, if required
   load_predicate_files(prefiles);
   treeler::Options srl_options;
   load_options(srl_cfg,srl_options);
@@ -169,19 +175,18 @@ srl_treeler::~srl_treeler() {
 
 void srl_treeler::analyze(freeling::sentence &s) const {
 
-  TRACE(3,L"Analyzing sentence");
-
   // convert FL sentence to Treeler sentence
   treeler::dependency_parser::sentence tl_sentence;
   treeler::dependency_parser::dep_vector deptree;
   FL2Treeler(s, tl_sentence, deptree);
 
   // call SRL
+  TRACE(3,L"Analyzing sentence");  
   treeler::srl_parser::pred_arg_set semroles;
   treeler::srl::PossiblePreds preds;
   compute_predicates(tl_sentence, s, deptree, preds);
   srl->parse(tl_sentence, deptree, preds, semroles);
-  TRACE(3,L"Sentence SRLed");
+  TRACE(3,L"Sentence analyzed");
 
   // Add SRL produced by treeler to FL sentence
   Treeler2FL(s, semroles);
@@ -189,7 +194,6 @@ void srl_treeler::analyze(freeling::sentence &s) const {
   // debugging
   // dep_tree::PrintDepTree(s.get_dep_tree().begin(), 0);
    
-  TRACE(3,L"Sentence analyzed");
 }
 
 
@@ -204,45 +208,47 @@ void srl_treeler::analyze(freeling::sentence &s) const {
 			       treeler::dependency_parser::sentence &tl_sentence,
 			       treeler::dependency_parser::dep_vector &tl_tree) const {
 
-  // best tagger sequence (first one by default, unless user selects another)
-  int best = fl_sentence.get_best_seq();
-  freeling::dep_tree const & dt = fl_sentence.get_dep_tree();
+    TRACE(3, L"Converting FreeLing sentence and dep_tree to Treeler dep_vector");
     
-  // Create the treeler sentence
-  // copy each word in FL sentence to treeler sentence, with appropriate changes
-  size_t i=0;
-  for (freeling::sentence::const_iterator wd = fl_sentence.begin(); wd!=fl_sentence.end(); ++wd) {
-
-    // obtain token information
-    string word = freeling::util::wstring2string(wd->get_form());
-    string lemma = freeling::util::wstring2string(wd->get_lemma(best));
-
-    wstring fpos = wd->get_tag(best);
-    string fine_pos = freeling::util::wstring2string(fpos);
-    string coarse_pos =  freeling::util::wstring2string(tags->get_short_tag(fpos));
-
-    // build the treeler token
-    treeler::dependency_parser::token tk(word, lemma, coarse_pos, fine_pos);
-
-    // add msd features to the token
-    list<wstring> msd = freeling::util::wstring2list(tags->get_msd_string(fpos),L"|");
-    for (list<wstring>::iterator f=msd.begin(); f!=msd.end(); f++) 
-      tk.morpho_push(freeling::util::wstring2string(*f));
-
-    // add token to sentence
-    tl_sentence.add_token(tk);
-
-    // add dependency to dep vector
-    freeling::dep_tree::const_iterator p = dt.get_node_by_pos(i);
-    tl_tree.push_back(treeler::HeadLabelPair<string>(p.get_parent()->get_word().get_position()+1,
-						     freeling::util::wstring2string(p->get_label())) );
+    // best tagger sequence (first one by default, unless user selects another)
+    int best = fl_sentence.get_best_seq();
+    freeling::dep_tree const & dt = fl_sentence.get_dep_tree();
     
-    ++i;
+    // Create the treeler sentence
+    // copy each word in FL sentence to treeler sentence, with appropriate changes
+    size_t i=0;
+    for (freeling::sentence::const_iterator wd = fl_sentence.begin(); wd!=fl_sentence.end(); ++wd) {
+      
+      // obtain token information
+      string word = freeling::util::wstring2string(wd->get_form());
+      string lemma = freeling::util::wstring2string(wd->get_lemma(best));
+      
+      wstring fpos = wd->get_tag(best);
+      string fine_pos = freeling::util::wstring2string(fpos);
+      string coarse_pos =  freeling::util::wstring2string(tags->get_short_tag(fpos));
+      
+      // build the treeler token
+      treeler::dependency_parser::token tk(word, lemma, coarse_pos, fine_pos);
+      
+      // add msd features to the token
+      list<wstring> msd = freeling::util::wstring2list(tags->get_msd_string(fpos),L"|");
+      for (list<wstring>::iterator f=msd.begin(); f!=msd.end(); f++) 
+	tk.morpho_push(freeling::util::wstring2string(*f));
+      
+      // add token to sentence
+      tl_sentence.add_token(tk);
+      
+      // add dependency to dep vector
+      freeling::dep_tree::const_iterator p = dt.get_node_by_pos(i);
+      int head = (p.is_root() ? -1 : p.get_parent()->get_word().get_position());
+      tl_tree.push_back(treeler::HeadLabelPair<string>(head, freeling::util::wstring2string(p->get_label())));
+      
+      ++i;
+    }
+    
+    TRACE(3, L"FL->TL conversion finished");
   }
-
   
-}
-
 
 ///////////////////////////////////////////////////////////////
 /// Add treeler output tree to FreeLing sentence
@@ -251,10 +257,9 @@ void srl_treeler::analyze(freeling::sentence &s) const {
 void srl_treeler::Treeler2FL(freeling::sentence &fl_sentence,
 			     const treeler::srl_parser::pred_arg_set &tl_roles) const {
 
-  TRACE(3, L"Converting SRL result to FreeLing predicates");
+  TRACE(3, L"Converting Treeler SRL result to FreeLing predicates");
 
   // add sem roles to FL sentence   //fl_sentence.pred_args = tl_roles;
-  TRACE(3, L"adding SRL output to sentence");
   for (treeler::srl::PredArgSet::const_iterator p=tl_roles.begin(); p!=tl_roles.end(); p++) {
     // create new predicate
     predicate pred(p->first, freeling::util::string2wstring(p->second.sense));
@@ -268,7 +273,7 @@ void srl_treeler::Treeler2FL(freeling::sentence &fl_sentence,
     fl_sentence.add_predicate(pred);
   }
 
-  TRACE(3, L"dep_tree conversion finished");
+  TRACE(3, L"TL->FL SRL conversion finished");
 }
 
 

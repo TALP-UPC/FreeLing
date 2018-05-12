@@ -104,14 +104,14 @@ class config {
 
     // Auxiliary variables to store options read as strings before they are converted
     // to their final enumerate/integer values 
-    std::string InputLv, OutputLv, InputM, OutputF, InputF, Tagger, SenseAnot, Force, Dep;
+    std::string InputLv, OutputLv, InputM, OutputF, InputF, Tagger, SenseAnot, Force, Dep, srl;
     std::string tracemod;
     std::string language, locale, identFile, tagsetFile, tokFile, splitFile,
       macoDecimal, macoThousand, usermapFile, locutionsFile, quantitiesFile, 
       affixFile, probabilityFile, dictionaryFile, npDataFile, punctuationFile,
       compoundFile; 
     std::string phonFile, necFile, senseFile, ukbFile;
-    std::string hmmFile,relaxFile,grammarFile,txalaFile,treelerFile,lstmFile,corefFile,semgraphFile;
+    std::string hmmFile,relaxFile,grammarFile,txalaFile,treelerFile,lstmFile,SRLtreelerFile,corefFile,semgraphFile;
     std::string inputConllF, outputConllF;
 
     Port=0;
@@ -132,8 +132,8 @@ class config {
       ("queue,q",po::value<int>(&QueueSize)->default_value(DEFAULT_QUEUE_SIZE),"Maximum number of waiting clients.")
       ("flush","Consider each newline as a sentence end")
       ("noflush","Do not consider each newline as a sentence end")
-      ("inplv",po::value<std::string>(&InputLv),"Input analysis level (text,token,splitted,morfo,sense,tagged)")
-      ("outlv",po::value<std::string>(&OutputLv),"Output analysis level (ident,token,splitted,morfo,tagged,shallow,parsed,dep)")
+      ("inplv",po::value<std::string>(&InputLv),"Input analysis level (text,token,splitted,morfo,tagged,shallow,dep,srl,coref)")
+      ("outlv",po::value<std::string>(&OutputLv),"Output analysis level (ident,token,splitted,morfo,tagged,shallow,parsed,dep,srl,coref,semgraph)")
       ("mode",po::value<std::string>(&InputM),"Input mode (doc,corpus)")
       ("output",po::value<std::string>(&OutputF),"Output format (freeling,conll,train,xml,json,naf)")
       ("iconll",po::value<std::string>(&inputConllF),"CoNLL input definition file")
@@ -199,9 +199,11 @@ class config {
       ("force",po::value<std::string>(&Force),"When the tagger must be forced to select only one tag per word (no|none,tagger,retok)")
       ("grammar,G",po::value<std::string>(&grammarFile),"Grammar file for chart parser")
       ("dep,d",po::value<std::string>(&Dep),"Dependency parser to use (txala,treeler,lstm)")
+      ("srl",po::value<std::string>(&srl),"SRL parser to use (treeler)")
       ("txala,T",po::value<std::string>(&txalaFile),"Rule file for Txala dependency parser")
       ("treeler,E",po::value<std::string>(&treelerFile),"Configuration file for Treeler dependency parser")
       ("lstm",po::value<std::string>(&lstmFile),"Configuration file for LSTM dependency parser")
+      ("SRLtreeler",po::value<std::string>(&SRLtreelerFile),"Configuration file for SRL treeler parser")
       ("fcorf,C",po::value<std::string>(&corefFile),"Coreference solver data file")
       ("fsge,g",po::value<std::string>(&semgraphFile),"Semantic graph extractor config file")
       ;
@@ -215,8 +217,8 @@ class config {
       ("ServerMaxWorkers",po::value<int>(&MaxWorkers)->default_value(DEFAULT_MAX_WORKERS),"Maximum number of workers to fork in server mode")
       ("ServerQueueSize",po::value<int>(&QueueSize)->default_value(DEFAULT_QUEUE_SIZE),"Maximum number of waiting requests in server mode")
       ("AlwaysFlush",po::value<bool>(&AlwaysFlush)->default_value(false),"Consider each newline as a sentence end")
-      ("InputLevel",po::value<std::string>(&InputLv)->default_value("text"),"Input analysis level (text,token,splitted,morfo,tagged,shallow,dep,coref)")
-      ("OutputLevel",po::value<std::string>(&OutputLv)->default_value("tagged"),"Output analysis level (token,splitted,morfo,tagged,shallow,parsed,dep,coref,semgraph)")
+      ("InputLevel",po::value<std::string>(&InputLv)->default_value("text"),"Input analysis level (text,token,splitted,morfo,tagged,shallow,dep,srl,coref)")
+      ("OutputLevel",po::value<std::string>(&OutputLv)->default_value("tagged"),"Output analysis level (token,splitted,morfo,tagged,shallow,parsed,dep,srl,coref,semgraph)")
       ("InputMode",po::value<std::string>(&InputM)->default_value("corpus"),"Input mode (corpus,doc)")
       ("OutputFormat",po::value<std::string>(&OutputF)->default_value("freeling"),"Output format (freeling,conll,train,xml,json,naf)")
       ("InputFormat",po::value<std::string>(&InputF)->default_value("text"),"Input format (text,freeling,conll)")
@@ -271,6 +273,8 @@ class config {
       ("DepTxalaFile",po::value<std::string>(&txalaFile),"Rule file for Txala dependency parser")
       ("DepTreelerFile",po::value<std::string>(&treelerFile),"Configuration file for Treeler dependency parser")
       ("DepLSTMFile",po::value<std::string>(&lstmFile),"Configuration file for LSTM dependency parser")
+      ("SRLParser",po::value<std::string>(&srl)->default_value("treeler"),"SRL parser to use (treeler)")
+      ("SRLTreelerFile",po::value<std::string>(&SRLtreelerFile),"Configuration file for Treeler SRL parser")
       ("CorefFile",po::value<std::string>(&corefFile),"Coreference solver data file")
       ("SemGraphExtractorFile",po::value<std::string>(&semgraphFile),"Semantic graph extractor config file")
       ;
@@ -373,6 +377,7 @@ class config {
     txalaFile = util::expand_filename(txalaFile);
     treelerFile = util::expand_filename(treelerFile);
     lstmFile = util::expand_filename(lstmFile);
+    SRLtreelerFile = util::expand_filename(SRLtreelerFile);
     corefFile = util::expand_filename(corefFile); 
     semgraphFile = util::expand_filename(semgraphFile); 
     inputConllF = util::expand_filename(inputConllF); 
@@ -407,6 +412,7 @@ class config {
     analyzer_config_options.DEP_TxalaFile = util::string2wstring(txalaFile);
     analyzer_config_options.DEP_TreelerFile = util::string2wstring(treelerFile);
     analyzer_config_options.DEP_LSTMFile = util::string2wstring(lstmFile);
+    analyzer_config_options.SRL_TreelerFile = util::string2wstring(SRLtreelerFile);
     analyzer_config_options.COREF_CorefFile = util::string2wstring(corefFile);
     analyzer_config_options.SEMGRAPH_SemGraphFile = util::string2wstring(semgraphFile);
 
@@ -441,6 +447,7 @@ class config {
     else if (InputLv=="shallow") analyzer_invoke_options.InputLevel = SHALLOW;
     else if (InputLv=="parsed") analyzer_invoke_options.InputLevel = PARSED;
     else if (InputLv=="dep") analyzer_invoke_options.InputLevel = DEP;
+    else if (InputLv=="srl") analyzer_invoke_options.InputLevel = SRL;
     else if (InputLv=="coref") analyzer_invoke_options.InputLevel = COREF;
     else { ERROR_CRASH(L"Unknown or invalid input analysis level: "+util::string2wstring(InputLv));}
 
@@ -453,6 +460,7 @@ class config {
     else if (OutputLv=="shallow") analyzer_invoke_options.OutputLevel = SHALLOW;
     else if (OutputLv=="parsed") analyzer_invoke_options.OutputLevel = PARSED;
     else if (OutputLv=="dep") analyzer_invoke_options.OutputLevel = DEP;
+    else if (OutputLv=="srl") analyzer_invoke_options.OutputLevel = SRL;
     else if (OutputLv=="coref") analyzer_invoke_options.OutputLevel = COREF;
     else if (OutputLv=="semgraph") analyzer_invoke_options.OutputLevel = SEMGRAPH;
     else { ERROR_CRASH(L"Unknown or invalid output analysis level: "+util::string2wstring(OutputLv));}
@@ -531,6 +539,13 @@ class config {
       WARNING(L"Invalid dependency parser '"+util::string2wstring(Dep)+L"'. Using default.");
     }
     
+    // translate SRL string to appropriate enum values.
+    if (srl =="treeler") analyzer_invoke_options.SRL_which = SRL_TREELER;
+    else {
+      analyzer_invoke_options.SRL_which = NO_SRL;
+      WARNING(L"Invalid SRL parser '"+util::string2wstring(srl)+L"'. Using default.");
+    }
+
     // translate tracmod string (hex) into traces::TraceModule unsinged long
     std::stringstream sin;
     sin << std::hex << tracemod;
