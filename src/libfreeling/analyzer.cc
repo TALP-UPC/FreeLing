@@ -91,7 +91,7 @@ analyzer::analyzer(const config_options &cfg) {
 
   tk=NULL; sp=NULL; morfo=NULL; neclass=NULL; sens=NULL;
   dsb=NULL; hmm=NULL; relax=NULL; phon=NULL; parser=NULL;
-  deptxala=NULL; deptreeler=NULL; corfc=NULL; sge=NULL;
+  deptxala=NULL; deptreeler=NULL; deplstm=NULL; corfc=NULL; sge=NULL;
 
   offs = 0;
   nsentence = 1;
@@ -178,6 +178,10 @@ analyzer::analyzer(const config_options &cfg) {
   if (not cfg.DEP_TreelerFile.empty()) 
     deptreeler = new dep_treeler(cfg.DEP_TreelerFile);
 
+  // LSTM based statistical parser
+  if (not cfg.DEP_LSTMFile.empty()) 
+    deplstm = new dep_lstm(cfg.DEP_LSTMFile);
+
   // coreference resolution
   if (not cfg.COREF_CorefFile.empty()) 
     corfc = new relaxcor(cfg.COREF_CorefFile);
@@ -225,6 +229,7 @@ analyzer::~analyzer() {
   delete parser;
   delete deptxala;
   delete deptreeler;
+  delete deplstm;
   delete corfc;
   delete sge;
 }
@@ -305,6 +310,14 @@ template<class T> void analyzer::do_analysis(T &doc) const {
        or (current_invoke_options.OutputLevel >= DEP and current_invoke_options.DEP_which==TREELER))) {
 
     deptreeler->analyze(doc);
+  }
+  // apply dep parser if needed
+  if (deplstm!=NULL and 
+      current_invoke_options.InputLevel<DEP and
+      ((current_invoke_options.OutputLevel>=COREF and corfc!=NULL)
+       or (current_invoke_options.OutputLevel >= DEP and current_invoke_options.DEP_which==LSTM))) {
+
+    deplstm->analyze(doc);
   }
   else if (deptxala != NULL and current_invoke_options.InputLevel < DEP and
            current_invoke_options.OutputLevel >= DEP and current_invoke_options.DEP_which==TXALA) 
@@ -608,6 +621,12 @@ void analyzer::set_current_invoke_options(const invoke_options &opt, bool check)
              or (opt.DEP_which==TREELER
                  and opt.InputLevel < DEP and opt.OutputLevel > DEP)))
       ERROR_CRASH(L"Required analysis level requires depTreeler parser, but it was not instantiated in config options");
+
+    if (deplstm==NULL 
+        and ((opt.OutputLevel >= COREF and opt.InputLevel < DEP) 
+             or (opt.DEP_which==LSTM
+                 and opt.InputLevel < DEP and opt.OutputLevel > DEP)))
+      ERROR_CRASH(L"Required analysis level requires depLSTM parser, but it was not instantiated in config options");
 
     if (corfc==NULL and opt.OutputLevel == COREF and opt.InputLevel < COREF) 
       ERROR_CRASH(L"Required analysis level requires Coreference solver, but it was not instantiated in config options");

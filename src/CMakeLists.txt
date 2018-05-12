@@ -1,6 +1,7 @@
 
 # Add include directory to all projects and libraries
 include_directories(include)
+include_directories(libdynet)
 
 # disable autolinking in boost, force dynamic linking for boost,
 # deactivate deprecated stuff that forces boost_system

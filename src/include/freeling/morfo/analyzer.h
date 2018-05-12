@@ -41,7 +41,7 @@ typedef enum {TEXT,IDENT,TOKEN,SPLITTED,MORFO,TAGGED,SENSES,SHALLOW,PARSED,DEP,C
 // codes for tagging algorithms
 typedef enum {NO_TAGGER,HMM,RELAX} TaggerAlgorithm;
 // codes for dependency parsers
-typedef enum {NO_DEP,TXALA,TREELER} DependencyParser;
+ typedef enum {NO_DEP,TXALA,TREELER,LSTM} DependencyParser;
 // codes for sense annotation
 typedef enum {NO_WSD,ALL,MFS,UKB} WSDAlgorithm;
 // codes for ForceSelect
@@ -108,6 +108,7 @@ class WINDLL analyzer {
        /// Dependency parsers config files
        std::wstring DEP_TxalaFile;   
        std::wstring DEP_TreelerFile;   
+       std::wstring DEP_LSTMFile;   
        /// Coreference resolution config file
        std::wstring COREF_CorefFile;
        /// semantic graph extractor config file
@@ -171,6 +172,7 @@ class WINDLL analyzer {
    chart_parser *parser;
    dep_txala *deptxala;
    dep_treeler *deptreeler;
+   dep_lstm *deplstm;
    relaxcor *corfc;
    semgraph_extract *sge;
 

@@ -1,4 +1,4 @@
-////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
 //
 //    FreeLing - Open Source Language Analyzers
 //
@@ -26,42 +26,37 @@
 //
 ////////////////////////////////////////////////////////////////
 
-#ifndef _FREELING
-#define _FREELING
+#ifndef _SRL_PARSER
+#define _SRL_PARSER
 
+#include <list> 
 #include "freeling/windll.h"
-#include "freeling/version.h"
+#include "freeling/morfo/processor.h"
+#include "freeling/morfo/language.h"
 
-#include "freeling/morfo/lang_ident.h"
-#include "freeling/morfo/tokenizer.h"
-#include "freeling/morfo/tagset.h"
-#include "freeling/morfo/splitter.h"
-#include "freeling/morfo/maco.h"
-#include "freeling/morfo/nec.h"
-#include "freeling/morfo/phonetics.h"
-#include "freeling/morfo/alternatives.h"
-#include "freeling/morfo/senses.h"
-#include "freeling/morfo/ukb.h"
-#include "freeling/morfo/semdb.h"
-#include "freeling/morfo/hmm_tagger.h"
-#include "freeling/morfo/relax_tagger.h"
-#include "freeling/morfo/chart_parser.h"
-#include "freeling/morfo/dep_txala.h"
-#include "freeling/morfo/dep_treeler.h"
-#include "freeling/morfo/dep_lstm.h"
-#include "freeling/morfo/relaxcor.h"
-#include "freeling/morfo/semgraph_extract.h"
+namespace freeling {
 
-#include "freeling/morfo/analyzer.h"
+  ////////////////////////////////////////////////////////////////
+  ///
+  ///  The class srl_parser is just an abstract class
+  ///   generalizing any SRL parser
+  ///
+  ////////////////////////////////////////////////////////////////
 
-//#include "freeling/morfo/coref.h"
-//#include "freeling/morfo/fex.h"
-/*
-#include "freeling/omlet/adaboost.h"
-#include "freeling/omlet/dataset.h"
-#include "freeling/omlet/example.h"
-#include "freeling/omlet/weakrule.h"
-#include "freeling/omlet/viterbi.h"
-#include "freeling/omlet/svm.h"
-*/
+  class WINDLL srl_parser : public processor {
+
+  public: 
+    srl_parser() {};
+    virtual ~srl_parser() {};
+
+    /// analyze given sentence
+    virtual void analyze(sentence &) const =0;
+
+    /// inherit other methods
+    using processor::analyze;
+  };
+
+
+} // namespace
+
 #endif

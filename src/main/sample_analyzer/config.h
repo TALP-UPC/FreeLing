@@ -111,7 +111,7 @@ class config {
       affixFile, probabilityFile, dictionaryFile, npDataFile, punctuationFile,
       compoundFile; 
     std::string phonFile, necFile, senseFile, ukbFile;
-    std::string hmmFile,relaxFile,grammarFile,txalaFile,treelerFile,corefFile,semgraphFile;
+    std::string hmmFile,relaxFile,grammarFile,txalaFile,treelerFile,lstmFile,corefFile,semgraphFile;
     std::string inputConllF, outputConllF;
 
     Port=0;
@@ -198,9 +198,10 @@ class config {
       ("nortk","Do not perform retokenization after PoS tagging")
       ("force",po::value<std::string>(&Force),"When the tagger must be forced to select only one tag per word (no|none,tagger,retok)")
       ("grammar,G",po::value<std::string>(&grammarFile),"Grammar file for chart parser")
-      ("dep,d",po::value<std::string>(&Dep),"Dependency parser to use (txala,treeler)")
+      ("dep,d",po::value<std::string>(&Dep),"Dependency parser to use (txala,treeler,lstm)")
       ("txala,T",po::value<std::string>(&txalaFile),"Rule file for Txala dependency parser")
       ("treeler,E",po::value<std::string>(&treelerFile),"Configuration file for Treeler dependency parser")
+      ("lstm",po::value<std::string>(&lstmFile),"Configuration file for LSTM dependency parser")
       ("fcorf,C",po::value<std::string>(&corefFile),"Coreference solver data file")
       ("fsge,g",po::value<std::string>(&semgraphFile),"Semantic graph extractor config file")
       ;
@@ -266,9 +267,10 @@ class config {
       ("TaggerRetokenize",po::value<bool>(&analyzer_config_options.TAGGER_Retokenize)->default_value(false),"Perform retokenization after PoS tagging")
       ("TaggerForceSelect",po::value<std::string>(&Force)->default_value("retok"),"When the tagger must be forced to select only one tag per word (no|none,tagger,retok)")
       ("GrammarFile",po::value<std::string>(&grammarFile),"Grammar file for chart parser")
-      ("DependencyParser",po::value<std::string>(&Dep)->default_value("txala"),"Dependency parser to use (txala,treeler)")
+      ("DependencyParser",po::value<std::string>(&Dep)->default_value("txala"),"Dependency parser to use (txala,treeler,lstm)")
       ("DepTxalaFile",po::value<std::string>(&txalaFile),"Rule file for Txala dependency parser")
       ("DepTreelerFile",po::value<std::string>(&treelerFile),"Configuration file for Treeler dependency parser")
+      ("DepLSTMFile",po::value<std::string>(&lstmFile),"Configuration file for LSTM dependency parser")
       ("CorefFile",po::value<std::string>(&corefFile),"Coreference solver data file")
       ("SemGraphExtractorFile",po::value<std::string>(&semgraphFile),"Semantic graph extractor config file")
       ;
@@ -370,6 +372,7 @@ class config {
     grammarFile = util::expand_filename(grammarFile); 
     txalaFile = util::expand_filename(txalaFile);
     treelerFile = util::expand_filename(treelerFile);
+    lstmFile = util::expand_filename(lstmFile);
     corefFile = util::expand_filename(corefFile); 
     semgraphFile = util::expand_filename(semgraphFile); 
     inputConllF = util::expand_filename(inputConllF); 
@@ -403,6 +406,7 @@ class config {
     analyzer_config_options.PARSER_GrammarFile = util::string2wstring(grammarFile);
     analyzer_config_options.DEP_TxalaFile = util::string2wstring(txalaFile);
     analyzer_config_options.DEP_TreelerFile = util::string2wstring(treelerFile);
+    analyzer_config_options.DEP_LSTMFile = util::string2wstring(lstmFile);
     analyzer_config_options.COREF_CorefFile = util::string2wstring(corefFile);
     analyzer_config_options.SEMGRAPH_SemGraphFile = util::string2wstring(semgraphFile);
 
@@ -521,6 +525,7 @@ class config {
     // translate Dep string to appropriate enum values.
     if (Dep=="txala") analyzer_invoke_options.DEP_which = TXALA;
     else if (Dep=="treeler") analyzer_invoke_options.DEP_which = TREELER;
+    else if (Dep=="lstm") analyzer_invoke_options.DEP_which = LSTM;
     else {
       analyzer_invoke_options.DEP_which = TXALA;
       WARNING(L"Invalid dependency parser '"+util::string2wstring(Dep)+L"'. Using default.");

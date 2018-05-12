@@ -245,7 +245,7 @@ namespace freeling {
     }
 
     TRACE(1,L"Loading model.");
-    load_dynet_model(freeling::util::wstring2string(modelFile), model);
+    load_dynet_model(freeling::util::wstring2string(freeling::util::absolute(modelFile,path)), model);
   }
 
   ////////////////////////////////////////////////////////////////
