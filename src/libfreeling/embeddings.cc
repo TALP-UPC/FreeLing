@@ -232,7 +232,7 @@ namespace freeling {
       fmod >> w;
       // read vector
       vector<float> v(dimensionality);
-      for (unsigned int j=0; i<dimensionality; ++j) {
+      for (unsigned int j=0; j<dimensionality; ++j) {
         fmod >> v[j];
       }
       // store pair (word,vector) in map
@@ -287,7 +287,18 @@ namespace freeling {
     if (p != wordVec.end()) return p->second;
     else return empty_vector;
   }
-  
+
+  /////////////////////////////////////////////////////////////////////////////
+  /// Get the vector representing a word. 
+  /// If word is not in the model an empty vector is returned
+  /////////////////////////////////////////////////////////////////////////////
+
+  const vector<float>& embeddings::get_base_vector(const wstring &word) const {
+    unordered_map<wstring,norm_vector>::const_iterator p = wordVec.find(word);
+    if (p != wordVec.end()) return p->second;
+    else return empty_vector;
+  }
+
   /////////////////////////////////////////////////////////////////////////////
   /// Cos similarity between two words, returns -1 if words not found in model
   /////////////////////////////////////////////////////////////////////////////
