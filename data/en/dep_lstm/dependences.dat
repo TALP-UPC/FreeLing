@@ -9,6 +9,7 @@ PosDIM 12
 RelDIM 20
 ModelFile model.en.w100.dat
 EmbeddingsFile ../en-embeddings-100.dat
+TagsetFile ../tagset.dat
 </NETWORK>
 <WORDS>
 0 <BAD0>

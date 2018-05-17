@@ -415,6 +415,9 @@ config* load_config(int argc, char *argv[]) {
       and ((cfg->analyzer_invoke_options.DEP_which!=LSTM and cfg->analyzer_invoke_options.OutputLevel<COREF)
            or (cfg->analyzer_invoke_options.InputLevel>DEP
                or cfg->analyzer_invoke_options.OutputLevel<DEP))) cfg->analyzer_config_options.DEP_LSTMFile = L"";
+  if (not cfg->analyzer_config_options.SRL_TreelerFile.empty()
+      and (cfg->analyzer_invoke_options.InputLevel>=SRL 
+           or cfg->analyzer_invoke_options.OutputLevel<SRL)) cfg->analyzer_config_options.SRL_TreelerFile = L"";
   if (not cfg->analyzer_config_options.COREF_CorefFile.empty()
       and (cfg->analyzer_invoke_options.InputLevel>=COREF 
            or cfg->analyzer_invoke_options.OutputLevel<COREF)) cfg->analyzer_config_options.COREF_CorefFile = L"";

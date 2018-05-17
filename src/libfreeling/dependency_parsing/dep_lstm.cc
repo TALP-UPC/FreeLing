@@ -112,7 +112,7 @@ namespace freeling {
     PRETRAINED_DIM = LSTM_INPUT_DIM = POS_DIM = REL_DIM = 0;
     ACTION_SIZE = VOCAB_SIZE = POS_SIZE = 0;
     //nwords = ntags = nactions = 0;
-    wstring embeddingsFile, modelFile;
+    wstring embeddingsFile, modelFile, tagsetFile;
     
     wstring line;
     while (cfg.get_content_line(line)) {
@@ -132,6 +132,7 @@ namespace freeling {
         else if (key==L"RelDIM") iss>>REL_DIM;
         else if (key==L"ModelFile") iss>>modelFile;
         else if (key==L"EmbeddingsFile") iss>>embeddingsFile;
+        else if (key==L"TagsetFile") iss>>tagsetFile;
         else {
           WARNING(L"Warning: Ignoring unexpected key "<<key<<" in NETWORK section of file "<<fname<<L".");
         }      
@@ -186,7 +187,7 @@ namespace freeling {
         ERROR_CRASH(L"Model requires embeddings, but no embedding file was provided.");
       }
 
-      TRACE(1,"Loading embeddings.");
+      TRACE(1,"Using pretrained embeddings.");
 
       // load pretrained embeddings
       freeling::embeddings embeds(freeling::util::absolute(embeddingsFile,path));
@@ -204,8 +205,9 @@ namespace freeling {
   
     VOCAB_SIZE = _words.size() + 1;
     ACTION_SIZE = _actions.size() + 1;
-    POS_SIZE = _tags.size() + 9;  // bad way of dealing with the fact that we may see new POS tags in the test set
+    POS_SIZE = _tags.size() + 9 ;  // bad way of dealing with the fact that we may see new POS tags in the test set
   
+    TRACE(3,L"Creating LSTM.");
     model = new dynet::ParameterCollection();
 
     stack_lstm = new dynet::LSTMBuilder(LAYERS, LSTM_INPUT_DIM, HIDDEN_DIM, *model);
@@ -246,6 +248,10 @@ namespace freeling {
 
     TRACE(1,L"Loading model.");
     load_dynet_model(freeling::util::wstring2string(freeling::util::absolute(modelFile,path)), model);
+
+    _Tags = new freeling::tagset(tagsetFile);
+    
+    TRACE(1,L"Module successfully created.");
   }
 
   ////////////////////////////////////////////////////////////////
@@ -529,7 +535,7 @@ namespace freeling {
   ////////////////////////////////////////////////////////////////
 
   void dep_lstm::analyze(freeling::sentence &sent) const {
-  
+
     vector<unsigned> wordids, tagids;
     vector<wstring> unkwords;
 
@@ -543,7 +549,7 @@ namespace freeling {
       if (wid == _words.get_unk_id()) unkwords.push_back(w.get_form());
       else unkwords.push_back(L"");
 
-      unsigned tid = sent_tags.insert(w.get_tag());
+      unsigned tid = sent_tags.insert(_Tags->get_short_tag(w.get_tag()));
       tagids.push_back(tid);
     }
 

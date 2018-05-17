@@ -5,8 +5,9 @@
 #include <vector>
 #include <algorithm>
 
-#include "freeling/morfo/embeddings.h"
+#include "zlib.h"
 
+#include "freeling/morfo/embeddings.h"
 #include "freeling/morfo/util.h"
 #include "freeling/morfo/traces.h"
 
@@ -143,10 +144,13 @@ namespace freeling {
 
   embeddings::embeddings(const wstring &modelPath) {
 
+    TRACE(2, L"Loading embeddings");
     // read binary or text model, depending on file extension
     if (modelPath.substr(modelPath.length()-4) == L".bin" ) 
       load_binary_model(modelPath);
-    else 
+    else if (modelPath.substr(modelPath.length()-3) == L".gz" ) 
+      load_gzip_model(modelPath);
+    else
       load_text_model(modelPath);
 
     TRACE(2, L"embeddings module succesfully created");
@@ -192,11 +196,13 @@ namespace freeling {
     // read file header with vocabulary and vector sizes
     vocabSize = util::wstring_to<unsigned int>(util::string2wstring(read_string(fmod)));
     dimensionality = util::wstring_to<unsigned int>(util::string2wstring(read_string(fmod)));
+    TRACE(4,L"read head "<<vocabSize<<L" " <<dimensionality);
 
     // read each word and associated vector
     for (unsigned int i=0; i<vocabSize; ++i) {
       // read word
       string word = read_string(fmod);
+      TRACE(6,L"  read word "<< util::string2wstring(word));
       // read vector
       vector<float> v(dimensionality);
       fmod.read((char*)v.data(), dimensionality*sizeof(float));
@@ -224,23 +230,82 @@ namespace freeling {
     }
     // read file header with vocabulary and vector sizes
     fmod >> vocabSize >> dimensionality;
+    TRACE(4,L"read head "<<vocabSize<<L" " <<dimensionality);
 
     // read each word and associated vector
     for (unsigned int i=0; i<vocabSize; ++i) {
       // read word
       wstring w;
       fmod >> w;
+ 
       // read vector
       vector<float> v(dimensionality);
       for (unsigned int j=0; j<dimensionality; ++j) {
         fmod >> v[j];
       }
-      // store pair (word,vector) in map
+      TRACE(6,L"  read word "<< w << L" " << v[0] << L" " << v[1] << L" " << v[2] << L" ...");
+     // store pair (word,vector) in map
       wordVec.insert(make_pair(w, norm_vector(v)));
     }
 
     // close file
     fmod.close();
+  }
+
+  /////////////////////////////////////////////////////////////////////////////
+  /// Load model in gzip format from given file
+  /////////////////////////////////////////////////////////////////////////////
+
+  void embeddings::load_gzip_model(const wstring &fname) {
+
+    // open file
+    gzFile in = gzopen(util::wstring2string(fname).c_str(), "r");
+
+    TRACE(4,L"opened gzfile");
+    // maximum length of a word
+    const int MAXTOKEN = 256;
+    // read file header with vocabulary and vector sizes
+    char headline[MAXTOKEN];
+    headline[0] = '\0';
+    gzgets(in, headline, MAXTOKEN);
+    sscanf(headline, "%u %u", &vocabSize, &dimensionality);
+    TRACE(4,L"read header "<<vocabSize<<L" " <<dimensionality);
+
+    // space for the word + as many floats as dimensions (19 digits per float plus one separator whitespace)
+    const int MAXLINE = MAXTOKEN + dimensionality*20;
+    char *line = new char[MAXLINE];
+    char word[MAXTOKEN]; 
+              
+    // read each word and associated vector
+    for (unsigned int i=0; i<vocabSize; ++i) {
+      line[0] = '\0';
+      gzgets(in, line, MAXLINE);
+
+      // read word
+      int offset;
+      sscanf(line, "%s%n", word, &offset);
+      char *data = line + offset;
+
+      // read vector
+      vector<float> v(dimensionality);
+      for (unsigned int j=0; j<dimensionality; ++j) {
+        sscanf(data, "%f%n", &v[j], &offset);
+        data += offset;
+      }
+      // store pair (word,vector) in map
+      string w(word);
+      wordVec.insert(make_pair(util::string2wstring(w), norm_vector(v)));
+      TRACE(6,L"Loaded vector " << util::string2wstring(w) << L" " << v[0]<< L" " << v[1]<< L" " << v[2] << L" ...");
+    }
+    // clean
+    delete [] line;
+
+    TRACE(4,L"loaded " << wordVec.size() << L" vectors. vocab size = "<<vocabSize);
+
+    
+     // close file
+    gzclose(in);
+
   }
 
   

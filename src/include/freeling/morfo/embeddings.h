@@ -80,6 +80,8 @@ namespace freeling {
     void load_binary_model(const std::wstring &fname);
     /// Loads model from specified file. 
     void load_text_model(const std::wstring &fname);
+    /// Loads model from specified file. 
+    void load_gzip_model(const std::wstring &fname);
     
     //-------------------------------
     // Model properties

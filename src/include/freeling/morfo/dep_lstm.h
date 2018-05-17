@@ -37,6 +37,7 @@
 #include "dynet/model.h"
 
 #include "freeling/morfo/language.h"
+#include "freeling/morfo/tagset.h"
 #include "freeling/morfo/dependency_parser.h"
 
 
@@ -98,7 +99,8 @@ namespace freeling {
     bimap _words;   
     bimap _tags;
     bimap _actions;
-    
+
+    freeling::tagset * _Tags;
     std::set<unsigned> training_vocab;
     std::unordered_map<unsigned, std::vector<float>> pretrained;
 

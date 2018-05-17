@@ -8,7 +8,8 @@ LSTMInputDIM 100
 PosDIM 12
 RelDIM 20
 ModelFile model.es.w200.dat
-EmbeddingsFile es-embeddings-200.dat
+EmbeddingsFile ../es-embeddings-200.dat
+TagsetFile ../tagset.dat
 </NETWORK>
 <WORDS>
 0 <BAD0>
