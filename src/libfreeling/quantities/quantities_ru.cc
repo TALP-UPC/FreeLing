@@ -156,9 +156,15 @@ namespace freeling {
     case ST_C:
       TRACE(3,L"Actions for state C");
       if (token==TK_unit) {
-        TRACE(3,L"Actions for state I");
-        st->unitCode=units.find(lema)->second+L"_"+lema;
-        st->unitType=units.find(lema)->second;
+        map<wstring,wstring>::const_iterator p = units.find(lema);
+        if (p != units.end()) {
+          st->unitCode = p->second+L"_"+lema;
+          st->unitType = p->second;
+        }
+        else {
+          st->unitCode = L"??_"+lema;
+          st->unitType = L"??";
+        }
       }
       break;
 
