@@ -808,7 +808,7 @@ namespace freeling {
         st->minute=st->rem[2];  // RE_Time1.Match(2);
       }
       else if (token==TK_min) { // rem contains matches for RE_Time2
-        value=util::wstring2int(st->rem[2]);   // RE_Time2.Match(2)
+        value=util::wstring2int(st->rem[1]);   // RE_Time2.Match(2)
         // "y veinte" vs "menos veinte"
         if (origin==ST_EHb || origin==ST_EH1b) {
           value = 60-value;
