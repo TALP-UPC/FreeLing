@@ -390,18 +390,25 @@ namespace freeling {
         
           // if lemma has variables, replace them
           p = lemma.find(L"$",0);
-          while (p!=wstring::npos) {
+          while (p!=wstring::npos and p<lemma.length()-2) {
             // check variable ($F1, $L1, $F2, $L2, etc)
             wstring lf=lemma.substr(p+1,1);
-            int pos=util::wstring2int(lemma.substr(p+2,1));
-            // get replacing value (form, or first lemma --> to be improved)
-            wstring repl;
-            TRACE(3,L"n_selected="+util::int2wstring(st->components[pos-1]->get_n_selected()));
-            if (lf==L"F") repl=st->components[pos-1]->get_lc_form();
-            else if (lf==L"L") repl=st->components[pos-1]->get_lemma();
-            else ERROR_CRASH(L"Invalid lemma in locution entry: "+form+L" "+lemma+L" "+tag);
-            // replace variable and repeat, util no more replacements
-            lemma.replace(p,3,repl);
+            wstring num=lemma.substr(p+2,1);
+            if ((lf==L"F" or lf==L"L") and (num>=L"0" and num<=L"9")) {
+              int pos=util::wstring2int(num);
+              // get replacing value (form, or first lemma --> to be improved)
+              wstring repl;
+              TRACE(3,L"n_selected="+util::int2wstring(st->components[pos-1]->get_n_selected()));
+              if (lf==L"F") repl=st->components[pos-1]->get_lc_form();
+              else if (lf==L"L") repl=st->components[pos-1]->get_lemma();
+              // replace variable and repeat, util no more replacements
+              lemma.replace(p,3,repl);
+            }
+            else {
+              // we found a '$' but not followed by [FL][0-9], skip it
+              ++p;
+            }
+              
             p = lemma.find(L"$",p);
           }
 
