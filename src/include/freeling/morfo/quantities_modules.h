@@ -74,6 +74,8 @@ namespace freeling {
     locutions measures;
     /// special "magnitude" type for currencies.
     std::wstring currency_key;
+    // Symbols that may precede a number in currency expression (e.g. $100, €20,000)
+    std::map<std::wstring,std::wstring> CurrencySymbols;
 
   public:
     /// Constructor
