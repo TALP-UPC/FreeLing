@@ -56,8 +56,9 @@ namespace freeling {
   void quantities_module::readConfig(const std::wstring &quantFile) {
 
     // opening quantities config file
-    enum sections {CURRENCY, MEASURE, MEASURE_NAMES};
+    enum sections {CURR_SYMBOLS, CURRENCY, MEASURE, MEASURE_NAMES};
     config_file cfg;
+    cfg.add_section(L"CurrencySymbols",CURR_SYMBOLS);
     cfg.add_section(L"Currency",CURRENCY);
     cfg.add_section(L"Measure",MEASURE);
     cfg.add_section(L"MeasureNames",MEASURE_NAMES);
@@ -76,6 +77,13 @@ namespace freeling {
       
       case CURRENCY: {    // reading currency symbol
         currency_key = line;
+        break;
+      }
+
+      case CURR_SYMBOLS: {    // reading list of prefixed currency symbols
+        wstring sym, lem;
+        sin >> sym >> lem;
+        CurrencySymbols.insert(make_pair(sym,lem));
         break;
       }
 
