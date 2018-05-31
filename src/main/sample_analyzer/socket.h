@@ -60,7 +60,7 @@ class socket_CS {
 
 void socket_CS::error(const std::string &msg, int code) const {
   perror(msg.c_str());
-  exit(code);
+  //exit(code);
 }
 
 
@@ -136,13 +136,19 @@ int socket_CS::read_message(std::string &s) {
 
   s.clear();
   n = read_from_socket(sock2,buffer,BUFF_SZ);
-  if (n < 0) error("ERROR reading from socket",n);
+  if (n < 0) {
+      error("ERROR reading from socket",n);
+      return 0;
+  }
   buffer[n]=0;
   s = s + std::string(buffer);
   nt = n;
   while (n>0 and buffer[n-1]!=0) {
     n = read_from_socket(sock2,buffer,BUFF_SZ);
-    if (n < 0) error("ERROR reading from socket",n);
+    if (n < 0)  {
+        error("ERROR reading from socket",n);
+        return 0;
+	}
     buffer[n]=0;
     s=s + std::string(buffer);
     nt += n;
