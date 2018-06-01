@@ -210,8 +210,12 @@ int ReadLine(wstring &text) {
   int n=0;
   if (ServerMode) {
     string s;
-    n = sock->read_message(s);
-    text = util::string2wstring(s);
+    try {
+        n = sock->read_message(s);
+        text = util::string2wstring(s);
+	} catch(const std::exception& ex) {
+	    
+	}
   }
   else 
     if (getline(wcin,text)) n=1;
