@@ -520,7 +520,7 @@ namespace freeling {
   /// Generic preincrement, for all cases
   word::iterator& word::iterator::operator++() {
     do {
-      this->list<analysis>::iterator::operator++();
+      this->std::list<analysis>::iterator::operator++();
     } while (type!=ALL and (*this)!=iend and (*this)->is_selected(kbest)!=(type==SELECTED) );
     return (*this);
   }
@@ -561,7 +561,7 @@ namespace freeling {
   /// Generic preincrement, for all cases
   word::const_iterator& word::const_iterator::operator++() {
     do {
-      this->list<analysis>::const_iterator::operator++();
+      this->std::list<analysis>::const_iterator::operator++();
     } while (type!=ALL and (*this)!=iend and (*this)->is_selected(kbest)!=(type==SELECTED) );  
     return (*this);
   }
