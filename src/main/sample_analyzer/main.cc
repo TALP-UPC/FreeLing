@@ -618,6 +618,8 @@ int main (int argc, char **argv) {
     if (cfg->analyzer_invoke_options.OutputLevel == IDENT) {
       wstring text;
       while (ReadLine(text)) {
+        // if it is a command, process it and go for next line
+        if (CheckStatsCommands(text,*stats)) continue;
         // call the analyzer to identify language
         OutputString (ident->identify_language(text)+L"\n");
       }

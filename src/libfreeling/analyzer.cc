@@ -397,6 +397,7 @@ wistream& analyzer::safe_getline(wistream& is, wstring& t)  {
     case L'\r':
       if(sb->sgetc() == '\n') sb->sbumpc();
       return is;
+    case L'\uFFFF':
     case EOF:
       // Also handle the case when the last line has no line ending
       if (t.empty()) is.setstate(std::ios::eofbit);
