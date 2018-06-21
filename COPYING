@@ -44,6 +44,17 @@
      and Chih-Jen Lin and is distributed under its original BSD
      license, which can be found in file LICENSES/BSD.license
 
+ 3.- dynet code in src/libdynet is copyrighted by Carnegie Mellon University
+     and distributed under its original Apache 2.0 license.
+     See http://dynet.io/ for details.
+     You'll find the license in the file LICENSES/Apache.license included 
+     in this package or at http://www.apache.org/licenses/LICENSE-2.0
+
+ 4.- Eigen3 code in src/eigen3 is distributed under its original MPL license.
+     See http://eigen.tuxfamily.org for details.
+     You'll find the license in the file LICENSES/MPL.license included 
+     in this package or at https://www.mozilla.org/en-US/MPL/2.0/
+     
 
  2b.- DATA COMPONENTS
  -------------------- 
