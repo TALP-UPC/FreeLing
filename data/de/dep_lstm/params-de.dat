@@ -7,7 +7,7 @@ ActionDIM 20
 LSTMInputDIM 100
 PosDIM 12
 RelDIM 20
-ModelFile model-de.fixed.dat.gz
+ModelFile model-de.dat.gz
 EmbeddingsFile ../embeddings/de_embeddings.dat.gz
 TagsetFile ../tagset.dat
 </NETWORK>

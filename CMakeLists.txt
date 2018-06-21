@@ -64,6 +64,8 @@ install(DIRECTORY data/
         DESTINATION share/freeling
         PATTERN "dictionary" EXCLUDE
 	PATTERN "parameters.*.gz.*" EXCLUDE
+	PATTERN "model*.gz.*" EXCLUDE
+	PATTERN "*embeddings*.gz.*" EXCLUDE
 	PATTERN "Makefile*" EXCLUDE)
 
 #### Data installation hooks
@@ -104,7 +106,7 @@ foreach (lg ${languages})
     endif()
   endforeach()
 
-  # if treeler parameter files are splitted due to GitHub 50M limitation, join them
+  # if some model files are splitted due to GitHub 50M limitation, join them
   file(GLOB aafiles
             ${CMAKE_SOURCE_DIR}/data/${lg}/treeler/srl/parameters.*.gz.aa
             ${CMAKE_SOURCE_DIR}/data/${lg}/treeler/dep/parameters.*.gz.aa

@@ -249,7 +249,7 @@ namespace freeling {
     TRACE(1,L"Loading model.");
     load_dynet_model(freeling::util::wstring2string(freeling::util::absolute(modelFile,path)), model);
 
-    _Tags = new freeling::tagset(tagsetFile);
+    _Tags = new freeling::tagset(freeling::util::absolute(tagsetFile,path));
     
     TRACE(1,L"Module successfully created.");
   }
