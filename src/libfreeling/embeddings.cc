@@ -4,7 +4,8 @@
 #include <cmath>
 #include <vector>
 #include <algorithm>
-
+#include <boost/iostreams/filtering_streambuf.hpp>
+#include <boost/iostreams/filter/gzip.hpp>
 #include "zlib.h"
 
 #include "freeling/morfo/embeddings.h"
@@ -257,57 +258,38 @@ namespace freeling {
   /////////////////////////////////////////////////////////////////////////////
 
   void embeddings::load_gzip_model(const wstring &fname) {
-
     // open file
-    gzFile in = gzopen(util::wstring2string(fname).c_str(), "r");
+    std::ifstream fmod(util::wstring2string(fname), std::ios_base::in | std::ios_base::binary);
+    boost::iostreams::filtering_streambuf<boost::iostreams::input> inbuf;
+    inbuf.push(boost::iostreams::gzip_decompressor());
+    inbuf.push(fmod);
+    //Convert streambuf to istream
+    std::istream instream(&inbuf);
 
-    TRACE(4,L"opened gzfile");
-    // maximum length of a word
-    const int MAXTOKEN = 256;
     // read file header with vocabulary and vector sizes
-    char headline[MAXTOKEN];
-    headline[0] = '\0';
-    gzgets(in, headline, MAXTOKEN);
-    sscanf(headline, "%u %u", &vocabSize, &dimensionality);
-    TRACE(4,L"read header "<<vocabSize<<L" " <<dimensionality);
+    instream >> vocabSize >> dimensionality;
+    TRACE(4,L"read head "<<vocabSize<<L" " <<dimensionality);
 
-    // space for the word + as many floats as dimensions (19 digits per float plus one separator whitespace)
-    const int MAXLINE = MAXTOKEN + dimensionality*20;
-    char *line = new char[MAXLINE];
-    char word[MAXTOKEN]; 
-              
     // read each word and associated vector
     for (unsigned int i=0; i<vocabSize; ++i) {
-      line[0] = '\0';
-      gzgets(in, line, MAXLINE);
-
       // read word
-      int offset;
-      sscanf(line, "%s%n", word, &offset);
-      char *data = line + offset;
-
+      string w;
+      instream >> w;
+ 
       // read vector
       vector<float> v(dimensionality);
       for (unsigned int j=0; j<dimensionality; ++j) {
-        sscanf(data, "%f%n", &v[j], &offset);
-        data += offset;
+        instream >> v[j];
       }
-      // store pair (word,vector) in map
-      string w(word);
+      TRACE(6,L"  read word "<< util::string2wstring(w) << L" " << v[0] << L" " << v[1] << L" " << v[2] << L" ...");
+     // store pair (word,vector) in map
       wordVec.insert(make_pair(util::string2wstring(w), norm_vector(v)));
-      TRACE(6,L"Loaded vector " << util::string2wstring(w) << L" " << v[0]<< L" " << v[1]<< L" " << v[2] << L" ...");
     }
-    // clean
-    delete [] line;
 
-    TRACE(4,L"loaded " << wordVec.size() << L" vectors. vocab size = "<<vocabSize);
-
-    
-     // close file
-    gzclose(in);
+    // close file
+    fmod.close();
 
   }
-
   
   /////////////////////////////////////////////////////////////////////////////
   /// Get vectors dimensionality
