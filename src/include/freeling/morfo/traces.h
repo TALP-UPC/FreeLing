@@ -77,6 +77,7 @@
 #define CORRECTOR_TRACE      0x0400000000
 #define CONFIG_TRACE         0x0800000000
 #define RELAX_TRACE          0x1000000000
+#define SRL_TRACE            0x2000000000
 
 // MOD_TRACECODE and MOD_TRACENAME are empty. The class 
 // using the trace is expected to set them

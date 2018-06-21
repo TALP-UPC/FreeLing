@@ -48,6 +48,8 @@
 #include "freeling/morfo/chart_parser.h"
 #include "freeling/morfo/dep_txala.h"
 #include "freeling/morfo/dep_treeler.h"
+#include "freeling/morfo/dep_lstm.h"
+#include "freeling/morfo/srl_treeler.h"
 #include "freeling/morfo/relaxcor.h"
 #include "freeling/morfo/semgraph_extract.h"
 

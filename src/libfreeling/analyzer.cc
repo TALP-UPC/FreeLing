@@ -73,6 +73,7 @@ analyzer::analyzer_invoke_options::analyzer_invoke_options() {
   SENSE_WSD_which=NO_WSD;
   TAGGER_which=HMM;
   DEP_which=NO_DEP;    
+  SRL_which=NO_SRL;    
 }
 
 /// destructor
@@ -91,8 +92,9 @@ analyzer::analyzer(const config_options &cfg) {
 
   tk=NULL; sp=NULL; morfo=NULL; neclass=NULL; sens=NULL;
   dsb=NULL; hmm=NULL; relax=NULL; phon=NULL; parser=NULL;
-  deptxala=NULL; deptreeler=NULL; corfc=NULL; sge=NULL;
-
+  deptxala=NULL; deptreeler=NULL; deplstm=NULL; srltreeler=NULL;
+  corfc=NULL; sge=NULL;
+  
   offs = 0;
   nsentence = 1;
   
@@ -174,14 +176,23 @@ analyzer::analyzer(const config_options &cfg) {
   if (not cfg.DEP_TxalaFile.empty() and not cfg.PARSER_GrammarFile.empty()) 
     deptxala = new dep_txala(cfg.DEP_TxalaFile, parser->get_start_symbol ());
 
-  // statistical dep-parser and SRL
+  // statistical dep-parser (and SRL... to detach)
   if (not cfg.DEP_TreelerFile.empty()) 
     deptreeler = new dep_treeler(cfg.DEP_TreelerFile);
+
+  // LSTM based statistical parser
+  if (not cfg.DEP_LSTMFile.empty()) 
+    deplstm = new dep_lstm(cfg.DEP_LSTMFile);
+
+  // statistical SRL
+  if (not cfg.SRL_TreelerFile.empty()) 
+    srltreeler = new srl_treeler(cfg.SRL_TreelerFile);
 
   // coreference resolution
   if (not cfg.COREF_CorefFile.empty()) 
     corfc = new relaxcor(cfg.COREF_CorefFile);
 
+  // semantic graph extractor
   if (not cfg.SEMGRAPH_SemGraphFile.empty())
     sge = new semgraph_extract(cfg.SEMGRAPH_SemGraphFile);
 
@@ -203,6 +214,7 @@ analyzer::analyzer(const config_options &cfg) {
   current_invoke_options.SENSE_WSD_which = NO_WSD;
   current_invoke_options.TAGGER_which = NO_TAGGER;
   current_invoke_options.DEP_which = NO_DEP;
+  current_invoke_options.SRL_which = NO_SRL;
 }
 
 
@@ -225,6 +237,8 @@ analyzer::~analyzer() {
   delete parser;
   delete deptxala;
   delete deptreeler;
+  delete deplstm;
+  delete srltreeler;
   delete corfc;
   delete sge;
 }
@@ -297,7 +311,7 @@ template<class T> void analyzer::do_analysis(T &doc) const {
   // if expected output was PARSED, we are done
   if (current_invoke_options.OutputLevel==PARSED) return;
 
-  // --------- DEP PARSER (+SRL where available).
+  // --------- DEP PARSER (+SRL in treeler-> to detach).
   // apply dep parser if needed
   if (deptreeler!=NULL and 
       current_invoke_options.InputLevel<DEP and
@@ -306,9 +320,32 @@ template<class T> void analyzer::do_analysis(T &doc) const {
 
     deptreeler->analyze(doc);
   }
+  // apply lstm dep parser if needed
+  else if (deplstm!=NULL and 
+      current_invoke_options.InputLevel<DEP and
+      ((current_invoke_options.OutputLevel>=COREF and corfc!=NULL)
+       or (current_invoke_options.OutputLevel >= DEP and current_invoke_options.DEP_which==LSTM))) {
+
+    deplstm->analyze(doc);
+  }
+  // default to rule based dep parser
   else if (deptxala != NULL and current_invoke_options.InputLevel < DEP and
-           current_invoke_options.OutputLevel >= DEP and current_invoke_options.DEP_which==TXALA) 
+           current_invoke_options.OutputLevel >= DEP and current_invoke_options.DEP_which==TXALA) {
+
     deptxala->analyze(doc);
+  }
+  
+  // if expected output was DEP, we are done
+  if (current_invoke_options.OutputLevel==DEP) return;
+
+  // --------- SRL PARSER
+  if (srltreeler!=NULL and 
+      current_invoke_options.InputLevel<SRL and
+      ((current_invoke_options.OutputLevel>=COREF and corfc!=NULL)
+       or (current_invoke_options.OutputLevel >= SRL and current_invoke_options.SRL_which==SRL_TREELER))) {
+    srltreeler->analyze(doc);
+  }
+  
 }
 
 
@@ -609,6 +646,12 @@ void analyzer::set_current_invoke_options(const invoke_options &opt, bool check)
              or (opt.DEP_which==TREELER
                  and opt.InputLevel < DEP and opt.OutputLevel > DEP)))
       ERROR_CRASH(L"Required analysis level requires depTreeler parser, but it was not instantiated in config options");
+
+    if (deplstm==NULL 
+        and ((opt.OutputLevel >= COREF and opt.InputLevel < DEP) 
+             or (opt.DEP_which==LSTM
+                 and opt.InputLevel < DEP and opt.OutputLevel > DEP)))
+      ERROR_CRASH(L"Required analysis level requires depLSTM parser, but it was not instantiated in config options");
 
     if (corfc==NULL and opt.OutputLevel == COREF and opt.InputLevel < COREF) 
       ERROR_CRASH(L"Required analysis level requires Coreference solver, but it was not instantiated in config options");
