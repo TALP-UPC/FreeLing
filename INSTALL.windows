@@ -115,7 +115,6 @@ BUILD FREELING
       -DTRACES=ON        Build FreeLing with debugging traces (default: OFF)
       -DWARNINGS=OFF     Build FreeLing without warning messages (default: ON)
       -DXPRESSIVE=ON     Build FreeLing using boost::xpressive regexps instead of boost::regex  (default: OFF)
-      -DEMBEDDINGS=ON    Download word embeddings files when installing (default: OFF)
 
       -DJAVA_API=ON      Build Java API (see "Observations" below before running cmake) (default: OFF)
       -DPYTHON2_API=ON   Build Python 2 API (see "Observations" below before running cmake) (default: OFF)
