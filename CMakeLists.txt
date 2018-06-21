@@ -105,7 +105,13 @@ foreach (lg ${languages})
   endforeach()
 
   # if treeler parameter files are splitted due to GitHub 50M limitation, join them
-  file(GLOB aafiles ${CMAKE_SOURCE_DIR}/data/${lg}/treeler/srl/parameters.*.gz.aa ${CMAKE_SOURCE_DIR}/data/${lg}/treeler/dep/parameters.*.gz.aa)
+  file(GLOB aafiles
+            ${CMAKE_SOURCE_DIR}/data/${lg}/treeler/srl/parameters.*.gz.aa
+            ${CMAKE_SOURCE_DIR}/data/${lg}/treeler/dep/parameters.*.gz.aa
+            ${CMAKE_SOURCE_DIR}/data/${lg}/dep_lstm/model*.gz.aa
+            ${CMAKE_SOURCE_DIR}/data/${lg}/embeddings/*embeddings*.gz.aa
+       )
+
   foreach (model ${aafiles})
     STRING(REGEX REPLACE ".aa\$" "" gzfile "${model}")
     STRING(REGEX REPLACE "${CMAKE_SOURCE_DIR}/data" "${CMAKE_INSTALL_PREFIX}/share/freeling" gzfile "${gzfile}")
