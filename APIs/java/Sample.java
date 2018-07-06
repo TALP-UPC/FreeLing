@@ -5,7 +5,7 @@ import java.io.File;
 
 import edu.upc.Jfreeling.*;
 
-public class Analyzer {
+public class Sample {
 
   private static final String OS = System.getProperty("os.name").toLowerCase();
     

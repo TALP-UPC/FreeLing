@@ -19,5 +19,5 @@ ADD_CUSTOM_COMMAND(TARGET Jfreeling POST_BUILD
 
 install(TARGETS Jfreeling
         DESTINATION share/freeling/APIs/java)
-install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/Jfreeling.jar ${CMAKE_CURRENT_SOURCE_DIR}/Analyzer.java
+install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/Jfreeling.jar ${CMAKE_CURRENT_SOURCE_DIR}/Sample.java
         DESTINATION share/freeling/APIs/java)
