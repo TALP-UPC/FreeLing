@@ -14,19 +14,46 @@
 ## 
 ##  See ../../README for more details
 
-## Change this to te location where libfreeling is installed
-export LD_LIBRARY_PATH=/usr/local/lib
-export LC_ALL=en_US.UTF-8
+#### TODO TODO TODO
+#### add rich/poor gazetter as parameter to allow different trainings.
 
-cd $(dirname $0)/..
+
+if (test $# -lt 4); then
+    echo "usage:  ner-svm.sh lang feature filter Cparam"
+    exit
+fi
+
+# directory where this script is located
+BINDIR=`readlink -f $(dirname $0)`
+# parent directory, where the corpus should be
+NECDIR=`dirname $BINDIR`
+# main train-nerc directory
+NERCDIR=`dirname $NECDIR`
+
+if [[ ! -f $BINDIR/test-svm ]]; then
+    echo -e "'$BINDIR/test-svm' binary not found.\nPlease use 'make' to compile binaries needed to encode the corpus"
+    exit
+fi
+
+## Library path where FreeLing is found (e.g. /usr/local/lib
+FL=`ldd $BINDIR/test-svm | grep freeling | grep 'not found' | wc -l`
+if [[ $FL != 0 ]]; then
+   echo "libfreeling not found in LD_LIBRARY_PATH. Please set LD_LIBRARY_PATH to include libfreeling location"    
+   exit
+fi
+
+export LC_ALL=en_US.UTF-8
 
 LG=$1
 
-FEAT=../$LG/nec
-CORP=corpus
+FEAT=$NERCDIR/$LG/nec
+CORP=$NECDIR/corpus
 
-TRN=trained-$LG
-RES=results-$LG
+TRN=$NECDIR/trained-$LG
+RES=$NECDIR/results-$LG
+
+mkdir -p $TRN/svm
+mkdir -p $RES/svm
 
 for feat in $2; do
 
@@ -47,10 +74,10 @@ for feat in $2; do
   	   echo "** Trained SVM models " $TRN/svm/nec-$feat-$fl-C$C" already exists. Skipping model training."
          else
            echo "** Training SVM model "$TRN/svm/nec-$feat-C$C" with filter "$fl
-           bin/train-svm.sh $TRN/nec-$feat-$fl.lex "0 NP00SP0 1 NP00G00 2 NP00O00 3 NP00V00" $TRN/svm/nec-$feat-$fl $CORP/$LG.train.$feat.enc $C
+           $BINDIR/train-svm.sh $TRN/nec-$feat-rich.train-$fl.lex "0 NP00SP0 1 NP00G00 2 NP00O00 3 NP00V00" $TRN/svm/nec-$feat-$fl $CORP/$LG.$feat.rich.train.enc $C
 
    	   ## if model re-trained, make sure that test is repeated
-           rm -f $RES/svm/nec-$feat-$fl-C$C-[ab].out
+           rm -f $RES/svm/nec-$feat-$fl-C$C.out
          fi
        done
  
@@ -61,8 +88,7 @@ for feat in $2; do
     	   echo "** Results for SVM models "nec-$feat-$fl-C$C" already exist. Skipping test."
          else
            echo "** Testing SVM model "$TRN/svm/nec-$feat-$fl-C$C.dat
-           bin/test-svm $TRN/svm/nec-$feat-$fl-C$C.dat < $CORP/$LG.testa.$feat.enc >$RES/svm/nec-$feat-$fl-C$C-a.out
-           bin/test-svm $TRN/svm/nec-$feat-$fl-C$C.dat < $CORP/$LG.testb.$feat.enc >$RES/svm/nec-$feat-$fl-C$C-b.out
+           $BINDIR/test-svm $TRN/svm/nec-$feat-$fl-C$C.dat < $CORP/$LG.$feat.rich.test.enc >$RES/svm/nec-$feat-$fl-C$C.out
 
   	   ## if test re-executed, make sure that statistics are recomputed
            rm -f $RES/svm/nec-$feat-$fl-C$C.stats

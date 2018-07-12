@@ -123,7 +123,7 @@ int main(int argc, char* argv[]) {
   wcerr<<L"Corpus loaded. "<<100.0*fu/(double)ft<<"% feature occurrences passed filter."<<endl;
 
   // output ner.dat file for test.cc 
-  wcout<<L"<Lexicon>"<<endl<<L"../"<<lexFile.substr(lexFile.find(L"/")+1)<<endl<<L"</Lexicon>"<<endl;
+  wcout<<L"<Lexicon>"<<endl<<L"../"<<lexFile.substr(lexFile.rfind(L"/")+1)<<endl<<L"</Lexicon>"<<endl;
   wcout<<L"<Classifier>\nAdaBoost\n</Classifier>"<<endl;
   wcout<<L"<RGF>\nnec.rgf\n</RGF>"<<endl;
   wcout<<L"<ModelFile>"<<endl<<abmFile.substr(abmFile.rfind(L"/")+1)<<endl<<L"</ModelFile>"<<endl;
