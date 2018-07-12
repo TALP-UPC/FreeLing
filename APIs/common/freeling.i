@@ -1887,6 +1887,33 @@ class dep_treeler {
 };
 
 
+/*------------------------------------------------------------------------*/
+class dep_lstm {
+  
+ public:
+    /// constructor
+    dep_lstm(const std::wstring &fname);
+    /// destructor
+    ~dep_lstm();
+    
+   #ifndef FL_API_JAVA
+   /// analyze sentence
+   sentence analyze(const sentence &) const;
+   /// analyze sentences
+   std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
+   /// analyze document
+   document analyze(const document &) const;
+   #else
+   /// analyze sentence
+   void analyze(sentence &) const;
+   /// analyze sentences, return analyzed copy
+   void analyze(std::list<freeling::sentence> &) const;
+   /// analyze document
+   void analyze(document &) const;
+   #endif
+
+  };
+
 
 /*------------------------------------------------------------------------*/
 class senses {
