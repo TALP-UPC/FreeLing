@@ -139,6 +139,7 @@ dep_treeler::dep_treeler(const wstring &config)  {
 
 dep_treeler::~dep_treeler() {
   delete dp;
+  delete tags;
 }
 
 
@@ -245,12 +246,11 @@ void dep_treeler::Treeler2FL(freeling::sentence &fl_sentence,
   }
   
   // build FreeLing dependency tree, starting from true root 
-  map<int,freeling::depnode*> depnods;
   freeling::dep_tree *dt;
   if (roots.size()==1) {
     // only one root, normal tree
     TRACE(4,L"Single root tree");
-    dt = build_dep_tree(*(roots.begin()), sons, labels, depnods, fl_sentence);
+    dt = build_dep_tree(*(roots.begin()), sons, labels, fl_sentence);
   }
   else {
     TRACE(4,L"Multiple root tree, creating virtual root. nroots="+freeling::util::int2wstring(roots.size()));
@@ -259,7 +259,7 @@ void dep_treeler::Treeler2FL(freeling::sentence &fl_sentence,
     dt = new freeling::dep_tree(dn);
     // hang all subtrees under fake root
     for (list<int>::iterator r=roots.begin(); r!=roots.end(); r++) {
-      freeling::dep_tree *st=build_dep_tree(*r, sons, labels, depnods, fl_sentence);
+      freeling::dep_tree *st=build_dep_tree(*r, sons, labels, fl_sentence);
       dt->hang_child(*st);
       TRACE(4,L"Created subtree for root "+freeling::util::int2wstring(*r));
     }
@@ -271,6 +271,7 @@ void dep_treeler::Treeler2FL(freeling::sentence &fl_sentence,
   //add the dep_tree to FreeLing sentence
   TRACE(4, L"dep tree built, adding to sentence");
   fl_sentence.set_dep_tree(*dt, fl_sentence.get_best_seq());
+  dt->clear();
 
   TRACE(3, L"dep_tree conversion finished");
 }
@@ -282,7 +283,6 @@ void dep_treeler::Treeler2FL(freeling::sentence &fl_sentence,
 
 freeling::dep_tree* dep_treeler::build_dep_tree(int node_id, const vector<list<int> > &sons, 
                                                 const vector<string> &labels,
-                                                map<int,freeling::depnode*> &depnods,
                                                 freeling::sentence &fl_sentence) const {
 
   TRACE(5, L"  building dep_tree for node "+freeling::util::int2wstring(node_id));
@@ -303,12 +303,11 @@ freeling::dep_tree* dep_treeler::build_dep_tree(int node_id, const vector<list<i
   // create current subtree 
   TRACE(5, L"    creating subtree for=("+dn.get_word().get_form()+L","+dn.get_label()+L")");
   freeling::dep_tree *dt = new freeling::dep_tree(dn);
-  depnods.insert(make_pair(node_id,&(*(dt->begin()))));
 
   // recurse into children to build subtrees, and hang them under current node
   for (list<int>::const_iterator son=sons[node_id].begin(); son!=sons[node_id].end(); ++son) {
     TRACE(5, L"      recurse into child="+freeling::util::int2wstring(*son));
-    freeling::dep_tree *dt_son=build_dep_tree(*son, sons, labels, depnods, fl_sentence);
+    freeling::dep_tree *dt_son=build_dep_tree(*son, sons, labels, fl_sentence);
     dt->hang_child(*dt_son);
   }
 

@@ -166,6 +166,7 @@ srl_treeler::srl_treeler(const wstring &config)  {
 
 srl_treeler::~srl_treeler() {
   delete srl;
+  delete tags;
 }
 
 

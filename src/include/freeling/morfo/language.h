@@ -572,6 +572,8 @@ namespace freeling {
 
     /// set link to corresponding node in the parse tree
     void set_link(const parse_tree::iterator);
+    /// Check if the depnode is linked to parse tree
+    bool has_link() const;
     /// get link to corresponding node in the parse tree
     parse_tree::iterator get_link();
     parse_tree::const_iterator get_link() const;

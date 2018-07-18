@@ -258,7 +258,13 @@ namespace freeling {
   /// Destructor
   ////////////////////////////////////////////////////////////////
 
-  dep_lstm::~dep_lstm() {}
+  dep_lstm::~dep_lstm() {
+    delete model;
+    delete stack_lstm;
+    delete buffer_lstm;
+    delete action_lstm;
+    delete _Tags;
+  }
 
   ////////////////////////////////////////////////////////////////
   /// word id was seen during training
@@ -603,11 +609,10 @@ namespace freeling {
     }
   
     // build FreeLing dependency tree, starting from true root 
-    map<int,freeling::depnode*> depnods;
     freeling::dep_tree *dt;
     if (roots.size()==1) {
       // only one root, normal tree
-      dt = build_dep_tree(*(roots.begin()), sons, labels, depnods, fl_sentence);
+      dt = build_dep_tree(*(roots.begin()), sons, labels, fl_sentence);
     }
     else {
       // multiple roots, create fake root node
@@ -615,13 +620,16 @@ namespace freeling {
       dt = new freeling::dep_tree(dn);
       // hang all subtrees under fake root
       for (list<int>::iterator r=roots.begin(); r!=roots.end(); r++) {
-        freeling::dep_tree *st=build_dep_tree(*r, sons, labels, depnods, fl_sentence);
+        freeling::dep_tree *st=build_dep_tree(*r, sons, labels, fl_sentence);
         dt->hang_child(*st);
       }
     }
 
     //add the dep_tree to FreeLing sentence
     fl_sentence.set_dep_tree(*dt, fl_sentence.get_best_seq());
+
+    // free temporal memory
+    dt->clear();
   }
 
 
@@ -629,10 +637,10 @@ namespace freeling {
   /// build dep_tree
   ////////////////////////////////////////////////////////////////
 
-  freeling::dep_tree* dep_lstm::build_dep_tree(int node_id, const vector<list<int> > &sons, 
-                                                  const vector<wstring> &labels,
-                                                  map<int,freeling::depnode*> &depnods,
-                                                  freeling::sentence &fl_sentence) const {
+  freeling::dep_tree* dep_lstm::build_dep_tree(int node_id,
+                                               const vector<list<int> > &sons, 
+                                               const vector<wstring> &labels,
+                                               freeling::sentence &fl_sentence) const {
   
     //  Get function label
     wstring str_label = labels[node_id];
@@ -649,11 +657,10 @@ namespace freeling {
     }
     // create current subtree
     freeling::dep_tree *dt = new freeling::dep_tree(dn);
-    depnods.insert(make_pair(node_id,&(*(dt->begin()))));
 
     // recurse into children to build subtrees, and hang them under current node
     for (list<int>::const_iterator son=sons[node_id].begin(); son!=sons[node_id].end(); ++son) {
-      freeling::dep_tree *dt_son=build_dep_tree(*son, sons, labels, depnods, fl_sentence);
+      freeling::dep_tree *dt_son=build_dep_tree(*son, sons, labels, fl_sentence);
       dt->hang_child(*dt_son);
     }
 

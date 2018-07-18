@@ -147,7 +147,6 @@ namespace freeling {
     freeling::dep_tree* build_dep_tree(int node_id,
                                        const std::vector<std::list<int> > &sons, 
                                        const std::vector<std::wstring> &labels,
-                                       std::map<int,freeling::depnode*> &depnods,
                                        freeling::sentence &fl_sentence) const ;
 
     void lstm2FL(freeling::sentence &fl_sentence,
