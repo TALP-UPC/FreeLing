@@ -658,10 +658,11 @@ namespace freeling {
             auto s = ls.begin();
             while  (s!=ls.end() and gen==L'n' and s->second>=fex._MinPageRank) {
               sense_info si = fex._Semdb->get_sense_info(s->first);
-              TRACE(7, L"      sense="<< s->first << L" (" << s->second << L") sumo="<<si.sumo );
+              TRACE(7, L"      sense="<< s->first << L" (" << s->second << L") sumo="<< si.sumo << " tonto=" <<util::list2wstring(si.tonto,L":"));
               if (fex.get_label_RE(L"SEM_MaleSUMO").search(si.sumo)) gen = L'm';
               else if (fex.get_label_RE(L"SEM_FemaleSUMO").search(si.sumo)) gen = L'f';
-              else if (fex.get_label_RE(L"SEM_PersonSUMO").search(si.sumo)) gen = L'b';
+              else if (fex.get_label_RE(L"SEM_PersonSUMO").search(si.sumo)
+                       or fex.get_label_RE(L"SEM_PersonTONTO").search(util::list2wstring(si.tonto,L":"))) gen = L'b';
               ++s;
             }
 
