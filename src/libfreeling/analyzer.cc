@@ -99,7 +99,7 @@ analyzer::analyzer(const config_options &cfg) {
   nsentence = 1;
   
   //--- create needed analyzers, depending on given options ---//
-
+  
   // tokenizer requested
   if (not cfg.TOK_TokenizerFile.empty()) tk = new tokenizer(cfg.TOK_TokenizerFile);
   // splitter requested
@@ -176,7 +176,7 @@ analyzer::analyzer(const config_options &cfg) {
   if (not cfg.DEP_TxalaFile.empty() and not cfg.PARSER_GrammarFile.empty()) 
     deptxala = new dep_txala(cfg.DEP_TxalaFile, parser->get_start_symbol ());
 
-  // statistical dep-parser (and SRL... to detach)
+  // statistical dep-parser 
   if (not cfg.DEP_TreelerFile.empty()) 
     deptreeler = new dep_treeler(cfg.DEP_TreelerFile);
 
