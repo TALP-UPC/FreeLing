@@ -2,7 +2,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 import java.io.File;
-
+import java.math.*;
+    
 import edu.upc.Jfreeling.*;
 
 public class Sample {
@@ -35,9 +36,14 @@ public class Sample {
     Util.initLocale( "default" );
 
     // Create options set for maco analyzer.
-    String LANG = "es";
+    String LANG = "en";
     MacoOptions op = new MacoOptions( LANG );
 
+    Traces.setTraceLevel(5);
+    BigInteger bi = new BigInteger("000F",16);
+    Traces.setTraceModule(bi);
+        
+    
     op.setDataFiles( "", 
                      DATA + "common/punct.dat",
                      DATA + LANG + "/dicc.src",
@@ -65,10 +71,17 @@ public class Sample {
                                                   // are used
 
     HmmTagger tg = new HmmTagger( DATA + LANG + "/tagger.dat", true, 2 );
-    ChartParser parser = new ChartParser(
-      DATA + LANG + "/chunker/grammar-chunk.dat" );
-    DepTxala dep = new DepTxala( DATA + LANG + "/dep_txala/dependences.dat",
-      parser.getStartSymbol() );
+    ChartParser parser = new ChartParser( DATA + LANG + "/chunker/grammar-chunk.dat" );
+
+    // Uncomment this for rule-based dependency parsing
+    // DepTxala dep = new DepTxala( DATA + LANG + "/dep_txala/dependences.dat", parser.getStartSymbol() );
+
+    // Uncomment this for ML-based statistical dependency parsing
+    //DepTreeler dep = new DepTreeler( DATA + LANG + "/treeler/dependences.dat" );
+
+    // Uncomment this for LSTM-based statistical dependency parsing
+    DepLstm dep = new DepLstm( DATA + LANG + "/dep_lstm/params-en.dat" );
+
     Nec neclass = new Nec( DATA + LANG + "/nerc/nec/nec-ab-poor1.dat" );
 
     Senses sen = new Senses(DATA + LANG + "/senses.dat" ); // sense dictionary
@@ -119,9 +132,28 @@ public class Sample {
       line = input.readLine();
     }
 
+    // flush any sentences lingering in the splitter buffer 
+    System.out.println( "-------- Flushing buffers -----------" );
+    ListSentence ls = sp.split( sid, tk.tokenize(""), true );
+    mf.analyze( ls );
+    tg.analyze( ls );
+    neclass.analyze( ls );
+    sen.analyze( ls );
+    dis.analyze( ls );
+    printResults( ls, "tagged" );
+    parser.analyze( ls );
+    printResults( ls, "parsed" );
+    dep.analyze( ls );
+    printResults( ls, "dep" );
+    
     sp.closeSession(sid);
   }
 
+
+  private static void ProcessLine(String line, boolean flush) {
+  }
+    
+    
   private static void printSenses( Word w ) {
     String ss = w.getSensesString();
 
