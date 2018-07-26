@@ -39,9 +39,10 @@ public class Sample {
     String LANG = "en";
     MacoOptions op = new MacoOptions( LANG );
 
-    Traces.setTraceLevel(5);
-    BigInteger bi = new BigInteger("000F",16);
-    Traces.setTraceModule(bi);
+    //Uncomment these to activate FreeLing debugging traces
+    //Traces.setTraceLevel(5);
+    //BigInteger bi = new BigInteger("000F",16);
+    //Traces.setTraceModule(bi);
         
     
     op.setDataFiles( "", 
