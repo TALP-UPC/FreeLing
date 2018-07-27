@@ -65,6 +65,7 @@ LocationSUMO ^(Island|Park|Plain|Reef|Glacier|Hill|Room|Building|Burrow|Creek|Fi
 
 %% based on WN Top Ontology
 PersonTONTO Human 
+NotPersonTONTO Group
 </SemanticFeatures>
 
 <WordFeatures>

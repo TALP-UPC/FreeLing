@@ -661,8 +661,16 @@ namespace freeling {
               TRACE(7, L"      sense="<< s->first << L" (" << s->second << L") sumo="<< si.sumo << " tonto=" <<util::list2wstring(si.tonto,L":"));
               if (fex.get_label_RE(L"SEM_MaleSUMO").search(si.sumo)) gen = L'm';
               else if (fex.get_label_RE(L"SEM_FemaleSUMO").search(si.sumo)) gen = L'f';
-              else if (fex.get_label_RE(L"SEM_PersonSUMO").search(si.sumo)
-                       or fex.get_label_RE(L"SEM_PersonTONTO").search(util::list2wstring(si.tonto,L":"))) gen = L'b';
+              else if (fex.get_label_RE(L"SEM_PersonSUMO").search(si.sumo)) gen = L'b';
+	      else {
+		wstring topont = util::list2wstring(si.tonto,L":");
+		TRACE(1,L"TOPONT="<<topont);
+		TRACE(1,L"  PersonTONTO (human)"<<fex.get_label_RE(L"SEM_PersonTONTO").search(topont));
+		TRACE(1,L"  NotPersonTONTO (group)"<<fex.get_label_RE(L"SEM_NotPersonTONTO").search(topont));
+		if (fex.get_label_RE(L"SEM_PersonTONTO").search(topont)
+		    and not fex.get_label_RE(L"SEM_NotPersonTONTO").search(topont))
+		  gen = L'b';
+	      }
               ++s;
             }
 
