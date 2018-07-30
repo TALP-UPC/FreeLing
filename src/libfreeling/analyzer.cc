@@ -629,29 +629,26 @@ void analyzer::set_current_invoke_options(const invoke_options &opt, bool check)
     if (opt.SENSE_WSD_which == UKB and dsb==NULL)
       ERROR_CRASH(L"UKB word sense disambiguation requested, but it was not instantiated in config options.");
     
-    if (parser==NULL 
-        and ((opt.OutputLevel == COREF and opt.InputLevel < PARSED) 
-             or (opt.InputLevel < SHALLOW 
-                 and (opt.OutputLevel == PARSED or opt.OutputLevel == SHALLOW))))
+    if (parser==NULL and opt.InputLevel < SHALLOW and (opt.OutputLevel == PARSED or opt.OutputLevel == SHALLOW))
       ERROR_CRASH(L"Required analysis level requires chart parser, but it was not instantiated in config options");
     
-    if (deptxala==NULL 
-        and ((opt.OutputLevel == COREF and opt.InputLevel < DEP) 
-             or (opt.DEP_which==TXALA
-                 and opt.InputLevel < DEP and opt.OutputLevel > DEP)))
+    if (parser==NULL and opt.DEP_which==TXALA and opt.InputLevel < SHALLOW  and opt.OutputLevel >= DEP) 
+      ERROR_CRASH(L"Required analysis level requires chart parser, but it was not instantiated in config options");
+    
+    if (deptxala==NULL and opt.DEP_which==TXALA and opt.InputLevel < DEP and opt.OutputLevel >= DEP)
       ERROR_CRASH(L"Required analysis level requires depTxala parser, but it was not instantiated in config options");
     
-    if (deptreeler==NULL 
-        and ((opt.OutputLevel >= COREF and opt.InputLevel < DEP) 
-             or (opt.DEP_which==TREELER
-                 and opt.InputLevel < DEP and opt.OutputLevel > DEP)))
+    if (deptreeler==NULL and opt.DEP_which==TREELER and opt.InputLevel < DEP and opt.OutputLevel >= DEP)
       ERROR_CRASH(L"Required analysis level requires depTreeler parser, but it was not instantiated in config options");
 
-    if (deplstm==NULL 
-        and ((opt.OutputLevel >= COREF and opt.InputLevel < DEP) 
-             or (opt.DEP_which==LSTM
-                 and opt.InputLevel < DEP and opt.OutputLevel > DEP)))
+    if (deplstm==NULL and opt.DEP_which==LSTM and opt.InputLevel < DEP and opt.OutputLevel >= DEP)
       ERROR_CRASH(L"Required analysis level requires depLSTM parser, but it was not instantiated in config options");
+
+    if (deptxala==NULL and deptreeler==NULL and deplstm==NULL and opt.OutputLevel >= DEP) 
+      ERROR_CRASH(L"Required analysis level requires a Dependency Parser, but none was instantiated in config options");
+
+    if (srltreeler==NULL and opt.SRL_which==SRL_TREELER and opt.InputLevel < SRL and opt.OutputLevel >= SRL)
+      ERROR_CRASH(L"Required analysis level requires depTreeler parser, but it was not instantiated in config options");
 
     if (corfc==NULL and opt.OutputLevel == COREF and opt.InputLevel < COREF) 
       ERROR_CRASH(L"Required analysis level requires Coreference solver, but it was not instantiated in config options");
