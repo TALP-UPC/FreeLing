@@ -85,7 +85,7 @@ RCF_SUBJ_OBJ_SAME_VERB_IJ	# mention I is the subject of verb and mention J is an
 -100	RCF_NESTED_JI !RCF_APPOSITION_JI !RCF_REL_ANTECEDENT_IJ
 
 ## prevent different gender or number from being put toghether
--100    RCF_AGREEMENT_NO
+-30    RCF_AGREEMENT_NO
 
 # indefinite mentions
 -50	RCF_J_INDEF_NP !RCF_PRED_NP_IJ

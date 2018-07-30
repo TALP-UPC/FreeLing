@@ -75,22 +75,23 @@ namespace freeling {
   ////////////////////////////////////////////////
 
   void problem::add_constraint(int v, int l, const list<list<pair<int,int> > > &lp, double comp) {
-    int i,j;
-    list<list<pair<int,int> > >::const_iterator x;
-    list<pair<int,int> >::const_iterator y;
 
     constraint ct(lp.size());
 
     // translate the given list of coordinates (v,l) to pointers
     // to the actual label weights, to speed later access.
+    list<list<pair<int,int> > >::const_iterator x;
+    int i;
     for (i=0,x=lp.begin();  x!=lp.end();  i++,x++) {
 
-      ct[i] = vector<double*>(x->size(),NULL);
-
+      ct[i] = vector<constraint_element>(x->size());
+                            
+      list<pair<int,int> >::const_iterator y;
+      int j;
       for (j=0,y=x->begin();  y!=x->end();  j++,y++) {
-        TRACE(4,L"added constraint with comp="+util::double2wstring(comp)+L" for ("+util::int2wstring(v)+L","+util::int2wstring(l)+L") pointing to ("+util::int2wstring(y->first)+L","+util::int2wstring(y->second)+L")");
+        TRACE(4,L"added constraint with comp="<<comp<<L" for ("<<v<<L","<<l<<L") pointing to ("<<y->first<<L","<<y->second<<L")");
 
-        ct[i][j] = vars[y->first][y->second].weight;
+        ct[i][j] = constraint_element(y->first, y->second, vars[y->first][y->second].weight);
       }
     }
 
@@ -171,16 +172,17 @@ namespace freeling {
   double label::get_weight(int which) const { return weight[which]; }
   void label::set_weight(int which, double w) { weight[which]=w; }
 
-
   //---------- Class constraint ----------------------------------
 
+  constraint_element::constraint_element() {var=-1; lab=-1; w=NULL;}
+  constraint_element::constraint_element(int v, int l, double* wgh) {var=v; lab=l; w=wgh;}
 
   ////////////////////////////////////////////////////////////////
   ///  The class constraint stores all information related to a 
   /// constraint on a label in the relaxation labelling algorithm.
   ////////////////////////////////////////////////////////////////
 
-  constraint::constraint(int sz) :  vector<vector<double*> >(sz, vector<double *>()) {}
+  constraint::constraint(int sz) :  vector<vector<constraint_element> >(sz, vector<constraint_element>()) {}
 
   ////////////////////////////////////////////////
   /// set compatibility value
@@ -240,7 +242,7 @@ namespace freeling {
       int v;
       for (v=0,var=prb.vars.begin(); var!=prb.vars.end(); var++,v++) {
 
-        TRACE(3,L"   Variable "+util::int2wstring(v));
+        TRACE(3,L"   Variable " << v);
         double fnorm=0;
         if (var->size() > 1) { //  only proceed if the word is ambiguous.
         
@@ -250,38 +252,39 @@ namespace freeling {
           for (j=0,lab=var->begin(); lab!=var->end();  j++,lab++) {
 
             double CurrW = lab->get_weight(prb.CURRENT);
-            TRACE(4,L"     Label "+util::int2wstring(j)+L" weight="+util::double2wstring(CurrW));
+            TRACE(4,L"     Label " << j << L" weight=" << CurrW);
             if (CurrW>0) { // if weight==0 don't bother to compute supports, since the weight won't change
             
               support[j]=0.0;
               // apply each constraint affecting the label
               list<constraint>::const_iterator r;
               for (r=lab->constraints.begin(); r!=lab->constraints.end(); r++) {
-              
+		TRACE(6,L"      -Checking constraint (comp:" << r->get_compatibility() << L")");
+
                 // each constraint is a list of terms to be multiplied
                 constraint::const_iterator p;
-                double inf;
-                for (inf=1, p=r->begin(); p!=r->end(); p++) {
-                
-                  // each term is a list (of lenght one except on negative or wildcarded conditions) 
+                double inf = 1.0;
+                for (p=r->begin(); p!=r->end(); p++) {
+		  // each term is a list (of lenght one except on negative or wildcarded conditions) 
                   // of label weights to be added.
                   double tw;
-                  vector<double*>::const_iterator wg;
-                  for (tw=0, wg=p->begin(); wg!=p->end(); wg++)
-                    tw += (*wg)[prb.CURRENT];
-                
+                  vector<constraint_element>::const_iterator wg;
+                  for (tw=0, wg=p->begin(); wg!=p->end(); wg++) {
+                    tw += (wg->w)[prb.CURRENT];
+		    TRACE(6,L"         adding constraint element (" << wg->var << L"," << wg->lab << L"," << (wg->w)[prb.CURRENT] << L")");
+		  }
                   inf *= tw;
                 }
               
                 // add constraint influence*compatibility to label support
                 support[j] += r->get_compatibility() * inf;
-                TRACE(6,L"       constraint done (comp:"+util::double2wstring(r->get_compatibility())+L"), inf="+util::double2wstring(inf)+L",  accum.support="+util::double2wstring(support[j]));
+                TRACE(6,L"       constraint done (comp:" << r->get_compatibility() << L"), inf=" << inf << L",  accum.support=" << support[j]);
               }
             
               // normalize supports to a unified range
-              TRACE(4,L"        total support="+util::double2wstring(support[j]));
+              TRACE(4,L"        total support=" << support[j]);
               support[j] = NormalizeSupport(support[j]);      
-              TRACE(4,L"        normalized support="+util::double2wstring(support[j]));
+              TRACE(4,L"        normalized support=" << support[j]);
               // compute normalization factor for updating function below
               fnorm += CurrW * (1+support[j]);
             }

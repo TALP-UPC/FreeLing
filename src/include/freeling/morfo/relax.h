@@ -35,6 +35,15 @@
 namespace freeling {
 
 
+  class constraint_element {
+  public:
+    constraint_element();
+    constraint_element(int, int, double*);
+    int var,lab; // target (var,lab) --used for tracing mainly
+    double *w;   // pointer to (var,lab) weigth in problem matrix.
+  };
+ 
+  
   ////////////////////////////////////////////////////////////////
   ///
   ///  The class constraint implements a constraint for the 
@@ -42,7 +51,7 @@ namespace freeling {
   ///
   ////////////////////////////////////////////////////////////////
 
-  class constraint : public std::vector<std::vector<double*> > {
+  class constraint : public std::vector<std::vector<constraint_element> > {
   private:
     double compatibility;
 
