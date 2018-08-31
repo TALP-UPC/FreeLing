@@ -1600,6 +1600,8 @@ namespace freeling {
       // check for quotes between m1 and m2. If none is found, they are in the same quotation (if any)
       int best = m1.get_sentence()->get_best_seq();
       sq = in_quotes(m1,fcache,fex) and in_quotes(m2,fcache,fex);
+
+      //  if they are nested, they are in the same quote. No need to check anything else. Otherwise, check
       if (nested_mentions(m1,m2,fcache,fex)==ff_NO) {
         for (sentence::const_iterator k=m1.get_it_end(); k!=m2.get_it_begin() and sq; ++k ) {
           sq = (k->get_tag(best)==L"Fe" or k->get_tag(best)==L"Fra" or k->get_tag(best)==L"Frc");
