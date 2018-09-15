@@ -258,8 +258,8 @@ template<class T> void analyzer::do_analysis(T &doc) const {
   // apply morfo if needed
   if (current_invoke_options.InputLevel < MORFO && current_invoke_options.OutputLevel >= MORFO) {
     morfo->analyze(doc);
-    // apply sense tagging (w/o disambiguation) if needed
-    if (current_invoke_options.SENSE_WSD_which != NO_WSD) 
+    // apply sense tagging (without WSD) if requested at morfo level
+    if (current_invoke_options.SENSE_WSD_which != NO_WSD and current_invoke_options.OutputLevel <= MORFO) 
       sens->analyze(doc);
   }
 
@@ -277,6 +277,15 @@ template<class T> void analyzer::do_analysis(T &doc) const {
     if (current_invoke_options.TAGGER_which==HMM) hmm->analyze(doc);
     else if (current_invoke_options.TAGGER_which==RELAX) relax->analyze(doc);
       
+    // apply sense tagging if needed
+    if (current_invoke_options.SENSE_WSD_which != NO_WSD) {
+      if (sens->get_duplicate_analysis()) {
+	sens->set_duplicate_analysis(false);
+	WARNING(L"Deactivated DuplicateAnalysis option for 'senses' module due to selected OutputLevel>=TAGGED.")
+      }
+      sens->analyze(doc);
+    }
+    // apply WSD if requested
     if (current_invoke_options.OutputLevel >= TAGGED and current_invoke_options.SENSE_WSD_which == UKB and dsb != NULL) 
       dsb->analyze(doc);
 
