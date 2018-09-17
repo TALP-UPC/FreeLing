@@ -258,25 +258,28 @@ template<class T> void analyzer::do_analysis(T &doc) const {
   // apply morfo if needed
   if (current_invoke_options.InputLevel < MORFO && current_invoke_options.OutputLevel >= MORFO) {
     morfo->analyze(doc);
-    // apply sense tagging (without WSD) if requested at morfo level
-    if (current_invoke_options.SENSE_WSD_which != NO_WSD and current_invoke_options.OutputLevel <= MORFO) 
-      sens->analyze(doc);
   }
 
+  // apply sense tagging (without WSD) if requested at morfo level
+  if (current_invoke_options.SENSE_WSD_which != NO_WSD and current_invoke_options.OutputLevel <= MORFO) 
+    sens->analyze(doc);
+  
   // add phonetic encoding if needed 
   if (current_invoke_options.PHON_Phonetics) 
     phon->analyze(doc);
 
   // if expected output was MORFO or less, we are done
-  if (current_invoke_options.OutputLevel<=MORFO) return;
+  if (current_invoke_options.OutputLevel <= MORFO) return;
 
   // --------- TAGGER
   // apply tagger if needed
   if (current_invoke_options.InputLevel < TAGGED && current_invoke_options.OutputLevel >= TAGGED) {
-
     if (current_invoke_options.TAGGER_which==HMM) hmm->analyze(doc);
     else if (current_invoke_options.TAGGER_which==RELAX) relax->analyze(doc);
-      
+  }
+  
+  // --------- WSD
+  if (current_invoke_options.OutputLevel >= TAGGED) {
     // apply sense tagging if needed
     if (current_invoke_options.SENSE_WSD_which != NO_WSD) {
       if (sens->get_duplicate_analysis()) {
@@ -284,14 +287,17 @@ template<class T> void analyzer::do_analysis(T &doc) const {
 	WARNING(L"Deactivated DuplicateAnalysis option for 'senses' module due to selected OutputLevel>=TAGGED.")
       }
       sens->analyze(doc);
-    }
-    // apply WSD if requested
-    if (current_invoke_options.OutputLevel >= TAGGED and current_invoke_options.SENSE_WSD_which == UKB and dsb != NULL) 
-      dsb->analyze(doc);
 
-    if (current_invoke_options.OutputLevel >= TAGGED and current_invoke_options.NEC_NEClassification and neclass != NULL) 
-      neclass->analyze(doc);
+      // apply WSD if requested
+      if (current_invoke_options.SENSE_WSD_which == UKB and dsb != NULL) 
+	dsb->analyze(doc);
+    }
   }
+
+  // -- NEC
+  if (current_invoke_options.OutputLevel >= TAGGED and current_invoke_options.NEC_NEClassification and neclass != NULL) 
+    neclass->analyze(doc);
+  
   // if expected output was TAGGED, we are done
   if (current_invoke_options.OutputLevel==TAGGED) return;
 
