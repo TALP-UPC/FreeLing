@@ -38,6 +38,7 @@
 #include "freeling/morfo/splitter.h"
 #include "freeling/morfo/maco.h"
 #include "freeling/morfo/nec.h"
+#include "freeling/morfo/crf_nerc.h"
 #include "freeling/morfo/phonetics.h"
 #include "freeling/morfo/alternatives.h"
 #include "freeling/morfo/senses.h"

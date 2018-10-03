@@ -1105,11 +1105,13 @@ class paragraph : public std::list<freeling::sentence> {
 
 /*------------------------------------------------------------------------*/
 // codes for input-output formats
-typedef enum {TEXT,IDENT,TOKEN,SPLITTED,MORFO,TAGGED,SENSES,SHALLOW,PARSED,DEP,COREF,SEMGRAPH} AnalysisLevel;
+typedef enum {TEXT,IDENT,TOKEN,SPLITTED,MORFO,TAGGED,SENSES,SHALLOW,PARSED,DEP,SRL,COREF,SEMGRAPH} AnalysisLevel;
 // codes for tagging algorithms
 typedef enum {NO_TAGGER,HMM,RELAX} TaggerAlgorithm;
 // codes for dependency parsers
-typedef enum {NO_DEP,TXALA,TREELER} DependencyParser;
+typedef enum {NO_DEP,TXALA,TREELER,LSTM} DependencyParser;
+// codes for SRL parsers
+typedef enum {NO_SRL,SRL_TREELER} SRLParser;
 // codes for sense annotation
 typedef enum {NO_WSD,ALL,MFS,UKB} WSDAlgorithm;
 // codes for ForceSelect
@@ -1136,7 +1138,7 @@ typedef enum {NO_FORCE,TAGGER,RETOK} ForceSelectStrategy;
    std::wstring MACO_Decimal, MACO_Thousand;
    std::wstring MACO_UserMapFile, MACO_LocutionsFile,   MACO_QuantitiesFile,
      MACO_AffixFile,   MACO_ProbabilityFile, MACO_DictionaryFile, 
-     MACO_NPDataFile,  MACO_PunctuationFile, MACO_CompoundFile;   	 
+     MACO_NPDataFile,  MACO_PunctuationFile, MACO_CompoundFile;
    double MACO_ProbabilityThreshold;
    /// Phonetics config file
    std::wstring PHON_PhoneticsFile;
@@ -1158,6 +1160,9 @@ typedef enum {NO_FORCE,TAGGER,RETOK} ForceSelectStrategy;
    /// Dependency parsers config files
    std::wstring DEP_TxalaFile;   
    std::wstring DEP_TreelerFile;   
+   std::wstring DEP_LSTMFile;
+   /// Semantic role labeling files
+   std::wstring SRL_TreelerFile;
    /// Coreference resolution config file
    std::wstring COREF_CorefFile;
    /// semantic graph extractor config file
@@ -1194,6 +1199,7 @@ typedef enum {NO_FORCE,TAGGER,RETOK} ForceSelectStrategy;
    WSDAlgorithm SENSE_WSD_which;
    TaggerAlgorithm TAGGER_which;
    DependencyParser DEP_which;    
+   SRLParser SRL_which;
  };
  
 %nestedworkaround analyzer::config_options;

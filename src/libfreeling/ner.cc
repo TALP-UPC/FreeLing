@@ -31,6 +31,7 @@
 #include "freeling/morfo/ner.h"
 #include "freeling/morfo/np.h"
 #include "freeling/morfo/bioner.h"
+#include "freeling/morfo/crf_nerc.h"
 #include "freeling/morfo/configfile.h"
 #include "freeling/morfo/traces.h"
 #include "freeling/morfo/util.h"
@@ -80,6 +81,8 @@ namespace freeling {
       who = new np(npFile);
     else if (ner_type==L"bio") 
       who = new bioner(npFile);
+    else if (ner_type==L"crf") 
+      who = new crf_nerc(npFile);
     else
       ERROR_CRASH (L"Unknown or missing NER type '"+ner_type+L"' in file "+npFile);
   

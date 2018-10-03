@@ -65,6 +65,7 @@ install(DIRECTORY data/
 	PATTERN "parameters.*.gz.*" EXCLUDE
 	PATTERN "model*.gz.*" EXCLUDE
 	PATTERN "*embeddings*.gz.*" EXCLUDE
+	PATTERN "model*.crf.*" EXCLUDE
 	PATTERN "Makefile*" EXCLUDE)
 
 #### Data installation hooks
@@ -111,6 +112,7 @@ foreach (lg ${languages})
             ${CMAKE_SOURCE_DIR}/data/${lg}/treeler/dep/parameters.*.gz.aa
             ${CMAKE_SOURCE_DIR}/data/${lg}/dep_lstm/model*.gz.aa
             ${CMAKE_SOURCE_DIR}/data/${lg}/embeddings/*embeddings*.gz.aa
+            ${CMAKE_SOURCE_DIR}/data/${lg}/nerc/nerc/model*.crf.aa
        )
 
   foreach (model ${aafiles})

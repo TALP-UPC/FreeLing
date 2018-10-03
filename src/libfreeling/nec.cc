@@ -157,7 +157,7 @@ namespace freeling {
     bool hasNE=false;
     for (sentence::iterator w=se.begin(); w!=se.end() and not hasNE; w++)
       for (word::iterator a=w->selected_begin(); a!=w->selected_end() and not hasNE; a++)
-        hasNE = (a->get_tag().find(NPtag,0)==0);
+        hasNE = (a->get_tag()==NPtag);
     // If no NEs in the sentence, let's avoid useless work. We are done.
     if (not hasNE) return;
     
@@ -176,7 +176,7 @@ namespace freeling {
     for (w=se.begin(),i=0; w!=se.end(); w++,i++) {
       // for any analysis (selected by the tagger) that has NEtag, create and classify new example
       for (word::iterator a=w->selected_begin(); a!=w->selected_end(); a++) {
-        if (a->get_tag().find(NPtag,0)==0) {
+        if (a->get_tag()==NPtag) {
         
           TRACE(2,L"NP found ("+w->get_form()+L"). building example");
           example exmp(classif->get_nlabels());

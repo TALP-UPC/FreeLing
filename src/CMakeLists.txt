@@ -9,9 +9,9 @@ add_definitions( -DBOOST_ALL_NO_LIB -DBOOST_ALL_DYN_LINK )
 
 set(EIGEN3_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/src/eigen3)
 add_subdirectory(libdynet)
-
 add_subdirectory(libfoma)
 add_subdirectory(libtreeler)
+add_subdirectory(crfsuite)
 add_subdirectory(libfreeling)
 add_subdirectory(main)
 add_subdirectory(utilities)

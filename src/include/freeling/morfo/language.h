@@ -217,7 +217,8 @@ namespace freeling {
     // morphological modules that may add analysis to the word
     typedef enum  { USERMAP=0x0001,    NUMBERS=0x0002,    PUNCTUATION=0x0004,   DATES=0x0008, 
                     DICTIONARY=0x0010, AFFIXES=0x0020,    COMPOUNDS=0x0040,     MULTIWORDS=0x0080, 
-                    NER=0x0100,        QUANTITIES=0x0200, PROBABILITIES=0x0400, GUESSER=0x0800 } Modules;
+                    NER=0x0100,        NERC=0x200,        QUANTITIES=0x0400,    PROBABILITIES=0x0800,
+                    GUESSER=01000 } Modules;
 
     // predeclarations
     class iterator; 

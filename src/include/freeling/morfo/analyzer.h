@@ -87,7 +87,7 @@ class WINDLL analyzer {
        std::wstring MACO_Decimal, MACO_Thousand;
        std::wstring MACO_UserMapFile, MACO_LocutionsFile,   MACO_QuantitiesFile,
          MACO_AffixFile,   MACO_ProbabilityFile, MACO_DictionaryFile, 
-         MACO_NPDataFile,  MACO_PunctuationFile, MACO_CompoundFile;   	 
+         MACO_NPDataFile,  MACO_PunctuationFile, MACO_CompoundFile;
        double MACO_ProbabilityThreshold;
        /// Phonetics config file
        std::wstring PHON_PhoneticsFile;
