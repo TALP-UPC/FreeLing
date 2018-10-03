@@ -1618,6 +1618,33 @@ class ner {
 };
 
 /*------------------------------------------------------------------------*/
+class crf_nerc {
+  
+  public:
+    /// Constructor
+    crf_nerc(const std::wstring &);
+    /// Destructor
+    ~crf_nerc();
+
+    #ifndef FL_API_JAVA
+    /// analyze sentence
+    sentence analyze(const sentence &) const;
+    /// analyze sentences
+    std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
+    /// analyze document
+    document analyze(const document &) const;
+    #else
+    /// analyze sentence
+    void analyze(sentence &) const;
+    /// analyze sentences
+    void analyze(std::list<freeling::sentence> &) const;
+    /// analyze document
+    void analyze(document &) const;
+    #endif
+};
+
+ 
+/*------------------------------------------------------------------------*/
 class quantities {
  public:
   /// Constructor (language, config file)
@@ -1921,6 +1948,36 @@ class dep_lstm {
   };
 
 
+/*------------------------------------------------------------------------*/
+
+class srl_treeler {
+
+ public:   
+  /// Constructor
+  srl_treeler(const std::wstring &);
+  /// Destructor
+  ~srl_treeler();
+
+   #ifndef FL_API_JAVA
+   /// analyze sentence
+   sentence analyze(const sentence &) const;
+   /// analyze sentences
+   std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
+   /// analyze document
+   document analyze(const document &) const;
+   #else
+   /// analyze sentence
+   void analyze(sentence &) const;
+   /// analyze sentences, return analyzed copy
+   void analyze(std::list<freeling::sentence> &) const;
+   /// analyze document
+   void analyze(document &) const;
+   #endif
+    
+};
+
+
+ 
 /*------------------------------------------------------------------------*/
 class senses {
  public:

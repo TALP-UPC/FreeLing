@@ -54,6 +54,12 @@
      See http://eigen.tuxfamily.org for details.
      You'll find the license in the file LICENSES/MPL.license included 
      in this package or at https://www.mozilla.org/en-US/MPL/2.0/
+
+ 5.- CRFsuite, lbgfs, and cqdb library in src/crfsuite are copyrighted by
+     Naoaki Okazaki (okazaki@chokkan.org) from Tokyo Institute of Technology,
+     and distributed under their original BSD license.
+     See http://www.chokkan.org/ for details.
+     You'll find the license in the file LICENSES/BSD.license in this package.
      
 
  2b.- DATA COMPONENTS
