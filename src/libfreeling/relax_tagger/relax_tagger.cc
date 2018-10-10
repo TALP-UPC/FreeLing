@@ -74,8 +74,9 @@ namespace freeling {
     // and add appropriate labels (pos tags) to each variable (word)
     problem prb(se.size());
     for (v=0,w=se.begin();  w!=se.end();  v++,w++) {
+      prb.set_var_name(v,w->get_form());
       for (tag=w->selected_begin(); tag!=w->selected_end(); tag++) {
-        prb.add_label(v,tag->get_prob());
+        prb.add_label(v,tag->get_prob(),tag->get_tag());
       }
     }      
   

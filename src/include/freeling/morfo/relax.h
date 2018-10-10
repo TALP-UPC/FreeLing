@@ -29,6 +29,7 @@
 #ifndef _RELAX
 #define _RELAX
 
+#include <string>
 #include <list>
 #include <vector>
 
@@ -78,6 +79,8 @@ namespace freeling {
   protected:
     /// label weigth at current and next iterations
     double weight[2];
+    /// label name, for user convenience
+    std::wstring name;
     /// list of constraints for the label
     std::list<constraint> constraints;
 
@@ -86,6 +89,7 @@ namespace freeling {
     label();
     double get_weight(int) const;
     void set_weight(int, double);
+    std::wstring get_name() const;
 
   };
 
@@ -106,6 +110,8 @@ namespace freeling {
   protected:
     /// table with variable-labels in the CLP.
     std::vector<std::vector<label> > vars;
+    /// variable names, for user convenience
+    std::vector<std::wstring> varnames;
     /// which of both weight sets are we using and which are we computing
     int CURRENT, NEXT;
 
@@ -113,8 +119,17 @@ namespace freeling {
     /// Constructor
     problem(int);
 
-    /// add a label (and its weight) to the given variable
-    void add_label(int, double);
+    /// set variable name 
+    void set_var_name(int, const std::wstring &);
+    /// get variable name
+    std::wstring get_var_name(int i) const;
+    /// get number of labels
+    int get_num_labels(int i) const;
+    /// get label name
+    std::wstring get_label_name(int i, int j) const;
+
+    /// add a label and its weight (and its name if needed) to the given variable
+    void add_label(int, double, const std::wstring &lb=L"");
     /// add a new constraint to the problem
     void add_constraint (int, int, const std::list<std::list<std::pair<int,int> > > &, double);
     /// get best label(s) --hopefully only one-- for given variable
