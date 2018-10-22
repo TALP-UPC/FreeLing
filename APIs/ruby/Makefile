@@ -10,7 +10,7 @@ RUBYVER = ruby-2.5.0
 RUBYDIR = /usr/include/$(RUBYVER)
 
 freeling.so: freeling_rubyAPI.cxx
-	g++ -shared -o freeling.so freeling_rubyAPI.cxx -lfreeling -I$(FREELINGDIR)/include -I$(FREELINGDIR)/include/crfsuite -L$(FREELINGDIR)/lib -I$(RUBYDIR) -I/usr/include/x86_64-linux-gnu/$(RUBYVER) -fPIC -std=gnu++0x
+	g++ -shared -o freeling.so freeling_rubyAPI.cxx -lfreeling -I$(FREELINGDIR)/include -L$(FREELINGDIR)/lib -I$(RUBYDIR) -I/usr/include/x86_64-linux-gnu/$(RUBYVER) -fPIC -std=gnu++0x
 
 freeling_rubyAPI.cxx: freeling_rubyAPI.i
 	swig -ruby -c++ -o freeling_rubyAPI.cxx freeling_rubyAPI.i
