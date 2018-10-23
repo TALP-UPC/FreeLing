@@ -1,8 +1,7 @@
 
- This folder contains an attept to build a Ruby API  for FreeLing using SWIG.
+ This folder contains a Makefile to build a Ruby API for FreeLing using SWIG.
 
- Unfortunately, it is not operative yet.
+ However, SWIG supports ruby only partially, thus the Makefile contains a series of hacks that may need adjusting.
 
- If you manage to make it work and you want to contribute to the
- project, please contact FreeLing developers.
+ Please read carefully the comments in the Makefile and perform the required adjustments before running it.
 
