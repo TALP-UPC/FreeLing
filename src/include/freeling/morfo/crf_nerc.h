@@ -37,7 +37,7 @@
 #include "freeling/morfo/language.h"
 #include "freeling/morfo/fex.h"
 
-#include "crfsuite_api.hpp"
+#include "crfsuite/crfsuite_api.hpp"
 
 namespace freeling {
 

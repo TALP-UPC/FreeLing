@@ -5,30 +5,30 @@ endif()
 
 ## -------------------------------------------------
 file(GLOB_RECURSE sources_CRF
-src/crf/crf1d_context.c src/crf/crf1d_encode.c src/crf/crf1d_feature.c src/crf/crf1d_model.c src/crf/crf1d_tag.c src/crf/crfsuite.c src/crf/crfsuite_train.c src/crf/dataset.c src/crf/dictionary.c src/crf/holdout.c src/crf/logging.c src/crf/params.c src/crf/quark.c src/crf/rumavl.c src/crf/train_arow.c src/crf/train_averaged_perceptron.c src/crf/train_l2sgd.c src/crf/train_lbfgs.c src/crf/train_passive_aggressive.c src/cqdb/cqdb.c src/cqdb/lookup3.c src/lbfgs/lbfgs.c include/crfsuite_api.cpp 
+crfsuite/crf/crf1d_context.c crfsuite/crf/crf1d_encode.c crfsuite/crf/crf1d_feature.c crfsuite/crf/crf1d_model.c crfsuite/crf/crf1d_tag.c crfsuite/crf/crfsuite.c crfsuite/crf/crfsuite_train.c crfsuite/crf/dataset.c crfsuite/crf/dictionary.c crfsuite/crf/holdout.c crfsuite/crf/logging.c crfsuite/crf/params.c crfsuite/crf/quark.c crfsuite/crf/rumavl.c crfsuite/crf/train_arow.c crfsuite/crf/train_averaged_perceptron.c crfsuite/crf/train_l2sgd.c crfsuite/crf/train_lbfgs.c crfsuite/crf/train_passive_aggressive.c crfsuite/cqdb/cqdb.c crfsuite/cqdb/lookup3.c crfsuite/lbfgs/lbfgs.c crfsuite/crfsuite_api.cpp 
 )
 
 add_library(crfsuite SHARED ${sources_CRF})
 set_target_properties(crfsuite PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries(crfsuite m)
-target_include_directories(crfsuite PUBLIC include src/crf src/cqdb src/lbfgs) 
+target_include_directories(crfsuite PUBLIC . crfsuite crfsuite/crf crfsuite/cqdb crfsuite/lbfgs) 
 
 install(TARGETS crfsuite
         RUNTIME DESTINATION bin
         LIBRARY DESTINATION lib
         ARCHIVE DESTINATION lib/static)
 
-install(FILES include/crfsuite_api.hpp 
+install(FILES crfsuite/crfsuite_api.hpp 
         DESTINATION include/crfsuite
         )
 
 ## -------------------------------------------------
 file(GLOB_RECURSE crfsuite_main_SRC
-     src/frontend/dump.c src/frontend/iwa.c src/frontend/learn.c src/frontend/main.c src/frontend/option.c src/frontend/reader.c src/frontend/tag.c
+     crfsuite/frontend/dump.c crfsuite/frontend/iwa.c crfsuite/frontend/learn.c crfsuite/frontend/main.c crfsuite/frontend/option.c crfsuite/frontend/reader.c crfsuite/frontend/tag.c
     )
 
 add_executable(crfsuite_bin ${crfsuite_main_SRC})
-target_include_directories(crfsuite_bin PRIVATE src/frontend)
+target_include_directories(crfsuite_bin PRIVATE crfsuite/frontend)
 target_link_libraries(crfsuite_bin crfsuite)
 set_target_properties(crfsuite_bin PROPERTIES OUTPUT_NAME crfsuite)
 
