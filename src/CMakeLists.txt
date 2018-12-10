@@ -3,6 +3,11 @@
 include_directories(include)
 include_directories(libdynet)
 
+if (WIN32)
+  # TO be Tested.  If linking problems appear, remove this line
+  SET(CMAKE_BUILD_TYPE Release)
+endif()
+
 # disable autolinking in boost, force dynamic linking for boost,
 # deactivate deprecated stuff that forces boost_system
 add_definitions( -DBOOST_ALL_NO_LIB -DBOOST_ALL_DYN_LINK )
