@@ -1,51 +1,64 @@
-
 require './freeling'
 
- Freeling::Util.init_locale("default")
+Freeling::Util.init_locale('default')
 
- FLDIR="/home/padro/Software/share/freeling"
- LANG="es"
+FLDIR = '/usr/local/share/freeling'.freeze
+LANG = 'en'.freeze
 
- tk = Freeling::Tokenizer.new(FLDIR+"/"+LANG+"/tokenizer.dat")
- sp = Freeling::Splitter.new(FLDIR+"/"+LANG+"/splitter.dat")
- sid = sp.open_session
+tokenizer = Freeling::Tokenizer.new("#{FLDIR}/#{LANG}/tokenizer.dat")
+splitter = Freeling::Splitter.new("#{FLDIR}/#{LANG}/splitter.dat")
+session = splitter.open_session
 
- op = Freeling::Maco_options.new(LANG);
- op.set_data_files( "", 
-                   FLDIR+"/"+"common/punct.dat",
-                   FLDIR+"/"+LANG + "/dicc.src",
-                   FLDIR+"/"+LANG + "/afixos.dat",
-                   "",
-                   FLDIR+"/"+LANG + "/locucions.dat", 
-                   FLDIR+"/"+LANG + "/np.dat",
-                   FLDIR+"/"+LANG + "/quantities.dat",
-                   FLDIR+"/"+LANG + "/probabilitats.dat")
+maco_options = Freeling::Maco_options.new(LANG)
+maco_options.set_data_files(
+  '',
+  "#{FLDIR}/common/punct.dat",
+  "#{FLDIR}/#{LANG}/dicc.src",
+  "#{FLDIR}/#{LANG}/afixos.dat",
+  '',
+  "#{FLDIR}/#{LANG}/locucions.dat",
+  "#{FLDIR}/#{LANG}/np.dat",
+  "#{FLDIR}/#{LANG}/quantities.dat",
+  "#{FLDIR}/#{LANG}/probabilitats.dat"
+)
 
- mf = Freeling::Maco.new(op)
+morphological_analyzer = Freeling::Maco.new(maco_options)
 
- # activate mmorpho odules to be used in next call
- mf.set_active_options(false, true, true, true,  # select which among created 
-                       true, true, false, true,  # submodules are to be used. 
-                       true, true, true, true ); # default: all created submodules are used
+# activate mmorpho odules to be used in next call
+morphological_analyzer.set_active_options(
+  false, # umap - User Map
+  true,  # num -  Number Detection
+  true,  # pun -  Punctuation Detection
+  true,  # dat -  Dates Detection
+  true,  # dic -  Dictionary Search (also splits words)
+  true,  # aff -  Affix (?)
+  false, # comp - Compounds (?)
+  true,  # rtk -  Retokenization (?)
+  true,  # mw -   Multiword Recognition
+  true,  # ner -  Named Entity Recognition
+  true,  # qt -   Quantity Recognition
+  true   # prb -  Probability Assignment and Unknown Word Guesser
+)
 
- # create tagger and sense anotator,
- tg = Freeling::Hmm_tagger.new(FLDIR+"/"+LANG+"/tagger.dat",true,2);
- sen = Freeling::Senses.new(FLDIR+"/"+LANG+"/senses.dat");
+# create tagger and sense anotator,
+tagger = Freeling::Hmm_tagger.new("#{FLDIR}/#{LANG}/tagger.dat", true, 2)
+sense_labeler = Freeling::Senses.new("#{FLDIR}/#{LANG}/senses.dat")
 
- while (line=gets)
-   line.chomp
-   s = tk.tokenize(line)
-   ls = sp.split(sid,s,false)
-   ls = mf.analyze(ls)
-   ls = tg.analyze(ls)
-   ls = sen.analyze(ls)
-  
-   ls.each { |s| 
-      s.each { |w| 
-          puts w.get_form + " " + w.get_lemma + " " +  w.get_tag + " " + w.get_senses_string
-      }
-    puts " "
-   }
- end
+while (input = gets)
+  input.chomp
 
- sp.close_session(sid)
+  tokens = tokenizer.tokenize(input)
+  sentences = splitter.split(session, tokens, true)
+  sentences = morphological_analyzer.analyze(sentences)
+  sentences = tagger.analyze(sentences)
+  sentences = sense_labeler.analyze(sentences)
+
+  sentences.each do |sentence|
+    sentence.each do |word|
+      puts word.get_form + ' ' + word.get_lemma + ' ' + word.get_tag + ' ' + word.get_senses_string
+    end
+    puts ' '
+  end
+end
+
+splitter.close_session(session)

@@ -50,7 +50,9 @@
 #ifndef FL_API_PHP
 %template(VectorSetString) std::vector<std::set<std::wstring> >;
 %template(VectorSetInt) std::vector<std::set<int> >;
+#ifndef FL_API_RUBY
 %template(SetString) std::set<std::wstring>;
+#endif
 #endif
 #endif
 
