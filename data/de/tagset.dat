@@ -1,5 +1,5 @@
 <DecompositionRules>
-N 3 noun type/C:common;P:proper case/N:nominative;A:accusative;D:dative;G:genitive gen/F:feminine;M:masculine;N:neuter num/S:singular;P:plural neclass/S:person;G:location;O:organization;V:other
+N 3 noun type/C:common;P:proper case/N:nominative;A:accusative;D:dative;G:genitive gen/F:feminine;M:masculine;N:neuter num/S:singular;P:plural neclass/P:person;G:location;O:organization;V:other
 A 3 adjective type/Q:qualificative;P:predicative case/N:nominative;A:accusative;D:dative;G:genitive gen/F:feminine;M:masculine;N:neuter num/S:singular;P:plural degree/S:superlative;C:comparative
 D 3 determiner type/A:definite;I:indefinite;X:possessive;D:demostrative;R:relative;T:interrogative case/N:nominative;A:accusative;D:dative;G:genitive gen/F:feminine;M:masculine;N:neuter num/S:singular;P:plural
 V 3 verb type/V:full;A:auxiliary;M:modal mood/N:infinitive;P:participle;Z:zuinf;M:imperative;S:subjunctive;I:indicative tense/P:present;S:past person/1:1;2:2;3:3 num/S:singular;P:plural
