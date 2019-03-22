@@ -778,8 +778,8 @@ i-lo		iz   ^V     *   1    1    0    L 1	$$+o:$$+PP
 
 ################ ADVERBIOS -mente ##############
 
-mente    *    ^AQ0CS    RG    0    0    0   L  1 -
-mente    *    ^AQ0FS    RG    0    0    0   L  1 -
+mente    *    ^AQ0CS    AQ0CS    0    0    0   L  1 -
+mente    *    ^AQ0FS    AQ0FS    0    0    0   L  1 -
 
 
 ################ DIMINUTIVOS ##############
