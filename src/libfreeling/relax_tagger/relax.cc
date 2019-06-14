@@ -29,7 +29,6 @@
 #include <cmath>
 
 #include "freeling/morfo/relax.h"
-#include "freeling/morfo/util.h"
 #include "freeling/morfo/traces.h"
 
 using namespace std;
@@ -188,7 +187,7 @@ namespace freeling {
         for (j=i->begin(); j!=i->end(); j++) {
           double ch = fabs(j->weight[NEXT] - j->weight[CURRENT]);
           if (ch >= epsil) {
-            TRACE(4,L" Found weight change of "+util::double2wstring(ch)+L", not converging yet.");
+            TRACE(4,L" Found weight change of " << ch << L", not converging yet.");
             return true;
           }
         }
