@@ -1,8 +1,34 @@
+//////////////////////////////////////////////////////////////////
+//
+//    FreeLing - Open Source Language Analyzers
+//
+//    Copyright (C) 2014   TALP Research Center
+//                         Universitat Politecnica de Catalunya
+//
+//    This library is free software; you can redistribute it and/or
+//    modify it under the terms of the GNU Affero General Public
+//    License as published by the Free Software Foundation; either
+//    version 3 of the License, or (at your option) any later version.
+//
+//    This library is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+//    Affero General Public License for more details.
+//
+//    You should have received a copy of the GNU Affero General Public
+//    License along with this library; if not, write to the Free Software
+//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+//
+//    contact: Lluis Padro (padro@lsi.upc.es)
+//             TALP Research Center
+//             despatx C6.212 - Campus Nord UPC
+//             08034 Barcelona.  SPAIN
+//
+////////////////////////////////////////////////////////////////
 
 #include <sstream>
 
 #include "freeling/morfo/dep_lstm.h"
-
 #include "freeling/morfo/util.h"
 #include "freeling/morfo/configfile.h"
 #include "freeling/morfo/embeddings.h"
@@ -84,6 +110,9 @@ namespace freeling {
   ///
   ///////////////////////////////////////////////////////////////////////
 
+  /// mutex to prevent more than one simultaneous dynet CG 
+  boost::mutex dep_lstm::cg_sem;
+  
   ////////////////////////////////////////////////////////////////
   /// Constructor:  Load Model and create LSTM
   ////////////////////////////////////////////////////////////////
@@ -450,7 +479,7 @@ namespace freeling {
     
       // get relation embedding from action (TODO: convert to relation from action?)
       dynet::Expression relation = lookup(hg, p_r, action);
-    
+
       // do action
       //wstring actname = get_action(action);
       wstring actname = _actions.id2string(action);
@@ -533,7 +562,6 @@ namespace freeling {
     assert(bufferi.size() == 1);
     dynet::Expression tot_neglogprob = -sum(log_probs);
     assert(tot_neglogprob.pg != nullptr);
-    //return results;
   }
 
   ////////////////////////////////////////////////////////////////
@@ -570,7 +598,11 @@ namespace freeling {
   
     map<int,int> deps;
     map<int,wstring> rels;
+    // dynet does not support two simultaneous ComputationGraphs
+    // set a lock to ensure thread safety
+    cg_sem.lock(); 
     log_prob_parser(wordids, tsentence, tagids, deps, rels);
+    cg_sem.unlock();
 
     // convert output vector of deps and rels to freeling::dep_tree
     lstm2FL(sent, deps, rels);

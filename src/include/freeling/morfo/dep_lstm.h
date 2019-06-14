@@ -32,6 +32,7 @@
 #include <set>
 #include <vector>
 #include <unordered_map>
+#include <boost/thread/mutex.hpp>
 
 #include "dynet/lstm.h"
 #include "dynet/model.h"
@@ -77,6 +78,9 @@ namespace freeling {
   class dep_lstm : public freeling::dependency_parser {
   
   private:
+    // mutex to prevent more than one simultaneous dynet CG 
+    static boost::mutex cg_sem;
+  
     const std::wstring ROOT_SYMBOL = L"ROOT";
     const std::wstring wUNK = L"<UNK>";
     unsigned kUNK;
