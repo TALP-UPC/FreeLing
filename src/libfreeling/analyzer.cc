@@ -41,46 +41,6 @@ namespace freeling {
 
 
 //---------------------------------------------
-//  Classes to hold configuration options
-//---------------------------------------------
-
-/// config options constructor, default values (except file names, initialized to "")
-analyzer::analyzer_config_options::analyzer_config_options() {
-  MACO_ProbabilityThreshold = 0.001;
-  TAGGER_RelaxMaxIter = 500;
-  TAGGER_RelaxScaleFactor = 67;
-  TAGGER_RelaxEpsilon = 0.001;
-  TAGGER_Retokenize = true;
-  TAGGER_kbest = 1;
-  TAGGER_ForceSelect=TAGGER;
-}
-  
-/// destructor
-analyzer::analyzer_config_options::~analyzer_config_options() {}
-
-/// invoke options constructor, default values 
-analyzer::analyzer_invoke_options::analyzer_invoke_options() {
-  InputLevel = TEXT;  OutputLevel = TAGGED;
-  
-  MACO_UserMap=false;            MACO_AffixAnalysis=true;        MACO_MultiwordsDetection=true;
-  MACO_NumbersDetection=true;    MACO_PunctuationDetection=true; MACO_DatesDetection=true;
-  MACO_QuantitiesDetection=true; MACO_DictionarySearch=true;     MACO_ProbabilityAssignment=true;
-  MACO_CompoundAnalysis=true;    MACO_NERecognition=true;        MACO_RetokContractions=true;
-  
-  PHON_Phonetics=false;
-  NEC_NEClassification=false;
-  
-  SENSE_WSD_which=NO_WSD;
-  TAGGER_which=HMM;
-  DEP_which=NO_DEP;    
-  SRL_which=NO_SRL;    
-}
-
-/// destructor
-analyzer::analyzer_invoke_options::~analyzer_invoke_options() {}
-
-
-//---------------------------------------------
 //  analyzer class
 //---------------------------------------------
 
@@ -88,7 +48,7 @@ analyzer::analyzer_invoke_options::~analyzer_invoke_options() {}
 /// Create analyzers defined by config_options.
 ///---------------------------------------------
 
-analyzer::analyzer(const config_options &cfg) {
+analyzer::analyzer(const analyzer_config::config_options &cfg) {
 
   tk=NULL; sp=NULL; morfo=NULL; neclass=NULL; sens=NULL;
   dsb=NULL; hmm=NULL; relax=NULL; phon=NULL; parser=NULL;
@@ -243,6 +203,32 @@ analyzer::~analyzer() {
   delete sge;
 }
 
+  
+//---------------------------------------------
+// Modify options currently set for the analyzer
+//---------------------------------------------
+
+void analyzer::set_current_invoke_options(const analyzer_config::invoke_options &opt) { 
+
+  if (morfo!=NULL) {
+    // morfo class will take care of setting and validating its own options
+    morfo->set_active_options (opt.MACO_UserMap,
+                               opt.MACO_NumbersDetection,
+                               opt.MACO_PunctuationDetection,
+                               opt.MACO_DatesDetection,
+                               opt.MACO_DictionarySearch,
+                               opt.MACO_AffixAnalysis,
+                               opt.MACO_CompoundAnalysis,
+                               opt.MACO_RetokContractions,
+                               opt.MACO_MultiwordsDetection,
+                               opt.MACO_NERecognition,
+                               opt.MACO_QuantitiesDetection,
+                               opt.MACO_ProbabilityAssignment);
+  }
+
+  // store given options as current
+  current_invoke_options = opt;
+}
 
 //---------------------------------------------  
 // analyze further levels on a partially analyzed document or sentence list
@@ -571,107 +557,10 @@ void analyzer::reset_offset() {
 // return options currently set for the analyzer
 //---------------------------------------------
 
-const analyzer::invoke_options& analyzer::get_current_invoke_options() const { 
+const analyzer_config::invoke_options& analyzer::get_current_invoke_options() const { 
   return current_invoke_options; 
 }
 
-
-//---------------------------------------------
-// Modify options currently set for the analyzer
-//---------------------------------------------
-
-void analyzer::set_current_invoke_options(const invoke_options &opt, bool check) { 
-
-  if (morfo!=NULL) {
-    // morfo class will take care of setting and validating its own options
-    morfo->set_active_options (opt.MACO_UserMap,
-                               opt.MACO_NumbersDetection,
-                               opt.MACO_PunctuationDetection,
-                               opt.MACO_DatesDetection,
-                               opt.MACO_DictionarySearch,
-                               opt.MACO_AffixAnalysis,
-                               opt.MACO_CompoundAnalysis,
-                               opt.MACO_RetokContractions,
-                               opt.MACO_MultiwordsDetection,
-                               opt.MACO_NERecognition,
-                               opt.MACO_QuantitiesDetection,
-                               opt.MACO_ProbabilityAssignment);
-  }
-
-  // store given options as current
-  current_invoke_options = opt; 
-  
-  if (check) {
-    // Check if given options make sense. Issue warnings/errors if not
-    if (opt.InputLevel >= opt.OutputLevel)
-      WARNING(L"Input and output analysis levels are the same. No analysis will be performed.");
-    if (opt.PHON_Phonetics and opt.OutputLevel < SPLITTED)
-      WARNING(L"Phonetics requires at least 'splitted' output analysis level.");
-    if (opt.SENSE_WSD_which!=NO_WSD and opt.OutputLevel < MORFO)
-      WARNING(L"Sense annotation requires at least 'morfo' output analysis level.");
-    if (opt.SENSE_WSD_which==UKB and opt.OutputLevel < TAGGED)
-      WARNING(L"UKB word sense disambiguation requires at least 'tagged' output analysis level.");
-    if (opt.NEC_NEClassification and opt.OutputLevel < TAGGED)
-      WARNING(L"NE classification requires at least 'tagged' output analysis level.");
-    if (opt.NEC_NEClassification and not opt.MACO_NERecognition)
-      WARNING(L"NE classification requires NE recognition.");
-    
-    if (tk==NULL and opt.InputLevel == TEXT and opt.OutputLevel >= TOKEN)
-      ERROR_CRASH(L"Tokenizer requested, but it was not instantiated in config options.");
-    if (sp==NULL and opt.InputLevel < SPLITTED and opt.OutputLevel >= SPLITTED)
-      ERROR_CRASH(L"Splitter requested, but it was not instantiated in config options.");
-    if (morfo==NULL and opt.InputLevel < MORFO and opt.OutputLevel >= MORFO)
-      ERROR_CRASH(L"Morphological analysis requested, but it was not instantiated in config options.");
-    if (hmm==NULL and opt.TAGGER_which==HMM
-        and opt.InputLevel < TAGGED and opt.OutputLevel >= TAGGED)
-      ERROR_CRASH(L"HMM tagger requested, but it was not instantiated in config options.");
-    if (relax==NULL and opt.TAGGER_which==RELAX
-        and opt.InputLevel < TAGGED and opt.OutputLevel >= TAGGED)
-      ERROR_CRASH(L"Relax tagger requested, but it was not instantiated in config options.");
-    if (opt.TAGGER_which==NO_TAGGER and opt.InputLevel < TAGGED and opt.OutputLevel >= TAGGED)
-      ERROR_CRASH(L"Tagger deactivated, but it is needed for required output analysis level.");
-    if (opt.DEP_which==NO_DEP and opt.InputLevel < DEP and opt.OutputLevel >= DEP)
-      ERROR_CRASH(L"Dependency parser deactivated, but it is needed for required output analysis level.");
-    if (deptxala==NULL and opt.OutputLevel == PARSED)
-      ERROR_CRASH(L"depTxala parser deactivated, but it is needed for required output analysis level.");
-
-    if (opt.NEC_NEClassification and neclass==NULL)
-      ERROR_CRASH(L"NE classification requested, but it was not instantiated in config options.");
-    if (opt.PHON_Phonetics and phon==NULL)
-      ERROR_CRASH(L"Phonetic transcription requested, but it was not instantiated in config options.");
-    if (opt.SENSE_WSD_which != NO_WSD and sens==NULL) 
-      ERROR_CRASH(L"Sense annotation requested, but it was not instantiated in config options.");
-    if (opt.SENSE_WSD_which == UKB and dsb==NULL)
-      ERROR_CRASH(L"UKB word sense disambiguation requested, but it was not instantiated in config options.");
-    
-    if (parser==NULL and opt.InputLevel < SHALLOW and (opt.OutputLevel == PARSED or opt.OutputLevel == SHALLOW))
-      ERROR_CRASH(L"Required analysis level requires chart parser, but it was not instantiated in config options");
-    
-    if (parser==NULL and opt.DEP_which==TXALA and opt.InputLevel < SHALLOW  and opt.OutputLevel >= DEP) 
-      ERROR_CRASH(L"Required analysis level requires chart parser, but it was not instantiated in config options");
-    
-    if (deptxala==NULL and opt.DEP_which==TXALA and opt.InputLevel < DEP and opt.OutputLevel >= DEP)
-      ERROR_CRASH(L"Required analysis level requires depTxala parser, but it was not instantiated in config options");
-    
-    if (deptreeler==NULL and opt.DEP_which==TREELER and opt.InputLevel < DEP and opt.OutputLevel >= DEP)
-      ERROR_CRASH(L"Required analysis level requires depTreeler parser, but it was not instantiated in config options");
-
-    if (deplstm==NULL and opt.DEP_which==LSTM and opt.InputLevel < DEP and opt.OutputLevel >= DEP)
-      ERROR_CRASH(L"Required analysis level requires depLSTM parser, but it was not instantiated in config options");
-
-    if (deptxala==NULL and deptreeler==NULL and deplstm==NULL and opt.OutputLevel >= DEP) 
-      ERROR_CRASH(L"Required analysis level requires a Dependency Parser, but none was instantiated in config options");
-
-    if (srltreeler==NULL and opt.SRL_which==SRL_TREELER and opt.InputLevel < SRL and opt.OutputLevel >= SRL)
-      ERROR_CRASH(L"Required analysis level requires depTreeler parser, but it was not instantiated in config options");
-
-    if (corfc==NULL and opt.OutputLevel == COREF and opt.InputLevel < COREF) 
-      ERROR_CRASH(L"Required analysis level requires Coreference solver, but it was not instantiated in config options");
-
-    if (sge==NULL and opt.OutputLevel == SEMGRAPH and opt.InputLevel < SEMGRAPH) 
-      ERROR_CRASH(L"Required analysis level requires semantic graph extractor, but it was not instantiated in config options");
-  }
-}
 
 
 } // namespace

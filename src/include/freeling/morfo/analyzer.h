@@ -33,21 +33,9 @@
 #include <list>
 
 #include "freeling.h"
+#include "freeling/morfo/analyzer_config.h"
 
 namespace freeling {
-
-// codes for input-output formats
-typedef enum {TEXT,IDENT,TOKEN,SPLITTED,MORFO,TAGGED,SENSES,SHALLOW,PARSED,DEP,SRL,COREF,SEMGRAPH} AnalysisLevel;
-// codes for tagging algorithms
-typedef enum {NO_TAGGER,HMM,RELAX} TaggerAlgorithm;
-// codes for dependency parsers
-typedef enum {NO_DEP,TXALA,TREELER,LSTM} DependencyParser;
-// codes for SRL parsers
-typedef enum {NO_SRL,SRL_TREELER} SRLParser;
-// codes for sense annotation
-typedef enum {NO_WSD,ALL,MFS,UKB} WSDAlgorithm;
-// codes for ForceSelect
-typedef enum {NO_FORCE,TAGGER,RETOK} ForceSelectStrategy;
 
 
 ////////////////////////////////////////////////////////////////
@@ -65,103 +53,6 @@ typedef enum {NO_FORCE,TAGGER,RETOK} ForceSelectStrategy;
 class WINDLL analyzer {
 
  private:
-
-   ////////////////////////////////////////////////////////////////
-   /// 
-   ///  Class analyzer::config_options contains the configuration options
-   ///  that define which modules are active and which configuration files
-   ///  are loaded for each of them at construction time.
-   ///  Options in this set can not be altered once the analyzer is created.  
-   ///
-   ////////////////////////////////////////////////////////////////
-
-   class WINDLL analyzer_config_options {
-     public:
-       /// Language of text to process
-       std::wstring Lang;
-       /// Tokenizer configuration file
-       std::wstring TOK_TokenizerFile;
-       /// Splitter configuration file
-       std::wstring SPLIT_SplitterFile;
-       /// Morphological analyzer options
-       std::wstring MACO_Decimal, MACO_Thousand;
-       std::wstring MACO_UserMapFile, MACO_LocutionsFile,   MACO_QuantitiesFile,
-         MACO_AffixFile,   MACO_ProbabilityFile, MACO_DictionaryFile, 
-         MACO_NPDataFile,  MACO_PunctuationFile, MACO_CompoundFile;
-       double MACO_ProbabilityThreshold;
-       /// Phonetics config file
-       std::wstring PHON_PhoneticsFile;
-       /// NEC config file
-       std::wstring NEC_NECFile;
-       /// Sense annotator and WSD config files
-       std::wstring SENSE_ConfigFile;
-       std::wstring UKB_ConfigFile;
-       /// Tagger options
-       std::wstring TAGGER_HMMFile;
-       std::wstring TAGGER_RelaxFile;
-       int TAGGER_RelaxMaxIter;
-       double TAGGER_RelaxScaleFactor;
-       double TAGGER_RelaxEpsilon;
-       bool TAGGER_Retokenize;
-       int TAGGER_kbest;
-       ForceSelectStrategy TAGGER_ForceSelect;
-       /// Chart parser config file
-       std::wstring PARSER_GrammarFile;
-       /// Dependency parsers config files
-       std::wstring DEP_TxalaFile;   
-       std::wstring DEP_TreelerFile;   
-       std::wstring DEP_LSTMFile;
-       // SRL parsers config files
-       std::wstring SRL_TreelerFile;   
-       /// Coreference resolution config file
-       std::wstring COREF_CorefFile;
-       /// semantic graph extractor config file
-       std::wstring SEMGRAPH_SemGraphFile;
-
-       /// constructor
-       analyzer_config_options();
-       /// destructor
-       ~analyzer_config_options();
-   };
-
-   ////////////////////////////////////////////////////////////////
-   /// 
-   ///  Class analyzer::invoke_options contains the options
-   ///  that define the behaviour of each module in the analyze 
-   ///  on the next analysis.
-   ///  Options in this set can be altered after construction
-   ///  (e.g. to activate/deactivate certain modules)
-   ///
-   ////////////////////////////////////////////////////////////////
-   
-   class WINDLL analyzer_invoke_options {
-     public:
-       /// Level of analysis in input and output
-       AnalysisLevel InputLevel, OutputLevel;
-
-       /// activate/deactivate morphological analyzer modules
-       bool MACO_UserMap, MACO_AffixAnalysis, MACO_MultiwordsDetection, 
-         MACO_NumbersDetection, MACO_PunctuationDetection, 
-         MACO_DatesDetection, MACO_QuantitiesDetection, 
-         MACO_DictionarySearch, MACO_ProbabilityAssignment, MACO_CompoundAnalysis,
-         MACO_NERecognition, MACO_RetokContractions;
-
-       /// activate/deactivate phonetics and NEC
-       bool PHON_Phonetics;
-       bool NEC_NEClassification;
-
-       /// Select which tagger, parser, or sense annotator to use
-       WSDAlgorithm SENSE_WSD_which;
-       TaggerAlgorithm TAGGER_which;
-       DependencyParser DEP_which;    
-       SRLParser SRL_which;    
-
-       /// constructor
-       analyzer_invoke_options();
-       /// destructor
-       ~analyzer_invoke_options();
-   };
-   
 
    // we use pointers to the analyzers, so we
    // can create only those strictly necessary.
@@ -183,8 +74,7 @@ class WINDLL analyzer {
    semgraph_extract *sge;
 
    // store configuration options
-   //   config *cfg;
-   analyzer_invoke_options current_invoke_options;
+   analyzer_config::invoke_options current_invoke_options;
 
    // remember splitter session
    splitter::session_id sp_id;
@@ -210,14 +100,12 @@ class WINDLL analyzer {
    static std::wistream& safe_getline(std::wistream& is, std::wstring& t);
 
  public:
-   typedef analyzer_config_options config_options;
-   typedef analyzer_invoke_options invoke_options;
-
-   analyzer(const config_options &cfg);
-   void set_current_invoke_options(const invoke_options &opt, bool check=true);
-   const invoke_options& get_current_invoke_options() const;
-
+   analyzer(const analyzer_config::config_options &cfg);
    ~analyzer();
+
+   void set_current_invoke_options(const analyzer_config::invoke_options &opt);
+   const analyzer_config::invoke_options& get_current_invoke_options() const;
+
    /// analyze further levels on a partially analyzed document
    void analyze(document &doc) const;
    /// analyze further levels on partially analyzed sentences
