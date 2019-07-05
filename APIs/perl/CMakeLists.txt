@@ -14,7 +14,7 @@ else()
 endif()
 
 install(TARGETS plfreeling DESTINATION share/freeling/APIs/perl)
-install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/plfreeling.pl ${CMAKE_CURRENT_SOURCE_DIR}/sample.perl
+install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/freeling.pm ${CMAKE_CURRENT_SOURCE_DIR}/sample.perl
         DESTINATION share/freeling/APIs/perl)
 
 

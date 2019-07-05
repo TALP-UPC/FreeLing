@@ -85,7 +85,7 @@ void CreateAnalyzers(int argc, char **argv) {
   util::init_locale(cfg->Locale);
 
   // check option coherence
-  if (cfg->invoke_opt.OutputLevel==IDENT) {
+  if (cfg->LangIdent) {
     wcerr <<L"Error - Language identification not available in threaded mode."<<endl;
     exit (1);
   }

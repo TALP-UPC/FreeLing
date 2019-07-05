@@ -124,6 +124,7 @@ class config : public analyzer_config {
   std::wstring Locale;
 
   /// Configuration file for language identifier
+  bool LangIdent;
   std::wstring IDENT_identFile;
 
   /// Mode used to process input: 
@@ -160,10 +161,11 @@ class config : public analyzer_config {
 #endif
       ("fcfg,f", po::wvalue<std::wstring>(&ConfigFile)->default_value(L"",""), "Configuration file to use")
       ("locale",po::wvalue<std::wstring>(&Locale),"locale encoding of input text (\"default\"=en_US.UTF-8, \"system\"=current system locale, [other]=any valid locale string installed in the system (e.g. ca_ES.UTF-8,it_IT.UTF-8,...)")
-      ("server","Activate server mode (default: off)")
       ("port,p",po::wvalue<int>(&Port),"Port where server is to be started")
       ("workers,w",po::wvalue<int>(&MaxWorkers)->default_value(DEFAULT_MAX_WORKERS),"Maximum number of workers to fork in server mode")
       ("queue,q",po::wvalue<int>(&QueueSize)->default_value(DEFAULT_QUEUE_SIZE),"Maximum number of waiting clients.")
+      ("server","Activate server mode (default: off)")
+      ("ident","Produce language identification as output")
       ("flush","Consider each newline as a sentence end")
       ("noflush","Do not consider each newline as a sentence end")
       ("mode",po::wvalue<InputModes>(&InputMode),"Input mode (doc,corpus)")
@@ -183,6 +185,7 @@ class config : public analyzer_config {
       ("ServerPort",po::wvalue<int>(&Port),"Port where server is to be started")
       ("ServerMaxWorkers",po::wvalue<int>(&MaxWorkers)->default_value(DEFAULT_MAX_WORKERS),"Maximum number of workers to fork in server mode")
       ("ServerQueueSize",po::wvalue<int>(&QueueSize)->default_value(DEFAULT_QUEUE_SIZE),"Maximum number of waiting requests in server mode")
+      ("LangIdent",po::wvalue<bool>(&LangIdent)->default_value(false),"Produce language identification as output")
       ("AlwaysFlush",po::wvalue<bool>(&AlwaysFlush)->default_value(false),"Consider each newline as a sentence end")
       ("InputMode",po::wvalue<InputModes>(&InputMode)->default_value(MODE_CORPUS),"Input mode (corpus,doc)")
       ("OutputFormat",po::wvalue<OutputFormats>(&OutputFormat)->default_value(OUT_FREELING),"Output format (freeling,conll,train,xml,json,naf)")
@@ -200,9 +203,14 @@ class config : public analyzer_config {
       po::notify(vm);    
     } 
     catch (std::exception &e) {
-      std::cerr<<"Error while parsing command line: "<<e.what()<<std::endl;
+      std::cerr <<"Error while parsing command line: "<<e.what() << std::endl;
       exit(1);
     }
+
+    // Handle boolean options expressed with --myopt or --nomyopt in command line
+    analyzer_config::SetBooleanOptionCL(vm.count("server"),!vm.count("server"),Server,"server");
+    analyzer_config::SetBooleanOptionCL(vm.count("ident"),!vm.count("ident"),LangIdent,"ident");
+    analyzer_config::SetBooleanOptionCL(vm.count("flush"),vm.count("noflush"),AlwaysFlush,"flush");    
 
     // Version required
     if (vm.count("version")) {
@@ -226,14 +234,16 @@ class config : public analyzer_config {
       exit(0); // return to system
     }
 
-    // Load config file.
-    if (ConfigFile.empty()) {
-      std::cerr<<"Configuration file not specified. Please use option -f to provide a configuration file."<<std::endl;
-      exit(1);
+    // Unless lang ident, load config file.
+    if (not LangIdent) {
+      if (ConfigFile.empty()) {
+        std::cerr<<"Configuration file not specified. Please use option -f to provide a configuration file."<<std::endl;
+        exit(1);
+      }
+      
+      // parse ConfigFile for more options
+      parse_options(ConfigFile);
     }
-
-    // parse ConfigFile for more options
-    parse_options(ConfigFile);
     
     // check options involving Filenames for environment vars expansion.
     IDENT_identFile = util::expand_filename(IDENT_identFile);
@@ -254,25 +264,8 @@ class config : public analyzer_config {
     if (InputConllFile!=L"" and InputFormat!=INP_CONLL) 
       WARNING(L"Input CoNLL format configuration ignored, since selected input format is not 'conll'.");
 
-    
-    // Handle boolean options expressed with --myopt or --nomyopt in command line
-    SetBooleanOptionCL(vm.count("server"),!vm.count("server"),Server,"server");
-    SetBooleanOptionCL(vm.count("flush"),vm.count("noflush"),AlwaysFlush,"flush");
-    
   }
   
- private:
-    
-  void SetBooleanOptionCL (const int pos, const int neg, bool &opt, const std::string &name) {
-    if (pos && neg) {
-      WARNING(L"Ambiguous specification for option --"+util::string2wstring(name)+L" in command line. Using default value.");
-    }
-    else if (pos)
-      opt=true;
-    else if (neg)
-      opt=false;
-    //else: nothing specified, leave things as they are.
-  }
 
 };
 

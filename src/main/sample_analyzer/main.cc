@@ -347,7 +347,7 @@ io::input_handler* create_input_handler(config *cfg) {
 config* load_config(int argc, char *argv[]) {
   
   config* cfg = new config(argc,argv);
-  
+
   ServerMode = cfg->Server;
   
   // If server activated, make sure port was specified, and viceversa.
@@ -364,7 +364,7 @@ config* load_config(int argc, char *argv[]) {
   
   /// Check that required configuration can satisfy required requests
   /// 'analyzer' constructor will check most of them, so we only need to worry about lang ident
-  if (cfg->invoke_opt.OutputLevel==IDENT and cfg->IDENT_identFile.empty()) {
+  if (cfg->LangIdent and cfg->IDENT_identFile.empty()) {
     wcerr <<L"Error - No configuration file provided for language identifier."<<endl;
     exit (1);        
   }
@@ -467,7 +467,8 @@ config* load_config(int argc, char *argv[]) {
     wcerr<<L"Error - 'text' input format only accepts input analysis level 'text'."<<endl;
     exit(1);
   }
-  
+
+
   return cfg; 
 }
 
@@ -578,7 +579,7 @@ int main (int argc, char **argv) {
    
   // read configuration file and command-line options
   config *cfg = load_config(argc,argv);
- 
+  
   /// set the locale to UTF to properly handle special characters.
   util::init_locale(cfg->Locale);
 
@@ -589,7 +590,7 @@ int main (int argc, char **argv) {
   // create lang ident or analyzer, depending on requested output
   lang_ident *ident=NULL;
   analyzer *anlz=NULL;
-  if (cfg->invoke_opt.OutputLevel == IDENT) 
+  if (cfg->LangIdent) 
     ident = new lang_ident(cfg->IDENT_identFile);
   else {
     anlz = new analyzer(cfg->config_opt);
@@ -615,7 +616,7 @@ int main (int argc, char **argv) {
     // ---------------------------------------------------------------
     // if language identification requested, do not enter analysis loop, 
     // just identify language for each line.
-    if (cfg->invoke_opt.OutputLevel == IDENT) {
+    if (cfg->LangIdent) {
       wstring text;
       while (ReadLine(text)) {
         // if it is a command, process it and go for next line

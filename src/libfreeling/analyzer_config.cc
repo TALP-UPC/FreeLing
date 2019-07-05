@@ -111,7 +111,6 @@ namespace freeling {
     std::wstring token;
     in >> token;
     if (token==L"text") val = freeling::TEXT;
-    else if (token==L"ident") val = freeling::IDENT;
     else if (token==L"token") val = freeling::TOKEN;
     else if (token==L"splitted") val = freeling::SPLITTED;
     else if (token==L"morfo") val = freeling::MORFO;
@@ -260,7 +259,7 @@ namespace freeling {
     cl_opts.add_options()
       ("lang",po::wvalue<std::wstring>(&config_opt.Lang),"language of the input text")
       ("inplv",po::wvalue<freeling::AnalysisLevel>(&invoke_opt.InputLevel)->default_value(freeling::TEXT),"Input analysis level (text,token,splitted,morfo,tagged,shallow,dep,srl,coref)")
-      ("outlv",po::wvalue<freeling::AnalysisLevel>(&invoke_opt.OutputLevel)->default_value(freeling::TAGGED),"Output analysis level (ident,token,splitted,morfo,tagged,shallow,parsed,dep,srl,coref,semgraph)")
+      ("outlv",po::wvalue<freeling::AnalysisLevel>(&invoke_opt.OutputLevel)->default_value(freeling::TAGGED),"Output analysis level (token,splitted,morfo,tagged,shallow,parsed,dep,srl,coref,semgraph)")
       ("ftok",po::wvalue<std::wstring>(&config_opt.TOK_TokenizerFile),"Tokenizer rules file")
       ("fsplit",po::wvalue<std::wstring>(&config_opt.SPLIT_SplitterFile),"Splitter option file")
       ("afx","Perform affix analysis")
@@ -305,21 +304,21 @@ namespace freeling {
       ("nec","Perform NE classification")
       ("nonec","Do not perform NE classification")
       ("fnec",po::wvalue<std::wstring>(&config_opt.NEC_NECFile),"NEC configuration file")
-      ("sense,s",po::wvalue<freeling::WSDAlgorithm>(&invoke_opt.SENSE_WSD_which)->default_value(freeling::NO_WSD),"Type of sense annotation (no|none,all,mfs,ukb)")
+      ("sense,s",po::wvalue<freeling::WSDAlgorithm>(&invoke_opt.SENSE_WSD_which),"Type of sense annotation (no|none,all,mfs,ukb)")
       ("fsense,W",po::wvalue<std::wstring>(&config_opt.SENSE_ConfigFile),"Configuration file for sense annotation module")
       ("fukb,U",po::wvalue<std::wstring>(&config_opt.UKB_ConfigFile),"Configuration file for UKB word sense disambiguator")
       ("hmm,H",po::wvalue<std::wstring>(&config_opt.TAGGER_HMMFile),"Data file for HMM tagger")
       ("rlx,R",po::wvalue<std::wstring>(&config_opt.TAGGER_RelaxFile),"Data file for RELAX tagger")
-      ("tag,t",po::wvalue<freeling::TaggerAlgorithm>(&invoke_opt.TAGGER_which)->default_value(freeling::HMM),"Tagging alogrithm to use (hmm, relax)")
+      ("tag,t",po::wvalue<freeling::TaggerAlgorithm>(&invoke_opt.TAGGER_which),"Tagging alogrithm to use (hmm, relax)")
       ("iter,i",po::wvalue<int>(&config_opt.TAGGER_RelaxMaxIter),"Maximum number of iterations allowed for RELAX tagger")
       ("sf,r",po::wvalue<double>(&config_opt.TAGGER_RelaxScaleFactor),"Support scale factor for RELAX tagger (affects step size)")
       ("eps",po::wvalue<double>(&config_opt.TAGGER_RelaxEpsilon),"Convergence epsilon value for RELAX tagger")
       ("rtk","Perform retokenization after PoS tagging")
       ("nortk","Do not perform retokenization after PoS tagging")
-      ("force",po::wvalue<freeling::ForceSelectStrategy>(&config_opt.TAGGER_ForceSelect)->default_value(freeling::RETOK),"When the tagger must be forced to select only one tag per word (no|none,tagger,retok)")
+      ("force",po::wvalue<freeling::ForceSelectStrategy>(&config_opt.TAGGER_ForceSelect),"When the tagger must be forced to select only one tag per word (no|none,tagger,retok)")
       ("grammar,G",po::wvalue<std::wstring>(&config_opt.PARSER_GrammarFile),"Grammar file for chart parser")
-      ("dep,d",po::wvalue<freeling::DependencyParser>(&invoke_opt.DEP_which)->default_value(freeling::TXALA),"Dependency parser to use (txala,treeler,lstm)")
-      ("srl",po::wvalue<freeling::SRLParser>(&invoke_opt.SRL_which)->default_value(freeling::SRL_TREELER),"SRL parser to use (treeler)")
+      ("dep,d",po::wvalue<freeling::DependencyParser>(&invoke_opt.DEP_which),"Dependency parser to use (txala,treeler,lstm)")
+      ("srl",po::wvalue<freeling::SRLParser>(&invoke_opt.SRL_which),"SRL parser to use (treeler)")
       ("txala,T",po::wvalue<std::wstring>(&config_opt.DEP_TxalaFile),"Rule file for Txala dependency parser")
       ("treeler,E",po::wvalue<std::wstring>(&config_opt.DEP_TreelerFile),"Configuration file for Treeler dependency parser")
       ("lstm",po::wvalue<std::wstring>(&config_opt.DEP_LSTMFile),"Configuration file for LSTM dependency parser")
@@ -452,7 +451,24 @@ namespace freeling {
     config_opt.DEP_LSTMFile = freeling::util::expand_filename(config_opt.DEP_LSTMFile);
     config_opt.SRL_TreelerFile = freeling::util::expand_filename(config_opt.SRL_TreelerFile);
     config_opt.COREF_CorefFile = freeling::util::expand_filename(config_opt.COREF_CorefFile);
-    config_opt.SEMGRAPH_SemGraphFile = freeling::util::expand_filename(config_opt.SEMGRAPH_SemGraphFile);    
+    config_opt.SEMGRAPH_SemGraphFile = freeling::util::expand_filename(config_opt.SEMGRAPH_SemGraphFile);
+
+    // Handle boolean options expressed with --myopt or --nomyopt in command line
+    SetBooleanOptionCL(vm.count("rtk"),vm.count("nortk"),config_opt.TAGGER_Retokenize,"rtk");
+    SetBooleanOptionCL(vm.count("afx"),vm.count("noafx"),invoke_opt.MACO_AffixAnalysis,"afx");
+    SetBooleanOptionCL(vm.count("usr"),vm.count("nousr"),invoke_opt.MACO_UserMap,"usr");
+    SetBooleanOptionCL(vm.count("loc"),vm.count("noloc"),invoke_opt.MACO_MultiwordsDetection,"loc");
+    SetBooleanOptionCL(vm.count("numb"),vm.count("nonumb"),invoke_opt.MACO_NumbersDetection,"numb");
+    SetBooleanOptionCL(vm.count("punt"),vm.count("nopunt"),invoke_opt.MACO_PunctuationDetection,"punt");
+    SetBooleanOptionCL(vm.count("date"),vm.count("nodate"),invoke_opt.MACO_DatesDetection,"date");
+    SetBooleanOptionCL(vm.count("ner"),vm.count("noner"),invoke_opt.MACO_NERecognition,"ner");
+    SetBooleanOptionCL(vm.count("quant"),vm.count("noquant"),invoke_opt.MACO_QuantitiesDetection,"quant");
+    SetBooleanOptionCL(vm.count("dict"),vm.count("nodict"),invoke_opt.MACO_DictionarySearch,"dict");
+    SetBooleanOptionCL(vm.count("rtkcon"),vm.count("nortkcon"),invoke_opt.MACO_RetokContractions,"rtkcon");
+    SetBooleanOptionCL(vm.count("prob"),vm.count("noprob"),invoke_opt.MACO_ProbabilityAssignment,"prob");
+    SetBooleanOptionCL(vm.count("comp"),vm.count("nocomp"),invoke_opt.MACO_CompoundAnalysis,"comp");
+    SetBooleanOptionCL(vm.count("phon"),vm.count("nophon"),invoke_opt.PHON_Phonetics,"phon");
+    SetBooleanOptionCL(vm.count("nec"),vm.count("nonec"),invoke_opt.NEC_NEClassification,"nec");
   }
   
   analyzer_config::status analyzer_config::check_invoke_options(const analyzer_config::invoke_options &opt) const {
@@ -539,6 +555,17 @@ namespace freeling {
     }
 
     return st;
+  }
+
+  void analyzer_config::SetBooleanOptionCL (const int pos, const int neg, bool &opt, const std::string &name) {
+    if (pos && neg) {
+      WARNING(L"Ambiguous specification for option --"+util::string2wstring(name)+L" in command line. Using default value.");
+    }
+    else if (pos)
+      opt=true;
+    else if (neg)
+      opt=false;
+    //else: nothing specified, leave things as they are.
   }
 
   

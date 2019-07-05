@@ -40,7 +40,7 @@ namespace po=boost::program_options;
 namespace freeling {
 
   // codes for input-output formats
-  typedef enum {TEXT,IDENT,TOKEN,SPLITTED,MORFO,TAGGED,SENSES,SHALLOW,PARSED,DEP,SRL,COREF,SEMGRAPH} AnalysisLevel;
+  typedef enum {TEXT,TOKEN,SPLITTED,MORFO,TAGGED,SENSES,SHALLOW,PARSED,DEP,SRL,COREF,SEMGRAPH} AnalysisLevel;
   // codes for tagging algorithms
   typedef enum {NO_TAGGER,HMM,RELAX} TaggerAlgorithm;
   // codes for dependency parsers
@@ -218,6 +218,8 @@ class WINDLL analyzer_config {
    // check invoke options
    status check_invoke_options(const analyzer_config::invoke_options &opt) const; 
 
+   // set boolean option depending on Command line flags
+   static void SetBooleanOptionCL (const int pos, const int neg, bool &opt, const std::string &name);
 };
  
 } // namespace

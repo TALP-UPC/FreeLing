@@ -1105,7 +1105,7 @@ class paragraph : public std::list<freeling::sentence> {
 
 /*------------------------------------------------------------------------*/
 // codes for input-output formats
-typedef enum {TEXT,IDENT,TOKEN,SPLITTED,MORFO,TAGGED,SENSES,SHALLOW,PARSED,DEP,SRL,COREF,SEMGRAPH} AnalysisLevel;
+typedef enum {TEXT,TOKEN,SPLITTED,MORFO,TAGGED,SENSES,SHALLOW,PARSED,DEP,SRL,COREF,SEMGRAPH} AnalysisLevel;
 // codes for tagging algorithms
 typedef enum {NO_TAGGER,HMM,RELAX} TaggerAlgorithm;
 // codes for dependency parsers
