@@ -49,6 +49,7 @@
  using namespace std;
 %}
 
+#define FL_API_PERL
 %include ../common/templates.i
 
 ### Typemaps ###
@@ -94,6 +95,4 @@
 }
 
 
-
-#define FL_API_PERL
 %include ../common/freeling.i

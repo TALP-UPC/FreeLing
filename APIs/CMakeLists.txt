@@ -36,3 +36,7 @@ endif()
 if(JAVA_API)
   add_subdirectory(java)
 endif()
+
+if(PERL_API)
+  add_subdirectory(perl)
+endif()
