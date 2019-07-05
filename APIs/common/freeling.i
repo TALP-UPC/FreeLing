@@ -1117,6 +1117,10 @@ typedef enum {NO_WSD,ALL,MFS,UKB} WSDAlgorithm;
 // codes for ForceSelect
 typedef enum {NO_FORCE,TAGGER,RETOK} ForceSelectStrategy;
 
+// error status for analyzer_config class
+typedef enum {CFG_OK, CFG_WARNING, CFG_ERROR} CFG_status;
+
+
 ////////////////////////////////////////////////////////////////
 /// 
 ///  Class analyzer::config_options contains the configuration options
@@ -1201,13 +1205,50 @@ typedef enum {NO_FORCE,TAGGER,RETOK} ForceSelectStrategy;
    DependencyParser DEP_which;    
    SRLParser SRL_which;
  };
+
+ ////////////////////////////////////////////////////////////////
+ ///  class to handle configuration error states
+
+ class status {
+ public:
+   CFG_status stat;
+   std::wstring description;
+ };
+
+ class analyzer_config {
+ public:
+
+   typedef analyzer_config_options config_options;
+   typedef analyzer_invoke_options invoke_options;
+
+   config_options config_opt;
+   invoke_options invoke_opt;
+
+   /// constructor
+   analyzer_config();
+   /// destructor
+   ~analyzer_config();
+
+   /// load options from a config file
+   void parse_options(const std::wstring &cfgFile);
+   /// load options from a config file + command line   
+   void parse_options(const std::wstring &cfgFile, int ac, char *av[]);   
+   /// load options from a stream (auxiliary for the other constructors)
+   void parse_options(std::wistream &cfg, analyzer_config::config_options &config, analyzer_config::invoke_options &invoke);
+
+   // check invoke options
+   status check_invoke_options(const analyzer_config::invoke_options &opt) const; 
+
+ };
  
-%nestedworkaround analyzer::config_options;
-%nestedworkaround analyzer::invoke_options;
+ 
+ ///%nestedworkaround analyzer_config::config_options;
+ ///%nestedworkaround analyzer_config::invoke_options;
 %{
   namespace freeling {
-   typedef freeling::analyzer::config_options config_options;
-   typedef freeling::analyzer::invoke_options invoke_options;
+   typedef freeling::analyzer_config::config_options config_options;
+   typedef freeling::analyzer_config::invoke_options invoke_options;
+   typedef freeling::analyzer_config::status status;
   }
 %}
 
@@ -1226,11 +1267,8 @@ typedef enum {NO_FORCE,TAGGER,RETOK} ForceSelectStrategy;
 class analyzer {
 
  public:
-   typedef analyzer_config_options config_options;
-   typedef analyzer_invoke_options invoke_options;
-
    analyzer(const freeling::config_options &cfg);
-   void set_current_invoke_options(const freeling::invoke_options &opt, bool check=true);
+   void set_current_invoke_options(const freeling::analyzer_config::invoke_options &opt);
    const invoke_options& get_current_invoke_options() const;
 
    ~analyzer();

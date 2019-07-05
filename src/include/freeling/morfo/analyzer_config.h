@@ -60,6 +60,8 @@ namespace freeling {
   std::wistream& operator>>(std::wistream& in, freeling::AnalysisLevel& val);
   bool read_bool(std::wistream& in);
 
+  // analyzer_config error status
+  typedef enum {CFG_OK,CFG_WARNING, CFG_ERROR} CFG_status;
 
   
 ////////////////////////////////////////////////////////////////
@@ -180,14 +182,15 @@ class WINDLL analyzer_config {
        std::wstring dump() const;
    };
 
-   
  protected:
-   po::options_description opts;
+   po::options_description cl_opts; // command-line options
+   po::options_description cf_opts; // config file options
+   po::variables_map vm;  // variable map for option parser
    
  public:
    ////////////////////////////////////////////////////////////////
    ///  class to handle configuration error states
-   typedef enum {CFG_OK,CFG_WARNING, CFG_ERROR} CFG_status;
+
    class WINDLL status {
    public:
      CFG_status stat;
@@ -197,8 +200,8 @@ class WINDLL analyzer_config {
    typedef analyzer_config::analyzer_config_options config_options;
    typedef analyzer_config::analyzer_invoke_options invoke_options;
 
-   config_options config;
-   invoke_options invoke;
+   config_options config_opt;
+   invoke_options invoke_opt;
 
    /// constructor
    analyzer_config();
@@ -210,7 +213,7 @@ class WINDLL analyzer_config {
    /// load options from a config file + command line   
    void parse_options(const std::wstring &cfgFile, int ac, char *av[]);   
    /// load options from a stream (auxiliary for the other constructors)
-   void parse_options(std::wistream &cfg, analyzer_config::config_options &config, analyzer_config::invoke_options &invoke) const;
+   void parse_options(std::wistream &cfg, analyzer_config::config_options &config, analyzer_config::invoke_options &invoke);
 
    // check invoke options
    status check_invoke_options(const analyzer_config::invoke_options &opt) const; 

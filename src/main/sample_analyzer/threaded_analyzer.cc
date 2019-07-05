@@ -85,33 +85,33 @@ void CreateAnalyzers(int argc, char **argv) {
   util::init_locale(cfg->Locale);
 
   // check option coherence
-  if (cfg->analyzer_invoke_options.OutputLevel==IDENT) {
+  if (cfg->invoke_opt.OutputLevel==IDENT) {
     wcerr <<L"Error - Language identification not available in threaded mode."<<endl;
     exit (1);
   }
 
-  if (cfg->analyzer_invoke_options.OutputLevel==COREF) {
+  if (cfg->invoke_opt.OutputLevel==COREF) {
     wcerr <<L"Error - Coreference resolution not available in threaded mode" <<endl;
     exit (1);
   }
 
-  if (!((cfg->analyzer_invoke_options.InputLevel < cfg->analyzer_invoke_options.OutputLevel) or
-        (cfg->analyzer_invoke_options.InputLevel == cfg->analyzer_invoke_options.OutputLevel 
-         and cfg->analyzer_invoke_options.InputLevel == TAGGED
-         and cfg->analyzer_invoke_options.NEC_NEClassification)))
+  if (!((cfg->invoke_opt.InputLevel < cfg->invoke_opt.OutputLevel) or
+        (cfg->invoke_opt.InputLevel == cfg->invoke_opt.OutputLevel 
+         and cfg->invoke_opt.InputLevel == TAGGED
+         and cfg->invoke_opt.NEC_NEClassification)))
     {
       wcerr <<L"Error - Input format cannot be more complex than desired output."<<endl;
       exit (1);
     }
 
-  if (cfg->analyzer_invoke_options.OutputLevel < TAGGED and cfg->analyzer_invoke_options.SENSE_WSD_which == UKB)   {
+  if (cfg->invoke_opt.OutputLevel < TAGGED and cfg->invoke_opt.SENSE_WSD_which == UKB)   {
     wcerr <<L"Error - UKB word sense disambiguation requires PoS tagging. Specify 'tagged', 'parsed' or 'dep' output format." <<endl;
     exit (1);
   }
 
-  if (cfg->analyzer_invoke_options.OutputLevel != TAGGED and cfg->OutputFormat==OUT_TRAIN) {
+  if (cfg->invoke_opt.OutputLevel != TAGGED and cfg->OutputFormat==OUT_TRAIN) {
     wcerr <<L"Warning - OutputLevel changed to 'tagged' since option --train was specified." <<endl;
-    cfg->analyzer_invoke_options.OutputLevel = TAGGED;
+    cfg->invoke_opt.OutputLevel = TAGGED;
   }
   
   //--- create needed threaded analyzers, depending on given options ---//
@@ -122,9 +122,9 @@ void CreateAnalyzers(int argc, char **argv) {
   FL_pipe *p = new FL_pipe(); pipes.push_back(p); nmodules++;
 
   // tokenizer requested
-  if (cfg->analyzer_invoke_options.InputLevel < TOKEN and cfg->analyzer_invoke_options.OutputLevel >= TOKEN) {
+  if (cfg->invoke_opt.InputLevel < TOKEN and cfg->invoke_opt.OutputLevel >= TOKEN) {
     // create tokenizer
-    tk = new tokenizer (cfg->analyzer_config_options.TOK_TokenizerFile);
+    tk = new tokenizer (cfg->config_opt.TOK_TokenizerFile);
     // create tokenizer output pipe
     FL_pipe *p = new FL_pipe(); pipes.push_back(p); 
     // launch tokenizer thread
@@ -132,9 +132,9 @@ void CreateAnalyzers(int argc, char **argv) {
     nmodules++;
   }
   // splitter requested
-  if (cfg->analyzer_invoke_options.InputLevel < SPLITTED and cfg->analyzer_invoke_options.OutputLevel >= SPLITTED) {
+  if (cfg->invoke_opt.InputLevel < SPLITTED and cfg->invoke_opt.OutputLevel >= SPLITTED) {
     // create splitter
-    sp = new splitter (cfg->analyzer_config_options.SPLIT_SplitterFile);
+    sp = new splitter (cfg->config_opt.SPLIT_SplitterFile);
     // create splitter output pipe
     FL_pipe *p = new FL_pipe(); pipes.push_back(p); 
     // launch splitter thread
@@ -143,50 +143,50 @@ void CreateAnalyzers(int argc, char **argv) {
   }
 
   // morfological analysis requested
-  if (cfg->analyzer_invoke_options.InputLevel < MORFO and cfg->analyzer_invoke_options.OutputLevel >= MORFO) {
+  if (cfg->invoke_opt.InputLevel < MORFO and cfg->invoke_opt.OutputLevel >= MORFO) {
     // the morfo class requires several options at creation time.
     // they are passed packed in a maco_options object.
-    maco_options opt (cfg->analyzer_config_options.Lang);
+    maco_options opt (cfg->config_opt.Lang);
 
     // decimal/thousand separators used by number detection
-    opt.set_nummerical_points (cfg->analyzer_config_options.MACO_Decimal, cfg->analyzer_config_options.MACO_Thousand);
+    opt.set_nummerical_points (cfg->config_opt.MACO_Decimal, cfg->config_opt.MACO_Thousand);
     // Minimum probability for a tag for an unkown word
-    opt.set_threshold (cfg->analyzer_config_options.MACO_ProbabilityThreshold);
+    opt.set_threshold (cfg->config_opt.MACO_ProbabilityThreshold);
     // Whether the dictionary offers inverse acces (lemma#pos -> form). 
     // Only needed if your application is going to do such an access.
     opt.set_inverse_dict(false);
     // Whether contractions are splitted by the dictionary right away,
     // or left for later "retok" option to decide.
-    opt.set_retok_contractions(cfg->analyzer_invoke_options.MACO_RetokContractions);
+    opt.set_retok_contractions(cfg->invoke_opt.MACO_RetokContractions);
 
     // Data files for morphological submodules. by default set to ""
     // Only files for active modules have to be specified 
-    opt.set_data_files (cfg->analyzer_config_options.MACO_UserMapFile,
-                        cfg->analyzer_config_options.MACO_PunctuationFile, 
-                        cfg->analyzer_config_options.MACO_DictionaryFile,
-                        cfg->analyzer_config_options.MACO_AffixFile,
-                        cfg->analyzer_config_options.MACO_CompoundFile,
-                        cfg->analyzer_config_options.MACO_LocutionsFile, 
-                        cfg->analyzer_config_options.MACO_NPDataFile,
-                        cfg->analyzer_config_options.MACO_QuantitiesFile, 
-                        cfg->analyzer_config_options.MACO_ProbabilityFile);
+    opt.set_data_files (cfg->config_opt.MACO_UserMapFile,
+                        cfg->config_opt.MACO_PunctuationFile, 
+                        cfg->config_opt.MACO_DictionaryFile,
+                        cfg->config_opt.MACO_AffixFile,
+                        cfg->config_opt.MACO_CompoundFile,
+                        cfg->config_opt.MACO_LocutionsFile, 
+                        cfg->config_opt.MACO_NPDataFile,
+                        cfg->config_opt.MACO_QuantitiesFile, 
+                        cfg->config_opt.MACO_ProbabilityFile);
 
     // create analyzer with desired options
     morfo = new maco (opt);
 
     // boolean options to activate/desactivate modules
-    morfo->set_active_options (cfg->analyzer_invoke_options.MACO_UserMap,
-                               cfg->analyzer_invoke_options.MACO_NumbersDetection,
-                               cfg->analyzer_invoke_options.MACO_PunctuationDetection,
-                               cfg->analyzer_invoke_options.MACO_DatesDetection,
-                               cfg->analyzer_invoke_options.MACO_DictionarySearch,
-                               cfg->analyzer_invoke_options.MACO_AffixAnalysis,
-                               cfg->analyzer_invoke_options.MACO_CompoundAnalysis,
-                               cfg->analyzer_invoke_options.MACO_RetokContractions,
-                               cfg->analyzer_invoke_options.MACO_MultiwordsDetection,
-                               cfg->analyzer_invoke_options.MACO_NERecognition,
-                               cfg->analyzer_invoke_options.MACO_QuantitiesDetection,
-                               cfg->analyzer_invoke_options.MACO_ProbabilityAssignment);
+    morfo->set_active_options (cfg->invoke_opt.MACO_UserMap,
+                               cfg->invoke_opt.MACO_NumbersDetection,
+                               cfg->invoke_opt.MACO_PunctuationDetection,
+                               cfg->invoke_opt.MACO_DatesDetection,
+                               cfg->invoke_opt.MACO_DictionarySearch,
+                               cfg->invoke_opt.MACO_AffixAnalysis,
+                               cfg->invoke_opt.MACO_CompoundAnalysis,
+                               cfg->invoke_opt.MACO_RetokContractions,
+                               cfg->invoke_opt.MACO_MultiwordsDetection,
+                               cfg->invoke_opt.MACO_NERecognition,
+                               cfg->invoke_opt.MACO_QuantitiesDetection,
+                               cfg->invoke_opt.MACO_ProbabilityAssignment);
 
     // create morfo output pipe
     FL_pipe *p = new FL_pipe(); pipes.push_back(p); 
@@ -196,10 +196,10 @@ void CreateAnalyzers(int argc, char **argv) {
   }
 
   // sense annotation requested
-  if (cfg->analyzer_invoke_options.InputLevel < SENSES 
-      and cfg->analyzer_invoke_options.OutputLevel >= MORFO 
-      and cfg->analyzer_invoke_options.SENSE_WSD_which != NO_WSD)  {
-    sens = new senses (cfg->analyzer_config_options.SENSE_ConfigFile);
+  if (cfg->invoke_opt.InputLevel < SENSES 
+      and cfg->invoke_opt.OutputLevel >= MORFO 
+      and cfg->invoke_opt.SENSE_WSD_which != NO_WSD)  {
+    sens = new senses (cfg->config_opt.SENSE_ConfigFile);
     // create sense output pipe
     FL_pipe *p = new FL_pipe(); pipes.push_back(p); 
     // launch sense thread
@@ -208,21 +208,21 @@ void CreateAnalyzers(int argc, char **argv) {
   }
 
   // tagger requested, see which method
-  if (cfg->analyzer_invoke_options.InputLevel < TAGGED and cfg->analyzer_invoke_options.OutputLevel >= TAGGED) {
-    if (cfg->analyzer_invoke_options.TAGGER_which == HMM) {
+  if (cfg->invoke_opt.InputLevel < TAGGED and cfg->invoke_opt.OutputLevel >= TAGGED) {
+    if (cfg->invoke_opt.TAGGER_which == HMM) {
       tagger =
-        new hmm_tagger (cfg->analyzer_config_options.TAGGER_HMMFile, 
-                        cfg->analyzer_config_options.TAGGER_Retokenize,
-                        cfg->analyzer_config_options.TAGGER_ForceSelect);
+        new hmm_tagger (cfg->config_opt.TAGGER_HMMFile, 
+                        cfg->config_opt.TAGGER_Retokenize,
+                        cfg->config_opt.TAGGER_ForceSelect);
     }
-    else if (cfg->analyzer_invoke_options.TAGGER_which == RELAX) {
+    else if (cfg->invoke_opt.TAGGER_which == RELAX) {
       tagger =
-        new relax_tagger (cfg->analyzer_config_options.TAGGER_RelaxFile, 
-                          cfg->analyzer_config_options.TAGGER_RelaxMaxIter,
-                          cfg->analyzer_config_options.TAGGER_RelaxScaleFactor,
-                          cfg->analyzer_config_options.TAGGER_RelaxEpsilon, 
-                          cfg->analyzer_config_options.TAGGER_Retokenize,
-                          cfg->analyzer_config_options.TAGGER_ForceSelect);
+        new relax_tagger (cfg->config_opt.TAGGER_RelaxFile, 
+                          cfg->config_opt.TAGGER_RelaxMaxIter,
+                          cfg->config_opt.TAGGER_RelaxScaleFactor,
+                          cfg->config_opt.TAGGER_RelaxEpsilon, 
+                          cfg->config_opt.TAGGER_Retokenize,
+                          cfg->config_opt.TAGGER_ForceSelect);
     }
     // create tagger output pipe
     FL_pipe *p = new FL_pipe(); pipes.push_back(p); 
@@ -232,8 +232,8 @@ void CreateAnalyzers(int argc, char **argv) {
   }
 
   // phonetics requested
-  if (cfg->analyzer_invoke_options.PHON_Phonetics) {
-    phon = new phonetics (cfg->analyzer_config_options.PHON_PhoneticsFile);
+  if (cfg->invoke_opt.PHON_Phonetics) {
+    phon = new phonetics (cfg->config_opt.PHON_PhoneticsFile);
     // create phonetics output pipe
     FL_pipe *p = new FL_pipe(); pipes.push_back(p); 
     // launch phonetics thread
@@ -242,11 +242,11 @@ void CreateAnalyzers(int argc, char **argv) {
   }
   
   // sense disambiguation requested
-  if ((cfg->analyzer_invoke_options.InputLevel < SENSES 
-       and cfg->analyzer_invoke_options.OutputLevel >= TAGGED
-       and cfg->analyzer_invoke_options.SENSE_WSD_which==UKB) 
-      or cfg->analyzer_invoke_options.OutputLevel == COREF) {
-    dsb = new ukb(cfg->analyzer_config_options.UKB_ConfigFile);
+  if ((cfg->invoke_opt.InputLevel < SENSES 
+       and cfg->invoke_opt.OutputLevel >= TAGGED
+       and cfg->invoke_opt.SENSE_WSD_which==UKB) 
+      or cfg->invoke_opt.OutputLevel == COREF) {
+    dsb = new ukb(cfg->config_opt.UKB_ConfigFile);
     // create ukb output pipe
     FL_pipe *p = new FL_pipe(); pipes.push_back(p); 
     // launch ukb thread
@@ -255,11 +255,11 @@ void CreateAnalyzers(int argc, char **argv) {
   }
 
   // NEC requested
-  if (cfg->analyzer_invoke_options.InputLevel <= TAGGED 
-      and cfg->analyzer_invoke_options.OutputLevel >= TAGGED 
-      and (cfg->analyzer_invoke_options.NEC_NEClassification 
-           or cfg->analyzer_invoke_options.OutputLevel == COREF)) {
-    neclass = new nec (cfg->analyzer_config_options.NEC_NECFile);
+  if (cfg->invoke_opt.InputLevel <= TAGGED 
+      and cfg->invoke_opt.OutputLevel >= TAGGED 
+      and (cfg->invoke_opt.NEC_NEClassification 
+           or cfg->invoke_opt.OutputLevel == COREF)) {
+    neclass = new nec (cfg->config_opt.NEC_NECFile);
     // create nec output pipe
     FL_pipe *p = new FL_pipe(); pipes.push_back(p); 
     // launch nec thread
@@ -268,10 +268,10 @@ void CreateAnalyzers(int argc, char **argv) {
   }
   
   // Chunking requested
-  if (cfg->analyzer_invoke_options.InputLevel < SHALLOW 
-      and (cfg->analyzer_invoke_options.OutputLevel >= SHALLOW 
-           or cfg->analyzer_invoke_options.OutputLevel == COREF)) {
-    parser = new chart_parser (cfg->analyzer_config_options.PARSER_GrammarFile);
+  if (cfg->invoke_opt.InputLevel < SHALLOW 
+      and (cfg->invoke_opt.OutputLevel >= SHALLOW 
+           or cfg->invoke_opt.OutputLevel == COREF)) {
+    parser = new chart_parser (cfg->config_opt.PARSER_GrammarFile);
     // create chunker output pipe
     FL_pipe *p = new FL_pipe(); pipes.push_back(p); 
     // launch chunker thread
@@ -280,9 +280,9 @@ void CreateAnalyzers(int argc, char **argv) {
   }
 
   // Dependency parsing requested
-  if (cfg->analyzer_invoke_options.InputLevel < SHALLOW 
-      and cfg->analyzer_invoke_options.OutputLevel >= PARSED) {
-    dep = new dep_txala (cfg->analyzer_config_options.DEP_TxalaFile, parser->get_start_symbol ());
+  if (cfg->invoke_opt.InputLevel < SHALLOW 
+      and cfg->invoke_opt.OutputLevel >= PARSED) {
+    dep = new dep_txala (cfg->config_opt.DEP_TxalaFile, parser->get_start_symbol ());
     // create dep output pipe
     FL_pipe *p = new FL_pipe(); pipes.push_back(p); 
     // launch dep thread
@@ -339,11 +339,11 @@ int main(int argc, char* argv[]) {
   config *cfg = new config(argc,argv);
 
   io::output_freeling out;
-  out.output_senses(cfg->analyzer_invoke_options.SENSE_WSD_which!=NO_WSD);
-  out.output_all_senses(cfg->analyzer_invoke_options.SENSE_WSD_which!=MFS);
-  out.output_phonetics(cfg->analyzer_invoke_options.PHON_Phonetics);
-  out.output_dep_tree(cfg->analyzer_invoke_options.OutputLevel==DEP);
-  out.output_corefs(cfg->analyzer_invoke_options.OutputLevel==COREF);
+  out.output_senses(cfg->invoke_opt.SENSE_WSD_which!=NO_WSD);
+  out.output_all_senses(cfg->invoke_opt.SENSE_WSD_which!=MFS);
+  out.output_phonetics(cfg->invoke_opt.PHON_Phonetics);
+  out.output_dep_tree(cfg->invoke_opt.OutputLevel==DEP);
+  out.output_corefs(cfg->invoke_opt.OutputLevel==COREF);
 
   // launch a thread that reads wcin and sends data to the first module in chain
   boost::thread get_input(read_text,*pipes[0]);
