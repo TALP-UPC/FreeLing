@@ -207,11 +207,6 @@ class config : public analyzer_config {
       exit(1);
     }
 
-    // Handle boolean options expressed with --myopt or --nomyopt in command line
-    analyzer_config::SetBooleanOptionCL(vm.count("server"),!vm.count("server"),Server,"server");
-    analyzer_config::SetBooleanOptionCL(vm.count("ident"),!vm.count("ident"),LangIdent,"ident");
-    analyzer_config::SetBooleanOptionCL(vm.count("flush"),vm.count("noflush"),AlwaysFlush,"flush");    
-
     // Version required
     if (vm.count("version")) {
       #ifndef FREELING_VERSION
@@ -245,6 +240,11 @@ class config : public analyzer_config {
       parse_options(ConfigFile);
     }
     
+    // Handle boolean options expressed with --myopt or --nomyopt in command line
+    analyzer_config::SetBooleanOptionCL(vm.count("server"),!vm.count("server"),Server,"server");
+    analyzer_config::SetBooleanOptionCL(vm.count("ident"),!vm.count("ident"),LangIdent,"ident");
+    analyzer_config::SetBooleanOptionCL(vm.count("flush"),vm.count("noflush"),AlwaysFlush,"flush");    
+
     // check options involving Filenames for environment vars expansion.
     IDENT_identFile = util::expand_filename(IDENT_identFile);
     TAGSET_TagsetFile = util::expand_filename(TAGSET_TagsetFile);
