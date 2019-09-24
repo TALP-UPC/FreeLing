@@ -1,0 +1,12 @@
+<Type>
+crf
+</Type>
+<ModelFile>
+model-lbfgs-c2-0.001-1.crf
+</ModelFile>
+<RGF>
+nerc-f03.rgf
+</RGF>
+<Classes>
+PER NP00SP0 LOC NP00G00 ORG NP00O00 MISC NP00V00
+</Classes>

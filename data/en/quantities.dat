@@ -1,3 +1,9 @@
+<CurrencySymbols>
+$ USD
+£ GBP
+¥ JPY
+€ ECU
+</CurrencySymbols>
 <Currency>
 $
 </Currency>

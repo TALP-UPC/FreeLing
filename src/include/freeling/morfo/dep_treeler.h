@@ -47,10 +47,8 @@
 //#include "treeler/control/models.h"
 
 #include "treeler/dep/dependency_parser.h"
-#include "treeler/srl/srl_parser.h"
 
 namespace freeling {
-
 
 /// Class dep_treeler is a wrapper for a Treeler dependency parser
 
@@ -74,44 +72,23 @@ private:
 
   /// treeler parser
   treeler::dependency_parser *dp;
-  treeler::srl_parser *srl;
   // tagset handler
   freeling::tagset *tags;
-
-  // predicate detection configuration
-
-  // given a synset, obtain predicate and argument structure
-  std::map<std::string,map<std::wstring,treeler::srl::PossiblePredArgs> > predicates;
-  // which PoS are always predicate, even if not in the files
-  std::set<std::string> always_predicate;
-  // arguments to expect for predicates not found in the files
-  std::list<pair<std::string,std::string> > default_args;
-  // predicate exceptions
-  std::map<std::string,std::string> pred_exceptions;
  
   /// Convert FL sentence to Treeler
   void FL2Treeler(const freeling::sentence& fl_sentence, treeler::dependency_parser::sentence &tl_sentence) const;
   /// Add treeler output tree to FL sentence
   void Treeler2FL(freeling::sentence &fl_sentence,
-                  const treeler::dependency_parser::dep_vector &tl_tree,  
-                  const treeler::srl_parser::pred_arg_set &tl_roles) const;
+                  const treeler::dependency_parser::dep_vector &tl_tree) const;
 
   /// Build a FL dep_tree from treeler output
   freeling::dep_tree* build_dep_tree(int node_id, 
                                      const std::vector<std::list<int> > &sons, 
                                      const std::vector<std::string> &labels,
-                                     std::map<int,freeling::depnode*> &depnods,
                                      freeling::sentence &fl_sentence) const;
 
   /// Load dep_parser configuration file into a treeler::Options object
   void load_options(const std::string &cfg, treeler::Options &opts);
-
-  // compute predicates for SRL
-  void load_predicate_files(const std::map<std::wstring,std::wstring> &);
-  void compute_predicates(const treeler::srl_parser::basic_sentence &, const freeling::sentence &, 
-                          const treeler::srl_parser::dep_vector &, treeler::srl::PossiblePreds &) const;
-  bool is_pred_exception(const treeler::srl_parser::basic_sentence &, size_t, const treeler::srl_parser::dep_vector &) const;
-
 };
 
 }

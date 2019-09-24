@@ -56,8 +56,9 @@ namespace freeling {
   void quantities_module::readConfig(const std::wstring &quantFile) {
 
     // opening quantities config file
-    enum sections {CURRENCY, MEASURE, MEASURE_NAMES};
+    enum sections {CURR_SYMBOLS, CURRENCY, MEASURE, MEASURE_NAMES};
     config_file cfg;
+    cfg.add_section(L"CurrencySymbols",CURR_SYMBOLS);
     cfg.add_section(L"Currency",CURRENCY);
     cfg.add_section(L"Measure",MEASURE);
     cfg.add_section(L"MeasureNames",MEASURE_NAMES);
@@ -76,6 +77,13 @@ namespace freeling {
       
       case CURRENCY: {    // reading currency symbol
         currency_key = line;
+        break;
+      }
+
+      case CURR_SYMBOLS: {    // reading list of prefixed currency symbols
+        wstring sym, lem;
+        sin >> sym >> lem;
+        CurrencySymbols.insert(make_pair(sym,lem));
         break;
       }
 
@@ -272,12 +280,21 @@ namespace freeling {
         st->value2=L"100";  // percent sign "%", second value of ratio is 100
       break;
       // ---------------------------------
-    case ST_G:
+    case ST_G: {
       // number + measure unit (or currency name) found, store magnitude and unit
-      TRACE(3,L"Actions for state I");
-      st->unitCode=units.find(lema)->second+L"_"+lema;
-      st->unitType=units.find(lema)->second;
+      TRACE(3,L"Actions for state G");
+      map<wstring,wstring>::const_iterator p = units.find(lema);
+      if (p != units.end()) {
+        st->unitCode = p->second+L"_"+lema;
+        st->unitType = p->second;
+      }
+      else {
+        st->unitCode = L"??_"+lema;
+        st->unitType = L"??";
+      }
       break;
+    }
+
       // ---------------------------------
     default: break;
     }

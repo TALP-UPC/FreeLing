@@ -80,6 +80,8 @@ namespace freeling {
     void load_binary_model(const std::wstring &fname);
     /// Loads model from specified file. 
     void load_text_model(const std::wstring &fname);
+    /// Loads model from specified file. 
+    void load_gzip_model(const std::wstring &fname);
     
     //-------------------------------
     // Model properties
@@ -103,6 +105,7 @@ namespace freeling {
     
     /// Get the vector representing a word. If word is not in the model, NULL is returned
     const norm_vector& get_vector(const std::wstring &word) const;
+    const std::vector<float>& get_base_vector(const std::wstring &word) const;
 
     /// Cos similarity between two words, returns -1 if words not found in model
     float cos_similarity(const std::wstring &word1, const std::wstring &word2) const;

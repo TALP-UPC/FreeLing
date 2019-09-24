@@ -171,6 +171,8 @@ namespace freeling {
     fsm->get_similar_words(w.get_lc_form(), comps);
     TRACE(2,L"Obtained splittings");
 
+    if (comps.empty()) return false; // no decompositions found
+
     // process decompositions with minimal cost
     list<alternative>::iterator d = comps.begin();
     int cost = d->get_distance();

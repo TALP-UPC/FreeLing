@@ -87,7 +87,7 @@ int main(int argc, char *argv[]) {
   string r;
   sock.read_message(r);
   if (r!="FL-SERVER-READY") {
-    cerr<<"Server not ready?"<<endl;
+    cerr<<"Server not ready? Its answer was: [" << r << "]" << endl;
     exit(0);
   };
 

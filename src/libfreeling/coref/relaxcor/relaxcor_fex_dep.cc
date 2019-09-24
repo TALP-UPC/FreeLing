@@ -658,10 +658,19 @@ namespace freeling {
             auto s = ls.begin();
             while  (s!=ls.end() and gen==L'n' and s->second>=fex._MinPageRank) {
               sense_info si = fex._Semdb->get_sense_info(s->first);
-              TRACE(7, L"      sense="<< s->first << L" (" << s->second << L") sumo="<<si.sumo );
+              TRACE(7, L"      sense="<< s->first << L" (" << s->second << L") sumo="<< si.sumo << " tonto=" <<util::list2wstring(si.tonto,L":"));
               if (fex.get_label_RE(L"SEM_MaleSUMO").search(si.sumo)) gen = L'm';
               else if (fex.get_label_RE(L"SEM_FemaleSUMO").search(si.sumo)) gen = L'f';
               else if (fex.get_label_RE(L"SEM_PersonSUMO").search(si.sumo)) gen = L'b';
+	      else {
+		wstring topont = util::list2wstring(si.tonto,L":");
+		TRACE(1,L"TOPONT="<<topont);
+		TRACE(1,L"  PersonTONTO (human)"<<fex.get_label_RE(L"SEM_PersonTONTO").search(topont));
+		TRACE(1,L"  NotPersonTONTO (group)"<<fex.get_label_RE(L"SEM_NotPersonTONTO").search(topont));
+		if (fex.get_label_RE(L"SEM_PersonTONTO").search(topont)
+		    and not fex.get_label_RE(L"SEM_NotPersonTONTO").search(topont))
+		  gen = L'b';
+	      }
               ++s;
             }
 
@@ -1590,9 +1599,13 @@ namespace freeling {
     if (m1.get_n_sentence()==m2.get_n_sentence()) {
       // check for quotes between m1 and m2. If none is found, they are in the same quotation (if any)
       int best = m1.get_sentence()->get_best_seq();
-      sq = in_quotes(m1,fcache,fex) and in_quotes(m2,fcache,fex);      
-      for (sentence::const_iterator k=m1.get_it_end(); k!=m2.get_it_begin() and sq; ++k ) {
-        sq = (k->get_tag(best)==L"Fe" or k->get_tag(best)==L"Fra" or k->get_tag(best)==L"Frc");
+      sq = in_quotes(m1,fcache,fex) and in_quotes(m2,fcache,fex);
+
+      //  if they are nested, they are in the same quote. No need to check anything else. Otherwise, check
+      if (nested_mentions(m1,m2,fcache,fex)==ff_NO) {
+        for (sentence::const_iterator k=m1.get_it_end(); k!=m2.get_it_begin() and sq; ++k ) {
+          sq = (k->get_tag(best)==L"Fe" or k->get_tag(best)==L"Fra" or k->get_tag(best)==L"Frc");
+        }
       }
     }
     
@@ -1897,6 +1910,7 @@ namespace freeling {
         int count = 0;
         for (auto f=model.begin_features(); f!=model.end_features(); ++f) {
           wstring fname = f->first;
+          TRACE(6,L"   Extracting feature "<<fname);
           auto p = _FeatureFunction.find(fname);
           if (p != _FeatureFunction.end()) {
             int fid = model.feature_name_id(fname);

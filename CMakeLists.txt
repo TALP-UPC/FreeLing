@@ -27,9 +27,9 @@ option(BUILD_TESTS "Build tests" OFF)
 option(TRACES "Enable traces" OFF)
 option(WARNINGS "Enable warnings" ON)
 option(XPRESSIVE "Xpressive regex" OFF)
-option(EMBEDDINGS "Download word embeddings" OFF)
 option(JAVA_API "Build Java API" OFF)
-option(PYTHON3_API "Build Python 3 API" OFF)
+option(JAVA_API "Build Java API" OFF)
+option(PERL_API "Build Perl API" OFF)
 option(PYTHON2_API "Build Python 2.7 API" OFF)
 option(PERL_API "Build Perl API" OFF)
 
@@ -38,9 +38,9 @@ find_package(ZLIB REQUIRED)
 
 # Check for dependencies -- Boost
 if(BUILD_TESTS)
-  find_package(Boost COMPONENTS regex filesystem thread program_options unit_test_framework REQUIRED)
+  find_package(Boost COMPONENTS regex filesystem thread program_options iostreams unit_test_framework REQUIRED)
 else()
-  find_package(Boost COMPONENTS regex filesystem thread program_options REQUIRED)
+  find_package(Boost COMPONENTS regex filesystem thread program_options iostreams REQUIRED)
 endif()
 
 # Check for dependencies -- ICU
@@ -64,6 +64,9 @@ install(DIRECTORY data/
         DESTINATION share/freeling
         PATTERN "dictionary" EXCLUDE
 	PATTERN "parameters.*.gz.*" EXCLUDE
+	PATTERN "model*.gz.*" EXCLUDE
+	PATTERN "*embeddings*.gz.*" EXCLUDE
+	PATTERN "model*.crf.*" EXCLUDE
 	PATTERN "Makefile*" EXCLUDE)
 
 #### Data installation hooks
@@ -79,7 +82,11 @@ foreach (lg ${languages})
   # build dictionary for each language
   if (EXISTS ${CMAKE_SOURCE_DIR}/data/${lg}/dictionary/header)
     install(CODE "message(STATUS \"Creating ${lg} dictionary...\")" )
-    install(CODE "execute_process(COMMAND ${CMAKE_BINARY_DIR}/src/utilities/build-dict ${CMAKE_SOURCE_DIR}/data/${lg}/dictionary/header ${CMAKE_SOURCE_DIR}/data/${lg}/dictionary/entries  OUTPUT_FILE ${CMAKE_INSTALL_PREFIX}/share/freeling/${lg}/dicc.src)" )
+    install(CODE "execute_process(COMMAND ${CMAKE_BINARY_DIR}/src/utilities/build-dict ${CMAKE_SOURCE_DIR}/data/${lg}/dictionary/header ${CMAKE_SOURCE_DIR}/data/${lg}/dictionary/entries  OUTPUT_FILE ${CMAKE_INSTALL_PREFIX}/share/freeling/${lg}/dicc.src RESULT_VARIABLE _res) " )
+    # make sure installation helpers work.  If this one works, the others should too.
+    install(CODE "If (NOT \${_res} EQUAL \"0\")
+                     message(FATAL_ERROR \"Error executing dictionary indexation program. Make sure compilation ended without errors, and that boost libraries can be found in the path.\")
+                  endif() ")
   endif()
   
   # build phonetic dictionary
@@ -100,8 +107,15 @@ foreach (lg ${languages})
     endif()
   endforeach()
 
-  # if treeler parameter files are splitted due to GitHub 50M limitation, join them
-  file(GLOB aafiles ${CMAKE_SOURCE_DIR}/data/${lg}/dep_treeler/srl/parameters.*.gz.aa ${CMAKE_SOURCE_DIR}/data/${lg}/dep_treeler/dep/parameters.*.gz.aa)
+  # if some model files are splitted due to GitHub 50M limitation, join them
+  file(GLOB aafiles
+            ${CMAKE_SOURCE_DIR}/data/${lg}/treeler/srl/parameters.*.gz.aa
+            ${CMAKE_SOURCE_DIR}/data/${lg}/treeler/dep/parameters.*.gz.aa
+            ${CMAKE_SOURCE_DIR}/data/${lg}/dep_lstm/model*.gz.aa
+            ${CMAKE_SOURCE_DIR}/data/${lg}/embeddings/*embeddings*.gz.aa
+            ${CMAKE_SOURCE_DIR}/data/${lg}/nerc/nerc/model*.crf.aa
+       )
+
   foreach (model ${aafiles})
     STRING(REGEX REPLACE ".aa\$" "" gzfile "${model}")
     STRING(REGEX REPLACE "${CMAKE_SOURCE_DIR}/data" "${CMAKE_INSTALL_PREFIX}/share/freeling" gzfile "${gzfile}")
@@ -110,14 +124,3 @@ foreach (lg ${languages})
   
 endforeach()
 
-if (EMBEDDINGS)
-  if (EXISTS ${CMAKE_INSTALL_PREFIX}/share/freeling/en/embeddings)
-    install(CODE "message(STATUS \"Word embedding data already installed. To force reinstallation, remove folder ${CMAKE_INSTALL_PREFIX}/share/freeling/en/embeddings and 'make install' again\")" )
-  else()
-    install(CODE "message(STATUS \"Downloading word embedding data from 'nlp.cs.upc.edu/freeling/extradata'. Please wait...\")" )
-    install(CODE "file(DOWNLOAD nlp.cs.upc.edu/freeling/extradata/freeling_embeddings.tar.bz2 ${CMAKE_BINARY_DIR}/freeling_embeddings.tar.bz2 )" ) 
-    install(CODE "message(STATUS \"Uncompressing word embeddings data. Please wait...\")" )
-    install(CODE "execute_process(COMMAND ${CMAKE_COMMAND} -E tar xjf ${CMAKE_BINARY_DIR}/freeling_embeddings.tar.bz2 WORKING_DIRECTORY ${CMAKE_INSTALL_PREFIX}/share/freeling)")
-    install(CODE "file(REMOVE ${CMAKE_BINARY_DIR}/freeling_embeddings.tar.bz2 )" ) 
-  endif()
-endif()

@@ -1,8 +1,23 @@
 
- This folder contains an attept to build a Ruby API  for FreeLing using SWIG.
+  ##### Ruby API for FreeLing    ######
 
- Unfortunately, it is not operative yet.
 
- If you manage to make it work and you want to contribute to the
- project, please contact FreeLing developers.
+  INSTALLATION
+
+  To get a ruby API library, after installing FreeLing, follow the steps:
+
+   1.- Edit Makefile in this directory to adjust the right values of
+        FREELINGDIR: must be your FreeLing installation directory --e.g. /usr/local
+
+   2. issue 'make' to compile the ruby API
+
+   3. Make sure that the directory contanining libfreeling.so (FREELINGDIR/lib) is
+      in your LD_LIBRARY_PATH.
+
+   4. Test the interface with the "sample.rb" script in this directory
+      (after editing it to adjust FLDIR)
+
+   USAGE
+
+    - Write your ruby programms using freeling as seen in sample.rb
 

@@ -33,7 +33,9 @@
 #include "freeling/morfo/util.h"
 #include "freeling/morfo/configfile.h"
 
+#undef MOD_TRACENAME
 #define MOD_TRACENAME L"SMOOTHING"
+#undef MOD_TRACEMODULE
 #define MOD_TRACEMODULE LANGIDENT_TRACE
 
 namespace freeling {

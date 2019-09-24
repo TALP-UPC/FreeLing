@@ -3,7 +3,7 @@
 ##################################################################################
 ## ner-svm.sh
 ##
-## ./ner-svm.sh lang feature lexicons Cparam
+## ./ner-svm.sh lang feature filters Cparam
 ## 
 ## Trains and tests SVM NER models for given language, using given feature rule sets, 
 ## and given lexicons, and with given values for C param.
@@ -14,21 +14,44 @@
 ## 
 ##  See ../../README for more details
 
+#### TODO TODO TODO
+#### add rich/poor gazetter as parameter to allow different trainings.
 
-## Change this to te location where libfreeling is installed
-export LD_LIBRARY_PATH=/usr/local/lib
+if (test $# -lt 4); then
+    echo "usage:  ner-svm.sh lang feature filter Cparam"
+    exit
+fi
+
+# directory where this script is located
+BINDIR=`readlink -f $(dirname $0)`
+# parent directory, where the corpus should be
+NERDIR=`dirname $BINDIR`
+# main train-nerc directory
+NERCDIR=`dirname $NERDIR`
+
+if [[ ! -f $BINDIR/test-svm ]]; then
+    echo -e "'$BINDIR/test-svm' binary not found.\nPlease use 'make' to compile binaries needed to encode the corpus"
+    exit
+fi
+
+## Library path where FreeLing is found (e.g. /usr/local/lib
+FL=`ldd $BINDIR/test-svm | grep freeling | grep 'not found' | wc -l`
+if [[ $FL != 0 ]]; then
+   echo "libfreeling not found in LD_LIBRARY_PATH. Please set LD_LIBRARY_PATH to include libfreeling location"    
+   exit
+fi
+
 export LC_ALL=en_US.UTF-8
-
-cd $(dirname $0)/..
 
 LG=$1
 
-FEAT=../$LG/ner
+FEAT=$NERCDIR/$LG/ner
+CORPUS=$NERDIR/corpus
+TRN=$NERDIR/trained-$LG
+RES=$NERDIR/results-$LG
 
-CORPUS=corpus
-
-TRN=trained-$LG
-RES=results-$LG
+mkdir -p $TRN/svm
+mkdir -p $RES/svm
 
 for feat in $2; do
 
@@ -49,7 +72,7 @@ for feat in $2; do
   	   echo "** Trained SVM models " $TRN/svm/ner-$feat-$fl-C$C" already exists. Skipping model training."
          else
            echo "** Training SVM model "$TRN/svm/ner-$feat-C$C" with filter "$fl
-           bin/train-svm.sh $TRN/ner-$feat-$fl.lex "0 B 1 I 2 O" $TRN/svm/ner-$feat-$fl $CORPUS/$LG.train.$feat.enc $C
+           $BINDIR/train-svm.sh $TRN/ner-$feat-rich.train-$fl.lex "0 B 1 I 2 O" $TRN/svm/ner-$feat-$fl $CORPUS/$LG.$feat.rich.train.enc $C
 
    	   ## if model re-trained, make sure that test is repeated
            rm -f $RES/svm/ner-$feat-$fl-C$C.out
@@ -63,7 +86,7 @@ for feat in $2; do
     	   echo "** Results for SVM models "ner-$feat-$fl-C$C" already exist. Skipping test."
          else
            echo "** Testing SVM model "$TRN/svm/ner-$feat-$fl-C$C.dat
-           bin/test-svm $TRN/svm/ner-$feat-$fl-C$C.dat < $CORPUS/$LG.test.$feat.enc >$RES/svm/ner-$feat-$fl-C$C.out
+           $BINDIR/test-svm $TRN/svm/ner-$feat-$fl-C$C.dat < $CORPUS/$LG.$feat.rich.test.enc >$RES/svm/ner-$feat-$fl-C$C.out
 
   	   ## if test re-executed, make sure that statistics are recomputed
            rm -f $RES/svm/ner-$feat-$fl-C$C.stats
@@ -77,7 +100,7 @@ for feat in $2; do
   	    echo "** Statistics for SVM model "ner-$feat-$fl-C$C" already exist. Skipping statistics."
           else 
             echo "** Computing Statistics for SVM model "$TRN/svm/ner-$feat-$fl-C$C.dat
-     	    paste -d' ' $CORPUS/$LG.ner.gold $RES/svm/ner-$feat-$fl-C$C.out | ./bin/conlleval.pl | gawk '{if($1=="accuracy:") print $8}' > $RES/svm/ner-$feat-$fl-C$C.stats
+     	    paste -d' ' $CORPUS/$LG.ner.gold $RES/svm/ner-$feat-$fl-C$C.out | $BINDIR/conlleval.pl | gawk '{if($1=="accuracy:") print $8}' > $RES/svm/ner-$feat-$fl-C$C.stats
           fi
        done
 

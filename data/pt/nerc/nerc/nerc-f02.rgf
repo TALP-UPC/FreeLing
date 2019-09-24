@@ -1,0 +1,119 @@
+## tagset description used to compute short tag versions
+TAGSET ../../tagset.dat
+
+## features extracted for all words
+RULES ALL
+
+  is_punct@      [-3,3]  pt matches ^F
+  is_num@        [-3,3]  W matches ^([0-9]\.?)+$
+  has_num@       [-3,3]  W matches [0-9]
+  all_caps@      [-3,3]  W matches ^[[:upper:]][[:upper:]_\.]+$
+  cap@           [-3,3]  W matches ^[[:upper:]][[:lower:]]
+  initial@       [-3,3]  W matches ^[[:upper:]]\.$
+  has_acr@       [-3,3]  W matches ([[:upper:]][[:upper:]\.]+_)|(_[[:upper:]][[:upper:]\.]+)
+  is_acr@        [-3,3]  W matches ^[[:upper:]](\.[[:upper:]])+$
+  has_dot@       [-3,3]  W matches \.
+  is_dot@        [-3,3]  W matches ^\.$
+  has_dash@      [-3,3]  W matches ^[[:alpha:]]+\-
+  is_dash@       [-3,3]  W matches ^\-$
+  has_under@     [-3,3]  W matches ^[[:alpha:]]+_
+  is_under@      [-3,3]  W matches ^_$
+  funct@         [-3,3]  pl in_set ../data/function.dat
+  roman@         [-3,3]  W matches ^[IVX]+$ 
+  no_analysis@   [-3,3]  na is 0     
+  url@           [-3,3]  W matches ^www[.]*\.[a-z]+$
+  url@           [-3,3]  W matches ^http[.]*\.[a-z]+$
+
+  possible_noun@ [-4,4]  pt matches ^N
+  possible_adj@  [-4,4]  pt matches ^A
+
+  gazPER@      [-3,3]    pl in_set ../data/gazPER-c.dat
+  gazLOC@      [-3,3]    pl in_set ../data/gazLOC-c.dat
+  gazORG@      [-3,3]    pl in_set ../data/gazORG-c.dat
+  gazMISC@     [-3,3]    pl in_set ../data/gazMISC-c.dat
+
+  igazPER@     [-3,3]    pl in_set ../data/gazPER-p.dat
+  igazLOC@     [-3,3]    pl in_set ../data/gazLOC-p.dat
+  igazORG@     [-3,3]    pl in_set ../data/gazORG-p.dat
+  igazMISC@    [-3,3]    pl in_set ../data/gazMISC-p.dat
+
+  ltwPER@      [-3,-1]    pl in_set ../data/twPER.dat
+  ltwLOC@      [-3,-1]    pl in_set ../data/twLOC.dat
+  ltwORG@      [-3,-1]    pl in_set ../data/twORG.dat
+  ltwGENT@     [-3,-1]    pl in_set ../data/twGENT.dat
+  rtwPER@      [1,3]      pl in_set ../data/twPER.dat
+  rtwLOC@      [1,3]      pl in_set ../data/twLOC.dat
+  rtwORG@      [1,3]      pl in_set ../data/twORG.dat
+  rtwGENT@     [1,3]      pl in_set ../data/twGENT.dat
+
+  ltwPER      [-3,-1]    pl in_set ../data/twPER.dat
+  ltwLOC      [-3,-1]    pl in_set ../data/twLOC.dat
+  ltwORG      [-3,-1]    pl in_set ../data/twORG.dat
+  ltwGENT     [-3,-1]    pl in_set ../data/twGENT.dat
+  rtwPER      [1,3]      pl in_set ../data/twPER.dat
+  rtwLOC      [1,3]      pl in_set ../data/twLOC.dat
+  rtwORG      [1,3]      pl in_set ../data/twORG.dat
+  rtwGENT     [1,3]      pl in_set ../data/twGENT.dat
+    
+  city@       [-3,3]   pl in_set ../../../common/nec/cities.dat
+
+  W@:$W(0)    [-3,3]  pt !matches ^[ZWF]
+  w@:$w(0)    [-3,3]  ALL
+  pl@:$pl(0)  [-3,3]  pt !matches ^[ZWF]
+  pt@:$pt(0)  [-3,3]  ALL
+  pa@:$pa(0)  [-3,3]  ALL
+
+  wbg@:$w(0)_$w(1)        [-3,3]   ALL
+  tbg@:$t(0)_$t(1)        [-3,3]   ALL
+  ttg@:$t(0)_$t(1)_$t(2)  [-3,3]   ALL
+
+  bow:$w(0)   [-5,-1]  pt matches ^[ANV] 
+  bow:$w(0)   [1,5]    pt matches ^[ANV]
+  bol:$pl(0)  [-5,-1]  pt matches ^[ANV]
+  bol:$pl(0)  [1,5]    pt matches ^[ANV]
+
+  suf3@:{$0}     [-3,3]  w matches ...$
+  pre3@:{$0}     [-3,3]  w matches ^...
+  suf4@:{$0}     [-3,3]  w matches ....$
+  pre4@:{$0}     [-3,3]  w matches ^....
+
+  cap&pnoun@    [-3,3]   W matches ^[[:upper:]] AND pt matches ^N
+  cap&na=0@     [-3,3]   W matches ^[[:upper:]] AND na is 0
+  has_dot&na=0@ [-3,3]   W matches [.] AND na is 0
+  
+  pat@:{pattern(0)} [-3,3]  ALL
+  {quoted(0)}       [-3,3]  ALL
+  {parenthesis(0)}  [-3,3]  ALL  
+
+  p1L:{pattern(-1)}_{pattern(0)}                             [0,0] ALL
+  p2L:{pattern(-2)}_{pattern(-1)}_{pattern(0)}               [0,0] ALL
+  p3L:{pattern(-3)}_{pattern(-2)}_{pattern(-1)}_{pattern(0)} [0,0] ALL
+  p1R:{pattern(0)}_{pattern(1)}                              [0,0] ALL
+  p2R:{pattern(0)}_{pattern(1)}_{pattern(2)}                 [0,0] ALL
+  p3R:{pattern(0)}_{pattern(1)}_{pattern(2)}_{pattern(3)}    [0,0] ALL
+
+  pt:$pt(0)&pat:{pattern(0)}@  [-3,3]    ALL
+ENDRULES
+
+
+RULES na !is 0
+  pt0:$pt&funct@    [-3,3]    w in_set ../data/function.dat
+  pt0:$pt&cap@      [-3,3]    W matches ^[[:upper:]]
+
+  pt0:$pt&w@:$w(0)  [-3,3]    ALL
+
+  pt0:$pt&pat@:{pattern(0)}  [-3,3]    ALL
+ENDRULES
+
+
+RULES W matches ^[[:upper:]]
+  cap0&pat@:{pattern(0)}     [-3,3]    ALL
+
+  cap0&cap@     [-3,-1]   W matches ^[[:upper:]]
+  cap0&cap@     [1,3]     W matches ^[[:upper:]]
+
+  cap0&funct@   [-3,-1]   w in_set ../data/function.dat
+  cap0&funct@   [1,3]     w in_set ../data/function.dat
+ENDRULES
+
+

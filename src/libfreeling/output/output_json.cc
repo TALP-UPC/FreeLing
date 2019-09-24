@@ -155,6 +155,8 @@ void output_json::PrintSentences (wostream &sout, const list<sentence> &ls) cons
       sout << L", \"begin\" : \"" << w->get_span_start() << L"\"";
       sout << L", \"end\" : \"" << w->get_span_finish() << L"\"";
       sout << L", \"form\" : \"" << escapeJSON(w->get_form()) << L"\"";
+      if (not w->get_ph_form().empty())
+         sout << L", \"phon\" : \"" << escapeJSON(w->get_ph_form()) << L"\"";
 
       // no analysis, nothing else to print
       if (w->empty()) {

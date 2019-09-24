@@ -74,7 +74,8 @@ namespace freeling {
 #define TK_avo      9 // fraction word (tenth, half)
 #define TK_part    10 // word "part" or "parts"
 #define TK_unit    11 // measure unit or currency name
-#define TK_other   12
+#define TK_curr    12 // complete currency amount (e.g. $10,000)
+#define TK_other   13
 
   ///////////////////////////////////////////////////////////////
   ///  Create a quantities recognizer for Spanish.
@@ -170,6 +171,7 @@ namespace freeling {
   
     // State A
     trans[ST_A][TK_number]=ST_B;
+    trans[ST_A][TK_curr]=ST_G;
     // State B
     trans[ST_B][TK_pc]=ST_C;      trans[ST_B][TK_wpor]=ST_D;  trans[ST_B][TK_wde]=ST_E;
     trans[ST_B][TK_wsobre]=ST_F;  trans[ST_B][TK_avo]=ST_C;   trans[ST_B][TK_unit]=ST_G;
@@ -214,8 +216,13 @@ namespace freeling {
 
     // Token not found in translation table, let's have a closer look.
 
+    // check to see if it is a currency (e.g $10,000)
+    if (j->get_n_analysis() && j->get_tag()[0]==L'Z' &&
+	CurrencySymbols.find(j->get_form().substr(0,1))!=CurrencySymbols.end()) {
+      token = TK_curr;
+    }
     // check to see if it is a number
-    if (j->get_n_analysis() && j->get_tag()[0]==L'Z') {
+    else if (j->get_n_analysis() && j->get_tag()[0]==L'Z') {
       token = TK_number;
     }
     TRACE(3,L"checked");
@@ -275,9 +282,19 @@ namespace freeling {
 
     // get token numerical value, if any
     wstring value=L"";
-    if ((token==TK_number || token==TK_n100) && j->get_n_analysis() && j->get_tag()[0]==L'Z') 
+    if ((token==TK_number || token==TK_n100) && j->get_n_analysis() && j->get_tag()[0]==L'Z') {
       value = lema;
-
+    }
+    else if (token==TK_curr) {
+      lema = CurrencySymbols.find(j->get_form().substr(0,1))->second;
+      st->value1 = j->get_form().substr(1);
+      // remove thousand points
+      size_t i;
+      while ((i=st->value1.find_first_of(L","))!=wstring::npos) {
+        st->value1.erase(i,1);
+      }
+    }
+    
     // State actions
     switch (state) {
       // ---------------------------------
@@ -303,12 +320,21 @@ namespace freeling {
         st->value2=value;
       break;
       // ---------------------------------
-    case ST_G:
+    case ST_G: {
       // number + measure unit (or currency name) found, store magnitude and unit
-      TRACE(3,L"Actions for state I");
-      st->unitCode=units.find(lema)->second+L"_"+lema;
-      st->unitType=units.find(lema)->second;
+      TRACE(3,L"Actions for state G");
+      map<wstring,wstring>::const_iterator p = units.find(lema);
+      if (p != units.end()) {
+        st->unitCode = p->second+L"_"+lema;
+        st->unitType = p->second;
+      }
+      else {
+        st->unitCode = L"??_"+lema;
+        st->unitType = L"??";
+      }
+      TRACE(3,L"Final state. lemma="<<lema<<L" value="<<st->value1<<" type="<<st->unitType);
       break;
+    }
       // ---------------------------------
     default: break;
     }

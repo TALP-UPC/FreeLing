@@ -56,6 +56,7 @@ NounFem ^$
 </PosTags>
 
 <SemanticFeatures>
+%%% based on sumo
 PersonSUMO ^(Human|Man|Woman)[+=]$ 
 MaleSUMO ^(Male|Man)[+=]$ 
 FemaleSUMO ^(Female|Woman)[+=]$ 
@@ -63,6 +64,10 @@ FemaleSUMO ^(Female|Woman)[+=]$
 OrganizationSUMO ^(Care|Educational|Government|Judicial|Legislative|Mercantile|Military|Nonprofit|Police|Political|Religious|Terrorist|Union)?Organization[+=]$
 
 LocationSUMO ^(Island|Park|Plain|Reef|Glacier|Hill|Room|Building|Burrow|Creek|Field|StateOrProvince|Forest|MountainRange|Lake|Valley|City|Nation|StationaryArtifact|Region|FreshWaterArea|LowlandArea|SaltWaterArea|UplandArea|SlopedArea|CultivatedLandArea|ShoreArea|StaticWaterArea|WaterArea|StreamWaterArea|GeopoliticalArea|GeographicArea|LandArea)[+=]$
+
+%% based on WN Top Ontology
+PersonTONTO Human
+NotPersonTONTO Group
 </SemanticFeatures>
 
 <WordFeatures>

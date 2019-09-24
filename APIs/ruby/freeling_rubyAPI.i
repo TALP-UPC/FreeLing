@@ -42,66 +42,16 @@
  using namespace std;
 %}
 
-
-%fragment("SWIG_AsWCharPtrAndSize","header",fragment="<wchar.h>",fragment="SWIG_pwchar_descriptor") {
-SWIGINTERN int SWIG_AsWCharPtrAndSize(VALUE obj, wchar_t **cptr, size_t *psize, int *alloc)
-{
-  if (TYPE(obj) == T_STRING) {
-    %#if defined(StringValuePtr)
-                  char *cstr = StringValuePtr(obj);
-    %#else
-       char *cstr = STR2CSTR(obj);
-    %#endif
-
-       std::wstring tempStr = freeling::util::string2wstring(cstr);
-
-    size_t size = tempStr.size() + 1;
-    if (cptr)  {
-      if (alloc) {                
-        *cptr = %new_copy_array(tempStr.c_str(), size, wchar_t);
-        *alloc = SWIG_NEWOBJ;
-      }
-    }
-    if (psize) *psize = size;
-    return SWIG_OK;
-  } else {
-    swig_type_info* pwchar_descriptor = SWIG_pwchar_descriptor();
-    if (pwchar_descriptor) {
-      void* vptr = 0;
-      if (SWIG_ConvertPtr(obj, &vptr, pwchar_descriptor, 0) == SWIG_OK) {
-        if (cptr) *cptr = (wchar_t *)vptr;
-        if (psize) *psize = vptr ? (wcslen((wchar_t*)vptr) + 1) : 0;
-        if (alloc) *alloc = SWIG_OLDOBJ;
-        return SWIG_OK;
-      }
-    }
-  }  
-  return SWIG_TypeError;
-}
- }
-
-%fragment("SWIG_FromWCharPtrAndSize","header",fragment="<wchar.h>",fragment="SWIG_pwchar_descriptor") {
-SWIGINTERNINLINE VALUE
-  SWIG_FromWCharPtrAndSize(const wchar_t * carray, size_t size)
-{
-  if (carray) {
-    std::string tempStr(freeling::util::wstring2string(carray));
-
-    if (tempStr.size() > LONG_MAX) {
-      swig_type_info* pwchar_descriptor = SWIG_pwchar_descriptor();
-      return pwchar_descriptor ?
-        SWIG_NewPointerObj(%const_cast(carray,wchar_t *), pwchar_descriptor, 0) : Qnil;
-    } else {
-      return rb_str_new(tempStr.c_str(), %numeric_cast(tempStr.size(),long));
-    }
-  } else {
-    return Qnil;
-  }
-}
- }
+%include std_wstring.i
+%include std_set.i
 
 %include <typemaps/cwstring.swg>
 %include <typemaps/std_wstring.swg>
 
+// `SetString` is also defined in `freeling.i`, but it needs to be defined earlier, otherwise
+// SWIG will complain about `make_set_nonconst_iterator` not having been defined yet.
+%template(SetString) std::set<std::wstring>;
+
+#define FL_API_RUBY
 %include ../common/templates.i
 %include ../common/freeling.i

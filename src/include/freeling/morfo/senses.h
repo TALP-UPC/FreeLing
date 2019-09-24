@@ -55,7 +55,12 @@ namespace freeling {
     senses(const std::wstring &); 
     /// Destructor
     ~senses(); 
- 
+
+    // set/unset duplicate_analysys option
+    void set_duplicate_analysis(bool b);
+    // get duplicate_analysys option status
+    bool get_duplicate_analysis();
+    
     /// analyze given sentence
     void analyze(sentence &) const;
 

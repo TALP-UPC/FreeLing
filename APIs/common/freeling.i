@@ -1105,15 +1105,21 @@ class paragraph : public std::list<freeling::sentence> {
 
 /*------------------------------------------------------------------------*/
 // codes for input-output formats
-typedef enum {TEXT,IDENT,TOKEN,SPLITTED,MORFO,TAGGED,SENSES,SHALLOW,PARSED,DEP,COREF,SEMGRAPH} AnalysisLevel;
+typedef enum {TEXT,TOKEN,SPLITTED,MORFO,TAGGED,SENSES,SHALLOW,PARSED,DEP,SRL,COREF,SEMGRAPH} AnalysisLevel;
 // codes for tagging algorithms
 typedef enum {NO_TAGGER,HMM,RELAX} TaggerAlgorithm;
 // codes for dependency parsers
-typedef enum {NO_DEP,TXALA,TREELER} DependencyParser;
+typedef enum {NO_DEP,TXALA,TREELER,LSTM} DependencyParser;
+// codes for SRL parsers
+typedef enum {NO_SRL,SRL_TREELER} SRLParser;
 // codes for sense annotation
 typedef enum {NO_WSD,ALL,MFS,UKB} WSDAlgorithm;
 // codes for ForceSelect
 typedef enum {NO_FORCE,TAGGER,RETOK} ForceSelectStrategy;
+
+// error status for analyzer_config class
+typedef enum {CFG_OK, CFG_WARNING, CFG_ERROR} CFG_status;
+
 
 ////////////////////////////////////////////////////////////////
 /// 
@@ -1136,7 +1142,7 @@ typedef enum {NO_FORCE,TAGGER,RETOK} ForceSelectStrategy;
    std::wstring MACO_Decimal, MACO_Thousand;
    std::wstring MACO_UserMapFile, MACO_LocutionsFile,   MACO_QuantitiesFile,
      MACO_AffixFile,   MACO_ProbabilityFile, MACO_DictionaryFile, 
-     MACO_NPDataFile,  MACO_PunctuationFile, MACO_CompoundFile;   	 
+     MACO_NPDataFile,  MACO_PunctuationFile, MACO_CompoundFile;
    double MACO_ProbabilityThreshold;
    /// Phonetics config file
    std::wstring PHON_PhoneticsFile;
@@ -1158,6 +1164,9 @@ typedef enum {NO_FORCE,TAGGER,RETOK} ForceSelectStrategy;
    /// Dependency parsers config files
    std::wstring DEP_TxalaFile;   
    std::wstring DEP_TreelerFile;   
+   std::wstring DEP_LSTMFile;
+   /// Semantic role labeling files
+   std::wstring SRL_TreelerFile;
    /// Coreference resolution config file
    std::wstring COREF_CorefFile;
    /// semantic graph extractor config file
@@ -1194,14 +1203,52 @@ typedef enum {NO_FORCE,TAGGER,RETOK} ForceSelectStrategy;
    WSDAlgorithm SENSE_WSD_which;
    TaggerAlgorithm TAGGER_which;
    DependencyParser DEP_which;    
+   SRLParser SRL_which;
+ };
+
+ ////////////////////////////////////////////////////////////////
+ ///  class to handle configuration error states
+
+ class status {
+ public:
+   CFG_status stat;
+   std::wstring description;
+ };
+
+ class analyzer_config {
+ public:
+
+   typedef analyzer_config_options config_options;
+   typedef analyzer_invoke_options invoke_options;
+
+   config_options config_opt;
+   invoke_options invoke_opt;
+
+   /// constructor
+   analyzer_config();
+   /// destructor
+   ~analyzer_config();
+
+   /// load options from a config file
+   void parse_options(const std::wstring &cfgFile);
+   /// load options from a config file + command line   
+   void parse_options(const std::wstring &cfgFile, int ac, char *av[]);   
+   /// load options from a stream (auxiliary for the other constructors)
+   void parse_options(std::wistream &cfg, analyzer_config::config_options &config, analyzer_config::invoke_options &invoke);
+
+   // check invoke options
+   status check_invoke_options(const analyzer_config::invoke_options &opt) const; 
+
  };
  
-%nestedworkaround analyzer::config_options;
-%nestedworkaround analyzer::invoke_options;
+ 
+ ///%nestedworkaround analyzer_config::config_options;
+ ///%nestedworkaround analyzer_config::invoke_options;
 %{
   namespace freeling {
-   typedef freeling::analyzer::config_options config_options;
-   typedef freeling::analyzer::invoke_options invoke_options;
+   typedef freeling::analyzer_config::config_options config_options;
+   typedef freeling::analyzer_config::invoke_options invoke_options;
+   typedef freeling::analyzer_config::status status;
   }
 %}
 
@@ -1220,11 +1267,8 @@ typedef enum {NO_FORCE,TAGGER,RETOK} ForceSelectStrategy;
 class analyzer {
 
  public:
-   typedef analyzer_config_options config_options;
-   typedef analyzer_invoke_options invoke_options;
-
    analyzer(const freeling::config_options &cfg);
-   void set_current_invoke_options(const freeling::invoke_options &opt, bool check=true);
+   void set_current_invoke_options(const freeling::analyzer_config::invoke_options &opt);
    const invoke_options& get_current_invoke_options() const;
 
    ~analyzer();
@@ -1612,6 +1656,33 @@ class ner {
 };
 
 /*------------------------------------------------------------------------*/
+class crf_nerc {
+  
+  public:
+    /// Constructor
+    crf_nerc(const std::wstring &);
+    /// Destructor
+    ~crf_nerc();
+
+    #ifndef FL_API_JAVA
+    /// analyze sentence
+    sentence analyze(const sentence &) const;
+    /// analyze sentences
+    std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
+    /// analyze document
+    document analyze(const document &) const;
+    #else
+    /// analyze sentence
+    void analyze(sentence &) const;
+    /// analyze sentences
+    void analyze(std::list<freeling::sentence> &) const;
+    /// analyze document
+    void analyze(document &) const;
+    #endif
+};
+
+ 
+/*------------------------------------------------------------------------*/
 class quantities {
  public:
   /// Constructor (language, config file)
@@ -1887,7 +1958,64 @@ class dep_treeler {
 };
 
 
+/*------------------------------------------------------------------------*/
+class dep_lstm {
+  
+ public:
+    /// constructor
+    dep_lstm(const std::wstring &fname);
+    /// destructor
+    ~dep_lstm();
+    
+   #ifndef FL_API_JAVA
+   /// analyze sentence
+   sentence analyze(const sentence &) const;
+   /// analyze sentences
+   std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
+   /// analyze document
+   document analyze(const document &) const;
+   #else
+   /// analyze sentence
+   void analyze(sentence &) const;
+   /// analyze sentences, return analyzed copy
+   void analyze(std::list<freeling::sentence> &) const;
+   /// analyze document
+   void analyze(document &) const;
+   #endif
 
+  };
+
+
+/*------------------------------------------------------------------------*/
+
+class srl_treeler {
+
+ public:   
+  /// Constructor
+  srl_treeler(const std::wstring &);
+  /// Destructor
+  ~srl_treeler();
+
+   #ifndef FL_API_JAVA
+   /// analyze sentence
+   sentence analyze(const sentence &) const;
+   /// analyze sentences
+   std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
+   /// analyze document
+   document analyze(const document &) const;
+   #else
+   /// analyze sentence
+   void analyze(sentence &) const;
+   /// analyze sentences, return analyzed copy
+   void analyze(std::list<freeling::sentence> &) const;
+   /// analyze document
+   void analyze(document &) const;
+   #endif
+    
+};
+
+
+ 
 /*------------------------------------------------------------------------*/
 class senses {
  public:

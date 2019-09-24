@@ -48,7 +48,7 @@ namespace freeling {
 
   senses::senses(const wstring & wsdFile) {
  
-    duplicate=false;
+    duplicate = false;
     semdb = new semanticDB(wsdFile);
 
     enum sections {DUP_ANALYSIS};
@@ -67,7 +67,7 @@ namespace freeling {
         sin.str(line);
         wstring key; 
         sin>>key;
-        if (key==L"yes") duplicate=true;  
+        if (key==L"yes") duplicate = true;  
         break;
       }
       default: break;
@@ -152,5 +152,19 @@ namespace freeling {
 
     TRACE(1,L"Sentences annotated by the senses module.");
   }
+
+
+  ///////////////////////////////////////////////////////////////
+  /// set/unset duplicate_analysys option
+  ///////////////////////////////////////////////////////////////
+
+  void senses::set_duplicate_analysis(bool b) { duplicate = b; }
+
+  ///////////////////////////////////////////////////////////////
+  /// get duplicate_analysys option status
+  ///////////////////////////////////////////////////////////////
+
+  bool senses::get_duplicate_analysis() { return duplicate; }
+  
 
 } // namespace

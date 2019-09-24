@@ -301,27 +301,27 @@ io::output_handler* create_output_handler(config *cfg) {
   else if (cfg->OutputFormat==OUT_NAF)  {
     io::output_naf *onaf = new io::output_naf();
     onaf->load_tagset(cfg->TAGSET_TagsetFile);
-    onaf->set_language(cfg->analyzer_config_options.Lang);
+    onaf->set_language(cfg->config_opt.Lang);
 
     onaf->ActivateLayer(L"text",true);
-    onaf->ActivateLayer(L"terms",cfg->analyzer_invoke_options.OutputLevel>=MORFO);
-    onaf->ActivateLayer(L"entities",cfg->analyzer_invoke_options.OutputLevel>=TAGGED);
-    onaf->ActivateLayer(L"chunks",cfg->analyzer_invoke_options.OutputLevel==SHALLOW);
-    onaf->ActivateLayer(L"constituency",cfg->analyzer_invoke_options.OutputLevel>=PARSED
-                        and cfg->analyzer_invoke_options.DEP_which==TXALA);
-    onaf->ActivateLayer(L"deps",cfg->analyzer_invoke_options.OutputLevel>=DEP);
-    onaf->ActivateLayer(L"srl",cfg->analyzer_invoke_options.OutputLevel>=DEP 
-                        and cfg->analyzer_invoke_options.DEP_which==TREELER);
-    onaf->ActivateLayer(L"coreferences",cfg->analyzer_invoke_options.OutputLevel>=COREF);
+    onaf->ActivateLayer(L"terms",cfg->invoke_opt.OutputLevel>=MORFO);
+    onaf->ActivateLayer(L"entities",cfg->invoke_opt.OutputLevel>=TAGGED);
+    onaf->ActivateLayer(L"chunks",cfg->invoke_opt.OutputLevel==SHALLOW);
+    onaf->ActivateLayer(L"constituency",cfg->invoke_opt.OutputLevel>=PARSED
+                        and cfg->invoke_opt.DEP_which==TXALA);
+    onaf->ActivateLayer(L"deps",cfg->invoke_opt.OutputLevel>=DEP);
+    onaf->ActivateLayer(L"srl",cfg->invoke_opt.OutputLevel>=DEP 
+                        and cfg->invoke_opt.DEP_which==TREELER);
+    onaf->ActivateLayer(L"coreferences",cfg->invoke_opt.OutputLevel>=COREF);
     out = onaf;
   }
   else { //  default, cfg->OutputFormat==OUT_FREELING
     io::output_freeling *ofl = new io::output_freeling();
-    ofl->output_senses(cfg->analyzer_invoke_options.SENSE_WSD_which!=NO_WSD);
-    ofl->output_all_senses(cfg->analyzer_invoke_options.SENSE_WSD_which!=MFS);
-    ofl->output_phonetics(cfg->analyzer_invoke_options.PHON_Phonetics);
-    ofl->output_dep_tree(cfg->analyzer_invoke_options.OutputLevel>=DEP);
-    ofl->output_corefs(cfg->analyzer_invoke_options.OutputLevel>=COREF);
+    ofl->output_senses(cfg->invoke_opt.SENSE_WSD_which!=NO_WSD);
+    ofl->output_all_senses(cfg->invoke_opt.SENSE_WSD_which!=MFS);
+    ofl->output_phonetics(cfg->invoke_opt.PHON_Phonetics);
+    ofl->output_dep_tree(cfg->invoke_opt.OutputLevel>=DEP);
+    ofl->output_corefs(cfg->invoke_opt.OutputLevel>=COREF);
     out = ofl;
   }
 
@@ -347,7 +347,7 @@ io::input_handler* create_input_handler(config *cfg) {
 config* load_config(int argc, char *argv[]) {
   
   config* cfg = new config(argc,argv);
-  
+
   ServerMode = cfg->Server;
   
   // If server activated, make sure port was specified, and viceversa.
@@ -364,103 +364,111 @@ config* load_config(int argc, char *argv[]) {
   
   /// Check that required configuration can satisfy required requests
   /// 'analyzer' constructor will check most of them, so we only need to worry about lang ident
-  if (cfg->analyzer_invoke_options.OutputLevel==IDENT and cfg->IDENT_identFile.empty()) {
+  if (cfg->LangIdent and cfg->IDENT_identFile.empty()) {
     wcerr <<L"Error - No configuration file provided for language identifier."<<endl;
     exit (1);        
   }
   
-  if (cfg->analyzer_invoke_options.OutputLevel>=COREF and 
-      not cfg->analyzer_invoke_options.NEC_NEClassification and 
-      not cfg->analyzer_config_options.NEC_NECFile.empty()) {
-    cfg->analyzer_invoke_options.NEC_NEClassification = true;
+  if (cfg->invoke_opt.OutputLevel>=COREF and 
+      not cfg->invoke_opt.NEC_NEClassification and 
+      not cfg->config_opt.NEC_NECFile.empty()) {
+    cfg->invoke_opt.NEC_NEClassification = true;
     wcerr << L"NEC activated since coreference or semantic graph was requested."<<endl;
   }
   
-  if (cfg->analyzer_invoke_options.OutputLevel>=COREF and 
-      cfg->analyzer_invoke_options.SENSE_WSD_which!=UKB and 
-      not cfg->analyzer_config_options.SENSE_ConfigFile.empty()) {
-    cfg->analyzer_invoke_options.SENSE_WSD_which = UKB;
+  if (cfg->invoke_opt.OutputLevel>=COREF and 
+      cfg->invoke_opt.SENSE_WSD_which!=UKB and 
+      not cfg->config_opt.SENSE_ConfigFile.empty()) {
+    cfg->invoke_opt.SENSE_WSD_which = UKB;
     wcerr << L"UKB sense disambiguation activated since coreference or semantic graph was requested."<<endl;
   }
   
   // ignore unneeded config files, to prevent analyer from loading modules we know we won't use  
-  if (not cfg->analyzer_config_options.TOK_TokenizerFile.empty()
-      and (cfg->analyzer_invoke_options.InputLevel>TOKEN 
-           or cfg->analyzer_invoke_options.OutputLevel<TOKEN))  cfg->analyzer_config_options.TOK_TokenizerFile = L"";
-  if (not cfg->analyzer_config_options.SPLIT_SplitterFile.empty()
-      and (cfg->analyzer_invoke_options.InputLevel>SPLITTED
-           or cfg->analyzer_invoke_options.OutputLevel<SPLITTED)) cfg->analyzer_config_options.SPLIT_SplitterFile = L"";
-  if (not cfg->analyzer_config_options.TAGGER_HMMFile.empty() 
-      and (cfg->analyzer_invoke_options.TAGGER_which!=HMM
-           or (cfg->analyzer_invoke_options.InputLevel>TAGGED
-               or cfg->analyzer_invoke_options.OutputLevel<TAGGED))) cfg->analyzer_config_options.TAGGER_HMMFile = L"";
-  if (not cfg->analyzer_config_options.TAGGER_RelaxFile.empty() 
-      and (cfg->analyzer_invoke_options.TAGGER_which!=RELAX
-           or (cfg->analyzer_invoke_options.InputLevel>TAGGED
-               or cfg->analyzer_invoke_options.OutputLevel<TAGGED))) cfg->analyzer_config_options.TAGGER_RelaxFile = L"";
-  if (not cfg->analyzer_config_options.PARSER_GrammarFile.empty() 
-      and (cfg->analyzer_invoke_options.InputLevel>SHALLOW
-           or cfg->analyzer_invoke_options.OutputLevel<SHALLOW)
-      and (cfg->analyzer_invoke_options.InputLevel>DEP
-           or cfg->analyzer_invoke_options.OutputLevel<DEP)) cfg->analyzer_config_options.PARSER_GrammarFile = L"";
-  if (not cfg->analyzer_config_options.DEP_TxalaFile.empty() 
-      and ((cfg->analyzer_invoke_options.DEP_which!=TXALA and cfg->analyzer_invoke_options.OutputLevel<COREF)
-           or (cfg->analyzer_invoke_options.InputLevel>DEP
-               or cfg->analyzer_invoke_options.OutputLevel<PARSED))) cfg->analyzer_config_options.DEP_TxalaFile = L"";
-  if (not cfg->analyzer_config_options.DEP_TreelerFile.empty() 
-      and ((cfg->analyzer_invoke_options.DEP_which!=TREELER and cfg->analyzer_invoke_options.OutputLevel<COREF)
-           or (cfg->analyzer_invoke_options.InputLevel>DEP
-               or cfg->analyzer_invoke_options.OutputLevel<DEP))) cfg->analyzer_config_options.DEP_TreelerFile = L"";
-  if (not cfg->analyzer_config_options.COREF_CorefFile.empty()
-      and (cfg->analyzer_invoke_options.InputLevel>=COREF 
-           or cfg->analyzer_invoke_options.OutputLevel<COREF)) cfg->analyzer_config_options.COREF_CorefFile = L"";
+  if (not cfg->config_opt.TOK_TokenizerFile.empty()
+      and (cfg->invoke_opt.InputLevel>TOKEN 
+           or cfg->invoke_opt.OutputLevel<TOKEN))  cfg->config_opt.TOK_TokenizerFile = L"";
+  if (not cfg->config_opt.SPLIT_SplitterFile.empty()
+      and (cfg->invoke_opt.InputLevel>SPLITTED
+           or cfg->invoke_opt.OutputLevel<SPLITTED)) cfg->config_opt.SPLIT_SplitterFile = L"";
+  if (not cfg->config_opt.TAGGER_HMMFile.empty() 
+      and (cfg->invoke_opt.TAGGER_which!=HMM
+           or (cfg->invoke_opt.InputLevel>TAGGED
+               or cfg->invoke_opt.OutputLevel<TAGGED))) cfg->config_opt.TAGGER_HMMFile = L"";
+  if (not cfg->config_opt.TAGGER_RelaxFile.empty() 
+      and (cfg->invoke_opt.TAGGER_which!=RELAX
+           or (cfg->invoke_opt.InputLevel>TAGGED
+               or cfg->invoke_opt.OutputLevel<TAGGED))) cfg->config_opt.TAGGER_RelaxFile = L"";
+  if (not cfg->config_opt.PARSER_GrammarFile.empty() 
+      and (cfg->invoke_opt.InputLevel>SHALLOW
+           or cfg->invoke_opt.OutputLevel<SHALLOW)
+      and (cfg->invoke_opt.InputLevel>DEP
+           or cfg->invoke_opt.OutputLevel<DEP)) cfg->config_opt.PARSER_GrammarFile = L"";
+  if (not cfg->config_opt.DEP_TxalaFile.empty() 
+      and ((cfg->invoke_opt.DEP_which!=TXALA and cfg->invoke_opt.OutputLevel<COREF)
+           or (cfg->invoke_opt.InputLevel>DEP
+               or cfg->invoke_opt.OutputLevel<PARSED))) cfg->config_opt.DEP_TxalaFile = L"";
+  if (not cfg->config_opt.DEP_TreelerFile.empty() 
+      and ((cfg->invoke_opt.DEP_which!=TREELER and cfg->invoke_opt.OutputLevel<COREF)
+           or (cfg->invoke_opt.InputLevel>DEP
+               or cfg->invoke_opt.OutputLevel<DEP))) cfg->config_opt.DEP_TreelerFile = L"";
+  if (not cfg->config_opt.DEP_LSTMFile.empty() 
+      and ((cfg->invoke_opt.DEP_which!=LSTM and cfg->invoke_opt.OutputLevel<COREF)
+           or (cfg->invoke_opt.InputLevel>DEP
+               or cfg->invoke_opt.OutputLevel<DEP))) cfg->config_opt.DEP_LSTMFile = L"";
+  if (not cfg->config_opt.SRL_TreelerFile.empty()
+      and (cfg->invoke_opt.InputLevel>=SRL 
+           or cfg->invoke_opt.OutputLevel<SRL)) cfg->config_opt.SRL_TreelerFile = L"";
+  if (not cfg->config_opt.COREF_CorefFile.empty()
+      and (cfg->invoke_opt.InputLevel>=COREF 
+           or cfg->invoke_opt.OutputLevel<COREF)) cfg->config_opt.COREF_CorefFile = L"";
 
-  if (not cfg->analyzer_config_options.SEMGRAPH_SemGraphFile.empty()
-      and (cfg->analyzer_invoke_options.InputLevel>=SEMGRAPH 
-           or cfg->analyzer_invoke_options.OutputLevel<SEMGRAPH)) 
-    cfg->analyzer_config_options.SEMGRAPH_SemGraphFile = L"";
+  if (not cfg->config_opt.SEMGRAPH_SemGraphFile.empty()
+      and (cfg->invoke_opt.InputLevel>=SEMGRAPH 
+           or cfg->invoke_opt.OutputLevel<SEMGRAPH)) 
+    cfg->config_opt.SEMGRAPH_SemGraphFile = L"";
   
-  if (not cfg->analyzer_config_options.PHON_PhoneticsFile.empty() and not cfg->analyzer_invoke_options.PHON_Phonetics)
-    cfg->analyzer_config_options.PHON_PhoneticsFile = L"";
-  if (not cfg->analyzer_config_options.NEC_NECFile.empty() and not cfg->analyzer_invoke_options.NEC_NEClassification)
-    cfg->analyzer_config_options.NEC_NECFile = L"";
-  if (not cfg->analyzer_config_options.SENSE_ConfigFile.empty() and cfg->analyzer_invoke_options.SENSE_WSD_which==NO_WSD)
-    cfg->analyzer_config_options.SENSE_ConfigFile = L"";
-  if (not cfg->analyzer_config_options.UKB_ConfigFile.empty() and cfg->analyzer_invoke_options.SENSE_WSD_which!=UKB)
-    cfg->analyzer_config_options.UKB_ConfigFile = L"";
+  if (not cfg->config_opt.PHON_PhoneticsFile.empty() and not cfg->invoke_opt.PHON_Phonetics)
+    cfg->config_opt.PHON_PhoneticsFile = L"";
+  if (not cfg->config_opt.NEC_NECFile.empty() and not cfg->invoke_opt.NEC_NEClassification)
+    cfg->config_opt.NEC_NECFile = L"";
+  if (not cfg->config_opt.SENSE_ConfigFile.empty() and cfg->invoke_opt.SENSE_WSD_which==NO_WSD)
+    cfg->config_opt.SENSE_ConfigFile = L"";
+  if (not cfg->config_opt.UKB_ConfigFile.empty() and cfg->invoke_opt.SENSE_WSD_which!=UKB)
+    cfg->config_opt.UKB_ConfigFile = L"";
   
   if (cfg->OutputFormat == OUT_NAF and cfg->InputMode != MODE_DOC) {
     cfg->InputMode = MODE_DOC;
     wcerr << L"Input mode switched to 'doc' since NAF output format was requested." << endl;
   }
   
-  if (cfg->analyzer_invoke_options.OutputLevel>=COREF and cfg->InputMode != MODE_DOC) {
+  if (cfg->invoke_opt.OutputLevel>=COREF and cfg->InputMode != MODE_DOC) {
     cfg->InputMode = MODE_DOC;
     wcerr << L"Input mode switched to 'doc' since coreference or semantic graph was requested."<<endl;
   }
   
-  if (cfg->analyzer_invoke_options.InputLevel > cfg->analyzer_invoke_options.OutputLevel) {
+  if (cfg->invoke_opt.InputLevel > cfg->invoke_opt.OutputLevel) {
     wcerr<<L"Error - Input analysis level can not be more complex than desired output analysis level."<<endl;
     exit(1);
   }
-  if (cfg->analyzer_invoke_options.InputLevel == cfg->analyzer_invoke_options.OutputLevel) 
+  if (cfg->invoke_opt.InputLevel == cfg->invoke_opt.OutputLevel) 
     wcerr<<L"Warning - Input and output analysis levels are the same."<<endl;
 
   if (cfg->InputFormat==INP_FREELING and 
-      (cfg->analyzer_invoke_options.InputLevel < SPLITTED or
-       cfg->analyzer_invoke_options.InputLevel > SENSES)) {
+      (cfg->invoke_opt.InputLevel < SPLITTED or
+       cfg->invoke_opt.InputLevel > SENSES)) {
     wcerr<<L"Error - 'freeling' input format only accepts input analysis levels 'splitted', 'morfo', 'tagged', and 'senses'."<<endl;
     exit(1);
   }
-  if (cfg->InputFormat==INP_CONLL and cfg->analyzer_invoke_options.InputLevel < TAGGED) {
+  if (cfg->InputFormat==INP_CONLL and cfg->invoke_opt.InputLevel < TAGGED) {
     wcerr<<L"Error - 'conll' input format only accepts input analysis levels >= tagged."<<endl;
     exit(1);
   }
-  if (cfg->InputFormat==INP_TEXT and cfg->analyzer_invoke_options.InputLevel!=TEXT) {
+  if (cfg->InputFormat==INP_TEXT and cfg->invoke_opt.InputLevel!=TEXT) {
     wcerr<<L"Error - 'text' input format only accepts input analysis level 'text'."<<endl;
     exit(1);
   }
-  
+
+
   return cfg; 
 }
 
@@ -571,7 +579,7 @@ int main (int argc, char **argv) {
    
   // read configuration file and command-line options
   config *cfg = load_config(argc,argv);
- 
+  
   /// set the locale to UTF to properly handle special characters.
   util::init_locale(cfg->Locale);
 
@@ -582,11 +590,11 @@ int main (int argc, char **argv) {
   // create lang ident or analyzer, depending on requested output
   lang_ident *ident=NULL;
   analyzer *anlz=NULL;
-  if (cfg->analyzer_invoke_options.OutputLevel == IDENT) 
+  if (cfg->LangIdent) 
     ident = new lang_ident(cfg->IDENT_identFile);
   else {
-    anlz = new analyzer(cfg->analyzer_config_options);
-    anlz->set_current_invoke_options(cfg->analyzer_invoke_options);
+    anlz = new analyzer(cfg->config_opt);
+    anlz->set_current_invoke_options(cfg->invoke_opt);
   }
 
 
@@ -608,9 +616,11 @@ int main (int argc, char **argv) {
     // ---------------------------------------------------------------
     // if language identification requested, do not enter analysis loop, 
     // just identify language for each line.
-    if (cfg->analyzer_invoke_options.OutputLevel == IDENT) {
+    if (cfg->LangIdent) {
       wstring text;
       while (ReadLine(text)) {
+        // if it is a command, process it and go for next line
+        if (CheckStatsCommands(text,*stats)) continue;
         // call the analyzer to identify language
         OutputString (ident->identify_language(text)+L"\n");
       }

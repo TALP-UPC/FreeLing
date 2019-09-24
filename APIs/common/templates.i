@@ -11,7 +11,9 @@
 %include std_pair.i
 #ifndef FL_API_JAVA
 #ifndef FL_API_PHP
+#ifndef FL_API_PERL
 %include std_set.i
+#endif
 #endif
 #endif
 
@@ -48,9 +50,13 @@
 
 #ifndef FL_API_JAVA
 #ifndef FL_API_PHP
+#ifndef FL_API_PERL
 %template(VectorSetString) std::vector<std::set<std::wstring> >;
 %template(VectorSetInt) std::vector<std::set<int> >;
+#ifndef FL_API_RUBY
 %template(SetString) std::set<std::wstring>;
+#endif
+#endif
 #endif
 #endif
 

@@ -26,7 +26,7 @@ endif()
 
 # Threaded analyzer
 add_executable(threaded_analyzer sample_analyzer/threaded_analyzer.cc sample_analyzer/config.h)
-target_link_libraries(threaded_analyzer freeling)
+target_link_libraries(threaded_analyzer freeling pthread)
 
 
 # Install targets

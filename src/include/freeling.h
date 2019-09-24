@@ -38,6 +38,7 @@
 #include "freeling/morfo/splitter.h"
 #include "freeling/morfo/maco.h"
 #include "freeling/morfo/nec.h"
+#include "freeling/morfo/crf_nerc.h"
 #include "freeling/morfo/phonetics.h"
 #include "freeling/morfo/alternatives.h"
 #include "freeling/morfo/senses.h"
@@ -48,6 +49,8 @@
 #include "freeling/morfo/chart_parser.h"
 #include "freeling/morfo/dep_txala.h"
 #include "freeling/morfo/dep_treeler.h"
+#include "freeling/morfo/dep_lstm.h"
+#include "freeling/morfo/srl_treeler.h"
 #include "freeling/morfo/relaxcor.h"
 #include "freeling/morfo/semgraph_extract.h"
 

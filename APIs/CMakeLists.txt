@@ -3,6 +3,7 @@ find_package(SWIG REQUIRED)
 include(${SWIG_USE_FILE})
 
 include_directories(${PROJECT_SOURCE_DIR}/src/include)
+include_directories(${PROJECT_SOURCE_DIR}/src/libdynet)
 
 include_directories(${Boost_INCLUDE_DIRS})
 include_directories(${ICU_INCLUDE_DIRS})
@@ -34,4 +35,8 @@ endif()
 
 if(JAVA_API)
   add_subdirectory(java)
+endif()
+
+if(PERL_API)
+  add_subdirectory(perl)
 endif()

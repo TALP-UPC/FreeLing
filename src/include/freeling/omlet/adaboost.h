@@ -77,6 +77,8 @@ namespace freeling {
     /// constructors, destructor and access methods
     adaboost(int nl, std::wstring t);
     adaboost(const std::wstring &file, const std::wstring &codes);
+    virtual ~adaboost();
+
     int n_rules() const;
 
     /// classification methods. 

@@ -520,7 +520,7 @@ namespace freeling {
   /// Generic preincrement, for all cases
   word::iterator& word::iterator::operator++() {
     do {
-      this->list<analysis>::iterator::operator++();
+      this->std::list<analysis>::iterator::operator++();
     } while (type!=ALL and (*this)!=iend and (*this)->is_selected(kbest)!=(type==SELECTED) );
     return (*this);
   }
@@ -561,7 +561,7 @@ namespace freeling {
   /// Generic preincrement, for all cases
   word::const_iterator& word::const_iterator::operator++() {
     do {
-      this->list<analysis>::const_iterator::operator++();
+      this->std::list<analysis>::const_iterator::operator++();
     } while (type!=ALL and (*this)!=iend and (*this)->is_selected(kbest)!=(type==SELECTED) );  
     return (*this);
   }
@@ -836,6 +836,7 @@ namespace freeling {
   depnode::depnode(const wstring & s) : node(s),link(NULL) {}
   depnode::depnode(const node & n) : node(n),link(NULL) {}
   void depnode::set_link(const parse_tree::iterator p) {link=p;}
+  bool depnode::has_link() const {return (link!=parse_tree::iterator((parse_tree*)NULL));}
   parse_tree::iterator depnode::get_link() { return link;}
   parse_tree::const_iterator depnode::get_link() const { return link;}
   /// tree<node>& depnode::get_link_ref() { return (link);}  ///  (useful for Java API)
@@ -889,14 +890,13 @@ namespace freeling {
 
     wcerr << wstring (depth*2, ' ');
 
-    parse_tree::const_iterator pn = n->get_link();
-    wcerr<<pn->get_label(); 
-    wcerr<<L"/" << n->get_label() << L"/";
+    if (n->has_link()) wcerr << n->get_link()->get_label() << L"/" ; 
+    wcerr << n->get_label() << L"/";
 
     const word & w = n->get_word();
     wcerr << L"(" << w.get_form() << L" " << w.get_lemma() << L" " << w.get_tag () << L")";
   
-    if (n.num_children () > 0) {
+    if (n.num_children() > 0) {
       wcerr << L" [" << endl;
     
       // Print Nodes
@@ -1546,11 +1546,11 @@ namespace freeling {
 	  ptree = new_ptree;
 	}
 	// if the last word is before the one in p2, we try the new pointers
-	else if (w_end_pos <  ps2->get_position()) 
+	else if (w_end_pos <  ps2->get_position()) {
 	  ps_res = new_ps_res;
 	  ptree = new_ptree;
 	  set_iterators(ps1, ps2, parse, ps_res, ptree);
-   
+        }   
 	// if the last word is after ps2, ptree and ps_res are the input ones.
       }
     }
