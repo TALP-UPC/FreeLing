@@ -40,7 +40,7 @@ version.cc util.cc regexp.cc traces.cc language.cc configfile.cc analyzer.cc tok
 )
 
 add_library(freeling ${freeling_SRCS})
-target_link_libraries(freeling foma treeler ${Boost_LIBRARIES} ${ICU_UC_LIBRARY})
+target_link_libraries(freeling foma treeler ${Boost_LIBRARIES} ${ICU_UC_LIBRARY} ${ICU_I18N_LIBRARY})
 
 install(TARGETS freeling
         RUNTIME DESTINATION bin
