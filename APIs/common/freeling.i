@@ -1242,8 +1242,8 @@ typedef enum {CFG_OK, CFG_WARNING, CFG_ERROR} CFG_status;
  };
  
  
- ///%nestedworkaround analyzer_config::config_options;
- ///%nestedworkaround analyzer_config::invoke_options;
+ //%nestedworkaround analyzer_config::config_options;
+ //%nestedworkaround analyzer_config::invoke_options;
 %{
   namespace freeling {
    typedef freeling::analyzer_config::config_options config_options;
@@ -1268,7 +1268,7 @@ class analyzer {
 
  public:
    analyzer(const freeling::config_options &cfg);
-   void set_current_invoke_options(const freeling::analyzer_config::invoke_options &opt);
+   void set_current_invoke_options(const freeling::invoke_options &opt);
    const invoke_options& get_current_invoke_options() const;
 
    ~analyzer();
