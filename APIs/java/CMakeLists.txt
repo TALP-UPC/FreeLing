@@ -13,7 +13,7 @@ SWIG_ADD_LIBRARY(Jfreeling TYPE SHARED LANGUAGE java SOURCES freeling_javaAPI.i)
 SWIG_LINK_LIBRARIES(Jfreeling freeling)
 
 ADD_CUSTOM_COMMAND(TARGET Jfreeling POST_BUILD
-    COMMAND "${Java_JAVAC_EXECUTABLE}" ${CMAKE_CURRENT_BINARY_DIR}/edu/upc/Jfreeling/*.java
+    COMMAND "${Java_JAVAC_EXECUTABLE}" -source 1.8 -target 1.8 ${CMAKE_CURRENT_BINARY_DIR}/edu/upc/Jfreeling/*.java
     COMMAND "${Java_JAR_EXECUTABLE}" -cf Jfreeling.jar edu/upc/Jfreeling/*.class
  )
 
