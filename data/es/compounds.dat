@@ -3,6 +3,11 @@
 yes
 </UnknownWordsOnly>
 
+<MinimumLength>
+## discard compounds with elements shorter than 2 characters (e.g. proble -> p_roble)
+2
+</MinimumLength>
+
 <JoinChars>
 ## list of chars that may join compound elements (one char per line)
 -

@@ -56,10 +56,11 @@ namespace freeling {
 
   compounds::compounds(const wstring &CompFile, const dictionary &d) : dic(d) {
 
-    enum sections {UNK_ONLY, JOIN_CHARS, PATTERNS};
+    enum sections {UNK_ONLY, MIN_LENGTH, JOIN_CHARS, PATTERNS};
     config_file cfg(true);
     cfg.add_section(L"UnknownWordsOnly",UNK_ONLY);
     cfg.add_section(L"JoinChars",JOIN_CHARS);
+    cfg.add_section(L"MinimumLength",MIN_LENGTH);
     cfg.add_section(L"CompoundPatterns",PATTERNS);
 
     if (not cfg.open(CompFile)) {
@@ -68,6 +69,7 @@ namespace freeling {
 
     // default value
     unknown_only = true;
+    minimum_length = 2;
     list<wstring> joins;
     
     wstring line; 
@@ -78,6 +80,13 @@ namespace freeling {
 
       case UNK_ONLY: {
         unknown_only = (line==L"yes");
+        break;
+      }
+
+      case MIN_LENGTH: {
+        wistringstream sin;
+        sin.str(line);
+        sin >> minimum_length;
         break;
       }
 
@@ -120,7 +129,7 @@ namespace freeling {
         }
 
         if (head>=0 or has_tag) {
-          TRACE(3,L"Adding pattern "+util::list2wstring(p,L"_")+L" "+util::int2wstring(head)+L" ("+tag+L")");
+          TRACE(3,L"Adding pattern "<<util::list2wstring(p,L"_")<<L" "<<head<<L" ("<<tag<<L")");
           patterns.push_back(pattern(util::list2wstring(p,L"_"),head,tag));
         }
         break;
@@ -159,7 +168,7 @@ namespace freeling {
 
   bool compounds::check_compound(word &w) const {
 
-    TRACE(2,L"Checking compound for "+w.get_lc_form());
+    TRACE(2,L"Checking compound for "<<w.get_lc_form());
     // see if word needs checking
     if (unknown_only and w.get_n_analysis()>0) return false;
 
@@ -177,14 +186,23 @@ namespace freeling {
     list<alternative>::iterator d = comps.begin();
     int cost = d->get_distance();
     while (d != comps.end() and cost == d->get_distance()) {
-      TRACE(3,L"Processing splitting "+d->get_form());
+      TRACE(3,L"Processing splitting " << d->get_form());
       // see if decomposition matches any valid pattern
       list<wstring> dec = util::wstring2list(d->get_form(),L"_");
+
+      bool all_ok = true;
       list<word> wds;
-      for (list<wstring>::iterator s=dec.begin(); s!=dec.end(); s++) {
-        word t(*s);
-        dic.annotate_word(t);
-        wds.push_back(t);
+      for (list<wstring>::iterator s=dec.begin(); s!=dec.end() and all_ok; s++) {        
+        if (s->length() < minimum_length)
+          all_ok = false;  // too short word in the decomposition, ignore this splitting
+        else {
+          word t(*s);
+          dic.annotate_word(t);
+          wds.push_back(t);
+        }
+      }
+      if (not all_ok) {
+        TRACE(3,L"Ignoring splitting "<< d->get_form() << " because of too short components.");
       }
 
       TRACE(3,L"Splitting annotated");
@@ -194,7 +212,7 @@ namespace freeling {
       set<wstring> seen;
       for (list<pattern>::const_iterator p=patterns.begin(); p!=patterns.end(); p++) {
 
-        TRACE(4,L"Matching splitting against pattern "+p->patr+L" "+util::int2wstring(p->head)+L" "+p->tag);
+        TRACE(4,L"Matching splitting against pattern "<<p->patr<<L" "<<p->head<<L" "<<p->tag);
         // for each word in the compound, build compound lemma and tag, 
         // as long as the pattern is satisfied.
         wstring lemma, tag;
@@ -211,7 +229,7 @@ namespace freeling {
         bool good=true;
         while (t != tags.end()) {
           // find analysis with tag matching the pattern
-          TRACE(5,L"  check tag "+(*t));
+          TRACE(5,L"  check tag "<<(*t));
           word::iterator a = wd->begin();
           while (a!=wd->end() and a->get_tag().find(*t)!=0) a++;
           if (a==wd->end()) {

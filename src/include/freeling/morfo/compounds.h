@@ -62,6 +62,8 @@ namespace freeling {
 
        /// whether only unknown words (vs all words) are checked for compounds
        bool unknown_only;
+       /// minimum size of compound elements to be accepted (to avoid cases such as proble -> p_roble)
+       int minimum_length;
        /// list of valid compound patterns (e.g. NC_NC, NC_SP_NC, etc),
        /// with head position for each. 
        std::list<pattern > patterns;
