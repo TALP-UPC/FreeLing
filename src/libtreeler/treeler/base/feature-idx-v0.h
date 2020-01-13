@@ -68,11 +68,11 @@ namespace treeler {
   public:
     inline size_t operator()(const FeatureIdx& t) const {
       /* grab low-order bits */
-      auto uint32_t a = (uint32_t)(t & 0xffffffff);
+      uint32_t a = (uint32_t)(t & 0xffffffff);
       /* grab high-order bits */
-      auto uint32_t b = (uint32_t)((t >> 32) & 0xffffffff);
+      uint32_t b = (uint32_t)((t >> 32) & 0xffffffff);
       /* nothing to grab */
-      auto uint32_t c = 0;
+      uint32_t c = 0;
 
 #define rot(x, k) ((x << k) | (x >> (32 - k)))
 
