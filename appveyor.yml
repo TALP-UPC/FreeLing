@@ -12,8 +12,9 @@ install:
 before_build:
     - conan profile new --detect default
     - conan profile show default
-    - conan install ../.ci/conanfile.txt -s build_type=Release
 
 build_script:
+    - mkdir build && cd build
+    - conan install ../.ci/conanfile.txt -s build_type=Release
     - cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_MODULE_PATH=$(pwd)
     - cmake --build .
