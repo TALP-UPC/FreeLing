@@ -10,9 +10,8 @@ if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
 endif()
 
 project(FreeLing)
-set(PACKAGE_NAME "FreeLing") 
 set(VERSION "4.1") 
-set(PACKAGE_STRING "\"${PACKAGE_NAME} ${VERSION}\"")
+set(PACKAGE_STRING "\"${CMAKE_PROJECT_NAME} ${VERSION}\"")
 set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib") # Needed to find libraries if not installed in system path
 
 # Add compiler definitions
@@ -28,10 +27,9 @@ option(TRACES "Enable traces" OFF)
 option(WARNINGS "Enable warnings" ON)
 option(XPRESSIVE "Xpressive regex" OFF)
 option(JAVA_API "Build Java API" OFF)
-option(JAVA_API "Build Java API" OFF)
 option(PERL_API "Build Perl API" OFF)
 option(PYTHON2_API "Build Python 2.7 API" OFF)
-option(PERL_API "Build Perl API" OFF)
+option(PYTHON3_API "Build Python 3 API" OFF)
 
 # Check for dependencies -- ZLIB
 find_package(ZLIB REQUIRED)
@@ -63,11 +61,11 @@ endif()
 install(DIRECTORY data/
         DESTINATION share/freeling
         PATTERN "dictionary" EXCLUDE
-	PATTERN "parameters.*.gz.*" EXCLUDE
-	PATTERN "model*.gz.*" EXCLUDE
-	PATTERN "*embeddings*.gz.*" EXCLUDE
-	PATTERN "model*.crf.*" EXCLUDE
-	PATTERN "Makefile*" EXCLUDE)
+	      PATTERN "parameters.*.gz.*" EXCLUDE
+        PATTERN "model*.gz.*" EXCLUDE
+        PATTERN "*embeddings*.gz.*" EXCLUDE
+        PATTERN "model*.crf.*" EXCLUDE
+        PATTERN "Makefile*" EXCLUDE)
 
 #### Data installation hooks
 SET(languages "as;ca;cs;cy;de;en;es;fr;gl;hr;it;nb;pt;ru;sl")
