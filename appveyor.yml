@@ -1,4 +1,4 @@
-image: Visual Studio 2019
+image: Visual Studio 2017
 
 install:
     - C:\Python38-x64\python --version
@@ -11,5 +11,6 @@ before_build:
 build_script:
     - mkdir build && cd build
     - conan install ../.ci/conanfile.txt -s build_type=Release
+    - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
     - cmake .. -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_MODULE_PATH=%cd:\=/%
     - nmake install
