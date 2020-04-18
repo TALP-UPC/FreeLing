@@ -11,5 +11,5 @@ before_build:
 build_script:
     - mkdir build && cd build
     - conan install ../.ci/conanfile.txt -s build_type=Release
-    - cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_MODULE_PATH=%cd%
+    - cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_MODULE_PATH=%cd:\=/%
     - cmake --build .
