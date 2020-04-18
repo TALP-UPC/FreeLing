@@ -14,7 +14,7 @@ compiler:
 install:
     # Use Conan to install dependencies
     - pip3 install conan --user
-    - conan profile show defalt
+    - conan profile show default
 
 script: 
     - mkdir _build && cd _build
