@@ -2,8 +2,12 @@ image: Visual Studio 2019
 
 install:
     - python --version
+    - python3 --version
     # batch commands start from cmd:
     - pip install conan
+    - pip3 install -U pip virtualenv
+    - virtualenv -p python3 ~/venv
+    - source ~/venv/bin/activate
 
 before_build:
     - conan profile new --detect default
