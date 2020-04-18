@@ -207,9 +207,6 @@ set(dynet_gpu_SRCS
     gpu-ops.cu)
 
 file(GLOB TEST_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} tests/*.cc)
-if (NOT MSVC)
-  set(BUILD_SHARED_LIBS ON)
-endif()
 
 #foreach(test_src ${TEST_SRCS})
   #Extract the filename without an extension (NAME_WE)
@@ -219,7 +216,7 @@ endif()
 #  add_executable(${testName} ${test_src})
 
   #link to Boost libraries AND your targets and dependencies
-#  target_link_libraries(${testName} dynet ${LIBS})
+#  target_link_libraries(${testName} dynet Boost::Boost)
 
 #  set_target_properties(${testName} PROPERTIES
 #      RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests.bin)
@@ -292,11 +289,11 @@ if(WITH_CUDA_BACKEND)
     target_compile_definitions(dynet PRIVATE HAVE_CUDNN)
   endif()
   cuda_add_cublas_to_target(dynet)
-  target_link_libraries(dynet ${LIBS})
+  target_link_libraries(dynet Boost::Boost)
 else()
   # Build cpu library
   add_library(dynet ${dynet_library_SRCS} ${dynet_library_HDRS})
-  target_link_libraries(dynet ${LIBS})
+  target_link_libraries(dynet Boost::Boost)
 endif(WITH_CUDA_BACKEND)
 
 install(FILES ${dynet_library_HDRS} DESTINATION include/dynet)

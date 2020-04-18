@@ -1,6 +1,7 @@
 [requires]
 boost/1.72.0
 icu/64.2
+eigen/3.3.7
 
 [options]
 boost:shared=True
