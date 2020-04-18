@@ -1,0 +1,15 @@
+image: Visual Studio 2019
+
+install:
+    - python --version
+    # batch commands start from cmd:
+    - pip install conan
+
+before_build:
+    - conan profile new --detect default
+    - conan profile show default
+    - conan install ../.ci/conanfile.txt -s build_type=Release
+
+build_script:
+    - cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_MODULE_PATH=$(pwd)
+    - cmake --build .
