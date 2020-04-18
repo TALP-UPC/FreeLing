@@ -1,15 +1,21 @@
 language: cpp
 
+addons:
+    apt:
+      packages:
+        - "python3"
+        - "python3-pip"
+        
 compiler:
     - clang
     - gcc
 
 install:
-    - python3 --version
-    - pip3 --version
+    # Use Conan to install dependencies
     - pip3 install conan --user
     - conan profile show defalt
-    - conan install boost/1.72.0@ -s build_type=Release -o boost:shared=True
+    - conan install icu/64.2@ -g cmake_find_package -s build_type=Release -o boost:shared=True
+    - conan install boost/1.72.0@ -g cmake_find_package -s build_type=Release -o boost:shared=True
 
 script: 
     - mkdir _build && cd _build
