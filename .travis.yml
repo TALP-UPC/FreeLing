@@ -22,9 +22,14 @@ matrix:
           osx_image: xcode11.3
     
 
+before_install:
+    - pip3 install -U pip virtualenv
+    - virtualenv -p python3 ~/venv
+    - source ~/venv/bin/activate
+
 install:
     # Use Conan to install dependencies
-    - pip3 install -U pip conan --user
+    - pip3 install -U conan
     - conan profile new --detect default
 
 script: 
