@@ -5,10 +5,9 @@ compiler:
     - gcc
 
 install:
-    - python --version
     - python3 --version
-    - pip --version
-    - pip install conan
+    - pip3 --version
+    - pip3 install conan --user
     - conan profile show defalt
     - conan install boost/1.72.0@ -s build_type=Release -o boost:shared=True
 
