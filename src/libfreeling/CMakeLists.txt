@@ -1,11 +1,4 @@
 
-include_directories(${Boost_INCLUDE_DIRS})
-include_directories(${ICU_INCLUDE_DIRS})
-include_directories(${ZLIB_INCLUDE_DIRS})
-
-link_directories(${Boost_LIBRARY_DIRS})
-link_directories(${ICU_LIBRARY_DIRS})
-
 if (WIN32)
    # compiler definitions for windows
    add_definitions(-DFL_EXPORTS=1 -D_CRT_SECURE_NO_WARNINGS=1 -D_CRT_NONSTDC_NO_DEPRECATE=1 -DNOMINMAX -DNDEBUG=1 -D_WINDOWS=1 -D_USRDLL=1 -DLIBFREELING_EXPORTS=1 -DWIN32=1)
@@ -39,7 +32,7 @@ version.cc util.cc regexp.cc traces.cc language.cc configfile.cc analyzer.cc ana
 )
 
 add_library(freeling ${freeling_SRCS})
-target_link_libraries(freeling foma treeler dynet crfsuite ${Boost_LIBRARIES} ${ICU_UC_LIBRARY} ${ICU_I18N_LIBRARY})
+target_link_libraries(freeling foma treeler dynet crfsuite Boost::Boost ICU::ICU)
 
 install(TARGETS freeling
         RUNTIME DESTINATION bin
