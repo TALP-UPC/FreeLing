@@ -1,10 +1,17 @@
 language: cpp
 
 compiler:
-  - clang
-  - gcc
+    - clang
+    - gcc
+
+install:
+    - python --version
+    - pip --version
+    - pip install conan
+    - conan profile show defalt
+    - conan install boost/1.72.0@ -s build_type=Release -o boost:shared=True
 
 script: 
-  - mkdir _build && cd _build
-  - cmake .. -DCMAKE_BUILD_TYPE=Release
-  - cmake --build .
+    - mkdir _build && cd _build
+    - cmake .. -DCMAKE_BUILD_TYPE=Release
+    - cmake --build .
