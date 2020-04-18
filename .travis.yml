@@ -15,10 +15,9 @@ install:
     # Use Conan to install dependencies
     - pip3 install conan --user
     - conan profile show defalt
-    - conan install icu/64.2@ -g cmake_find_package -s build_type=Release -o boost:shared=True
-    - conan install boost/1.72.0@ -g cmake_find_package -s build_type=Release -o boost:shared=True
 
 script: 
     - mkdir _build && cd _build
+    - conan install ../.ci/conanfile.txt -s build_type=Release
     - cmake .. -DCMAKE_BUILD_TYPE=Release
     - cmake --build .

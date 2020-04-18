@@ -1,0 +1,9 @@
+[requires]
+boost/1.72.0
+icu/64.2
+
+[options]
+boost:shared=True
+
+[generators]
+cmake_find_package
