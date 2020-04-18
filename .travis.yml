@@ -6,6 +6,7 @@ compiler:
 
 install:
     - python --version
+    - python3 --version
     - pip --version
     - pip install conan
     - conan profile show defalt
