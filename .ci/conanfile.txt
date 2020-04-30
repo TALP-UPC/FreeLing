@@ -5,6 +5,7 @@ eigen/3.3.7
 
 [options]
 boost:shared=True
+boost:i18n_backend=icu
 
 [generators]
 cmake_find_package
