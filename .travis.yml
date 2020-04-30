@@ -37,6 +37,6 @@ install:
 
 script: 
     - mkdir build && cd build
-    - travis_wait conan install ../.ci/conanfile.txt -s compiler.cppstd=11 -s build_type=Release --build missing > build.log
+    - travis_wait sh -c 'conan install ../.ci/conanfile.txt -s compiler.cppstd=11 -s build_type=Release --build missing > build.log'
     - cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_MODULE_PATH=$(pwd)
     - cmake --build .
