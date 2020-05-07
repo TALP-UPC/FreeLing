@@ -2459,13 +2459,13 @@ Z 443
 Zm 53
 </SingleTagFreq>
 <ClassTagFreq>
--AQ-DT  0 AQ 0 DT 3
--CC-SP  0 CC 0 SP 9
--DT-RV  0 DT 0 RV 5
--NC-Z  0 NC 0 Z 3
--VMI-Z  0 VMI 0 Z 4
-5.-AQ-NC-Z-te 5. 0 AQ 2 NC 0 Z 0 te 0
-7.-CC-CS-GI-da-na 7. 0 CC 38 CS 9 GI 0 da 0 na 0
+AQ-DT AQ 0 DT 3
+CC-SP CC 0 SP 9
+DT-RV DT 0 RV 5
+NC-Z NC 0 Z 3
+VMI-Z VMI 0 Z 4
+AQ-NC-Z AQ 2 NC 0 Z 0
+CC-CS-GI CC 38 CS 9 GI 0
 AQ-CS-SP AQ 0 CS 0 SP 27
 AQ-DA-Fz-NC-PP-RG-SP AQ 0 DA 0 Fz 0 NC 0 PP 0 RG 3 SP 0
 AQ-JJ-NN-VB AQ 8 JJ 0 NN 0 VB 0
@@ -2615,7 +2615,7 @@ adfer VMI-VMN VMI 0 VMN 2
 adfywio VMN-VMS VMN 2 VMS 0
 adrodd VMI-VMN VMI 0 VMN 3
 afael_ar JJ-NN-RB-VB-VMN JJ 0 NN 0 RB 0 VB 0 VMN 2
-ag -CC-SP  0 CC 0 SP 9
+ag CC-SP CC 0 SP 9
 agor VMI-VMN VMI 0 VMN 14
 aled JJ-NP-VB JJ 0 NP 3 VB 0
 all VAM-al VAM 2 al 0
@@ -2750,7 +2750,7 @@ ddamwain NC-VMN NC 32 VMN 0
 ddangos VMI-VMN VMI 0 VMN 9
 ddatganoli VMI-VMN VMI 0 VMN 2
 ddefnyddio VMN-VMS VMN 20 VMS 0
-ddeg -NC-Z  0 NC 0 Z 3
+ddeg NC-Z NC 0 Z 3
 ddelio VMN-VMS VMN 2 VMS 0
 dderbyn VMI-VMM-VMN VMI 0 VMM 0 VMN 2
 ddewis NC-VMI-VMN NC 0 VMI 0 VMN 2
@@ -2777,7 +2777,7 @@ de NC-VSI NC 13 VSI 0
 deall VMI-VMN VMI 0 VMN 20
 defnydd NC-VMM NC 0 VMM 1
 defnyddio VMN-VMS VMN 22 VMS 0
-deg 5.-AQ-NC-Z-te 5. 0 AQ 2 NC 0 Z 0 te 0
+deg AQ-NC-Z AQ 2 NC 0 Z 0
 deillio VMN-VMS VMN 3 VMS 0
 deithio VMN-VMS VMN 3 VMS 0
 democratiaid_rhyddfrydol NN-NP NN 0 NP 11
@@ -3032,9 +3032,9 @@ ms_jones NN-NP NN 0 NP 5
 ms_randerson NN-NP NN 0 NP 6
 murphy NN-NP NN 0 NP 3
 mynd_i'r_afael NN-VMN NN 0 VMN 2
-na 7.-CC-CS-GI-da-na 7. 0 CC 38 CS 9 GI 0 da 0 na 0
+na CC-CS-GI CC 38 CS 9 GI 0
 nadolig JJ-NC-NN JJ 0 NC 7 NN 0
-naw -VMI-Z  0 VMI 0 Z 4
+naw VMI-Z VMI 0 Z 4
 neil NN-NP-VB NN 0 NP 3 VB 0
 nesa VMI-VMM VMI 0 VMM 2
 nesaf AQ-VMI AQ 13 VMI 0
@@ -3114,7 +3114,7 @@ rspca NN-NP NN 0 NP 1
 russell NN-NP NN 0 NP 1
 saesneg AQ-NN-VB AQ 4 NN 0 VB 0
 san_steffan NN-NP NN 0 NP 10
-sawl -AQ-DT  0 AQ 0 DT 3
+sawl AQ-DT AQ 0 DT 3
 siarad VMI-VMN VMI 0 VMN 2
 simon NN-NP NN 0 NP 1
 siomi VMI-VMN VMI 0 VMN 2
@@ -3123,7 +3123,7 @@ sir_benfro NN-NP-RB NN 0 NP 3 RB 0
 sir_ddinbych JJ-NN-NP-RB-VB JJ 0 NN 0 NP 2 RB 0 VB 0
 sir_gaerhirfryn JJ-NN-NP JJ 0 NN 0 NP 2
 stuart NN-NP NN 0 NP 2
-sut -DT-RV  0 DT 0 RV 5
+sut DT-RV DT 0 RV 5
 swyddfa'r_post DA-Fz-NC-NP DA 0 Fz 0 NC 0 NP 9
 sy'n DP-JJ-NN-PR-RB-SP DP 0 JJ 0 NN 0 PR 69 RB 0 SP 0
 sylweddoli VMI-VMN VMI 0 VMN 2
