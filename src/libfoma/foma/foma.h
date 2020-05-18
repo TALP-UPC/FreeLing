@@ -25,8 +25,8 @@
 #define PROMPT_A 1    /* Apply prompt   */
 
 #ifdef MAIN_MODULE  
-struct defined_networks   *g_defines;
-struct defined_functions  *g_defines_f;
+struct defined_networks   *g_defines = 0;
+struct defined_functions  *g_defines_f = 0;
 #else
 extern struct defined_networks   *g_defines;
 extern struct defined_functions  *g_defines_f;
