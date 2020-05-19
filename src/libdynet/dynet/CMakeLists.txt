@@ -207,9 +207,6 @@ set(dynet_gpu_SRCS
     gpu-ops.cu)
 
 file(GLOB TEST_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} tests/*.cc)
-if (NOT MSVC)
-  set(BUILD_SHARED_LIBS ON)
-endif()
 
 #foreach(test_src ${TEST_SRCS})
   #Extract the filename without an extension (NAME_WE)
