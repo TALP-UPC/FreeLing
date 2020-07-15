@@ -660,19 +660,39 @@ namespace freeling {
           TRACE(2,L"Contraction found, replacing... "+pos->get_form()
                 +L". span=("+util::int2wstring(pos->get_span_start())
                 +L","+util::int2wstring(pos->get_span_finish())+L")");
-        
+
+          wstring worig = pos->get_form();
           int st=pos->get_span_start(); 
-          int fin=pos->get_span_finish(); 
-          int step=(fin-st+1)/lw.size(); 
+          int fin=pos->get_span_finish();
+
+          list<word>::iterator i = lw.begin();
+          int n = 0;
+          if (worig.find(i->get_form()) == 0) {
+            // first word is a prefix of the contraction, get its spans
+            i->set_span(st,st + i->get_form().length());
+            i->user=pos->user;          
+            i->set_analyzed_by(word::DICTIONARY);
+            TRACE(2,L"  Inserting "+i->get_form()+L". span=("+util::int2wstring(i->get_span_start())+L","+util::int2wstring(i->get_span_finish())+L")");
+            pos = se.insert(pos,*i); 
+            pos++;
+
+            // new start for next word
+            st = st + i->get_form().length();
+            // remove prefix from original word
+            worig = worig.substr(i->get_form().length());
+            // move to second word
+            ++i; ++n;
+          }
+          
+          // distribute length among (remaining) number of words, making sure it is not zero
+          int step=(fin-st)/(lw.size()-n); 
           step=max(1,step);
           int len=max(1,step-1);
         
-          unsigned int n;
-          list<word>::iterator i;
-          for (n=1,i=lw.begin(); i!=lw.end(); n++,i++) {
+          while ( i!=lw.end() ) {
             // span end for curent token. Make sure last token span 
             // matches original token
-            int f= (n==lw.size()? fin : st+len);
+            int f= (n==lw.size()-1 ? fin : st+step);
             // set span for current token.
             i->set_span(st,f);
             i->user=pos->user;
@@ -685,6 +705,9 @@ namespace freeling {
             st=st+step;
           
             contr=true;
+            
+            ++n;
+            ++i;
           }
         
           TRACE(2,L"  Erasing "+pos->get_form());
