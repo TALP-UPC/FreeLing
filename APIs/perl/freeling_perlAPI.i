@@ -33,7 +33,7 @@
 //
 ////////////////////////////////////////////////////////////////
 
-%module freeling
+%module plfreeling
 
 %{
  // avoid clashes between macros in perl.h and std::algorithm

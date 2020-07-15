@@ -1,19 +1,27 @@
 #! /usr/bin/perl
 
 use lib '.';
-use freeling;
+use plfreeling;
 use strict;
 
 ## Init library locale, to properly handle UTF8 characters.
-freeling::util::init_locale("default");
+plfreeling::util::init_locale("default");
+    
+my $FREELINGDIR;
+if ($ENV{'FREELINGDIR'} eq "") {
+    print "FREELINGDIR not defined, using /usr/local";
+    $FREELINGDIR = "/usr/local";
+}
+else {
+    $FREELINGDIR = $ENV{'FREELINGDIR'};
+}
 
 ## Modify this line to be your FreeLing installation directory
-my $FREELINGDIR = "/usr/local";
 my $DATA = $FREELINGDIR."/share/freeling/";
 my $LANG = "es";
 
 # create options set for maco analyzer. Default values are Ok, except for data files.
-my $op=new freeling::maco_options("es");
+my $op=new plfreeling::maco_options("es");
 $op->set_data_files( "", 
                    $DATA."common/punct.dat",
                    $DATA.$LANG."/dicc.src",
@@ -25,29 +33,29 @@ $op->set_data_files( "",
                    $DATA.$LANG."/probabilitats.dat");
 
 # uncomment to trace FreeLing (if it was compiled with --enable-traces)
-#$freeling::traces::TraceLevel=4;
-#$freeling::traces::TraceModule=0xFFFF;
+#$plfreeling::traces::TraceLevel=4;
+#$plfreeling::traces::TraceModule=0xFFFF;
 
 # create analyzers
-my $tk=new freeling::tokenizer($DATA.$LANG."/tokenizer.dat");
-my $sp=new freeling::splitter($DATA.$LANG."/splitter.dat");
+my $tk=new plfreeling::tokenizer($DATA.$LANG."/tokenizer.dat");
+my $sp=new plfreeling::splitter($DATA.$LANG."/splitter.dat");
 my $sid=$sp->open_session();
-my $mf=new freeling::maco($op);
+my $mf=new plfreeling::maco($op);
 $mf->set_active_options(0, 1, 1, 1,   # select which among created 
                         1, 1, 0, 1,   # submodules are to be used. 
                         1, 1, 1, 1);  # default: all created submodules 
                                       # are used
 
 ## exchange comments in two following lines to change the tagger type used
-my $tg=new freeling::hmm_tagger($DATA.$LANG."/tagger.dat",1,2);
-#my $tg=new freeling::relax_tagger($DATA."es/constr_gram.dat", 500,670.0,0.001, 1,2);
+my $tg=new plfreeling::hmm_tagger($DATA.$LANG."/tagger.dat",1,2);
+#my $tg=new plfreeling::relax_tagger($DATA."es/constr_gram.dat", 500,670.0,0.001, 1,2);
 
-my $nc=new freeling::nec($DATA.$LANG."/nerc/nec/nec-ab-poor1.dat");
+my $nc=new plfreeling::nec($DATA.$LANG."/nerc/nec/nec-ab-poor1.dat");
 
 # create chunker
-my $parser= new freeling::chart_parser($DATA.$LANG."/chunker/grammar-chunk.dat");
+my $parser= new plfreeling::chart_parser($DATA.$LANG."/chunker/grammar-chunk.dat");
 # create dependency parser
-my $dep=new freeling::dep_txala($DATA.$LANG."/dep_txala/dependences.dat", $parser->get_start_symbol());
+my $dep=new plfreeling::dep_txala($DATA.$LANG."/dep_txala/dependences.dat", $parser->get_start_symbol());
 
 ## read input text and analyze it.
 while (<STDIN>) {
