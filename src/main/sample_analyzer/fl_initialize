@@ -13,8 +13,14 @@ if [ "x$FREELINGSHARE" = "x" ]; then
   export FREELINGSHARE=$FREELING/share/freeling
 fi
 
-#--- Prepare libraries required to execute FreeLing
-export LD_LIBRARY_PATH=$FREELING/lib:$LD_LIBRARY_PATH
+#--- set paths to libraries required to execute FreeLing
+OS=`uname -s`
+if [ $OS == "Linux" ]; then 
+   export LD_LIBRARY_PATH=$FREELING/lib:$LD_LIBRARY_PATH
+else
+   # it is a Mac
+   export DYLD_LIBRARY_PATH=$FREELING/lib:$DYLD_LIBRARY_PATH
+fi
 
 #--- Pass all parameters to the executable, fixing the config file path if necessary
 i=1;  eval arg=\${$i}
