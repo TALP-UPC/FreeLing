@@ -8,7 +8,7 @@ endif()
 
 add_executable(treeler_bin ${treeler_main_SRC})
 target_include_directories(treeler_bin PRIVATE .)
-target_link_libraries(treeler_bin treeler ${ZLIB_LIBRARIES})
+target_link_libraries(treeler_bin treeler ZLIB::ZLIB)
 set_target_properties(treeler_bin PROPERTIES OUTPUT_NAME treeler)
 
 install(TARGETS treeler_bin

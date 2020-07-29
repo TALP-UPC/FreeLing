@@ -126,13 +126,6 @@ if(ENABLE_BOOST)
   set(Boost_REALPATH ON)
   find_package(Boost COMPONENTS program_options regex serialization iostreams REQUIRED)
   message("-- Boost dir is " ${Boost_INCLUDE_DIR})
-  include_directories(${Boost_INCLUDE_DIR})
-  if(MSVC)
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /LIBPATH:${Boost_LIBRARY_DIRS}")
-    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} /LIBPATH:${Boost_LIBRARY_DIRS}")
-  else()
-    set(LIBS ${LIBS} ${Boost_LIBRARIES})
-  endif()
 endif()
 
 if(BACKEND)
@@ -171,17 +164,10 @@ if (WITH_CUDA_BACKEND)
 endif()
 
 # look for Eigen
-if (DEFINED ENV{EIGEN3_INCLUDE_DIR} AND NOT DEFINED EIGEN3_INCLUDE_DIR) # use env variable if not set
-  set(EIGEN3_INCLUDE_DIR $ENV{EIGEN3_INCLUDE_DIR})
-endif()
-get_filename_component(EIGEN3_INCLUDE_DIR "${EIGEN3_INCLUDE_DIR}" REALPATH BASE_DIR "${CMAKE_BINARY_DIR}")
-set(EIGEN3_INCLUDE_DIR ${EIGEN3_INCLUDE_DIR} CACHE STRING "" FORCE)
-message("-- Eigen dir is " ${EIGEN3_INCLUDE_DIR})
 find_package(Eigen3 REQUIRED)
 include_directories(${EIGEN3_INCLUDE_DIR})
 
-FIND_PACKAGE(Threads REQUIRED)
-set(LIBS ${LIBS} ${CMAKE_THREAD_LIBS_INIT})
+find_package(Threads REQUIRED)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})

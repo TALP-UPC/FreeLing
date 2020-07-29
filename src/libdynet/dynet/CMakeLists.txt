@@ -289,11 +289,11 @@ if(WITH_CUDA_BACKEND)
     target_compile_definitions(dynet PRIVATE HAVE_CUDNN)
   endif()
   cuda_add_cublas_to_target(dynet)
-  target_link_libraries(dynet ${LIBS})
+  target_link_libraries(dynet ${Boost_LIBRARIES} Eigen3::Eigen3 Threads::Threads)
 else()
   # Build cpu library
   add_library(dynet ${dynet_library_SRCS} ${dynet_library_HDRS})
-  target_link_libraries(dynet ${LIBS})
+  target_link_libraries(dynet ${Boost_LIBRARIES} Eigen3::Eigen3 Threads::Threads)
 endif(WITH_CUDA_BACKEND)
 
 install(FILES ${dynet_library_HDRS} DESTINATION include/dynet)

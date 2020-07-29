@@ -1,6 +1,4 @@
 
-include_directories( ${ZLIB_INCLUDE_DIRS} )
-
 if (WIN32)
   add_definitions(-DFOMA_EXPORTS=1 -D_CRT_SECURE_NO_WARNINGS=1 -D_CRT_NONSTDC_NO_DEPRECATE=1 -DYY_NO_UNISTD_H=1 -DNDEBUG=1 -D_WINDOWS=1 -D_USRDLL=1 -DLIBFOMA_EXPORTS=1 -DWIN32=1)
 endif()
@@ -10,7 +8,7 @@ foma/apply.c foma/coaccessible.c foma/constructions.c foma/define.c foma/determi
 )
 
 add_library(foma ${sources})
-target_link_libraries(foma ${ZLIB_LIBRARIES})
+target_link_libraries(foma ZLIB::ZLIB)
 set_target_properties(foma PROPERTIES LINKER_LANGUAGE CXX)
 target_include_directories(foma PUBLIC .)
 
