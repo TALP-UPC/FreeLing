@@ -11,7 +11,7 @@ endif()
 
 project(FreeLing)
 set(PACKAGE_NAME "FreeLing") 
-set(VERSION "4.1") 
+set(VERSION "4.2") 
 set(PACKAGE_STRING "\"${PACKAGE_NAME} ${VERSION}\"")
 set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib") # Needed to find libraries if not installed in system path
 
@@ -37,10 +37,11 @@ option(PERL_API "Build Perl API" OFF)
 find_package(ZLIB REQUIRED)
 
 # Check for dependencies -- Boost
+#set(Boost_DEBUG ON)
 if(BUILD_TESTS)
-  find_package(Boost COMPONENTS regex filesystem thread program_options iostreams unit_test_framework REQUIRED)
+  find_package(Boost COMPONENTS regex filesystem thread program_options unit_test_framework REQUIRED)
 else()
-  find_package(Boost COMPONENTS regex filesystem thread program_options iostreams REQUIRED)
+  find_package(Boost COMPONENTS regex filesystem thread program_options REQUIRED)
 endif()
 
 # Check for dependencies -- ICU
@@ -75,37 +76,48 @@ SET(variants "es/es-old;es/es-ar;es/es-cl;ca/balear;ca/valencia")
 
 if (WIN32)
   # set library path for installation programs
-  install(CODE "set(ENV{PATH} \"${Boost_LIBRARY_DIRS};${ICU_INCLUDE_DIRS}/../bin64;${ZLIB_INCLUDE_DIRS}/../bin;${CMAKE_BINARY_DIR}/src/libfreeling;${CMAKE_BINARY_DIR}/src/libfoma;${CMAKE_BINARY_DIR}/src/libtreeler;\")")
+  install(CODE "set(ENV{PATH} \"${Boost_LIBRARY_DIRS};${ICU_INCLUDE_DIRS}/../bin64;${ZLIB_INCLUDE_DIRS}/../bin;${CMAKE_BINARY_DIR}/src/libfreeling;${CMAKE_BINARY_DIR}/src/libfoma;${CMAKE_BINARY_DIR}/src/libtreeler;${CMAKE_BINARY_DIR}/src/crfsuite;${CMAKE_BINARY_DIR}/src/libdynet/dynet;\")")
 endif()
 
 foreach (lg ${languages})
+  
   # build dictionary for each language
   if (EXISTS ${CMAKE_SOURCE_DIR}/data/${lg}/dictionary/header)
     install(CODE "message(STATUS \"Creating ${lg} dictionary...\")" )
     install(CODE "execute_process(COMMAND ${CMAKE_BINARY_DIR}/src/utilities/build-dict ${CMAKE_SOURCE_DIR}/data/${lg}/dictionary/header ${CMAKE_SOURCE_DIR}/data/${lg}/dictionary/entries  OUTPUT_FILE ${CMAKE_INSTALL_PREFIX}/share/freeling/${lg}/dicc.src RESULT_VARIABLE _res) " )
     # make sure installation helpers work.  If this one works, the others should too.
     install(CODE "If (NOT \${_res} EQUAL \"0\")
-                     message(FATAL_ERROR \"Error executing dictionary indexation program. Make sure compilation ended without errors, and that boost libraries can be found in the path.\")
+                     message(FATAL_ERROR \"Error '\${_res}' while executing dictionary indexation program. Make sure compilation ended without errors, and that boost libraries can be found in the path. \")
                   endif() ")
   endif()
   
-  # build phonetic dictionary
-  if (EXISTS ${CMAKE_SOURCE_DIR}/data/${lg}/alternatives-phon.dat)
-    install(CODE "message(STATUS \"-- Creating ${lg} phonetic dictionary...\")" )
-    install(CODE "execute_process(COMMAND ${CMAKE_BINARY_DIR}/src/utilities/dicc2phon ${CMAKE_INSTALL_PREFIX}/share/freeling/${lg}/dicc.src ${CMAKE_INSTALL_PREFIX}/share/freeling/${lg}/alternatives-phon.dat)" )
-  endif()
-
   foreach (variant ${variants})
     # for variants matching this language, build specific dictionary and multiwords file
     if (${variant} MATCHES "^${lg}/")
       install(CODE "message(STATUS \"-- Creating ${variant} dictionary...\")" )
       install(CODE "file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/share/freeling/${variant})")      
-      install(CODE "execute_process(COMMAND ${CMAKE_BINARY_DIR}/src/utilities/build-dict ${CMAKE_SOURCE_DIR}/data/${variant}/dictionary/header ${CMAKE_SOURCE_DIR}/data/${lg}/dictionary/entries ${CMAKE_SOURCE_DIR}/data/${variant}/dictionary/entries ${CMAKE_SOURCE_DIR}/data/${variant}/remove OUTPUT_FILE ${CMAKE_INSTALL_PREFIX}/share/freeling/${variant}/dicc.src)" )
+      install(CODE "execute_process(COMMAND ${CMAKE_BINARY_DIR}/src/utilities/build-dict ${CMAKE_SOURCE_DIR}/data/${variant}/dictionary/header ${CMAKE_SOURCE_DIR}/data/${lg}/dictionary/entries ${CMAKE_SOURCE_DIR}/data/${variant}/dictionary/entries ${CMAKE_SOURCE_DIR}/data/${variant}/remove OUTPUT_FILE ${CMAKE_INSTALL_PREFIX}/share/freeling/${variant}/dicc.src RESULT_VARIABLE _res)" )
+      install(CODE "If (NOT \${_res} EQUAL \"0\")
+                        message(FATAL_ERROR \"multiword fusion failed with error: \${_res}\")
+                    endif() ")
       if (EXISTS ${CMAKE_SOURCE_DIR}/data/${variant}/locucions.dat)
-	install(CODE "execute_process(COMMAND ${CMAKE_BINARY_DIR}/src/utilities/fusion-mw ${CMAKE_SOURCE_DIR}/data/${variant}/locucions.dat ${CMAKE_SOURCE_DIR}/data/${lg}/locucions.dat OUTPUT_FILE ${CMAKE_INSTALL_PREFIX}/share/freeling/${variant}/locucions.dat)" )
+        install(CODE "message(STATUS \"-- Merging ${variant} multiwords...\")" )
+	install(CODE "execute_process(COMMAND ${CMAKE_BINARY_DIR}/src/utilities/fusion-mw ${CMAKE_SOURCE_DIR}/data/${variant}/locucions.dat ${CMAKE_SOURCE_DIR}/data/${lg}/locucions.dat OUTPUT_FILE ${CMAKE_INSTALL_PREFIX}/share/freeling/${variant}/locucions.dat RESULT_VARIABLE _res)" )
+        install(CODE "If (NOT \${_res} EQUAL \"0\")
+                        message(FATAL_ERROR \"multiword fusion failed with error: \${_res}\")
+                      endif() ")
       endif()
     endif()
   endforeach()
+
+  # build phonetic dictionary if needed
+  if (EXISTS ${CMAKE_SOURCE_DIR}/data/${lg}/alternatives-phon.dat)
+    install(CODE "message(STATUS \"-- Creating ${lg} phonetic dictionary...\")" )
+    install(CODE "execute_process(COMMAND ${CMAKE_BINARY_DIR}/src/utilities/dicc2phon ${CMAKE_INSTALL_PREFIX}/share/freeling/${lg}/dicc.src ${CMAKE_INSTALL_PREFIX}/share/freeling/${lg}/alternatives-phon.dat RESULT_VARIABLE _res)" )
+    install(CODE "If (NOT \${_res} EQUAL \"0\")
+                      message(FATAL_ERROR \"creating phonetic dictionary failed with error: \${_res}\")
+                  endif() ")
+  endif()
 
   # if some model files are splitted due to GitHub 50M limitation, join them
   file(GLOB aafiles
@@ -119,7 +131,11 @@ foreach (lg ${languages})
   foreach (model ${aafiles})
     STRING(REGEX REPLACE ".aa\$" "" gzfile "${model}")
     STRING(REGEX REPLACE "${CMAKE_SOURCE_DIR}/data" "${CMAKE_INSTALL_PREFIX}/share/freeling" gzfile "${gzfile}")
-    install(CODE "execute_process(COMMAND ${CMAKE_BINARY_DIR}/src/utilities/gz-cat ${model} ${gzfile})")
+    install(CODE "message(STATUS \"-- Rebuilding data file ${gzfile}\")" )
+    install(CODE "execute_process(COMMAND ${CMAKE_BINARY_DIR}/src/utilities/gz-cat ${model} ${gzfile} RESULT_VARIABLE _res)")
+    install(CODE "If (NOT \${_res} EQUAL \"0\")
+                    message(FATAL_ERROR \"zcat failed with error: \${_res}\")
+                  endif() ")
   endforeach()    
   
 endforeach()

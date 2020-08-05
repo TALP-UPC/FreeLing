@@ -124,21 +124,21 @@ class config : public analyzer_config {
   std::wstring Locale;
 
   /// Configuration file for language identifier
-  bool LangIdent;
+  bool LangIdent = false;
   std::wstring IDENT_identFile;
 
-  /// Mode used to process input: 
+  /// Default mode used to process input: 
   ///   DOC: load a document, then process it. 
   ///   CORPUS: infinite sentence-by-sentnce processing
-  InputModes InputMode;
-  /// Selected input and output format
-  OutputFormats OutputFormat;
-  InputFormats InputFormat;
+  InputModes InputMode  = MODE_CORPUS;
+  /// Selected default input and output format
+  OutputFormats OutputFormat = OUT_FREELING;
+  InputFormats InputFormat = INP_TEXT;
   std::wstring InputConllFile;
   std::wstring OutputConllFile;
 
   /// whether splitter buffer must be flushed at each line
-  bool AlwaysFlush;
+  bool AlwaysFlush = false;
 
   /// Tagset to use for shortening tags in output
   std::wstring TAGSET_TagsetFile;
@@ -198,6 +198,7 @@ class config : public analyzer_config {
       ("TraceModule",po::wvalue<std::wstring>(&tracemod)->default_value(L"0x0","0x0"),"Mask indicating which modules to trace")
       ;
 
+    
     try {
       po::store(po::parse_command_line(ac, av, cl_opts), vm);
       po::notify(vm);    
@@ -229,13 +230,14 @@ class config : public analyzer_config {
       exit(0); // return to system
     }
 
+
     // Unless lang ident, load config file.
     if (not LangIdent) {
       if (ConfigFile.empty()) {
-        std::cerr<<"Configuration file not specified. Please use option -f to provide a configuration file."<<std::endl;
+        std::cerr<<"Configuration file not specified. Please use option -f to provide a configuration file." << std::endl;
         exit(1);
       }
-      
+
       // parse ConfigFile for more options
       parse_options(ConfigFile);
     }

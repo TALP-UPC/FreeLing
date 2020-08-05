@@ -289,17 +289,15 @@ if(WITH_CUDA_BACKEND)
     target_compile_definitions(dynet PRIVATE HAVE_CUDNN)
   endif()
   cuda_add_cublas_to_target(dynet)
-  target_link_libraries(dynet ${LIBS})
 else()
   # Build cpu library
-  add_library(dynet ${dynet_library_SRCS} ${dynet_library_HDRS})
-  target_link_libraries(dynet ${LIBS})
+  add_library(dynet SHARED ${dynet_library_SRCS} ${dynet_library_HDRS})
 endif(WITH_CUDA_BACKEND)
 
+target_link_libraries(dynet ${LIBS} ${ZLIB_LIBRARIES})
+
 install(FILES ${dynet_library_HDRS} DESTINATION include/dynet)
+
 install(TARGETS dynet DESTINATION lib)
-if(WITH_CUDA_BACKEND)
-  install(TARGETS dynet DESTINATION lib)
-endif(WITH_CUDA_BACKEND)
 
 # target_compile_features(dynet PRIVATE cxx_range_for)

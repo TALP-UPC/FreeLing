@@ -2,12 +2,14 @@
 include_directories(${Boost_INCLUDE_DIR})
 include_directories(${ICU_INCLUDE_DIRS})
 
+link_directories(${Boost_LIBRARY_DIRS})
+
 if (WIN32)
   # compiler defintions for windows
   add_definitions(-D_CRT_SECURE_NO_WARNINGS=1 -D_CRT_NONSTDC_NO_DEPRECATE=1 -DNOMINMAX -DNDEBUG=1 -DWIN32=1 -D_CONSOLE=1)
   # avoid creating "Debug|Release" directory
-  SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/src/utilities)
-  SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/src/utilities)
+  #SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/src/utilities)
+  #SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/src/utilities)
 endif()
 
 # build-dict
@@ -24,7 +26,7 @@ target_link_libraries(dicc2phon freeling)
 
 # gz-cat
 add_executable(gz-cat installation/gz-cat.cc)
-target_link_libraries(gz-cat freeling ${Boost_LIBRARIES})
+target_link_libraries(gz-cat ${Boost_LIBRARIES})
 
 # convert_model
 add_executable(convert_model embeddings/convert_model.cc)

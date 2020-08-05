@@ -505,6 +505,7 @@ void process_text_incremental(analyzer &anlz, ServerStats &stats, const io::outp
   wstring line;  
   while (ReadLine(line)) {
     if (ServerMode) {
+
       // if it is a stats command from the client, process it and go for next line.
       if (CheckStatsCommands(line,stats)) continue;
 
@@ -576,7 +577,7 @@ void process_columns_incremental(const analyzer &anlz, ServerStats &stats, const
 //---------------------------------------------
 
 int main (int argc, char **argv) {
-   
+
   // read configuration file and command-line options
   config *cfg = load_config(argc,argv);
   
@@ -629,6 +630,7 @@ int main (int argc, char **argv) {
     // ---------------------------------------------------------------
     // Process text documentwise
     else if (cfg->InputMode == MODE_DOC) {
+      wcerr << L"doc" << endl;
       // load whole document in a string
       wstring text;
       load_document(text, *stats);
@@ -651,14 +653,14 @@ int main (int argc, char **argv) {
     // ---------------------------------------------------------------
     // proces text line by line, produce output incrementally
     else if (cfg->InputMode == MODE_CORPUS) {
+
       if (cfg->InputFormat == INP_TEXT) 
         process_text_incremental(*anlz,*stats,*out,cfg->AlwaysFlush);
       else 
         process_columns_incremental(*anlz,*stats,*inp,*out);    
     }
-    
 
-    // if we are a forked server attending a client, and the client is done, we exit.
+      // if we are a forked server attending a client, and the client is done, we exit.
     if (ServerMode) CloseWorker(stats);
     // if not server version, stop when document is processed
     else stop=true;   

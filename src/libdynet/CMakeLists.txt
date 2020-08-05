@@ -73,7 +73,7 @@ endif()
 
 ######## Platform-specific options
 if(WIN32)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DNOMINMAX")   # Disable min/max macros in windef.h
+  add_definitions(-D_CRT_SECURE_NO_WARNINGS=1 -D_CRT_NONSTDC_NO_DEPRECATE=1 -DNOMINMAX -DNDEBUG=1 -D_WINDOWS=1 -D_USRDLL=1 -DDYNET_EXPORTS=1)
 endif()
 
 ######## Compiler-specific options
@@ -124,15 +124,13 @@ if(ENABLE_BOOST)
     endif()
   endif()
   set(Boost_REALPATH ON)
-  find_package(Boost COMPONENTS program_options regex serialization iostreams REQUIRED)
+  if(MSVC)
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /LIBPATH:${Boost_LIBRARY_DIRS}" )
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} /LIBPATH:${Boost_LIBRARY_DIRS}")
+  endif()
   message("-- Boost dir is " ${Boost_INCLUDE_DIR})
   include_directories(${Boost_INCLUDE_DIR})
-  if(MSVC)
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /LIBPATH:${Boost_LIBRARY_DIRS}")
-    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} /LIBPATH:${Boost_LIBRARY_DIRS}")
-  else()
-    set(LIBS ${LIBS} ${Boost_LIBRARIES})
-  endif()
+  set(LIBS ${LIBS} ${Boost_LIBRARIES})
 endif()
 
 if(BACKEND)
@@ -185,7 +183,7 @@ set(LIBS ${LIBS} ${CMAKE_THREAD_LIBS_INIT})
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
-
+include_directories(${ZLIB_INCLUDE_DIR})
 add_subdirectory(dynet)
 
 if(ENABLE_CPP_EXAMPLES)

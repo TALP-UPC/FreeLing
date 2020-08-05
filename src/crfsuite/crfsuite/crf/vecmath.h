@@ -66,12 +66,12 @@ static inline void _aligned_free(void *p)
     MIE_ALIGN(16) static const double var[2] = {(val), (val)}
 
 
-inline static void veczero(floatval_t *x, const int n)
+static void veczero(floatval_t *x, const int n)
 {
     memset(x, 0, sizeof(floatval_t) * n);
 }
 
-inline static void vecset(floatval_t *x, const floatval_t a, const int n)
+static void vecset(floatval_t *x, const floatval_t a, const int n)
 {
     int i;
     for (i = 0;i < n;++i) {
@@ -79,12 +79,12 @@ inline static void vecset(floatval_t *x, const floatval_t a, const int n)
     }
 }
 
-inline static void veccopy(floatval_t *y, const floatval_t *x, const int n)
+static void veccopy(floatval_t *y, const floatval_t *x, const int n)
 {
     memcpy(y, x, sizeof(floatval_t) * n);
 }
 
-inline static void vecadd(floatval_t *y, const floatval_t *x, const int n)
+static void vecadd(floatval_t *y, const floatval_t *x, const int n)
 {
     int i;
     for (i = 0;i < n;++i) {
@@ -92,7 +92,7 @@ inline static void vecadd(floatval_t *y, const floatval_t *x, const int n)
     }
 }
 
-inline static void vecaadd(floatval_t *y, const floatval_t a, const floatval_t *x, const int n)
+static void vecaadd(floatval_t *y, const floatval_t a, const floatval_t *x, const int n)
 {
     int i;
     for (i = 0;i < n;++i) {
@@ -100,7 +100,7 @@ inline static void vecaadd(floatval_t *y, const floatval_t a, const floatval_t *
     }
 }
 
-inline static void vecsub(floatval_t *y, const floatval_t *x, const int n)
+static void vecsub(floatval_t *y, const floatval_t *x, const int n)
 {
     int i;
     for (i = 0;i < n;++i) {
@@ -108,7 +108,7 @@ inline static void vecsub(floatval_t *y, const floatval_t *x, const int n)
     }
 }
 
-inline static void vecasub(floatval_t *y, const floatval_t a, const floatval_t *x, const int n)
+static void vecasub(floatval_t *y, const floatval_t a, const floatval_t *x, const int n)
 {
     int i;
     for (i = 0;i < n;++i) {
@@ -116,7 +116,7 @@ inline static void vecasub(floatval_t *y, const floatval_t a, const floatval_t *
     }
 }
 
-inline static void vecmul(floatval_t *y, const floatval_t *x, const int n)
+static void vecmul(floatval_t *y, const floatval_t *x, const int n)
 {
     int i;
     for (i = 0;i < n;++i) {
@@ -124,7 +124,7 @@ inline static void vecmul(floatval_t *y, const floatval_t *x, const int n)
     }
 }
 
-inline static void vecinv(floatval_t *y, const int n)
+static void vecinv(floatval_t *y, const int n)
 {
     int i;
     for (i = 0;i < n;++i) {
@@ -132,7 +132,7 @@ inline static void vecinv(floatval_t *y, const int n)
     }
 }
 
-inline static void vecscale(floatval_t *y, const floatval_t a, const int n)
+static void vecscale(floatval_t *y, const floatval_t a, const int n)
 {
     int i;
     for (i = 0;i < n;++i) {
@@ -140,7 +140,7 @@ inline static void vecscale(floatval_t *y, const floatval_t a, const int n)
     }
 }
 
-inline static floatval_t vecdot(const floatval_t *x, const floatval_t *y, const int n)
+static floatval_t vecdot(const floatval_t *x, const floatval_t *y, const int n)
 {
     int i;
     floatval_t s = 0;
@@ -150,7 +150,7 @@ inline static floatval_t vecdot(const floatval_t *x, const floatval_t *y, const 
     return s;
 }
 
-inline static floatval_t vecsum(floatval_t* x, const int n)
+static floatval_t vecsum(floatval_t* x, const int n)
 {
     int i;
     floatval_t s = 0.;
@@ -161,7 +161,7 @@ inline static floatval_t vecsum(floatval_t* x, const int n)
     return s;
 }
 
-inline static floatval_t vecsumlog(floatval_t* x, const int n)
+static floatval_t vecsumlog(floatval_t* x, const int n)
 {
     int i;
     floatval_t s = 0.;
@@ -173,7 +173,7 @@ inline static floatval_t vecsumlog(floatval_t* x, const int n)
 
 #ifdef  USE_SSE
 
-inline static void vecexp(double *values, const int n)
+static void vecexp(double *values, const int n)
 {
     int i;
     CONST_128D(one, 1.);
@@ -328,7 +328,7 @@ inline static void vecexp(double *values, const int n)
 
 #else
 
-inline static void vecexp(double *values, const int n)
+static void vecexp(double *values, const int n)
 {
     int i;
     for (i = 0;i < n;++i) {

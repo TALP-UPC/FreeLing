@@ -4,10 +4,8 @@
 #include <cmath>
 #include <vector>
 #include <algorithm>
-#include <boost/iostreams/filtering_streambuf.hpp>
-#include <boost/iostreams/filter/gzip.hpp>
-#include "zlib.h"
 
+#include "zstr.hpp"
 #include "freeling/morfo/embeddings.h"
 #include "freeling/morfo/util.h"
 #include "freeling/morfo/traces.h"
@@ -212,6 +210,7 @@ namespace freeling {
       // store pair (word,vector) in map
       wordVec.insert(make_pair(util::string2wstring(word), norm_vector(v)));
     }
+
     // close file
     fmod.close();
   }
@@ -259,36 +258,27 @@ namespace freeling {
 
   void embeddings::load_gzip_model(const wstring &fname) {
     // open file
-    std::ifstream fmod(util::wstring2string(fname), std::ios_base::in | std::ios_base::binary);
-    boost::iostreams::filtering_streambuf<boost::iostreams::input> inbuf;
-    inbuf.push(boost::iostreams::gzip_decompressor());
-    inbuf.push(fmod);
-    //Convert streambuf to istream
-    std::istream instream(&inbuf);
+    zstr::ifstream fmod(util::wstring2string(fname), std::ios_base::in | std::ios_base::binary);
 
     // read file header with vocabulary and vector sizes
-    instream >> vocabSize >> dimensionality;
+    fmod >> vocabSize >> dimensionality;
     TRACE(4,L"read head "<<vocabSize<<L" " <<dimensionality);
 
     // read each word and associated vector
     for (unsigned int i=0; i<vocabSize; ++i) {
       // read word
       string w;
-      instream >> w;
+      fmod >> w;
  
       // read vector
       vector<float> v(dimensionality);
       for (unsigned int j=0; j<dimensionality; ++j) {
-        instream >> v[j];
+        fmod >> v[j];
       }
       TRACE(6,L"  read word "<< util::string2wstring(w) << L" " << v[0] << L" " << v[1] << L" " << v[2] << L" ...");
      // store pair (word,vector) in map
       wordVec.insert(make_pair(util::string2wstring(w), norm_vector(v)));
     }
-
-    // close file
-    fmod.close();
-
   }
   
   /////////////////////////////////////////////////////////////////////////////

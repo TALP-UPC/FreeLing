@@ -46,8 +46,8 @@
 #define alloca      _alloca
 #define strdup      _strdup
 #define open        _open
-#define isfinite    _finite
-#define snprintf    _snprintf
+//#define isfinite    _finite
+//#define snprintf    _snprintf
 
 #ifndef    __cplusplus
 /* Microsoft Visual C specific */

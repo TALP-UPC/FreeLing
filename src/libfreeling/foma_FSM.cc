@@ -66,6 +66,9 @@ wstring print_sigma(struct sigma *sigma) {
 
   foma_FSM::foma_FSM(const wstring &fname, const wstring &mcost, const list<wstring> &joins) {
 
+    // Minimum edit distance automaton deactivated by default
+    h_fsa = NULL;
+    
     // check that file type and cost matrix are consistent.
     // (Cost matrix is not allowed with binary files, it should
     //  be compiled into the binary file)
@@ -104,6 +107,9 @@ wstring print_sigma(struct sigma *sigma) {
   ///////////////////////////////////////////////////////////////
 
   foma_FSM::foma_FSM(wistream &buff, const wstring &mcost, const list<wstring> &joins) {
+
+    // Minimum edit distance automaton deactivated by default
+    h_fsa = NULL;
 
     // load dictionary into a FSA
     fsa = load_dictionary_buffer(buff);
@@ -351,6 +357,8 @@ wstring print_sigma(struct sigma *sigma) {
   ///////////////////////////////////////////////////////////////
 
   void foma_FSM::init_MED() {
+    // clear med handle, if any.
+    apply_med_clear(h_fsa);
     // obtain med handle
     h_fsa = apply_med_init(fsa);
 

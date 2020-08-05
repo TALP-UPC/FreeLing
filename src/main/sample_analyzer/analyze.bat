@@ -7,7 +7,7 @@ rem (which is legal in Windows and occurs with some MySQL setups)
 set "BASEDIR=%~dp0"
 
 set "OLDPATH=%PATH%"
-set "PATH=%PATH%;%BASEDIR%\..\..\dependencies\boost\lib;%BASEDIR%\..\..\dependencies\zlib\bin;%BASEDIR%\..\..\dependencies\icu\bin64;%BASEDIR%\..\bin
+set "PATH=%PATH%;%BASEDIR%\..\..\dependencies\boost\lib;%BASEDIR%\..\..\dependencies\zlib\bin;%BASEDIR%\..\..\dependencies\icu\bin64;%BASEDIR%\..\lib;%BASEDIR%\..\bin;
 
 set "FREELINGSHARE=%BASEDIR%..\share\freeling"
 

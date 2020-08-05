@@ -47,7 +47,7 @@ unsigned get_current_graph_id();
 // Device is not copyable, so you can use the pointer to uniquely
 // identify the device
 // extern std::vector<Device*> devices; // [0] is always the CPU
-extern Device* default_device;  // where parameters go by default
+//  extern Device* default_device;  // where parameters go by default
 
 class ExecutionEngine;
 struct ParameterNodeBase;

@@ -24,10 +24,11 @@ set_target_properties(treeler PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries(treeler ${ZLIB_LIBRARIES})
 target_include_directories(treeler PUBLIC .) # TODO: Here we are also including 'main'
 
-install(TARGETS treeler
-        RUNTIME DESTINATION bin
-        LIBRARY DESTINATION lib
-        ARCHIVE DESTINATION lib/static)
+install(TARGETS treeler DESTINATION lib)
+#install(TARGETS treeler
+#        RUNTIME DESTINATION bin
+#        LIBRARY DESTINATION lib
+#        ARCHIVE DESTINATION lib)
 
 #install(DIRECTORY treeler/ DESTINATION include/treeler/
 #        FILES_MATCHING PATTERN "*.h")

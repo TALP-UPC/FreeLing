@@ -33,7 +33,11 @@ int main(int argc, char *argv[]) {
   fs::path dir = aafile.parent_path(); // get directory
   
   // open destination file for writting
-  ofstream dest(gzfile.c_str(), ios::out | ios::binary); 
+  ofstream dest(gzfile.c_str(), ios::out | ios::binary);
+  if (dest.fail()) {
+    cerr << "Error opening output file " << gzfile << endl;
+    exit(-1);
+  }    
 
   // get files in the same directory than input
   vector<fs::path> gzparts;
@@ -47,6 +51,10 @@ int main(int argc, char *argv[]) {
       // the file matches the base name, append it to dest
       char buffer[LEN];
       ifstream src(p->c_str(), ios::in | ios::binary);
+      if (src.fail()) {
+        cerr << "Error opening input file " << *p << endl;
+        exit(-1);
+      }    
       while (!src.eof()) {
 	src.read(buffer, LEN);
 	dest.write(buffer, src.gcount());

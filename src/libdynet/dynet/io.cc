@@ -4,8 +4,7 @@
 #include "dynet/str-util.h"
 
 #include <algorithm>
-#include <boost/iostreams/filtering_streambuf.hpp>
-#include <boost/iostreams/filter/gzip.hpp>
+#include "zstr.hpp"
 
 // Normally DyNet style permits using namespace std, but to make compatibility
 // possible with some external code, it is simpler if types are fully
@@ -366,12 +365,8 @@ gzFileLoader::~gzFileLoader() {}
   
 void gzFileLoader::populate(ParameterCollection & model, const std::string & key) {
 
-  std::ifstream fmod(dataname, std::ios_base::in | std::ios_base::binary);
+  zstr::ifstream fmod(dataname, std::ios_base::in | std::ios_base::binary);
   if(!fmod) DYNET_RUNTIME_ERR("Could not read model from " << dataname);
-  boost::iostreams::filtering_streambuf<boost::iostreams::input> inbuf;
-  inbuf.push(boost::iostreams::gzip_decompressor());
-  inbuf.push(fmod);
-  std::istream datastream(&inbuf);
   
   std::string line, type, name;
   bool zero_grad = false;
@@ -383,10 +378,10 @@ void gzFileLoader::populate(ParameterCollection & model, const std::string & key
   ParameterCollectionStorage & storage = model.get_storage();
   std::string key_ = key;
   if (key_.size() != 0 && key_.back() != '/') key_ += "/";
-  while(std::getline(datastream, line)) {
+  while(std::getline(fmod, line)) {
     // skip non-relevant parameter lines
-    while (not relevant_header_line(line, "#", key_, type, name, dim, byte_count, zero_grad))
-      std::getline(datastream, line);
+    while (!relevant_header_line(line, "#", key_, type, name, dim, byte_count, zero_grad))
+      std::getline(fmod, line);
     
     // We found a relevant parameter line, load it
     if (type == "#Parameter#") {
@@ -420,10 +415,10 @@ void gzFileLoader::populate(ParameterCollection & model, const std::string & key
     }
 
     // load parameter
-    { std::getline(datastream, line); std::istringstream iss(line); iss >> values; }
+    { std::getline(fmod, line); std::istringstream iss(line); iss >> values; }
     TensorTools::set_elements(*value_t, values);
     if(!zero_grad){
-      { std::getline(datastream, line); std::istringstream iss(line); iss >> values; }
+      { std::getline(fmod, line); std::istringstream iss(line); iss >> values; }
       TensorTools::set_elements(*grad_t, values);
     } else {
       TensorTools::zero(*grad_t);
@@ -435,19 +430,14 @@ void gzFileLoader::populate(ParameterCollection & model, const std::string & key
                       param_id << '/' << lookup_id << ") did not match number to be populated (" <<
                       storage.params.size() << '/' << storage.lookup_params.size() << ')');
 
-  fmod.close();
 }
 
 void gzFileLoader::populate(Parameter & param,
                     const std::string & key) {
   if(key == "") DYNET_INVALID_ARG("gzFileLoader.populate() requires non-empty key");
 
-  std::ifstream fmod(dataname, std::ios_base::in | std::ios_base::binary);
+  zstr::ifstream fmod(dataname, std::ios_base::in | std::ios_base::binary);
   if(!fmod) DYNET_RUNTIME_ERR("Could not read model from " << dataname);
-  boost::iostreams::filtering_streambuf<boost::iostreams::input> inbuf;
-  inbuf.push(boost::iostreams::gzip_decompressor());
-  inbuf.push(fmod);
-  std::istream datastream(&inbuf);
 
   std::string line, type, name;
   bool zero_grad=false;
@@ -456,31 +446,30 @@ void gzFileLoader::populate(Parameter & param,
   
   // skip non-relevant parameter lines
   bool found = false;
-  std::getline(datastream, line);
-  while (not datastream.eof() and not found) {
+  std::getline(fmod, line);
+  while (!fmod.eof() && !found) {
     if (relevant_header_line(line, "#Parameter#", key, type, name, dim, byte_count, zero_grad))
       found = true;
     else
-      std::getline(datastream, line);
+      std::getline(fmod, line);
   }
   // search parameter was not found
-  if (not found) DYNET_RUNTIME_ERR("Could not find key " << key << " in the model file");
+  if (!found) DYNET_RUNTIME_ERR("Could not find key " << key << " in the model file");
 
   // parameter was found, load it
   if(param.p->dim != dim)
     DYNET_RUNTIME_ERR("Attempted to populate parameter where arguments don't match (" << param.p->dim << " != " << dim << ")");
   std::vector<float> values(dim.size());
-  { std::getline(datastream, line); std::istringstream iss(line); iss >> values; }
+  { std::getline(fmod, line); std::istringstream iss(line); iss >> values; }
   TensorTools::set_elements(param.get_storage().values, values);
   if(!zero_grad){
-    { std::getline(datastream, line); std::istringstream iss(line); iss >> values; }
+    { std::getline(fmod, line); std::istringstream iss(line); iss >> values; }
     TensorTools::set_elements(param.get_storage().g, values);
   }
   else {
     TensorTools::zero(param.get_storage().g);
   }
 
-  fmod.close();
   return;
 }
 
@@ -489,12 +478,8 @@ void gzFileLoader::populate(LookupParameter & lookup_param,
                               const std::string & key) {
   if(key == "") DYNET_INVALID_ARG("gzFileLoader.populate() requires non-empty key");
   
-  std::ifstream fmod(dataname, std::ios_base::in | std::ios_base::binary);
+  zstr::ifstream fmod(dataname, std::ios_base::in | std::ios_base::binary);
   if(!fmod) DYNET_RUNTIME_ERR("Could not read model from " << dataname);
-  boost::iostreams::filtering_streambuf<boost::iostreams::input> inbuf;
-  inbuf.push(boost::iostreams::gzip_decompressor());
-  inbuf.push(fmod);
-  std::istream datastream(&inbuf);
   
   std::string line, type, name;
   bool zero_grad=false;
@@ -503,31 +488,30 @@ void gzFileLoader::populate(LookupParameter & lookup_param,
   
   // skip non-relevant parameter lines
   bool found = false;
-  std::getline(datastream, line);
-  while (not datastream.eof() and not found) {
+  std::getline(fmod, line);
+  while (!fmod.eof() && !found) {
     if (relevant_header_line(line, "#LookupParameter#", key, type, name, dim, byte_count, zero_grad))
       found = true;
     else
-      std::getline(datastream, line);
+      std::getline(fmod, line);
   }
   // search parameter was not found
-  if (not found) DYNET_RUNTIME_ERR("Could not find key " << key << " in the model file");
+  if (!found) DYNET_RUNTIME_ERR("Could not find key " << key << " in the model file");
   
   // parameter was found, load it
   if(lookup_param.p->all_dim != dim)
     DYNET_RUNTIME_ERR("Attempted to populate lookup parameter where arguments don't match (" << lookup_param.p->all_dim << " != " << dim << ")");
   
   std::vector<float> values(dim.size());
-  { std::getline(datastream, line); std::istringstream iss(line); iss >> values; }
+  { std::getline(fmod, line); std::istringstream iss(line); iss >> values; }
   TensorTools::set_elements(lookup_param.get_storage().all_values, values);
   if(!zero_grad){
-    { std::getline(datastream, line); std::istringstream iss(line); iss >> values; }
+    { std::getline(fmod, line); std::istringstream iss(line); iss >> values; }
     TensorTools::set_elements(lookup_param.get_storage().all_grads, values);
   }
   else {
     TensorTools::zero(lookup_param.get_storage().all_grads);
   }
-  fmod.close();
   return;
 }
 
@@ -535,12 +519,8 @@ Parameter gzFileLoader::load_param(ParameterCollection & model,
                                      const std::string & key) {
   if (key == "") DYNET_INVALID_ARG("gzFileLoader.load_param() requires non-empty key");
 
-  std::ifstream fmod(dataname, std::ios_base::in | std::ios_base::binary);
+  zstr::ifstream fmod(dataname, std::ios_base::in | std::ios_base::binary);
   if(!fmod) DYNET_RUNTIME_ERR("Could not read model from " << dataname);
-  boost::iostreams::filtering_streambuf<boost::iostreams::input> inbuf;
-  inbuf.push(boost::iostreams::gzip_decompressor());
-  inbuf.push(fmod);
-  std::istream datastream(&inbuf);
 
   std::string line, type, name;
   bool zero_grad=false;
@@ -549,29 +529,28 @@ Parameter gzFileLoader::load_param(ParameterCollection & model,
   
   // skip non-relevant parameter lines
   bool found = false;
-  std::getline(datastream, line);
-  while (not datastream.eof() and not found) {
+  std::getline(fmod, line);
+  while (!fmod.eof() && !found) {
     if (relevant_header_line(line, "#Parameter#", key, type, name, dim, byte_count, zero_grad))
       found = true;
     else
-      std::getline(datastream, line);
+      std::getline(fmod, line);
   }
   // search parameter was not found
-  if (not found) DYNET_RUNTIME_ERR("Could not find key " << key << " in the model file");
+  if (!found) DYNET_RUNTIME_ERR("Could not find key " << key << " in the model file");
 
   // parameter was found, add and load it
   Parameter param = model.add_parameters(dim);
   param.get_storage().name = name;
   std::vector<float> values(dim.size());
-  { std::getline(datastream, line); std::istringstream iss(line); iss >> values; }
+  { std::getline(fmod, line); std::istringstream iss(line); iss >> values; }
   TensorTools::set_elements(param.get_storage().values, values);
   if(!zero_grad){
-    { std::getline(datastream, line); std::istringstream iss(line); iss >> values; }
+    { std::getline(fmod, line); std::istringstream iss(line); iss >> values; }
     TensorTools::set_elements(param.get_storage().g, values);
   } else {
     TensorTools::zero(param.get_storage().g);
   }
-  fmod.close();
   return param;
 }
 
@@ -580,12 +559,8 @@ LookupParameter gzFileLoader::load_lookup_param(ParameterCollection & model,
 
   if(key == "") DYNET_INVALID_ARG("gzFileLoader.load_lookup_param() requires non-empty key");
   
-  std::ifstream fmod(dataname, std::ios_base::in | std::ios_base::binary);
+  zstr::ifstream fmod(dataname, std::ios_base::in | std::ios_base::binary);
   if(!fmod) DYNET_RUNTIME_ERR("Could not read model from " << dataname);
-  boost::iostreams::filtering_streambuf<boost::iostreams::input> inbuf;
-  inbuf.push(boost::iostreams::gzip_decompressor());
-  inbuf.push(fmod);
-  std::istream datastream(&inbuf);
   
   std::string line, type, name;
   bool zero_grad=false;
@@ -594,30 +569,29 @@ LookupParameter gzFileLoader::load_lookup_param(ParameterCollection & model,
   
   // skip non-relevant parameter lines
   bool found = false;
-  std::getline(datastream, line);
-  while (not datastream.eof() and not found) {
+  std::getline(fmod, line);
+  while (!fmod.eof() && !found) {
     if (relevant_header_line(line, "#LookupParameter#", key, type, name, dim, byte_count, zero_grad))
       found = true;
     else
-      std::getline(datastream, line);
+      std::getline(fmod, line);
   }
   // search parameter was not found
-  if (not found) DYNET_RUNTIME_ERR("Could not find key " << key << " in the model file");
+  if (!found) DYNET_RUNTIME_ERR("Could not find key " << key << " in the model file");
   
   // parameter was found, load it
   std::vector<float> values(dim.size());
   size_t size = dim[dim.nd-1]; dim.nd--;
   LookupParameter lookup_param = model.add_lookup_parameters(size, dim);
   lookup_param.get_storage().name = name;
-  { std::getline(datastream, line); std::istringstream iss(line); iss >> values; }
+  { std::getline(fmod, line); std::istringstream iss(line); iss >> values; }
   TensorTools::set_elements(lookup_param.get_storage().all_values, values);
   if(!zero_grad){
-    { std::getline(datastream, line); std::istringstream iss(line); iss >> values; }
+    { std::getline(fmod, line); std::istringstream iss(line); iss >> values; }
     TensorTools::set_elements(lookup_param.get_storage().all_grads, values);
   } else {
     TensorTools::zero(lookup_param.get_storage().all_grads);
   }
-  fmod.close();
   return lookup_param;
 }
 
