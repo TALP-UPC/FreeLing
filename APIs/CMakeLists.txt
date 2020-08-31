@@ -23,14 +23,8 @@ if (WIN32)
   add_definitions(-D_CRT_SECURE_NO_WARNINGS=1 -D_CRT_NONSTDC_NO_DEPRECATE=1 -DNOMINMAX -DNDEBUG=1 -DWIN32=1 -D_CONSOLE=1 -DSWIG_PYTHON_INTERPRETER_NO_DEBUG)
 endif()
 
-if(PYTHON2_API AND PYTHON3_API)
-  message(FATAL_ERROR "\nCan not build both python2 and python3 APIs. Please select only one.")
-endif()
-
 if(PYTHON3_API)
   add_subdirectory(python3)
-elseif(PYTHON2_API)
-  add_subdirectory(python2)
 endif()
 
 if(JAVA_API)

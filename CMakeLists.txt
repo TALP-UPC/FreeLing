@@ -28,10 +28,8 @@ option(TRACES "Enable traces" OFF)
 option(WARNINGS "Enable warnings" ON)
 option(XPRESSIVE "Xpressive regex" OFF)
 option(JAVA_API "Build Java API" OFF)
-option(JAVA_API "Build Java API" OFF)
 option(PERL_API "Build Perl API" OFF)
-option(PYTHON2_API "Build Python 2.7 API" OFF)
-option(PERL_API "Build Perl API" OFF)
+option(PYTHON3_API "Build Python 3 API" OFF)
 
 # Check for dependencies -- ZLIB
 find_package(ZLIB REQUIRED)
@@ -57,7 +55,7 @@ endif()
 add_subdirectory(src)
 
 # if any APIs were requested, build them
-if(PYTHON3_API OR PYTHON2_API OR JAVA_API OR PERL_API)
+if(PYTHON3_API OR JAVA_API OR PERL_API)
   add_subdirectory(APIs)
 endif()
 
