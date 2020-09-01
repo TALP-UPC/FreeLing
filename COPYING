@@ -61,11 +61,15 @@
      See http://www.chokkan.org/ for details.
      You'll find the license in the file LICENSES/BSD.license in this package.
      
+ 6.- zstr library is copyrighted by Matei David from University of Toronto
+     and distributed under its original MIT license.
+     See https://github.com/mateidavid/zstr for details.
+     You'll find the license in the file LICENSES/MIT.license in this package.
 
  2b.- DATA COMPONENTS
  -------------------- 
 
- Data components copyrigthed by a third party with licenses other 
+ Data components copyrighted by a third party with licenses other 
  than AGPL are:
 
  1.- English WordNet synset and relation data, contained in files
