@@ -687,7 +687,6 @@ namespace freeling {
           // distribute length among (remaining) number of words, making sure it is not zero
           int step=(fin-st)/(lw.size()-n); 
           step=max(1,step);
-          int len=max(1,step-1);
         
           while ( i!=lw.end() ) {
             // span end for curent token. Make sure last token span 
