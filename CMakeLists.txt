@@ -11,7 +11,7 @@ endif()
 
 project(FreeLing)
 set(PACKAGE_NAME "FreeLing") 
-set(VERSION "4.3-devel") 
+set(VERSION "4.3_devel") 
 set(PACKAGE_STRING "\"${PACKAGE_NAME} ${VERSION}\"")
 set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib") # Needed to find libraries if not installed in system path
 
