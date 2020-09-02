@@ -51,8 +51,6 @@
 #include "treeler/util/options.h"
 #include "treeler/base/exception.h"
 
-#define TREELER_VERSION "0.3.0"
-
 using namespace std;
 using namespace treeler;
 time_t start,end;
