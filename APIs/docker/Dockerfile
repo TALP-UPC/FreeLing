@@ -17,11 +17,15 @@ RUN echo "******** Installing dependencies... please wait" && \
 
 RUN export FL_VERSION=4.2 && \
     cd /tmp && \
-    wget --progress=dot:giga https://github.com/TALP-UPC/FreeLing/releases/download/4.2/FreeLing-4.2.tar.gz && \
-    tar xvzf FreeLing-$FL_VERSION.tar.gz && \
-    rm -rf FreeLing-$FL_VERSION.tar.gz && \
+    echo "******** Downloading FreeLing... please wait" && \
+    wget --progress=dot:giga https://github.com/TALP-UPC/FreeLing/releases/download/$FL_VERSION/FreeLing-src-$FL_VERSION.tar.gz && \
+    wget --progress=dot:giga https://github.com/TALP-UPC/FreeLing/releases/download/$FL_VERSION/FreeLing-langs-src-$FL_VERSION.tar.gz && \
+    echo "******** Uncompressing FreeLing... please wait" && \
+    tar xzf FreeLing-src-$FL_VERSION.tar.gz && \
+    tar xzf FreeLing-langs-src-$FL_VERSION.tar.gz && \
+    rm -rf FreeLing-src-$FL_VERSION.tar.gz FreeLing-langs-src-$FL_VERSION.tar.gz && \
     cd /tmp/FreeLing-$FL_VERSION && \
-
+#
     mkdir build && \
     cd build && \
     echo "******** Compiling FreeLing... please wait" && \
@@ -29,13 +33,14 @@ RUN export FL_VERSION=4.2 && \
     make -j8 && \
     echo "******** Installing FreeLing... please wait" && \
     make -j8 install && \
-
+#
 #   Uncomment to remove unwanted languages data to save space && \
 #   rm -rf /usr/local/share/freeling/ru && \
 #   rm -rf /usr/local/share/freeling/cy && \
 #   rm -rf /usr/local/share/freeling/pt && \
 #   etc ....
-
+#
+    cd && \
     rm -rf /tmp/FreeLing-$FL_VERSION && \
     apt-get --purge -y remove build-essential libicu-dev \
             libboost-regex-dev libboost-system-dev \
