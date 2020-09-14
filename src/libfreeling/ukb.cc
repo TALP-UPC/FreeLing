@@ -156,7 +156,7 @@ namespace freeling {
       for (list<pair<wstring,double> >::const_iterator s=lsen.begin(); s!=lsen.end(); s++) {
         size_t syn = wn->get_vertex(s->first);
         if (syn==csr_kb::VERTEX_NOT_FOUND)
-          wcerr<<L"Unknown synset "<<s->first<<L" ignored. Please check consistency between sense dictionary and KB"<<endl;
+          WARNING(L"Unknown synset "<<s->first<<L" ignored. Please check consistency between sense dictionary and KB.");
         else 
           pv[syn] += (1.0/(double)nw)*(1.0/(double)nsyn);
       } 
