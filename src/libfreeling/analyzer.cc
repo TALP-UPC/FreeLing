@@ -290,14 +290,13 @@ template<class T> void analyzer::do_analysis(T &doc) const {
   // --------- CHART PARSER
   // apply chart parser if needed
   if (parser != NULL and
-      ((current_invoke_options.OutputLevel>=COREF and current_invoke_options.InputLevel < SHALLOW)
-       or (current_invoke_options.InputLevel < SHALLOW
-	   and (current_invoke_options.OutputLevel == SHALLOW or 
-		current_invoke_options.OutputLevel == PARSED or 
-		(current_invoke_options.OutputLevel > SHALLOW and current_invoke_options.DEP_which==TXALA)))))
+      (current_invoke_options.InputLevel < SHALLOW
+       and (current_invoke_options.OutputLevel == SHALLOW or 
+            current_invoke_options.OutputLevel == PARSED or 
+            (current_invoke_options.OutputLevel > SHALLOW and current_invoke_options.DEP_which==TXALA))))
     parser->analyze(doc);
   
- // if expected output was SHALLOW, we are done
+  // if expected output was SHALLOW, we are done
   if (current_invoke_options.OutputLevel==SHALLOW) return;
 
   if (deptxala != NULL and 
