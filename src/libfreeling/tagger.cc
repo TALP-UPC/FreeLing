@@ -124,8 +124,10 @@ namespace freeling {
           i->user=w->user;
         
           TRACE(2,L"  Inserting "+i->get_form()+L". span=("+util::int2wstring(i->get_span_start())+L","+util::int2wstring(i->get_span_finish())+L")");
-          w=se.insert(w,*i); 
-          w++;
+          for (int k=0; k<se.num_kbest(); ++k)  // mark the analysis as selected in all kbest PoS sequences
+            i->select_all_analysis(k);
+          w = se.insert(w,*i);  // actually insert the new token 
+          w++;                  // fix w position to keep it where it was.
         }
       
         TRACE(2,L"  Erasing "+w->get_form());
