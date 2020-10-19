@@ -635,9 +635,10 @@ int main (int argc, char **argv) {
       load_document(text, *stats);
       
       document doc; 
-      // if input is plain text, analyze directly
+      // if input is plain text, analyze directly, treating blank lines
+      // as paragraph separators.
       if (cfg->InputFormat == INP_TEXT) 
-        anlz->analyze(text,doc,cfg->AlwaysFlush);
+        anlz->analyze(text,doc,true);
 
       // if input is partially analyzed, load it into a document, and analyze
       else {  
