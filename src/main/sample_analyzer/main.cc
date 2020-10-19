@@ -630,7 +630,6 @@ int main (int argc, char **argv) {
     // ---------------------------------------------------------------
     // Process text documentwise
     else if (cfg->InputMode == MODE_DOC) {
-      wcerr << L"doc" << endl;
       // load whole document in a string
       wstring text;
       load_document(text, *stats);

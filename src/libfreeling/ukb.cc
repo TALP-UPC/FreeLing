@@ -125,6 +125,9 @@ namespace freeling {
   ///  Init a weight vector for synsets in the sentences 
 
   void ukb::init_synset_vector(const list<freeling::sentence> &ls, vector<double> &pv) const {
+
+    TRACE(4,"Initializing synset vector");
+
     /// get synsets for words in sentence, checking for duplicates
     int nw=0;
 
@@ -168,6 +171,8 @@ namespace freeling {
   /// Rank synsets in each sentence word according to given rank vector
 
   void ukb::extract_ranks_to_sentences(list<freeling::sentence> &ls, const vector<double> &pv) const {
+
+    TRACE(4,"Extracting ranks");
     /// move obtained ranks to word synsets, sorting sense list by rank
     for (list<freeling::sentence>::iterator s=ls.begin(); s!=ls.end(); s++) {
       int best = s->get_best_seq();
@@ -196,6 +201,8 @@ namespace freeling {
     ls.push_back(s);
     analyze(ls);
     s=ls.front();
+
+    TRACE(2,"Single sentence successfully analyzed by UKB module");
   }
 
   //////////////////////////////////////////////////////////////////
@@ -208,10 +215,13 @@ namespace freeling {
     init_synset_vector(ls,pv);
 
     // page rank the vector, using loaded kb
+    TRACE(4,"Page rank");
     wn->pagerank(pv);
 
     // Extract ranks from the vector, and move results to sentence
     extract_ranks_to_sentences(ls,pv);
+
+    TRACE(2,"Sentences successfully analyzed by UKB module");
   }
 
 }

@@ -289,28 +289,28 @@ template<class T> void analyzer::do_analysis(T &doc) const {
 
   // --------- CHART PARSER
   // apply chart parser if needed
-  if (parser != NULL and
-      (current_invoke_options.InputLevel < SHALLOW
-       and (current_invoke_options.OutputLevel == SHALLOW or 
-            current_invoke_options.OutputLevel == PARSED or 
-            (current_invoke_options.OutputLevel > SHALLOW and current_invoke_options.DEP_which==TXALA))))
-    parser->analyze(doc);
+  if (parser != NULL and                                    // chart parser is loaded
+      current_invoke_options.InputLevel < SHALLOW and       // input is not parsed
+        (current_invoke_options.OutputLevel == SHALLOW or     // requested output is shallow or parsed
+         current_invoke_options.OutputLevel == PARSED or      // 
+         (current_invoke_options.OutputLevel >= DEP and       // or any later stage, but dep_txala
+          current_invoke_options.DEP_which==TXALA)))          // was explicitly requested
+      parser->analyze(doc);
   
   // if expected output was SHALLOW, we are done
   if (current_invoke_options.OutputLevel==SHALLOW) return;
 
-  if (deptxala != NULL and 
-      ((current_invoke_options.OutputLevel>=COREF 
-	and current_invoke_options.InputLevel < PARSED
-	and corfc!=NULL)
-       or (current_invoke_options.InputLevel < PARSED
-	   and (current_invoke_options.OutputLevel == PARSED or 
-		(current_invoke_options.OutputLevel > PARSED and current_invoke_options.DEP_which==TXALA)))) )
+  // --------  Check if "PARSED" level needs to be computed
+  if (deptxala != NULL                                        // dep_txala is loaded
+      and current_invoke_options.InputLevel < PARSED          // input is at most chunked
+      and (current_invoke_options.OutputLevel == PARSED       // and requested output is parsed
+           or (current_invoke_options.OutputLevel > PARSED    // or any later stage, but dep_txala 
+               and current_invoke_options.DEP_which==TXALA))) // was explicitly requested  
     deptxala->complete_parse_tree(doc);
-
+  
   // if expected output was PARSED, we are done
   if (current_invoke_options.OutputLevel==PARSED) return;
-
+  
   // --------- DEP PARSER (+SRL in treeler-> to detach).
   // apply dep parser if needed
   if (deptreeler!=NULL and 
