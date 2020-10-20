@@ -126,6 +126,7 @@ output_json::~output_json() {}
 
 void output_json::PrintResults (wostream &sout, const list<sentence> &ls) const {
    PrintSentences(sout,ls);
+   sout << endl;
 }
 
 //---------------------------------------------
@@ -270,7 +271,7 @@ void output_json::PrintSentences (wostream &sout, const list<sentence> &ls) cons
     sout << L"}";  // end sentence
   }
 
-  sout<<L"]}" << endl;  // end list of sentences
+  sout<<L"]}";  // end list of sentences
 }
 
 
@@ -575,7 +576,7 @@ void output_json::PrintResults(wostream &sout, const document &doc) const {
 
   sout << L"{ \"paragraphs\" : [" << endl;
   for (document::const_iterator p=doc.begin(); p!=doc.end(); p++) {
-    if (p!=doc.begin() and not p->empty()) sout << L"," << endl;
+    if (p!=doc.begin()) sout << L"," << endl;
     PrintSentences(sout,*p);
   }
   sout << L"]" ;

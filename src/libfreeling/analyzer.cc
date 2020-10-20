@@ -454,6 +454,14 @@ void analyzer::analyze(const wstring &text, document &doc, bool parag) const {
 
   sp->close_session(sp_ses);
 
+  // purge document from any empty paragraph (may happen if there are blank lines at the
+  // beggining or end of the file, or if there are several blank lines toghether)
+  document::const_iterator p = doc.begin();
+  while (p != doc.end()) {
+    if (p->empty()) p = doc.erase(p);
+    else ++p;
+  }
+  
   // process the splitted document for the rest of required levels
   analyze(doc);
 }
