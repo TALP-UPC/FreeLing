@@ -574,12 +574,16 @@ void output_json::PrintSemgraph(wostream &sout, const document &doc) const {
 
 void output_json::PrintResults(wostream &sout, const document &doc) const {
 
-  sout << L"{ \"paragraphs\" : [" << endl;
-  for (document::const_iterator p=doc.begin(); p!=doc.end(); p++) {
-    if (p!=doc.begin()) sout << L"," << endl;
-    PrintSentences(sout,*p);
+  sout << L"{ ";
+
+  if (not doc.empty()) {
+     sout << "\"paragraphs\" : [" << endl;
+     for (document::const_iterator p=doc.begin(); p!=doc.end(); p++) {
+        if (p!=doc.begin()) sout << L"," << endl;
+        PrintSentences(sout,*p);
+     }
+     sout << L"]" ;
   }
-  sout << L"]" ;
 
   if (doc.get_num_groups()>0) {
     // there are coreferences, print them

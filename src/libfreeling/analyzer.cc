@@ -359,11 +359,11 @@ void analyzer::analyze(document &doc) const {
   do_analysis<document>(doc);
 
   // solve coreference if needed 
-  if (current_invoke_options.InputLevel<COREF and current_invoke_options.OutputLevel>=COREF and corfc!=NULL)
+  if (current_invoke_options.InputLevel<COREF and current_invoke_options.OutputLevel>=COREF and corfc!=NULL and not doc.empty())
     corfc->analyze(doc);  
 
   // extract semantic graph if needed
-  if (current_invoke_options.OutputLevel>=SEMGRAPH) 
+  if (current_invoke_options.OutputLevel>=SEMGRAPH and sge!=NULL and not doc.empty()) 
     sge->extract(doc);  
 }
 
