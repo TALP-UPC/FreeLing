@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.12)
 
 # disallow in-source builds
 if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
@@ -69,7 +69,11 @@ install(DIRECTORY data/
 	PATTERN "Makefile*" EXCLUDE)
 
 #### Data installation hooks
-SET(languages "as;ca;cs;cy;de;en;es;fr;gl;hr;it;nb;pt;ru;sl")
+
+# find out which language data are available
+file(GLOB languages RELATIVE ${CMAKE_SOURCE_DIR}/data CONFIGURE_DEPENDS ${CMAKE_SOURCE_DIR}/data/??)
+MESSAGE(STATUS "Configuring languages: ${languages}")
+# just in case, will be ignored if ca/es are not to be installed
 SET(variants "es/es-old;es/es-ar;es/es-cl;ca/balear;ca/valencia")      
 
 if (WIN32)
