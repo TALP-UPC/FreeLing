@@ -70,18 +70,32 @@ namespace freeling {
     ArgMap = NULL;
     wstring path=erFile.substr(0,erFile.find_last_of(L"/\\")+1);
     
-    enum sections {ARG_ROLES};
+    enum sections {ARG_ROLES,OPTIONS};
     config_file cfg(true);
     cfg.add_section(L"ArgumentRoles",ARG_ROLES);
+    cfg.add_section(L"GeneralOptions",OPTIONS);
 
     if (not cfg.open(erFile))
       ERROR_CRASH(L"Error opening file "+erFile);
+
+    MergeSingletons = false; // default;
     
     wstring line; 
     while (cfg.get_content_line(line)) {
       // process each content line according to the section where it is found
       switch (cfg.get_section()) {
 
+      case OPTIONS: {
+        wistringstream sin;  sin.str(line);
+        wstring key,val;
+        sin>>key>>val;
+        if (key == L"MergeSingletons") {
+          val = util::lowercase(val);
+          MergeSingletons = (val==L"true" or val==L"1" or val==L"on" or val==L"yes" or val==L"y");
+        }
+        break;
+      }
+        
       case ARG_ROLES: {
         wistringstream sin;  sin.str(line);
         wstring key,val;
@@ -190,7 +204,7 @@ namespace freeling {
         return eid;   
       }
     
-    // is not a known mention (e.g. it is a common noun)  
+    // is not a known mention (i.e. it is a common noun singleton)  
     TRACE(4,L"    Non-entity argument "+wd.get_form());
 
     // create mention for this word and see to which node it should be added
@@ -202,19 +216,28 @@ namespace freeling {
     for (size_t k=w1; k<=w2; k++) lw.push_back(sent[k].get_form());    
     semgraph::SG_mention m(util::int2wstring(wd.get_position()+1), sent.get_sentence_id(), lw);
 
-    // Check if an entity with the same lemma-sense exists
-    wstring wsarg;
     wstring sens = (wd.get_senses(best).empty() ? L"" : wd.get_senses(best).begin()->first);
-    TRACE(4,L"    ... check for entity with lemma-sense "+wd.get_lemma(best)+L"#"+sens);
-    eid = sg.get_entity_id_by_lemma(wd.get_lemma(best), sens);
-    if (not eid.empty()) {
-      TRACE(4,L"    ... adding to matching node with id ="+eid);
+    wstring lemma = wd.get_lemma(best);
+    bool merged = false;
+    if (MergeSingletons) {
+      // Check if an entity with the same lemma-sense exists    
+      wstring wsarg;
+      TRACE(4,L"    ... check for entity with lemma-sense "+lemma+L"#"+sens);
+      eid = sg.get_entity_id_by_lemma(lemma, sens);
+      if (not eid.empty()) {
+        TRACE(4,L"    ... merging to matching node with id ="+eid);
+        merged = true;
+      }
+      else {
+        TRACE(4,L"    ... no match found, not merged.");
+      }
     }
-    else {	             
-      // no node for this lemma, create one
-      semgraph::SG_entity ent (wd.get_lemma(best), L"", semgraph::WORD, sens);
+
+    if (not merged) {	             
+      // no node for this lemma, create a new one
+      semgraph::SG_entity ent (lemma, L"", semgraph::WORD, sens);
       eid = sg.add_entity(ent);
-      TRACE(4,L"    ... Not existing. created node "+eid);
+      TRACE(4,L"    Created new node "+eid);
     }
     
     // add mention to node

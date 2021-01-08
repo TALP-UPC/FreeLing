@@ -68,6 +68,9 @@ namespace freeling {
     enum {DIRECT,SYNSARG} mapType;
     /// labels for A0,A1 produced by parser (SPR extractor only)
     std::wstring A0_label, A1_label; 
+
+    /// whether to merge singletons with lemma+sense matching coref gropus
+    bool MergeSingletons;
     
     /// check if mention has already appeared
     std::wstring find_entity_node(freeling::semgraph::semantic_graph &sg,

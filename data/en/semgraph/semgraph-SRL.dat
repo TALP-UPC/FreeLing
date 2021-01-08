@@ -2,6 +2,12 @@
 SRL
 </ExtractorType>
 
+<GeneralOptions>
+## whether singletons should be merged with lemma+sense
+## matching coref gropus (default is false).
+MergeSingletons false
+</GeneralOptions>
+
 <NE_Tag>
 NP
 </NE_Tag>
