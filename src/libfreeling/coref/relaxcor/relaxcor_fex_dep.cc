@@ -66,12 +66,12 @@ namespace freeling {
   relaxcor_fex_dep::relaxcor_fex_dep(const wstring &filename, const relaxcor_model &m) : relaxcor_fex_abs(m), _Morf(filename) {
 
     // read configuration file and store information       
-    enum sections {SEM_DB, MINPAGERANK, DEPLABELS, POSTAGS, WORDFEAT, SEMFEAT, RESOURCES};
+    enum sections {SEM_DB, SENSESELECTION, DEPLABELS, POSTAGS, WORDFEAT, SEMFEAT, RESOURCES};
     config_file cfg(true,L"%");
 
     // add compulsory sections
     cfg.add_section(L"SemDB",SEM_DB,true);
-    cfg.add_section(L"MinPageRank",MINPAGERANK,true);
+    cfg.add_section(L"SenseSelection",SENSESELECTION,true);
     cfg.add_section(L"DepLabels",DEPLABELS,true);
     cfg.add_section(L"PosTags",POSTAGS,true);
     cfg.add_section(L"WordFeatures",WORDFEAT,true);
@@ -98,8 +98,15 @@ namespace freeling {
         break;
       }
 
-      case MINPAGERANK: {
-        sin>>_MinPageRank;
+      case SENSESELECTION: {
+	wstring name;
+        sin >> name;
+        if (name == L"MinPageRank") sin >> _MinPageRank;
+        else if (name == L"PRAccumWeight") sin >> _PRAccumWeight;
+        else if (name == L"MinSenses") sin >> _MinSenses;
+        else {
+          WARNING("Ignoring unknown key '"<<name<<"' in <SenseSelection> section of file "<<filename);
+        }
         break;
       }
 
@@ -651,26 +658,44 @@ namespace freeling {
           wstring sense;
           int best = m.get_sentence()->get_best_seq();
           const list<pair<wstring,double>> &ls = m.get_head().get_senses(best);
+
 	  gen = L'n';
           if (not ls.empty()) {
+
             TRACE(7, L"    - semantic gender for '"<< m.get_head().get_form() << L"'");
             // Use as class that provided by sense ranked highest by UKB that has a class
+
+            // compute sum of page rank weigths for all senses
+            double wsum = 0;
+            for (auto s : ls) {
+              TRACE(7, L"       "<<s.first<<" "<<s.second);
+              wsum += s.second;
+            } 
+            TRACE(7, L"       wsum="<<wsum);
+            // accumulated weight sum of senses seen so far
+            double accsum = 0;
+            
+            // check senses, from most likely to less, stopping when no SenseSelection criteria holds
+            int ns = 0;
             auto s = ls.begin();
-            while  (s!=ls.end() and gen==L'n' and s->second>=fex._MinPageRank) {
+            while  (s!=ls.end() and gen==L'n' and
+                    (accsum/wsum < fex._PRAccumWeight or ns<fex._MinSenses or s->second>=fex._MinPageRank)) {
+              accsum += s->second;
               sense_info si = fex._Semdb->get_sense_info(s->first);
-              TRACE(7, L"      sense="<< s->first << L" (" << s->second << L") sumo="<< si.sumo << " tonto=" <<util::list2wstring(si.tonto,L":"));
+              TRACE(7, L"      sense="<< s->first << L" (" << s->second << L") sumo="<< si.sumo << " tonto=" <<util::list2wstring(si.tonto,L":") <<" accsum/wsum="<<accsum/wsum);
               if (fex.get_label_RE(L"SEM_MaleSUMO").search(si.sumo)) gen = L'm';
               else if (fex.get_label_RE(L"SEM_FemaleSUMO").search(si.sumo)) gen = L'f';
               else if (fex.get_label_RE(L"SEM_PersonSUMO").search(si.sumo)) gen = L'b';
 	      else {
 		wstring topont = util::list2wstring(si.tonto,L":");
-		TRACE(1,L"TOPONT="<<topont);
-		TRACE(1,L"  PersonTONTO (human)"<<fex.get_label_RE(L"SEM_PersonTONTO").search(topont));
-		TRACE(1,L"  NotPersonTONTO (group)"<<fex.get_label_RE(L"SEM_NotPersonTONTO").search(topont));
+		TRACE(7,L"      TOPONT="<<topont);
+		TRACE(7,L"        PersonTONTO (human)"<<fex.get_label_RE(L"SEM_PersonTONTO").search(topont));
+		TRACE(7,L"        NotPersonTONTO (group)"<<fex.get_label_RE(L"SEM_NotPersonTONTO").search(topont));
 		if (fex.get_label_RE(L"SEM_PersonTONTO").search(topont)
 		    and not fex.get_label_RE(L"SEM_NotPersonTONTO").search(topont))
 		  gen = L'b';
 	      }
+              ++ns;
               ++s;
             }
 
@@ -1209,15 +1234,29 @@ namespace freeling {
         const list<pair<wstring,double>> &ls = m.get_head().get_senses(best);
         if (not ls.empty()) {
           TRACE(7, L"    - semantic class for '"<< m.get_head().get_form() << L"'");
+          // compute sum of page rank weigths for all senses
+          double wsum = 0;
+          for (auto s : ls) {
+            TRACE(7, L"       "<<s.first<<" "<<s.second);
+            wsum += s.second;
+          } 
+          // accumulated weight sum of senses seen so far
+          double accsum = 0;
+
+          // check senses, from most likely to less, stopping when no SenseSelection criteria holds
           // Use as class that provided by sense ranked highest by UKB that has a class
+          int ns = 0 ;
           auto s = ls.begin();
-          while  (s!=ls.end() and sc==sc_UNK and s->second>=fex._MinPageRank) {
+          while  (s!=ls.end() and sc==sc_UNK and
+                  (accsum/wsum < fex._PRAccumWeight or ns<fex._MinSenses or s->second>=fex._MinPageRank)) {
+            accsum += s->second;
             sense_info si = fex._Semdb->get_sense_info(s->first);
-            TRACE(7, L"      sense="<< s->first << L" (" << s->second << L") sumo="<<si.sumo );
+            TRACE(7, L"      sense="<< s->first << L" (" << s->second << L") sumo="<< si.sumo << " accsum/wsum="<<accsum/wsum);
             if (fex.get_label_RE(L"SEM_OrganizationSUMO").search(si.sumo)) sc = sc_ORG;
             else if (fex.get_label_RE(L"SEM_PersonSUMO").search(si.sumo)) sc = sc_PER;
             else if (fex.get_label_RE(L"SEM_LocationSUMO").search(si.sumo)) sc = sc_LOC;
 
+            ++ns;
             ++s;
           }
         }

@@ -14,9 +14,11 @@ Dependencies
 ../../semdb.dat
 </SemDB>
 
-<MinPageRank>
-0.0003
-</MinPageRank>
+<SenseSelection>
+MinPageRank 1.0
+PRAccumWeight  0.5
+MinSenses 3
+</SenseSelection>
 
 <Resources>
 PersonNames ../relaxcor_constit/resources/person-names.txt

@@ -76,9 +76,17 @@ namespace freeling {
 
     // access to WN and SUMO information
     freeling::semanticDB *_Semdb;
-    // minimum PgRank UKB value to accept a sense as valid
-    double _MinPageRank;
 
+    /// the following parametes are combined disjunctively: A sense is valid when any of these criteria accept it
+    /// (They may be used separately setting a disabling value 0 for two of them)
+
+    // minimum PgRank UKB value to accept a sense as valid. (1: no sense is valid, 0: all senses are valid)
+    double _MinPageRank;
+    // maximum Accumulated PR percenteage to accept a sense as valid. (-1: no sense is valid, 1: all senses are valid)
+    double _PRAccumWeight;
+    // minimum absolute number of senses to check (0: no sense is valid, 1000: all senses are valid)
+    int _MinSenses;
+    
     // mention semantic classes
     typedef enum {sc_PER, sc_ORG, sc_LOC, sc_NONPER, sc_UNK} TSemanticClass;
 
