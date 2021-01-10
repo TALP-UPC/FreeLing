@@ -19,9 +19,11 @@ PersonNames ../relaxcor_constit/resources/person-names.txt
 PersonTitles ../relaxcor_constit/resources/titles.txt
 </Resources>
 
-<MinPageRank>
-0.0003
-</MinPageRank>
+<SenseSelection>
+MinPageRank 1.0
+PRAccumWeight  0.5
+MinSenses 3
+</SenseSelection>
 
 <DepLabels>
 %Apposition  ^sn$ ????
