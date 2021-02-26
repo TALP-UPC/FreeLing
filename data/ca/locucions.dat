@@ -7,6 +7,9 @@ a_balquena a_balquena RG I
 a_banda_i_banda a_banda_i_banda RG I
 abans_doncs abans_doncs RG I
 abans_que_res abans_que_res RG I
+abans_<de> abans_de SP I
+després_<de> després_de SP I
+abans_d'_ahir abans_de_ahir RG I
 a_barrisc a_barrisc RG I
 a_base_de_bé a_base_de_bé RG I
 a_batzegades a_batzegades RG I
@@ -1381,6 +1384,7 @@ no_ser_cosa_de no_ser_cosa_de SP I
 on_line on_line RG I
 <ós>_<formiguer> ós_formiguer $1:NC I
 o_sigui o_sigui RG I
+o_bé o_bé CC I
 <ós>_<polar> ós_polar $1:NC I
 <ou>_<passat>_per_aigua ou_passat_per_aigua $1:NC I
 <òxid>_de_plom òxid_de_plom $1:NC I
@@ -1689,6 +1693,7 @@ tal_qual tal_qual RG I
 tal_vegada tal_vegada RG I
 tal_volta tal_volta RG I
 tan_aviat_com_puguis tan_aviat_com_puguis RG I
+tan_aviat_com tan_aviat_com CS I
 tan_bon_punt tan_bon_punt RG I
 tancat_i_barrat tancat_i_barrat RG I
 tan_cert_com_aquesta_claror_de_dia tan_cert_com_aquesta_claror_de_dia RG I
