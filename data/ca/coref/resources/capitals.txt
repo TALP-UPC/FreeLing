@@ -1,0 +1,212 @@
+Afghanistan Kabul
+Albania Tirane
+Algeria Algiers
+Andorra Andorra_la_Vella
+Angola Luanda
+Antigua_y_Barbuda Saint_John
+Argentina Buenos_Aires
+Armenia Yerevan
+Australia Canberra
+Austria Viena
+Azerbaiyán Baku
+Las_Bahamas Nassau
+Baréin Manama
+Bangladés Daca
+Barbados Bridgetown
+Bielorusia Minsk
+Bélgica Bruselas
+Belice Belmopan
+Benín Porto-Novo
+Bután Timbu
+Bolivia La_Paz Sucre
+Bosnia_y_Herzegovina Sarajevo
+Bosnia-Herzegovina Sarajevo
+Botsuana Gaborone
+Brasil Brasilia
+Brunei Bandar_Seri_Begawan
+Bulgaria Sofía
+Burkina_Faso Ouagadougou
+Burma Rangoon Yangon Naypyidaw Nay_Pyi_Taw
+Burundi Buyumbura
+Camboya Nom_Pen
+Camerún Yaoundé
+Canadá Ottawa
+Cabo_Verde Praia
+República_Centroafricana Bangui
+Chad N'Djamena
+Chile Santiago
+China Beijing Pekín
+Colombia Bogota
+Comoras Moroni
+Congo Brazzaville Kinshasa
+Costa_Rica San_Jose
+Costa_de_Marfil Yamusukro Abiyán
+Croacia Zagreb
+Cuba Havana
+Chipre Nicosia
+República_Checa Praga
+Dinamarca Copenague
+Yibuti Yibuti
+República_Democrática_del_Congo Kinshasa
+Dominica Roseau
+República_Dominicana Santo_Domingo
+Timor_Oriental Dili
+Ecuador Quito
+Egipto Cairo
+El_Salvador San_Salvador
+Guinea_Ecuatorial Malabo
+Eritrea Asmara
+Estonia Tallin
+Etiopía Adís_Abeba
+Estados_Federados_de_Micronesia Palikir
+Fiji Suva
+Finlandia Helsinki
+Francia París
+Gabón Libreville
+Georgia Tiflis
+alemania Berlín
+Ghana Acra Accra
+Grecia Atenas
+Granada Saint_George
+Grenada Saint_George
+Guatemala Ciudad_de_Guatemala Guatemala
+Guinea Conakry
+Guinea-Bissau Bissau
+Guinea_Bissau Bissau
+Guinea-Bisáu Bisáu
+Guinea_Bisáu Bisáu
+Guyana Georgetown
+Haití Port_au_Prince Port-au-Prince Puerto_Príncipe
+Honduras Tegucigalpa
+Hungría Budapest
+Islandia Reykjavik
+India Nueva_Delhi
+Indonesia Yakarta
+Irán Teherán
+Iraq Bagdad
+Irlanda Dublín
+Israel Jerusalen
+Italia Roma
+Jamaica Kingston
+Japón Tokyo Tokio
+Jordania Amman Amán
+Kazakhstan Astana
+Kenia Nairobi
+Kiribati Tarawa
+Corea Pyongyang Seoul Seúl
+Kosovo Pristina
+Kuwait Ciudad_de_Kuwait Kuwait
+Kirguistán Bishkek Biskek
+Laos Vientiane Vientián
+Letonia Riga
+Líbano Beirut
+Lesoto Maseru
+Liberia Monrovia
+Libia Trípoli
+Liechtenstein Vaduz
+Lituania Vilnius
+Luxemburgo Luxemburgo
+Macedonia Skopie
+Madagascar Antananarivo
+Malawi Lilongwe Lilongüe
+Malaui Lilongwe	Lilongüe
+Malasia Kuala_Lumpur
+Maldivas Male
+Mali Bamako
+Malta Valletta
+Islas_Marshall Majuro
+Mauritania Nouakchott Nuakchot
+Mauricio Port_Louis
+México Ciudad_de_México México Ciudad_de_Méjico Méjico
+Méjico Ciudad_de_México México Ciudad_de_Méjico Méjico
+Micronesia Palikir
+Moldavia Chisináu
+Mónaco Mónaco
+Mongolia Ulaanbaatar Ulán_Bator
+Montenegro Podgorica
+Marruecos Rabat
+Mozambique Maputo
+Birmania Rangoon Yangon Naypyidaw Nay_Pyi_Taw Naipyidó
+Namibia Windhoek
+Nauru Yaren Distrito_de_Yaren
+Nepal Kathmandú Katmandú
+Holanda Amsterdam La_Haya
+Países_Bajos Amsterdam La_Haya
+Nueva_Zelanda Wellington
+Nicaragua Managua
+Níger Niamey
+Nigeria Abuja Abuya
+Corea_del_Norte Pyongyang Pionyang
+Noruega Oslo
+Omán Mascate
+Pakistán Islamabad
+Palaos Melekeok
+Panamá Ciudad_de_Panamá Panamá
+Papúa_Nueva_Guinea Puerto_Moresby
+Paraguay Asunción
+Perú Lima
+Filipinas Manila
+Polonia Varsovia
+Portugal Lisboa
+Catar Doha
+Katar Doha
+República_del_Congo Brazzaville
+República_de_Gambia Banjul
+Gambia Banjul
+Rumanía Bucarest
+Rusia Moscú
+Ruanda Kigali
+San_Cristóbal_y_Nieves Basseterre
+Santa_Lucía Castries
+San_Vincente_y_las_Granadinas Kingstown
+Samoa Apia
+San_Marino San_Marino
+Santo_Tomé_y_Príncipe Santo_Tomé
+Arabia_Saudí Riyadh Riad
+Arabia_Saudita Riyadh Riad
+Senegal Dakar
+Serbia Belgrado
+Seychelles Victoria
+Sierra_Leona Freetown
+Singapur Singapur
+Eslovaquia Bratislava
+Eslovenia Liubliana
+Islas_Salomón Honiara
+Somalia Mogadiscio
+Sudáfrica Pretoria Ciudad_del_Cabo Bloemfontein
+Corea_del_Sur Seoul Seúl
+España Madrid
+Sri_Lanka Colombo Sri_Jayewardenepura_Kotte
+Sudán Jartum
+Surinam Paramaribo
+Suazilandia Mbabane Lobamba
+Suecia Estocolmo
+Suiza Berna
+Siria Damasco
+Taiwán Taipei
+Tayikistán Dusambé
+Tanzania Dar_es_Salaam Dodoma
+Tailandia Bangkok
+Togo Lomé
+Tonga Nuku'alofa Nukualofa
+Trinidad_y_Tobago Puerto_España
+Túnez Túnez
+Turquía Ankara
+Turkmenistán Asjabad
+Tuvalu Funafuti
+Uganda Kampala
+Ucrania Kiev
+Emiratos_Arabes_Unidos Abu_Dabi
+Reino_Unido Londres
+Inglaterra Londres
+Estados_Unidos_de_América Washington_D.C. Washington
+Estados_Unidos  Washington_D.C. Washington
+Uruguay Montevideo
+Uzbekistán Taskent
+Vanuatu Port_Vila Port-Vila
+Ciudad_del_Vaticano Ciudad_del_Vaticano
+Venezuela Caracas
+Vietnam Hanoi
+Yemen Sanaa
+Zambia Lusaka
+Zimbabue Harare

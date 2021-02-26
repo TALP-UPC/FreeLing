@@ -1,0 +1,263 @@
+<Features>
+
+RCF_DIST_SEN_0          # the two mentions are in the same sentence
+RCF_DIST_SEN_1          # distance 1 sentence
+RCF_DIST_SEN_LE3        # distance <= 3 sentences 
+
+RCF_DIST_MEN_0		# the two mencions are together
+RCF_DIST_MEN_LE3	# 
+
+RCF_I_TYPE_E		# the head of mention I is a proper noun
+RCF_J_TYPE_E		# the head of mention J is a proper noun
+RCF_I_TYPE_S		# the head of mention I is a common noun
+RCF_J_TYPE_S		# the head of mention J is a common noun
+RCF_I_TYPE_P		# the head of mention I is a pronoun
+RCF_J_TYPE_P		# the head of mention J is a pronoun
+
+RCF_I_DEF_NP		# mention I is a definite NP (i.e. the first word is in the list "Definite")
+RCF_J_DEF_NP		# mention J is a definite NP (i.e. the first word is in the list "Definite")
+RCF_I_INDEF_NP		# mention I is an indefinite NP (i.e. either the first word or the head have type=I in list PronWords)
+RCF_J_INDEF_NP		# mention J is an indefinite NP (i.e. either the first word or the head have type=I in list PronWords)
+
+RCF_I_REL_PRON		# mention I is a relative pronoun (its PoS tag matches regex RelPron)
+RCF_J_REL_PRON		# mention J is a relative pronoun (its PoS tag matches regex RelPron)
+RCF_J_REFLX_PRON        # the mention J is a reflexive pronoun (i.e. the head has type=R in list PronWords)
+RCF_I_POSS_DET          # the mention I is a possessive determiner (i.e. the head has type=P in list PronWords and the tag is PR)  !!!! el tag canvia
+RCF_J_POSS_DET          # the mention J is a possessive determiner (i.e. the head has type=P in list PronWords and the tag is PR)  !!!! el tag canvia
+RCF_I_I			# mention I is the personal pronoun "I" (i.e. has type=S, person=1, number=s in list PronWords)
+RCF_J_I			# mention J is the personal pronoun "I" (i.e. has type=S, person=1, number=s in list PronWords)
+RCF_I_YOU		# mention I is the personal pronoun "you" (i.e. has type=S, person=2, number=0 in list PronWords)
+RCF_J_YOU		# mention J is the personal pronoun "you" (i.e. has type=S, person=2, number=0 in list PronWords)
+RCF_I_WE		# mention I is the personal pronoun "we" (i.e. has type=S, person=1, number=p in list PronWords)
+RCF_J_WE		# mention J is the personal pronoun "we" (i.e. has type=S, person=1, number=p in list PronWords)
+RCF_I_NUMBER_SG		# mention I is in singular (pronoun: check list PronWords, NP: check PoS tag, NE: ORG->0, others->unk)
+RCF_J_NUMBER_SG		# mention J is in singular (pronoun: check list PronWords, NP: check PoS tag, NE: ORG->0, others->unk)
+RCF_I_THIRD_PERSON	# mention I is in 3rd person (pronoun: check list PronWords, others -> 3rd)
+RCF_J_THIRD_PERSON	# mention J is in 3rd person (pronoun: check list PronWords, others -> 3rd)
+RCF_SAME_PERSON		# the two mentions have the same person (pronoun: check list PronWords, others -> 3rd)
+RCF_AGREEMENT_NO        # the mentions have different number or gender
+RCF_AGREEMENT_YES       # the mentions have the same number and gender 
+RCF_AGREEMENT_UNK       # the mentions have compatible number and unknown gender
+RCF_C_AGREEMENT_YES     # the mentions are the closest agreement (i.e. mention "J" is the closest mention to mention "I" with which it agrees)
+RCF_C_AGREEMENT_UNK     # the mentions have the closest compatible number and unknown gender
+
+RCF_STR_MATCH_STRICT	# the strings of both mentions match completely
+RCF_STR_MATCH_RELAXED	# the strings of both mentions match up to the head element
+RCF_HEAD_MATCH		# mentions are both non-pronouns and have identical heads
+RCF_RELAXED_HEAD_MATCH_JI	# the mention head of J match any word of mention I
+RCF_NAME_MATCH_JI	# I and J are NEs and the last word in head of J is contained in head of I
+RCF_PRON_MATCH          # mentions are both pronouns and identical
+RCF_LOC_MATCH		# the modifiers of the two mentions have the same location named entities, the same proper names or the same spatial modifiers
+RCF_NUM_MATCH_JI	# mention J does not have a number that does not appear in I
+RCF_WORD_INCLUSION_JI	# all non-stop words of J are included in I
+RCF_COMPATIBLE_MODS_JI	# all modifiers (with a tag matching NounAdj expression) of J are included in I
+RCF_COMPATIBLE_MODS_IJ	# all modifiers (with a tag matching NounAdj expression) of I are included in J
+
+RCF_I_EMBEDDED          # mention I is a common noun o a proper noun which is not maximal (it is inside another mention)
+RCF_J_EMBEDDED          # mention J is a common noun o a proper noun which is not maximal (it is inside another mention)
+RCF_NESTED_JI		# mention J is inside mention I
+RCF_REL_ANTECEDENT_IJ	# mention I is the antecedent of mention J, which is a relative pronoun
+#RCF_APPOSITION_JI       # mention J is an apposition of mention I
+RCF_PRED_NP_IJ          # mention J functions as attribute (is PRD of a verb "be" of which I is SBJ)
+#RCF_I_NMOD		# mention I functions as NMOD
+RCF_ACRONYM		# the mention is an acronym
+RCF_DEMONYM		# the mention is a demonym
+
+RCF_SAME_SEMCLASS_YES	# the mentions have the same semantic class
+RCF_SAME_SEMCLASS_NO	# the mentions don't have the same semantic class
+
+RCF_I_IN_QUOTES		# mention I is within quotes
+RCF_J_IN_QUOTES		# mention J is within quotes
+RCF_SAME_QUOTE		# the two mentions are within the same quotes
+RCF_OBJ_SAME_REPORTING	# the two mentions are inside the direct object of the same reporting verb
+RCF_SUBJ_OBJ_REPORTING_IJ	# mention I is the subject of a reporting verb and mention J is within the direct object of the same reporting verb
+RCF_SUBJ_OBJ_REPORTING_JI	# mention J is the subject of a reporting verb and mention I is within the direct object of the same reporting verb
+RCF_SUBJ_OBJ_SAME_VERB_IJ	# mention I is the subject of verb and mention J is any object of the same verb
+
+</Features>
+
+
+
+<Constraints>
+
+## ----- Rules unconnecting non-coreferening mentions
+
+## non-corefering nested mentions
+#-100	RCF_NESTED_JI !RCF_APPOSITION_JI !RCF_REL_ANTECEDENT_IJ
+-100	RCF_NESTED_JI !RCF_REL_ANTECEDENT_IJ
+
+# prevent non-agreeing mentions from being toghether.
+-100	RCF_AGREEMENT_NO
+
+# indefinite mentions
+-50	RCF_J_INDEF_NP
+#-50	RCF_J_INDEF_NP !RCF_PRED_NP_IJ
+
+
+## ------ Stanford's sieves
+
+## 1. Speaker indentification
+
+# (a) two Is assigned to the same speaker are coreferent if they are object of the same reporting verb or are in the same quotes
+50	RCF_I_I RCF_J_I RCF_OBJ_SAME_REPORTING
+50	RCF_I_I RCF_J_I RCF_SAME_QUOTE
+
+# (b) two YOUs assigned to the same speaker are coreferent if they are object of the same reporting verb or are in the same quotes
+25	RCF_I_YOU RCF_I_NUMBER_SG RCF_J_YOU RCF_J_NUMBER_SG RCF_OBJ_SAME_REPORTING
+25	RCF_I_YOU RCF_I_NUMBER_SG RCF_J_YOU RCF_J_NUMBER_SG RCF_SAME_QUOTE
+25	RCF_I_YOU !RCF_I_NUMBER_SG RCF_J_YOU !RCF_J_NUMBER_SG RCF_OBJ_SAME_REPORTING
+25	RCF_I_YOU !RCF_I_NUMBER_SG RCF_J_YOU !RCF_J_NUMBER_SG RCF_SAME_QUOTE
+
+# (c) the speaker and Is in her/his text are coreferent if...
+# - the speaker is the subject of a reporting verb and the I is within the object of the same reporting verb
+# - the I is the subject of a reporting verb and the speaker is within the object of the same reporting verb
+25	RCF_DIST_SEN_0 RCF_I_I RCF_SUBJ_OBJ_REPORTING_JI
+25	RCF_DIST_SEN_0 RCF_J_I RCF_SUBJ_OBJ_REPORTING_IJ
+
+# (d) the speaker and a mention which is not I in her/his utterance cannot be coreferent if ...
+# - the speaker is the subject of a reporting verb and the not-I is within the object of the same reporting verb
+# - the not-I is the subject of a reporting verb and the speaker is within the object of the same reporting verb
+-50	RCF_DIST_SEN_0 !RCF_J_I RCF_SUBJ_OBJ_REPORTING_IJ RCF_I_NUMBER_SG RCF_J_IN_QUOTES
+-50	RCF_DIST_SEN_0 !RCF_I_I RCF_SUBJ_OBJ_REPORTING_JI RCF_J_NUMBER_SG RCF_I_IN_QUOTES
+-25	RCF_DIST_SEN_0 !RCF_J_I RCF_SUBJ_OBJ_REPORTING_IJ RCF_J_IN_QUOTES
+-25	RCF_DIST_SEN_0 !RCF_I_I RCF_SUBJ_OBJ_REPORTING_JI RCF_I_IN_QUOTES
+
+# (f) two different person pronouns by the same speaker cannot be coreferent if they are inside the same utterance or inside the same quotes
+# !!! Un periodista es refereix al convidat com "he" quan el presenta, i com "you" quan parla amb ell.
+# !!! En general, les converses no son de 2, i per tant, el pronom canvia de "he" a "you" segons a qui es dirigeix el parlant. => Dificil d'arreglar
+# !!! Hi ha cites sense cometes "He said: I don't want to go", o be "I asked myself, do you really want this?"
+-25	RCF_J_TYPE_P !RCF_J_REL_PRON RCF_I_I !RCF_J_I RCF_OBJ_SAME_REPORTING RCF_SAME_QUOTE
+-25	RCF_J_TYPE_P !RCF_J_REL_PRON RCF_I_I !RCF_J_I RCF_OBJ_SAME_REPORTING !RCF_I_IN_QUOTES !RCF_J_IN_QUOTES
+-25	RCF_I_TYPE_P !RCF_I_REL_PRON !RCF_I_I RCF_J_I RCF_OBJ_SAME_REPORTING RCF_SAME_QUOTE
+-25	RCF_I_TYPE_P !RCF_I_REL_PRON !RCF_I_I RCF_J_I RCF_OBJ_SAME_REPORTING !RCF_I_IN_QUOTES !RCF_J_IN_QUOTES
+-25	RCF_J_TYPE_P !RCF_J_REL_PRON RCF_I_YOU RCF_I_NUMBER_SG !RCF_J_YOU RCF_OBJ_SAME_REPORTING
+-25	RCF_I_TYPE_P !RCF_I_REL_PRON !RCF_I_YOU RCF_J_YOU RCF_J_NUMBER_SG RCF_OBJ_SAME_REPORTING
+-25	RCF_J_TYPE_P !RCF_J_REL_PRON RCF_I_WE !RCF_J_WE RCF_OBJ_SAME_REPORTING
+-25	RCF_I_TYPE_P !RCF_I_REL_PRON !RCF_I_WE RCF_J_WE RCF_OBJ_SAME_REPORTING
+-25	RCF_J_TYPE_P !RCF_J_REL_PRON RCF_I_YOU !RCF_I_NUMBER_SG !RCF_J_YOU RCF_OBJ_SAME_REPORTING
+-25	RCF_I_TYPE_P !RCF_I_REL_PRON !RCF_I_YOU RCF_J_YOU !RCF_J_NUMBER_SG RCF_OBJ_SAME_REPORTING
+
+-25	RCF_J_TYPE_P !RCF_J_REL_PRON RCF_I_I !RCF_J_I RCF_SAME_QUOTE
+-25	RCF_I_TYPE_P !RCF_I_REL_PRON !RCF_I_I RCF_J_I RCF_SAME_QUOTE
+-25	RCF_J_TYPE_P !RCF_J_REL_PRON RCF_I_YOU RCF_I_NUMBER_SG !RCF_J_YOU RCF_SAME_QUOTE
+-25	RCF_I_TYPE_P !RCF_I_REL_PRON !RCF_I_YOU RCF_J_YOU RCF_J_NUMBER_SG RCF_SAME_QUOTE
+-25	RCF_J_TYPE_P !RCF_J_REL_PRON RCF_I_WE !RCF_J_WE RCF_SAME_QUOTE
+-25	RCF_I_TYPE_P !RCF_I_REL_PRON !RCF_I_WE RCF_J_WE RCF_SAME_QUOTE
+-25	RCF_J_TYPE_P !RCF_J_REL_PRON RCF_I_YOU !RCF_I_NUMBER_SG !RCF_J_YOU RCF_SAME_QUOTE
+-25	RCF_I_TYPE_P !RCF_I_REL_PRON !RCF_I_YOU RCF_J_YOU !RCF_J_NUMBER_SG RCF_SAME_QUOTE
+
+## (g) nominal mentions cannot be coreferent with Is, YOUs or WEs in the same quotation
+#!!! No es necessariament cert, especialment pel 'we' o el 'you', p.e. "In our family, we like dancing", "Starbuck's is a nice company, we believe in equal opportunitues"
+#!!! Tambe cal excloure les cites sense cometes amb !OBJ_REPORTING, p.e. "He said: I don't like it".
+-25	!RCF_I_TYPE_P RCF_J_I RCF_OBJ_SAME_REPORTING !RCF_PRED_NP_IJ
+-25	!RCF_J_TYPE_P RCF_I_I RCF_OBJ_SAME_REPORTING !RCF_PRED_NP_IJ
+-25	!RCF_I_TYPE_P RCF_J_YOU RCF_J_NUMBER_SG RCF_OBJ_SAME_REPORTING !RCF_PRED_NP_IJ
+-25	!RCF_J_TYPE_P RCF_I_YOU RCF_I_NUMBER_SG RCF_OBJ_SAME_REPORTING !RCF_PRED_NP_IJ
+-25	!RCF_I_TYPE_P RCF_J_WE RCF_OBJ_SAME_REPORTING !RCF_PRED_NP_IJ
+-25	!RCF_J_TYPE_P RCF_I_WE RCF_OBJ_SAME_REPORTING !RCF_PRED_NP_IJ
+-25	!RCF_I_TYPE_P RCF_J_YOU !RCF_J_NUMBER_SG RCF_OBJ_SAME_REPORTING !RCF_PRED_NP_IJ
+-25	!RCF_J_TYPE_P RCF_I_YOU !RCF_I_NUMBER_SG RCF_OBJ_SAME_REPORTING !RCF_PRED_NP_IJ
+
+-25	!RCF_I_TYPE_P RCF_J_I RCF_SAME_QUOTE !RCF_PRED_NP_IJ
+-25	!RCF_J_TYPE_P RCF_I_I RCF_SAME_QUOTE !RCF_PRED_NP_IJ
+-25	!RCF_I_TYPE_P RCF_J_YOU RCF_J_NUMBER_SG RCF_SAME_QUOTE !RCF_PRED_NP_IJ
+-25	!RCF_J_TYPE_P RCF_I_YOU RCF_I_NUMBER_SG RCF_SAME_QUOTE !RCF_PRED_NP_IJ RCF_I_NUMBER_SG
+-25	!RCF_I_TYPE_P RCF_J_WE RCF_SAME_QUOTE !RCF_PRED_NP_IJ
+-25	!RCF_J_TYPE_P RCF_I_WE RCF_SAME_QUOTE !RCF_PRED_NP_IJ
+-25	!RCF_I_TYPE_P RCF_J_YOU !RCF_J_NUMBER_SG RCF_SAME_QUOTE !RCF_PRED_NP_IJ
+-25	!RCF_J_TYPE_P RCF_I_YOU !RCF_I_NUMBER_SG RCF_SAME_QUOTE !RCF_PRED_NP_IJ
+
+
+## 2. Exact string match: the 2 mentions fully match and
+# - they are headed by proper nouns
+# - they are headed by common nouns and the 2nd mention is a definite or indefinite NP
+50	RCF_STR_MATCH_STRICT RCF_I_TYPE_E RCF_J_TYPE_E !RCF_NESTED_JI
+50	RCF_STR_MATCH_STRICT RCF_I_TYPE_S RCF_J_TYPE_S RCF_J_INDEF_NP !RCF_NESTED_JI
+50	RCF_STR_MATCH_STRICT RCF_I_TYPE_S RCF_J_TYPE_S RCF_J_DEF_NP !RCF_NESTED_JI
+
+## 3. Relaxed string match: the 2 mentions fully match up to the head element and
+# - they are headed by proper nouns
+# - they are headed by common nouns and the 2nd mention is definite NP
+25	RCF_STR_MATCH_RELAXED RCF_I_TYPE_E RCF_J_TYPE_E 
+25	RCF_STR_MATCH_RELAXED RCF_I_TYPE_S RCF_J_TYPE_S RCF_J_DEF_NP
+
+## 4.1. Precise constructs: Appositions (separated by commas)
+#50	RCF_APPOSITION_JI
+
+## 4.2. Precise constructs: Predicative NPs
+75	RCF_PRED_NP_IJ RCF_I_TYPE_P
+75	RCF_PRED_NP_IJ RCF_I_TYPE_E
+75	RCF_PRED_NP_IJ RCF_J_TYPE_E
+
+## 4.4. Precise constructs: Relative pronouns
+75	RCF_J_REL_PRON RCF_REL_ANTECEDENT_IJ
+
+## 4.5. Precise constructs: Acronyms
+75	RCF_ACRONYM
+
+## 4.6. Precise constructs: Demonyms
+75	RCF_DEMONYM
+
+## 5. Strict head match
+25	!RCF_I_TYPE_P RCF_J_TYPE_E !RCF_NESTED_JI RCF_HEAD_MATCH RCF_WORD_INCLUSION_JI RCF_COMPATIBLE_MODS_JI
+25	!RCF_I_TYPE_P RCF_J_TYPE_S !RCF_NESTED_JI RCF_HEAD_MATCH RCF_WORD_INCLUSION_JI RCF_COMPATIBLE_MODS_JI RCF_J_DEF_NP 
+
+## 6. Relaxed strict head match
+15	!RCF_I_TYPE_P RCF_J_TYPE_E !RCF_NESTED_JI RCF_HEAD_MATCH RCF_WORD_INCLUSION_JI
+15	!RCF_I_TYPE_P RCF_J_TYPE_S !RCF_NESTED_JI RCF_HEAD_MATCH RCF_WORD_INCLUSION_JI RCF_J_DEF_NP 
+
+## 7. Relaxed strict head match (2)
+10	!RCF_I_TYPE_P RCF_J_TYPE_E !RCF_NESTED_JI RCF_HEAD_MATCH RCF_COMPATIBLE_MODS_JI
+10	!RCF_I_TYPE_P RCF_J_TYPE_S !RCF_NESTED_JI RCF_HEAD_MATCH RCF_COMPATIBLE_MODS_JI RCF_J_DEF_NP
+
+## 8. Proper head word match
+50	RCF_I_TYPE_E RCF_J_TYPE_E !RCF_NESTED_JI RCF_HEAD_MATCH RCF_LOC_MATCH RCF_NUM_MATCH_JI
+
+## 9. Relaxed head match (proper)
+50	RCF_I_TYPE_E RCF_J_TYPE_E !RCF_NESTED_JI RCF_RELAXED_HEAD_MATCH_JI RCF_WORD_INCLUSION_JI RCF_SAME_SEMCLASS_YES
+50	RCF_I_TYPE_E RCF_J_TYPE_E !RCF_NESTED_JI RCF_NAME_MATCH_JI RCF_SAME_SEMCLASS_YES
+50	RCF_I_TYPE_E RCF_J_TYPE_E !RCF_NESTED_JI RCF_NAME_MATCH_JI
+
+## 10. Pronominal coreference resolution
+
+# nouns and non-relative 3rd pers. pronouns, if agree and not no-same semclass
+15	RCF_DIST_SEN_0   !RCF_I_TYPE_P RCF_J_TYPE_P RCF_J_THIRD_PERSON !RCF_J_REL_PRON !RCF_SAME_SEMCLASS_NO RCF_AGREEMENT_YES
+5	RCF_DIST_SEN_1   !RCF_I_TYPE_P RCF_J_TYPE_P RCF_J_THIRD_PERSON !RCF_J_REL_PRON !RCF_SAME_SEMCLASS_NO RCF_AGREEMENT_YES
+10	RCF_DIST_SEN_LE3 !RCF_I_TYPE_P RCF_J_TYPE_P RCF_J_THIRD_PERSON !RCF_J_REL_PRON !RCF_SAME_SEMCLASS_NO RCF_C_AGREEMENT_YES
+
+# nouns and 3rd pers. possesives, if agree and not no-same semclass and not nested if in the same sentence 
+20	RCF_DIST_SEN_0   !RCF_I_TYPE_P RCF_J_TYPE_P RCF_J_THIRD_PERSON !RCF_J_REL_PRON !RCF_SAME_SEMCLASS_NO RCF_AGREEMENT_YES RCF_J_POSS_DET !RCF_NESTED_JI 
+10	RCF_DIST_SEN_1   !RCF_I_TYPE_P RCF_J_TYPE_P RCF_J_THIRD_PERSON !RCF_J_REL_PRON !RCF_SAME_SEMCLASS_NO RCF_AGREEMENT_YES RCF_J_POSS_DET 
+
+# nouns and 3rd pers. non-relatives/non-reflexives/non-possessives, if they agree and same semclass
+5	RCF_DIST_SEN_LE3 !RCF_I_TYPE_P RCF_J_TYPE_P RCF_J_THIRD_PERSON !RCF_J_REL_PRON RCF_AGREEMENT_YES !RCF_J_REFLX_PRON !RCF_J_POSS_DET !RCF_SAME_SEMCLASS_NO 
+10	RCF_DIST_SEN_LE3 !RCF_I_TYPE_P RCF_J_TYPE_P RCF_J_THIRD_PERSON !RCF_J_REL_PRON RCF_AGREEMENT_YES !RCF_J_REFLX_PRON !RCF_J_POSS_DET RCF_SAME_SEMCLASS_YES 
+
+# nouns and 3rd person reflexives/possessives if closest agreement
+50	RCF_DIST_SEN_0   !RCF_I_TYPE_P RCF_J_REFLX_PRON RCF_J_THIRD_PERSON RCF_C_AGREEMENT_YES 
+#50	RCF_DIST_SEN_0   !RCF_I_TYPE_P RCF_J_POSS_DET RCF_J_THIRD_PERSON RCF_AGREEMENT_YES 
+
+## two pronouns...
+# two non-relative pronouns if they agree and have the same person
+15	RCF_DIST_SEN_0   RCF_I_TYPE_P !RCF_I_REL_PRON RCF_J_TYPE_P !RCF_J_REL_PRON RCF_J_THIRD_PERSON !RCF_PRON_MATCH RCF_SAME_PERSON RCF_AGREEMENT_YES
+5	RCF_DIST_SEN_1   RCF_I_TYPE_P !RCF_I_REL_PRON RCF_J_TYPE_P !RCF_J_REL_PRON RCF_J_THIRD_PERSON !RCF_PRON_MATCH RCF_SAME_PERSON RCF_AGREEMENT_YES
+10	RCF_DIST_SEN_LE3 RCF_I_TYPE_P !RCF_I_REL_PRON RCF_J_TYPE_P !RCF_J_REL_PRON RCF_J_THIRD_PERSON !RCF_PRON_MATCH RCF_SAME_PERSON RCF_C_AGREEMENT_YES 
+
+# pronouns and reflexives/possessives if closest agreement and same person
+50	RCF_DIST_SEN_0 RCF_I_TYPE_P !RCF_PRON_MATCH RCF_J_REFLX_PRON RCF_C_AGREEMENT_YES RCF_SAME_PERSON
+50	RCF_DIST_SEN_0 RCF_I_TYPE_P !RCF_PRON_MATCH !RCF_I_REL_PRON RCF_J_POSS_DET RCF_C_AGREEMENT_YES RCF_SAME_PERSON
+
+# possessives and personal pronouns if closest agreement and have same person
+25	RCF_DIST_SEN_0 RCF_I_POSS_DET RCF_J_I RCF_C_AGREEMENT_YES RCF_SAME_PERSON
+25	RCF_DIST_SEN_0 RCF_I_POSS_DET RCF_J_YOU RCF_J_NUMBER_SG RCF_C_AGREEMENT_YES RCF_SAME_PERSON
+25	RCF_DIST_SEN_0 RCF_I_POSS_DET RCF_J_WE RCF_C_AGREEMENT_YES RCF_SAME_PERSON
+25	RCF_DIST_SEN_0 RCF_I_POSS_DET RCF_J_YOU !RCF_J_NUMBER_SG RCF_C_AGREEMENT_YES RCF_SAME_PERSON
+
+# two pronouns if they match and are neither relative, nor possessive, nor 3rd person
+10	RCF_I_TYPE_P RCF_J_TYPE_P RCF_PRON_MATCH !RCF_I_REL_PRON !RCF_I_THIRD_PERSON !RCF_J_POSS_DET 
+
+-50	RCF_DIST_SEN_0 RCF_I_TYPE_P !RCF_J_TYPE_P RCF_J_EMBEDDED
+-50	RCF_I_TYPE_P RCF_J_TYPE_P RCF_I_THIRD_PERSON RCF_J_THIRD_PERSON !RCF_AGREEMENT_YES
+-50	RCF_J_TYPE_P !RCF_J_REFLX_PRON !RCF_J_POSS_DET RCF_AGREEMENT_YES RCF_SAME_PERSON RCF_SUBJ_OBJ_SAME_VERB_IJ
+
+</Constraints>

@@ -1,0 +1,252 @@
+%%%%%%%%%%%%%%%%%%%%%
+%%% GENERAL
+%%%%%%%%%%%%%%%%%%%%%
+
+<Type>
+Dependencies
+</Type>
+
+%%%%%%%%%%%%%%%%%%%%%
+%%% FEATURE EXTRACTOR
+%%%%%%%%%%%%%%%%%%%%%
+
+<SemDB>
+../../semdb.dat
+</SemDB>
+
+<Resources>
+PersonNames ../resources/person-names.txt
+PersonTitles ../resources/titles.txt
+</Resources>
+
+<SenseSelection>
+MinPageRank 1.0
+PRAccumWeight  0.5
+MinSenses 3
+</SenseSelection>
+
+<DepLabels>
+%Apposition  ^sn$ ????
+Subject     ^suj$
+Object      ^cd|ci$
+NounModifier ^S$
+Predicate    ^atr$
+Arg0         ^A0$
+Arg1         ^A1$
+Arg123       ^A[123]$
+</DepLabels>
+
+
+<PosTags>
+Verb ^V
+Number ^Z
+RelPron ^PR
+Poss ^DP
+NounSg ^NC.S
+NounPl ^NC.P
+NounMasc ^NCM
+NounFem ^NCF
+ProperNoun ^NP
+NonStopWord ^[NAVR]
+NounAdj ^([NAZ]|VM[GN])
+OrganizationNE ^NP00O00$
+PersonNE ^NP00SP0$
+LocationNE ^NP00G00$
+Preposition ^SP
+</PosTags>
+
+<SemanticFeatures>
+%%% based on sumo
+PersonSUMO ^(Human|Man|Woman)[+=]$ 
+MaleSUMO ^(Male|Man)[+=]$ 
+FemaleSUMO ^(Female|Woman)[+=]$ 
+
+OrganizationSUMO ^(Care|Educational|Government|Judicial|Legislative|Mercantile|Military|Nonprofit|Police|Political|Religious|Terrorist|Union)?Organization[+=]$ 
+
+LocationSUMO ^(Island|Park|Plain|Reef|Glacier|Hill|Room|Building|Burrow|Creek|Field|StateOrProvince|Forest|MountainRange|Lake|Valley|City|Nation|StationaryArtifact|Region|FreshWaterArea|LowlandArea|SaltWaterArea|UplandArea|SlopedArea|CultivatedLandArea|ShoreArea|StaticWaterArea|WaterArea|StreamWaterArea|GeopoliticalArea|GeographicArea|LandArea)[+=]$ 
+
+%% based on WN Top Ontology
+PersonTONTO Human 
+NotPersonTONTO Group
+</SemanticFeatures>
+
+<WordFeatures>
+Definite     ^(el|la|los|las|mi|mis|tu|tus|su|sus|nuestra|nuestras|nuestro|nuestros|vuestra|vuestras|vuestro|vuestros|aquel|aquella|aquellas|aquellos|esa|esas|ese|esos|esotra|esotras|esotro|esotros|esta|estas|este|estos|estotra|estotras|estotro|estotros|semejante|semejantes|tal|tales|)$
+Copulative   ^(ser|estar)$
+Reporting    ^(dir|respondre|contestar)$
+AcronymInfix ^(and|und|et|y|\\&|the|of|i)$
+AcronymSuffix ^([Cc]o|[Ii]nc|[Cc]orp|SL|sl|SA|sa|Bro(s?)|bro(s?))\\.?$ 
+</WordFeatures>
+
+%%% Pronouns and possessive particles
+%%% columns: pronoun/possesive type humanity person gender number
+%%% (type: 'I'-indefinite, 'S'-subject, 'O'-object, 'P'-possessive, 'R'-reflexive 'L'-relative 'D'-demonstrative 'X'-interrogative)
+%%% (humanity: 'h'-human, 'n'-non-human, '0'-underspecified)
+%%% (person: 1, 2, 3)
+%%% (gender: 'm'-masculine, 'f'-femenine, 'n'-neuter, 'b'-m or f, '0'-unspecified)
+%%% (number: 's'-singular, 'p'-plural, '0'-unspecified)
+<PronWords>
+% subject
+yo S h1bs
+tú S h2bs
+él S h3ms
+ella S h3fs
+nosotras S h1fp
+nosotros S h1mp
+vosotras S h2fp
+vosotros S h2mp
+ellas S h3fp
+ellos S h3mp
+usted S h2bs
+ustedes S h2bp
+% object and reflexive
+me OR h1bs
+te OR h2bs
+%se OR 03b0
+nos OR h1bp
+os OR h2bp
+la O 03fs
+las O 03fp
+le O h3bs
+les O h3bp
+lo O 03ms
+los O 03mp
+% possessive
+mi P h1b0
+mis P h1b0
+tu P h2b0
+tus P h2b0
+su P 03b0
+sus P 03b0
+nuestra P h1b0
+nuestras P h1b0
+nuestro P h1b0
+nuestros P h1b0
+vuestra P h2b0
+vuestras P h2b0
+vuestro P h2b0
+vuestros P h2b0
+% demonstrative
+aquel D 03ms
+aquella D 03fs
+aquellas D 03fp
+aquello D n3ms
+aquellos D 03mp
+aquél D 03ms
+aquélla D 03fs
+aquéllas D 03fp
+aquéllos D 03mp
+ello D n3ms
+esa D 03fs
+esas D 03fp
+ese D 03ms
+eso D n3ms
+esos D 03mp
+esotra D 03fs
+esotras D 03fp
+esotro D n3ms
+esotros D 03mp
+esta D 03fs
+estas D 03fp
+este D 03ms
+esto D n3ms
+estos D 03mp
+estotra D n3fs
+estotras D n3fp
+estotro D n3ms
+estotros D n3mp
+tal D n3bs
+tales D n3bp
+ésa D 03fs
+ésas D 03fp
+ése D 03ms
+ésos D 03mp
+ésta D 03fs
+éstas D 03fp
+éste D 03ms
+éstos D 03mp
+% relative
+cual L 030s
+cuales L 030p
+cuanta L n3fs
+cuantas L 03fp
+cuanto L n3ms
+cuantos L 03mp
+cuya L 03fs
+cuyas L 03fp
+cuyo L 03ms
+cuyos L 03mp
+que L 0300
+quien L h3bs
+quienes L h3bp 
+% interrogative
+cuál X 030s
+cuáles X 030p
+cuánta X n3fs
+cuántas X 03fp
+cuánto X n3ms
+cuántos X 03mp
+quién X h3bs
+quiénes X h3bp
+qué X 0300
+% indefinite
+algo I n3ns
+alguien I h3bs
+alguna I 03fs
+algunas I 03fp
+alguno I h3ms
+algunos I n3mp
+ambas I 03fp
+ambos I 03mp
+bastante I 030s
+bastantes I 030p
+cual I 03ps
+cualesquiera I 030p
+cualquiera I 03ps
+demasiada I 03fs
+demasiadas I 03fp
+demasiado I 03ms
+demasiados I 03mp
+demás I 03bp
+misma I 03fs
+mismas I 03fp
+mismo I 03ms
+mismos I 03mp
+mucha I 03fs
+muchas I 03fp
+mucho I 03ms
+muchos I 03mp
+nada I n3ns
+nadie I h3bs
+naide I h3bs
+ninguna I 03fs
+ningunas I 03fp
+ninguno I 03ms
+ningunos I 03mp
+otra I 03fs
+otras I 03fp
+otro I 03ms
+otros I 03mp
+poca I 03fs
+pocas I 03fp
+poco I 03ms
+pocos I 03mp
+quienesquiera I h3bp
+quienquiera I h3bs
+suficiente I 03ps
+suficientes I 030p
+tanta I 03fs
+tantas I 03fp
+tanto I 03ms
+tantos I 03mp
+toda I 03fs
+todas I 03fp
+todo I 03ms
+todos I 03mp
+una I 03fs
+unas I 03fp
+uno I 03ms
+unos I 03mp
+varias I 03fp
+varios I 03mp
+</PronWords>
