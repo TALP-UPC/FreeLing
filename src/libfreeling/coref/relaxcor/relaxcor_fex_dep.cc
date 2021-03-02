@@ -264,7 +264,9 @@ namespace freeling {
     _FeatureFunction[L"RCF_PRED_NP_JI"] = make_pair(&relaxcor_fex_dep::predicative_ji, ff_YES);
 
     _FeatureFunction[L"RCF_STR_MATCH_STRICT"] = make_pair(&relaxcor_fex_dep::str_match_strict, ff_YES);
-    _FeatureFunction[L"RCF_STR_MATCH_RELAXED"] = make_pair(&relaxcor_fex_dep::str_match_relaxed, ff_YES);
+    _FeatureFunction[L"RCF_STR_MATCH_RELAXED_LEFT"] = make_pair(&relaxcor_fex_dep::str_match_relaxed_left, ff_YES);
+    _FeatureFunction[L"RCF_STR_MATCH_RELAXED_RIGHT"] = make_pair(&relaxcor_fex_dep::str_match_relaxed_right, ff_YES);
+
     _FeatureFunction[L"RCF_HEAD_MATCH"] = make_pair(&relaxcor_fex_dep::str_head_match, ff_YES);
     _FeatureFunction[L"RCF_RELAXED_HEAD_MATCH_IJ"] = make_pair(&relaxcor_fex_dep::relaxed_head_match_ij, ff_YES);
     _FeatureFunction[L"RCF_RELAXED_HEAD_MATCH_JI"] = make_pair(&relaxcor_fex_dep::relaxed_head_match_ji, ff_YES);
@@ -1736,10 +1738,10 @@ namespace freeling {
   }
 
   //////////////////////////////////////////////////////////////////
-  ///    Returns whether both mentions are identical up to the head
+  ///    Returns whether both mentions are identical from the start up to the head
   //////////////////////////////////////////////////////////////////
 
-  relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::str_match_relaxed(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex) {
+  relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::str_match_relaxed_left(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex) {
     sentence::const_iterator w;
     sentence::const_iterator wend;
 
@@ -1764,7 +1766,29 @@ namespace freeling {
     for (++w; w!=wend; ++w) dd2 += L" " + w->get_form();
     
     bool r = not m1.is_type(mention::PRONOUN) and not m2.is_type(mention::PRONOUN) and dd1==dd2;
-    TRACE(6,L"   " << m1.get_id()<<L":"<<m2.get_id() << L":STR_MATCH_RELAXED" << L" = " << (r?L"yes":L"no"));
+    TRACE(6,L"   " << m1.get_id()<<L":"<<m2.get_id() << L":STR_MATCH_RELAXED_LEFT" << L" = " << (r?L"yes":L"no"));
+    return (r ? ff_YES : ff_NO);
+  }
+
+  //////////////////////////////////////////////////////////////////
+  ///    Returns whether both mentions are identical from the head to the end
+  //////////////////////////////////////////////////////////////////
+
+  relaxcor_fex_dep::TFeatureValue relaxcor_fex_dep::str_match_relaxed_right(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex) {
+    sentence::const_iterator w;
+    sentence::const_iterator wend;
+
+    // get m1 words from head to end
+    wstring dd1;        
+    for (w = m1.get_it_head(); w != m1.get_it_end(); ++w) dd1 += L" " + w->get_form();
+
+    // get m2 words from head to end
+    wstring dd2;        
+    for (w = m2.get_it_head(); w != m2.get_it_end(); ++w) dd2 += L" " + w->get_form();
+
+    // check if they are the same
+    bool r = not m1.is_type(mention::PRONOUN) and not m2.is_type(mention::PRONOUN) and dd1==dd2;
+    TRACE(6,L"   " << m1.get_id()<<L":"<<m2.get_id() << L":STR_MATCH_RELAXED_RIGHT" << L" = " << (r?L"yes":L"no"));
     return (r ? ff_YES : ff_NO);
   }
 

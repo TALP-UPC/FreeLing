@@ -42,7 +42,7 @@ RCF_C_AGREEMENT_YES     # the mentions are the closest agreement (i.e. mention "
 RCF_C_AGREEMENT_UNK     # the mentions have the closest compatible number and unknown gender
 
 RCF_STR_MATCH_STRICT	# the strings of both mentions match completely
-RCF_STR_MATCH_RELAXED	# the strings of both mentions match up to the head element
+RCF_STR_MATCH_RELAXED_RIGHT	# the strings of both mentions match up to the head element
 RCF_HEAD_MATCH		# mentions are both non-pronouns and have identical heads
 RCF_RELAXED_HEAD_MATCH_JI	# the mention head of J match any word of mention I
 RCF_NAME_MATCH_JI	# I and J are NEs and the last word in head of J is contained in head of I
@@ -178,8 +178,8 @@ RCF_SUBJ_OBJ_SAME_VERB_IJ	# mention I is the subject of verb and mention J is an
 ## 3. Relaxed string match: the 2 mentions fully match up to the head element and
 # - they are headed by proper nouns
 # - they are headed by common nouns and the 2nd mention is definite NP
-25	RCF_STR_MATCH_RELAXED RCF_I_TYPE_E RCF_J_TYPE_E 
-25	RCF_STR_MATCH_RELAXED RCF_I_TYPE_S RCF_J_TYPE_S RCF_J_DEF_NP
+25	RCF_STR_MATCH_RELAXED_RIGHT RCF_I_TYPE_E RCF_J_TYPE_E 
+25	RCF_STR_MATCH_RELAXED_RIGHT RCF_I_TYPE_S RCF_J_TYPE_S RCF_J_DEF_NP
 
 ## 4.1. Precise constructs: Appositions (separated by commas)
 #50	RCF_APPOSITION_JI

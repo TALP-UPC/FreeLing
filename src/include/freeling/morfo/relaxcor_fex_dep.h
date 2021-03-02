@@ -158,7 +158,8 @@ namespace freeling {
     static TFeatureValue predicative_ji(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
 
     static TFeatureValue str_match_strict(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
-    static TFeatureValue str_match_relaxed(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue str_match_relaxed_left(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
+    static TFeatureValue str_match_relaxed_right(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue str_head_match(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue str_pron_match(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static TFeatureValue relaxed_head_match_ij(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
