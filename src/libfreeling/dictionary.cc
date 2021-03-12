@@ -549,7 +549,7 @@ namespace freeling {
       }
     #endif
 
-    ///////////// HANDLE CONTRACTION RETOKENIZATION, IF ANY
+    //////////// HANDLE CONTRACTION RETOKENIZATION, IF ANY
     bool contr=false;
     if (retok==OFF) {
       // RetokenizeContractions is OFF, or overriden for this call.
