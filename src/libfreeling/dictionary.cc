@@ -63,7 +63,7 @@ namespace freeling {
     if (not cfg.open(dicFile))
       ERROR_CRASH(L"Error opening file "+dicFile);
   
-    //auxiliary to parse data lines
+    // auxiliary to parse data lines
     list<pair<wstring,list<wstring> > > lems;  
     morfodb=NULL;
     inverdb=NULL;
