@@ -166,7 +166,7 @@ namespace freeling {
 
     list<wstring> lt;  // list of tags for current lemma
     list<wstring> ll;  // list of lemmas seen so far
-    map<wstring,list<wstring> > aux;  // map lemma->list of tags
+    map<wstring,list<wstring> > aux; // map lemma->list of tags
 
     list<wstring> d=util::wstring2list(data,L" ");  // split data
 
