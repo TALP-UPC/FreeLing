@@ -516,7 +516,7 @@ namespace freeling {
     if (retok==DEFAULT) retok = (RetokenizeContractions? ON : OFF);
     if (compounds==DEFAULT) compounds = (CompoundAnalysis? ON : OFF);
     
-    ///////////// SEARCH IN DICTIONARY
+    //////////// SEARCH IN DICTIONARY
     TRACE(3,L"Searching in dictionary, word: "+w.get_form());
     list<analysis> la;
     search_form(w.get_form(), la);
