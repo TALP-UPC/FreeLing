@@ -208,7 +208,7 @@ namespace freeling {
   /// compact data in format lema1 pos1a|pos1b|pos1c lema2 pos2a|posb to save memory
   ////////////////////////////////////////////////////////////////
 
-  /// auxiliary to compact_data
+  // auxiliary to compact_data
   const std::wstring TAG_DIVIDER = L"|";  
   const std::wstring LEMMA_DIVIDER = L" ";
 
