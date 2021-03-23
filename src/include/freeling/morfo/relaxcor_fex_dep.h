@@ -199,7 +199,7 @@ namespace freeling {
     static bool num_match(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static bool word_inclusion(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static bool compatible_mods(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
-    static bool inclusion_match(const mention &m1, const mention &m2, const freeling::regexp &re);
+    static bool inclusion_match(const mention &m1, const mention &m2, const freeling::regexp &re, const freeling::regexp &under);
 
     static bool subj_obj_reporting(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);
     static bool subj_obj_same_verb(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex);

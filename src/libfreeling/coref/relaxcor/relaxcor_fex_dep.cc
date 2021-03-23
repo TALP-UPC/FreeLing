@@ -167,6 +167,11 @@ namespace freeling {
     // close config file
     cfg.close();
 
+
+    // create regexp matching no tag (used as default)
+    freeling::regexp re(L"^$");
+    _Labels.insert(make_pair(L"TAG_NONE",re));
+    
     // register implemented feature functionrs
     register_features();
 
@@ -1090,10 +1095,11 @@ namespace freeling {
   }
 
   //////////////////////////////////////////////////////////////////
-  ///    Returns true iff any modifier (with PoS 'label') of m2 is also in m1.
+  ///    Returns true iff any modifier (with PoS 'label') of m2 is also in m1, even if they are under a token with PoS 'under'
   //////////////////////////////////////////////////////////////////
 
-  bool relaxcor_fex_dep::inclusion_match(const mention &m1, const mention &m2, const freeling::regexp &re) {
+  bool relaxcor_fex_dep::inclusion_match(const mention &m1, const mention &m2, const freeling::regexp &re, const freeling::regexp &under) {
+
     dep_tree::const_iterator t;
     int best1 = m1.get_sentence()->get_best_seq();
     int best2 = m2.get_sentence()->get_best_seq();
@@ -1102,16 +1108,25 @@ namespace freeling {
     set<wstring> mod1;
     t = m1.get_dtree().begin();
     for (dep_tree::const_sibling_iterator c=t.sibling_begin(); c!=t.sibling_end(); ++c) {
-      if (re.search(c->get_word().get_tag(best1))) 
+      if (re.search(c->get_word().get_tag(best1)))    // if the child has the "re" PoS, it is a modifier
         mod1.insert(c->get_word().get_lemma(best1));
+      else if (under.search(c->get_word().get_tag(best1))) {   // otherwise, if it has the "under" PoS (e.g. preposition), check its first child
+	if (re.search(c.sibling_begin()->get_word().get_tag(best1)))  // if the first child of the preposition has the "re" pos, get it as modifier
+	  mod1.insert(c.sibling_begin()->get_word().get_tag(best1));
+      }
     }
       
     // r is true as long as we don't find a m2 modifier that is not also in m1.
     bool r = true;
     t = m2.get_dtree().begin();
     for (dep_tree::const_sibling_iterator c=t.sibling_begin(); c!=t.sibling_end() and r; ++c) {
-      if (re.search(c->get_word().get_tag(best2))) 
-        r = (mod1.find(c->get_word().get_lemma(best2))!=mod1.end());
+      if (re.search(c->get_word().get_tag(best2)))                    
+        r = (mod1.find(c->get_word().get_lemma(best2))!=mod1.end());  // if the child has the "re" pos, check it directly.
+	
+      else if (under.search(c->get_word().get_tag(best2))) {   // if the child has the "under" PoS (e.g. preposition)
+	if (re.search(c.sibling_begin()->get_word().get_tag(best2)))  // and the the first child of the preposition has the "re" pos
+	  r = (mod1.find(c.sibling_begin()->get_word().get_tag(best2))!=mod1.end());  // check it was also in m1.
+      }
     }
 
     return r;
@@ -1122,7 +1137,7 @@ namespace freeling {
   //////////////////////////////////////////////////////////////////
 
   bool relaxcor_fex_dep::num_match(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex) {
-    bool r =  relaxcor_fex_dep::inclusion_match(m1,m2,fex.get_label_RE(L"TAG_Number"));
+    bool r =  relaxcor_fex_dep::inclusion_match(m1,m2,fex.get_label_RE(L"TAG_Number"),fex.get_label_RE(L"TAG_NONE"));
     TRACE(6,L"   "  <<  m1.get_id()<<L":"<<m2.get_id() <<L":NUM_MATCH" << L" = " << (r?L"yes":L"no"));
     return r;
   }
@@ -1134,7 +1149,7 @@ namespace freeling {
   //////////////////////////////////////////////////////////////////
 
   bool relaxcor_fex_dep::word_inclusion(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex) {
-    bool r =  relaxcor_fex_dep::inclusion_match(m1,m2,fex.get_label_RE(L"TAG_NonStopWord"));
+    bool r =  relaxcor_fex_dep::inclusion_match(m1,m2,fex.get_label_RE(L"TAG_NonStopWord"),fex.get_label_RE(L"TAG_NONE"));
     TRACE(6,L"   " << m1.get_id()<<L":"<<m2.get_id() <<L":WORD_INCLUSION" << L" = " << (r?L"yes":L"no"));
     return r;
   }
@@ -1145,7 +1160,7 @@ namespace freeling {
   //////////////////////////////////////////////////////////////////
 
   bool relaxcor_fex_dep::compatible_mods(const mention &m1, const mention &m2, feature_cache &fcache, const relaxcor_fex_dep &fex) {
-    bool r =  relaxcor_fex_dep::inclusion_match(m1,m2,fex.get_label_RE(L"TAG_NounAdj"));      
+    bool r =  relaxcor_fex_dep::inclusion_match(m1,m2, fex.get_label_RE(L"TAG_NounAdj"), fex.get_label_RE(L"TAG_Preposition"));      
     TRACE(6,L"   " << m1.get_id()<<L":"<<m2.get_id() <<L":COMPATIBLE_MODS" << L" = " << (r?L"yes":L"no"));
     return r;
   }
