@@ -77,6 +77,8 @@ foreach (lg ${languages})
 	   PATTERN "model*.crf.*" EXCLUDE
 	   PATTERN "Makefile*" EXCLUDE)
 endforeach()
+install(DIRECTORY data/common
+        DESTINATION share/freeling)
 
 if (WIN32)
   # set library path for installation programs
