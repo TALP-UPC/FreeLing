@@ -59,15 +59,6 @@ if(PYTHON3_API OR JAVA_API OR PERL_API)
   add_subdirectory(APIs)
 endif()
 
-install(DIRECTORY data/
-        DESTINATION share/freeling
-        PATTERN "dictionary" EXCLUDE
-	PATTERN "parameters.*.gz.*" EXCLUDE
-	PATTERN "model*.gz.*" EXCLUDE
-	PATTERN "*embeddings*.gz.*" EXCLUDE
-	PATTERN "model*.crf.*" EXCLUDE
-	PATTERN "Makefile*" EXCLUDE)
-
 #### Data installation hooks
 
 # find out which language data are available
@@ -75,6 +66,17 @@ file(GLOB languages RELATIVE ${CMAKE_SOURCE_DIR}/data CONFIGURE_DEPENDS ${CMAKE_
 MESSAGE(STATUS "Configuring languages: ${languages}")
 # just in case, will be ignored if ca/es are not to be installed
 SET(variants "es/es-old;es/es-ar;es/es-cl;ca/balear;ca/valencia")      
+
+foreach (lg ${languages})
+   install(DIRECTORY data/${lg}
+           DESTINATION share/freeling
+           PATTERN "dictionary" EXCLUDE
+	   PATTERN "parameters.*.gz.*" EXCLUDE
+	   PATTERN "model*.gz.*" EXCLUDE
+	   PATTERN "*embeddings*.gz.*" EXCLUDE
+	   PATTERN "model*.crf.*" EXCLUDE
+	   PATTERN "Makefile*" EXCLUDE)
+endforeach()
 
 if (WIN32)
   # set library path for installation programs
