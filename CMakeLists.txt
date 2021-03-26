@@ -61,13 +61,21 @@ endif()
 
 #### Data installation hooks
 
-# find out which language data are available
-file(GLOB languages RELATIVE ${CMAKE_SOURCE_DIR}/data CONFIGURE_DEPENDS ${CMAKE_SOURCE_DIR}/data/??)
-MESSAGE(STATUS "Configuring languages: ${languages}")
-# just in case, will be ignored if ca/es are not to be installed
-SET(variants "es/es-old;es/es-ar;es/es-cl;ca/balear;ca/valencia")      
+# see if a list of languages to install was specified
+if (NOT DEFINED LANGUAGES)
+   # find out which language data are available
+   file(GLOB LANGUAGES RELATIVE ${CMAKE_SOURCE_DIR}/data CONFIGURE_DEPENDS ${CMAKE_SOURCE_DIR}/data/??)
+endif()
+MESSAGE(STATUS "Configuring languages: [${LANGUAGES}]")
 
-foreach (lg ${languages})
+# see if a list of languages to install was specified
+if (NOT DEFINED VARIANTS)
+   # just in case, will be ignored if ca/es are not to be installed
+   SET(VARIANTS "es/es-old;es/es-ar;es/es-cl;ca/balear;ca/valencia")      
+endif()
+MESSAGE(STATUS "Configuring variants: [${VARIANTS}]")
+
+foreach (lg ${LANGUAGES})
    install(DIRECTORY data/${lg}
            DESTINATION share/freeling
            PATTERN "dictionary" EXCLUDE
@@ -85,7 +93,7 @@ if (WIN32)
   install(CODE "set(ENV{PATH} \"${Boost_LIBRARY_DIRS};${ICU_INCLUDE_DIRS}/../bin64;${ZLIB_INCLUDE_DIRS}/../bin;${CMAKE_BINARY_DIR}/src/libfreeling;${CMAKE_BINARY_DIR}/src/libfoma;${CMAKE_BINARY_DIR}/src/libtreeler;${CMAKE_BINARY_DIR}/src/crfsuite;${CMAKE_BINARY_DIR}/src/libdynet/dynet;\")")
 endif()
 
-foreach (lg ${languages})
+foreach (lg ${LANGUAGES})
   
   # build dictionary for each language
   if (EXISTS ${CMAKE_SOURCE_DIR}/data/${lg}/dictionary/header)
@@ -97,7 +105,7 @@ foreach (lg ${languages})
                   endif() ")
   endif()
   
-  foreach (variant ${variants})
+  foreach (variant ${VARIANTS})
     # for variants matching this language, build specific dictionary and multiwords file
     if (${variant} MATCHES "^${lg}/")
       install(CODE "message(STATUS \"-- Creating ${variant} dictionary...\")" )
