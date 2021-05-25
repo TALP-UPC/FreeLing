@@ -29,9 +29,13 @@
 #ifndef _SMOOTHING_LD
 #define _SMOOTHING_LD
 
+#include <cmath>
+using std::log;
+
 #include "freeling/morfo/traces.h"
 #include "freeling/morfo/util.h"
 #include "freeling/morfo/configfile.h"
+
 
 #undef MOD_TRACENAME
 #define MOD_TRACENAME L"SMOOTHING"
