@@ -31,6 +31,7 @@
 
 #include <cmath>
 using std::log;
+using std::fabs;
 
 #include "freeling/morfo/traces.h"
 #include "freeling/morfo/util.h"
