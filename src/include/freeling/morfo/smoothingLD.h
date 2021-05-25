@@ -39,8 +39,8 @@ using std::log;
 
 #undef MOD_TRACENAME
 #define MOD_TRACENAME L"SMOOTHING"
-#undef MOD_TRACEMODULE
-#define MOD_TRACEMODULE LANGIDENT_TRACE
+#undef MOD_TRACECODE
+#define MOD_TRACECODE LANGIDENT_TRACE
 
 namespace freeling {
   
@@ -180,7 +180,7 @@ namespace freeling {
       // precompute logs needed for logprob
       if (vsize<=ntypes)
         ERROR_CRASH(L"VocabularySize can not be smaller than number of different observed unigrams.");
-      pUnseen = -log(vsize-ntypes); // log version of 1/(vsize-ntypes)
+      pUnseen = -log(vsize-ntypes); // log version of 1/(vsize-ntypes) = 1/N0;  log(1/N0) = log(1)-log(N0) = -log(N0)
       nobs = log(nobs);
       for (typename std::map<G,double>::iterator c=counts.begin(); c!=counts.end(); c++) 
         c->second = log(c->second); 
@@ -203,10 +203,11 @@ namespace freeling {
       // log count of complete ngram
       double c = count(seq);
 
+      TRACE(7,L"Computing prob for "<<ngram<<"+"<<z);
       if (ngram.size()==0) {
         // no conditioning history, use unigrams (seq = [z])
         if (c>=0) return notalpha + c - nobs;  // log version of (1-alpha)*count(c)/nobs
-        else return alpha + pUnseen;   // log version of alpha * punseen
+        else return alpha + pUnseen;   // log version of alpha * (1/N0)
       }
       
       else {
