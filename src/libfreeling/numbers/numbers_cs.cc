@@ -26,6 +26,8 @@
 //
 ////////////////////////////////////////////////////////////////
 
+#include <cmath>
+
 #include "freeling/morfo/traces.h"
 #include "freeling/morfo/util.h"
 #include "freeling/morfo/numbers_modules.h"
