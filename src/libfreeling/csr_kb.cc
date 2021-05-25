@@ -1,6 +1,8 @@
 
 #include <fstream>
 #include <sstream>
+#include <cmath>
+using std::fabs;
 
 #include "freeling/morfo/util.h"
 #include "freeling/morfo/traces.h"
