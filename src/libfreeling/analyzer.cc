@@ -277,7 +277,7 @@ template<class T> void analyzer::do_analysis(T &doc, const analyzer_config::invo
   // --------- MORFO
   // apply morfo if needed
   if (ivk.InputLevel < MORFO && ivk.OutputLevel >= MORFO) {
-    morfo->analyze(doc);
+    morfo->analyze(doc, ivk);
   }
 
   // apply sense tagging (without WSD) if requested at morfo level

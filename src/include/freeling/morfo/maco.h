@@ -32,7 +32,7 @@
 #include "freeling/windll.h"
 #include "freeling/morfo/language.h"
 #include "freeling/morfo/processor.h"
-#include "freeling/morfo/maco_options.h"
+#include "freeling/morfo/analyzer_config.h"
 #include "freeling/morfo/RE_map.h"
 #include "freeling/morfo/locutions.h"
 #include "freeling/morfo/dictionary.h"
@@ -55,34 +55,47 @@ namespace freeling {
   class WINDLL maco : public processor {
   private:
 
-    /// Morhpological analyzer active modules.
-    bool MultiwordsDetection, NumbersDetection, PunctuationDetection, 
-      DatesDetection, QuantitiesDetection, DictionarySearch,
-      ProbabilityAssignment, UserMap, NERecognition;
+    // store configuration options used to create the module
+    analyzer_config initial_options;
 
-    locutions* loc;
-    dictionary* dico;
-    numbers* numb;
-    dates* date;
-    quantities* quant;
-    punts* punt;
-    RE_map *user;
-    probabilities* prob;
-    ner* npm;
+   // invoke options to be used in subsequent calls (defaults to 
+   // initial_options, but can be changed)
+   analyzer_config::invoke_options current_invoke_options;
+
+   // sumbodules to be used for analysis
+   locutions* loc;
+   dictionary* dico;
+   numbers* numb;
+   dates* date;
+   quantities* quant;
+   punts* punt;
+   RE_map *user;
+   probabilities* prob;
+   ner* npm;
       
   public:
+
     /// Constructor
-    maco(const maco_options &); 
+    maco(const analyzer_config &opts); 
     /// Destructor
     ~maco();
 
-    /// change active options for further analysis
+    /// convenience:  retrieve options used at creation time (e.g. to reset current config)
+    const analyzer_config& get_initial_options() const;
+    /// set configuration to be used by default
+    void set_current_invoke_options(const analyzer_config::invoke_options &opt);
+    /// get configuration being used by default
+    const analyzer_config::invoke_options& get_current_invoke_options() const;
+
+    /// DEPRECATED:  same than set_current_invoke_options
     void set_active_options(bool umap, bool num, bool pun, bool dat,
                             bool dic, bool aff, bool comp, bool rtk,
                             bool mw, bool ner, bool qt, bool prb);
 
-    /// analyze given sentence
-    void analyze(sentence &) const;
+    /// analyze given sentence with given options
+    void analyze(sentence &s, const analyzer_config::invoke_options &opts) const;
+    /// analyze given sentence with default options
+    void analyze(sentence &s) const;
 
     /// inherit other methods
     using processor::analyze;

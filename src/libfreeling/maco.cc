@@ -43,57 +43,45 @@ namespace freeling {
   /// recognizers and modules.
   ///////////////////////////////////////////////////////////////
 
-  maco::maco(const maco_options &opts) {
+  maco::maco(const analyzer_config &opts) {
 
-    MultiwordsDetection = PunctuationDetection = false;
-    QuantitiesDetection = DictionarySearch = ProbabilityAssignment = false;
-    UserMap = NERecognition = false;
+    // store options used at creation time.
+    initial_options = opts;
+    // init current options with creation values.
+    current_invoke_options = opts.invoke_opt;
 
+    // create required modules according to given configuration    
     loc=NULL; dico=NULL; numb=NULL; date=NULL; quant=NULL;
     punt=NULL; user=NULL; prob=NULL; npm=NULL;
 
-    if (not opts.UserMapFile.empty()) {
-      user = new RE_map(opts.UserMapFile);
-      UserMap = true;
-    }
+    if (not opts.config_opt.MACO_UserMapFile.empty()) 
+      user = new RE_map(opts.config_opt.MACO_UserMapFile);
 
-    numb = new numbers(opts.Lang,opts.Decimal,opts.Thousand);
-    NumbersDetection = true;
+    numb = new numbers(opts.config_opt.Lang,
+                       opts.config_opt.MACO_Decimal, opts.config_opt.MACO_Thousand);
 
-    if (not opts.PunctuationFile.empty()) {
-      punt = new punts(opts.PunctuationFile);
-      PunctuationDetection = true;
-    }
+    if (not opts.config_opt.MACO_PunctuationFile.empty())
+      punt = new punts(opts.config_opt.MACO_PunctuationFile);
 
-    date = new dates(opts.Lang);
-    DatesDetection = true;
+    date = new dates(opts.config_opt.Lang);
 
-    if (not opts.DictionaryFile.empty()) {
-      dico = new dictionary(opts.Lang, opts.DictionaryFile, 
-                            opts.AffixFile, opts.CompoundFile,
+    if (not opts.config_opt.MACO_DictionaryFile.empty()) 
+      dico = new dictionary(opts.config_opt.Lang, opts.config_opt.MACO_DictionaryFile, 
+                            opts.config_opt.MACO_AffixFile, opts.config_opt.MACO_CompoundFile,
                             opts.InverseDict, opts.RetokContractions);
-      DictionarySearch = true;
-    }
 
-    if (not opts.LocutionsFile.empty()) {
-      loc = new locutions(opts.LocutionsFile);
-      MultiwordsDetection = true; 
-    }
+    if (not opts.config_opt.MACO_LocutionsFile.empty()) 
+      loc = new locutions(opts.config_opt.MACO_LocutionsFile);
 
-    if (not opts.NPdataFile.empty()) {
-      npm = new ner(opts.NPdataFile);
-      NERecognition = true;
-    }
+    if (not opts.config_opt.MACO_NPdataFile.empty()) 
+      npm = new ner(opts.config_opt.MACO_NPdataFile);
 
-    if (not opts.QuantitiesFile.empty()) {
-      quant = new quantities(opts.Lang, opts.QuantitiesFile);
-      QuantitiesDetection = true;      
-    }
+    if (not opts.config_opt.MACO_QuantitiesFile.empty()) 
+      quant = new quantities(opts.config_opt.Lang, opts.config_opt.MACO_QuantitiesFile);
 
-    if (not opts.ProbabilityFile.empty()) {
-      prob = new probabilities(opts.ProbabilityFile, opts.ProbabilityThreshold);
-      ProbabilityAssignment = true;
-    }
+    if (not opts.config_opt.MACO_ProbabilityFile.empty()) 
+      prob = new probabilities(opts.config_opt.MACO_ProbabilityFile, opts.config_opt.MACO_ProbabilityThreshold);
+
   }
 
   ///////////////////////////////////////////////////////////////
@@ -124,93 +112,99 @@ namespace freeling {
     wstring msg=L"option can't be activated because it was not loaded at instantiation time.";
 
     if (umap and user==NULL) { WARNING(L"UserMap "+msg); }
-    else UserMap=umap;
+    else current_invoke_options.MACO_UserMap = umap;
 
     if (mw and loc==NULL) { WARNING(L"Multiwords "+msg); }
-    else MultiwordsDetection=mw;
+    else current_invoke_options.MACO_MultiwordsDetection = mw;
 
     if (num and numb==NULL) { WARNING(L"Numbers "+msg); }
-    else NumbersDetection=num; 
+    else current_invoke_options.MACO_NumbersDetection = num; 
 
     if (pun and punt==NULL) { WARNING(L"Punctuation "+msg) }
-    else PunctuationDetection=pun;
+    else current_invoke_options.MACO_PunctuationDetection = pun;
 
     if (dat and date==NULL) { WARNING(L"Dates "+msg); }
-    else DatesDetection=dat;   
+    else current_invoke_options.MACO_DatesDetection = dat;   
 
     if (qt and quant==NULL) { WARNING(L"Quantities "+msg); }
-    else QuantitiesDetection=qt;
+    else current_invoke_options.MACO_QuantitiesDetection = qt;
 
     if (prb and prob==NULL) { WARNING(L"Probabilities "+msg); }
-    else ProbabilityAssignment=prb;
+    else current_invoke_options.MACO_ProbabilityAssignment = prb;
 
     if (ner and npm==NULL) { WARNING(L"NE Recognition "+msg); }
-    else NERecognition=ner;    
+    else current_invoke_options.MACO_NERecognition = ner;    
 
     if (dic and dico==NULL) { WARNING(L"Dictionary "+msg); }
-    else DictionarySearch=dic;
+    else current_invoke_options.MACO_DictionarySearch = dic;
 
     if (dic and dico==NULL) { WARNING(L"Retokenize contractions "+msg); }
-    else dico->set_retokenize_contractions(rtk);
+    else current_invoke_options.MACO_RetokContractions = rtk;
 
     if (aff and (dico==NULL or not dico->has_affixes())) { WARNING(L"Affixation "+msg); }
-    else dico->set_affix_analysis(aff);
+    else current_invoke_options.MACO_AffixAnalysis = aff;
 
     if (comp and (dico==NULL or not dico->has_compounds())) { WARNING(L"Compound "+msg); }
-    else dico->set_compound_analysis(comp);
+    else current_invoke_options.MACO_CompoundAnalysis = comp;
   }
 
-
   ///////////////////////////////////////////////////////////////
-  ///  Apply cascade of analyzers to given sentence.
+  ///  Apply cascade of analyzers to given sentence, according to given options
   ///////////////////////////////////////////////////////////////  
 
-  void maco::analyze(sentence &s) const {
+  void maco::analyze(sentence &s, const analyzer_config::invoke_options &opt) const {
   
-    if (UserMap and user!=NULL) { 
+    if (opt.MACO_UserMap and user!=NULL) { 
       user->analyze(s);
       TRACE(2,L"Sentence annotated by the user-map module.");
     }
 
-    if (NumbersDetection and numb!=NULL) { 
+    if (opt.MACO_NumbersDetection and numb!=NULL) { 
       // (Skipping number detection will affect dates and quantities modules)
       numb->analyze(s);    
       TRACE(2,L"Sentence annotated by the numbers module.");
     }
 
-    if (PunctuationDetection and punt!=NULL) { 
+    if (opt.MACO_PunctuationDetection and punt!=NULL) { 
       punt->analyze(s);    
       TRACE(2,L"Sentence annotated by the punts module.");
     }
      
-    if (DatesDetection and date!=NULL) { 
+    if (opt.MACO_DatesDetection and date!=NULL) { 
       date->analyze(s);    
       TRACE(2,L"Sentence annotated by the dates module.");
     }
 
-    if (DictionarySearch and dico!=NULL) {
+    if (opt.MACO_DictionarySearch and dico!=NULL) {
       // (Skipping dictionary search will also skip suffix analysis)
+
+      /*********  TODO:  pass these options to dictionary !
+      MACO_RetokContractions
+      MACO_AffixAnalysis
+      MACO_CompoundAnalysis
+      **************************/
       dico->analyze(s);
+      
       TRACE(2,L"Sentence annotated by the dictionary searcher.");
     }
 
     // annotate list of sentences with required modules
-    if (MultiwordsDetection and loc!=NULL) { 
+    if (opt.MACO_MultiwordsDetection and loc!=NULL) { 
       loc->analyze(s);
       TRACE(2,L"Sentence annotated by the locutions module.");
     }
 
-    if (NERecognition and npm!=NULL) { 
+    if (opt.MACO_NERecognition and npm!=NULL) { 
       npm->analyze(s);
       TRACE(2,L"Sentence annotated by the np module.");
     }
 
-    if (QuantitiesDetection and quant!=NULL) {
+    if (opt.MACO_QuantitiesDetection and quant!=NULL) {
       quant->analyze(s);    
       TRACE(2,L"Sentence annotated by the quantities module.");
     }
 
-    if (ProbabilityAssignment and prob!=NULL) {
+    if (opt.MACO_ProbabilityAssignment and prob!=NULL) {
       prob->analyze(s);    
       TRACE(2,L"Sentences annotated by the probabilities module.");
     }
@@ -219,5 +213,10 @@ namespace freeling {
     for (sentence::iterator w=s.begin(); w!=s.end(); w++)
       w->select_all_analysis();
   }
+
+  ///  Apply cascade of analyzers to given sentence, using current default options
+  void maco::analyze(sentence &s) const {
+    analyze(s, current_invoke_options);
+  } 
 
 } // namespace
