@@ -73,7 +73,10 @@ class WINDLL analyzer {
    relaxcor *corfc;
    semgraph_extract *sge;
 
-   // store configuration options
+   // store configuration options used to create the analyzer
+   analyzer_config initial_options;
+   // invoke options to be used in subsequent calls (defaults to 
+   // initial_options, but can be changed)
    analyzer_config::invoke_options current_invoke_options;
 
    // remember splitter session
@@ -85,9 +88,13 @@ class WINDLL analyzer {
    unsigned long nsentence;
    // words pending of being splitted in InputMode==CORPUS
    std::list<word> tokens; 
-  
+
+   /// auxiliary for constructors: load modules defined in initial_options
+   void create_analyzers();
+
    /// analyze further levels on a partially analyzed document
-   template<class T> void do_analysis(T &doc) const;
+   template<class T> void do_analysis(T &doc, const analyzer_config::invoke_options &ivk) const;
+
    // tokenize and split text.
    void tokenize_split(const std::wstring &text, 
                        std::list<sentence> &ls, 
@@ -95,33 +102,43 @@ class WINDLL analyzer {
                        std::list<word> &av, 
                        unsigned long &nsent, 
                        bool flush, 
-                       splitter::session_id sp_ses) const;
+                       splitter::session_id sp_ses,
+		       const analyzer_config::invoke_options &ivk) const;
 
    static std::wistream& safe_getline(std::wistream& is, std::wstring& t);
 
  public:
+   analyzer(const analyzer_config &cfg);
    analyzer(const analyzer_config::config_options &cfg);
    ~analyzer();
 
-   void set_current_invoke_options(const analyzer_config::invoke_options &opt);
+   const analyzer_config& get_initial_options() const;
    const analyzer_config::invoke_options& get_current_invoke_options() const;
+   void set_current_invoke_options(const analyzer_config::invoke_options &opt);
 
    /// analyze further levels on a partially analyzed document
    void analyze(document &doc) const;
+   void analyze(document &doc, const analyzer_config::invoke_options &ivk) const;
    /// analyze further levels on partially analyzed sentences
    void analyze(std::list<sentence> &ls) const;
+   void analyze(std::list<sentence> &ls, const analyzer_config::invoke_options &ivk) const;
    /// analyze text as a whole document
    void analyze(const std::wstring &text, document &doc, bool parag=false) const;
+   void analyze(const std::wstring &text, document &doc, const analyzer_config::invoke_options &ivk, bool parag=false) const;
+   /// analyze text as a whole document, returning it (useful for python API)
+   document analyze_as_document(const std::wstring &text, bool parag=false) const;
+   document analyze_as_document(const std::wstring &text, const analyzer_config::invoke_options &ivk, bool parag=false) const;
   /// Analyze text as a partial document. Retain incomplete sentences in buffer   
    /// in case next call completes them (except if flush==true)
    void analyze(const std::wstring &text, std::list<sentence> &ls, bool flush=false);
-
-   // for python API
-   std::list<sentence> analyze(const std::wstring &text, bool flush=false) ;
-   document analyze_as_document(const std::wstring &text, bool parag=false) const;
+   void analyze(const std::wstring &text, std::list<sentence> &ls, const analyzer_config::invoke_options &ivk, bool flush=false);
+   /// Analyze text as a partial document. Retain incomplete sentences in buffer. Return analysis (useful for python API)
+   std::list<sentence> analyze(const std::wstring &text, bool flush=false);
+   std::list<sentence> analyze(const std::wstring &text, const analyzer_config::invoke_options &ivk, bool flush=false);
 
    // flush splitter buffer and analyze any pending text. 
    void flush_buffer(std::list<sentence> &ls);
+   void flush_buffer(std::list<sentence> &ls, const analyzer_config::invoke_options &ivk);
    // reset tokenizer offset counter
    void reset_offset();
 };
