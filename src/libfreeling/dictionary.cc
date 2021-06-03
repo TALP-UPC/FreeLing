@@ -47,13 +47,12 @@ namespace freeling {
   ///  Create a dictionary module, open database.
   ///////////////////////////////////////////////////////////////
 
-  dictionary::dictionary(const std::wstring &Lang, const std::wstring &dicFile, 
-                         const std::wstring &sufFile, const std::wstring &compFile,
-                         bool invDic, bool retok) { 
-    // remember whether dictionary must offer inverse access (lema#pos -> form)
-    InverseDict = invDic;
-    // remember whether contraction retokenization is to be performed
-    RetokenizeContractions = retok;
+  dictionary::dictionary(const std::wstring &Lang, const analyzer_config &opts) { 
+
+    // store options used at creation time.
+    initial_options = opts;
+    // init current options with creation values.
+    current_invoke_options = opts.invoke_opt;
 
     enum sections {INDEX, ENTRIES};
     config_file cfg;
@@ -504,14 +503,13 @@ namespace freeling {
 
 
   /////////////////////////////////////////////////////////////////////////////
-  ///  Search form in the dictionary.
+  ///  Search form in the dictionary, using given options
   ///  *Add* found analysis to the given word.
   ///  Return true iff word is a contraction.
   /////////////////////////////////////////////////////////////////////////////
 
   bool dictionary::annotate_word(word &w, list<word> &lw,
-				 dictionary::Option compounds,
-				 dictionary::Option retok) const {
+				 const analyzer_config::invoke_options &opts) const {
 
     if (retok==DEFAULT) retok = (RetokenizeContractions? ON : OFF);
     if (compounds==DEFAULT) compounds = (CompoundAnalysis? ON : OFF);
@@ -617,6 +615,17 @@ namespace freeling {
 
 
   /////////////////////////////////////////////////////////////////////////////
+  ///  Search form in the dictionary, using default options
+  ///  *Add* found analysis to the given word.
+  ///  Return true iff word is a contraction.
+  /////////////////////////////////////////////////////////////////////////////
+
+  bool dictionary::annotate_word(word &w, list<word> &lw) const {
+    annotate_word(w, lw, current_invoke_options);
+  }
+
+  
+  /////////////////////////////////////////////////////////////////////////////
   ///  Search form in the dictionary.
   ///  *Add* found analysis to the given word.
   ///  Do not apply compounds analysis,
@@ -625,7 +634,9 @@ namespace freeling {
 
   void dictionary::annotate_word(word &w) const {
     list<word> lw;
-    annotate_word(w,lw,OFF,OFF);
+    analyzer_config::invoke_options op = current_invoke_options;
+    op.MACO_RetokContractions = op.MACO_CompoundAnalysis = false;
+    annotate_word(w, lw, op);
   }
 
   ////////////////////////////////////////////////////////////////////////
@@ -642,7 +653,7 @@ namespace freeling {
   /// in a sentence, using given options.
   ////////////////////////////////////////////////////////////////////////
 
-  void dictionary::analyze(sentence &se) const {
+  void dictionary::analyze(sentence &se, const analyzer_config::invoke_options &opts) const {
     sentence::iterator pos;
 
     bool contr=false;
@@ -722,4 +733,13 @@ namespace freeling {
     TRACE_SENTENCE(1,se);
   }
 
+  ////////////////////////////////////////////////////////////////////////
+  ///  Dictionary search and affix analysis for all words
+  /// in a sentence, using current default options.
+  ////////////////////////////////////////////////////////////////////////
+
+  void dictionary::analyze(sentence &se) const {
+    analyze(se, current_invoke_options);
+  }
+  
 } // namespace

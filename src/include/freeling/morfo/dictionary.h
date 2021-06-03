@@ -30,8 +30,8 @@
 #define _DICTIONARY
 
 #include <map>
-
 #include "freeling/windll.h"
+#include "freeling/morfo/analyzer_config.h"
 #include "freeling/morfo/language.h"
 #include "freeling/morfo/processor.h"
 #include "freeling/morfo/database.h"
@@ -52,13 +52,11 @@ namespace freeling {
   class WINDLL dictionary : public processor {
 
   private:
-    /// configuration options
-    bool InverseDict;
-
-    /// Analysis settings
-    bool RetokenizeContractions;
-    bool AffixAnalysis;
-    bool CompoundAnalysis;
+    // store configuration options used to create the module
+    analyzer_config initial_options;
+    // invoke options to be used in subsequent calls (defaults to 
+    // initial_options, but can be changed)
+    analyzer_config::invoke_options current_invoke_options;
 
     /// suffix analyzer
     affixes *suf;
@@ -86,14 +84,17 @@ namespace freeling {
     std::wstring compact_data(const std::list<std::pair<std::wstring,std::list<std::wstring> > > &) const;
 
   public:
-    typedef enum {OFF,ON,DEFAULT} Option;
-    
     /// Constructor
-    dictionary(const std::wstring &Lang, const std::wstring &dicFile, 
-               const std::wstring &sufFile, const std::wstring &compFile,
-               bool invDic=false, bool retok=true);
+    dictionary(const std::wstring &Lang, const analyzer_config &opts);
     /// Destructor
     ~dictionary();
+
+    /// convenience:  retrieve options used at creation time (e.g. to reset current config)
+    const analyzer_config& get_initial_options() const;
+    /// set configuration to be used by default
+    void set_current_invoke_options(const analyzer_config::invoke_options &opt);
+    /// get configuration being used by default
+    const analyzer_config::invoke_options& get_current_invoke_options() const;
 
     /// add analysis to dictionary entry (create entry if not there)
     void add_analysis(const std::wstring &, const analysis &);
@@ -115,10 +116,13 @@ namespace freeling {
     /// Fills the analysis list of a word, checking for suffixes and contractions.
     /// Returns true iff the form is a contraction, returns contraction components
     /// in given list
-    bool annotate_word(word &, std::list<word> &, dictionary::Option compounds=DEFAULT, dictionary::Option retok=DEFAULT) const;
+    bool annotate_word(word &, std::list<word> &, const analyzer_config::invoke_options &opts) const;
+    /// annotate word with default options
+    bool annotate_word(word &, std::list<word> &) const;
     /// Fills the analysis list of a word, checking for suffixes and contractions.
     /// Never retokenizing contractions, nor returning component list.
-    /// It is just a convenience equivalent to "annotate_word(w,dummy,DEFAULT,OFF)"
+    /// It is just a convenience equivalent to "annotate_word(w,dummy,opts)
+    /// with opts.retokenize=opts.compound=false"
     void annotate_word(word &) const;
     /// Get possible forms for a lemma+pos
     std::list<std::wstring> get_forms(const std::wstring &, const std::wstring &) const;
@@ -126,8 +130,10 @@ namespace freeling {
     /// dump dictionary to a buffer. Either full entries or keys only
     void dump_dictionary(std::wostream &, bool keysonly=false) const;
 
-    /// analyze given sentence
-    void analyze(sentence &) const;
+    /// analyze given sentence with given options
+    void analyze(sentence &se, const analyzer_config::invoke_options &opts) const;
+    /// analyze given sentence with default options
+    void analyze(sentence &se) const;
 
     /// inherit other methods
     using processor::analyze;

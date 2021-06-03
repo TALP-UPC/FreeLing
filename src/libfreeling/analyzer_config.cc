@@ -144,6 +144,7 @@ namespace freeling {
   /// config options constructor, default values (except file names, initialized to "")
   
   analyzer_config::analyzer_config_options::analyzer_config_options() {
+    MACO_InverseDictionary = false;
     MACO_ProbabilityThreshold = 0.001;
     TAGGER_RelaxMaxIter = 500;
     TAGGER_RelaxScaleFactor = 67;

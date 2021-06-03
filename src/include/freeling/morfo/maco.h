@@ -87,7 +87,7 @@ namespace freeling {
     /// get configuration being used by default
     const analyzer_config::invoke_options& get_current_invoke_options() const;
 
-    /// DEPRECATED:  same than set_current_invoke_options
+    /// alternative for set_current_invoke_options
     void set_active_options(bool umap, bool num, bool pun, bool dat,
                             bool dic, bool aff, bool comp, bool rtk,
                             bool mw, bool ner, bool qt, bool prb);

@@ -102,7 +102,27 @@ namespace freeling {
   }
 
   ///////////////////////////////////////////////////////////////
-  ///  set active modules for further analysis
+  ///  convenience:  retrieve options used at creation time (e.g. to reset current config)
+  ///////////////////////////////////////////////////////////////  
+
+  const analyzer_config& maco::get_initial_options() const { return initial_options; }
+
+  ///////////////////////////////////////////////////////////////
+  /// set configuration to be used by default
+  ///////////////////////////////////////////////////////////////
+
+  void maco::set_current_invoke_options(const analyzer_config::invoke_options &opt) { current_invoke_options = opt; }
+
+  ///////////////////////////////////////////////////////////////
+  /// get configuration being used by default
+  ///////////////////////////////////////////////////////////////
+
+  const analyzer_config::invoke_options& maco::get_current_invoke_options() const { return current_invoke_options; }
+
+
+  ///////////////////////////////////////////////////////////////
+  ///  set active modules for further analysis.
+  ///  Alternative mehod for set_current_invoke_options
   ///////////////////////////////////////////////////////////////  
 
   void maco::set_active_options(bool umap, bool num, bool pun, bool dat,
@@ -214,7 +234,10 @@ namespace freeling {
       w->select_all_analysis();
   }
 
+  ///////////////////////////////////////////////////////////////
   ///  Apply cascade of analyzers to given sentence, using current default options
+  ///////////////////////////////////////////////////////////////
+
   void maco::analyze(sentence &s) const {
     analyze(s, current_invoke_options);
   } 
