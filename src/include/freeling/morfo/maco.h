@@ -97,6 +97,11 @@ namespace freeling {
     /// analyze given sentence with default options
     void analyze(sentence &s) const;
 
+    /// analyze list of sentences (paragraph) with given options
+    void analyze(std::list<sentence> &ls, const analyzer_config::invoke_options &opts) const;
+    /// analyze document with given options
+    virtual void analyze(document &doc, const analyzer_config::invoke_options &opts) const;
+
     /// inherit other methods
     using processor::analyze;
   };

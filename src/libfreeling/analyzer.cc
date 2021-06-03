@@ -128,26 +128,8 @@ void analyzer::create_analyzers() {
       not initial_options.config_opt.MACO_NPDataFile.empty() or not initial_options.config_opt.MACO_QuantitiesFile.empty() or 
       not initial_options.config_opt.MACO_ProbabilityFile.empty()) {
 
-    // the morfo class requires several options at creation time.
-    // they are passed packed in a maco_options object.
-    maco_options mopt(initial_options.config_opt.Lang);
-    // decimal/thousand separators used by number detection
-    mopt.set_nummerical_points (initial_options.config_opt.MACO_Decimal, initial_options.config_opt.MACO_Thousand);
-    // Minimum probability for a tag for an unkown word
-    mopt.set_threshold (initial_options.config_opt.MACO_ProbabilityThreshold);
-    // Whether the dictionary offers inverse acces (lemma#pos -> form). 
-    // Only needed if your application is going to do such an access.
-    mopt.set_inverse_dict(false);
-
-    // Data files for morphological submodules. by default set to ""
-    // Only files for active modules have to be specified 
-    mopt.set_data_files (initial_options.config_opt.MACO_UserMapFile,
-                        initial_options.config_opt.MACO_PunctuationFile, initial_options.config_opt.MACO_DictionaryFile,
-                        initial_options.config_opt.MACO_AffixFile, initial_options.config_opt.MACO_CompoundFile,
-                        initial_options.config_opt.MACO_LocutionsFile, initial_options.config_opt.MACO_NPDataFile,
-                        initial_options.config_opt.MACO_QuantitiesFile, initial_options.config_opt.MACO_ProbabilityFile);
     // create analyzer with desired options
-    morfo = new maco(mopt);
+    morfo = new maco(initial_options);
   }
 
   // sense annotation requested/needed

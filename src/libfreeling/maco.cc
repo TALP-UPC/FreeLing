@@ -66,15 +66,13 @@ namespace freeling {
     date = new dates(opts.config_opt.Lang);
 
     if (not opts.config_opt.MACO_DictionaryFile.empty()) 
-      dico = new dictionary(opts.config_opt.Lang, opts.config_opt.MACO_DictionaryFile, 
-                            opts.config_opt.MACO_AffixFile, opts.config_opt.MACO_CompoundFile,
-                            opts.InverseDict, opts.RetokContractions);
-
+      dico = new dictionary(opts);
+    
     if (not opts.config_opt.MACO_LocutionsFile.empty()) 
       loc = new locutions(opts.config_opt.MACO_LocutionsFile);
 
-    if (not opts.config_opt.MACO_NPdataFile.empty()) 
-      npm = new ner(opts.config_opt.MACO_NPdataFile);
+    if (not opts.config_opt.MACO_NPDataFile.empty()) 
+      npm = new ner(opts.config_opt.MACO_NPDataFile);
 
     if (not opts.config_opt.MACO_QuantitiesFile.empty()) 
       quant = new quantities(opts.config_opt.Lang, opts.config_opt.MACO_QuantitiesFile);
@@ -161,10 +159,12 @@ namespace freeling {
     if (dic and dico==NULL) { WARNING(L"Retokenize contractions "+msg); }
     else current_invoke_options.MACO_RetokContractions = rtk;
 
-    if (aff and (dico==NULL or not dico->has_affixes())) { WARNING(L"Affixation "+msg); }
+    if (aff and (dico==NULL or initial_options.config_opt.MACO_AffixFile.empty())) {
+      WARNING(L"Affixation "+msg);
+    }
     else current_invoke_options.MACO_AffixAnalysis = aff;
 
-    if (comp and (dico==NULL or not dico->has_compounds())) { WARNING(L"Compound "+msg); }
+    if (comp and (dico==NULL or initial_options.config_opt.MACO_CompoundFile.empty())) { WARNING(L"Compound "+msg); }
     else current_invoke_options.MACO_CompoundAnalysis = comp;
   }
 
@@ -242,4 +242,15 @@ namespace freeling {
     analyze(s, current_invoke_options);
   } 
 
+  /// analyze list of sentences (paragraph)
+  void maco::analyze(std::list<sentence> &ls, const analyzer_config::invoke_options &opts) const {
+    for (auto s : ls) analyze(s, opts);
+  }
+  
+  /// analyze document
+  void maco::analyze(document &doc, const analyzer_config::invoke_options &opts) const {
+    for (auto p : doc) analyze(p, opts);
+  }
+
+  
 } // namespace

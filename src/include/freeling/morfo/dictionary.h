@@ -85,7 +85,7 @@ namespace freeling {
 
   public:
     /// Constructor
-    dictionary(const std::wstring &Lang, const analyzer_config &opts);
+    dictionary(const analyzer_config &opts);
     /// Destructor
     ~dictionary();
 
@@ -100,16 +100,6 @@ namespace freeling {
     void add_analysis(const std::wstring &, const analysis &);
     /// remove entry from dictionary
     void remove_entry(const std::wstring &);
-
-    /// customize behaviour of dictionary for further analysis
-    void set_retokenize_contractions(bool); 
-    void set_affix_analysis(bool);
-    void set_compound_analysis(bool);
-
-    /// find out whether the dictionary has loaded an affix module
-    bool has_affixes() const;
-    /// find out whether the dictionary has loaded a compounds module
-    bool has_compounds() const;
     
     /// Get dictionary entry for a given form, add to given list.
     void search_form(const std::wstring &, std::list<analysis> &) const;

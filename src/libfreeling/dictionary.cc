@@ -47,13 +47,15 @@ namespace freeling {
   ///  Create a dictionary module, open database.
   ///////////////////////////////////////////////////////////////
 
-  dictionary::dictionary(const std::wstring &Lang, const analyzer_config &opts) { 
+  dictionary::dictionary(const analyzer_config &opts) { 
 
     // store options used at creation time.
     initial_options = opts;
     // init current options with creation values.
     current_invoke_options = opts.invoke_opt;
 
+    wstring dicFile = opts.config_opt.MACO_DictionaryFile;
+    
     enum sections {INDEX, ENTRIES};
     config_file cfg;
     cfg.add_section(L"IndexType",INDEX);
@@ -81,7 +83,7 @@ namespace freeling {
         // create database for dictionary entries
         morfodb = new database(type);
         // create inverse dict if needed
-        if (InverseDict) inverdb=new database(DB_MAP);
+        if (opts.config_opt.MACO_InverseDictionary) inverdb=new database(DB_MAP);
         break;
       }
 
@@ -108,7 +110,7 @@ namespace freeling {
         morfodb->add_database(key,data);
         
         // add info to inverse dict entry if needed.
-        if (InverseDict)
+        if (opts.config_opt.MACO_InverseDictionary)
           for (list<pair<wstring,list<wstring> > >::const_iterator p=lems.begin(); p!=lems.end(); p++)
             for (list<wstring>::const_iterator t=p->second.begin(); t!=p->second.end(); t++) 
               inverdb->add_database(p->first+L"#"+*t, key);      
@@ -124,18 +126,22 @@ namespace freeling {
 
     // create affix analyzer if required
     suf = NULL;
-    if (not sufFile.empty()) suf = new affixes(Lang, sufFile, *this);
-    AffixAnalysis = (suf != NULL);
+    if (not opts.config_opt.MACO_AffixFile.empty())
+      suf = new affixes(opts.config_opt.Lang, opts.config_opt.MACO_AffixFile, *this);
 
     // create compound analyzer if required
-    #ifdef NO_LIBFOMA
-      CompoundAnalysis = false;
-    #else
-      comp = NULL;
-      if (not compFile.empty()) comp = new compounds(compFile, *this);
-      CompoundAnalysis = (comp != NULL);
-    #endif
-  
+    comp = NULL;
+    if (not initial_options.config_opt.MACO_CompoundFile.empty()) {
+      #ifdef NO_LIBFOMA
+        WARNING(L"CompoundAnalysis configuration file was ignored, since libfoma support was not compiled in.");
+        initial_options.config_opt.MACO_CompoundFile = L"";
+        initial_options.invoke_opt.MACO_CompoundAnalysis = false;
+        current_invoke_options.MACO_CompoundAnalysis = false;
+      #else
+        comp = new compounds(initial_options.config_opt.MACO_CompoundFile, *this);
+      #endif
+    }
+
     TRACE(3,L"analyzer succesfully created");
   }
   
@@ -228,7 +234,7 @@ namespace freeling {
   void dictionary::remove_entry(const std::wstring &form) {
 
     // look for analysis in inverse dict and remove them.
-    if (InverseDict) {    
+    if (inverdb != NULL) {    
       list<analysis> la;
       search_form(form,la);
       for (list<analysis>::iterator a=la.begin(); a!=la.end(); a++) {
@@ -263,7 +269,7 @@ namespace freeling {
     if (data.empty()) { //new form, add it
       morfodb->add_database(form, newan.get_lemma()+L" "+newan.get_tag());
       // add pair to inverse dict if required
-      if (InverseDict) 
+      if (inverdb != NULL) 
         inverdb->add_database(newan.get_lemma()+L"#"+newan.get_tag(), form);
     }
 
@@ -303,29 +309,10 @@ namespace freeling {
         // Store modified list of lemmas and tags
         morfodb->replace_database(form, util::list2wstring(lan,LEMMA_DIVIDER));
         // add pair to inverse dict if required
-        if (InverseDict) 
+        if (inverdb != NULL) 
           inverdb->add_database(newan.get_lemma()+L"#"+newan.get_tag(), form);
       }
     }
-  }
-
-  /// customize behaviour of dictionary for further analysis
-  void dictionary::set_retokenize_contractions(bool rtk) { RetokenizeContractions = rtk; }
-  /// customize behaviour of dictionary for further analysis
-  void dictionary::set_affix_analysis(bool aff) { AffixAnalysis = aff; }
-  /// customize behaviour of dictionary for further analysis
-  void dictionary::set_compound_analysis(bool cmp) { CompoundAnalysis = cmp; }
-  
-  /// find out whether the dictionary has loaded an affix module
-  bool dictionary::has_affixes() const { return (suf!=NULL); }
-
-  /// find out whether the dictionary has loaded a compounds module
-  bool dictionary::has_compounds() const { 
-    #ifdef NO_LIBFOMA
-      return false;
-    #else
-      return (comp!=NULL);
-    #endif
   }
 
 
@@ -336,10 +323,10 @@ namespace freeling {
   list<wstring> dictionary::get_forms(const wstring &lemma, const wstring &tag) const {
     list<wstring> r;
 
-    if (InverseDict) 
+    if (inverdb != NULL) 
       r = util::wstring2list(inverdb->access_database(lemma+L"#"+tag),L" ");
     else
-      WARNING(L"get_forms called but dictionary was created with inverseDict=false."); 
+      WARNING(L"get_forms called but InverseDictionary was not loaded."); 
 
     return r;
   }
@@ -511,9 +498,8 @@ namespace freeling {
   bool dictionary::annotate_word(word &w, list<word> &lw,
 				 const analyzer_config::invoke_options &opts) const {
 
-    if (retok==DEFAULT) retok = (RetokenizeContractions? ON : OFF);
-    if (compounds==DEFAULT) compounds = (CompoundAnalysis? ON : OFF);
-    
+    bool retok = opts.MACO_RetokContractions;
+
     //////////// SEARCH IN DICTIONARY
     TRACE(3,L"Searching in dictionary, word: "+w.get_form());
     list<analysis> la;
@@ -529,7 +515,7 @@ namespace freeling {
     }
 
     ///////////// CHECK FOR AFFIXES
-    if (AffixAnalysis) {
+    if (opts.MACO_AffixAnalysis) {
       // check whether the word is a derived form via suffixation
       TRACE(2,L"Affix analisys active. SEARCHING FOR AFFIX. word n_analysis="+util::int2wstring(w.get_n_analysis()));
       suf->look_for_affixes(w);
@@ -537,19 +523,17 @@ namespace freeling {
 
     #ifndef NO_LIBFOMA
       ///////////// CHECK FOR COMPOUNDS
-      if (compounds) {
+      if (opts.MACO_CompoundAnalysis) {
         // check whether the word is a compound
         TRACE(2,L"Compound analisys active. SEARCHING FOR COMPOUND. word n_analysis="+util::int2wstring(w.get_n_analysis()));
 	// if it is a compound, deactivate retokenization
-        if (comp->check_compound(w)) {
-	  retok = OFF;
-	}
+        if (comp->check_compound(w)) retok = false;	
       }
     #endif
 
     //////////// HANDLE CONTRACTION RETOKENIZATION, IF ANY
-    bool contr=false;
-    if (retok==OFF) {
+    bool contr = false;
+    if (not retok) {
       // RetokenizeContractions is OFF, or overriden for this call.
       // Just add retokenization information to each analysis, in case it is needed later.
       list<analysis> newla;
@@ -621,7 +605,7 @@ namespace freeling {
   /////////////////////////////////////////////////////////////////////////////
 
   bool dictionary::annotate_word(word &w, list<word> &lw) const {
-    annotate_word(w, lw, current_invoke_options);
+    return annotate_word(w, lw, current_invoke_options);
   }
 
   
