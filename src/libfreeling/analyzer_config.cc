@@ -260,164 +260,106 @@ namespace freeling {
   /// destructor
   
   analyzer_config::~analyzer_config() {}
-  /*  
-  /// Copy constructor
-  analyzer_config::analyzer_config(const analyzer_config &x) {
-    config_opt = x.config_opt; 
-    invoke_opt = x.invoke_opt;
-  }
-  
-  /// assignment
-  analyzer_config& analyzer_config::operator=(const analyzer_config& x) {
-    if (this != &x) {
-      config_opt = x.config_opt; 
-      invoke_opt = x.invoke_opt;
+
+  /// Extract values from variables map into analyzer_config members.
+  /// Also expand filenames and boolean values in options map
+  void analyzer_config::extract_options(const po::variables_map &vm) {
+
+    // first, process config file options
+    for (auto v : vm) {
+      string name = v.first;
+
+      // config options
+      if (name == "Lang") config_opt.Lang = v.second.as<wstring>();
+      else if (name == "TokenizerFile") config_opt.TOK_TokenizerFile = v.second.as<wstring>();
+      else if (name == "SplitterFile") config_opt.SPLIT_SplitterFile = v.second.as<wstring>();
+      else if (name == "DecimalPoint") config_opt.MACO_Decimal = v.second.as<wstring>();
+      else if (name == "ThousandPoint") config_opt.MACO_Thousand = v.second.as<wstring>();
+      else if (name == "UserMapFile") config_opt.MACO_UserMapFile = v.second.as<wstring>();
+      else if (name == "LocutionsFile") config_opt.MACO_LocutionsFile = v.second.as<wstring>();
+      else if (name == "QuantitiesFile") config_opt.MACO_QuantitiesFile = v.second.as<wstring>();
+      else if (name == "AffixFile") config_opt.MACO_AffixFile = v.second.as<wstring>();
+      else if (name == "ProbabilityFile") config_opt.MACO_ProbabilityFile = v.second.as<wstring>();
+      else if (name == "ProbabilityThreshold") config_opt.MACO_ProbabilityThreshold = v.second.as<double>();
+      else if (name == "DictionaryFile") config_opt.MACO_DictionaryFile = v.second.as<wstring>();
+      else if (name == "NPDataFile") config_opt.MACO_NPDataFile = v.second.as<wstring>();
+      else if (name == "CompoundFile") config_opt.MACO_CompoundFile = v.second.as<wstring>();
+      else if (name == "PunctuationFile") config_opt.MACO_PunctuationFile = v.second.as<wstring>();
+      else if (name == "PhoneticsFile") config_opt.PHON_PhoneticsFile = v.second.as<wstring>();
+      else if (name == "NECFile") config_opt.NEC_NECFile = v.second.as<wstring>();
+      else if (name == "SenseConfigFile") config_opt.SENSE_ConfigFile = v.second.as<wstring>();
+      else if (name == "UKBConfigFile") config_opt.UKB_ConfigFile = v.second.as<wstring>();
+      else if (name == "TaggerHMMFile") config_opt.TAGGER_HMMFile = v.second.as<wstring>();
+      else if (name == "TaggerRelaxFile") config_opt.TAGGER_RelaxFile = v.second.as<wstring>();
+      else if (name == "TaggerRelaxMaxIter") config_opt.TAGGER_RelaxMaxIter = v.second.as<int>();
+      else if (name == "TaggerRelaxScaleFactor") config_opt.TAGGER_RelaxScaleFactor = v.second.as<double>();
+      else if (name == "TaggerRelaxEpsilon") config_opt.TAGGER_RelaxEpsilon = v.second.as<double>();
+      else if (name == "TaggerRetokenize") config_opt.TAGGER_Retokenize = v.second.as<bool>();
+      else if (name == "TaggerForceSelect") config_opt.TAGGER_ForceSelect = v.second.as<freeling::ForceSelectStrategy>();
+      else if (name == "TaggerKBest") config_opt.TAGGER_kbest = v.second.as<int>();
+      else if (name == "GrammarFile") config_opt.PARSER_GrammarFile = v.second.as<wstring>();
+      else if (name == "DepTxalaFile") config_opt.DEP_TxalaFile = v.second.as<wstring>();
+      else if (name == "DepTreelerFile") config_opt.DEP_TreelerFile = v.second.as<wstring>();
+      else if (name == "DepLSTMFile") config_opt.DEP_LSTMFile = v.second.as<wstring>();
+      else if (name == "SRLTreelerFile") config_opt.SRL_TreelerFile = v.second.as<wstring>();
+      else if (name == "CorefFile") config_opt.COREF_CorefFile = v.second.as<wstring>();
+      else if (name == "SemGraphExtractorFile") config_opt.SEMGRAPH_SemGraphFile = v.second.as<wstring>();      
+
+      // invoke options
+      else if (name == "InputLevel") invoke_opt.InputLevel = v.second.as<freeling::AnalysisLevel>();
+      else if (name == "OutputLevel") invoke_opt.OutputLevel = v.second.as<freeling::AnalysisLevel>();
+      else if (name == "AffixAnalysis") invoke_opt.MACO_AffixAnalysis = v.second.as<bool>();
+      else if (name == "UserMap") invoke_opt.MACO_UserMap = v.second.as<bool>();
+      else if (name == "MultiwordsDetection") invoke_opt.MACO_MultiwordsDetection = v.second.as<bool>();
+      else if (name == "NumbersDetection") invoke_opt.MACO_NumbersDetection = v.second.as<bool>();
+      else if (name == "PunctuationDetection") invoke_opt.MACO_PunctuationDetection = v.second.as<bool>();
+      else if (name == "DatesDetection") invoke_opt.MACO_DatesDetection = v.second.as<bool>();
+      else if (name == "DatesDetection") invoke_opt.MACO_DatesDetection = v.second.as<bool>();
+      else if (name == "QuantitiesDetection") invoke_opt.MACO_QuantitiesDetection = v.second.as<bool>();
+      else if (name == "DictionarySearch") invoke_opt.MACO_DictionarySearch = v.second.as<bool>();
+      else if (name == "RetokContractions") invoke_opt.MACO_RetokContractions = v.second.as<bool>();
+      else if (name == "ProbabilityAssignment") invoke_opt.MACO_ProbabilityAssignment = v.second.as<bool>();
+      else if (name == "CompoundAnalysis") invoke_opt.MACO_CompoundAnalysis = v.second.as<bool>();
+      else if (name == "NERecognition") invoke_opt.MACO_NERecognition = v.second.as<bool>();
+      else if (name == "Phonetics") invoke_opt.PHON_Phonetics = v.second.as<bool>();
+      else if (name == "NEClassification") invoke_opt.NEC_NEClassification = v.second.as<bool>();
+      else if (name == "SenseAnnotation") invoke_opt.SENSE_WSD_which = v.second.as<freeling::WSDAlgorithm>();
+      else if (name == "Tagger") invoke_opt.TAGGER_which = v.second.as<freeling::TaggerAlgorithm>();
+      else if (name == "DependencyParser") invoke_opt.DEP_which = v.second.as<freeling::DependencyParser>();
+      else if (name == "SRLParser") invoke_opt.SRL_which = v.second.as<freeling::SRLParser>();
     }
-    return *this;
-  }
-  */
-  /// Create descriptions for valid config file options
-  
-  po::options_description analyzer_config::config_file_opts() {
-    po::options_description cfo;
-    cfo.add_options()
-      ("Lang",po::wvalue<std::wstring>(&config_opt.Lang),"Language of the input text")
-      ("InputLevel",po::wvalue<freeling::AnalysisLevel>(&invoke_opt.InputLevel)->default_value(freeling::TEXT),"Input analysis level (text,token,splitted,morfo,tagged,shallow,dep,srl,coref)")
-      ("OutputLevel",po::wvalue<freeling::AnalysisLevel>(&invoke_opt.OutputLevel)->default_value(freeling::TAGGED),"Output analysis level (token,splitted,morfo,tagged,shallow,parsed,dep,srl,coref,semgraph)")
-      ("TokenizerFile",po::wvalue<std::wstring>(&config_opt.TOK_TokenizerFile),"Tokenizer rules file")
-      ("SplitterFile",po::wvalue<std::wstring>(&config_opt.SPLIT_SplitterFile),"Splitter option file")
-      ("AffixAnalysis",po::wvalue<bool>(&invoke_opt.MACO_AffixAnalysis)->default_value(false),"Perform affix analysis")
-      ("UserMap",po::wvalue<bool>(&invoke_opt.MACO_UserMap)->default_value(false),"Apply user mapping file")
-      ("MultiwordsDetection",po::wvalue<bool>(&invoke_opt.MACO_MultiwordsDetection)->default_value(false),"Perform multiword detection")
-      ("NumbersDetection",po::wvalue<bool>(&invoke_opt.MACO_NumbersDetection)->default_value(false),"Perform number detection")
-      ("PunctuationDetection",po::wvalue<bool>(&invoke_opt.MACO_PunctuationDetection)->default_value(false),"Perform punctuation detection")
-      ("DatesDetection",po::wvalue<bool>(&invoke_opt.MACO_DatesDetection)->default_value(false),"Perform date/time expression detection")
-      ("QuantitiesDetection",po::wvalue<bool>(&invoke_opt.MACO_QuantitiesDetection)->default_value(false),"Perform magnitude/ratio detection")
-      ("DictionarySearch",po::wvalue<bool>(&invoke_opt.MACO_DictionarySearch)->default_value(false),"Perform dictionary search")
-      ("RetokContractions",po::wvalue<bool>(&invoke_opt.MACO_RetokContractions)->default_value(true),"Dictionary retokenizes contractions regardless of --nortk option")
-      ("ProbabilityAssignment",po::wvalue<bool>(&invoke_opt.MACO_ProbabilityAssignment)->default_value(false),"Perform probability assignment")
-      ("CompoundAnalysis",po::wvalue<bool>(&invoke_opt.MACO_CompoundAnalysis)->default_value(false),"Perform compound analysis")
-      ("NERecognition",po::wvalue<bool>(&invoke_opt.MACO_NERecognition)->default_value(false),"Perform NE recognition")
-      ("DecimalPoint",po::wvalue<std::wstring>(&config_opt.MACO_Decimal),"Decimal point character")
-      ("ThousandPoint",po::wvalue<std::wstring>(&config_opt.MACO_Thousand),"Thousand point character")
-      ("UserMapFile",po::wvalue<std::wstring>(&config_opt.MACO_UserMapFile),"User mapping file")
-      ("LocutionsFile",po::wvalue<std::wstring>(&config_opt.MACO_LocutionsFile),"Multiwords file")
-      ("QuantitiesFile",po::wvalue<std::wstring>(&config_opt.MACO_QuantitiesFile),"Quantities file")
-      ("AffixFile",po::wvalue<std::wstring>(&config_opt.MACO_AffixFile),"Affix rules file")    
-      ("ProbabilityFile",po::wvalue<std::wstring>(&config_opt.MACO_ProbabilityFile),"Probabilities file")
-      ("ProbabilityThreshold",po::wvalue<double>(&config_opt.MACO_ProbabilityThreshold),"Probability threshold for unknown word tags")
-      ("DictionaryFile",po::wvalue<std::wstring>(&config_opt.MACO_DictionaryFile),"Form dictionary")
-      ("NPDataFile",po::wvalue<std::wstring>(&config_opt.MACO_NPDataFile),"NP recognizer data file")
-      ("CompoundFile",po::wvalue<std::wstring>(&config_opt.MACO_CompoundFile),"Compound detector configuration file")
-      ("PunctuationFile",po::wvalue<std::wstring>(&config_opt.MACO_PunctuationFile),"Punctuation symbol file")
-      ("Phonetics",po::wvalue<bool>(&invoke_opt.PHON_Phonetics)->default_value(false),"Perform phonetic encoding of words")
-      ("PhoneticsFile",po::wvalue<std::wstring>(&config_opt.PHON_PhoneticsFile),"Phonetic encoding configuration file")
-      ("NEClassification",po::wvalue<bool>(&invoke_opt.NEC_NEClassification)->default_value(false),"Perform NE classification")
-      ("NECFile",po::wvalue<std::wstring>(&config_opt.NEC_NECFile),"NEC configuration file")
-      ("SenseAnnotation",po::wvalue<freeling::WSDAlgorithm>(&invoke_opt.SENSE_WSD_which)->default_value(freeling::NO_WSD),"Type of sense annotation (no|none,all,mfs,ukb)")
-      ("SenseConfigFile",po::wvalue<std::wstring>(&config_opt.SENSE_ConfigFile),"Configuration file for sense annotation module")
-      ("UKBConfigFile",po::wvalue<std::wstring>(&config_opt.UKB_ConfigFile),"Configuration file for UKB word sense disambiguator")
-      ("TaggerHMMFile",po::wvalue<std::wstring>(&config_opt.TAGGER_HMMFile),"Data file for HMM tagger")
-      ("TaggerRelaxFile",po::wvalue<std::wstring>(&config_opt.TAGGER_RelaxFile),"Data file for RELAX tagger")
-      ("Tagger",po::wvalue<freeling::TaggerAlgorithm>(&invoke_opt.TAGGER_which)->default_value(freeling::HMM),"Tagging alogrithm to use (hmm, relax)")
-      ("TaggerRelaxMaxIter",po::wvalue<int>(&config_opt.TAGGER_RelaxMaxIter),"Maximum number of iterations allowed for RELAX tagger")
-      ("TaggerRelaxScaleFactor",po::wvalue<double>(&config_opt.TAGGER_RelaxScaleFactor),"Support scale factor for RELAX tagger (affects step size)")
-      ("TaggerRelaxEpsilon",po::wvalue<double>(&config_opt.TAGGER_RelaxEpsilon),"Convergence epsilon value for RELAX tagger")
-      ("TaggerRetokenize",po::wvalue<bool>(&config_opt.TAGGER_Retokenize)->default_value(false),"Perform retokenization after PoS tagging")
-      ("TaggerForceSelect",po::wvalue<freeling::ForceSelectStrategy>(&config_opt.TAGGER_ForceSelect)->default_value(freeling::RETOK),"When the tagger must be forced to select only one tag per word (no|none,tagger,retok)")
-      ("GrammarFile",po::wvalue<std::wstring>(&config_opt.PARSER_GrammarFile),"Grammar file for chart parser")
-      ("DependencyParser",po::wvalue<freeling::DependencyParser>(&invoke_opt.DEP_which)->default_value(freeling::TXALA),"Dependency parser to use (txala,treeler,lstm)")
-      ("DepTxalaFile",po::wvalue<std::wstring>(&config_opt.DEP_TxalaFile),"Rule file for Txala dependency parser")
-      ("DepTreelerFile",po::wvalue<std::wstring>(&config_opt.DEP_TreelerFile),"Configuration file for Treeler dependency parser")
-      ("DepLSTMFile",po::wvalue<std::wstring>(&config_opt.DEP_LSTMFile),"Configuration file for LSTM dependency parser")
-      ("SRLParser",po::wvalue<freeling::SRLParser>(&invoke_opt.SRL_which)->default_value(freeling::SRL_TREELER),"SRL parser to use (treeler)")
-      ("SRLTreelerFile",po::wvalue<std::wstring>(&config_opt.SRL_TreelerFile),"Configuration file for Treeler SRL parser")
-      ("CorefFile",po::wvalue<std::wstring>(&config_opt.COREF_CorefFile),"Coreference solver data file")
-      ("SemGraphExtractorFile",po::wvalue<std::wstring>(&config_opt.SEMGRAPH_SemGraphFile),"Semantic graph extractor config file");
 
-    return cfo;
-  }
+    // second, process command line options, overwriting config file 
+    for (auto v : vm) {
+      string name = v.first;
+      // /////////////
 
-  
-  /// Create descriptions for valid command line options
-  
-  po::options_description analyzer_config::command_line_opts() {
-    po::options_description clo;
-    clo.add_options()
-      ("lang",po::wvalue<std::wstring>(&config_opt.Lang),"language of the input text")
-      ("inplv",po::wvalue<freeling::AnalysisLevel>(&invoke_opt.InputLevel)->default_value(freeling::TEXT),"Input analysis level (text,token,splitted,morfo,tagged,shallow,dep,srl,coref)")
-      ("outlv",po::wvalue<freeling::AnalysisLevel>(&invoke_opt.OutputLevel)->default_value(freeling::TAGGED),"Output analysis level (token,splitted,morfo,tagged,shallow,parsed,dep,srl,coref,semgraph)")
-      ("ftok",po::wvalue<std::wstring>(&config_opt.TOK_TokenizerFile),"Tokenizer rules file")
-      ("fsplit",po::wvalue<std::wstring>(&config_opt.SPLIT_SplitterFile),"Splitter option file")
-      ("afx","Perform affix analysis")
-      ("noafx","Do not perform affix analysis")
-      ("usr","Apply user mapping file")
-      ("nousr","Do not apply user mapping file")
-      ("loc","Perform multiword detection")
-      ("noloc","Do not perform multiword detection")
-      ("numb","Perform number detection")
-      ("nonumb","Do not perform number detection")
-      ("punt","Perform punctuation detection")
-      ("nopunt","Do not perform punctuation detection")
-      ("date","Perform date/time expression detection")
-      ("nodate","Do not perform date/time expression detection")
-      ("quant","Perform magnitude/ratio detection")
-      ("noquant","Do not perform magnitude/ratio detection")
-      ("dict","Perform dictionary search")
-      ("nodict","Do not perform dictionary search")
-      ("prob","Perform probability assignment")
-      ("noprob","Do not perform probability assignment")
-      ("rtkcon","Dictionary retokenizes contractions regardless of --nortk option")
-      ("nortkcon","Dictionary leaves contraction retokenization to --rtk/nortk option")
-      ("comp","Perform compound analysis")
-      ("nocomp","Do not perform compound analysis")
-      ("ner","Perform NE recognition")
-      ("noner","Do not perform NE recognition")
-      ("dec",po::wvalue<std::wstring>(&config_opt.MACO_Decimal),"Decimal point character")
-      ("thou",po::wvalue<std::wstring>(&config_opt.MACO_Thousand),"Thousand point character")
-      ("fmap,M",po::wvalue<std::wstring>(&config_opt.MACO_UserMapFile),"User-map file")
-      ("floc,L",po::wvalue<std::wstring>(&config_opt.MACO_LocutionsFile),"Multiwords file")
-      ("fqty,Q",po::wvalue<std::wstring>(&config_opt.MACO_QuantitiesFile),"Quantities file")
-      ("fafx,S",po::wvalue<std::wstring>(&config_opt.MACO_AffixFile),"Affix rules file")
-      ("fprob,P",po::wvalue<std::wstring>(&config_opt.MACO_ProbabilityFile),"Probabilities file")
-      ("thres,e",po::wvalue<double>(&config_opt.MACO_ProbabilityThreshold),"Probability threshold for unknown word tags")
-      ("fdict,D",po::wvalue<std::wstring>(&config_opt.MACO_DictionaryFile),"Form dictionary")
-      ("fnp,N",po::wvalue<std::wstring>(&config_opt.MACO_NPDataFile),"NE recognizer data file")
-      ("fcomp,K",po::wvalue<std::wstring>(&config_opt.MACO_CompoundFile),"Compound detector configuration file")
-      ("fpunct,F",po::wvalue<std::wstring>(&config_opt.MACO_PunctuationFile),"Punctuation symbol file")
-      ("phon","Perform phonetic encoding of words")
-      ("nophon","Do not perform phonetic encoding of words")
-      ("fphon",po::wvalue<std::wstring>(&config_opt.PHON_PhoneticsFile),"Phonetic encoding configuration file")
-      ("nec","Perform NE classification")
-      ("nonec","Do not perform NE classification")
-      ("fnec",po::wvalue<std::wstring>(&config_opt.NEC_NECFile),"NEC configuration file")
-      ("sense,s",po::wvalue<freeling::WSDAlgorithm>(&invoke_opt.SENSE_WSD_which),"Type of sense annotation (no|none,all,mfs,ukb)")
-      ("fsense,W",po::wvalue<std::wstring>(&config_opt.SENSE_ConfigFile),"Configuration file for sense annotation module")
-      ("fukb,U",po::wvalue<std::wstring>(&config_opt.UKB_ConfigFile),"Configuration file for UKB word sense disambiguator")
-      ("hmm,H",po::wvalue<std::wstring>(&config_opt.TAGGER_HMMFile),"Data file for HMM tagger")
-      ("rlx,R",po::wvalue<std::wstring>(&config_opt.TAGGER_RelaxFile),"Data file for RELAX tagger")
-      ("tag,t",po::wvalue<freeling::TaggerAlgorithm>(&invoke_opt.TAGGER_which),"Tagging alogrithm to use (hmm, relax)")
-      ("iter,i",po::wvalue<int>(&config_opt.TAGGER_RelaxMaxIter),"Maximum number of iterations allowed for RELAX tagger")
-      ("sf,r",po::wvalue<double>(&config_opt.TAGGER_RelaxScaleFactor),"Support scale factor for RELAX tagger (affects step size)")
-      ("eps",po::wvalue<double>(&config_opt.TAGGER_RelaxEpsilon),"Convergence epsilon value for RELAX tagger")
-      ("rtk","Perform retokenization after PoS tagging")
-      ("nortk","Do not perform retokenization after PoS tagging")
-      ("force",po::wvalue<freeling::ForceSelectStrategy>(&config_opt.TAGGER_ForceSelect),"When the tagger must be forced to select only one tag per word (no|none,tagger,retok)")
-      ("grammar,G",po::wvalue<std::wstring>(&config_opt.PARSER_GrammarFile),"Grammar file for chart parser")
-      ("dep,d",po::wvalue<freeling::DependencyParser>(&invoke_opt.DEP_which),"Dependency parser to use (txala,treeler,lstm)")
-      ("srl",po::wvalue<freeling::SRLParser>(&invoke_opt.SRL_which),"SRL parser to use (treeler)")
-      ("txala,T",po::wvalue<std::wstring>(&config_opt.DEP_TxalaFile),"Rule file for Txala dependency parser")
-      ("treeler,E",po::wvalue<std::wstring>(&config_opt.DEP_TreelerFile),"Configuration file for Treeler dependency parser")
-      ("lstm",po::wvalue<std::wstring>(&config_opt.DEP_LSTMFile),"Configuration file for LSTM dependency parser")
-      ("SRLtreeler",po::wvalue<std::wstring>(&config_opt.SRL_TreelerFile),"Configuration file for SRL treeler parser")
-      ("fcorf,C",po::wvalue<std::wstring>(&config_opt.COREF_CorefFile),"Coreference solver data file")
-      ("fsge,g",po::wvalue<std::wstring>(&config_opt.SEMGRAPH_SemGraphFile),"Semantic graph extractor config file");
 
-    return clo;
-  }
+      //  TO DO
+      // TO DO
 
-  void analyzer_config::expand_options(const po::variables_map &vm) {
-    // expand environment variables in filenames
+      
+      // if (name=="") ...
+    }
+    // Handle boolean options expressed with --myopt or --nomyopt in command line
+    SetBooleanOptionCL(vm.count("rtk"),vm.count("nortk"),config_opt.TAGGER_Retokenize,"rtk");
+    SetBooleanOptionCL(vm.count("afx"),vm.count("noafx"),invoke_opt.MACO_AffixAnalysis,"afx");
+    SetBooleanOptionCL(vm.count("usr"),vm.count("nousr"),invoke_opt.MACO_UserMap,"usr");
+    SetBooleanOptionCL(vm.count("loc"),vm.count("noloc"),invoke_opt.MACO_MultiwordsDetection,"loc");
+    SetBooleanOptionCL(vm.count("numb"),vm.count("nonumb"),invoke_opt.MACO_NumbersDetection,"numb");
+    SetBooleanOptionCL(vm.count("punt"),vm.count("nopunt"),invoke_opt.MACO_PunctuationDetection,"punt");
+    SetBooleanOptionCL(vm.count("date"),vm.count("nodate"),invoke_opt.MACO_DatesDetection,"date");
+    SetBooleanOptionCL(vm.count("ner"),vm.count("noner"),invoke_opt.MACO_NERecognition,"ner");
+    SetBooleanOptionCL(vm.count("quant"),vm.count("noquant"),invoke_opt.MACO_QuantitiesDetection,"quant");
+    SetBooleanOptionCL(vm.count("dict"),vm.count("nodict"),invoke_opt.MACO_DictionarySearch,"dict");
+    SetBooleanOptionCL(vm.count("rtkcon"),vm.count("nortkcon"),invoke_opt.MACO_RetokContractions,"rtkcon");
+    SetBooleanOptionCL(vm.count("prob"),vm.count("noprob"),invoke_opt.MACO_ProbabilityAssignment,"prob");
+    SetBooleanOptionCL(vm.count("comp"),vm.count("nocomp"),invoke_opt.MACO_CompoundAnalysis,"comp");
+    SetBooleanOptionCL(vm.count("phon"),vm.count("nophon"),invoke_opt.PHON_Phonetics,"phon");
+    SetBooleanOptionCL(vm.count("nec"),vm.count("nonec"),invoke_opt.NEC_NEClassification,"nec");
+
+    
+    // expand environment variables in file names, if any    
     config_opt.TOK_TokenizerFile = freeling::util::expand_filename(config_opt.TOK_TokenizerFile);
     config_opt.SPLIT_SplitterFile = freeling::util::expand_filename(config_opt.SPLIT_SplitterFile);
     config_opt.MACO_UserMapFile = freeling::util::expand_filename(config_opt.MACO_UserMapFile);
@@ -443,90 +385,8 @@ namespace freeling {
     config_opt.COREF_CorefFile = freeling::util::expand_filename(config_opt.COREF_CorefFile);
     config_opt.SEMGRAPH_SemGraphFile = freeling::util::expand_filename(config_opt.SEMGRAPH_SemGraphFile);
 
-    // Handle boolean options expressed with --myopt or --nomyopt in command line
-    SetBooleanOptionCL(vm.count("rtk"),vm.count("nortk"),config_opt.TAGGER_Retokenize,"rtk");
-    SetBooleanOptionCL(vm.count("afx"),vm.count("noafx"),invoke_opt.MACO_AffixAnalysis,"afx");
-    SetBooleanOptionCL(vm.count("usr"),vm.count("nousr"),invoke_opt.MACO_UserMap,"usr");
-    SetBooleanOptionCL(vm.count("loc"),vm.count("noloc"),invoke_opt.MACO_MultiwordsDetection,"loc");
-    SetBooleanOptionCL(vm.count("numb"),vm.count("nonumb"),invoke_opt.MACO_NumbersDetection,"numb");
-    SetBooleanOptionCL(vm.count("punt"),vm.count("nopunt"),invoke_opt.MACO_PunctuationDetection,"punt");
-    SetBooleanOptionCL(vm.count("date"),vm.count("nodate"),invoke_opt.MACO_DatesDetection,"date");
-    SetBooleanOptionCL(vm.count("ner"),vm.count("noner"),invoke_opt.MACO_NERecognition,"ner");
-    SetBooleanOptionCL(vm.count("quant"),vm.count("noquant"),invoke_opt.MACO_QuantitiesDetection,"quant");
-    SetBooleanOptionCL(vm.count("dict"),vm.count("nodict"),invoke_opt.MACO_DictionarySearch,"dict");
-    SetBooleanOptionCL(vm.count("rtkcon"),vm.count("nortkcon"),invoke_opt.MACO_RetokContractions,"rtkcon");
-    SetBooleanOptionCL(vm.count("prob"),vm.count("noprob"),invoke_opt.MACO_ProbabilityAssignment,"prob");
-    SetBooleanOptionCL(vm.count("comp"),vm.count("nocomp"),invoke_opt.MACO_CompoundAnalysis,"comp");
-    SetBooleanOptionCL(vm.count("phon"),vm.count("nophon"),invoke_opt.PHON_Phonetics,"phon");
-    SetBooleanOptionCL(vm.count("nec"),vm.count("nonec"),invoke_opt.NEC_NEClassification,"nec");
   }
   
-  /// load provided options from a config file
-  
-  void analyzer_config::parse_options(const wstring &cfgFile, const po::options_description &cf_opts) {
-    std::wifstream fcfg;
-    freeling::util::open_utf8_file(fcfg,cfgFile);
-    if (fcfg.fail()) ERROR_CRASH(L"Can not open config file '"<<cfgFile<<"'");
-
-    po::variables_map vm; 
-
-    try {
-      po::store(po::parse_config_file(fcfg, cf_opts), vm);
-      po::notify(vm);
-    }
-    catch (exception &e) {
-      ERROR_CRASH(L"Error while parsing configuration file: "<<util::string2wstring(e.what()));
-    }
-    expand_options(vm);
-  }
-
-  /// load basic options from a config file
-  
-  void analyzer_config::parse_options(const wstring &cfgFile) {
-    po::options_description cf_opts = config_file_opts();
-    parse_options(cfgFile, cf_opts);
-  }
-
-
-  /// load provided options from command line 
-  
-  void analyzer_config::parse_options(int ac, char *av[], const po::options_description &cl_opts) {
-    po::variables_map vm; 
-
-    try {
-      po::store(po::parse_command_line(ac, av, cl_opts), vm);
-      po::notify(vm);    
-    } 
-    catch (exception &e) {
-      ERROR_CRASH("Error while parsing command line: "<<e.what());
-    }
-    expand_options(vm);
-  }
-
-  /// load default options from command line 
-  
-  void analyzer_config::parse_options(int ac, char *av[]) {
-    po::options_description cl_opts = command_line_opts();
-    parse_options(ac, av, cl_opts);
-  }
-
-  /// load provided options from config file and command line
-  
-  void analyzer_config::parse_options(const wstring &cfgFile, int ac, char *av[],
-				      const po::options_description &cf_opts,
-				      const po::options_description &cl_opts) {
-    parse_options(ac,av,cl_opts);
-    parse_options(cfgFile,cf_opts);
-  }
-
-  /// load default options from config file and command line
-  
-  void analyzer_config::parse_options(const wstring &cfgFile, int ac, char *av[]) {
-    po::options_description cl_opts = command_line_opts();
-    po::options_description cf_opts = config_file_opts();
-    parse_options(cfgFile, ac, av, cf_opts, cl_opts);
-  }
-
   /// Check if given options make sense. Issue warnings/errors if not
 
   analyzer_config::status analyzer_config::check_invoke_options(const analyzer_config::invoke_options &opt) const {

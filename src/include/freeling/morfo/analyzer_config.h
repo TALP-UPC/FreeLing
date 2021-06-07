@@ -184,8 +184,6 @@ class WINDLL analyzer_config {
    };
 
  private:
-   /// expand filenames and boolean values in read options
-   void expand_options(const po::variables_map &vm);
 
 
  public:
@@ -208,30 +206,12 @@ class WINDLL analyzer_config {
    analyzer_config();
    /// destructor
    ~analyzer_config();
-   /// Copy constructor
- //   analyzer_config(const analyzer_config &x);
-   /// assignment
- //  analyzer_config& operator=(const analyzer_config&x);
-
-   // get basic analyzer options description
-   po::options_description command_line_opts();
-   po::options_description config_file_opts();
-    
-   /// load options from a config file
-   void parse_options(const std::wstring &cfgFile, const po::options_description &cf_opt);
-   void parse_options(const std::wstring &cfgFile);
  
-   /// load options from  command line   
-   void parse_options(int ac, char *av[], const po::options_description &cf_opt);   
-   void parse_options(int ac, char *av[]);   
-
-   /// load options from file and CL
-   void parse_options(const std::wstring &cfgFile, int ac, char *av[],
-		      const po::options_description &cf_opt,
-		      const po::options_description &cl_opt);   
-   void parse_options(const std::wstring &cfgFile, int ac, char *av[]);   
-
-   /// check invoke options
+   /// Extract values from variables map into analyzer_config members.
+   /// Also expand filenames and boolean values in options map
+   void extract_options(const po::variables_map &vm);
+ 
+    /// check invoke options
    status check_invoke_options(const analyzer_config::invoke_options &opt) const; 
 
    /// set boolean option depending on Command line flags

@@ -151,8 +151,7 @@ class config : public analyzer_config {
 
     Port=0;
 
-    /// TODO  : canviar a wvalues, fer operator>> pels enums del main, 
-    
+    po::options_description cl_opts = command_line_opts();
     cl_opts.add_options()
       ("help,h", "Help about command-line options.")
       ("help-cf", "Help about configuration file options.")
@@ -179,6 +178,7 @@ class config : public analyzer_config {
       ("tmod,m",po::wvalue<std::wstring>(&tracemod),"Mask indicating which modules to trace")
       ;
  
+    po::options_description cf_opts = config_file_opts();
     cf_opts.add_options()
       ("Locale",po::wvalue<std::wstring>(&Locale)->default_value(L"default","default"),"locale encoding of input text (\"default\"=en_US.UTF-8, \"system\"=current system locale, [other]=any valid locale string installed in the system (e.g. ca_ES.UTF-8,it_IT.UTF-8,...)")
       ("ServerMode",po::wvalue<bool>(&Server)->default_value(false),"Activate server mode (default: off)")
@@ -198,15 +198,8 @@ class config : public analyzer_config {
       ("TraceModule",po::wvalue<std::wstring>(&tracemod)->default_value(L"0x0","0x0"),"Mask indicating which modules to trace")
       ;
 
-    
-    try {
-      po::store(po::parse_command_line(ac, av, cl_opts), vm);
-      po::notify(vm);    
-    } 
-    catch (std::exception &e) {
-      std::cerr <<"Error while parsing command line: "<<e.what() << std::endl;
-      exit(1);
-    }
+    // parse options in command line
+    parse_options(ac, av, cl_opt);
 
     // Version required
     if (vm.count("version")) {
