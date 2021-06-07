@@ -87,6 +87,8 @@ foreach (lg ${LANGUAGES})
 endforeach()
 install(DIRECTORY data/common
         DESTINATION share/freeling)
+install(DIRECTORY data/config
+        DESTINATION share/freeling)
 
 if (WIN32)
   # set library path for installation programs

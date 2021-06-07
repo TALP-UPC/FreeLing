@@ -37,7 +37,9 @@ using namespace std;
 namespace freeling {
 
 #undef MOD_TRACENAME
+#undef MOD_TRACECODE
 #define MOD_TRACENAME L"ANALYZER"
+#define MOD_TRACECODE ANALYZER_TRACE
 
 
 //---------------------------------------------
@@ -259,25 +261,35 @@ template<class T> void analyzer::do_analysis(T &doc, const analyzer_config::invo
   // --------- MORFO
   // apply morfo if needed
   if (ivk.InputLevel < MORFO && ivk.OutputLevel >= MORFO) {
-    morfo->analyze(doc, ivk);
+    TRACE(2,L"running morfo");
+    morfo->analyze(doc);
   }
 
   // apply sense tagging (without WSD) if requested at morfo level
-  if (ivk.SENSE_WSD_which != NO_WSD and ivk.OutputLevel <= MORFO) 
+  if (ivk.SENSE_WSD_which != NO_WSD and ivk.OutputLevel <= MORFO) {
+    TRACE(2,L"running sense annotation");
     sens->analyze(doc);
+  }
   
   // add phonetic encoding if needed 
-  if (ivk.PHON_Phonetics) 
+  if (ivk.PHON_Phonetics) {
+    TRACE(2,L"running phonetics");
     phon->analyze(doc);
-
+  }
   // if expected output was MORFO or less, we are done
   if (ivk.OutputLevel <= MORFO) return;
 
   // --------- TAGGER
   // apply tagger if needed
   if (ivk.InputLevel < TAGGED && ivk.OutputLevel >= TAGGED) {
-    if (ivk.TAGGER_which==HMM) hmm->analyze(doc);
-    else if (ivk.TAGGER_which==RELAX) relax->analyze(doc);
+    if (ivk.TAGGER_which==HMM) {
+      TRACE(2,L"running HMM tagger");
+      hmm->analyze(doc);
+    }
+    else if (ivk.TAGGER_which==RELAX) {
+      TRACE(2,L"running relax tagger");
+      relax->analyze(doc);
+    }
   }
   
   // --------- WSD
@@ -288,17 +300,22 @@ template<class T> void analyzer::do_analysis(T &doc, const analyzer_config::invo
 	sens->set_duplicate_analysis(false);
 	WARNING(L"Deactivated DuplicateAnalysis option for 'senses' module due to selected OutputLevel>=TAGGED.")
       }
+      TRACE(2,L"running sense annotation");
       sens->analyze(doc);
 
       // apply WSD if requested
-      if (ivk.SENSE_WSD_which == UKB and dsb != NULL) 
+      if (ivk.SENSE_WSD_which == UKB and dsb != NULL) {
+	TRACE(2,L"running WSD");
 	dsb->analyze(doc);
+      }
     }
   }
 
   // -- NEC
-  if (ivk.OutputLevel >= TAGGED and ivk.NEC_NEClassification and neclass != NULL) 
+  if (ivk.OutputLevel >= TAGGED and ivk.NEC_NEClassification and neclass != NULL) {
+    TRACE(2,L"running NEC");
     neclass->analyze(doc);
+  }
   
   // if expected output was TAGGED, we are done
   if (ivk.OutputLevel==TAGGED) return;
@@ -310,19 +327,23 @@ template<class T> void analyzer::do_analysis(T &doc, const analyzer_config::invo
         (ivk.OutputLevel == SHALLOW or     // requested output is shallow or parsed
          ivk.OutputLevel == PARSED or      // 
          (ivk.OutputLevel >= DEP and       // or any later stage, but dep_txala
-          ivk.DEP_which==TXALA)))          // was explicitly requested
-      parser->analyze(doc);
+          ivk.DEP_which==TXALA))) {        // was explicitly requested
+    TRACE(2,L"running chart parser");
+    parser->analyze(doc);
+  }
   
   // if expected output was SHALLOW, we are done
   if (ivk.OutputLevel==SHALLOW) return;
 
   // --------  Check if "PARSED" level needs to be computed
-  if (deptxala != NULL                                        // dep_txala is loaded
-      and ivk.InputLevel < PARSED          // input is at most chunked
-      and (ivk.OutputLevel == PARSED       // and requested output is parsed
-           or (ivk.OutputLevel > PARSED    // or any later stage, but dep_txala 
-               and ivk.DEP_which==TXALA))) // was explicitly requested  
+  if (deptxala != NULL                                          // dep_txala is loaded
+      and ivk.InputLevel < PARSED            // input is at most chunked
+      and (ivk.OutputLevel == PARSED         // and requested output is parsed
+           or (ivk.OutputLevel > PARSED      // or any later stage, but dep_txala 
+               and ivk.DEP_which==TXALA))) { // was explicitly requested  
+    TRACE(2,L"running dep Txala parser");
     deptxala->complete_parse_tree(doc);
+  }
   
   // if expected output was PARSED, we are done
   if (ivk.OutputLevel==PARSED) return;
@@ -334,6 +355,7 @@ template<class T> void analyzer::do_analysis(T &doc, const analyzer_config::invo
       ((ivk.OutputLevel>=COREF and corfc!=NULL)
        or (ivk.OutputLevel >= DEP and ivk.DEP_which==TREELER))) {
 
+    TRACE(2,L"running dep Treeler parser");
     deptreeler->analyze(doc);
   }
   // apply lstm dep parser if needed
@@ -342,12 +364,14 @@ template<class T> void analyzer::do_analysis(T &doc, const analyzer_config::invo
       ((ivk.OutputLevel>=COREF and corfc!=NULL)
        or (ivk.OutputLevel >= DEP and ivk.DEP_which==LSTM))) {
 
+    TRACE(2,L"running dep LSTM parser");
     deplstm->analyze(doc);
   }
   // default to rule based dep parser
   else if (deptxala != NULL and ivk.InputLevel < DEP and
            ivk.OutputLevel >= DEP and ivk.DEP_which==TXALA) {
 
+    TRACE(2,L"running dep Txala parser");
     deptxala->analyze(doc);
   }
   
@@ -359,6 +383,7 @@ template<class T> void analyzer::do_analysis(T &doc, const analyzer_config::invo
       ivk.InputLevel<SRL and
       ((ivk.OutputLevel>=COREF and corfc!=NULL)
        or (ivk.OutputLevel >= SRL and ivk.SRL_which==SRL_TREELER))) {
+    TRACE(2,L"running SLR");
     srltreeler->analyze(doc);
   }
   
@@ -375,12 +400,16 @@ void analyzer::analyze(document &doc, const analyzer_config::invoke_options& ivk
     do_analysis<document>(doc, ivk);
 
   // solve coreference if needed 
-  if (ivk.InputLevel<COREF and ivk.OutputLevel>=COREF and corfc!=NULL and not doc.empty())
-    corfc->analyze(doc);  
+  if (ivk.InputLevel<COREF and ivk.OutputLevel>=COREF and corfc!=NULL and not doc.empty()) {
+    TRACE(2,L"running coref");
+    corfc->analyze(doc);
+  }
 
   // extract semantic graph if needed
-  if (ivk.OutputLevel>=SEMGRAPH and sge!=NULL and not doc.empty()) 
-    sge->extract(doc);  
+  if (ivk.OutputLevel>=SEMGRAPH and sge!=NULL and not doc.empty()) {
+    TRACE(2,L"running semgraph");
+    sge->extract(doc);
+  }
 }
 
 //---------------------------------------------  
