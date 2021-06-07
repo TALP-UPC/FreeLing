@@ -404,17 +404,17 @@ config* load_config(int argc, char *argv[]) {
       and (cfg->invoke_opt.InputLevel>DEP
            or cfg->invoke_opt.OutputLevel<DEP)) cfg->config_opt.PARSER_GrammarFile = L"";
   if (not cfg->config_opt.DEP_TxalaFile.empty() 
-      and ((cfg->invoke_opt.DEP_which!=TXALA and cfg->invoke_opt.OutputLevel<COREF)
-           or (cfg->invoke_opt.InputLevel>DEP
-               or cfg->invoke_opt.OutputLevel<PARSED))) cfg->config_opt.DEP_TxalaFile = L"";
+      and (cfg->invoke_opt.DEP_which!=TXALA 
+           or cfg->invoke_opt.InputLevel>DEP
+	   or cfg->invoke_opt.OutputLevel<PARSED)) cfg->config_opt.DEP_TxalaFile = L"";
   if (not cfg->config_opt.DEP_TreelerFile.empty() 
-      and ((cfg->invoke_opt.DEP_which!=TREELER and cfg->invoke_opt.OutputLevel<COREF)
-           or (cfg->invoke_opt.InputLevel>DEP
-               or cfg->invoke_opt.OutputLevel<DEP))) cfg->config_opt.DEP_TreelerFile = L"";
+      and (cfg->invoke_opt.DEP_which!=TREELER
+	   or cfg->invoke_opt.InputLevel>DEP
+	   or cfg->invoke_opt.OutputLevel<DEP)) cfg->config_opt.DEP_TreelerFile = L"";
   if (not cfg->config_opt.DEP_LSTMFile.empty() 
-      and ((cfg->invoke_opt.DEP_which!=LSTM and cfg->invoke_opt.OutputLevel<COREF)
-           or (cfg->invoke_opt.InputLevel>DEP
-               or cfg->invoke_opt.OutputLevel<DEP))) cfg->config_opt.DEP_LSTMFile = L"";
+      and (cfg->invoke_opt.DEP_which!=LSTM
+           or cfg->invoke_opt.InputLevel>DEP
+	   or cfg->invoke_opt.OutputLevel<DEP)) cfg->config_opt.DEP_LSTMFile = L"";
   if (not cfg->config_opt.SRL_TreelerFile.empty()
       and (cfg->invoke_opt.InputLevel>=SRL 
            or cfg->invoke_opt.OutputLevel<SRL)) cfg->config_opt.SRL_TreelerFile = L"";

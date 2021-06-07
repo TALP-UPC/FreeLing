@@ -72,7 +72,7 @@
 #define SUMMARIZER_TRACE    0x80000000
 
 /** Traces beyond 32 bits **/
-#define ASR_TRACE            0x0100000000
+#define ANALYZER_TRACE       0x0100000000
 #define EMBEDDINGS_TRACE     0x0200000000
 #define CORRECTOR_TRACE      0x0400000000
 #define CONFIG_TRACE         0x0800000000
