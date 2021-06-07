@@ -158,6 +158,7 @@ namespace freeling {
   
   analyzer_config::analyzer_config_options::~analyzer_config_options() {}
 
+
   /// dumper
 
   wstring analyzer_config::analyzer_config_options::dump() const {
@@ -261,6 +262,21 @@ namespace freeling {
   
   analyzer_config::~analyzer_config() {}
 
+
+  /// invoke_opt and config_opt are public, so there is no need for getters/setters
+  /// but they are provided for convenience.
+  
+  /// getter for config_options
+  const analyzer_config::config_options & analyzer_config::get_config_options() const { return config_opt; }
+  /// getter for invoke_options
+  const analyzer_config::invoke_options & analyzer_config::get_invoke_options() const { return invoke_opt; }
+  /// setter for config_options
+  void analyzer_config::set_config_options(const analyzer_config::config_options &opt) { config_opt = opt; }
+  /// setter for invoke_options
+  void analyzer_config::set_invoke_options(const analyzer_config::invoke_options &opt) { invoke_opt = opt; }
+
+
+
   /// Extract values from variables map into analyzer_config members.
   /// Also expand filenames and boolean values in options map
   void analyzer_config::extract_options(const po::variables_map &vm) {
@@ -334,15 +350,54 @@ namespace freeling {
       string name = v.first;
       // /////////////
 
+      /// config options
+      if (name == "lang") config_opt.Lang = v.second.as<wstring>();
+      else if (name == "ftok") config_opt.TOK_TokenizerFile = v.second.as<wstring>();
+      else if (name == "fsplit") config_opt.SPLIT_SplitterFile = v.second.as<wstring>();
+      else if (name == "dec") config_opt.MACO_Decimal = v.second.as<wstring>();
+      else if (name == "thou") config_opt.MACO_Thousand = v.second.as<wstring>();
+      else if (name == "fmap") config_opt.MACO_UserMapFile = v.second.as<wstring>();
+      else if (name == "floc") config_opt.MACO_LocutionsFile = v.second.as<wstring>();
+      else if (name == "fqty") config_opt.MACO_QuantitiesFile = v.second.as<wstring>();
+      else if (name == "fafx") config_opt.MACO_AffixFile = v.second.as<wstring>();
+      else if (name == "fprob") config_opt.MACO_ProbabilityFile = v.second.as<wstring>();
+      else if (name == "thres") config_opt.MACO_ProbabilityThreshold = v.second.as<double>();
+      else if (name == "fdict") config_opt.MACO_DictionaryFile = v.second.as<wstring>();
+      else if (name == "fnp") config_opt.MACO_NPDataFile = v.second.as<wstring>();
+      else if (name == "fcomp") config_opt.MACO_CompoundFile = v.second.as<wstring>();
+      else if (name == "fpunct") config_opt.MACO_PunctuationFile = v.second.as<wstring>();
+      else if (name == "fphon") config_opt.PHON_PhoneticsFile = v.second.as<wstring>();
+      else if (name == "fnec") config_opt.NEC_NECFile = v.second.as<wstring>();
+      else if (name == "fsense") config_opt.SENSE_ConfigFile = v.second.as<wstring>();
+      else if (name == "fukb") config_opt.UKB_ConfigFile = v.second.as<wstring>();
 
-      //  TO DO
-      // TO DO
+      else if (name == "hmm") config_opt.TAGGER_HMMFile = v.second.as<wstring>();
+      else if (name == "rlx") config_opt.TAGGER_RelaxFile = v.second.as<wstring>();
+      else if (name == "iter") config_opt.TAGGER_RelaxMaxIter = v.second.as<int>();
+      else if (name == "sf") config_opt.TAGGER_RelaxScaleFactor = v.second.as<double>();
+      else if (name == "eps") config_opt.TAGGER_RelaxEpsilon = v.second.as<double>();
+      else if (name == "force") config_opt.TAGGER_ForceSelect = v.second.as<freeling::ForceSelectStrategy>();
+      else if (name == "kbest") config_opt.TAGGER_kbest = v.second.as<int>();
+      else if (name == "grammar") config_opt.PARSER_GrammarFile = v.second.as<wstring>();
+      else if (name == "txala") config_opt.DEP_TxalaFile = v.second.as<wstring>();
+      else if (name == "treeler") config_opt.DEP_TreelerFile = v.second.as<wstring>();
+      else if (name == "lstm") config_opt.DEP_LSTMFile = v.second.as<wstring>();
+      else if (name == "SRLtreeler") config_opt.SRL_TreelerFile = v.second.as<wstring>();
+      else if (name == "fcorf") config_opt.COREF_CorefFile = v.second.as<wstring>();
+      else if (name == "fsge") config_opt.SEMGRAPH_SemGraphFile = v.second.as<wstring>();
 
-      
-      // if (name=="") ...
+      // invoke options
+      else if (name == "inplv") invoke_opt.InputLevel = v.second.as<freeling::AnalysisLevel>();
+      else if (name == "outlv") invoke_opt.OutputLevel = v.second.as<freeling::AnalysisLevel>();
+      else if (name == "sense") invoke_opt.SENSE_WSD_which = v.second.as<freeling::WSDAlgorithm>();
+      else if (name == "tag") invoke_opt.TAGGER_which = v.second.as<freeling::TaggerAlgorithm>();
+      else if (name == "dep") invoke_opt.DEP_which = v.second.as<freeling::DependencyParser>();
+      else if (name == "srl") invoke_opt.SRL_which = v.second.as<freeling::SRLParser>();
     }
+    
     // Handle boolean options expressed with --myopt or --nomyopt in command line
     SetBooleanOptionCL(vm.count("rtk"),vm.count("nortk"),config_opt.TAGGER_Retokenize,"rtk");
+
     SetBooleanOptionCL(vm.count("afx"),vm.count("noafx"),invoke_opt.MACO_AffixAnalysis,"afx");
     SetBooleanOptionCL(vm.count("usr"),vm.count("nousr"),invoke_opt.MACO_UserMap,"usr");
     SetBooleanOptionCL(vm.count("loc"),vm.count("noloc"),invoke_opt.MACO_MultiwordsDetection,"loc");

@@ -209,11 +209,21 @@ class WINDLL analyzer_config {
  
    /// Extract values from variables map into analyzer_config members.
    /// Also expand filenames and boolean values in options map
-   void extract_options(const po::variables_map &vm);
- 
+   void extract_options(const po::variables_map &vm); 
     /// check invoke options
-   status check_invoke_options(const analyzer_config::invoke_options &opt) const; 
+   status check_invoke_options(const invoke_options &opt) const; 
 
+   // getter for config_options
+   const config_options & get_config_options() const;
+   // getter for invoke_options
+   const invoke_options & get_invoke_options() const;
+
+   // setter for config_options
+   void set_config_options(const config_options &opt);
+   // setter for invoke_options
+   void set_invoke_options(const invoke_options &opt);
+
+ 
    /// set boolean option depending on Command line flags
    static void SetBooleanOptionCL (const int pos, const int neg, bool &opt, const std::string &name);
 };

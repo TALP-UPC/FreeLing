@@ -175,6 +175,7 @@ namespace freeling {
       ("rtk","Perform retokenization after PoS tagging")
       ("nortk","Do not perform retokenization after PoS tagging")
       ("force",po::wvalue<freeling::ForceSelectStrategy>(),"When the tagger must be forced to select only one tag per word (no|none,tagger,retok)")
+      ("kbest",po::wvalue<int>(),"Number of sequences produced by HMM tagger")
       ("grammar,G",po::wvalue<std::wstring>(),"Grammar file for chart parser")
       ("dep,d",po::wvalue<freeling::DependencyParser>(),"Dependency parser to use (txala,treeler,lstm)")
       ("srl",po::wvalue<freeling::SRLParser>(),"SRL parser to use (treeler)")

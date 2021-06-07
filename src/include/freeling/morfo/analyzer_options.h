@@ -41,40 +41,41 @@ namespace freeling {
 
 
 class WINDLL analyzer_options {
-                                 
+
+ public: 
   /// constructor
   analyzer_options();
   /// destructor
   ~analyzer_options();
   
   // get basic analyzer options description
-  po::options_description command_line_opts();
-  po::options_description config_file_opts();
+  static po::options_description command_line_opts();
+  static po::options_description config_file_opts();
 
   /// load provided options from a config file, update variables map  
-  void parse_options(const std::wstring &cfgFile,
-                     const po::options_description &cf_opts,
-                     po::variables_map &vm);
+  static void parse_options(const std::wstring &cfgFile,
+                            const po::options_description &cf_opts,
+                            po::variables_map &vm);
   /// load provided options from a config file, return variables map
-  po::variables_map parse_options(const std::wstring &cfgFile,
-                                  const po::options_description &cf_opts);
+  static po::variables_map parse_options(const std::wstring &cfgFile,
+                                         const po::options_description &cf_opts);
   /// load basic options from a config file, return variables map
-  po::variables_map parse_options(const std::wstring &cfgFile);
+  static po::variables_map parse_options(const std::wstring &cfgFile);
   /// load provided options from command line, update variables map  
-  void parse_options(int ac, char *av[],
-                     const po::options_description &cl_opts,
-                     po::variables_map &vm);  
+  static void parse_options(int ac, char *av[],
+                           const po::options_description &cl_opts,
+                           po::variables_map &vm);  
   /// load provided options from command line, return variables map  
-  po::variables_map parse_options(int ac, char *av[],
-                                       const po::options_description &cl_opts);
+  static po::variables_map parse_options(int ac, char *av[],
+                                         const po::options_description &cl_opts);
   /// load default options from command line   
-  po::variables_map parse_options(int ac, char *av[]);
+  static po::variables_map parse_options(int ac, char *av[]);
   /// load provided options from config file and command line  
-  po::variables_map parse_options(const std::wstring &cfgFile, int ac, char *av[],
-                                  const po::options_description &cf_opts,
-                                  const po::options_description &cl_opts);
+  static po::variables_map parse_options(const std::wstring &cfgFile, int ac, char *av[],
+                                         const po::options_description &cf_opts,
+                                         const po::options_description &cl_opts);
   /// load default options from config file and command line  
-  po::variables_map parse_options(const std::wstring &cfgFile, int ac, char *av[]);
+  static po::variables_map parse_options(const std::wstring &cfgFile, int ac, char *av[]);
   
 };
 
