@@ -51,7 +51,6 @@ namespace freeling {
 ///---------------------------------------------
 
 analyzer::analyzer(const analyzer_config &opts) {
-
   // store options used at creation time.
   initial_options = opts;
   // init current options with creation values.
@@ -113,7 +112,7 @@ void analyzer::create_analyzers() {
   nsentence = 1;
   
   //--- create needed analyzers, depending on given options ---//
-  
+
   // tokenizer requested
   if (not initial_options.config_opt.TOK_TokenizerFile.empty())
     tk = new tokenizer(initial_options.config_opt.TOK_TokenizerFile);

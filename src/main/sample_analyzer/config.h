@@ -149,7 +149,6 @@ class config : public analyzer_config {
 
     Port=0;
     
-
     po::options_description cl_opts = analyzer_options::command_line_opts();
     cl_opts.add_options()
       ("help,h", "Help about command-line options.")
@@ -224,7 +223,7 @@ class config : public analyzer_config {
 
 
     // Unless lang ident, load config file.
-    LangIdent = (vm.count("ident") != 0);    
+    LangIdent = (vm.count("ident") != 0);
     if (not LangIdent) {
 
       auto f = vm.find("fcfg");
@@ -236,7 +235,7 @@ class config : public analyzer_config {
         ConfigFile = f->second.as<std::wstring>();
 
       // parse ConfigFile for more options
-      analyzer_options::parse_options(ConfigFile, cf_opts, vm);
+      analyzer_options::parse_options(ConfigFile, cf_opts, vm);      
     }
 
     extract_options(vm);   
@@ -245,6 +244,8 @@ class config : public analyzer_config {
 
 
   void extract_options(const po::variables_map & vm) {
+    // extract values for options in FreeLing parent class
+    analyzer_config::extract_options(vm);
 
     /// auxiliary to read hex number
     std::wstring tracemod;

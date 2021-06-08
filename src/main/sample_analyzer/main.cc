@@ -580,7 +580,12 @@ int main (int argc, char **argv) {
 
   // read configuration file and command-line options
   config *cfg = load_config(argc,argv);
-  
+  analyzer_config::status st = cfg->check_invoke_options(cfg->invoke_opt);
+  if (st.stat != CFG_OK) {
+    wcerr << st.description << endl;
+    if (st.stat == CFG_ERROR) exit (1);    
+  }
+    
   /// set the locale to UTF to properly handle special characters.
   util::init_locale(cfg->Locale);
 
@@ -593,10 +598,8 @@ int main (int argc, char **argv) {
   analyzer *anlz=NULL;
   if (cfg->LangIdent) 
     ident = new lang_ident(cfg->IDENT_identFile);
-  else {
-    anlz = new analyzer(cfg->config_opt);
-    anlz->set_current_invoke_options(cfg->invoke_opt);
-  }
+  else 
+    anlz = new analyzer(*cfg);
 
 
   if (ServerMode) {

@@ -36,7 +36,6 @@ using namespace std;
 
 //////////////////////////////////////////////////////////
 // process a file (or stdin) sending it all to the server
-
 void process_stream(istream &sin, socket_CS &sock) {
 
   // process each line from input
