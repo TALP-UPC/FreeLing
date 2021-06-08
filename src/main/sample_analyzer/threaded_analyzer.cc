@@ -71,7 +71,7 @@ vector<FL_pipe*> pipes;
 config load_config(int argc, char **argv) {
 
   config cfg(argc, argv);
-  
+
   // check option coherence
   if (cfg.LangIdent) {
     wcerr <<L"Error - Language identification not available in threaded mode."<<endl;
