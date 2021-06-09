@@ -398,21 +398,35 @@ namespace freeling {
   po::options_description& analyzer_config::config_file_options() { return cf_opts; }
  
 
-  /// load options from a config file
+  /// load options from a config file, update variables map
   
   void analyzer_config::parse_options(const wstring &cfgFile, po::variables_map &vm) {
     std::wifstream fcfg;
     freeling::util::open_utf8_file(fcfg,cfgFile);
     if (fcfg.fail()) ERROR_CRASH(L"Can not open config file '"<<cfgFile<<"'");
 
-    parse_options(fcfg, config_opt, invoke_opt, vm);
+    try {
+      po::store(po::parse_config_file(fcfg, cf_opts), vm);
+      po::notify(vm);
+    }
+    catch (exception &e) {
+      ERROR_CRASH(L"Error while parsing configuration file: "<<util::string2wstring(e.what()));
+    }    
+
+    expand_options(vm);
   }
 
-  /// load options from a config file + command line 
-  void analyzer_config::parse_options(const wstring &cfgFile,
-                                      int ac, char *av[],
-                                      po::variables_map &vm) {
+  
+  /// load options from a config file, ignore variables map
 
+  void analyzer_config::parse_options(const wstring &cfgFile) {
+    po::variables_map vm;
+    parse_options(cfgFile, vm);
+  }
+  
+  /// load options from command line, update variables map
+  
+  void analyzer_config::parse_options(int ac, char *av[], po::variables_map &vm) {
     try {
       po::store(po::parse_command_line(ac, av, cl_opts), vm);
       po::notify(vm);    
@@ -420,23 +434,32 @@ namespace freeling {
     catch (exception &e) {
       ERROR_CRASH("Error while parsing command line: "<<e.what());
     }
+    expand_options(vm);
+  }
 
+  /// load options from command line, ignore variables map
+  
+  void analyzer_config::parse_options(int ac, char *av[]) {
+    po::variables_map vm;
+    parse_options(ac, av, vm);
+  }
+  
+  /// load options from a config file + command line, update variables map
+  void analyzer_config::parse_options(const wstring &cfgFile, int ac, char *av[], po::variables_map &vm) {
+    parse_options(ac, av, vm);
     parse_options(cfgFile, vm);
   }
-  /// load config file options from a stream (auxiliary for the other constructors)
+
+  /// load options from a config file + command line, ignore variables map
+  void analyzer_config::parse_options(const wstring &cfgFile, int ac, char *av[]) {
+    po::variables_map vm;
+    parse_options(cfgFile, ac, av, vm);
+  }
+
   
-  void analyzer_config::parse_options(wistream &cfg,
-                                      analyzer_config::config_options &config_opt,
-                                      analyzer_config::invoke_options &invoke_opt,
-                                      po::variables_map &vm) {     
-    try {
-      po::store(po::parse_config_file(cfg, cf_opts), vm);
-      po::notify(vm);
-    }
-    catch (exception &e) {
-      ERROR_CRASH(L"Error while parsing configuration file: "<<util::string2wstring(e.what()));
-    }
-    
+  /// expand paths in filenames, and handle boolean command line options --xx/--noxx
+
+  void analyzer_config::expand_options(const po::variables_map &vm) {
     // expand environment variables in filenames
     config_opt.TOK_TokenizerFile = freeling::util::expand_filename(config_opt.TOK_TokenizerFile);
     config_opt.SPLIT_SplitterFile = freeling::util::expand_filename(config_opt.SPLIT_SplitterFile);
@@ -479,6 +502,7 @@ namespace freeling {
     SetBooleanOptionCL(vm.count("comp"),vm.count("nocomp"),invoke_opt.MACO_CompoundAnalysis,"comp");
     SetBooleanOptionCL(vm.count("phon"),vm.count("nophon"),invoke_opt.PHON_Phonetics,"phon");
     SetBooleanOptionCL(vm.count("nec"),vm.count("nonec"),invoke_opt.NEC_NEClassification,"nec");
+
   }
   
   analyzer_config::status analyzer_config::check_invoke_options(const analyzer_config::invoke_options &opt) const {
