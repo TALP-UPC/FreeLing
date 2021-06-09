@@ -183,9 +183,10 @@ class WINDLL analyzer_config {
        std::wstring dump() const;
    };
 
- private:
 
-
+   po::options_description cl_opts; // command-line options
+   po::options_description cf_opts; // config file options
+   
  public:
    ////////////////////////////////////////////////////////////////
    ///  class to handle configuration error states
@@ -206,25 +207,25 @@ class WINDLL analyzer_config {
    analyzer_config();
    /// destructor
    ~analyzer_config();
+
+   // access to options description, in case user wants to add some.
+   po::options_description& command_line_options();
+   po::options_description& config_file_options();
  
-   /// Extract values from variables map into analyzer_config members.
-   /// Also expand filenames and boolean values in options map
-   void extract_options(const po::variables_map &vm); 
-    /// check invoke options
-   status check_invoke_options(const invoke_options &opt) const; 
+   /// load options from a config file
+   void parse_options(const std::wstring &cfgFile, po::variables_map &vm);
+   /// load options from a config file + command line   
+   void parse_options(const std::wstring &cfgFile, int ac, char *av[], po::variables_map &vm);   
+   /// load options from a stream (auxiliary for the other constructors)
+   void parse_options(std::wistream &cfg,
+                      analyzer_config::config_options &config,
+                      analyzer_config::invoke_options &invoke,
+                      po::variables_map &vm);
 
-   // getter for config_options
-   const config_options & get_config_options() const;
-   // getter for invoke_options
-   const invoke_options & get_invoke_options() const;
+   // check invoke options
+   status check_invoke_options(const analyzer_config::invoke_options &opt) const; 
 
-   // setter for config_options
-   void set_config_options(const config_options &opt);
-   // setter for invoke_options
-   void set_invoke_options(const invoke_options &opt);
-
- 
-   /// set boolean option depending on Command line flags
+   // set boolean option depending on Command line flags
    static void SetBooleanOptionCL (const int pos, const int neg, bool &opt, const std::string &name);
 };
  

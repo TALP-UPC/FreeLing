@@ -47,10 +47,8 @@ namespace freeling {
   ///  Create a dictionary module, open database.
   ///////////////////////////////////////////////////////////////
 
-  dictionary::dictionary(const analyzer_config &opts) { 
+  dictionary::dictionary(const analyzer_config &opts) : initial_options(opts) { 
 
-    // store options used at creation time.
-    initial_options = opts;
     // init current options with creation values.
     current_invoke_options = opts.invoke_opt;
 

@@ -50,10 +50,8 @@ namespace freeling {
 /// Create analyzers with a full set of options (creation and invocation)
 ///---------------------------------------------
 
-analyzer::analyzer(const analyzer_config &opts) {
-  // store options used at creation time.
-  initial_options = opts;
-  // init current options with creation values.
+  analyzer::analyzer(const analyzer_config &opts) : initial_options(opts) {
+  // init current default options with initial values.
   current_invoke_options = opts.invoke_opt;
 
   // load required modules
