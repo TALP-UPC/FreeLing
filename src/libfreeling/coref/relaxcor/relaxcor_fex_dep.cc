@@ -1111,8 +1111,9 @@ namespace freeling {
       if (re.search(c->get_word().get_tag(best1)))    // if the child has the "re" PoS, it is a modifier
         mod1.insert(c->get_word().get_lemma(best1));
       else if (under.search(c->get_word().get_tag(best1))) {   // otherwise, if it has the "under" PoS (e.g. preposition), check its first child
-	if (re.search(c.sibling_begin()->get_word().get_tag(best1)))  // if the first child of the preposition has the "re" pos, get it as modifier
-	  mod1.insert(c.sibling_begin()->get_word().get_tag(best1));
+        if (c.sibling_begin() != c.sibling_end()) // and the preposition has a child (it should but who knows which sentence we'd get...)
+          if (re.search(c.sibling_begin()->get_word().get_tag(best1)))  // if the first child of the preposition has the "re" pos, get it as modifier
+            mod1.insert(c.sibling_begin()->get_word().get_tag(best1));
       }
     }
       
