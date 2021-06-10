@@ -1111,8 +1111,9 @@ namespace freeling {
       if (re.search(c->get_word().get_tag(best1)))    // if the child has the "re" PoS, it is a modifier
         mod1.insert(c->get_word().get_lemma(best1));
       else if (under.search(c->get_word().get_tag(best1))) {   // otherwise, if it has the "under" PoS (e.g. preposition), check its first child
-	if (re.search(c.sibling_begin()->get_word().get_tag(best1)))  // if the first child of the preposition has the "re" pos, get it as modifier
-	  mod1.insert(c.sibling_begin()->get_word().get_tag(best1));
+        if (c.sibling_begin() != c.sibling_end()) // and the preposition has a child (it should but who knows which sentence we'd get...)
+          if (re.search(c.sibling_begin()->get_word().get_tag(best1)))  // if the first child of the preposition has the "re" pos, get it as modifier
+            mod1.insert(c.sibling_begin()->get_word().get_tag(best1));
       }
     }
       
@@ -1124,8 +1125,9 @@ namespace freeling {
         r = (mod1.find(c->get_word().get_lemma(best2))!=mod1.end());  // if the child has the "re" pos, check it directly.
 	
       else if (under.search(c->get_word().get_tag(best2))) {   // if the child has the "under" PoS (e.g. preposition)
-	if (re.search(c.sibling_begin()->get_word().get_tag(best2)))  // and the the first child of the preposition has the "re" pos
-	  r = (mod1.find(c.sibling_begin()->get_word().get_tag(best2))!=mod1.end());  // check it was also in m1.
+        if (c.sibling_begin() != c.sibling_end()) // and the preposition has a child (it should but who knows which sentence we'd get...)
+          if (re.search(c.sibling_begin()->get_word().get_tag(best2)))  // and the the first child of the preposition has the "re" pos
+            r = (mod1.find(c.sibling_begin()->get_word().get_tag(best2))!=mod1.end());  // check it was also in m1.
       }
     }
 
