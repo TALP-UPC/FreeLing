@@ -239,16 +239,5 @@ namespace freeling {
   void maco::analyze(sentence &s) const {
     analyze(s, current_invoke_options);
   } 
-
-  /// analyze list of sentences (paragraph)
-  void maco::analyze(std::list<sentence> &ls, const analyzer_config::invoke_options &opts) const {
-    for (auto s : ls) analyze(s, opts);
-  }
-  
-  /// analyze document
-  void maco::analyze(document &doc, const analyzer_config::invoke_options &opts) const {
-    for (auto p : doc) analyze(p, opts);
-  }
-
   
 } // namespace

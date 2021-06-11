@@ -33,6 +33,7 @@
 
 #include "freeling/windll.h"
 #include "freeling/morfo/language.h"
+#include "freeling/morfo/analyzer_config.h"
 
 namespace freeling {
 
@@ -54,11 +55,25 @@ namespace freeling {
     /// analyze sentence/document. Pure virtual, must be provided by instance
     virtual void analyze(sentence &) const = 0;
 
+    /// analyze sentence/document with given options. Should be provided by instance if needed.
+    /// Default behaviour ignores provided options.
+    virtual void analyze(sentence &s, const analyzer_config::invoke_options &opt) const {
+      analyze(s);
+    };
+
     /// analyze list of sentences (paragraph)
     virtual void analyze(std::list<sentence> &ls) const {
       std::list<sentence>::iterator is;
       for (is=ls.begin(); is!=ls.end(); is++) {
         analyze(*is);    
+      }
+    }
+
+    /// analyze list of sentences (paragraph) with given options
+    virtual void analyze(std::list<sentence> &ls, const analyzer_config::invoke_options &opt) const {
+      std::list<sentence>::iterator is;
+      for (is=ls.begin(); is!=ls.end(); is++) {
+        analyze(*is, opt);    
       }
     }
 
@@ -70,10 +85,25 @@ namespace freeling {
       }
     }
 
-    /// analyze sentence/document, return analyzed copy
+    /// analyze document with given options
+    virtual void analyze(document &doc, const analyzer_config::invoke_options &opt) const {
+      document::iterator ip;
+      for (ip=doc.begin(); ip!=doc.end(); ip++) {
+        analyze(*ip, opt);
+      }
+    }
+
+    /// analyze sentence, return analyzed copy
     virtual sentence analyze(const sentence &s) const {
       sentence s2=s;
       analyze(s2);    
+      return s2;
+    }
+
+    /// analyze sentence with given options, return analyzed copy
+    virtual sentence analyze(const sentence &s, const analyzer_config::invoke_options &opt) const {
+      sentence s2=s;
+      analyze(s2, opt);    
       return s2;
     }
 
@@ -84,10 +114,24 @@ namespace freeling {
       return l2;
     }
 
+    /// analyze list of sentences with given options, return analyzed copy
+  virtual std::list<sentence> analyze(const std::list<sentence> &ls, const analyzer_config::invoke_options &opt) const {
+      std::list<sentence> l2=ls;
+      analyze(l2, opt);
+      return l2;
+    }
+
     /// analyze document, return analyzed copy
     virtual document analyze(const document &d) const {
       document d2=d;
       analyze(d2);
+      return d2;
+    }
+
+    /// analyze document with given options, return analyzed copy
+    virtual document analyze(const document &d, const analyzer_config::invoke_options &opt) const {
+      document d2=d;
+      analyze(d2, opt);
       return d2;
     }
 

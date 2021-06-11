@@ -1143,6 +1143,7 @@ typedef enum {CFG_OK, CFG_WARNING, CFG_ERROR} CFG_status;
    std::wstring MACO_UserMapFile, MACO_LocutionsFile,   MACO_QuantitiesFile,
      MACO_AffixFile,   MACO_ProbabilityFile, MACO_DictionaryFile, 
      MACO_NPDataFile,  MACO_PunctuationFile, MACO_CompoundFile;
+   bool MACO_InverseDictionary;
    double MACO_ProbabilityThreshold;
    /// Phonetics config file
    std::wstring PHON_PhoneticsFile;
@@ -1229,12 +1230,22 @@ typedef enum {CFG_OK, CFG_WARNING, CFG_ERROR} CFG_status;
    /// destructor
    ~analyzer_config();
 
-   /// load options from a config file
+   // access to options description, in case user wants to add some.
+   po::options_description& command_line_options();
+   po::options_description& config_file_options();
+
+   /// load options from a config file, ignore variables map
    void parse_options(const std::wstring &cfgFile);
-   /// load options from a config file + command line   
+   /// load options from a config file, update variables map
+   void parse_options(const std::wstring &cfgFile, po::variables_map &vm);
+   /// load options from command line, ignore variables map   
+   void parse_options(int ac, char *av[]);   
+   /// load options from command line, update variables map 
+   void parse_options(int ac, char *av[], po::variables_map &vm);   
+   /// load options from a config file + command line, ignore variables map   
    void parse_options(const std::wstring &cfgFile, int ac, char *av[]);   
-   /// load options from a stream (auxiliary for the other constructors)
-   void parse_options(std::wistream &cfg, analyzer_config::config_options &config, analyzer_config::invoke_options &invoke);
+   /// load options from a config file + command line, update variables map
+   void parse_options(const std::wstring &cfgFile, int ac, char *av[], po::variables_map &vm);   
 
    // check invoke options
    status check_invoke_options(const analyzer_config::invoke_options &opt) const; 
@@ -1267,30 +1278,37 @@ typedef enum {CFG_OK, CFG_WARNING, CFG_ERROR} CFG_status;
 class analyzer {
 
  public:
-   analyzer(const freeling::config_options &cfg);
-   void set_current_invoke_options(const freeling::invoke_options &opt);
-   const invoke_options& get_current_invoke_options() const;
+   analyzer(const analyzer_config &cfg);
+   analyzer(const analyzer_config::config_options &cfg);
 
    ~analyzer();
 
    /// analyze further levels on a partially analyzed document
    void analyze(document &doc) const;
+   void analyze(document &doc, const analyzer_config::invoke_options &ivk) const;
    /// analyze further levels on partially analyzed sentences
    void analyze(std::list<sentence> &ls) const;
+   void analyze(std::list<sentence> &ls, const analyzer_config::invoke_options &ivk) const;
    /// analyze text as a whole document
    void analyze(const std::wstring &text, document &doc, bool parag=false) const;
-   /// Analyze text as a partial document. Retain incomplete sentences in buffer   
+   void analyze(const std::wstring &text, document &doc, const analyzer_config::invoke_options &ivk, bool parag=false) const;
+   /// analyze text as a whole document, returning it (useful for python API)
+   document analyze_as_document(const std::wstring &text, bool parag=false) const;
+   document analyze_as_document(const std::wstring &text, const analyzer_config::invoke_options &ivk, bool parag=false) const;
+  /// Analyze text as a partial document. Retain incomplete sentences in buffer   
    /// in case next call completes them (except if flush==true)
    void analyze(const std::wstring &text, std::list<sentence> &ls, bool flush=false);
-
-   /// for python api
-   std::list<sentence> analyze(const std::wstring &text, bool flush=false);   
-   document analyze_as_document(const std::wstring &text, bool parag=false) const;
+   void analyze(const std::wstring &text, std::list<sentence> &ls, const analyzer_config::invoke_options &ivk, bool flush=false);
+   /// Analyze text as a partial document. Retain incomplete sentences in buffer. Return analysis (useful for python API)
+   std::list<sentence> analyze(const std::wstring &text, bool flush=false);
+   std::list<sentence> analyze(const std::wstring &text, const analyzer_config::invoke_options &ivk, bool flush=false);
 
    // flush splitter buffer and analyze any pending text. 
    void flush_buffer(std::list<sentence> &ls);
+   void flush_buffer(std::list<sentence> &ls, const analyzer_config::invoke_options &ivk);
    // reset tokenizer offset counter
    void reset_offset();
+
 };
 
 
@@ -1375,75 +1393,56 @@ class splitter {
 };
 
 
-/*------------------------------------------------------------------------*/
-class maco_options {
- public:
-    // Language analyzed
-    std::wstring Lang;
-
-    /// Morphological analyzer modules configuration/data files.
-    std::wstring LocutionsFile, QuantitiesFile, AffixFile, 
-      CompoundFile, DictionaryFile, ProbabilityFile, NPdataFile, 
-      PunctuationFile, UserMapFile;
-
-    /// module-specific parameters for number recognition
-    std::wstring Decimal, Thousand;
-    /// module-specific parameters for probabilities
-    double ProbabilityThreshold;
-    /// module-specific parameters for dictionary
-    bool InverseDict,RetokContractions;
-
-    /// constructor
-    maco_options(const std::wstring &); 
-    ~maco_options(); 
-
-    /// Option setting methods provided to ease perl interface generation. 
-    /// Since option data members are public and can be accessed directly
-    /// from C++, the following methods are not necessary, but may become
-    /// convenient sometimes.
-    void set_data_files(const std::wstring &usr,
-                        const std::wstring &pun, const std::wstring &dic,
-                        const std::wstring &aff, const std::wstring &comp,
-                        const std::wstring &loc, const std::wstring &nps,
-                        const std::wstring &qty, const std::wstring &prb);
-
-    void set_nummerical_points(const std::wstring &dec,const std::wstring &tho);
-    void set_threshold(double);
-    void set_inverse_dict(bool);
-    void set_retok_contractions(bool);
-};
-
 
 /*------------------------------------------------------------------------*/
 class maco {
    public:
      /// Constructor
-     maco(const maco_options &); 
+     maco(const analyzer_config &); 
      /// Destructor
      ~maco();
 
-     /// change active options for further analysis
-     void set_active_options(bool umap, bool num, bool pun, bool dat,
-                             bool dic, bool aff, bool comp, bool rtk,
-                             bool mw, bool ner, bool qt, bool prb);
-
-     #ifndef FL_API_JAVA
+    /// convenience:  retrieve options used at creation time (e.g. to reset current config)
+    const analyzer_config& get_initial_options() const;
+    /// set configuration to be used by default
+    void set_current_invoke_options(const analyzer_config::invoke_options &opt);
+    /// get configuration being used by default
+    const analyzer_config::invoke_options& get_current_invoke_options() const;
+    /// alternative for set_current_invoke_options
+    void set_active_options(bool umap, bool num, bool pun, bool dat,
+                            bool dic, bool aff, bool comp, bool rtk,
+                            bool mw, bool ner, bool qt, bool prb);
+#if defined(FL_API_JAVA) || defined(FL_API_PYTHON) || defined(FL_API_PERL)
      /// analyze sentence
-     sentence analyze(const sentence &) const;
-     /// analyze sentences
-     std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-     /// analyze document
-     document analyze(const document &) const;
-     #else
-     /// analyze sentence
-     void analyze(sentence &) const;
-     /// analyze sentences
+     void analyze(sentence &s) const;
+     /// analyze sentence with given options
+     void analyze(sentence &s, const analyzer_config::invoke_options &opts) const;
+     /// analyze list of sentences
      void analyze(std::list<freeling::sentence> &) const;
+     /// analyze list of sentences (paragraph) with given options
+     void analyze(std::list<freeling::sentence> &ls, const analyzer_config::invoke_options &opts) const;
      /// analyze document
      void analyze(document &) const;
+     /// analyze document with given options
+     void analyze(document &doc, const analyzer_config::invoke_options &opts) const;
+     #else
+     /// analyze sentence, return copy
+     sentence analyze(const sentence &s) const;
+     /// analyze given sentence with given options, return copy
+     sentence analyze(sentence &s, const analyzer_config::invoke_options &opts) const;
+     /// analyze sentences, return copy
+     std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
+     /// analyze sentences with given options, return copy
+     std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &, const analyzer_config::invoke_options &opts) const;
+     /// analyze document, return copy
+     document analyze(const document &d) const;
+     /// analyze document with given options, return copy
+     document analyze(const document &d, const analyzer_config::invoke_options &opts) const;
      #endif
 };
 
+
+ 
 
 /*------------------------------------------------------------------------*/
 class RE_map {
@@ -1456,20 +1455,20 @@ class RE_map {
   /// annotate given word
   void annotate_word(word &) const;
 
-  #ifndef FL_API_JAVA
-  /// analyze sentence
-  sentence analyze(const sentence &) const;
-  /// analyze sentences
-  std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-  /// analyze document
-  document analyze(const document &) const;
-  #else
+  #if defined(FL_API_JAVA)
   /// analyze sentence
   void analyze(sentence &) const;
   /// analyze sentences
   void analyze(std::list<freeling::sentence> &) const;
   /// analyze document
   void analyze(document &) const;
+  #else
+  /// analyze sentence
+  sentence analyze(const sentence &) const;
+  /// analyze sentences
+  std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
+  /// analyze document
+  document analyze(const document &) const;
   #endif
 };
 
@@ -1480,20 +1479,20 @@ class numbers {
     numbers(const std::wstring &, const std::wstring &, const std::wstring &);
     ~numbers();
 
-    #ifndef FL_API_JAVA
-    /// analyze sentence
-    sentence analyze(const sentence &) const;
-    /// analyze sentences
-    std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-    /// analyze document
-    document analyze(const document &) const;
-    #else
+    #if defined(FL_API_JAVA)
     /// analyze sentence
     void analyze(sentence &) const;
     /// analyze sentences
     void analyze(std::list<freeling::sentence> &) const;
     /// analyze document
     void analyze(document &) const;
+    #else
+    /// analyze sentence
+    sentence analyze(const sentence &) const;
+    /// analyze sentences
+    std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
+    /// analyze document
+    document analyze(const document &) const;
     #endif
 };
 
@@ -1505,20 +1504,20 @@ class punts {
   punts(const std::wstring &); 
   ~punts();
 
-  #ifndef FL_API_JAVA
-  /// analyze sentence
-  sentence analyze(const sentence &) const;
-  /// analyze sentences
-  std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-  /// analyze document
-  document analyze(const document &) const;
-  #else
+  #if defined(FL_API_JAVA)
   /// analyze sentence
   void analyze(sentence &) const;
   /// analyze sentences
   void analyze(std::list<freeling::sentence> &) const;
   /// analyze document
   void analyze(document &) const;
+  #else
+  /// analyze sentence
+  sentence analyze(const sentence &) const;
+  /// analyze sentences
+  std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
+  /// analyze document
+  document analyze(const document &) const;
   #endif
 };
 
@@ -1530,78 +1529,87 @@ class dates {
   /// Destructor
   ~dates(); 
 
-  #ifndef FL_API_JAVA
-  /// analyze sentence
-  sentence analyze(const sentence &) const;
-  /// analyze sentences
-  std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-  /// analyze document
-  document analyze(const document &) const;
-  #else
+  #if defined(FL_API_JAVA)
   /// analyze sentence
   void analyze(sentence &) const;
   /// analyze sentences
   void analyze(std::list<freeling::sentence> &) const;
   /// analyze document
   void analyze(document &) const;
+  #else
+  /// analyze sentence
+  sentence analyze(const sentence &) const;
+  /// analyze sentences
+  std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
+  /// analyze document
+  document analyze(const document &) const;
   #endif
 };  
 
 /*------------------------------------------------------------------------*/
 class dictionary {
  public:
-    typedef enum {OFF,ON,DEFAULT} Option;
-
     /// Constructor
-    dictionary(const std::wstring &Lang, const std::wstring &dicFile, 
-               const std::wstring &sufFile, const std::wstring &compFile,
-               bool invDic=false, bool retok=true);
+    dictionary(const analyzer_config &opts);
     /// Destructor
     ~dictionary();
+
+    /// convenience:  retrieve options used at creation time (e.g. to reset current config)
+    const analyzer_config& get_initial_options() const;
+    /// set configuration to be used by default
+    void set_current_invoke_options(const analyzer_config::invoke_options &opt);
+    /// get configuration being used by default
+    const analyzer_config::invoke_options& get_current_invoke_options() const;
 
     /// add analysis to dictionary entry (create entry if not there)
     void add_analysis(const std::wstring &, const analysis &);
     /// remove entry from dictionary
     void remove_entry(const std::wstring &);
 
-    /// customize behaviour of dictionary for further analysis
-    void set_retokenize_contractions(bool); 
-    void set_affix_analysis(bool);
-    void set_compound_analysis(bool);
-
-    /// find out whether the dictionary has loaded an affix module
-    bool has_affixes() const;
-    /// find out whether the dictionary has loaded a compounds module
-    bool has_compounds() const;
-
     /// Get dictionary entry for a given form, add to given list.
     void search_form(const std::wstring &, std::list<analysis> &) const;
     /// Fills the analysis list of a word, checking for suffixes and contractions.
     /// Returns true iff the form is a contraction, returns contraction components
     /// in given list
-    bool annotate_word(word &, std::list<word> &, dictionary::Option compounds=DEFAULT, dictionary::Option retok=DEFAULT) const;
+    bool annotate_word(word &, std::list<word> &, const analyzer_config::invoke_options &opts) const;
+    /// annotate word with default options
+    bool annotate_word(word &, std::list<word> &) const;
     /// Fills the analysis list of a word, checking for suffixes and contractions.
     /// Never retokenizing contractions, nor returning component list.
-    /// It is just a convenience equivalent to "annotate_word(w,dummy,OFF,OFF)"
+    /// It is just a convenience equivalent to "annotate_word(w,dummy,opts)
+    /// with opts.retokenize=opts.compound=false"
     void annotate_word(word &) const;
     /// Get possible forms for a lemma+pos
     std::list<std::wstring> get_forms(const std::wstring &, const std::wstring &) const;
 
-    #ifndef FL_API_JAVA
-    /// analyze sentence, return analyzed copy
-    sentence analyze(const sentence &) const;
-    /// analyze sentences, return analyzed copy
-    std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-    /// analyze document
-    document analyze(const document &) const;
-    #else
-    /// analyze given sentence
-    void analyze(sentence &) const;
-    /// analyze given sentences
-    void analyze(std::list<freeling::sentence> &) const; 
-    /// analyze document
-    void analyze(document &) const;
-    #endif
+     #if defined(FL_API_JAVA) || defined(FL_API_PYTHON) || defined(FL_API_PERL)
+     /// analyze sentence
+     void analyze(sentence &s) const;
+     /// analyze sentence with given options
+     void analyze(sentence &s, const analyzer_config::invoke_options &opts) const;
+     /// analyze list of sentences
+     void analyze(std::list<freeling::sentence> &) const;
+     /// analyze list of sentences (paragraph) with given options
+     void analyze(std::list<freeling::sentence> &ls, const analyzer_config::invoke_options &opts) const;
+     /// analyze document
+     void analyze(document &) const;
+     /// analyze document with given options
+     void analyze(document &doc, const analyzer_config::invoke_options &opts) const;
+     #else
+     /// analyze sentence, return copy
+     sentence analyze(const sentence &s) const;
+     /// analyze given sentence with given options, return copy
+     sentence analyze(sentence &s, const analyzer_config::invoke_options &opts) const;
+     /// analyze sentences, return copy
+     std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
+     /// analyze sentences with given options, return copy
+     std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &, const analyzer_config::invoke_options &opts) const;
+     /// analyze document, return copy
+     document analyze(const document &d) const;
+     /// analyze document with given options, return copy
+     document analyze(const document &d, const analyzer_config::invoke_options &opts) const;
+     #endif
+
 };
 
 /*------------------------------------------------------------------------*/
@@ -1613,20 +1621,20 @@ class locutions {
   void add_locution(const std::wstring &);
   void set_OnlySelected(bool);
 
-  #ifndef FL_API_JAVA
-  /// analyze sentence
-  sentence analyze(const sentence &) const;
-  /// analyze sentences
-  std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-  /// analyze document
-  document analyze(const document &) const;
-  #else
+  #if defined(FL_API_JAVA)
   /// analyze sentence
   void analyze(sentence &) const;
   /// analyze sentences
   void analyze(std::list<freeling::sentence> &) const;
   /// analyze document
   void analyze(document &) const;
+  #else
+  /// analyze sentence
+  sentence analyze(const sentence &) const;
+  /// analyze sentences
+  std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
+  /// analyze document
+  document analyze(const document &) const;
   #endif
 };
 
@@ -1638,20 +1646,20 @@ class ner {
   /// Destructor
   ~ner();
 
-  #ifndef FL_API_JAVA
-  /// analyze sentence
-  sentence analyze(const sentence &) const;
-  /// analyze sentences
-  std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-  /// analyze document
-  document analyze(const document &) const;
-  #else
+  #if defined(FL_API_JAVA)
   /// analyze sentence
   void analyze(sentence &) const;
   /// analyze sentences
   void analyze(std::list<freeling::sentence> &) const;
   /// analyze document
   void analyze(document &) const;
+  #else
+  /// analyze sentence
+  sentence analyze(const sentence &) const;
+  /// analyze sentences
+  std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
+  /// analyze document
+  document analyze(const document &) const;
   #endif
 };
 
@@ -1664,20 +1672,20 @@ class crf_nerc {
     /// Destructor
     ~crf_nerc();
 
-    #ifndef FL_API_JAVA
-    /// analyze sentence
-    sentence analyze(const sentence &) const;
-    /// analyze sentences
-    std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-    /// analyze document
-    document analyze(const document &) const;
-    #else
+    #if defined(FL_API_JAVA)
     /// analyze sentence
     void analyze(sentence &) const;
     /// analyze sentences
     void analyze(std::list<freeling::sentence> &) const;
     /// analyze document
     void analyze(document &) const;
+    #else
+    /// analyze sentence
+    sentence analyze(const sentence &) const;
+    /// analyze sentences
+    std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
+    /// analyze document
+    document analyze(const document &) const;
     #endif
 };
 
@@ -1690,20 +1698,20 @@ class quantities {
   /// Destructor
   ~quantities(); 
 
-  #ifndef FL_API_JAVA
-  /// analyze sentence
-  sentence analyze(const sentence &) const;
-  /// analyze sentences
-  std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-  /// analyze document
-  document analyze(const document &) const;
-  #else
+  #if defined(FL_API_JAVA)
   /// analyze sentence
   void analyze(sentence &) const;
   /// analyze sentences
   void analyze(std::list<freeling::sentence> &) const;
   /// analyze document
   void analyze(document &) const;
+  #else
+  /// analyze sentence
+  sentence analyze(const sentence &) const;
+  /// analyze sentences
+  std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
+  /// analyze document
+  document analyze(const document &) const;
   #endif
 };
 
@@ -1719,20 +1727,20 @@ class probabilities {
   /// Turn guesser on/of
   void set_activate_guesser(bool);
 
-  #ifndef FL_API_JAVA
-  /// analyze sentence
-  sentence analyze(const sentence &) const;
-  /// analyze sentences
-  std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-  /// analyze document
-  document analyze(const document &) const;
-  #else
+  #if defined(FL_API_JAVA)
   /// analyze sentence
   void analyze(sentence &) const;
   /// analyze sentences
   void analyze(std::list<freeling::sentence> &) const;
   /// analyze document
   void analyze(document &) const;
+  #else
+  /// analyze sentence
+  sentence analyze(const sentence &) const;
+  /// analyze sentences
+  std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
+  /// analyze document
+  document analyze(const document &) const;
   #endif
 };
 
@@ -1747,20 +1755,20 @@ class hmm_tagger {
   /// sequence according to HMM parameters.
   double SequenceProb_log(const sentence &, int k=0) const;
 
-  #ifndef FL_API_JAVA
-  /// analyze sentence
-  sentence analyze(const sentence &) const;
-  /// analyze sentences
-  std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-  /// analyze document
-  document analyze(const document &) const;
-  #else
+  #if defined(FL_API_JAVA)
   /// analyze sentence
   void analyze(sentence &) const;
   /// analyze sentences
   void analyze(std::list<freeling::sentence> &) const;
   /// analyze document
   void analyze(document &) const;
+  #else
+  /// analyze sentence
+  sentence analyze(const sentence &) const;
+  /// analyze sentences
+  std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
+  /// analyze document
+  document analyze(const document &) const;
   #endif
 };
 
@@ -1772,20 +1780,20 @@ class relax_tagger {
   relax_tagger(const std::wstring &, int, double, double, bool, unsigned int);
   ~relax_tagger();
 
-  #ifndef FL_API_JAVA
-  /// analyze sentence
-  sentence analyze(const sentence &) const;
-  /// analyze sentences
-  std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-  /// analyze document
-  document analyze(const document &) const;
-  #else
+  #if defined(FL_API_JAVA)
   /// analyze sentence
   void analyze(sentence &) const;
   /// analyze sentences
   void analyze(std::list<freeling::sentence> &) const;
   /// analyze document
   void analyze(document &) const;
+  #else
+  /// analyze sentence
+  sentence analyze(const sentence &) const;
+  /// analyze sentences
+  std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
+  /// analyze document
+  document analyze(const document &) const;
   #endif
 };
 
@@ -1802,20 +1810,20 @@ class relax_tagger {
     /// direct access to results of underlying automata
     void get_similar_words(const std::wstring &, std::list<freeling::alternative> &) const;
 
-    #ifndef FL_API_JAVA
-    /// analyze sentence
-    sentence analyze(const sentence &) const;
-    /// analyze sentences
-    std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-    /// analyze document
-    document analyze(const document &) const;
-    #else
+    #if defined(FL_API_JAVA)
     /// analyze sentence
     void analyze(sentence &) const;
     /// analyze sentences
     void analyze(std::list<freeling::sentence> &) const;
     /// analyze document
     void analyze(document &) const;
+    #else
+    /// analyze sentence
+    sentence analyze(const sentence &) const;
+    /// analyze sentences
+    std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
+    /// analyze document
+    document analyze(const document &) const;
     #endif
 
   };
@@ -1832,20 +1840,20 @@ class phonetics {
   /// Returns the phonetic sound of the word
   std::wstring get_sound(const std::wstring &) const;
 
-  #ifndef FL_API_JAVA
-  /// analyze sentence
-  sentence analyze(const sentence &) const;
-  /// analyze sentences
-  std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-  /// analyze document
-  document analyze(const document &) const;
-  #else
+  #if defined(FL_API_JAVA)
   /// analyze sentence
   void analyze(sentence &) const;
   /// analyze sentences
   void analyze(std::list<freeling::sentence> &) const;
   /// analyze document
   void analyze(document &) const;
+  #else
+  /// analyze sentence
+  sentence analyze(const sentence &) const;
+  /// analyze sentences
+  std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
+  /// analyze document
+  document analyze(const document &) const;
   #endif
 };
 
@@ -1857,20 +1865,20 @@ class nec {
   /// Destructor
   ~nec();
   
-  #ifndef FL_API_JAVA
-  /// analyze sentence
-  sentence analyze(const sentence &) const;
-  /// analyze sentences
-  std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-  /// analyze document
-  document analyze(const document &) const;
-  #else
+  #if defined(FL_API_JAVA)
   /// analyze sentence
   void analyze(sentence &) const;
   /// analyze sentences
   void analyze(std::list<freeling::sentence> &) const;
   /// analyze document
   void analyze(document &) const;
+  #else
+  /// analyze sentence
+  sentence analyze(const sentence &) const;
+  /// analyze sentences
+  std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
+  /// analyze document
+  document analyze(const document &) const;
   #endif
 };
 
@@ -1885,20 +1893,20 @@ class chart_parser {
    /// Get the start symbol of the grammar
    std::wstring get_start_symbol(void) const;
 
-   #ifndef FL_API_JAVA
-   /// analyze sentence
-   sentence analyze(const sentence &) const;
-   /// analyze sentences
-   std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-   /// analyze document
-   document analyze(const document &) const;
-   #else
+   #if defined(FL_API_JAVA)
    /// analyze sentence
    void analyze(sentence &) const;
    /// analyze sentences
    void analyze(std::list<freeling::sentence> &) const;
    /// analyze document
    void analyze(document &) const;
+   #else
+   /// analyze sentence
+   sentence analyze(const sentence &) const;
+   /// analyze sentences
+   std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
+   /// analyze document
+   document analyze(const document &) const;
    #endif
 };
 
@@ -1916,20 +1924,20 @@ class dep_txala {
    /// apply completion rules to get a full parse tree
    void complete_parse_tree(document &) const;
 
-   #ifndef FL_API_JAVA
+   #if defined(FL_API_JAVA)
+   /// analyze sentence
+   void analyze(sentence &) const;
+   /// analyze sentences
+   void analyze(std::list<freeling::sentence> &) const;
+   /// analyze document
+   void analyze(document &) const;
+   #else
    /// analyze sentence
    sentence analyze(const sentence &) const;
    /// analyze sentences
    std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
    /// analyze document
    document analyze(const document &) const;
-   #else
-   /// analyze sentence
-   void analyze(sentence &) const;
-   /// analyze sentences, return analyzed copy
-   void analyze(std::list<freeling::sentence> &) const;
-   /// analyze document
-   void analyze(document &) const;
    #endif
 
 };
@@ -1940,20 +1948,20 @@ class dep_treeler {
    dep_treeler(const std::wstring &);
    ~dep_treeler();
 
-   #ifndef FL_API_JAVA
+   #if defined(FL_API_JAVA)
+   /// analyze sentence
+   void analyze(sentence &) const;
+   /// analyze sentences
+   void analyze(std::list<freeling::sentence> &) const;
+   /// analyze document
+   void analyze(document &) const;
+   #else
    /// analyze sentence
    sentence analyze(const sentence &) const;
    /// analyze sentences
    std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
    /// analyze document
    document analyze(const document &) const;
-   #else
-   /// analyze sentence
-   void analyze(sentence &) const;
-   /// analyze sentences, return analyzed copy
-   void analyze(std::list<freeling::sentence> &) const;
-   /// analyze document
-   void analyze(document &) const;
    #endif
 };
 
@@ -1967,20 +1975,20 @@ class dep_lstm {
     /// destructor
     ~dep_lstm();
     
-   #ifndef FL_API_JAVA
+   #if defined(FL_API_JAVA)
+   /// analyze sentence
+   void analyze(sentence &) const;
+   /// analyze sentences
+   void analyze(std::list<freeling::sentence> &) const;
+   /// analyze document
+   void analyze(document &) const;
+   #else
    /// analyze sentence
    sentence analyze(const sentence &) const;
    /// analyze sentences
    std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
    /// analyze document
    document analyze(const document &) const;
-   #else
-   /// analyze sentence
-   void analyze(sentence &) const;
-   /// analyze sentences, return analyzed copy
-   void analyze(std::list<freeling::sentence> &) const;
-   /// analyze document
-   void analyze(document &) const;
    #endif
 
   };
@@ -1996,20 +2004,20 @@ class srl_treeler {
   /// Destructor
   ~srl_treeler();
 
-   #ifndef FL_API_JAVA
+   #if defined(FL_API_JAVA)
+   /// analyze sentence
+   void analyze(sentence &) const;
+   /// analyze sentences
+   void analyze(std::list<freeling::sentence> &) const;
+   /// analyze document
+   void analyze(document &) const;
+   #else
    /// analyze sentence
    sentence analyze(const sentence &) const;
    /// analyze sentences
    std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
    /// analyze document
    document analyze(const document &) const;
-   #else
-   /// analyze sentence
-   void analyze(sentence &) const;
-   /// analyze sentences, return analyzed copy
-   void analyze(std::list<freeling::sentence> &) const;
-   /// analyze document
-   void analyze(document &) const;
    #endif
     
 };
@@ -2024,21 +2032,21 @@ class senses {
   /// Destructor
   ~senses(); 
   
-  #ifndef FL_API_JAVA
-  /// analyze sentence
-  sentence analyze(const sentence &) const;
-  /// analyze sentences
-  std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-  /// analyze document
-  document analyze(const document &) const;
-  #else
-  /// analyze sentence
-  void analyze(sentence &) const;
-  /// analyze sentences
-  void analyze(std::list<freeling::sentence> &) const;
-  /// analyze document
-  void analyze(document &) const;
-  #endif
+   #if defined(FL_API_JAVA)
+   /// analyze sentence
+   void analyze(sentence &) const;
+   /// analyze sentences
+   void analyze(std::list<freeling::sentence> &) const;
+   /// analyze document
+   void analyze(document &) const;
+   #else
+   /// analyze sentence
+   sentence analyze(const sentence &) const;
+   /// analyze sentences
+   std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
+   /// analyze document
+   document analyze(const document &) const;
+   #endif
 };
 
 
@@ -2082,21 +2090,21 @@ class ukb {
   /// Destructor
   ~ukb();
   
-  #ifndef FL_API_JAVA
-  /// analyze sentence
-  sentence analyze(const sentence &) const;
-  /// analyze sentences
-  std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-  /// analyze document
-  document analyze(const document &) const;
-  #else
-  /// analyze sentence
-  void analyze(sentence &) const;
-  /// analyze sentences
-  void analyze(std::list<freeling::sentence> &) const;
-  /// analyze document
-  void analyze(document &) const;
-  #endif
+   #if defined(FL_API_JAVA)
+   /// analyze sentence
+   void analyze(sentence &) const;
+   /// analyze sentences
+   void analyze(std::list<freeling::sentence> &) const;
+   /// analyze document
+   void analyze(document &) const;
+   #else
+   /// analyze sentence
+   sentence analyze(const sentence &) const;
+   /// analyze sentences
+   std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
+   /// analyze document
+   document analyze(const document &) const;
+   #endif
 };
 
 
