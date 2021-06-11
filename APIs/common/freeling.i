@@ -1360,10 +1360,8 @@ class tokenizer {
 
        /// tokenize wstring 
        std::list<freeling::word> tokenize(const std::wstring &) const;
-       void tokenize(const std::wstring &, std::list<word> &) const;
        /// tokenize string, tracking offset
        std::list<freeling::word> tokenize(const std::wstring &, unsigned long &) const;
-       void tokenize(const std::wstring &, unsigned long &, std::list<word> &) const;
 };
 
 
@@ -1383,13 +1381,11 @@ class splitter {
      void close_session(session_id) const;
 
      /// split sentences
-     void split(session_id, const std::list<word> &, bool, std::list<sentence> &ls) const;
      std::list<sentence> split(session_id, const std::list<word> &, bool) const;
-
-     /// stateless splitting. Equivalent to open a session,
-     /// split input with flush=true, and close the session
-     void split(const std::list<word> &, std::list<sentence> &ls) const;
+     // sessionless splitting.  
+     // Equivalent to opening a session, split with flush=true, and close the session
      std::list<sentence> split(const std::list<word> &) const;
+
 };
 
 
@@ -1411,33 +1407,28 @@ class maco {
     /// alternative for set_current_invoke_options
     void set_active_options(bool umap, bool num, bool pun, bool dat,
                             bool dic, bool aff, bool comp, bool rtk,
-                            bool mw, bool ner, bool qt, bool prb);
-#if defined(FL_API_JAVA) || defined(FL_API_PYTHON) || defined(FL_API_PERL)
+                            bool mw, bool ner, bool qt, bool prb); 
+     #if defined(FL_API_JAVA)
      /// analyze sentence
      void analyze(sentence &s) const;
-     /// analyze sentence with given options
-     void analyze(sentence &s, const analyzer_config::invoke_options &opts) const;
      /// analyze list of sentences
      void analyze(std::list<freeling::sentence> &) const;
-     /// analyze list of sentences (paragraph) with given options
-     void analyze(std::list<freeling::sentence> &ls, const analyzer_config::invoke_options &opts) const;
      /// analyze document
      void analyze(document &) const;
+     /// analyze sentence with given options
+     void analyze(sentence &s, const analyzer_config::invoke_options &opts) const;
+     /// analyze list of sentences (paragraph) with given options
+     void analyze(std::list<freeling::sentence> &ls, const analyzer_config::invoke_options &opts) const;
      /// analyze document with given options
      void analyze(document &doc, const analyzer_config::invoke_options &opts) const;
+
      #else
      /// analyze sentence, return copy
      sentence analyze(const sentence &s) const;
-     /// analyze given sentence with given options, return copy
-     sentence analyze(sentence &s, const analyzer_config::invoke_options &opts) const;
      /// analyze sentences, return copy
      std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-     /// analyze sentences with given options, return copy
-     std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &, const analyzer_config::invoke_options &opts) const;
      /// analyze document, return copy
      document analyze(const document &d) const;
-     /// analyze document with given options, return copy
-     document analyze(const document &d, const analyzer_config::invoke_options &opts) const;
      #endif
 };
 
@@ -1582,7 +1573,7 @@ class dictionary {
     /// Get possible forms for a lemma+pos
     std::list<std::wstring> get_forms(const std::wstring &, const std::wstring &) const;
 
-     #if defined(FL_API_JAVA) || defined(FL_API_PYTHON) || defined(FL_API_PERL)
+     #if defined(FL_API_JAVA)
      /// analyze sentence
      void analyze(sentence &s) const;
      /// analyze sentence with given options
@@ -1598,16 +1589,10 @@ class dictionary {
      #else
      /// analyze sentence, return copy
      sentence analyze(const sentence &s) const;
-     /// analyze given sentence with given options, return copy
-     sentence analyze(sentence &s, const analyzer_config::invoke_options &opts) const;
      /// analyze sentences, return copy
      std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-     /// analyze sentences with given options, return copy
-     std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &, const analyzer_config::invoke_options &opts) const;
      /// analyze document, return copy
      document analyze(const document &d) const;
-     /// analyze document with given options, return copy
-     document analyze(const document &d, const analyzer_config::invoke_options &opts) const;
      #endif
 
 };
