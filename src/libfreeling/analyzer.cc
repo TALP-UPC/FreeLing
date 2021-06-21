@@ -65,7 +65,7 @@ namespace freeling {
 /// should set them with set_current_invoke_options
 ///---------------------------------------------
   
-analyzer::analyzer(const analyzer_config::config_options &cfg) {  
+analyzer::analyzer(const analyzer_config_options &cfg) {  
 
   // store options used at creation time.
   initial_options.config_opt = cfg;
@@ -141,19 +141,11 @@ void analyzer::create_analyzers() {
 
   // taggers requested
   if (not initial_options.config_opt.TAGGER_HMMFile.empty())
-    hmm = new hmm_tagger(initial_options.config_opt.TAGGER_HMMFile, 
-                         initial_options.config_opt.TAGGER_Retokenize,
-                         initial_options.config_opt.TAGGER_ForceSelect,
-                         initial_options.config_opt.TAGGER_kbest);
-
+    hmm = new hmm_tagger(initial_options);
+  
   if (not initial_options.config_opt.TAGGER_RelaxFile.empty())
-    relax = new relax_tagger(initial_options.config_opt.TAGGER_RelaxFile, 
-                             initial_options.config_opt.TAGGER_RelaxMaxIter,
-                             initial_options.config_opt.TAGGER_RelaxScaleFactor,
-                             initial_options.config_opt.TAGGER_RelaxEpsilon, 
-                             initial_options.config_opt.TAGGER_Retokenize,
-                             initial_options.config_opt.TAGGER_ForceSelect);
-
+    relax = new relax_tagger(initial_options);
+  
   // phonetics requested
   if (not initial_options.config_opt.PHON_PhoneticsFile.empty()) 
     phon = new phonetics(initial_options.config_opt.PHON_PhoneticsFile);
@@ -223,7 +215,7 @@ analyzer::~analyzer() {
 // Modify options currently set for the analyzer
 //---------------------------------------------
 
-void analyzer::set_current_invoke_options(const analyzer_config::invoke_options &opt) { 
+void analyzer::set_current_invoke_options(const analyzer_invoke_options &opt) { 
 
   if (morfo!=NULL) {
     // morfo class will take care of setting and validating its own options
@@ -249,7 +241,7 @@ void analyzer::set_current_invoke_options(const analyzer_config::invoke_options 
 // analyze further levels on a partially analyzed document or sentence list
 //---------------------------------------------
 
-template<class T> void analyzer::do_analysis(T &doc, const analyzer_config::invoke_options &ivk) const {
+template<class T> void analyzer::do_analysis(T &doc, const analyzer_invoke_options &ivk) const {
 
   // apply requested levels of analysis
 
@@ -391,7 +383,7 @@ template<class T> void analyzer::do_analysis(T &doc, const analyzer_config::invo
 // analyze further levels on a partially analyzed document
 //---------------------------------------------
 
-void analyzer::analyze(document &doc, const analyzer_config::invoke_options& ivk) const {
+void analyzer::analyze(document &doc, const analyzer_invoke_options& ivk) const {
 
   // analyze document
     do_analysis<document>(doc, ivk);
@@ -420,7 +412,7 @@ void analyzer::analyze(document &doc) const { analyze(doc, current_invoke_option
 // analyze further levels on a list of  partially analyzed sentences
 //---------------------------------------------
 
-void analyzer::analyze(list<sentence> &ls, const analyzer_config::invoke_options& ivk) const {
+void analyzer::analyze(list<sentence> &ls, const analyzer_invoke_options& ivk) const {
   do_analysis<list<sentence> >(ls, ivk);
 }
 
@@ -473,7 +465,7 @@ wistream& analyzer::safe_getline(wistream& is, wstring& t)  {
 // No buffer will be accumulated for next calls
 //---------------------------------------------
 
-  void analyzer::analyze(const wstring &text, document &doc, const analyzer_config::invoke_options& ivk, bool parag) const {
+  void analyzer::analyze(const wstring &text, document &doc, const analyzer_invoke_options& ivk, bool parag) const {
 
   doc.clear();
 
@@ -527,7 +519,7 @@ wistream& analyzer::safe_getline(wistream& is, wstring& t)  {
 // same than above, but returning result (useful for python API)
 //---------------------------------------------
 
-document analyzer::analyze_as_document(const wstring &text, const analyzer_config::invoke_options& ivk, bool parag) const {
+document analyzer::analyze_as_document(const wstring &text, const analyzer_invoke_options& ivk, bool parag) const {
   document doc;
   analyze(text, doc, ivk, parag);
   return doc;
@@ -557,7 +549,7 @@ document analyzer::analyze_as_document(const wstring &text, bool parag) const {
 // buffer for completion at the next call
 //---------------------------------------------
 
-void analyzer::analyze(const wstring &text, list<sentence> &ls, const analyzer_config::invoke_options& ivk, bool flush) {
+void analyzer::analyze(const wstring &text, list<sentence> &ls, const analyzer_invoke_options& ivk, bool flush) {
   // tokenize and split using global values for offset, nsent, sp_id
   tokenize_split(text, ls, offs, tokens, nsentence, flush, sp_id, ivk);
   // perform rest of required analysis levels, if any.
@@ -568,7 +560,7 @@ void analyzer::analyze(const wstring &text, list<sentence> &ls, const analyzer_c
 // same than above, but returning result (useful for python API)
 //---------------------------------------------
 
-list<sentence> analyzer::analyze(const wstring &text, const analyzer_config::invoke_options& ivk, bool flush) {
+list<sentence> analyzer::analyze(const wstring &text, const analyzer_invoke_options& ivk, bool flush) {
   list<sentence> ls;
   analyze(text, ls, ivk, flush);
   return ls;
@@ -601,7 +593,7 @@ void analyzer::tokenize_split(const wstring &text,
                               unsigned long &nsent, 
                               bool flush, 
                               splitter::session_id sp_ses,
-			      const analyzer_config::invoke_options &ivk) const {
+			      const analyzer_invoke_options &ivk) const {
   ls.clear();
 
   // --------- TOKENIZER
@@ -633,7 +625,7 @@ void analyzer::tokenize_split(const wstring &text,
 // flush buffers and return analysis for pending text, if any.
 //---------------------------------------------
 
-void analyzer::flush_buffer(list<sentence> &ls, const analyzer_config::invoke_options &ivk) { 
+void analyzer::flush_buffer(list<sentence> &ls, const analyzer_invoke_options &ivk) { 
   analyze(L"", ls, ivk, true); 
 }
 
@@ -655,7 +647,7 @@ void analyzer::reset_offset() {
 // return options currently set for the analyzer
 //---------------------------------------------
 
-const analyzer_config::invoke_options& analyzer::get_current_invoke_options() const { return current_invoke_options; }
+const analyzer_invoke_options& analyzer::get_current_invoke_options() const { return current_invoke_options; }
 
 //---------------------------------------------
 // return options used to create the analyzer

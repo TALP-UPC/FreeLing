@@ -33,6 +33,7 @@
 #include "freeling/windll.h"
 #include "freeling/morfo/language.h"
 #include "freeling/morfo/processor.h"
+#include "freeling/morfo/analyzer_config.h"
 
 #define FORCE_NONE   0  // no selection forced
 #define FORCE_TAGGER 1  // force select after tagger
@@ -48,25 +49,38 @@ namespace freeling {
 
   class WINDLL POS_tagger : public processor {
 
+  private:
+    // store configuration options used to create the module
+    analyzer_config initial_options;
+
+    // invoke options to be used in subsequent calls (defaults to 
+    // initial_options, but can be changed)
+    analyzer_invoke_options current_invoke_options;
+
   protected: 
-    // remember whether retokenization is active
-    bool retok;
-    // remember whether the user asked to force only one tag per word
-    unsigned int force;
     // retokenize words that may need it after tagging
     void retokenize(sentence &) const;
     // force the selection of only one Pos tag per word
     void force_select(sentence &) const;
 
   public:
-    POS_tagger(bool,unsigned int);
+    POS_tagger(const analyzer_config &opt);
     virtual ~POS_tagger() {};
 
+    /// convenience:  retrieve options used at creation time (e.g. to reset current config)
+    const analyzer_config& get_initial_options() const;
+    /// set configuration to be used by default
+    void set_current_invoke_options(const analyzer_invoke_options &opt);
+    /// get configuration being used by default
+    const analyzer_invoke_options& get_current_invoke_options() const;
+
     /// Do actual disambiguation
-    virtual void annotate(sentence &) const =0;
+    virtual void annotate(sentence &, const analyzer_invoke_options &opt) const =0;
 
     /// analyze given sentence
     void analyze(sentence &) const ;
+    /// analyze given sentence with given options
+    void analyze(sentence &, const analyzer_invoke_options &opt) const ;
 
     /// inherit other methods
     using processor::analyze;

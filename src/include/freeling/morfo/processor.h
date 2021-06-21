@@ -57,7 +57,7 @@ namespace freeling {
 
     /// analyze sentence/document with given options. Should be provided by instance if needed.
     /// Default behaviour ignores provided options.
-    virtual void analyze(sentence &s, const analyzer_config::invoke_options &opt) const {
+    virtual void analyze(sentence &s, const analyzer_invoke_options &opt) const {
       analyze(s);
     };
 
@@ -70,7 +70,7 @@ namespace freeling {
     }
 
     /// analyze list of sentences (paragraph) with given options
-    virtual void analyze(std::list<sentence> &ls, const analyzer_config::invoke_options &opt) const {
+    virtual void analyze(std::list<sentence> &ls, const analyzer_invoke_options &opt) const {
       std::list<sentence>::iterator is;
       for (is=ls.begin(); is!=ls.end(); is++) {
         analyze(*is, opt);    
@@ -86,7 +86,7 @@ namespace freeling {
     }
 
     /// analyze document with given options
-    virtual void analyze(document &doc, const analyzer_config::invoke_options &opt) const {
+    virtual void analyze(document &doc, const analyzer_invoke_options &opt) const {
       document::iterator ip;
       for (ip=doc.begin(); ip!=doc.end(); ip++) {
         analyze(*ip, opt);
@@ -101,7 +101,7 @@ namespace freeling {
     }
 
     /// analyze sentence with given options, return analyzed copy
-    virtual sentence analyze(const sentence &s, const analyzer_config::invoke_options &opt) const {
+    virtual sentence analyze(const sentence &s, const analyzer_invoke_options &opt) const {
       sentence s2=s;
       analyze(s2, opt);    
       return s2;
@@ -115,7 +115,7 @@ namespace freeling {
     }
 
     /// analyze list of sentences with given options, return analyzed copy
-  virtual std::list<sentence> analyze(const std::list<sentence> &ls, const analyzer_config::invoke_options &opt) const {
+  virtual std::list<sentence> analyze(const std::list<sentence> &ls, const analyzer_invoke_options &opt) const {
       std::list<sentence> l2=ls;
       analyze(l2, opt);
       return l2;
@@ -129,7 +129,7 @@ namespace freeling {
     }
 
     /// analyze document with given options, return analyzed copy
-    virtual document analyze(const document &d, const analyzer_config::invoke_options &opt) const {
+    virtual document analyze(const document &d, const analyzer_invoke_options &opt) const {
       document d2=d;
       analyze(d2, opt);
       return d2;

@@ -60,7 +60,7 @@ namespace freeling {
 
    // invoke options to be used in subsequent calls (defaults to 
    // initial_options, but can be changed)
-   analyzer_config::invoke_options current_invoke_options;
+   analyzer_invoke_options current_invoke_options;
 
    // sumbodules to be used for analysis
    locutions* loc;
@@ -83,9 +83,9 @@ namespace freeling {
     /// convenience:  retrieve options used at creation time (e.g. to reset current config)
     const analyzer_config& get_initial_options() const;
     /// set configuration to be used by default
-    void set_current_invoke_options(const analyzer_config::invoke_options &opt);
+    void set_current_invoke_options(const analyzer_invoke_options &opt);
     /// get configuration being used by default
-    const analyzer_config::invoke_options& get_current_invoke_options() const;
+    const analyzer_invoke_options& get_current_invoke_options() const;
 
     /// alternative for set_current_invoke_options
     void set_active_options(bool umap, bool num, bool pun, bool dat,
@@ -93,7 +93,7 @@ namespace freeling {
                             bool mw, bool ner, bool qt, bool prb);
 
     /// analyze given sentence with given options
-    void analyze(sentence &s, const analyzer_config::invoke_options &opts) const;
+    void analyze(sentence &s, const analyzer_invoke_options &opts) const;
     /// analyze given sentence with default options
     void analyze(sentence &s) const;
 

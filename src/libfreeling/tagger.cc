@@ -43,29 +43,59 @@ namespace freeling {
   /// from child constructors.
   ///////////////////////////////////////////////////////////////
 
-  POS_tagger::POS_tagger(bool r, unsigned int f) : retok(r),force(f) {}
+  POS_tagger::POS_tagger(const analyzer_config &opt) : initial_options(opt) {
+    // init current options with creation values.
+    current_invoke_options = opt.invoke_opt;    
+  }
+  
+  ///////////////////////////////////////////////////////////////
+  ///  convenience:  retrieve options used at creation time (e.g. to reset current config)
+  ///////////////////////////////////////////////////////////////  
+
+  const analyzer_config& POS_tagger::get_initial_options() const { return initial_options; }
+
+  ///////////////////////////////////////////////////////////////
+  /// set configuration to be used by default
+  ///////////////////////////////////////////////////////////////
+
+  void POS_tagger::set_current_invoke_options(const analyzer_invoke_options &opt) { current_invoke_options = opt; }
+
+  ///////////////////////////////////////////////////////////////
+  /// get configuration being used by default
+  ///////////////////////////////////////////////////////////////
+
+  const analyzer_invoke_options& POS_tagger::get_current_invoke_options() const { return current_invoke_options; }
 
   ////////////////////////////////////////////////////////////////
-  /// Disambiguate all words in given sentence
+  /// Disambiguate all words in given sentence with given options
   ////////////////////////////////////////////////////////////////
 
-  void POS_tagger::analyze(sentence &s) const {
+  void POS_tagger::analyze(sentence &s, const analyzer_invoke_options &opt) const {
 
     if (s.empty()) return;
     else if (s.begin()->begin()->get_prob()<0)
       ERROR_CRASH(L"No lexical probabilities!  Make sure you used the 'probabilities' module before the tagger.");
 
     // tag sentence words
-    annotate(s);
+    annotate(s, opt);
     // once everything is tagged, force select if required after tagging
-    if (force==FORCE_TAGGER) force_select(s);
+    if (opt.TAGGER_ForceSelect == TAGGER) force_select(s);
     // perform retokenization if needed.
-    if (retok) retokenize(s);
+    if (opt.TAGGER_Retokenize) retokenize(s);
     // once everything is tagged, force select if required after retokenization
-    if (force==FORCE_RETOK) force_select(s);
+    if (opt.TAGGER_ForceSelect == RETOK) force_select(s);
 
     s.set_is_tagged(true);
   }
+
+  ////////////////////////////////////////////////////////////////
+  /// Disambiguate all words in given sentence with default options
+  ////////////////////////////////////////////////////////////////
+
+  void POS_tagger::analyze(sentence &se) const {
+    analyze(se, current_invoke_options);
+  }
+
 
   ////////////////////////////////////////////////////////////////
   /// Look for words with remaining ambiguity and force the selection

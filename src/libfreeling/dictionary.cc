@@ -171,13 +171,13 @@ namespace freeling {
   /// set configuration to be used by default
   ///////////////////////////////////////////////////////////////
 
-  void dictionary::set_current_invoke_options(const analyzer_config::invoke_options &opt) { current_invoke_options = opt; }
+  void dictionary::set_current_invoke_options(const analyzer_invoke_options &opt) { current_invoke_options = opt; }
 
   ///////////////////////////////////////////////////////////////
   /// get configuration being used by default
   ///////////////////////////////////////////////////////////////
 
-  const analyzer_config::invoke_options& dictionary::get_current_invoke_options() const { return current_invoke_options; }
+  const analyzer_invoke_options& dictionary::get_current_invoke_options() const { return current_invoke_options; }
 
   ////////////////////////////////////////////////////////////////
   /// parse data string into a map lemma->list of tags
@@ -512,7 +512,8 @@ namespace freeling {
   /////////////////////////////////////////////////////////////////////////////
 
   bool dictionary::annotate_word(word &w, list<word> &lw,
-				 const analyzer_config::invoke_options &opts) const {
+				 const analyzer_invoke_options &opts) const {
+
 
     bool retok = opts.MACO_RetokContractions;
 
@@ -550,6 +551,7 @@ namespace freeling {
     //////////// HANDLE CONTRACTION RETOKENIZATION, IF ANY
     bool contr = false;
     if (not retok) {
+      TRACE(2,L"Retok is OFF");
       // RetokenizeContractions is OFF, or overriden for this call.
       // Just add retokenization information to each analysis, in case it is needed later.
       list<analysis> newla;
@@ -586,6 +588,7 @@ namespace freeling {
       }	
     }
     else {
+      TRACE(2,L"Retok is ON");
       // RetokenizeContractions is ON. Only first contracted
       // analysis is considered.  Any other is ignored with a warning.
     
@@ -634,7 +637,7 @@ namespace freeling {
 
   void dictionary::annotate_word(word &w) const {
     list<word> lw;
-    analyzer_config::invoke_options op = current_invoke_options;
+    analyzer_invoke_options op = current_invoke_options;
     op.MACO_RetokContractions = op.MACO_CompoundAnalysis = false;
     annotate_word(w, lw, op);
   }
@@ -653,9 +656,10 @@ namespace freeling {
   /// in a sentence, using given options.
   ////////////////////////////////////////////////////////////////////////
 
-  void dictionary::analyze(sentence &se, const analyzer_config::invoke_options &opts) const {
+  void dictionary::analyze(sentence &se, const analyzer_invoke_options &opts) const {
     sentence::iterator pos;
 
+    TRACE(2, L"Analyzing sentence with options " << opts.dump());
     bool contr=false;
     for (pos=se.begin(); pos!=se.end(); ++pos){
       // Process the word if it hasn't been annotated by previous modules,
@@ -665,7 +669,7 @@ namespace freeling {
         TRACE(1,L"Annotating word: "+pos->get_form());
 
         list<word> lw;
-        if (annotate_word(*pos,lw)) { 
+        if (annotate_word(*pos,lw,opts)) { 
           // word is a contraction. Create new tokens, fix sentence.
 
           TRACE(2,L"Contraction found, replacing... "+pos->get_form()

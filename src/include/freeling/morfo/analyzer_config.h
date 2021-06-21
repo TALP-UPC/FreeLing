@@ -63,22 +63,6 @@ namespace freeling {
   // analyzer_config error status
   typedef enum {CFG_OK,CFG_WARNING, CFG_ERROR} CFG_status;
 
-  
-////////////////////////////////////////////////////////////////
-/// 
-///  Class analyzer is a meta class that just calls all modules in
-///  FreeLing in the right order.
-///  Its construction options allow to instantiate different kinds of
-///  analysis pipelines, and or different languages.
-///  Also, invocation options may be altered at each call, 
-///  tuning the analysis to each particular sentence or document needs.
-///  For a finer control, underlying modules should be called directly.
-///
-////////////////////////////////////////////////////////////////
-
-class WINDLL analyzer_config {
-
- private:
 
    ////////////////////////////////////////////////////////////////
    /// 
@@ -117,9 +101,6 @@ class WINDLL analyzer_config {
        int TAGGER_RelaxMaxIter;
        double TAGGER_RelaxScaleFactor;
        double TAGGER_RelaxEpsilon;
-       bool TAGGER_Retokenize;
-       int TAGGER_kbest;
-       ForceSelectStrategy TAGGER_ForceSelect;
        /// Chart parser config file
        std::wstring PARSER_GrammarFile;
        /// Dependency parsers config files
@@ -168,6 +149,11 @@ class WINDLL analyzer_config {
        bool PHON_Phonetics;
        bool NEC_NEClassification;
 
+       /// PoS Tagger options
+       bool TAGGER_Retokenize;
+       int TAGGER_kbest;
+       ForceSelectStrategy TAGGER_ForceSelect;
+
        /// Select which tagger, parser, or sense annotator to use
        WSDAlgorithm SENSE_WSD_which;
        TaggerAlgorithm TAGGER_which;
@@ -183,13 +169,27 @@ class WINDLL analyzer_config {
        std::wstring dump() const;
    };
 
+  
+////////////////////////////////////////////////////////////////
+/// 
+///  Class analyzer is a meta class that just calls all modules in
+///  FreeLing in the right order.
+///  Its construction options allow to instantiate different kinds of
+///  analysis pipelines, and or different languages.
+///  Also, invocation options may be altered at each call, 
+///  tuning the analysis to each particular sentence or document needs.
+///  For a finer control, underlying modules should be called directly.
+///
+////////////////////////////////////////////////////////////////
 
+class WINDLL analyzer_config {
+
+ private: 
    po::options_description cl_opts; // command-line options
    po::options_description cf_opts; // config file options
 
    /// expand paths in filenames, and handle boolean command line options --xx/--noxx
    void expand_options(const po::variables_map &vm);
-
  
  public:
    ////////////////////////////////////////////////////////////////
@@ -201,11 +201,11 @@ class WINDLL analyzer_config {
      std::wstring description;
    };
 
-   typedef analyzer_config::analyzer_config_options config_options;
-   typedef analyzer_config::analyzer_invoke_options invoke_options;
+ //typedef analyzer_config_options config_options;
+ // typedef analyzer_invoke_options invoke_options;
 
-   config_options config_opt;
-   invoke_options invoke_opt;
+   analyzer_config_options config_opt;
+   analyzer_invoke_options invoke_opt;
 
    /// constructor
    analyzer_config();
@@ -230,7 +230,7 @@ class WINDLL analyzer_config {
    void parse_options(const std::wstring &cfgFile, int ac, char *av[], po::variables_map &vm);   
 
    // check invoke options
-   status check_invoke_options(const analyzer_config::invoke_options &opt) const; 
+   status check_invoke_options(const analyzer_invoke_options &opt) const; 
 
    // set boolean option depending on Command line flags
    static void SetBooleanOptionCL (const int pos, const int neg, bool &opt, const std::string &name);

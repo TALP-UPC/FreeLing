@@ -45,13 +45,18 @@ namespace freeling {
   ///  Constructor: Build a relax PoS tagger
   ///////////////////////////////////////////////////////////////
 
-  relax_tagger::relax_tagger(const wstring &cg_file, int m, double f, double r, bool rtk, unsigned int force) : POS_tagger(rtk,force),solver(m,f,r),c_gram(cg_file),RE_user(USER_RE) {}
-
+  relax_tagger::relax_tagger(const analyzer_config &opt) : POS_tagger(opt),
+							   solver(opt.config_opt.TAGGER_RelaxMaxIter,
+								  opt.config_opt.TAGGER_RelaxScaleFactor,
+								  opt.config_opt.TAGGER_RelaxEpsilon),
+							   c_gram(opt.config_opt.TAGGER_RelaxFile),
+							   RE_user(USER_RE) {}
+  
   ////////////////////////////////////////////////
   ///  Perform PoS tagging on given sentences
   ////////////////////////////////////////////////
 
-  void relax_tagger::annotate(sentence &se) const {
+  void relax_tagger::annotate(sentence &se, const analyzer_invoke_options &opt) const {
     sentence::iterator w;
     word::iterator tag;
     list<ruleCG> cand;

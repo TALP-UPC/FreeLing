@@ -107,13 +107,13 @@ namespace freeling {
   /// set configuration to be used by default
   ///////////////////////////////////////////////////////////////
 
-  void maco::set_current_invoke_options(const analyzer_config::invoke_options &opt) { current_invoke_options = opt; }
+  void maco::set_current_invoke_options(const analyzer_invoke_options &opt) { current_invoke_options = opt; }
 
   ///////////////////////////////////////////////////////////////
   /// get configuration being used by default
   ///////////////////////////////////////////////////////////////
 
-  const analyzer_config::invoke_options& maco::get_current_invoke_options() const { return current_invoke_options; }
+  const analyzer_invoke_options& maco::get_current_invoke_options() const { return current_invoke_options; }
 
 
   ///////////////////////////////////////////////////////////////
@@ -170,7 +170,7 @@ namespace freeling {
   ///  Apply cascade of analyzers to given sentence, according to given options
   ///////////////////////////////////////////////////////////////  
 
-  void maco::analyze(sentence &s, const analyzer_config::invoke_options &opt) const {
+  void maco::analyze(sentence &s, const analyzer_invoke_options &opt) const {
   
     if (opt.MACO_UserMap and user!=NULL) { 
       user->analyze(s);

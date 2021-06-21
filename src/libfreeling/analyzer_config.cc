@@ -143,23 +143,20 @@ namespace freeling {
   
   /// config options constructor, default values (except file names, initialized to "")
   
-  analyzer_config::analyzer_config_options::analyzer_config_options() {
+  analyzer_config_options::analyzer_config_options() {
     MACO_ProbabilityThreshold = 0.001;
     TAGGER_RelaxMaxIter = 500;
     TAGGER_RelaxScaleFactor = 67;
     TAGGER_RelaxEpsilon = 0.001;
-    TAGGER_Retokenize = true;
-    TAGGER_kbest = 1;
-    TAGGER_ForceSelect = TAGGER;
   }
   
   /// destructor
   
-  analyzer_config::analyzer_config_options::~analyzer_config_options() {}
+  analyzer_config_options::~analyzer_config_options() {}
 
   /// dumper
 
-  wstring analyzer_config::analyzer_config_options::dump() const {
+  wstring analyzer_config_options::dump() const {
     wostringstream sout;
     sout << L"Lang: " << Lang << endl;
     sout << L"TOK_TokenizerFile: " << TOK_TokenizerFile << endl;
@@ -185,9 +182,6 @@ namespace freeling {
     sout << L"TAGGER_RelaxMaxIter: " << TAGGER_RelaxMaxIter << endl;
     sout << L"TAGGER_RelaxScaleFactor: " << TAGGER_RelaxScaleFactor << endl;
     sout << L"TAGGER_RelaxEpsilon: " << TAGGER_RelaxEpsilon << endl;
-    sout << L"TAGGER_Retokenize: " << TAGGER_Retokenize << endl;
-    sout << L"TAGGER_kbest: " << TAGGER_kbest << endl;
-    sout << L"TAGGER_ForceSelect: " << TAGGER_ForceSelect << endl;
     sout << L"PARSER_GrammarFile: " << PARSER_GrammarFile << endl;
     sout << L"DEP_TxalaFile: " << DEP_TxalaFile << endl;
     sout << L"DEP_TreelerFile: " << DEP_TreelerFile << endl;
@@ -201,7 +195,7 @@ namespace freeling {
   
   /// invoke options constructor, default values 
   
-  analyzer_config::analyzer_invoke_options::analyzer_invoke_options() {
+  analyzer_invoke_options::analyzer_invoke_options() {
     InputLevel = TEXT;  OutputLevel = TAGGED;
     
     MACO_UserMap=false;            MACO_AffixAnalysis=true;        MACO_MultiwordsDetection=true;
@@ -211,7 +205,11 @@ namespace freeling {
     
     PHON_Phonetics=false;
     NEC_NEClassification=false;
-    
+
+    TAGGER_Retokenize = true;
+    TAGGER_kbest = 1;
+    TAGGER_ForceSelect = TAGGER;
+
     SENSE_WSD_which = NO_WSD;
     TAGGER_which = HMM;
     DEP_which = NO_DEP;    
@@ -220,11 +218,11 @@ namespace freeling {
   
   /// destructor
   
-  analyzer_config::analyzer_invoke_options::~analyzer_invoke_options() {}
+  analyzer_invoke_options::~analyzer_invoke_options() {}
   
   /// dumper
 
-  wstring analyzer_config::analyzer_invoke_options::dump() const {
+  wstring analyzer_invoke_options::dump() const {
     wostringstream sout;
     sout << L"InputLevel: " << InputLevel << endl;
     sout << L"OutputLevel: " << OutputLevel << endl;
@@ -240,6 +238,9 @@ namespace freeling {
     sout << L"MACO_CompoundAnalysis: " << MACO_CompoundAnalysis << endl;
     sout << L"MACO_NERecognition: " << MACO_NERecognition << endl;
     sout << L"MACO_RetokContractions: " << MACO_RetokContractions << endl;
+    sout << L"TAGGER_Retokenize: " << TAGGER_Retokenize << endl;
+    sout << L"TAGGER_kbest: " << TAGGER_kbest << endl;
+    sout << L"TAGGER_ForceSelect: " << TAGGER_ForceSelect << endl;
     sout << L"PHON_Phonetics: " << PHON_Phonetics << endl;
     sout << L"NEC_NEClassification: " << NEC_NEClassification << endl;
     sout << L"SENSE_WSD_which: " << SENSE_WSD_which << endl;
@@ -315,7 +316,7 @@ namespace freeling {
       ("eps",po::wvalue<double>(&config_opt.TAGGER_RelaxEpsilon),"Convergence epsilon value for RELAX tagger")
       ("rtk","Perform retokenization after PoS tagging")
       ("nortk","Do not perform retokenization after PoS tagging")
-      ("force",po::wvalue<freeling::ForceSelectStrategy>(&config_opt.TAGGER_ForceSelect),"When the tagger must be forced to select only one tag per word (no|none,tagger,retok)")
+      ("force",po::wvalue<freeling::ForceSelectStrategy>(&invoke_opt.TAGGER_ForceSelect),"When the tagger must be forced to select only one tag per word (no|none,tagger,retok)")
       ("grammar,G",po::wvalue<std::wstring>(&config_opt.PARSER_GrammarFile),"Grammar file for chart parser")
       ("dep,d",po::wvalue<freeling::DependencyParser>(&invoke_opt.DEP_which),"Dependency parser to use (txala,treeler,lstm)")
       ("srl",po::wvalue<freeling::SRLParser>(&invoke_opt.SRL_which),"SRL parser to use (treeler)")
@@ -370,8 +371,8 @@ namespace freeling {
       ("TaggerRelaxMaxIter",po::wvalue<int>(&config_opt.TAGGER_RelaxMaxIter),"Maximum number of iterations allowed for RELAX tagger")
       ("TaggerRelaxScaleFactor",po::wvalue<double>(&config_opt.TAGGER_RelaxScaleFactor),"Support scale factor for RELAX tagger (affects step size)")
       ("TaggerRelaxEpsilon",po::wvalue<double>(&config_opt.TAGGER_RelaxEpsilon),"Convergence epsilon value for RELAX tagger")
-      ("TaggerRetokenize",po::wvalue<bool>(&config_opt.TAGGER_Retokenize)->default_value(false),"Perform retokenization after PoS tagging")
-      ("TaggerForceSelect",po::wvalue<freeling::ForceSelectStrategy>(&config_opt.TAGGER_ForceSelect)->default_value(freeling::RETOK),"When the tagger must be forced to select only one tag per word (no|none,tagger,retok)")
+      ("TaggerRetokenize",po::wvalue<bool>(&invoke_opt.TAGGER_Retokenize)->default_value(false),"Perform retokenization after PoS tagging")
+      ("TaggerForceSelect",po::wvalue<freeling::ForceSelectStrategy>(&invoke_opt.TAGGER_ForceSelect)->default_value(freeling::RETOK),"When the tagger must be forced to select only one tag per word (no|none,tagger,retok)")
       ("GrammarFile",po::wvalue<std::wstring>(&config_opt.PARSER_GrammarFile),"Grammar file for chart parser")
       ("DependencyParser",po::wvalue<freeling::DependencyParser>(&invoke_opt.DEP_which)->default_value(freeling::TXALA),"Dependency parser to use (txala,treeler,lstm)")
       ("DepTxalaFile",po::wvalue<std::wstring>(&config_opt.DEP_TxalaFile),"Rule file for Txala dependency parser")
@@ -487,7 +488,7 @@ namespace freeling {
     config_opt.SEMGRAPH_SemGraphFile = freeling::util::expand_filename(config_opt.SEMGRAPH_SemGraphFile);
 
     // Handle boolean options expressed with --myopt or --nomyopt in command line
-    SetBooleanOptionCL(vm.count("rtk"),vm.count("nortk"),config_opt.TAGGER_Retokenize,"rtk");
+    SetBooleanOptionCL(vm.count("rtk"),vm.count("nortk"),invoke_opt.TAGGER_Retokenize,"rtk");
     SetBooleanOptionCL(vm.count("afx"),vm.count("noafx"),invoke_opt.MACO_AffixAnalysis,"afx");
     SetBooleanOptionCL(vm.count("usr"),vm.count("nousr"),invoke_opt.MACO_UserMap,"usr");
     SetBooleanOptionCL(vm.count("loc"),vm.count("noloc"),invoke_opt.MACO_MultiwordsDetection,"loc");
@@ -505,7 +506,7 @@ namespace freeling {
 
   }
   
-  analyzer_config::status analyzer_config::check_invoke_options(const analyzer_config::invoke_options &opt) const {
+  analyzer_config::status analyzer_config::check_invoke_options(const analyzer_invoke_options &opt) const {
     // Check if given options make sense. Issue warnings/errors if not
 
     analyzer_config::status st;

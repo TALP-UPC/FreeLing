@@ -165,21 +165,11 @@ void CreateAnalyzers(const config& cfg) {
 
   // tagger requested, see which method
   if (cfg.invoke_opt.InputLevel < TAGGED and cfg.invoke_opt.OutputLevel >= TAGGED) {
-    if (cfg.invoke_opt.TAGGER_which == HMM) {
-      tagger =
-        new hmm_tagger (cfg.config_opt.TAGGER_HMMFile, 
-                        cfg.config_opt.TAGGER_Retokenize,
-                        cfg.config_opt.TAGGER_ForceSelect);
-    }
-    else if (cfg.invoke_opt.TAGGER_which == RELAX) {
-      tagger =
-        new relax_tagger (cfg.config_opt.TAGGER_RelaxFile, 
-                          cfg.config_opt.TAGGER_RelaxMaxIter,
-                          cfg.config_opt.TAGGER_RelaxScaleFactor,
-                          cfg.config_opt.TAGGER_RelaxEpsilon, 
-                          cfg.config_opt.TAGGER_Retokenize,
-                          cfg.config_opt.TAGGER_ForceSelect);
-    }
+    if (cfg.invoke_opt.TAGGER_which == HMM)
+      tagger = new hmm_tagger (cfg);    
+    else if (cfg.invoke_opt.TAGGER_which == RELAX) 
+      tagger = new relax_tagger (cfg);
+    
     // create tagger output pipe
     FL_pipe *p = new FL_pipe(); pipes.push_back(p); 
     // launch tagger thread

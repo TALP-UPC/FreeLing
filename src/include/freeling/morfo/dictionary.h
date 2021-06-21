@@ -56,7 +56,7 @@ namespace freeling {
     analyzer_config initial_options;
     // invoke options to be used in subsequent calls (defaults to 
     // initial_options, but can be changed)
-    analyzer_config::invoke_options current_invoke_options;
+    analyzer_invoke_options current_invoke_options;
 
     /// suffix analyzer
     affixes *suf;
@@ -92,9 +92,9 @@ namespace freeling {
     /// convenience:  retrieve options used at creation time (e.g. to reset current config)
     const analyzer_config& get_initial_options() const;
     /// set configuration to be used by default
-    void set_current_invoke_options(const analyzer_config::invoke_options &opt);
+    void set_current_invoke_options(const analyzer_invoke_options &opt);
     /// get configuration being used by default
-    const analyzer_config::invoke_options& get_current_invoke_options() const;
+    const analyzer_invoke_options& get_current_invoke_options() const;
 
     /// add analysis to dictionary entry (create entry if not there)
     void add_analysis(const std::wstring &, const analysis &);
@@ -106,7 +106,7 @@ namespace freeling {
     /// Fills the analysis list of a word, checking for suffixes and contractions.
     /// Returns true iff the form is a contraction, returns contraction components
     /// in given list
-    bool annotate_word(word &, std::list<word> &, const analyzer_config::invoke_options &opts) const;
+    bool annotate_word(word &, std::list<word> &, const analyzer_invoke_options &opts) const;
     /// annotate word with default options
     bool annotate_word(word &, std::list<word> &) const;
     /// Fills the analysis list of a word, checking for suffixes and contractions.
@@ -121,7 +121,7 @@ namespace freeling {
     void dump_dictionary(std::wostream &, bool keysonly=false) const;
 
     /// analyze given sentence with given options
-    void analyze(sentence &se, const analyzer_config::invoke_options &opts) const;
+    void analyze(sentence &se, const analyzer_invoke_options &opts) const;
     /// analyze given sentence with default options
     void analyze(sentence &se) const;
 

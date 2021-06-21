@@ -78,10 +78,10 @@ namespace freeling {
 
   public:
     /// Constructor, given the constraint file and config parameters
-    relax_tagger(const std::wstring &, int, double, double, bool, unsigned int);
+    relax_tagger(const analyzer_config &opt);
 
     /// analyze sentences with default options
-    void annotate(sentence &) const;
+    void annotate(sentence &, const analyzer_invoke_options& opt) const;
   };
 
 } // namespace

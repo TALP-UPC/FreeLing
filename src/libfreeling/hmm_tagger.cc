@@ -183,7 +183,7 @@ namespace freeling {
   ///  Constructor: Build a HMM tagger, loading probability tables.
   ///////////////////////////////////////////////////////////////
 
-  hmm_tagger::hmm_tagger(const std::wstring &hmmFile, bool rtk, unsigned int force, unsigned int kb) : POS_tagger(rtk,force), probInitial(-1.0), probUnobserved(-1.0) {
+  hmm_tagger::hmm_tagger(const analyzer_config &opts) : POS_tagger(opts), probInitial(-1.0), probUnobserved(-1.0) {
 
     double prob, coef;
     wstring nom1,aux,ftags;
@@ -191,9 +191,9 @@ namespace freeling {
     pA_cache = new safe_map<wstring,double>();
     // pB_cache = new prob_cache(); // see comments below in ProbB_log
 
-    wstring path=hmmFile.substr(0,hmmFile.find_last_of(L"/\\")+1);
+    wstring hmmFile = opts.config_opt.TAGGER_HMMFile;
+    wstring path = hmmFile.substr(0,hmmFile.find_last_of(L"/\\")+1);
     Tags = NULL;
-    kbest = kb;
 
     enum sections {UNIGRAM,BIGRAM,TRIGRAM,INITIAL,WORD,SMOOTHING,FORBIDDEN,TAGSET};
 
@@ -628,7 +628,7 @@ namespace freeling {
   ///  Disambiguate given sentences with provided options  
   ///////////////////////////////////////////////////////////////  
 
-  void hmm_tagger::annotate(sentence &se) const {
+  void hmm_tagger::annotate(sentence &se, const analyzer_invoke_options &opt) const {
     list<emission_states> lemm;
     list<emission_states>::iterator emms,emmsant;
     emission_states::iterator k,kant;
@@ -643,7 +643,7 @@ namespace freeling {
     TRACE(3,L"Analyze one sentence using Viterbi algorithm");
   
     // create tables to disambiguate current sentece
-    trellis tr(se.size()+1,kbest);
+    trellis tr(se.size()+1, opt.TAGGER_kbest);
   
     // Compute possible emission states for each word
     lemm=FindStates(se);

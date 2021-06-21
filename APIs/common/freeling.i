@@ -1121,6 +1121,7 @@ typedef enum {NO_FORCE,TAGGER,RETOK} ForceSelectStrategy;
 typedef enum {CFG_OK, CFG_WARNING, CFG_ERROR} CFG_status;
 
 
+ 
 ////////////////////////////////////////////////////////////////
 /// 
 ///  Class analyzer::config_options contains the configuration options
@@ -1130,7 +1131,7 @@ typedef enum {CFG_OK, CFG_WARNING, CFG_ERROR} CFG_status;
 ///
 ////////////////////////////////////////////////////////////////
  
- class config_options {
+ class analyzer_config_options {
  public:
    /// Language of text to process
    std::wstring Lang;
@@ -1158,8 +1159,6 @@ typedef enum {CFG_OK, CFG_WARNING, CFG_ERROR} CFG_status;
    int TAGGER_RelaxMaxIter;
    double TAGGER_RelaxScaleFactor;
    double TAGGER_RelaxEpsilon;
-   bool TAGGER_Retokenize;
-   ForceSelectStrategy TAGGER_ForceSelect;
    /// Chart parser config file
    std::wstring PARSER_GrammarFile;
    /// Dependency parsers config files
@@ -1184,7 +1183,7 @@ typedef enum {CFG_OK, CFG_WARNING, CFG_ERROR} CFG_status;
  ///
  ////////////////////////////////////////////////////////////////
  
- class invoke_options {
+ class analyzer_invoke_options {
  public:
    /// Level of analysis in input and output
    AnalysisLevel InputLevel, OutputLevel;
@@ -1199,6 +1198,11 @@ typedef enum {CFG_OK, CFG_WARNING, CFG_ERROR} CFG_status;
    /// activate/deactivate phonetics and NEC
    bool PHON_Phonetics;
    bool NEC_NEClassification;
+
+   /// tagger options
+   bool TAGGER_Retokenize;
+   ForceSelectStrategy TAGGER_ForceSelect;
+   int TAGGER_kbest;
    
    /// Select which tagger, parser, or sense annotator to use
    WSDAlgorithm SENSE_WSD_which;
@@ -1206,6 +1210,7 @@ typedef enum {CFG_OK, CFG_WARNING, CFG_ERROR} CFG_status;
    DependencyParser DEP_which;    
    SRLParser SRL_which;
  };
+
 
  ////////////////////////////////////////////////////////////////
  ///  class to handle configuration error states
@@ -1219,11 +1224,8 @@ typedef enum {CFG_OK, CFG_WARNING, CFG_ERROR} CFG_status;
  class analyzer_config {
  public:
 
-   typedef analyzer_config_options config_options;
-   typedef analyzer_invoke_options invoke_options;
-
-   config_options config_opt;
-   invoke_options invoke_opt;
+   analyzer_config_options config_opt;
+   analyzer_invoke_options invoke_opt;
 
    /// constructor
    analyzer_config();
@@ -1248,20 +1250,20 @@ typedef enum {CFG_OK, CFG_WARNING, CFG_ERROR} CFG_status;
    void parse_options(const std::wstring &cfgFile, int ac, char *av[], po::variables_map &vm);   
 
    // check invoke options
-   status check_invoke_options(const analyzer_config::invoke_options &opt) const; 
+   status check_invoke_options(const analyzer_invoke_options &opt) const; 
 
  };
  
  
- //%nestedworkaround analyzer_config::config_options;
- //%nestedworkaround analyzer_config::invoke_options;
-%{
+ //%nestedworkaround analyzer_config_options;
+ //%nestedworkaround analyzer_invoke_options;
+ %{
   namespace freeling {
-   typedef freeling::analyzer_config::config_options config_options;
-   typedef freeling::analyzer_config::invoke_options invoke_options;
+    //typedef freeling::analyzer_config_options config_options;
+    //typedef freeling::analyzer_invoke_options invoke_options;
    typedef freeling::analyzer_config::status status;
   }
-%}
+  %}
 
 ////////////////////////////////////////////////////////////////
 /// 
@@ -1279,33 +1281,33 @@ class analyzer {
 
  public:
    analyzer(const analyzer_config &cfg);
-   analyzer(const analyzer_config::config_options &cfg);
+   analyzer(const analyzer_config_options &cfg);
 
    ~analyzer();
 
    /// analyze further levels on a partially analyzed document
    void analyze(document &doc) const;
-   void analyze(document &doc, const analyzer_config::invoke_options &ivk) const;
+   void analyze(document &doc, const analyzer_invoke_options &ivk) const;
    /// analyze further levels on partially analyzed sentences
    void analyze(std::list<sentence> &ls) const;
-   void analyze(std::list<sentence> &ls, const analyzer_config::invoke_options &ivk) const;
+   void analyze(std::list<sentence> &ls, const analyzer_invoke_options &ivk) const;
    /// analyze text as a whole document
    void analyze(const std::wstring &text, document &doc, bool parag=false) const;
-   void analyze(const std::wstring &text, document &doc, const analyzer_config::invoke_options &ivk, bool parag=false) const;
+   void analyze(const std::wstring &text, document &doc, const analyzer_invoke_options &ivk, bool parag=false) const;
    /// analyze text as a whole document, returning it (useful for python API)
    document analyze_as_document(const std::wstring &text, bool parag=false) const;
-   document analyze_as_document(const std::wstring &text, const analyzer_config::invoke_options &ivk, bool parag=false) const;
+   document analyze_as_document(const std::wstring &text, const analyzer_invoke_options &ivk, bool parag=false) const;
   /// Analyze text as a partial document. Retain incomplete sentences in buffer   
    /// in case next call completes them (except if flush==true)
    void analyze(const std::wstring &text, std::list<sentence> &ls, bool flush=false);
-   void analyze(const std::wstring &text, std::list<sentence> &ls, const analyzer_config::invoke_options &ivk, bool flush=false);
+   void analyze(const std::wstring &text, std::list<sentence> &ls, const analyzer_invoke_options &ivk, bool flush=false);
    /// Analyze text as a partial document. Retain incomplete sentences in buffer. Return analysis (useful for python API)
    std::list<sentence> analyze(const std::wstring &text, bool flush=false);
-   std::list<sentence> analyze(const std::wstring &text, const analyzer_config::invoke_options &ivk, bool flush=false);
+   std::list<sentence> analyze(const std::wstring &text, const analyzer_invoke_options &ivk, bool flush=false);
 
    // flush splitter buffer and analyze any pending text. 
    void flush_buffer(std::list<sentence> &ls);
-   void flush_buffer(std::list<sentence> &ls, const analyzer_config::invoke_options &ivk);
+   void flush_buffer(std::list<sentence> &ls, const analyzer_invoke_options &ivk);
    // reset tokenizer offset counter
    void reset_offset();
 
@@ -1319,6 +1321,12 @@ class traces {
     static int TraceLevel;
     // modules to trace
     static unsigned long long TraceModule;
+    #if !defined(FL_API_JAVA)
+    %extend {
+      void set_trace_level(int l) { $self->TraceLevel = l; }
+      void set_trace_module(unsigned long long m) { $self->TraceModule = m; }
+    }
+    #endif
 };
 
 
@@ -1401,9 +1409,9 @@ class maco {
     /// convenience:  retrieve options used at creation time (e.g. to reset current config)
     const analyzer_config& get_initial_options() const;
     /// set configuration to be used by default
-    void set_current_invoke_options(const analyzer_config::invoke_options &opt);
+    void set_current_invoke_options(const analyzer_invoke_options &opt);
     /// get configuration being used by default
-    const analyzer_config::invoke_options& get_current_invoke_options() const;
+    const analyzer_invoke_options& get_current_invoke_options() const;
     /// alternative for set_current_invoke_options
     void set_active_options(bool umap, bool num, bool pun, bool dat,
                             bool dic, bool aff, bool comp, bool rtk,
@@ -1416,19 +1424,23 @@ class maco {
      /// analyze document
      void analyze(document &) const;
      /// analyze sentence with given options
-     void analyze(sentence &s, const analyzer_config::invoke_options &opts) const;
+     void analyze(sentence &s, const analyzer_invoke_options &opts) const;
      /// analyze list of sentences (paragraph) with given options
-     void analyze(std::list<freeling::sentence> &ls, const analyzer_config::invoke_options &opts) const;
+     void analyze(std::list<freeling::sentence> &ls, const analyzer_invoke_options &opts) const;
      /// analyze document with given options
-     void analyze(document &doc, const analyzer_config::invoke_options &opts) const;
+     void analyze(document &doc, const analyzer_invoke_options &opts) const;
 
      #else
      /// analyze sentence, return copy
+     %rename(analyze_sentence) analyze;
      sentence analyze(const sentence &s) const;
      /// analyze sentences, return copy
+     %rename(analyze_sentence_list) analyze;
      std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
      /// analyze document, return copy
+     %rename(analyze_document) analyze;
      document analyze(const document &d) const;
+     %rename(analyze) analyze;
      #endif
 };
 
@@ -1454,12 +1466,16 @@ class RE_map {
   /// analyze document
   void analyze(document &) const;
   #else
-  /// analyze sentence
-  sentence analyze(const sentence &) const;
-  /// analyze sentences
+  /// analyze sentence, return copy
+  %rename(analyze_sentence) analyze;
+  sentence analyze(const sentence &s) const;
+  /// analyze sentences, return copy
+  %rename(analyze_sentence_list) analyze;
   std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-  /// analyze document
-  document analyze(const document &) const;
+  /// analyze document, return copy
+  %rename(analyze_document) analyze;
+  document analyze(const document &d) const;
+  %rename(analyze) analyze;
   #endif
 };
 
@@ -1478,12 +1494,16 @@ class numbers {
     /// analyze document
     void analyze(document &) const;
     #else
-    /// analyze sentence
-    sentence analyze(const sentence &) const;
-    /// analyze sentences
+    /// analyze sentence, return copy
+    %rename(analyze_sentence) analyze;
+    sentence analyze(const sentence &s) const;
+    /// analyze sentences, return copy
+    %rename(analyze_sentence_list) analyze;
     std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-    /// analyze document
-    document analyze(const document &) const;
+    /// analyze document, return copy
+    %rename(analyze_document) analyze;
+    document analyze(const document &d) const;
+    %rename(analyze) analyze;
     #endif
 };
 
@@ -1503,12 +1523,16 @@ class punts {
   /// analyze document
   void analyze(document &) const;
   #else
-  /// analyze sentence
-  sentence analyze(const sentence &) const;
-  /// analyze sentences
+  /// analyze sentence, return copy
+  %rename(analyze_sentence) analyze;
+  sentence analyze(const sentence &s) const;
+  /// analyze sentences, return copy
+  %rename(analyze_sentence_list) analyze;
   std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-  /// analyze document
-  document analyze(const document &) const;
+  /// analyze document, return copy
+  %rename(analyze_document) analyze;
+  document analyze(const document &d) const;
+  %rename(analyze) analyze;
   #endif
 };
 
@@ -1528,12 +1552,16 @@ class dates {
   /// analyze document
   void analyze(document &) const;
   #else
-  /// analyze sentence
-  sentence analyze(const sentence &) const;
-  /// analyze sentences
+  /// analyze sentence, return copy
+  %rename(analyze_sentence) analyze;
+  sentence analyze(const sentence &s) const;
+  /// analyze sentences, return copy
+  %rename(analyze_sentence_list) analyze;
   std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-  /// analyze document
-  document analyze(const document &) const;
+  /// analyze document, return copy
+  %rename(analyze_document) analyze;
+  document analyze(const document &d) const;
+  %rename(analyze) analyze;
   #endif
 };  
 
@@ -1548,9 +1576,9 @@ class dictionary {
     /// convenience:  retrieve options used at creation time (e.g. to reset current config)
     const analyzer_config& get_initial_options() const;
     /// set configuration to be used by default
-    void set_current_invoke_options(const analyzer_config::invoke_options &opt);
+    void set_current_invoke_options(const analyzer_invoke_options &opt);
     /// get configuration being used by default
-    const analyzer_config::invoke_options& get_current_invoke_options() const;
+    const analyzer_invoke_options& get_current_invoke_options() const;
 
     /// add analysis to dictionary entry (create entry if not there)
     void add_analysis(const std::wstring &, const analysis &);
@@ -1562,7 +1590,7 @@ class dictionary {
     /// Fills the analysis list of a word, checking for suffixes and contractions.
     /// Returns true iff the form is a contraction, returns contraction components
     /// in given list
-    bool annotate_word(word &, std::list<word> &, const analyzer_config::invoke_options &opts) const;
+    bool annotate_word(word &, std::list<word> &, const analyzer_invoke_options &opts) const;
     /// annotate word with default options
     bool annotate_word(word &, std::list<word> &) const;
     /// Fills the analysis list of a word, checking for suffixes and contractions.
@@ -1577,22 +1605,26 @@ class dictionary {
      /// analyze sentence
      void analyze(sentence &s) const;
      /// analyze sentence with given options
-     void analyze(sentence &s, const analyzer_config::invoke_options &opts) const;
+     void analyze(sentence &s, const analyzer_invoke_options &opts) const;
      /// analyze list of sentences
      void analyze(std::list<freeling::sentence> &) const;
      /// analyze list of sentences (paragraph) with given options
-     void analyze(std::list<freeling::sentence> &ls, const analyzer_config::invoke_options &opts) const;
+     void analyze(std::list<freeling::sentence> &ls, const analyzer_invoke_options &opts) const;
      /// analyze document
      void analyze(document &) const;
      /// analyze document with given options
-     void analyze(document &doc, const analyzer_config::invoke_options &opts) const;
+     void analyze(document &doc, const analyzer_invoke_options &opts) const;
      #else
      /// analyze sentence, return copy
+     %rename(analyze_sentence) analyze;
      sentence analyze(const sentence &s) const;
      /// analyze sentences, return copy
+     %rename(analyze_sentence_list) analyze;
      std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
      /// analyze document, return copy
+     %rename(analyze_document) analyze;
      document analyze(const document &d) const;
+     %rename(analyze) analyze;
      #endif
 
 };
@@ -1614,12 +1646,16 @@ class locutions {
   /// analyze document
   void analyze(document &) const;
   #else
-  /// analyze sentence
-  sentence analyze(const sentence &) const;
-  /// analyze sentences
+  /// analyze sentence, return copy
+  %rename(analyze_sentence) analyze;
+  sentence analyze(const sentence &s) const;
+  /// analyze sentences, return copy
+  %rename(analyze_sentence_list) analyze;
   std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-  /// analyze document
-  document analyze(const document &) const;
+  /// analyze document, return copy
+  %rename(analyze_document) analyze;
+  document analyze(const document &d) const;
+  %rename(analyze) analyze;
   #endif
 };
 
@@ -1639,12 +1675,16 @@ class ner {
   /// analyze document
   void analyze(document &) const;
   #else
-  /// analyze sentence
-  sentence analyze(const sentence &) const;
-  /// analyze sentences
+  /// analyze sentence, return copy
+  %rename(analyze_sentence) analyze;
+  sentence analyze(const sentence &s) const;
+  /// analyze sentences, return copy
+  %rename(analyze_sentence_list) analyze;
   std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-  /// analyze document
-  document analyze(const document &) const;
+  /// analyze document, return copy
+  %rename(analyze_document) analyze;
+  document analyze(const document &d) const;
+  %rename(analyze) analyze;
   #endif
 };
 
@@ -1665,12 +1705,16 @@ class crf_nerc {
     /// analyze document
     void analyze(document &) const;
     #else
-    /// analyze sentence
-    sentence analyze(const sentence &) const;
-    /// analyze sentences
+    /// analyze sentence, return copy
+    %rename(analyze_sentence) analyze;
+    sentence analyze(const sentence &s) const;
+    /// analyze sentences, return copy
+    %rename(analyze_sentence_list) analyze;
     std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-    /// analyze document
-    document analyze(const document &) const;
+    /// analyze document, return copy
+    %rename(analyze_document) analyze;
+    document analyze(const document &d) const;
+    %rename(analyze) analyze;
     #endif
 };
 
@@ -1691,12 +1735,16 @@ class quantities {
   /// analyze document
   void analyze(document &) const;
   #else
-  /// analyze sentence
-  sentence analyze(const sentence &) const;
-  /// analyze sentences
+  /// analyze sentence, return copy
+  %rename(analyze_sentence) analyze;
+  sentence analyze(const sentence &s) const;
+  /// analyze sentences, return copy
+  %rename(analyze_sentence_list) analyze;
   std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-  /// analyze document
-  document analyze(const document &) const;
+  /// analyze document, return copy
+  %rename(analyze_document) analyze;
+  document analyze(const document &d) const;
+  %rename(analyze) analyze;
   #endif
 };
 
@@ -1720,12 +1768,16 @@ class probabilities {
   /// analyze document
   void analyze(document &) const;
   #else
-  /// analyze sentence
-  sentence analyze(const sentence &) const;
-  /// analyze sentences
+  /// analyze sentence, return copy
+  %rename(analyze_sentence) analyze;
+  sentence analyze(const sentence &s) const;
+  /// analyze sentences, return copy
+  %rename(analyze_sentence_list) analyze;
   std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-  /// analyze document
-  document analyze(const document &) const;
+  /// analyze document, return copy
+  %rename(analyze_document) analyze;
+  document analyze(const document &d) const;
+  %rename(analyze) analyze;
   #endif
 };
 
@@ -1733,7 +1785,7 @@ class probabilities {
 class hmm_tagger {
  public:
   /// Constructor
-  hmm_tagger(const std::wstring &, bool, unsigned int, unsigned int kb=1);
+  hmm_tagger(const analyzer_config &opt);
   ~hmm_tagger();
 
   /// Given an *annotated* sentence, compute (log) probability of k-th best
@@ -1748,12 +1800,16 @@ class hmm_tagger {
   /// analyze document
   void analyze(document &) const;
   #else
-  /// analyze sentence
-  sentence analyze(const sentence &) const;
-  /// analyze sentences
+  /// analyze sentence, return copy
+  %rename(analyze_sentence) analyze;
+  sentence analyze(const sentence &s) const;
+  /// analyze sentences, return copy
+  %rename(analyze_sentence_list) analyze;
   std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-  /// analyze document
-  document analyze(const document &) const;
+  /// analyze document, return copy
+  %rename(analyze_document) analyze;
+  document analyze(const document &d) const;
+  %rename(analyze) analyze;
   #endif
 };
 
@@ -1762,7 +1818,7 @@ class hmm_tagger {
 class relax_tagger {
  public:
   /// Constructor, given the constraints file and config parameters
-  relax_tagger(const std::wstring &, int, double, double, bool, unsigned int);
+  relax_tagger(const analyzer_config &opt);
   ~relax_tagger();
 
   #if defined(FL_API_JAVA)
@@ -1773,12 +1829,16 @@ class relax_tagger {
   /// analyze document
   void analyze(document &) const;
   #else
-  /// analyze sentence
-  sentence analyze(const sentence &) const;
-  /// analyze sentences
+  /// analyze sentence, return copy
+  %rename(analyze_sentence) analyze;
+  sentence analyze(const sentence &s) const;
+  /// analyze sentences, return copy
+  %rename(analyze_sentence_list) analyze;
   std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-  /// analyze document
-  document analyze(const document &) const;
+  /// analyze document, return copy
+  %rename(analyze_document) analyze;
+  document analyze(const document &d) const;
+  %rename(analyze) analyze;
   #endif
 };
 
@@ -1803,12 +1863,16 @@ class relax_tagger {
     /// analyze document
     void analyze(document &) const;
     #else
-    /// analyze sentence
-    sentence analyze(const sentence &) const;
-    /// analyze sentences
+    /// analyze sentence, return copy
+    %rename(analyze_sentence) analyze;
+    sentence analyze(const sentence &s) const;
+    /// analyze sentences, return copy
+    %rename(analyze_sentence_list) analyze;
     std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-    /// analyze document
-    document analyze(const document &) const;
+    /// analyze document, return copy
+    %rename(analyze_document) analyze;
+    document analyze(const document &d) const;
+    %rename(analyze) analyze;
     #endif
 
   };
@@ -1833,12 +1897,16 @@ class phonetics {
   /// analyze document
   void analyze(document &) const;
   #else
-  /// analyze sentence
-  sentence analyze(const sentence &) const;
-  /// analyze sentences
+  /// analyze sentence, return copy
+  %rename(analyze_sentence) analyze;
+  sentence analyze(const sentence &s) const;
+  /// analyze sentences, return copy
+  %rename(analyze_sentence_list) analyze;
   std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-  /// analyze document
-  document analyze(const document &) const;
+  /// analyze document, return copy
+  %rename(analyze_document) analyze;
+  document analyze(const document &d) const;
+  %rename(analyze) analyze;
   #endif
 };
 
@@ -1858,12 +1926,16 @@ class nec {
   /// analyze document
   void analyze(document &) const;
   #else
-  /// analyze sentence
-  sentence analyze(const sentence &) const;
-  /// analyze sentences
+  /// analyze sentence, return copy
+  %rename(analyze_sentence) analyze;
+  sentence analyze(const sentence &s) const;
+  /// analyze sentences, return copy
+  %rename(analyze_sentence_list) analyze;
   std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-  /// analyze document
-  document analyze(const document &) const;
+  /// analyze document, return copy
+  %rename(analyze_document) analyze;
+  document analyze(const document &d) const;
+  %rename(analyze) analyze;
   #endif
 };
 
@@ -1886,12 +1958,16 @@ class chart_parser {
    /// analyze document
    void analyze(document &) const;
    #else
-   /// analyze sentence
-   sentence analyze(const sentence &) const;
-   /// analyze sentences
-   std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-   /// analyze document
-   document analyze(const document &) const;
+  /// analyze sentence, return copy
+  %rename(analyze_sentence) analyze;
+  sentence analyze(const sentence &s) const;
+  /// analyze sentences, return copy
+  %rename(analyze_sentence_list) analyze;
+  std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
+  /// analyze document, return copy
+  %rename(analyze_document) analyze;
+  document analyze(const document &d) const;
+  %rename(analyze) analyze;
    #endif
 };
 
@@ -1917,12 +1993,16 @@ class dep_txala {
    /// analyze document
    void analyze(document &) const;
    #else
-   /// analyze sentence
-   sentence analyze(const sentence &) const;
-   /// analyze sentences
+   /// analyze sentence, return copy
+   %rename(analyze_sentence) analyze;
+   sentence analyze(const sentence &s) const;
+   /// analyze sentences, return copy
+   %rename(analyze_sentence_list) analyze;
    std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-   /// analyze document
-   document analyze(const document &) const;
+   /// analyze document, return copy
+   %rename(analyze_document) analyze;
+   document analyze(const document &d) const;
+   %rename(analyze) analyze;
    #endif
 
 };
@@ -1941,12 +2021,16 @@ class dep_treeler {
    /// analyze document
    void analyze(document &) const;
    #else
-   /// analyze sentence
-   sentence analyze(const sentence &) const;
-   /// analyze sentences
+   /// analyze sentence, return copy
+   %rename(analyze_sentence) analyze;
+   sentence analyze(const sentence &s) const;
+   /// analyze sentences, return copy
+   %rename(analyze_sentence_list) analyze;
    std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-   /// analyze document
-   document analyze(const document &) const;
+   /// analyze document, return copy
+   %rename(analyze_document) analyze;
+   document analyze(const document &d) const;
+   %rename(analyze) analyze;
    #endif
 };
 
@@ -1968,12 +2052,16 @@ class dep_lstm {
    /// analyze document
    void analyze(document &) const;
    #else
-   /// analyze sentence
-   sentence analyze(const sentence &) const;
-   /// analyze sentences
+   /// analyze sentence, return copy
+   %rename(analyze_sentence) analyze;
+   sentence analyze(const sentence &s) const;
+   /// analyze sentences, return copy
+   %rename(analyze_sentence_list) analyze;
    std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-   /// analyze document
-   document analyze(const document &) const;
+   /// analyze document, return copy
+   %rename(analyze_document) analyze;
+   document analyze(const document &d) const;
+   %rename(analyze) analyze;
    #endif
 
   };
@@ -1997,12 +2085,16 @@ class srl_treeler {
    /// analyze document
    void analyze(document &) const;
    #else
-   /// analyze sentence
-   sentence analyze(const sentence &) const;
-   /// analyze sentences
+   /// analyze sentence, return copy
+   %rename(analyze_sentence) analyze;
+   sentence analyze(const sentence &s) const;
+   /// analyze sentences, return copy
+   %rename(analyze_sentence_list) analyze;
    std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-   /// analyze document
-   document analyze(const document &) const;
+   /// analyze document, return copy
+   %rename(analyze_document) analyze;
+   document analyze(const document &d) const;
+   %rename(analyze) analyze;
    #endif
     
 };
@@ -2025,12 +2117,16 @@ class senses {
    /// analyze document
    void analyze(document &) const;
    #else
-   /// analyze sentence
-   sentence analyze(const sentence &) const;
-   /// analyze sentences
+   /// analyze sentence, return copy
+   %rename(analyze_sentence) analyze;
+   sentence analyze(const sentence &s) const;
+   /// analyze sentences, return copy
+   %rename(analyze_sentence_list) analyze;
    std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-   /// analyze document
-   document analyze(const document &) const;
+   /// analyze document, return copy
+   %rename(analyze_document) analyze;
+   document analyze(const document &d) const;
+   %rename(analyze) analyze;
    #endif
 };
 
@@ -2083,12 +2179,16 @@ class ukb {
    /// analyze document
    void analyze(document &) const;
    #else
-   /// analyze sentence
-   sentence analyze(const sentence &) const;
-   /// analyze sentences
+   /// analyze sentence, return copy
+   %rename(analyze_sentence) analyze;
+   sentence analyze(const sentence &s) const;
+   /// analyze sentences, return copy
+   %rename(analyze_sentence_list) analyze;
    std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
-   /// analyze document
-   document analyze(const document &) const;
+   /// analyze document, return copy
+   %rename(analyze_document) analyze;
+   document analyze(const document &d) const;
+   %rename(analyze) analyze;
    #endif
 };
 

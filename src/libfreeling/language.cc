@@ -465,19 +465,30 @@ namespace freeling {
   }
   /// get reference to sense list for the selected analysis
   const list<pair<wstring,double> > & word::get_senses(int k) const {
-    return(selected_begin(k)->get_senses());
+    if (this->num_kbest()>k)
+      return selected_begin(k)->get_senses();
+    else {
+      wcerr << "Invalid get_senses access to unexisting analysis #"<< k << endl;
+      exit(1);
+    }			       
   }
+  
   /// get reference to sense list for the selected analysis
   list<pair<wstring,double> > & word::get_senses(int k) {
-    return(selected_begin(k)->get_senses());
+    if (this->num_kbest()>k)
+      return selected_begin(k)->get_senses();
+    else {
+      wcerr << "Invalid get_senses access to unexisting analysis #"<< k << endl;
+      exit(1);
+    }
   }
   /// get sense list (as string) for the selected analysis
   wstring word::get_senses_string(int k) const {
-    return(util::pairlist2wstring(selected_begin(k)->get_senses(),L":", L"/"));
+    return(this->num_kbest()>k ? util::pairlist2wstring(selected_begin(k)->get_senses(),L":", L"/") : NOT_FOUND);
   }
   /// set sense list for the selected analysis
   void word::set_senses(const list<pair<wstring,double> > &ls, int k) {
-    selected_begin(k)->set_senses(ls);
+    if (this->num_kbest()>k) selected_begin(k)->set_senses(ls);
   }
 
   // get/set position of word in sentence (start from 0)

@@ -151,9 +151,6 @@ namespace freeling {
     safe_map<std::wstring,double> *pA_cache;
     //prob_cache *pB_cache;
 
-    /// number of best paths to compute
-    unsigned int kbest;
-
     /// coeficients to compute linear interpolation
     double c[3];
 
@@ -167,12 +164,13 @@ namespace freeling {
 
   public:
     /// Constructor
-    hmm_tagger(const std::wstring &, bool, unsigned int, unsigned int kb=1);
+    hmm_tagger(const analyzer_config &opt);
     /// Destructor
     ~hmm_tagger();
 
     /// analyze given sentence 
-    void annotate(sentence &) const;
+    void annotate(sentence &s, const analyzer_invoke_options &opt) const;
+
     /// Given an *annotated* sentence, compute (log) probability of k-th best 
     /// sequence according to HMM parameters.
     double SequenceProb_log(const sentence &, int k=0) const;
