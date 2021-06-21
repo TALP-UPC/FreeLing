@@ -194,15 +194,8 @@ namespace freeling {
     }
 
     if (opt.MACO_DictionarySearch and dico!=NULL) {
-      // (Skipping dictionary search will also skip suffix analysis)
-
-      /*********  TODO:  pass these options to dictionary !
-      MACO_RetokContractions
-      MACO_AffixAnalysis
-      MACO_CompoundAnalysis
-      **************************/
-      dico->analyze(s);
-      
+      // (Skipping dictionary search will also skip suffix analysis and compound analysis)
+      dico->analyze(s, opt);      
       TRACE(2,L"Sentence annotated by the dictionary searcher.");
     }
 

@@ -31,6 +31,7 @@
 
 #include <string>
 #include <list>
+#include <semaphore.h>
 
 #include "freeling/morfo/language.h"
 #include "freeling/morfo/foma_FSM.h"
@@ -70,6 +71,8 @@ namespace freeling {
 
        /// FSM to check for compounds
        foma_FSM *fsm;
+       /// mutex to ensure thread safety.
+       static sem_t foma_mutex;
 
        // dictionary we are included in
        const dictionary &dic;

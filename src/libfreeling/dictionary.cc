@@ -514,7 +514,6 @@ namespace freeling {
   bool dictionary::annotate_word(word &w, list<word> &lw,
 				 const analyzer_invoke_options &opts) const {
 
-
     bool retok = opts.MACO_RetokContractions;
 
     //////////// SEARCH IN DICTIONARY
@@ -551,7 +550,7 @@ namespace freeling {
     //////////// HANDLE CONTRACTION RETOKENIZATION, IF ANY
     bool contr = false;
     if (not retok) {
-      TRACE(2,L"Retok is OFF");
+      TRACE(4,L"Retok is OFF");
       // RetokenizeContractions is OFF, or overriden for this call.
       // Just add retokenization information to each analysis, in case it is needed later.
       list<analysis> newla;
@@ -588,7 +587,7 @@ namespace freeling {
       }	
     }
     else {
-      TRACE(2,L"Retok is ON");
+      TRACE(4,L"Retok is ON");
       // RetokenizeContractions is ON. Only first contracted
       // analysis is considered.  Any other is ignored with a warning.
     
@@ -659,7 +658,6 @@ namespace freeling {
   void dictionary::analyze(sentence &se, const analyzer_invoke_options &opts) const {
     sentence::iterator pos;
 
-    TRACE(2, L"Analyzing sentence with options " << opts.dump());
     bool contr=false;
     for (pos=se.begin(); pos!=se.end(); ++pos){
       // Process the word if it hasn't been annotated by previous modules,

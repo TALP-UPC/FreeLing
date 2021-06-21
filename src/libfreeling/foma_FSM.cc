@@ -39,8 +39,6 @@ namespace freeling {
 #define MOD_TRACENAME L"FOMA_FSM"
 #define MOD_TRACECODE ALTERNATIVES_TRACE
 
-
-
 wstring print_sigma(struct sigma *sigma) {
   int size;
   wstring sgm = L"Sigma:";
@@ -233,6 +231,7 @@ wstring print_sigma(struct sigma *sigma) {
 
     free(result);
     delete[] search;
+
   }
 
 

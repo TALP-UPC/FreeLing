@@ -49,6 +49,8 @@ namespace freeling {
   compounds::pattern::pattern(const std::wstring &p, int h, const std::wstring &t) : patr(p), head(h), tag(t) {}
   compounds::pattern::~pattern() {}
 
+  // static member 
+  sem_t compounds::foma_mutex;
 
   ///////////////////////////////////////////////////////////////
   ///     Constructor
@@ -149,6 +151,8 @@ namespace freeling {
     // create automata for L(_L+)
     fsm = new foma_FSM(buff, L"", joins);
 
+    sem_init(&foma_mutex, 0, 1);
+    
     TRACE(3,L"Module successfully created");
   }
 
@@ -176,9 +180,11 @@ namespace freeling {
     bool compound = false;
 
     // obtain decompositions
+    sem_wait(&foma_mutex);
     list<alternative> comps;
     fsm->get_similar_words(w.get_lc_form(), comps);
-    TRACE(2,L"Obtained splittings");
+    TRACE(2,L"Obtained "<<comps.size()<<" splittings");
+    sem_post(&foma_mutex);
 
     if (comps.empty()) return false; // no decompositions found
 

@@ -54,7 +54,7 @@ namespace freeling {
     struct fsm *fsa;
     /// Handle for foma minimum edit distance automaton
     struct apply_med_handle *h_fsa;
-
+   
     /// Auxiliary for constructors:  create a FSM loading a file
     struct fsm* load_dictionary_file(const std::wstring &fname) const;
     /// Auxiliary for constructors:  create a FSM loading a text buffer

@@ -244,14 +244,13 @@ void analyzer::set_current_invoke_options(const analyzer_invoke_options &opt) {
 template<class T> void analyzer::do_analysis(T &doc, const analyzer_invoke_options &ivk) const {
 
   // apply requested levels of analysis
-
   if (doc.empty()) return;
 
   // --------- MORFO
   // apply morfo if needed
   if (ivk.InputLevel < MORFO && ivk.OutputLevel >= MORFO) {
     TRACE(2,L"running morfo");
-    morfo->analyze(doc);
+    morfo->analyze(doc, ivk);
   }
 
   // apply sense tagging (without WSD) if requested at morfo level
@@ -273,11 +272,11 @@ template<class T> void analyzer::do_analysis(T &doc, const analyzer_invoke_optio
   if (ivk.InputLevel < TAGGED && ivk.OutputLevel >= TAGGED) {
     if (ivk.TAGGER_which==HMM) {
       TRACE(2,L"running HMM tagger");
-      hmm->analyze(doc);
+      hmm->analyze(doc, ivk);
     }
     else if (ivk.TAGGER_which==RELAX) {
       TRACE(2,L"running relax tagger");
-      relax->analyze(doc);
+      relax->analyze(doc, ivk);
     }
   }
   
@@ -386,7 +385,7 @@ template<class T> void analyzer::do_analysis(T &doc, const analyzer_invoke_optio
 void analyzer::analyze(document &doc, const analyzer_invoke_options& ivk) const {
 
   // analyze document
-    do_analysis<document>(doc, ivk);
+  do_analysis<document>(doc, ivk);
 
   // solve coreference if needed 
   if (ivk.InputLevel<COREF and ivk.OutputLevel>=COREF and corfc!=NULL and not doc.empty()) {
