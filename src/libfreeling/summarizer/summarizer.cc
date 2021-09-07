@@ -26,6 +26,7 @@
 //
 ////////////////////////////////////////////////////////////////
 
+#include <cmath>
 
 #include "freeling/morfo/summarizer.h"
 #include "freeling/morfo/configfile.h"
