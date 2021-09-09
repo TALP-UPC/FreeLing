@@ -60,6 +60,15 @@ void io_handler::load_tagset(const std::wstring &ftag) {
 }
 
 ///--------------------------------------------
+/// provide access to loaded tagset handler
+///--------------------------------------------
+
+const freeling::tagset* io_handler::get_tagset() const {
+  return Tags;
+}
+
+
+///--------------------------------------------
 /// set language 
 ///--------------------------------------------
 

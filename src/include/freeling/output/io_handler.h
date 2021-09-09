@@ -46,6 +46,8 @@ namespace freeling {
       
       // load tagset rules for PoS shortening and MSD descriptions
       void load_tagset(const std::wstring &ftag);
+      // provide access to loaded tagset handler
+      const freeling::tagset* get_tagset() const;
       // set language 
       void set_language(const std::wstring &lg);
 
