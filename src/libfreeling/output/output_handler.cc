@@ -45,7 +45,7 @@ output_handler::output_handler() : io_handler() {}
 // Destructor
 //---------------------------------------------
 
-output_handler::~output_handler() { delete Tags; }
+output_handler::~output_handler() {}
 
 
 //---------------------------------------------
