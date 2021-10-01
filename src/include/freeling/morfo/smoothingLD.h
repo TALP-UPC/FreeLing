@@ -125,6 +125,7 @@ namespace freeling {
           if (order!=0 and order!=x)
             ERROR_CRASH(L"ERROR - Specified model order does not match ngram size");
           order = x;
+	  TRACE(8,L"Ngram order is "<<order);
           break;
         }
 
@@ -155,7 +156,8 @@ namespace freeling {
           else if (order != ngram.size()) 
             ERROR_CRASH(L"ERROR - Mixed order ngrams in input file, or specified model order does not match ngram size");
 
-          // add ngram (and n-i gram) counts to the model
+	  TRACE(8,L"read ngram = ["<<ngram<<L"] counts="<<c);
+	  // add ngram (and n-i gram) counts to the model
           while (ngram.size()>1) {
             // insert ngram count, or increase if it already existed
             std::pair<typename std::map<G,double>::iterator,bool> x = counts.insert(make_pair(ngram,c));
@@ -163,6 +165,7 @@ namespace freeling {
             // shorten n gram and loop to insert n-1 gram
             ngram.erase(std::prev(ngram.end()));
           }
+
           // unigram is left. Add it
           std::pair<typename std::map<G,double>::iterator,bool> x = counts.insert(make_pair(ngram,c));
           if (x.second) ntypes++; // new unigram inserted, increase type count

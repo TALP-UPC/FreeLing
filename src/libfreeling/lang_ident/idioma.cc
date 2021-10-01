@@ -60,6 +60,7 @@ namespace freeling {
     order=0;
     threshold=15;
 
+    TRACE(2,L"Loading ngram model from " << modelFile);
     // load ngram statistics and smoothing parameters
     map<wstring,wchar_t> escapes = { {L"\\n", L'\n'}, {L"\\s", L' '}, {L"\\\\", L'\\'} };
     smooth = new smoothingLD<wstring,wchar_t>(modelFile,escapes);

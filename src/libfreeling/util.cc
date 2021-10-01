@@ -116,6 +116,8 @@ namespace freeling {
     else if (loc==L"default") lname=DEFAULT_LOCALE;
     else lname=util::wstring2string(loc);
 
+    std::ios_base::sync_with_stdio(false);
+
     try
       {
         // create requested locale using libstdc++.
@@ -124,13 +126,13 @@ namespace freeling {
         // set locale as global, for all streams.
         locale::global(current_locale);
 
-        #if defined MACOSX
+	#if defined MACOSX
           current_locale = locale(current_locale, new std::codecvt_utf8<wchar_t>);
+	#endif        
 
-          wcin.imbue(current_locale);
-          wcerr.imbue(current_locale);
-          wcout.imbue(current_locale);
-        #endif        
+        wcin.imbue(current_locale);
+        wcerr.imbue(current_locale);
+        wcout.imbue(current_locale);
       }
     catch (const std::runtime_error &e)
       {
@@ -140,9 +142,7 @@ namespace freeling {
                     + util::string2wstring(lname) + L"' is unknown or not installed.\n"
                     + util::string2wstring(e.what()));
       }
-
-    std::ios_base::sync_with_stdio(false);
-
+    
     #if defined WIN32 || defined WIN64
       setUtf8Mode(stdin, "stdin");
       setUtf8Mode(stdout, "stdout");
@@ -245,8 +245,7 @@ namespace freeling {
   bool util::is_absolute(const wstring &p)  {
     // linux/Mac absolute paths start with "/"
     // Windows absolute paths match regexp "([A-Za-z]:)?\\"
-    return p.size()>0 and p[0]!='.' and (p[0]==L'/' or util::RE_win_absolute_path.search(p));
-    // p[0] != "." is added because for some reason RE_win_absolute_path.search matches it... boost? icu?
+    return p.size()>0 and (p[0]==L'/' or util::RE_win_absolute_path.search(p));
   }
 
   /////////////////////////////////////////////////////////////////////////////

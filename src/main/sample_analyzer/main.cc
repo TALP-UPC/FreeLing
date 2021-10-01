@@ -581,6 +581,9 @@ int main (int argc, char **argv) {
   // read configuration file and command-line options
   config *cfg = load_config(argc,argv);
 
+  /// set the locale to UTF to properly handle special characters.
+  util::init_locale(cfg->Locale);
+
   // create lang ident or analyzer, depending on requested output
   lang_ident *ident=NULL;
   analyzer *anlz=NULL;
@@ -595,10 +598,7 @@ int main (int argc, char **argv) {
       wcerr << st.description << endl;
       if (st.stat == CFG_ERROR) exit (1);    
     }
-    
-    /// set the locale to UTF to properly handle special characters.
-    util::init_locale(cfg->Locale);
-    
+        
     // create input/output handlers appropriate for requested type of input/output.
     out = create_output_handler(cfg);
     inp = create_input_handler(cfg);
