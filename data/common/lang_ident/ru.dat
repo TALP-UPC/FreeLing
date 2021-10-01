@@ -12,7 +12,7 @@ LinearDiscountAlpha 0.1
 VocabularySize  92
 </Smoothing>
 <Threshold>
-20
+25
 </Threshold>
 <NGrams>
 10 \s " в о
