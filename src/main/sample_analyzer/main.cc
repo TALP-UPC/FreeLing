@@ -580,26 +580,31 @@ int main (int argc, char **argv) {
 
   // read configuration file and command-line options
   config *cfg = load_config(argc,argv);
-  analyzer_config::status st = cfg->check_invoke_options(cfg->invoke_opt);
-  if (st.stat != CFG_OK) {
-    wcerr << st.description << endl;
-    if (st.stat == CFG_ERROR) exit (1);    
-  }
-    
-  /// set the locale to UTF to properly handle special characters.
-  util::init_locale(cfg->Locale);
-
-  // create input/output handlers appropriate for requested type of input/output.
-  io::output_handler *out = create_output_handler(cfg);
-  io::input_handler *inp = create_input_handler(cfg);
 
   // create lang ident or analyzer, depending on requested output
   lang_ident *ident=NULL;
   analyzer *anlz=NULL;
-  if (cfg->LangIdent) 
+  io::output_handler *out;
+  io::input_handler *inp;
+  if (cfg->LangIdent) {
     ident = new lang_ident(cfg->IDENT_identFile);
-  else 
+  }
+  else {
+    analyzer_config::status st = cfg->check_invoke_options(cfg->invoke_opt);
+    if (st.stat != CFG_OK) {
+      wcerr << st.description << endl;
+      if (st.stat == CFG_ERROR) exit (1);    
+    }
+    
+    /// set the locale to UTF to properly handle special characters.
+    util::init_locale(cfg->Locale);
+    
+    // create input/output handlers appropriate for requested type of input/output.
+    out = create_output_handler(cfg);
+    inp = create_input_handler(cfg);
+
     anlz = new analyzer(*cfg);
+  }
 
 
   if (ServerMode) {

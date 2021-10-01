@@ -245,7 +245,8 @@ namespace freeling {
   bool util::is_absolute(const wstring &p)  {
     // linux/Mac absolute paths start with "/"
     // Windows absolute paths match regexp "([A-Za-z]:)?\\"
-    return p.size()>0 and (p[0]==L'/' or util::RE_win_absolute_path.search(p));
+    return p.size()>0 and p[0]!='.' and (p[0]==L'/' or util::RE_win_absolute_path.search(p));
+    // p[0] != "." is added because for some reason RE_win_absolute_path.search matches it... boost? icu?
   }
 
   /////////////////////////////////////////////////////////////////////////////
@@ -260,13 +261,13 @@ namespace freeling {
   /////////////////////////////////////////////////////////////////////////////
   /// convert a relative path to absolute, string version
   /////////////////////////////////////////////////////////////////////////////
-
   string util::absolute(const string &fname, const string &path)  {
     string fn=fname;
     // remove " quotes around filename, if any
     if (fn[0]=='"' && fn[fn.size()-1]=='"') fn=fn.substr(1,fn.size()-2);   
     // prepend given path if filename is relative
     if (not util::is_absolute(fn)) fn=path+fn;
+    else wcerr<<L"IS ABSOLUTE! "<<endl;
     return fn;
   }
 

@@ -229,6 +229,11 @@ public:
       exit(0); // return to system
     }
 
+    // Handle boolean options expressed with --myopt or --nomyopt in command line
+    analyzer_config::SetBooleanOptionCL(vm.count("server"),!vm.count("server"),Server,"server");
+    analyzer_config::SetBooleanOptionCL(vm.count("ident"),!vm.count("ident"),LangIdent,"ident");
+    analyzer_config::SetBooleanOptionCL(vm.count("flush"),vm.count("noflush"),AlwaysFlush,"flush");
+    
     // Unless lang ident, load config file.
     if (not LangIdent) {
       if (ConfigFile.empty()) {
@@ -245,11 +250,6 @@ public:
     s << std::hex << tracemod;
     s >> traces::TraceModule;
 
-    // Handle boolean options expressed with --myopt or --nomyopt in command line
-    analyzer_config::SetBooleanOptionCL(vm.count("server"),!vm.count("server"),Server,"server");
-    analyzer_config::SetBooleanOptionCL(vm.count("ident"),!vm.count("ident"),LangIdent,"ident");
-    analyzer_config::SetBooleanOptionCL(vm.count("flush"),vm.count("noflush"),AlwaysFlush,"flush");
-    
     // check options involving Filenames for environment vars expansion.
     IDENT_identFile = util::expand_filename(IDENT_identFile);
     TAGSET_TagsetFile = util::expand_filename(TAGSET_TagsetFile);
