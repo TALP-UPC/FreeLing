@@ -539,7 +539,7 @@ namespace freeling {
 
     #ifndef NO_LIBFOMA
       ///////////// CHECK FOR COMPOUNDS
-      if (opts.MACO_CompoundAnalysis) {
+      if (opts.MACO_CompoundAnalysis and comp!=NULL) {
         // check whether the word is a compound
         TRACE(2,L"Compound analisys active. SEARCHING FOR COMPOUND. word n_analysis="+util::int2wstring(w.get_n_analysis()));
 	// if it is a compound, deactivate retokenization
