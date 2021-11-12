@@ -1,12 +1,4 @@
 
-# Dependencies
-include_directories(${Boost_INCLUDE_DIR})
-include_directories(${ICU_INCLUDE_DIRS})
-include_directories(${ZLIB_INCLUDE_DIRS})
-
-link_directories(${Boost_LIBRARY_DIRS})
-link_directories(${ICU_LIBRARY_DIRS})
-
 if (WIN32)
   # compiler defintions for windows
   add_definitions(-D_CRT_SECURE_NO_WARNINGS=1 -D_CRT_NONSTDC_NO_DEPRECATE=1 -D_WINSOCK_DEPRECATED_NO_WARNINGS=1 -DNOMINMAX -DNDEBUG=1 -D_CONSOLE=1 -D_WINDOWS=1 -D_USRDLL=1 -DWIN32=1)
