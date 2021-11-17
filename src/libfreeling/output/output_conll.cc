@@ -276,6 +276,7 @@ wstring output_conll::compute_value(const sentence &s,
     // Short PoS tag
     wstring shtag = L"-";
     if (not w.empty() and Tags!=NULL) {
+      shtag = L"";
       list<wstring> tgs=util::wstring2list(w.get_tag(best),L"+");
       for (list<wstring>::const_iterator t=tgs.begin(); t!=tgs.end(); t++) 
         shtag += L"+" + Tags->get_short_tag(*t);
@@ -299,6 +300,7 @@ wstring output_conll::compute_value(const sentence &s,
         tag = w.get_tag(best);
 
       list<wstring> tgs=util::wstring2list(tag,L"+");
+      wstring msd = L"";
       for (list<wstring>::const_iterator t=tgs.begin(); t!=tgs.end(); t++) 
         msd += L"+" + Tags->get_msd_string(*t);
       msd = msd.substr(1);
