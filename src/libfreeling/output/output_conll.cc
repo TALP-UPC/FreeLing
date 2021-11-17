@@ -248,7 +248,7 @@ wstring output_conll::compute_value(const sentence &s,
       list <analysis> la=compute_retokenization(rtk, rtk.begin(), L"", L"");
       lemma = la.begin()->get_lemma();
     }
-    else 
+    else // w not empty, not retokenizable
       lemma = w.get_lemma(best);
     
     return lemma;
@@ -265,7 +265,7 @@ wstring output_conll::compute_value(const sentence &s,
       list <analysis> la=compute_retokenization(rtk, rtk.begin(), L"", L"");
       tag = la.begin()->get_tag();
     }
-    else 
+    else // w not empty, not retokenizable
       tag = w.get_tag(best);
     
     return tag;
@@ -274,23 +274,20 @@ wstring output_conll::compute_value(const sentence &s,
 
   case SHORT_TAG: {
     // Short PoS tag
-    wstring shtag;
+    wstring shtag = L"-";
     if (not w.empty() and Tags!=NULL) {
       list<wstring> tgs=util::wstring2list(w.get_tag(best),L"+");
       for (list<wstring>::const_iterator t=tgs.begin(); t!=tgs.end(); t++) 
         shtag += L"+" + Tags->get_short_tag(*t);
       shtag = shtag.substr(1);
-    }
-    else 
-      shtag=L"-";
-
+    }    
     return shtag;
     break;
   }
-
+    
   case MSD: {
     // Morphosyntactic description
-    wstring msd;
+    wstring msd = L"-";
     if (not w.empty() and Tags!=NULL) {
       wstring tag;
       if (w.selected_begin(best)->is_retokenizable()) {
@@ -306,8 +303,6 @@ wstring output_conll::compute_value(const sentence &s,
         msd += L"+" + Tags->get_msd_string(*t);
       msd = msd.substr(1);
     }
-    else 
-      msd=L"-";
 
     return msd;
     break;
@@ -328,16 +323,18 @@ wstring output_conll::compute_value(const sentence &s,
 
   case SENSE: {
     // WSD
-    wstring wsd=L"-";
-    if (not w.get_senses(best).empty()) wsd = w.get_senses(best).begin()->first;
+    wstring wsd = L"-";
+    if (not w.empty() and not w.get_senses(best).empty())
+      wsd = w.get_senses(best).begin()->first;
     return wsd;
     break;
   } 
 
   case ALL_SENSES: {
     // All senses, with ranking if available
-    wstring wsd=L"-";
-    if (not w.get_senses(best).empty()) wsd = util::pairlist2wstring(w.get_senses(best),L":",L"/");
+    wstring wsd = L"-";
+    if (not w.empty() and not w.get_senses(best).empty())
+      wsd = util::pairlist2wstring(w.get_senses(best),L":",L"/");
     return wsd;
     break;
   } 
@@ -355,7 +352,7 @@ wstring output_conll::compute_value(const sentence &s,
 
   case DEPHEAD: {
     // dependency head
-    wstring dhead=L"-";
+    wstring dhead = L"-";
     if (s.is_dep_parsed()) {
       dep_tree::const_iterator n = s.get_dep_tree(s.get_best_seq()).get_node_by_pos(id);
       if (n.is_root() or n.get_parent()->get_label()==L"VIRTUAL_ROOT") dhead = L"0";
@@ -367,7 +364,7 @@ wstring output_conll::compute_value(const sentence &s,
     
   case DEPREL: {
     // dependency function   
-    wstring drel=L"-";
+    wstring drel = L"-";
     if (s.is_dep_parsed()) {
       dep_tree::const_iterator n = s.get_dep_tree(s.get_best_seq()).get_node_by_pos(id);
       drel = n->get_label();
