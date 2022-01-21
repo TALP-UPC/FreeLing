@@ -246,16 +246,19 @@ namespace freeling {
     set<wstring> acc;
     bool mw=false; bool pref=false;
 
+    wstring wcard=L"*";
     if (j->size() == 0) {
       // if no analysis, check only the form
       TRACE(3,L"checking ("+form+L")");
       if (st->acc_mw.empty()) {
         check(form,acc,mw,pref,st); 
+        check(wcard,acc,mw,pref,st); 
       }
       else {
         for (set<wstring>::const_iterator i=st->acc_mw.begin(); i!=st->acc_mw.end(); i++) {
           TRACE(3,L"   acc_mw: ["+(*i)+L"]");
           check((*i)+L"_"+form,acc,mw,pref,st); 
+          check((*i)+L"_"+wcard,acc,mw,pref,st); 
         }
       }
     }
@@ -273,12 +276,14 @@ namespace freeling {
         bool bm=false,bp=false;
         lem = L"<"+a->get_lemma()+L">";
         tag = a->get_tag();
+	
         if (Tags!=NULL) tag=Tags->get_short_tag(tag);
         TRACE(3,L"checking ("+form+L","+lem+L","+tag+L")");
       
         if (st->acc_mw.empty()) {
           check(form,acc,bm,bp,st); 
           check(lem,acc,bm,bp,st);  
+          check(wcard,acc,bm,bp,st);  
           if (check(tag,acc,bm,bp,st)) {
             j->unselect_all_analysis(); 
             a->mark_selected(); 
@@ -290,6 +295,7 @@ namespace freeling {
             TRACE(3,L"   acc_mw: ["+(*i)+L"]");
             check((*i)+L"_"+form,acc,bm,bp,st); 
             check((*i)+L"_"+lem,acc,bm,bp,st);  
+            check((*i)+L"_"+wcard,acc,bm,bp,st);  
             if (check((*i)+L"_"+tag,acc,bm,bp,st))  {
               j->unselect_all_analysis(); 
               a->mark_selected(); 
