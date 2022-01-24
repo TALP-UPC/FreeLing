@@ -266,7 +266,7 @@ namespace freeling {
     if (fn[0]=='"' && fn[fn.size()-1]=='"') fn=fn.substr(1,fn.size()-2);   
     // prepend given path if filename is relative
     if (not util::is_absolute(fn)) fn=path+fn;
-    else wcerr<<L"IS ABSOLUTE! "<<endl;
+    // else {TRACE(4,L"Path was already absolute. Unchanged.");}
     return fn;
   }
 
