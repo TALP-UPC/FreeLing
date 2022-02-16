@@ -1404,36 +1404,39 @@ class processor {
     processor() {};
     /// destructor
     virtual ~processor() {};
-    /// analyze sentence/document. Pure virtual, must be provided by instance
-    virtual void analyze(sentence &) const = 0;
 
-    /// analyze sentence/document with given options. Should be provided by instance if needed.
-    /// Default behaviour ignores provided options.
-    virtual void analyze(sentence &s, const analyzer_invoke_options &opt) const;
-    /// analyze list of sentences (paragraph)
-    virtual void analyze(std::list<sentence> &ls) const;
-    /// analyze list of sentences (paragraph) with given options
-    virtual void analyze(std::list<sentence> &ls, const analyzer_invoke_options &opt) const;
-    /// analyze document
-    virtual void analyze(document &doc) const;
-    /// analyze document with given options
-    virtual void analyze(document &doc, const analyzer_invoke_options &opt) const;
-    /// analyze sentence, return analyzed copy
-    virtual sentence analyze(const sentence &s) const;
-    /// analyze sentence with given options, return analyzed copy
-    virtual sentence analyze(const sentence &s, const analyzer_invoke_options &opt) const;
-    /// analyze list of sentences, return analyzed copy
-    virtual std::list<sentence> analyze(const std::list<sentence> &ls) const;
-    /// analyze list of sentences with given options, return analyzed copy
-    virtual std::list<sentence> analyze(const std::list<sentence> &ls, const analyzer_invoke_options &opt) const;
-    /// analyze document, return analyzed copy
-    virtual document analyze(const document &d) const;
-    /// analyze document with given options, return analyzed copy
-    virtual document analyze(const document &d, const analyzer_invoke_options &opt);
+     #if defined(FL_API_JAVA)
+     /// analyze sentence
+     virtual void analyze(sentence &s) const = 0;
+     /// analyze list of sentences
+     virtual void analyze(std::list<freeling::sentence> &) const;
+     /// analyze document
+     virtual void analyze(document &) const;
+     /// analyze sentence with given options
+     virtual void analyze(sentence &s, const analyzer_invoke_options &opts) const;
+     /// analyze list of sentences (paragraph) with given options
+     virtual void analyze(std::list<freeling::sentence> &ls, const analyzer_invoke_options &opts) const;
+     /// analyze document with given options
+     virtual void analyze(document &doc, const analyzer_invoke_options &opts) const;
+
+     #else
+     /// analyze sentence, return copy
+     %rename(analyze_sentence) analyze;
+     virtual sentence analyze(const sentence &s) const = 0;
+     /// analyze sentences, return copy
+     %rename(analyze_sentence_list) analyze;
+     virtual std::list<freeling::sentence> analyze(const std::list<freeling::sentence> &) const;
+     /// analyze document, return copy
+     %rename(analyze_document) analyze;
+     virtual document analyze(const document &d) const;
+     %rename(analyze) analyze;
+     #endif
+
+
 };
  
 /*------------------------------------------------------------------------*/
-class maco {
+ class maco : public processor {
    public:
      /// Constructor
      maco(const analyzer_config &); 
@@ -1482,7 +1485,7 @@ class maco {
  
 
 /*------------------------------------------------------------------------*/
-class RE_map {
+ class RE_map : public processor {
     
  public:
   /// Constructor (config file)
@@ -1543,7 +1546,7 @@ class numbers {
 
 
 /*------------------------------------------------------------------------*/
-class punts {
+class punts : public processor {
  public:
   /// Constructor (config file)
   punts(const std::wstring &); 
@@ -1600,7 +1603,7 @@ class dates {
 };  
 
 /*------------------------------------------------------------------------*/
-class dictionary {
+class dictionary : public processor {
  public:
     /// Constructor
     dictionary(const analyzer_config &opts);
@@ -1783,7 +1786,7 @@ class quantities {
 };
 
 /*------------------------------------------------------------------------*/
-class probabilities {
+class probabilities : public processor {
  public:
   /// Constructor (language, config file, threshold)
   probabilities(const std::wstring &, double);
@@ -1878,7 +1881,7 @@ class relax_tagger {
 
 
 /*------------------------------------------------------------------------*/
-  class alternatives {
+  class alternatives : public processor {
 
   public:
     /// Constructor
@@ -1914,7 +1917,7 @@ class relax_tagger {
 
 
 /*------------------------------------------------------------------------*/
-class phonetics {  
+class phonetics : public processor {  
  public:
   /// Constructor, given config file
   phonetics(const std::wstring&);
@@ -1945,7 +1948,7 @@ class phonetics {
 };
 
 /*------------------------------------------------------------------------*/
-class nec {
+class nec : public processor {
  public:
   /// Constructor
   nec(const std::wstring &); 
@@ -1975,7 +1978,7 @@ class nec {
 
 
 /*------------------------------------------------------------------------*/
-class chart_parser {
+class chart_parser : public processor {
  public:
    /// Constructors
    chart_parser(const std::wstring&);
@@ -2136,7 +2139,7 @@ class srl_treeler {
 
  
 /*------------------------------------------------------------------------*/
-class senses {
+class senses : public processor {
  public:
   /// Constructor
   senses(const std::wstring &); 
@@ -2166,7 +2169,7 @@ class senses {
 
 
 /*------------------------------------------------------------------------*/
-class relaxcor {
+class relaxcor : public processor {
   public:
 
     typedef relaxcor_modelDT coref_model;
