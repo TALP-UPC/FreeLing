@@ -1397,7 +1397,41 @@ class splitter {
 };
 
 
+/*------------------------------------------------------------------------*/
+class processor {
+  public:
+    /// constructor
+    processor() {};
+    /// destructor
+    virtual ~processor() {};
+    /// analyze sentence/document. Pure virtual, must be provided by instance
+    virtual void analyze(sentence &) const = 0;
 
+    /// analyze sentence/document with given options. Should be provided by instance if needed.
+    /// Default behaviour ignores provided options.
+    virtual void analyze(sentence &s, const analyzer_invoke_options &opt) const;
+    /// analyze list of sentences (paragraph)
+    virtual void analyze(std::list<sentence> &ls) const;
+    /// analyze list of sentences (paragraph) with given options
+    virtual void analyze(std::list<sentence> &ls, const analyzer_invoke_options &opt) const;
+    /// analyze document
+    virtual void analyze(document &doc) const;
+    /// analyze document with given options
+    virtual void analyze(document &doc, const analyzer_invoke_options &opt) const;
+    /// analyze sentence, return analyzed copy
+    virtual sentence analyze(const sentence &s) const;
+    /// analyze sentence with given options, return analyzed copy
+    virtual sentence analyze(const sentence &s, const analyzer_invoke_options &opt) const;
+    /// analyze list of sentences, return analyzed copy
+    virtual std::list<sentence> analyze(const std::list<sentence> &ls) const;
+    /// analyze list of sentences with given options, return analyzed copy
+    virtual std::list<sentence> analyze(const std::list<sentence> &ls, const analyzer_invoke_options &opt) const;
+    /// analyze document, return analyzed copy
+    virtual document analyze(const document &d) const;
+    /// analyze document with given options, return analyzed copy
+    virtual document analyze(const document &d, const analyzer_invoke_options &opt);
+};
+ 
 /*------------------------------------------------------------------------*/
 class maco {
    public:
