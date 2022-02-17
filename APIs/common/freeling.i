@@ -2169,11 +2169,9 @@ class senses : public processor {
 
 
 /*------------------------------------------------------------------------*/
-class relaxcor : public processor {
+class relaxcor {
   public:
 
-    typedef relaxcor_modelDT coref_model;
-    
     /// Constructor
     relaxcor(const std::wstring &fname);
     /// Destructor
@@ -2183,9 +2181,8 @@ class relaxcor : public processor {
     void set_provide_singletons(bool);
     // get provide_singletons
     bool get_provide_singletons() const;
-
-    /// Finds the coreferent mentions in a document
-    void analyze(document&) const;
+    
+    void analyze(document &) const;   
   };
 
 /*------------------------------------------------------------------------*/

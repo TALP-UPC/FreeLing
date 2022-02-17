@@ -112,23 +112,19 @@ LANG = "es"
 # create options set for maco analyzer. 
 op = pyfreeling.analyzer_config()
 
-cfopt = pyfreeling.analyzer_config_options()
-cfopt.Lang = LANG
-cfopt.MACO_PunctuationFile = DATA + "common/punct.dat"
-cfopt.MACO_DictionaryFile = DATA + LANG + "/dicc.src"
-cfopt.MACO_AffixFile = DATA + LANG + "/afixos.dat" 
-cfopt.MACO_CompoundFile = DATA + LANG + "/compounds.dat" 
-cfopt.MACO_LocutionsFile = DATA + LANG + "/locucions.dat"
-cfopt.MACO_NPDataFile = DATA + LANG + "/np.dat"
-cfopt.MACO_QuantitiesFile = DATA + LANG + "/quantities.dat"
-cfopt.MACO_ProbabilityFile = DATA + LANG + "/probabilitats.dat"
-
-op.config_opt = cfopt
-
-
+# define creation options for morphological analyzer modules
+op.config_opt.Lang = LANG
+op.config_opt.MACO_PunctuationFile = DATA + "common/punct.dat"
+op.config_opt.MACO_DictionaryFile = DATA + LANG + "/dicc.src"
+op.config_opt.MACO_AffixFile = DATA + LANG + "/afixos.dat" 
+op.config_opt.MACO_CompoundFile = DATA + LANG + "/compounds.dat" 
+op.config_opt.MACO_LocutionsFile = DATA + LANG + "/locucions.dat"
+op.config_opt.MACO_NPDataFile = DATA + LANG + "/np.dat"
+op.config_opt.MACO_QuantitiesFile = DATA + LANG + "/quantities.dat"
+op.config_opt.MACO_ProbabilityFile = DATA + LANG + "/probabilitats.dat"
 
 # chose which modules among those available will be used by default
-# (can be changed at each all if needed)
+# (can be changed at each call if needed)
 op.invoke_opt.MACO_AffixAnalysis = True
 op.invoke_opt.MACO_CompoundAnalysis = True
 op.invoke_opt.MACO_MultiwordsDetection = True

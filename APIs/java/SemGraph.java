@@ -1,56 +1,87 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
+import java.io.File;
 
-import edu.upc.freeling.*;
+import edu.upc.Jfreeling.*;
 
 public class SemGraph {
-  // Modify this line to be your FreeLing installation directory
-  private static final String FREELINGDIR = "/usr/local";
-  private static final String DATA = FREELINGDIR + "/share/freeling/";
-  private static final String LANG = "en";
 
+  private static final String OS = System.getProperty("os.name").toLowerCase();
+    
   public static void main( String argv[] ) throws IOException {
-    System.loadLibrary( "freeling_javaAPI" );
+
+    // connect to FreeLing library
+    System.loadLibrary( "Jfreeling" );
+
+    // Check whether we know where to find FreeLing data files
+    String FLDIR = System.getenv("FREELINGDIR");
+    if (FLDIR==null) {
+	if (OS.indexOf("win") >= 0) FLDIR = "C:\\Program Files";
+	else  FLDIR = "/usr/local";
+	System.err.println("FREELINGDIR environment variable not defined, trying "+FLDIR);
+    }
+
+    File f = new File(FLDIR+"/share/freeling");
+    if (! f.exists()) {
+	System.err.println("Folder "+FLDIR+"/share/freeling not found.");
+        System.err.println("Please set FREELINGDIR environment variable to FreeLing installation directory");
+	System.exit(1);
+    }
+
+    // Location of FreeLing configuration files.
+    String DATA = FLDIR + "/share/freeling/";
+    String LANG = "en";
 
     Util.initLocale( "default" );
 
     // Create options set for maco analyzer.
     // Default values are Ok, except for data files.
-    MacoOptions op = new MacoOptions( LANG );
+    // define creation options for morphological analyzer modules
+    AnalyzerConfig op = new AnalyzerConfig();
+    op.getConfig_opt().setLang(LANG);
+    op.getConfig_opt().setMACO_PunctuationFile(DATA + "common/punct.dat");
+    op.getConfig_opt().setMACO_DictionaryFile(DATA + LANG + "/dicc.src");
+    op.getConfig_opt().setMACO_AffixFile(DATA + LANG + "/afixos.dat");
+    op.getConfig_opt().setMACO_CompoundFile(DATA + LANG + "/compounds.dat");
+    op.getConfig_opt().setMACO_LocutionsFile(DATA + LANG + "/locucions.dat");
+    op.getConfig_opt().setMACO_NPDataFile(DATA + LANG + "/np.dat");
+    op.getConfig_opt().setMACO_QuantitiesFile(DATA + LANG + "/quantities.dat");
+    op.getConfig_opt().setMACO_ProbabilityFile(DATA + LANG + "/probabilitats.dat");
 
-    op.setDataFiles( "", 
-                     DATA + "common/punct.dat",
-                     DATA + LANG + "/dicc.src",
-                     DATA + LANG + "/afixos.dat",
-                     "",
-                     DATA + LANG + "/locucions.dat", 
-                     DATA + LANG + "/np.dat",
-                     DATA + LANG + "/quantities.dat",
-                     DATA + LANG + "/probabilitats.dat");
-
+    // chose which modules among those available will be used by default
+    // (can be changed at each call if needed)
+    op.getInvoke_opt().setMACO_AffixAnalysis(true);
+    op.getInvoke_opt().setMACO_CompoundAnalysis(true);
+    op.getInvoke_opt().setMACO_MultiwordsDetection(true);
+    op.getInvoke_opt().setMACO_NumbersDetection(true);
+    op.getInvoke_opt().setMACO_PunctuationDetection(true );
+    op.getInvoke_opt().setMACO_DatesDetection(true);
+    op.getInvoke_opt().setMACO_QuantitiesDetection(true);
+    op.getInvoke_opt().setMACO_DictionarySearch(true);
+    op.getInvoke_opt().setMACO_ProbabilityAssignment(true);
+    op.getInvoke_opt().setMACO_NERecognition(true);
+    op.getInvoke_opt().setMACO_RetokContractions(true);
     // Create analyzers.
 
     Tokenizer tk = new Tokenizer( DATA + LANG + "/tokenizer.dat" );
     Splitter sp = new Splitter( DATA + LANG + "/splitter.dat" );
 
     Maco mf = new Maco( op );
-    mf.setActiveOptions(false, true, true, true,  // select which among created 
-                        true, true, false, true,  // submodules are to be used. 
-                        true, true, true, true);  // default: all created submodules 
-                                                  // are used
 
-    HmmTagger tg = new HmmTagger( DATA + LANG + "/tagger.dat", true, 2 );
-    ChartParser chunker = new ChartParser(DATA + LANG + "/chunker/grammar-chunk.dat" );
-    DepTxala parser = new DepTxala( DATA + LANG + "/dep_txala/dependences.dat", 
-				    chunker.getStartSymbol() );
-    DepTreeler depsrl = new DepTreeler( DATA + LANG + "/dep_treeler/dependences.dat");    
+    op.getConfig_opt().setTAGGER_HMMFile(DATA + LANG + "/tagger.dat");
+    op.getInvoke_opt().setTAGGER_Retokenize(true);
+    op.getInvoke_opt().setTAGGER_ForceSelect(ForceSelectStrategy.RETOK);
+    HmmTagger tg = new HmmTagger(op);
+
+    DepLstm parser = new DepLstm( DATA + LANG + "/dep_lstm/params-en.dat");
+    SrlTreeler srl = new SrlTreeler( DATA + LANG + "/treeler/srl.dat");    
     Nec neclass = new Nec( DATA + LANG + "/nerc/nec/nec-ab-poor1.dat" );
 
     Senses sen = new Senses(DATA + LANG + "/senses.dat" ); // sense dictionary
     Ukb dis = new Ukb( DATA + LANG + "/ukb.dat" ); // sense disambiguator
 
-    Relaxcor corf = new Relaxcor(DATA + LANG + "/coref/relaxcor/relaxcor.dat");
+    Relaxcor corf = new Relaxcor(DATA + LANG + "/coref/relaxcor_dep/relaxcor.dat");
     SemgraphExtract sge = new SemgraphExtract(DATA + LANG + "/semgraph/semgraph-SRL.dat");
 
     // Make sure the encoding matches your input text (utf-8, iso-8859-15, ...)
@@ -67,7 +98,7 @@ public class SemGraph {
     ListSentence ls = sp.split(l);
     // copy sentences into a paragraph
     Document doc = new Document();
-    doc.pushBack(new Paragraph(ls));
+    doc.addLast(new Paragraph(ls));
     
     // Perform morphological analysis
     mf.analyze(doc);
@@ -82,15 +113,13 @@ public class SemGraph {
     sen.analyze(doc);
     dis.analyze(doc);
     
-    // Chunk parser
-    chunker.analyze(doc);
-    printResults(doc, "parsed" );
-
-    parser.completeParseTree(doc);
-    
-    // Dependency parser and SRL
-    depsrl.analyze(doc);
+    // dependency parsing and semantic role labeling
+    parser.analyze(doc);
     printResults(doc, "dep" );
+    srl.analyze(doc);
+
+    // correferences
+    corf.analyze(doc);
 
     // extract semgraph
     sge.extract(doc);
@@ -124,20 +153,6 @@ public class SemGraph {
 	  }
       }
     }
-    else if (format == "parsed") {
-      System.out.println();
-      System.out.println( "-------- CHUNKER results -----------" );
-
-      ListParagraphIterator pIt = new ListParagraphIterator(doc);
-      while (pIt.hasNext()) {
-	  ListSentenceIterator sIt = new ListSentenceIterator(pIt.next());
-	  while (sIt.hasNext()) {
-	      Sentence s = sIt.next();
-	      ParseTree tree = s.getParseTree();
-	      printParseTree( 0, tree );
-	  }
-      }
-    }
     else if (format == "dep") {
       System.out.println();
       System.out.println( "-------- DEPENDENCY PARSER results -----------" );
@@ -147,8 +162,10 @@ public class SemGraph {
 	  ListSentenceIterator sIt = new ListSentenceIterator(pIt.next());
 	  while (sIt.hasNext()) {
 	      Sentence s = sIt.next();
-	      DepTree tree = s.getDepTree();
-	      printDepTree( 0, tree);
+              if (s.isParsed()) {
+                  DepTree tree = s.getDepTree();
+                  printDepTree( 0, tree);
+              }
 	  }
       }
     }

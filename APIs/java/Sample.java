@@ -31,29 +31,43 @@ public class Sample {
     
     // Location of FreeLing configuration files.
     String DATA = FLDIR + "/share/freeling/";
+
+    //Uncomment these to activate FreeLing debugging traces
+    //Traces.setTraceLevel(5);
+    //BigInteger bi = new BigInteger("000F",16);
+    //Traces.setTraceModule(bi);
     
     // Init locales
     Util.initLocale( "default" );
 
     // Create options set for maco analyzer.
     String LANG = "en";
-    MacoOptions op = new MacoOptions( LANG );
 
-    //Uncomment these to activate FreeLing debugging traces
-    //Traces.setTraceLevel(5);
-    //BigInteger bi = new BigInteger("000F",16);
-    //Traces.setTraceModule(bi);
-        
-    
-    op.setDataFiles( "", 
-                     DATA + "common/punct.dat",
-                     DATA + LANG + "/dicc.src",
-                     DATA + LANG + "/afixos.dat",
-                     "",
-                     DATA + LANG + "/locucions.dat", 
-                     DATA + LANG + "/np.dat",
-                     DATA + LANG + "/quantities.dat",
-                     DATA + LANG + "/probabilitats.dat");
+    // define creation options for morphological analyzer modules
+    AnalyzerConfig op = new AnalyzerConfig();
+    op.getConfig_opt().setLang(LANG);
+    op.getConfig_opt().setMACO_PunctuationFile(DATA + "common/punct.dat");
+    op.getConfig_opt().setMACO_DictionaryFile(DATA + LANG + "/dicc.src");
+    op.getConfig_opt().setMACO_AffixFile(DATA + LANG + "/afixos.dat");
+    op.getConfig_opt().setMACO_CompoundFile(DATA + LANG + "/compounds.dat");
+    op.getConfig_opt().setMACO_LocutionsFile(DATA + LANG + "/locucions.dat");
+    op.getConfig_opt().setMACO_NPDataFile(DATA + LANG + "/np.dat");
+    op.getConfig_opt().setMACO_QuantitiesFile(DATA + LANG + "/quantities.dat");
+    op.getConfig_opt().setMACO_ProbabilityFile(DATA + LANG + "/probabilitats.dat");
+
+    // chose which modules among those available will be used by default
+    // (can be changed at each call if needed)
+    op.getInvoke_opt().setMACO_AffixAnalysis(true);
+    op.getInvoke_opt().setMACO_CompoundAnalysis(true);
+    op.getInvoke_opt().setMACO_MultiwordsDetection(true);
+    op.getInvoke_opt().setMACO_NumbersDetection(true);
+    op.getInvoke_opt().setMACO_PunctuationDetection(true );
+    op.getInvoke_opt().setMACO_DatesDetection(true);
+    op.getInvoke_opt().setMACO_QuantitiesDetection(true);
+    op.getInvoke_opt().setMACO_DictionarySearch(true);
+    op.getInvoke_opt().setMACO_ProbabilityAssignment(true);
+    op.getInvoke_opt().setMACO_NERecognition(true);
+    op.getInvoke_opt().setMACO_RetokContractions(true);
 
     // Create analyzers.
 
@@ -66,14 +80,14 @@ public class Sample {
     SWIGTYPE_p_splitter_status sid = sp.openSession();
 
     Maco mf = new Maco( op );
-    mf.setActiveOptions(false, true, true, true,  // select which among created 
-                        true, true, false, true,  // submodules are to be used. 
-                        true, true, true, true);  // default: all created submodules 
-                                                  // are used
 
-    HmmTagger tg = new HmmTagger( DATA + LANG + "/tagger.dat", true, 2 );
+    op.getConfig_opt().setTAGGER_HMMFile(DATA + LANG + "/tagger.dat");
+    op.getInvoke_opt().setTAGGER_Retokenize(true);
+    op.getInvoke_opt().setTAGGER_ForceSelect(ForceSelectStrategy.RETOK);
+    HmmTagger tg = new HmmTagger(op);
+    
     ChartParser parser = new ChartParser( DATA + LANG + "/chunker/grammar-chunk.dat" );
-
+    
     // Uncomment this for rule-based dependency parsing
     // DepTxala dep = new DepTxala( DATA + LANG + "/dep_txala/dependences.dat", parser.getStartSymbol() );
 
@@ -111,21 +125,17 @@ public class Sample {
 
       // Perform morphological analysis
       mf.analyze( ls );
-
       // Perform part-of-speech tagging.
       tg.analyze( ls );
-
       // Perform named entity (NE) classificiation.
       neclass.analyze( ls );
-
+      // word sense annotation and disambiguation
       sen.analyze( ls );
       dis.analyze( ls );
       printResults( ls, "tagged" );
-
       // Chunk parser
       parser.analyze( ls );
       printResults( ls, "parsed" );
-
       // Dependency parser
       dep.analyze( ls );
       printResults( ls, "dep" );
