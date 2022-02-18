@@ -570,6 +570,7 @@ namespace freeling {
 
   void dep_lstm::analyze(freeling::sentence &sent) const {
 
+    TRACE(3,L"Analyzing sentence.");
     vector<unsigned> wordids, tagids;
     vector<wstring> unkwords;
 
@@ -606,7 +607,9 @@ namespace freeling {
 
     // convert output vector of deps and rels to freeling::dep_tree
     lstm2FL(sent, deps, rels);
-  }
+
+    TRACE(3,L"Sentence analyzed.");
+}
 
 
   ////////////////////////////////////////////////////////////////
@@ -617,6 +620,7 @@ namespace freeling {
                             const map<int,int> &deps,  
                             const map<int,wstring> &rels) const {
 
+    TRACE(4,L"Converting LSTM output to FL format.");
     // init variables and auxiliary structures
     int num_tokens = fl_sentence.size();
     vector<wstring> labels(num_tokens+1, L"unknown");
@@ -662,6 +666,7 @@ namespace freeling {
 
     // free temporal memory
     dt->clear();
+    TRACE(4,L"Conversion successful.");
   }
 
 
@@ -674,6 +679,7 @@ namespace freeling {
                                                const vector<wstring> &labels,
                                                freeling::sentence &fl_sentence) const {
   
+    TRACE(5,L"converting dep_tree @node "<<node_id);
     //  Get function label
     wstring str_label = labels[node_id];
 

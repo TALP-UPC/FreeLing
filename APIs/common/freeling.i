@@ -685,6 +685,9 @@ class parse_tree : public tree<freeling::node> {
     /// obtain position of head word of a parse_tree (or -1 if no head)
     static int get_head_position(parse_tree::const_iterator pt);
 
+    /// print a parse tree (debugging purposes mainly)
+    static void PrintTree(parse_tree::const_iterator n, int k, int depth);
+
     /// C-commands
     ///    1 - pt1 does not dominate pt2
     ///    2 - pt2 does not dominate pt1
@@ -740,6 +743,9 @@ class dep_tree :  public tree<freeling::depnode> {
     static size_t get_first_word(dep_tree::const_iterator);
     static size_t get_last_word(dep_tree::const_iterator);
 
+    /// print a dependency tree (debugging purposes mainly)
+    static void PrintDepTree(dep_tree::const_iterator n, int depth);
+    
     // explicit inheritance from tree<depnode>, to help SWIG
     dep_tree& nth_child_ref(unsigned int);
 };

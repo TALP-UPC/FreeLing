@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 import java.io.File;
+import java.math.*;
 
 import edu.upc.Jfreeling.*;
 
@@ -34,6 +35,11 @@ public class SemGraph {
     String LANG = "en";
 
     Util.initLocale( "default" );
+
+    // Uncomment these to activate FreeLing debugging traces
+    //Traces.setTraceLevel(5);
+    //BigInteger bi = new BigInteger("000F",16);
+    //Traces.setTraceModule(bi);
 
     // Create options set for maco analyzer.
     // Default values are Ok, except for data files.
@@ -162,10 +168,8 @@ public class SemGraph {
 	  ListSentenceIterator sIt = new ListSentenceIterator(pIt.next());
 	  while (sIt.hasNext()) {
 	      Sentence s = sIt.next();
-              if (s.isParsed()) {
-                  DepTree tree = s.getDepTree();
-                  printDepTree( 0, tree);
-              }
+              DepTree tree = s.getDepTree();
+              printDepTree( 0, tree);
 	  }
       }
     }
@@ -250,7 +254,7 @@ public class SemGraph {
     }
 
     System.out.print(
-      tr.begin().getLink().getLabel() + "/" +
+      tr.begin().getLabel() + "/" +
       tr.begin().getLabel() + "/" );
 
     Word w = tr.begin().getWord();
