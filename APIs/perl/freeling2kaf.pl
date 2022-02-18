@@ -2,7 +2,7 @@
 
 use FindBin qw($Bin);
 use lib $Bin;
-use freeling;
+use plfreeling;
 use strict;
 use XML::LibXML;
 use File::Basename;
@@ -11,10 +11,17 @@ use File::Basename;
 
 # TODO: use configuration file for all this settings
 #       IDEA: use 'analyzer.cfg' from analyze
-# TODO: have to know where freeling.so is!
+# TODO: have to know where plfreeling.so is!
 
-## Modify this line to be your FreeLing installation directory
-my $FREELINGDIR = "/usr/local";
+## Modify this line to be your Plfreeling installation directory
+my $FREELINGDIR;
+if ($ENV{'FREELINGDIR'} eq "") {
+    print "FREELINGDIR not defined, using /usr/local";
+    $FREELINGDIR = "/usr/local";
+}
+else {
+    $FREELINGDIR = $ENV{'FREELINGDIR'};
+}
 
 my $DATA = $FREELINGDIR."/share/freeling/";
 my $LANG = "es";
@@ -48,7 +55,7 @@ sub loc_cfg_file {
 	   "${DATA}${LANG}", "${DATA}");
 
   foreach my $dir (@F) {
-    return $dir."/$str" if -e $dir."/$str";
+      return $dir."/$str" if -e $dir."/$str";
   }
   die "No $str found in the following directories:\n".join(" ", @F)."\n";
 }
@@ -73,42 +80,54 @@ sub Freeling_CreateAnalyzers {
   $loc{"dependences"} = &loc_cfg_file("dep_txala/dependences.dat");
 
   # uncomment to trace FreeLing (if it was compiled with --enable-traces)
-  #$freeling::traces::TraceLevel=4;
-  #$freeling::traces::TraceModule=0x00000040;
+  #$plfreeling::traces::TraceLevel=4;
+  #$plfreeling::traces::TraceModule=0x00000040;
 
-  freeling::util::init_locale("default");
+  plfreeling::util::init_locale("default");
 
-  # create options set for maco analyzer. Default values are Ok, except for data files.
-  my $op=new freeling::maco_options("es");
+  # create options set for maco analyzer. 
+  my $op = new plfreeling::analyzer_config();
 
-  $op->set_data_files("",                                        # UserMapFile
-		      $loc{"punct"},				 # PunctuationFile
-		      $loc{"dicc"},				 # DictionaryFile
-		      $loc{"afixos"},				 # AffixFile
-                      "",
-		      $loc{"locucions"},                         # LocutionsFile
-		      $loc{"np"},				 # NPDataFile
-		      $loc{"quantities"},			 # QuantitiesFile
-		      $loc{"probabilitats"}			 # ProbabilityFile
-                     );
-
+  # define creation options for morphological analyzer modules
+  $op->swig_config_opt_get()->swig_Lang_set($LANG);
+  $op->swig_config_opt_get()->swig_MACO_PunctuationFile_set($DATA."common/punct.dat");
+  $op->swig_config_opt_get()->swig_MACO_DictionaryFile_set($DATA.$LANG."/dicc.src");
+  $op->swig_config_opt_get()->swig_MACO_AffixFile_set($DATA.$LANG."/afixos.dat" );
+  $op->swig_config_opt_get()->swig_MACO_CompoundFile_set($DATA.$LANG."/compounds.dat" );
+  $op->swig_config_opt_get()->swig_MACO_LocutionsFile_set($DATA.$LANG."/locucions.dat");
+  $op->swig_config_opt_get()->swig_MACO_NPDataFile_set($DATA.$LANG."/np.dat");
+  $op->swig_config_opt_get()->swig_MACO_QuantitiesFile_set($DATA.$LANG."/quantities.dat");
+  $op->swig_config_opt_get()->swig_MACO_ProbabilityFile_set($DATA.$LANG."/probabilitats.dat");
+  
+  # chose which modules among those available will be used by default
+  # (can be changed at each call if needed)
+  $op->swig_invoke_opt_get()->swig_MACO_AffixAnalysis_set(1);
+  $op->swig_invoke_opt_get()->swig_MACO_CompoundAnalysis_set(1);
+  $op->swig_invoke_opt_get()->swig_MACO_MultiwordsDetection_set(1);
+  $op->swig_invoke_opt_get()->swig_MACO_NumbersDetection_set(1);
+  $op->swig_invoke_opt_get()->swig_MACO_PunctuationDetection_set(1 );
+  $op->swig_invoke_opt_get()->swig_MACO_DatesDetection_set(1);
+  $op->swig_invoke_opt_get()->swig_MACO_QuantitiesDetection_set(1);
+  $op->swig_invoke_opt_get()->swig_MACO_DictionarySearch_set(1);
+  $op->swig_invoke_opt_get()->swig_MACO_ProbabilityAssignment_set(1);
+  $op->swig_invoke_opt_get()->swig_MACO_NERecognition_set(1);
+  $op->swig_invoke_opt_get()->swig_MACO_RetokContractions_set(1);
+  
   # create analyzers
-  $tk = new freeling::tokenizer($loc{"tokenizer"});
-  $sp = new freeling::splitter($loc{"splitter"});
-  $morfo = new freeling::maco($op);
-  $morfo->set_active_options(0, 1, 1, 1,   # select which among created 
-                             1, 1, 0, 1,   # submodules are to be used. 
-                             1, 1, 1, 1);  # default: all created submodules are used
-
+  $tk = new plfreeling::tokenizer($loc{"tokenizer"});
+  $sp = new plfreeling::splitter($loc{"splitter"});
+  $morfo = new plfreeling::maco($op);
 
   ## exchange comments in two following lines to change the tagger type used
-  $tagger = new freeling::hmm_tagger($loc{"tagger"},1,2);
-  #my $tagger=new freeling::relax_tagger($loc{"constr_gram"}, 500,670.0,0.001, 1,2);
-
+  $op->swig_config_opt_get()->swig_TAGGER_HMMFile_set($loc{"tagger"});
+  $op->swig_invoke_opt_get()->swig_TAGGER_Retokenize_set(1);
+  $op->swig_invoke_opt_get()->swig_TAGGER_ForceSelect_set(2);
+  $tagger=new plfreeling::hmm_tagger($op);
+  
   # create chunker
-  $parser = new freeling::chart_parser($loc{"grammar-chunk"});
+  $parser = new plfreeling::chart_parser($loc{"grammar-chunk"});
   # create dependency parser
-  $dep = new freeling::dep_txala($loc{"dependences"}, $parser->get_start_symbol());
+  $dep = new plfreeling::dep_txala($loc{"dependences"}, $parser->get_start_symbol());
 
   # could be a
   # return ($tk, $sp, $morfo, $tagger, $parser, $dep);
@@ -122,10 +141,10 @@ sub Freeling_AnalyzeSentence {
 ## read input text and analyze it.
   my $l = $tk->tokenize($str);	# tokenize
   my $ls = $sp->split($l,0);	# split sentences
-  $ls = $morfo->analyze($ls);	# morphological analysis
-  $ls = $tagger->analyze($ls);	# PoS tagging
-  $ls = $parser->analyze($ls);
-  $ls = $dep->analyze($ls);
+  $ls = $morfo->analyze_sentence_list($ls);	# morphological analysis
+  $ls = $tagger->analyze_sentence_list($ls);	# PoS tagging
+  $ls = $parser->analyze_sentence_list($ls);
+  $ls = $dep->analyze_sentence_list($ls);
 
   return $ls;
 }
@@ -480,8 +499,8 @@ sub process_doc {
     ## read input text and analyze it.
     my $l = $tk->tokenize($par);    # tokenize
     my $ls = $sp->split($sid,$l,0);	    # split sentences
-    $ls = $morfo->analyze($ls);     # morphological analysis
-    $ls = $tagger->analyze($ls);    # PoS tagging
+    $ls = $morfo->analyze_sentence_list($ls);     # morphological analysis
+    $ls = $tagger->analyze_sentence_list($ls);    # PoS tagging
 
     #&printSent($ls);
 
@@ -495,13 +514,13 @@ sub process_doc {
       	&add_term_element($w, \@wids, $ctrl);
       }
     }
-    $ls = $parser->analyze($ls);	# Chunking
+    $ls = $parser->analyze_sentence_list($ls);	# Chunking
     #&printTree($ls);
     foreach my $sent (@{ $ls }) {
       &add_chunks($sent->get_parse_tree()->begin(), $ctrl);
     }
 
-    $ls = $dep->analyze($ls); # Dependency
+    $ls = $dep->analyze_sentence_list($ls); # Dependency
     #&printDepTree($ls);
     foreach my $sent (@{ $ls }) {
       &add_deps($sent->get_dep_tree()->begin(), "", $ctrl);

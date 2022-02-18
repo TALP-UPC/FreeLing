@@ -6,7 +6,7 @@ use strict;
 
 ## Init library locale, to properly handle UTF8 characters.
 plfreeling::util::init_locale("default");
-    
+
 my $FREELINGDIR;
 if ($ENV{'FREELINGDIR'} eq "") {
     print "FREELINGDIR not defined, using /usr/local";
@@ -16,39 +16,56 @@ else {
     $FREELINGDIR = $ENV{'FREELINGDIR'};
 }
 
+# uncomment to trace FreeLing (if it was compiled with -DTRACES=ON)
+#$plfreeling::traces::TraceLevel=4;
+#$plfreeling::traces::TraceModule=0xFFFF;
+
 ## Modify this line to be your FreeLing installation directory
 my $DATA = $FREELINGDIR."/share/freeling/";
 my $LANG = "es";
 
-# create options set for maco analyzer. Default values are Ok, except for data files.
-my $op=new plfreeling::maco_options("es");
-$op->set_data_files( "", 
-                   $DATA."common/punct.dat",
-                   $DATA.$LANG."/dicc.src",
-                   $DATA.$LANG."/afixos.dat",
-                   "",
-                   $DATA.$LANG."/locucions.dat", 
-                   $DATA.$LANG."/np.dat",
-                   $DATA.$LANG."/quantities.dat",
-                   $DATA.$LANG."/probabilitats.dat");
+# create options set for maco analyzer. 
+my $op = new plfreeling::analyzer_config();
 
-# uncomment to trace FreeLing (if it was compiled with --enable-traces)
-#$plfreeling::traces::TraceLevel=4;
-#$plfreeling::traces::TraceModule=0xFFFF;
+# define creation options for morphological analyzer modules
+$op->swig_config_opt_get()->swig_Lang_set($LANG);
+$op->swig_config_opt_get()->swig_MACO_PunctuationFile_set($DATA."common/punct.dat");
+$op->swig_config_opt_get()->swig_MACO_DictionaryFile_set($DATA.$LANG."/dicc.src");
+$op->swig_config_opt_get()->swig_MACO_AffixFile_set($DATA.$LANG."/afixos.dat" );
+$op->swig_config_opt_get()->swig_MACO_CompoundFile_set($DATA.$LANG."/compounds.dat" );
+$op->swig_config_opt_get()->swig_MACO_LocutionsFile_set($DATA.$LANG."/locucions.dat");
+$op->swig_config_opt_get()->swig_MACO_NPDataFile_set($DATA.$LANG."/np.dat");
+$op->swig_config_opt_get()->swig_MACO_QuantitiesFile_set($DATA.$LANG."/quantities.dat");
+$op->swig_config_opt_get()->swig_MACO_ProbabilityFile_set($DATA.$LANG."/probabilitats.dat");
+
+# chose which modules among those available will be used by default
+# (can be changed at each call if needed)
+$op->swig_invoke_opt_get()->swig_MACO_AffixAnalysis_set(1);
+$op->swig_invoke_opt_get()->swig_MACO_CompoundAnalysis_set(1);
+$op->swig_invoke_opt_get()->swig_MACO_MultiwordsDetection_set(1);
+$op->swig_invoke_opt_get()->swig_MACO_NumbersDetection_set(1);
+$op->swig_invoke_opt_get()->swig_MACO_PunctuationDetection_set(1 );
+$op->swig_invoke_opt_get()->swig_MACO_DatesDetection_set(1);
+$op->swig_invoke_opt_get()->swig_MACO_QuantitiesDetection_set(1);
+$op->swig_invoke_opt_get()->swig_MACO_DictionarySearch_set(1);
+$op->swig_invoke_opt_get()->swig_MACO_ProbabilityAssignment_set(1);
+$op->swig_invoke_opt_get()->swig_MACO_NERecognition_set(1);
+$op->swig_invoke_opt_get()->swig_MACO_RetokContractions_set(1);
+
 
 # create analyzers
 my $tk=new plfreeling::tokenizer($DATA.$LANG."/tokenizer.dat");
 my $sp=new plfreeling::splitter($DATA.$LANG."/splitter.dat");
 my $sid=$sp->open_session();
+
 my $mf=new plfreeling::maco($op);
-$mf->set_active_options(0, 1, 1, 1,   # select which among created 
-                        1, 1, 0, 1,   # submodules are to be used. 
-                        1, 1, 1, 1);  # default: all created submodules 
-                                      # are used
 
 ## exchange comments in two following lines to change the tagger type used
-my $tg=new plfreeling::hmm_tagger($DATA.$LANG."/tagger.dat",1,2);
-#my $tg=new plfreeling::relax_tagger($DATA."es/constr_gram.dat", 500,670.0,0.001, 1,2);
+
+$op->swig_config_opt_get()->swig_TAGGER_HMMFile_set($DATA.$LANG."/tagger.dat");
+$op->swig_invoke_opt_get()->swig_TAGGER_Retokenize_set(1);
+$op->swig_invoke_opt_get()->swig_TAGGER_ForceSelect_set(2);
+my $tg=new plfreeling::hmm_tagger($op);
 
 my $nc=new plfreeling::nec($DATA.$LANG."/nerc/nec/nec-ab-poor1.dat");
 
@@ -62,16 +79,18 @@ while (<STDIN>) {
   chomp;
   my $l = $tk->tokenize($_);	# tokenize
   my $ls = $sp->split($sid,$l,0);  # split sentences
-  $ls=$mf->analyze($ls);	# morphological analysis
-  $ls=$tg->analyze($ls);	# PoS tagging
-  $ls=$nc->analyze($ls);       # NE classification
 
+  $ls=$mf->analyze_sentence_list($ls);	# morphological analysis
+  $ls=$tg->analyze_sentence_list($ls);	# PoS tagging
+  $ls=$nc->analyze_sentence_list($ls);  # NE classification
   print "** print tagged Sentence\n";
   &printSent($ls);
-  $ls = $parser->analyze($ls);
+
+  $ls = $parser->analyze_sentence_list($ls);
   print "** print shallow Tree\n";
   &printTree($ls);
-  $ls = $dep->analyze($ls);
+
+  $ls = $dep->analyze_sentence_list($ls);
   print "** print Dependency Tree\n";
   &printDepTree($ls);
 }
