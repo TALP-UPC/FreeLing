@@ -104,6 +104,7 @@ namespace freeling {
       w.set_analyzed_by(word::USERMAP);
       // prevent any other module from reinterpreting this.
       w.lock_analysis();
+      w.lock_multiwords();
     }
   }
 
