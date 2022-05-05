@@ -122,11 +122,11 @@
 *.VAG<haber>.VMP00SF
 *.VAG<haber>.VMP00PF
 *.VAG<haber>.VMP00PM
-*.VMI<estar>.VMG
-*.VMS<estar>.VMG
-*.VMM<estar>.VMG
-*.VMN<estar>.VMG
-*.VMP<estar>.VMG
+##*.VMI<estar>.VMG   ## commented because "haber estado" is tagged as VAI-VMP in training data
+##*.VMS<estar>.VMG
+##*.VMM<estar>.VMG
+##*.VMN<estar>.VMG
+##*.VMP<estar>.VMG
 *.DD.VAI
 *.DD.VAM
 *.DD.VAS
