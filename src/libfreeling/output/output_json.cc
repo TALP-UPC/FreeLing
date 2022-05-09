@@ -129,6 +129,43 @@ void output_json::PrintResults (wostream &sout, const list<sentence> &ls) const 
    sout << endl;
 }
 
+
+//---------------------------------------------
+// auxiliary to print one word analysis in json
+//---------------------------------------------
+void output_json::print_analysis(wostream &sout, const analysis &a, bool print_sel_status, bool print_probs) const {
+
+  wstring lemma = a.get_lemma();
+  wstring tag = a.get_tag();
+  sout << L" \"lemma\" : \"" << escapeJSON(lemma) << L"\"";
+  sout << L", \"tag\" : \"" << tag << L"\"";
+  
+  if (Tags!=NULL) {
+    if (lemma.find(L"+")!=wstring::npos) { // is a retokenizable analysis
+      list<wstring> tgs=util::wstring2list(tag,L"+");
+      wstring shtag,msd;
+      for (list<wstring>::const_iterator t=tgs.begin(); t!=tgs.end(); t++) {
+	shtag += L"+" + Tags->get_short_tag(*t);
+	msd += L"+" + Tags->get_msd_string(*t);
+      }
+      sout << L", \"ctag\" : \"" << shtag.substr(1) << L"\"";
+      sout << L", \"msd\" : \"" << msd.substr(1) << L"\"";
+    }
+    
+    else { // not retokenizable
+      sout << L", \"ctag\" : \"" << Tags->get_short_tag(tag) << L"\"";
+      list<pair<wstring,wstring> > feats = Tags->get_msd_features(tag);
+      for (list<pair<wstring,wstring> >::iterator f=feats.begin(); f!=feats.end(); f++) 
+	sout << L", \"" << f->first << L"\" : \"" << f->second << "\"";
+    }
+  }
+
+  if (print_probs and a.get_prob()>=0) sout << L", \"prob\" : \"" << a.get_prob() << "\"";
+  if (print_sel_status and a.is_selected()) sout << L", \"selected\" : \"1\"";
+
+}
+
+  
 //---------------------------------------------
 // print sentences in list
 //---------------------------------------------
@@ -165,87 +202,96 @@ void output_json::PrintSentences (wostream &sout, const list<sentence> &ls) cons
         continue;
       }
 
-      // morpho & tagger stuff
-      wstring lemma,tag;
-      if (w->selected_begin(best)->is_retokenizable()) {
-        const list <word> &rtk = w->selected_begin(best)->get_retokenizable();
-        list <analysis> la=compute_retokenization(rtk, rtk.begin(), L"", L"");
-        lemma = la.begin()->get_lemma();
-        tag = la.begin()->get_tag();
-      }
-      else {
-        lemma = w->get_lemma(best);
-        tag = w->get_tag(best);
-      }      
-      sout << L", \"lemma\" : \"" << escapeJSON(lemma) << L"\"";
-      sout << L", \"tag\" : \"" << tag << L"\"";
-
-      if (Tags!=NULL) {
-        if (lemma.find(L"+")!=wstring::npos) { // is a retokenizable analysis
-          list<wstring> tgs=util::wstring2list(tag,L"+");
-          wstring shtag,msd;
-          for (list<wstring>::const_iterator t=tgs.begin(); t!=tgs.end(); t++) {
-            shtag += L"+" + Tags->get_short_tag(*t);
-            msd += L"+" + Tags->get_msd_string(*t);
-          }
-          sout << L", \"ctag\" : \"" << shtag.substr(1) << L"\"";
-          sout << L", \"msd\" : \"" << msd.substr(1) << L"\"";
-        }
-        
-        else { // not retokenizable
-          sout << L", \"ctag\" : \"" << Tags->get_short_tag(tag) << L"\"";
-          list<pair<wstring,wstring> > feats = Tags->get_msd_features(tag);
-          for (list<pair<wstring,wstring> >::iterator f=feats.begin(); f!=feats.end(); f++) 
-            sout << L", \"" << f->first << L"\" : \"" << f->second << "\"";
-        }
-      }
-
-      // NEC output, if any
-      wstring nec=L"";
-      if (w->get_tag(best)==L"NP00SP0") nec=L"PER";
-      else if (w->get_tag(best)==L"NP00G00") nec=L"LOC";
-      else if (w->get_tag(best)==L"NP00O00") nec=L"ORG";
-      else if (w->get_tag(best)==L"NP00V00") nec=L"MISC";
-      if (not nec.empty()) sout << L", \"nec\" : \"" << nec << L"\"";
-      
-      // WSD output, if any
-      if (not w->get_senses(best).empty()) sout << L", \"wn\" : \"" << w->get_senses(best).begin()->first << L"\"";
-
-      if (AllAnalysis) {
-        sout << L","<<endl;
-        sout << "             \"analysis\" : [" <<endl;
-        for (word::const_iterator a=w->begin(); a!=w->end(); a++) {
-          if (a!=w->begin()) sout << L"," << endl;
-          sout << L"                    { \"lemma\" : \"" <<  escapeJSON(a->get_lemma()) << L"\"";
-          sout << L", \"tag\" : \"" << a->get_tag() << "\"";
-          if (Tags!=NULL) {
-            sout << L", \"ctag\" : \"" << Tags->get_short_tag(a->get_tag()) << L"\"";
-            list<pair<wstring,wstring> > feats = Tags->get_msd_features(a->get_tag());
-            for (list<pair<wstring,wstring> >::iterator f=feats.begin(); f!=feats.end(); f++) 
-              sout << L", \"" << f->first << L"\" : \"" << f->second << "\"";
-          }
-          if (a->is_selected()) sout << L", \"selected\" : \"1\"";
-          sout << L"}";         
-        }
-        sout << L"]";
-      }
-
-      if (AllSenses and not w->get_senses(best).empty()) {
+      if (not s->is_tagged()) {
+        // morpho output (all analysis)
         sout << L"," << endl;
-        sout << "             \"senses\" : [" <<endl;
-        for (list<pair<wstring,double> >::const_iterator s=w->get_senses(best).begin(); s!=w->get_senses(best).end(); s++) {
-          if (s!=w->get_senses(best).begin()) sout << L"," << endl;
-          sout << L"                    { \"wn\" : \"" << s->first << L"\"";
-          if (s->second!=0) sout << L", \"pgrank\" : \"" << s->second << "\"";
-          sout << L"}";         
+        sout << "             \"analysis\" : [" << endl;
+        for (word::const_iterator a=w->begin(); a!=w->end(); a++) {
+          if (a->is_retokenizable()) {
+            const list <word> &rtk = a->get_retokenizable();
+            list <analysis> la=compute_retokenization(rtk, rtk.begin(), L"", L"");
+            for (list<analysis>::iterator aa=la.begin(); aa!=la.end(); aa++) {
+              double p=a->get_prob();
+              if (p>=0) aa->set_prob(p/la.size());
+              else aa->set_prob(-1.0);
+              sout << L"    {";
+              print_analysis(sout,*aa,false,true);
+              sout << " }";
+            }
+          }
+          else {
+            sout << L"                 {";
+            print_analysis(sout,*a,false,true);
+            sout << " }";
+          }
+	  auto b = a;
+	  if (++b != w->end()) sout << L",";
+	  sout << endl;
         }
-        sout << L"]";
+        sout << L"             ]" ;
       }
-
+      
+      else {
+	//  tagger output
+	wstring lemma,tag;
+	if (w->selected_begin(best)->is_retokenizable()) {
+	  const list <word> &rtk = w->selected_begin(best)->get_retokenizable();
+	  list <analysis> la=compute_retokenization(rtk, rtk.begin(), L"", L"");
+          sout << L", ";
+	  print_analysis(sout,*(la.begin()),false,false);
+        }
+        else {
+          sout << L", ";
+          print_analysis(sout,*(w->selected_begin(best)),false,false);
+	}
+	
+	// NEC output, if any
+	wstring nec=L"";
+	if (w->get_tag(best)==L"NP00SP0") nec=L"PER";
+	else if (w->get_tag(best)==L"NP00G00") nec=L"LOC";
+	else if (w->get_tag(best)==L"NP00O00") nec=L"ORG";
+	else if (w->get_tag(best)==L"NP00V00") nec=L"MISC";
+	if (not nec.empty()) sout << L", \"nec\" : \"" << nec << L"\"";
+	
+	// WSD output, if any
+	if (not w->get_senses(best).empty()) sout << L", \"wn\" : \"" << w->get_senses(best).begin()->first << L"\"";
+	
+	if (AllAnalysis) {
+	  sout << L","<<endl;
+	  sout << "             \"analysis\" : [" <<endl;
+	  for (word::const_iterator a=w->begin(); a!=w->end(); a++) {
+	    if (a!=w->begin()) sout << L"," << endl;
+	    sout << L"                    { \"lemma\" : \"" <<  escapeJSON(a->get_lemma()) << L"\"";
+	    sout << L", \"tag\" : \"" << a->get_tag() << "\"";
+	    if (Tags!=NULL) {
+	      sout << L", \"ctag\" : \"" << Tags->get_short_tag(a->get_tag()) << L"\"";
+	      list<pair<wstring,wstring> > feats = Tags->get_msd_features(a->get_tag());
+	      for (list<pair<wstring,wstring> >::iterator f=feats.begin(); f!=feats.end(); f++) 
+		sout << L", \"" << f->first << L"\" : \"" << f->second << "\"";
+	    }
+	    if (a->is_selected()) sout << L", \"selected\" : \"1\"";
+	    sout << L"}";         
+	  }
+	  sout << L"]";
+	}
+	
+	if (AllSenses and not w->get_senses(best).empty()) {
+	  sout << L"," << endl;
+	  sout << "             \"senses\" : [" <<endl;
+	  for (list<pair<wstring,double> >::const_iterator s=w->get_senses(best).begin(); s!=w->get_senses(best).end(); s++) {
+	    if (s!=w->get_senses(best).begin()) sout << L"," << endl;
+	    sout << L"                    { \"wn\" : \"" << s->first << L"\"";
+	    if (s->second!=0) sout << L", \"pgrank\" : \"" << s->second << "\"";
+	    sout << L"}";         
+	  }
+	  sout << L"]";
+	}
+      }
       sout << L"}";
     }
     sout << L"]";
-
+    
+    
     // print parse tree, if any
     if (s->is_parsed()) {
       sout << L"," << endl;

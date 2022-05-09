@@ -56,6 +56,7 @@ namespace freeling {
       bool AllSenses;
       bool AllAnalysis;
 
+      void print_analysis(std::wostream &sout, const freeling::analysis &a, bool print_sel_status, bool print_probs) const;
       void PrintSentences (std::wostream &sout, const std::list<freeling::sentence> &ls) const;
       void PrintTreeJSON (std::wostream &sout, const std::wstring &sid,
                           freeling::parse_tree::const_iterator n, int depth) const;
