@@ -29,7 +29,7 @@ if(BUILD_TESTS)
 endif()
 
 install(DIRECTORY include/ DESTINATION include
-        FILES_MATCHING PATTERN "*.h"
+        FILES_MATCHING PATTERN "*.h*"
         PATTERN "coref.h" EXCLUDE
         PATTERN "coref_fex.h" EXCLUDE)
 

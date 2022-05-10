@@ -45,6 +45,7 @@ using namespace freeling::io;
 #define MOD_TRACENAME L"OUTPUT_JSON"
 #define MOD_TRACECODE OUTPUT_TRACE
 
+using namespace jsn;
 
 //---------------------------------------------
 // Constructor
@@ -121,24 +122,17 @@ output_json::~output_json() {}
 
 
 //---------------------------------------------
-// print obtained analysis in json
-//---------------------------------------------
-
-void output_json::PrintResults (wostream &sout, const list<sentence> &ls) const {
-   PrintSentences(sout,ls);
-   sout << endl;
-}
-
-
-//---------------------------------------------
 // auxiliary to print one word analysis in json
 //---------------------------------------------
-void output_json::print_analysis(wostream &sout, const analysis &a, bool print_sel_status, bool print_probs) const {
 
+jsn::ordered_json output_json::json_analysis(const analysis &a, bool print_sel_status, bool print_probs) const {
+
+  jsn::ordered_json an;
   wstring lemma = a.get_lemma();
   wstring tag = a.get_tag();
-  sout << L" \"lemma\" : \"" << escapeJSON(lemma) << L"\"";
-  sout << L", \"tag\" : \"" << tag << L"\"";
+
+  an["lemma"] = util::wstring2string(lemma);
+  an["tag"] = util::wstring2string(tag); 
   
   if (Tags!=NULL) {
     if (lemma.find(L"+")!=wstring::npos) { // is a retokenizable analysis
@@ -148,21 +142,22 @@ void output_json::print_analysis(wostream &sout, const analysis &a, bool print_s
 	shtag += L"+" + Tags->get_short_tag(*t);
 	msd += L"+" + Tags->get_msd_string(*t);
       }
-      sout << L", \"ctag\" : \"" << shtag.substr(1) << L"\"";
-      sout << L", \"msd\" : \"" << msd.substr(1) << L"\"";
+      an["ctag"] = jsn::json(util::wstring2string(shtag.substr(1)));
+      an["msd"] = jsn::json(util::wstring2string(msd.substr(1)));
     }
     
     else { // not retokenizable
-      sout << L", \"ctag\" : \"" << Tags->get_short_tag(tag) << L"\"";
+      an["ctag"] = jsn::json(util::wstring2string(Tags->get_short_tag(tag)));
       list<pair<wstring,wstring> > feats = Tags->get_msd_features(tag);
       for (list<pair<wstring,wstring> >::iterator f=feats.begin(); f!=feats.end(); f++) 
-	sout << L", \"" << f->first << L"\" : \"" << f->second << "\"";
+	an[freeling::util::wstring2string(f->first)] = jsn::json(util::wstring2string(f->second));
     }
   }
 
-  if (print_probs and a.get_prob()>=0) sout << L", \"prob\" : \"" << a.get_prob() << "\"";
-  if (print_sel_status and a.is_selected()) sout << L", \"selected\" : \"1\"";
+  if (print_probs and a.get_prob()>=0) an["prob"] = jsn::json(a.get_prob());
+  if (print_sel_status and a.is_selected()) an["selected"] = jsn::json(true);
 
+  return an;
 }
 
   
@@ -170,42 +165,38 @@ void output_json::print_analysis(wostream &sout, const analysis &a, bool print_s
 // print sentences in list
 //---------------------------------------------
 
-void output_json::PrintSentences (wostream &sout, const list<sentence> &ls) const {
+jsn::ordered_json output_json::json_Sentences (const list<sentence> &ls) const {
 
-  if (ls.empty()) return;
-
-  sout<<L"   { \"sentences\" : [" << endl;
+  
+  jsn::ordered_json sentlist = json::array();
+  if (ls.empty()) return sentlist;
+    
   for (list<sentence>::const_iterator s=ls.begin(); s!=ls.end(); s++) {
-
+    
     if (s->empty()) continue;
-    if (s!=ls.begin()) sout << L", " << endl;
-
+    
     int best = s->get_best_seq();
     
-    sout << L"      { \"id\":\"" << s->get_sentence_id() << L"\"," << endl;
-    sout << L"        \"tokens\" : [" << endl;    
+    jsn::ordered_json sent;
+    sent["id"] = jsn::json(util::wstring2string(s->get_sentence_id()));
+    jsn::ordered_json tokens = json::array();
+    
     for (sentence::const_iterator w=s->begin(); w!=s->end(); w++) {
-
-      if (w!=s->begin()) sout << L"," << endl;
-
       // basic token stuff
-      sout << L"           { \"id\" : \"" << get_token_id(s->get_sentence_id(),w->get_position()+1) << L"\"";
-      sout << L", \"begin\" : \"" << w->get_span_start() << L"\"";
-      sout << L", \"end\" : \"" << w->get_span_finish() << L"\"";
-      sout << L", \"form\" : \"" << escapeJSON(w->get_form()) << L"\"";
+      jsn::ordered_json token;
+      token["id"] = jsn::json(util::wstring2string(get_token_id(s->get_sentence_id(),w->get_position()+1)));
+      token["begin"] = jsn::json(int(w->get_span_start()));
+      token["end"] = jsn::json(int(w->get_span_finish()));
+      token["form"] = jsn::json(util::wstring2string(w->get_form()));
       if (not w->get_ph_form().empty())
-         sout << L", \"phon\" : \"" << escapeJSON(w->get_ph_form()) << L"\"";
-
-      // no analysis, nothing else to print
-      if (w->empty()) {
-        sout << L"}";
-        continue;
-      }
+	token["phon"] = jsn::json(util::wstring2string(w->get_ph_form()));
+      
+      // no analysis, nothing else to add
+      if (w->empty()) continue;
 
       if (not s->is_tagged()) {
         // morpho output (all analysis)
-        sout << L"," << endl;
-        sout << "             \"analysis\" : [" << endl;
+	jsn::ordered_json anlist = json::array();	
         for (word::const_iterator a=w->begin(); a!=w->end(); a++) {
           if (a->is_retokenizable()) {
             const list <word> &rtk = a->get_retokenizable();
@@ -214,35 +205,30 @@ void output_json::PrintSentences (wostream &sout, const list<sentence> &ls) cons
               double p=a->get_prob();
               if (p>=0) aa->set_prob(p/la.size());
               else aa->set_prob(-1.0);
-              sout << L"    {";
-              print_analysis(sout,*aa,false,true);
-              sout << " }";
+              anlist.push_back(json_analysis(*aa,false,true));
             }
           }
           else {
-            sout << L"                 {";
-            print_analysis(sout,*a,false,true);
-            sout << " }";
+	    anlist.push_back(json_analysis(*a,false,true));
           }
-	  auto b = a;
-	  if (++b != w->end()) sout << L",";
-	  sout << endl;
         }
-        sout << L"             ]" ;
+	token["analysis"] = anlist;
       }
       
       else {
 	//  tagger output
-	wstring lemma,tag;
+	jsn::ordered_json an;
 	if (w->selected_begin(best)->is_retokenizable()) {
 	  const list <word> &rtk = w->selected_begin(best)->get_retokenizable();
 	  list <analysis> la=compute_retokenization(rtk, rtk.begin(), L"", L"");
-          sout << L", ";
-	  print_analysis(sout,*(la.begin()),false,false);
+	  an = json_analysis(*(la.begin()),false,false);
         }
         else {
-          sout << L", ";
-          print_analysis(sout,*(w->selected_begin(best)),false,false);
+          an = json_analysis(*(w->selected_begin(best)),false,false);
+	}
+
+	for (auto &x : an.items()) {
+	  token[x.key()] = x.value();
 	}
 	
 	// NEC output, if any
@@ -251,73 +237,69 @@ void output_json::PrintSentences (wostream &sout, const list<sentence> &ls) cons
 	else if (w->get_tag(best)==L"NP00G00") nec=L"LOC";
 	else if (w->get_tag(best)==L"NP00O00") nec=L"ORG";
 	else if (w->get_tag(best)==L"NP00V00") nec=L"MISC";
-	if (not nec.empty()) sout << L", \"nec\" : \"" << nec << L"\"";
+	if (not nec.empty())
+	  token["nec"] = jsn::json(util::wstring2string(nec));
 	
 	// WSD output, if any
-	if (not w->get_senses(best).empty()) sout << L", \"wn\" : \"" << w->get_senses(best).begin()->first << L"\"";
+	if (not w->get_senses(best).empty())
+	  token["wn"] = jsn::json(util::wstring2string(w->get_senses(best).begin()->first));
 	
 	if (AllAnalysis) {
-	  sout << L","<<endl;
-	  sout << "             \"analysis\" : [" <<endl;
+	  jsn::ordered_json anlist = json::array();
+
 	  for (word::const_iterator a=w->begin(); a!=w->end(); a++) {
-	    if (a!=w->begin()) sout << L"," << endl;
-	    sout << L"                    { \"lemma\" : \"" <<  escapeJSON(a->get_lemma()) << L"\"";
-	    sout << L", \"tag\" : \"" << a->get_tag() << "\"";
+	    jsn::ordered_json mrf;
+	    mrf["lemma"] = jsn::json(util::wstring2string(a->get_lemma()));
+	    mrf["tag"] = jsn::json(util::wstring2string(a->get_tag()));
 	    if (Tags!=NULL) {
-	      sout << L", \"ctag\" : \"" << Tags->get_short_tag(a->get_tag()) << L"\"";
+	      mrf["ctag"] = jsn::json(util::wstring2string(Tags->get_short_tag(a->get_tag())));
 	      list<pair<wstring,wstring> > feats = Tags->get_msd_features(a->get_tag());
 	      for (list<pair<wstring,wstring> >::iterator f=feats.begin(); f!=feats.end(); f++) 
-		sout << L", \"" << f->first << L"\" : \"" << f->second << "\"";
+		mrf[freeling::util::wstring2string(f->first)] = jsn::json(util::wstring2string(f->second));
 	    }
-	    if (a->is_selected()) sout << L", \"selected\" : \"1\"";
-	    sout << L"}";         
+	    if (a->is_selected()) mrf["selected"] = jsn::json(true);
+
+	    anlist.push_back(mrf);
 	  }
-	  sout << L"]";
+	  token["analysis"] = anlist;
 	}
 	
 	if (AllSenses and not w->get_senses(best).empty()) {
-	  sout << L"," << endl;
-	  sout << "             \"senses\" : [" <<endl;
+	  jsn::ordered_json senses = json::array();
 	  for (list<pair<wstring,double> >::const_iterator s=w->get_senses(best).begin(); s!=w->get_senses(best).end(); s++) {
-	    if (s!=w->get_senses(best).begin()) sout << L"," << endl;
-	    sout << L"                    { \"wn\" : \"" << s->first << L"\"";
-	    if (s->second!=0) sout << L", \"pgrank\" : \"" << s->second << "\"";
-	    sout << L"}";         
+	    jsn::ordered_json sns;
+	    sns["wn"] = util::wstring2string(s->first);
+	    sns["pgrank"] = s->second;
+	    senses.push_back(sns);
 	  }
-	  sout << L"]";
+	  token["senses"] = senses;
 	}
       }
-      sout << L"}";
+
+      tokens.push_back(token);
     }
-    sout << L"]";
-    
+
+    sent["tokens"] = tokens;
     
     // print parse tree, if any
     if (s->is_parsed()) {
-      sout << L"," << endl;
-      sout << L"        \"constituents\" : [" << endl;
-      PrintTreeJSON (sout, s->get_sentence_id(), s->get_parse_tree(s->get_best_seq()).begin(), 5); 
-      sout << L"]";
+      sent["constituents"] = json_Tree (s->get_sentence_id(), s->get_parse_tree(s->get_best_seq()).begin()); 
     }
 
     //  print dependency tree, if any
     if (s->is_dep_parsed()) {
-      sout << L"," << endl;
-      sout << L"        \"dependencies\" : [" << endl;
-      PrintDepTreeJSON (sout, s->get_sentence_id(), s->get_dep_tree(s->get_best_seq()).begin(), 5);
-      sout << L"]";
-    
+      sent["dependencies"] = json_DepTree (s->get_sentence_id(), s->get_dep_tree(s->get_best_seq()).begin());
+
       // predicates, if any
-      if (not s->get_predicates().empty()) {
-        sout << ", " << endl;
-        PrintPredArgsJSON(sout,*s);
+      if (not s->get_predicates().empty()) {        
+        sent ["predicates"] = json_PredArgs(*s);
       }
     }
 
-    sout << L"}";  // end sentence
+    sentlist.push_back(sent);
   }
 
-  sout<<L"]}";  // end list of sentences
+  return sentlist;
 }
 
 
@@ -325,26 +307,31 @@ void output_json::PrintSentences (wostream &sout, const list<sentence> &ls) cons
 // print parse tree
 //--------------------------------------------
 
-void output_json::PrintTreeJSON (wostream &sout, const std::wstring &sid,
-                                 parse_tree::const_iterator n, int depth) const {
+jsn::ordered_json output_json::json_Tree (const std::wstring &sid, parse_tree::const_iterator n) const {
 
-  wstring indent=wstring (depth * 2, ' ');
-  if (n.num_children () == 0) 
-    sout << indent << L"{\"leaf\" : \"1\"" << (n->is_head () ? L", \"head\" : \"1\"" : L"") << L", \"token\" : \"" << get_token_id(sid,n->get_word().get_position()+1) << L"\", \"word\" : \"" << escapeJSON(n->get_word().get_form()) << "\"}";
-
+  jsn::ordered_json tree;
+  if (n.num_children () == 0) {
+    tree["leaf"] = jsn::json(true);
+    tree["head"] = n->is_head();
+    tree["token"] = jsn::json(util::wstring2string(get_token_id(sid,n->get_word().get_position()+1)));
+    tree["word"] = jsn::json(util::wstring2string(n->get_word().get_form()));
+  }
   else {
-    sout << indent << L"{\"label\" : \"" << n->get_label() << L"\"" << (n->is_head () ? L", \"head\" : \"1\"" : L"") << ", \"children\" : [" << endl;
-
+    tree["leaf"] = jsn::json(false);
+    tree["label"] = jsn::json(util::wstring2string(n->get_label()));
+    tree["head"] = n->is_head();
+    
+    jsn::ordered_json children = json::array();
     parse_tree::const_sibling_iterator d = n.sibling_begin (); 
     while (d != n.sibling_end ()) {
-      PrintTreeJSON (sout, sid, d, depth + 1);
+      children.push_back(json_Tree(sid, d));
       d++;
-      if (d!= n.sibling_end()) sout << L", ";
-      sout << endl;
     }
-    sout << indent << L"]}";
+
+    tree["children"] = children;
   }
 
+  return tree;
 }
 
 
@@ -352,23 +339,25 @@ void output_json::PrintTreeJSON (wostream &sout, const std::wstring &sid,
 // print dependency tree
 //---------------------------------------------
 
-void output_json::PrintDepTreeJSON (wostream &sout, const std::wstring &sid,
-                                    dep_tree::const_iterator n, int depth) const {
+jsn::ordered_json output_json::json_DepTree (const std::wstring &sid, dep_tree::const_iterator n) const {
 
-  wstring indent=wstring (depth * 2, ' ');
-  if (n.num_children () == 0) 
-    sout << indent << L"{\"token\" : \"" << get_token_id(sid,n->get_word().get_position()+1) << "\", \"function\" : \"" << n->get_label() << L"\", \"word\" : \"" << escapeJSON(n->get_word().get_form()) << "\"}";
-
+  jsn::ordered_json tree;
+  
+  if (n.num_children () == 0) {
+    tree["token"] = jsn::json(util::wstring2string(get_token_id(sid,n->get_word().get_position()+1)));
+    tree["function"] = jsn::json(util::wstring2string(n->get_label()));
+    tree["word"] = jsn::json(util::wstring2string(n->get_word().get_form()));
+  }
   else {
-    sout << indent;
     if (n->get_label()==L"VIRTUAL_ROOT") 
-      sout << L"{\"token\" : \"VIRTUAL_ROOT\""; 
+      tree["token"] = jsn::json("VIRTUAL_ROOT");
     else {
-      sout << L"{\"token\" : \"" <<  get_token_id(sid,n->get_word().get_position()+1) << L"\""
-           << L", \"function\" : \"" << n->get_label() << L"\""
-           << L", \"word\" : \"" << escapeJSON(n->get_word().get_form()) << L"\"";
+      tree["token"] = jsn::json(util::wstring2string(get_token_id(sid,n->get_word().get_position()+1)));
+      tree["function"] = jsn::json(util::wstring2string(n->get_label()));
+      tree["word"] = jsn::json(util::wstring2string(n->get_word().get_form()));
     }
-    sout << ", \"children\" : [" << endl;
+
+    jsn::ordered_json chld = json::array();
 
     // Sort children. Chunks first, then by their word position.
     // (this is just for aesthetic reasons)
@@ -380,22 +369,24 @@ void output_json::PrintDepTreeJSON (wostream &sout, const std::wstring &sid,
     // print children in the right order
     list<dep_tree::const_sibling_iterator>::const_iterator ch=children.begin();
     while (ch != children.end()) {      
-      PrintDepTreeJSON (sout, sid, (*ch), depth + 1);
+      chld.push_back(json_DepTree(sid, (*ch)));
       ch++;
-      if (ch!=children.end()) sout<<L", ";
-      sout << endl;
     }
 
-    sout << indent << L"]}";    
+    tree["children"] = chld;
   }
+
+  return tree;
 }
 
 //---------------------------------------------
 // print predicate-argument structure of the sentence
 //---------------------------------------------
 
-void output_json::PrintPredArgsJSON(wostream &sout, const sentence &s) const {
+jsn::ordered_json output_json::json_PredArgs(const sentence &s) const {
 
+  jsn::ordered_json preds = json::array();
+  
   const dep_tree & dt = s.get_dep_tree(s.get_best_seq());
   wstring sid = s.get_sentence_id();
 
@@ -421,59 +412,53 @@ void output_json::PrintPredArgsJSON(wostream &sout, const sentence &s) const {
   }
 
   // print all predicates, referring to entities as their arguments
-  sout << L"        \"predicates\" : ["<<endl;
   int npred=1;
   for (sentence::predicates::const_iterator pred=s.get_predicates().begin(); 
        pred!=s.get_predicates().end(); 
        pred++) {
 
-    if (pred!=s.get_predicates().begin()) sout << L"," << endl;
-
-    sout<<L"            { \"id\" : \"" << get_token_id(sid,npred,L"P") 
-        << L"\", \"head_token\" : \"" << get_token_id(sid,pred->get_position()+1) 
-        << "\", \"sense\" : \"" << pred->get_sense()
-        <<L"\", \"words\" : \"" << escapeJSON(s[pred->get_position()].get_form()) << "\"";
+    jsn::ordered_json prd;
+    prd["id"] = jsn::json(util::wstring2string(get_token_id(sid,npred,L"P")));
+    prd["head_token"] = jsn::json(util::wstring2string(get_token_id(sid,pred->get_position()+1)));
+    prd["sense"] = jsn::json(util::wstring2string(pred->get_sense()));
+    prd["words"] = jsn::json(util::wstring2string(s[pred->get_position()].get_form()));
     
     if (not pred->empty()) {
-      sout << L"," << endl;
-      sout << "              \"arguments\" : [" << endl;
-      
-      for (predicate::const_iterator arg=pred->begin(); arg!=pred->end(); arg++) {
-        if (arg!=pred->begin()) sout << L"," << endl;
-
-        sout << L"                  { "
-             << L" \"role\" : \"" << arg->get_role() << L"\", "
-             << L" \"words\" : \"" << escapeJSON(arg_words[arg->get_position()]) << L"\", "
-             << L" \"head_token\" : \"" << get_token_id(sid,arg->get_position()+1) << L"\", "
-             << L" \"from\" : \"" << get_token_id(sid,arg_span[arg->get_position()].first+1) << L"\", "
-             << L" \"to\" : \"" << get_token_id(sid,arg_span[arg->get_position()].second+1) << L"\" "
-             << L"}";
+      jsn::ordered_json args = json::array();
+      for (predicate::const_iterator a=pred->begin(); a!=pred->end(); a++) {
+	jsn::ordered_json arg;
+	arg["role"] =  jsn::json(util::wstring2string(a->get_role()));
+	arg["words"] =  jsn::json(util::wstring2string(arg_words[a->get_position()]));
+	arg["head_token"] =  jsn::json(util::wstring2string(get_token_id(sid,a->get_position()+1)));
+	arg["from"] =  jsn::json(util::wstring2string(get_token_id(sid,arg_span[a->get_position()].first+1)));
+	arg["to"] =  jsn::json(util::wstring2string(get_token_id(sid,arg_span[a->get_position()].second+1)));	
+	args.push_back(arg);
       }
 
-      sout << "]";
+      prd["arguments"] = args;
     }
-    sout << "}";
 
-
+    preds.push_back(prd);
     npred++;
   }
 
-  sout << L"]";
-
+  return preds;
 }
 
 //---------------------------------------------
 // print coreference information of the document
 //---------------------------------------------
 
-void output_json::PrintCorefs(wostream &sout, const document &doc) const {
+jsn::ordered_json output_json::json_Corefs(const document &doc) const {
 
-  sout << L"\"coreferences\" : [" << endl;
+  jsn::ordered_json corefs = json::array();
+  
   for (list<int>::const_iterator g=doc.get_groups().begin(); g!=doc.get_groups().end(); g++) {
-    if (g!=doc.get_groups().begin()) sout << L"," << endl;
     
-    sout << L"     { \"id\" : \"co" << *g+1 << L"\"," << endl;
-    sout << L"       \"mentions\" : [" << endl;      
+    jsn::ordered_json group;
+    group["id"] = jsn::json("co"+std::to_string(*g+1));
+    
+    jsn::ordered_json ments = json::array();
     list<int> mentions = doc.get_coref_id_mentions(*g);
     int nm=1;
     for (list<int>::iterator m=mentions.begin(); m!=mentions.end(); m++) {
@@ -485,18 +470,23 @@ void output_json::PrintCorefs(wostream &sout, const document &doc) const {
       wstring words = sent[j].get_form();
       for (j=ment.get_pos_begin()+1; j<=ment.get_pos_end(); j++) 
         words = words + L" " + sent[j].get_form();
-      
-      if (m!=mentions.begin()) sout << L"," << endl;
-      
-      sout << L"           { \"id\" : \"m" << *g+1 << L"." << nm << "\", "
-           << L" \"from\" : \"" << get_token_id(sid,ment.get_pos_begin()+1) << "\", "
-           << L" \"to\" : \"" << get_token_id(sid,ment.get_pos_end()+1) << "\", "
-           << L" \"words\" : \"" << escapeJSON(words) << "\" }";
+
+      jsn::ordered_json mt;
+      mt["id"] = jsn::json("m"+std::to_string(*g+1)+"."+std::to_string(nm));
+      mt["from"] = jsn::json(util::wstring2string(get_token_id(sid,ment.get_pos_begin()+1)));
+      mt["to"] = jsn::json(util::wstring2string(get_token_id(sid,ment.get_pos_end()+1)));
+      mt["words"] = jsn::json(util::wstring2string(words));      
+
+      ments.push_back(mt);
       nm++;
-    }      
-    sout << L"]}";
+    }
+
+    group["mentions"] = ments;
+
+    corefs.push_back(group);     
   }
-  sout << L"]";
+
+  return corefs;
 }
 
 
@@ -505,112 +495,162 @@ void output_json::PrintCorefs(wostream &sout, const document &doc) const {
 // print semantic graph of the document 
 //----------------------------------------------------------
 
-void output_json::PrintSemgraph(wostream &sout, const document &doc) const {
-    sout << L"\"semantic_graph\" : {" << endl;
-    sout << L"     \"entities\" : [" << endl;
-    int ne=0;
-    for (vector<semgraph::SG_entity>::const_iterator e=doc.get_semantic_graph().get_entities().begin();
-         e!=doc.get_semantic_graph().get_entities().end();
-         e++) {
-      // skip non NE entities that are not argument to any predicate
-      if (not doc.get_semantic_graph().is_argument(e->get_id())) continue;
+jsn::ordered_json output_json::json_Semgraph(const document &doc) const {
 
-      if (ne>0) sout << L"," << endl;
-      sout << L"           { \"id\" : \"" << e->get_id() << L"\"" 
-           << L", \"lemma\" : \"" <<  escapeJSON(e->get_lemma()) << L"\"";
-      if (not e->get_semclass().empty()) sout << L", \"class\" : \"" << e->get_semclass() << L"\"";
-      if (not e->get_sense().empty()) sout << L", \"sense\" : \"" << e->get_sense() << L"\"";
-      sout << "," << endl;      
-      
-      sout << L"             \"mentions\" : [" << endl;
-      for (vector<semgraph::SG_mention>::const_iterator m=e->get_mentions().begin(); m!=e->get_mentions().end(); m++) {
-        if (m!=e->get_mentions().begin()) sout << L"," << endl;
-        sout << L"                   { \"id\" : \"" << get_token_id(m->get_sentence_id(),util::wstring2int(m->get_id())) << L"\""
-             << L", \"words\" : \"" << escapeJSON(util::list2wstring(m->get_words(),L" ")) << L"\" "
-             << L"}";
-      }      
-      sout << L"]";
-
-      const list<wstring> &syns = e->get_synonyms();
-      if (not syns.empty()) {
-        sout << L"," << endl;
-        sout << L"             \"synonyms\" : [ ";
-        for (list<wstring>::const_iterator s=syns.begin(); s!=syns.end(); ++s) {
-          if (s!=syns.begin()) sout << L", ";
-          sout << L"\""<< *s << L"\"";
-        }
-        sout << L" ]";
-      }
-      
-      const list<pair<wstring,wstring> > &uris = e->get_URIs();
-      if (not uris.empty()) {
-        sout << L"," << endl;
-        sout << L"             \"URIs\" : [ " << endl;
-        for (list<pair<wstring,wstring> >::const_iterator s=uris.begin(); s!=uris.end(); ++s) {
-          if (s!=uris.begin()) sout << L", " << endl;
-          sout << L"                   { \"knowledgeBase\" : \"" << s->first << L"\", \"URI\" : \"" << s->second << L"\" }";
-        }          
-        sout << "]";
-      }
-
-      sout << "}";
-      ne++;
-    }
-    sout << L"]," << endl;
+  jsn::ordered_json semgr;
+  
+  jsn::ordered_json entities = json::array();
+  
+  int ne=0;
+  for (vector<semgraph::SG_entity>::const_iterator e=doc.get_semantic_graph().get_entities().begin();
+       e!=doc.get_semantic_graph().get_entities().end();
+       e++) {
+    // skip non NE entities that are not argument to any predicate
+    if (not doc.get_semantic_graph().is_argument(e->get_id())) continue;
     
-    sout << L"     \"frames\" : [" << endl;    
-    int nf=0;
-    for (vector<semgraph::SG_frame>::const_iterator f=doc.get_semantic_graph().get_frames().begin();
-         f!=doc.get_semantic_graph().get_frames().end();
-         f++) {
-      // skip argless nominal predicates
-      if (not doc.get_semantic_graph().has_arguments(f->get_id())) continue;
-
-      if (nf>0) sout << L"," << endl;
-      sout << L"           { \"id\" : \"" << f->get_id() << L"\"" 
-           << L", \"token\" : \"" << get_token_id(f->get_sentence_id(),util::wstring2int(f->get_token_id())) << L"\""
-           << L", \"lemma\" : \"" << escapeJSON(f->get_lemma()) << L"\"" 
-           << L", \"sense\" : \"" << f->get_sense() << L"\""
-           << L"," << endl; 
-      
-      sout << L"             \"arguments\" : [" << endl;
-      for (vector<semgraph::SG_argument>::const_iterator a=f->get_arguments().begin(); 
-           a!=f->get_arguments().end();
-           a++) {
-        if (a!=f->get_arguments().begin()) sout << L"," << endl;
-        sout << L"                         { \"role\" : \"" << a->get_role() << L"\"" 
-             << L", \"entity\" : \"" << a->get_entity() << "\" "
-             << L"}"; 
+    jsn::ordered_json entity;
+    entity["id"] = jsn::json(util::wstring2string(e->get_id()));
+    entity["lemma"] = jsn::json(util::wstring2string(e->get_lemma()));
+    if (not e->get_semclass().empty()) entity["class"] = jsn::json(util::wstring2string(e->get_semclass()));
+    if (not e->get_sense().empty()) entity["sense"] = jsn::json(util::wstring2string(e->get_sense()));
+    
+    jsn::ordered_json mentions = json::array();
+    for (vector<semgraph::SG_mention>::const_iterator m=e->get_mentions().begin(); m!=e->get_mentions().end(); m++) {
+      jsn::ordered_json ment;
+      ment["id"] =  jsn::json(util::wstring2string(get_token_id(m->get_sentence_id(),util::wstring2int(m->get_id())) ));
+      ment["words"] =  jsn::json(util::wstring2string(util::list2wstring(m->get_words(),L" ")));
+      mentions.push_back(ment);
+    }
+    entity["mentions"] = mentions;
+    
+    const list<wstring> &syns = e->get_synonyms();
+    if (not syns.empty()) {
+      jsn::ordered_json synonyms = json::array();
+      for (list<wstring>::const_iterator s=syns.begin(); s!=syns.end(); ++s) {
+	synonyms.push_back(util::wstring2string(*s));
       }
-      sout << L"]";
-
-      const list<wstring> &syns = f->get_synonyms();
-      if (not syns.empty()) {
-        sout << L"," << endl;
-        sout << L"             \"synonyms\" : [ ";
-        for (list<wstring>::const_iterator s=syns.begin(); s!=syns.end(); ++s) {
-          if (s!=syns.begin()) sout << L", ";
-          sout << L"\""<< *s << L"\"";
-        }
-        sout << L" ]";
-      }
-      
-      const list<pair<wstring,wstring> > &uris = f->get_URIs();
-      if (not uris.empty()) {
-        sout << L"," << endl;
-        sout << L"             \"URIs\" : [ " << endl;
-        for (list<pair<wstring,wstring> >::const_iterator s=uris.begin(); s!=uris.end(); ++s) {
-          if (s!=uris.begin()) sout << L", " << endl;
-          sout << L"                   { \"knowledgeBase\" : \"" << s->first << L"\", \"URI\" : \"" << s->second << L"\" }";
-        }          
-        sout << "]";
-      }
-        
-      sout << "}";
-      nf++;
+      entity["synonyms"] = synonyms;
     }
     
-    sout << L"]}" << endl;
+    const list<pair<wstring,wstring> > &uris = e->get_URIs();
+    if (not uris.empty()) {
+      jsn::ordered_json urilist = json::array();
+      for (list<pair<wstring,wstring> >::const_iterator s=uris.begin(); s!=uris.end(); ++s) {
+	jsn::ordered_json uri;
+	uri["knowledgeBase"] = jsn::json(util::wstring2string(s->first));
+	uri["URI"] = jsn::json(util::wstring2string(s->second));
+	urilist.push_back(uri);
+      }
+      entity["URIs"] = urilist;
+    }
+    
+    ne++;
+    entities.push_back(entity); 
+  }
+  
+  semgr["entities"] = entities;
+
+  jsn::ordered_json frames = json::array();
+    
+  int nf=0;
+  for (vector<semgraph::SG_frame>::const_iterator f=doc.get_semantic_graph().get_frames().begin();
+       f!=doc.get_semantic_graph().get_frames().end();
+       f++) {
+
+    // skip argless nominal predicates
+    if (not doc.get_semantic_graph().has_arguments(f->get_id())) continue;
+
+    jsn::ordered_json frame;
+    frame["id"] = jsn::json(util::wstring2string( f->get_id()));
+    frame["token"] = jsn::json(util::wstring2string(get_token_id(f->get_sentence_id(),util::wstring2int(f->get_token_id()))));
+    frame["lemma"] = jsn::json(util::wstring2string(f->get_lemma()));
+    frame["sense"] = jsn::json(util::wstring2string(f->get_sense() ));
+
+    jsn::ordered_json args = json::array();
+    for (vector<semgraph::SG_argument>::const_iterator a=f->get_arguments().begin(); 
+	 a!=f->get_arguments().end();
+	 a++) {
+      jsn::ordered_json arg;
+      arg["role"] = jsn::json(util::wstring2string(a->get_role()));
+      arg["entity"] = jsn::json(util::wstring2string(a->get_entity()));
+      args.push_back(arg);
+    }
+    frame["arguments"] = args;
+    
+    const list<wstring> &syns = f->get_synonyms();
+    if (not syns.empty()) {
+      jsn::ordered_json synonyms = json::array();
+      for (list<wstring>::const_iterator s=syns.begin(); s!=syns.end(); ++s) {
+	synonyms.push_back(util::wstring2string(*s));
+      }
+      frame["synonyms"] = synonyms;
+    }
+    
+    const list<pair<wstring,wstring> > &uris = f->get_URIs();
+    if (not uris.empty()) {
+      jsn::ordered_json urilist = json::array();
+      for (list<pair<wstring,wstring> >::const_iterator s=uris.begin(); s!=uris.end(); ++s) {	
+	jsn::ordered_json uri;
+	uri["knowledgeBase"] = jsn::json(util::wstring2string(s->first));
+	uri["URI"] = jsn::json(util::wstring2string(s->second));
+	urilist.push_back(uri);
+      }
+      frame["URIs"] = urilist;
+    }
+    
+    frames.push_back(frame);
+    nf++;
+  }
+
+  semgr["frames"] = frames;
+  
+  return semgr;
+}
+
+
+//---------------------------------------------
+// get json object for whole document
+//---------------------------------------------
+
+jsn::ordered_json output_json::json_Document(const document &doc) const {
+
+  jsn::ordered_json tot;  
+  if (doc.empty()) return tot;
+
+  jsn::ordered_json pars = json::array();
+  for (document::const_iterator p=doc.begin(); p!=doc.end(); p++) {
+    jsn::ordered_json par;
+    par["sentences"] = json_Sentences(*p);
+    pars.push_back(par);
+  }
+  tot["paragraphs"] = pars;
+  
+  if (doc.get_num_groups()>0) {
+    // there are coreferences, print them
+    tot["coreferences"] = json_Corefs(doc);
+  }
+  
+  // print semantic graph if there is one
+  if (not doc.get_semantic_graph().empty()) {
+    tot["semantic_graph"] = json_Semgraph(doc);
+  }
+
+  return tot;
+}
+
+
+
+//---------------------------------------------
+// print obtained analysis in json
+//---------------------------------------------
+
+void output_json::PrintResults (wostream &sout, const list<sentence> &ls) const {
+
+  if (ls.empty()) return;
+  
+  jsn::ordered_json sents = json_Sentences(ls);
+  sout << util::string2wstring(sents.dump(3)) << endl;
+
 }
 
 
@@ -620,30 +660,10 @@ void output_json::PrintSemgraph(wostream &sout, const document &doc) const {
 
 void output_json::PrintResults(wostream &sout, const document &doc) const {
 
-  sout << L"{ ";
+  if (doc.empty()) return;
 
-  if (not doc.empty()) {
-     sout << "\"paragraphs\" : [" << endl;
-     for (document::const_iterator p=doc.begin(); p!=doc.end(); p++) {
-        if (p!=doc.begin()) sout << L"," << endl;
-        PrintSentences(sout,*p);
-     }
-     sout << L"]" ;
-  }
-
-  if (doc.get_num_groups()>0) {
-    // there are coreferences, print them
-    sout << L"," << endl;
-    PrintCorefs(sout,doc);
-  }
-
-  // print semantic graph if there is one
-  if (not doc.get_semantic_graph().empty()) {
-    sout << "," << endl;
-    PrintSemgraph(sout,doc);
-  }
-
-  sout << L"}" << endl;
+  jsn::ordered_json res = json_Document(doc);  
+  sout << util::string2wstring(res.dump(3)) << endl;
 }
 
 

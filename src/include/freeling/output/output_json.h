@@ -31,6 +31,9 @@
 
 #include <iostream> 
 #include "freeling/output/output_handler.h"
+#include "freeling/output/json.hpp"
+
+namespace jsn = nlohmann;
 
 namespace freeling {
 
@@ -45,6 +48,10 @@ namespace freeling {
       // destructor. 
       ~output_json ();
 
+      // get json object for a sentence list
+      jsn::ordered_json json_Sentences (const std::list<freeling::sentence> &ls) const;
+      // get json object for a document
+      jsn::ordered_json json_Document(const document &doc) const;
       // print given sentences to sout in appropriate format
       void PrintResults (std::wostream &sout, const std::list<freeling::sentence> &ls) const;
       // print given a document to sout in appropriate format
@@ -56,15 +63,14 @@ namespace freeling {
       bool AllSenses;
       bool AllAnalysis;
 
-      void print_analysis(std::wostream &sout, const freeling::analysis &a, bool print_sel_status, bool print_probs) const;
-      void PrintSentences (std::wostream &sout, const std::list<freeling::sentence> &ls) const;
-      void PrintTreeJSON (std::wostream &sout, const std::wstring &sid,
-                          freeling::parse_tree::const_iterator n, int depth) const;
-      void PrintDepTreeJSON (std::wostream &sout, const std::wstring &sid,
-                             freeling::dep_tree::const_iterator n, int depth) const;
-      void PrintPredArgsJSON(std::wostream &sout, const freeling::sentence &s) const;
-      void PrintCorefs(std::wostream &sout, const freeling::document &doc) const;
-      void PrintSemgraph(std::wostream &sout, const freeling::document &doc) const;
+      jsn::ordered_json json_analysis(const freeling::analysis &a, bool print_sel_status, bool print_probs) const;
+      jsn::ordered_json json_Tree (const std::wstring &sid,
+				   freeling::parse_tree::const_iterator n) const;
+      jsn::ordered_json json_DepTree (const std::wstring &sid,
+				      freeling::dep_tree::const_iterator n) const;
+      jsn::ordered_json json_PredArgs(const freeling::sentence &s) const;
+      jsn::ordered_json json_Corefs(const freeling::document &doc) const;
+      jsn::ordered_json json_Semgraph(const freeling::document &doc) const;
     };
   }
 }
