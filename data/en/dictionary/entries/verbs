@@ -34795,6 +34795,12 @@ tethering tether VBG
 tethers tether VBZ
 tether tether VB
 tether tether VBP
+texted text VBD
+texted text VBN
+texts text VBZ
+text text VB
+text text VBP
+texting text VBG
 textured texture VBD
 textured texture VBN
 textures texture VBZ
