@@ -185,8 +185,8 @@ jsn::ordered_json output_json::json_Sentences (const list<sentence> &ls) const {
       // basic token stuff
       jsn::ordered_json token;
       token["id"] = jsn::json(util::wstring2string(get_token_id(s->get_sentence_id(),w->get_position()+1)));
-      token["begin"] = jsn::json(int(w->get_span_start()));
-      token["end"] = jsn::json(int(w->get_span_finish()));
+      token["begin"] = jsn::json(util::wstring2string(util::wstring_from(w->get_span_start())));
+      token["end"] = jsn::json(util::wstring2string(util::wstring_from(w->get_span_finish())));
       token["form"] = jsn::json(util::wstring2string(w->get_form()));
       if (not w->get_ph_form().empty())
 	token["phon"] = jsn::json(util::wstring2string(w->get_ph_form()));
@@ -288,7 +288,7 @@ jsn::ordered_json output_json::json_Sentences (const list<sentence> &ls) const {
 
     //  print dependency tree, if any
     if (s->is_dep_parsed()) {
-      sent["dependencies"] = json_DepTree (s->get_sentence_id(), s->get_dep_tree(s->get_best_seq()).begin());
+      sent["dependencies"].push_back(json_DepTree (s->get_sentence_id(), s->get_dep_tree(s->get_best_seq()).begin()));
 
       // predicates, if any
       if (not s->get_predicates().empty()) {        
