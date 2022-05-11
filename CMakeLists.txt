@@ -156,3 +156,8 @@ foreach (lg ${LANGUAGES})
   
 endforeach()
 
+
+#Setup CMake to run tests
+enable_testing()
+add_test(NAME fl_test
+         COMMAND fl_test ${CMAKE_INSTALL_PREFIX})
