@@ -126,6 +126,7 @@ public:
   /// Configuration file for language identifier
   bool LangIdent = false;
   std::wstring IDENT_identFile;
+  std::wstring LangIdentMode;  // whether to output the whole list or just the topmost
 
   /// Default mode used to process input: 
   ///   DOC: load a document, then process it. 
@@ -162,7 +163,7 @@ public:
       ("workers,w",po::wvalue<int>(&MaxWorkers)->default_value(DEFAULT_MAX_WORKERS),"Maximum number of workers to fork in server mode")
       ("queue,q",po::wvalue<int>(&QueueSize)->default_value(DEFAULT_QUEUE_SIZE),"Maximum number of waiting clients.")
       ("server","Activate server mode (default: off)")
-      ("ident","Produce language identification as output")
+      ("ident",po::wvalue<std::wstring>(&LangIdentMode),"Produce language identification as output (best: only most likely language, all: whole ranking)")
       ("flush","Consider each newline as a sentence end")
       ("noflush","Do not consider each newline as a sentence end")
       ("mode",po::wvalue<InputModes>(&InputMode),"Input mode (doc,corpus)")
@@ -182,7 +183,7 @@ public:
       ("ServerPort",po::wvalue<int>(&Port),"Port where server is to be started")
       ("ServerMaxWorkers",po::wvalue<int>(&MaxWorkers)->default_value(DEFAULT_MAX_WORKERS),"Maximum number of workers to fork in server mode")
       ("ServerQueueSize",po::wvalue<int>(&QueueSize)->default_value(DEFAULT_QUEUE_SIZE),"Maximum number of waiting requests in server mode")
-      ("LangIdent",po::wvalue<bool>(&LangIdent)->default_value(false),"Produce language identification as output")
+      ("LangIdent",po::wvalue<std::wstring>(&LangIdentMode),"Produce language identification as output (best: only most likely language, all: whole ranking)")
       ("AlwaysFlush",po::wvalue<bool>(&AlwaysFlush)->default_value(false),"Consider each newline as a sentence end")
       ("InputMode",po::wvalue<InputModes>(&InputMode)->default_value(MODE_CORPUS),"Input mode (corpus,doc)")
       ("OutputFormat",po::wvalue<OutputFormats>(&OutputFormat)->default_value(OUT_FREELING),"Output format (freeling,conll,train,xml,json,naf)")
@@ -231,16 +232,15 @@ public:
 
     // Handle boolean options expressed with --myopt or --nomyopt in command line
     analyzer_config::SetBooleanOptionCL(vm.count("server"),!vm.count("server"),Server,"server");
-    analyzer_config::SetBooleanOptionCL(vm.count("ident"),!vm.count("ident"),LangIdent,"ident");
     analyzer_config::SetBooleanOptionCL(vm.count("flush"),vm.count("noflush"),AlwaysFlush,"flush");
     
     // Unless lang ident, load config file.
+    LangIdent = not LangIdentMode.empty();
     if (not LangIdent) {
       if (ConfigFile.empty()) {
         std::cerr<<"Configuration file not specified. Please use option -f to provide a configuration file." << std::endl;
         exit(1);
       }
-
       // parse ConfigFile for more options
       parse_options(ConfigFile, vm);
     }

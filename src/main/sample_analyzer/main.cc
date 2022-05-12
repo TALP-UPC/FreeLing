@@ -606,7 +606,6 @@ int main (int argc, char **argv) {
     anlz = new analyzer(*cfg);
   }
 
-
   if (ServerMode) {
     wcerr<<L"SERVER: Analyzers loaded."<<endl;
     InitServer(cfg);
@@ -631,7 +630,16 @@ int main (int argc, char **argv) {
         // if it is a command, process it and go for next line
         if (CheckStatsCommands(text,*stats)) continue;
         // call the analyzer to identify language
-        OutputString (ident->identify_language(text)+L"\n");
+	if (cfg->LangIdentMode == L"best")
+	  OutputString (ident->identify_language(text)+L"\n");
+	else {
+	  vector<pair<double,wstring>> langs = ident->rank_languages(text);
+	  wstringstream res;
+	  for (auto p : langs) 
+	    res << L" " << p.second << L"=" << p.first; 
+	  OutputString (res.str().substr(1) + L"\n");
+	}
+	
       }
     }
  

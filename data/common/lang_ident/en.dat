@@ -12,7 +12,7 @@ LinearDiscountAlpha 0.1
 VocabularySize  108
 </Smoothing>
 <Threshold>
-15
+20
 </Threshold>
 <NGrams>
 14 \s ! \s c
