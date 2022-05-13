@@ -236,14 +236,15 @@ public:
     
     // Unless lang ident, load config file.
     LangIdent = not LangIdentMode.empty();
-    if (not LangIdent) {
-      if (ConfigFile.empty()) {
+    if (not LangIdent and ConfigFile.empty()) {
         std::cerr<<"Configuration file not specified. Please use option -f to provide a configuration file." << std::endl;
-        exit(1);
-      }
-      // parse ConfigFile for more options
-      parse_options(ConfigFile, vm);
+        exit(1);      
     }
+    // parse ConfigFile for more options
+    parse_options(ConfigFile, vm);
+
+    // check if lang ident was requested in config file
+    LangIdent = not LangIdentMode.empty();
     
     /// convert hex string to actual value
     std::wstringstream s;

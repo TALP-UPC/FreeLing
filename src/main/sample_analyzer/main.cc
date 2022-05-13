@@ -365,7 +365,12 @@ config* load_config(int argc, char *argv[]) {
   /// Check that required configuration can satisfy required requests
   /// 'analyzer' constructor will check most of them, so we only need to worry about lang ident
   if (cfg->LangIdent and cfg->IDENT_identFile.empty()) {
-    wcerr <<L"Error - No configuration file provided for language identifier."<<endl;
+    wcerr << L"Error - No configuration file provided for language identifier."<<endl;
+    exit (1);        
+  }
+
+  if (cfg->LangIdent and cfg->LangIdentMode != L"best" and cfg->LangIdentMode != L"all") {
+    wcerr << L"Error - Invalid language identifier mode '" << cfg->LangIdentMode << "'." << endl;
     exit (1);        
   }
   
