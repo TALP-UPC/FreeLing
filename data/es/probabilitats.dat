@@ -37224,7 +37224,7 @@ consumidor AQ-NC AQ 0 NC 12
 consumidores AQ-NC AQ 0 NC 32
 consumo NC-VMI NC 44 VMI 0
 contables AQ-NC AQ 2 NC 2
-contacto NC-VMI NC 17 VMI 0
+contacto NC-VMI NC 10 VMI 10
 contempla VMI-VMM VMI 10 VMM 0
 contencioso AQ-NC AQ 0 NC 9
 contenedores AQ-NC AQ 0 NC 7
@@ -37630,7 +37630,7 @@ entrevistas NC-VMI-VMP NC 9 VMI 0 VMP 0
 entusiasmo NC-VMI NC 13 VMI 0
 enviadas NC-VMP NC 0 VMP 4
 enviado NC-VMP NC 0 VMP 7
-envío NC-VMI NC 10 VMI 0
+envío NC-VMI NC 10 VMI 10
 equipo NC-VMI NC 367 VMI 0
 equivale VMI-VMM VMI 3 VMM 1
 equivalente AQ-NC AQ 3 NC 4
