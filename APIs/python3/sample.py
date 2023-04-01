@@ -97,7 +97,7 @@ if not os.path.exists(os.environ["FREELINGDIR"]+"/share/freeling") :
 DATA = os.environ["FREELINGDIR"]+"/share/freeling/";
 
 # Init locales
-pyfreeling.util_init_locale("default");
+pyfreeling.util.init_locale("default");
 
 tr = pyfreeling.traces()
 tr.set_trace_level(7)
