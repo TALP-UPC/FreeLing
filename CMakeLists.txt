@@ -18,7 +18,7 @@ set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib") # Needed to find librarie
 add_definitions(-DPACKAGE_STRING=${PACKAGE_STRING} -DVERSION=${VERSION})
 
 # Global configuration
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 option(BUILD_SHARED_LIBS "Build shared libraries" ON)
 
 # compilation options
