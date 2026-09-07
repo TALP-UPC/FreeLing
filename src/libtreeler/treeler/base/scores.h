@@ -82,7 +82,7 @@ namespace treeler {
   template <typename X, typename R>
   class ConstantScores : public BaseScores<ConstantScores<X,R>> {
   private:
-    const double _s; 
+    double _s; 
     bool  _random; 
   public:
 
